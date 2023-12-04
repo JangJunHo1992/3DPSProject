@@ -47,6 +47,7 @@ namespace Engine
 #include "Engine_Enum.h"
 using namespace Engine;
 
+const XMMATRIX		g_mUnit = XMMatrixIdentity();
 
 
 

@@ -1,8 +1,15 @@
 #pragma once
-#include "Base.h"
 #include "Client_Defines.h"
+#include "Base.h"
+
+BEGIN(Engine)
+class CGameObject;
+END
 
 BEGIN(Client)
+
+class CImGui_Window;
+class CTerrain;
 
 class CImgui_Manager final : public CBase
 {
@@ -54,6 +61,23 @@ private:
 	ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
 	IDXGISwapChain* g_pSwapChain = NULL;
 	ID3D11RenderTargetView* g_mainRenderTargetView = NULL;
+
+public:
+	vector<shared_ptr<CImGui_Window>> m_arrWindows;
+
+private: /* For Json */
+	string m_szJsonPath = "../Bin/LevelData/";
+	string m_szCurrentLocalPath;
+	json m_CurrentLevelJson;
+
+	EDITER_TYPE m_eCurrentEditerType = EDITER_TYPE::TYPE_END;
+
+private: /* For Effect Editer */
+	weak_ptr<CTerrain>		m_pTerrain;
+
+private: /* For. PhysXInfo */
+	_bool					m_bViewPhysXInfo = false;
+
 };
 
 END

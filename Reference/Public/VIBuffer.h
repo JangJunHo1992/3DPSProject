@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Engine_Defines.h"
 #include "Component.h"
 
 /* 특정 형태(Rect, Cube, Terrain, Model) 를 구성하기위한 클래스들의 부모가 되는 클래스다 .*/
@@ -20,6 +21,8 @@ public:
 	virtual HRESULT Render();
 
 public:
+	_bool							Intersect(_In_opt_ const _float4x4 _mWorld = g_mUnit) const;
+	_bool							Intersect(_Out_ _float3& _vOut, _In_opt_ const _float4x4 _mWorld = g_mUnit) const;
 
 	HRESULT Bind_VIBuffers();
 	/* 정점, 인덱스, 인스턴스 버퍼들을 생성한다. */

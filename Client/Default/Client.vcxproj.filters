@@ -64,6 +64,9 @@
     <Filter Include="02.GameObjects\Monster">
       <UniqueIdentifier>{6a759b02-917b-4bc3-adbb-507ab4df32d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="96. Imgui\ImguiWindow">
+      <UniqueIdentifier>{d1c63ac7-4174-423c-a6c3-de45f11e4848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="..\Public\ForkLift.h">
       <Filter>02.GameObjects\ForkLift</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\ImGui_Window.h">
+      <Filter>96. Imgui\ImguiWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -217,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\ForkLift.cpp">
       <Filter>02.GameObjects\ForkLift</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ImGui_Window.cpp">
+      <Filter>96. Imgui\ImguiWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

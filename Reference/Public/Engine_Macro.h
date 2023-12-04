@@ -3,6 +3,8 @@
 
 #define	VK_MAX				0xff
 
+#define IDX(ENUM)				static_cast<unsigned int>(ENUM)
+#define BIT(ENUM)				static_cast<unsigned int>(1u << IDX(ENUM))
 
 #define D3DCOLOR_ARGB(a,r,g,b) \
     ((D3DCOLOR)((((a)&0xff)<<24)|(((b)&0xff)<<16)|(((g)&0xff)<<8)|((r)&0xff)))

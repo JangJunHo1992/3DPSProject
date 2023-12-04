@@ -13,6 +13,8 @@ CMesh::CMesh(const CMesh& rhs)
 
 HRESULT CMesh::Initialize_Prototype(const aiMesh* pAIMesh, _fmatrix PivotMatrix)
 {
+	m_iMaterialIndex = pAIMesh->mMaterialIndex;
+
 	strcpy_s(m_szName, pAIMesh->mName.data);
 
 	m_iNumVertexBuffers = 1;

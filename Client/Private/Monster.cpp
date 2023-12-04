@@ -47,9 +47,19 @@ HRESULT CMonster::Render()
 	if (FAILED(Bind_ShaderResource()))
 		return E_FAIL;
 
-	m_pShaderCom->Begin(0);
+	_uint		iNumMeshes = m_pModelCom->Get_NumMeshes();
 
-	m_pModelCom->Render();
+	for (size_t i = 0; i<iNumMeshes; i++)
+	{
+		//반드시 Begin하기 전에 쉐이더에 먼저 다 떤져 줘야 함 비긴이 먼저 돌게 되면 정보들이 섞이면서 안에  메쉬 박살남
+		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
+
+		m_pShaderCom->Begin(0);
+
+		m_pModelCom->Render(i);
+	}
+
+
 
 	return S_OK;
 }

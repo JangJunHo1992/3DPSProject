@@ -14,6 +14,11 @@ namespace Engine
 
 	}GRAPHIC_DESC;
 
+	typedef struct
+	{
+		class CTexture* pMtrlTextures[AI_TEXTURE_TYPE_MAX];
+	}MATERIAL_DESC;
+
 	typedef struct ENGINE_DLL tagVertex_Position_Texcoord
 	{
 		XMFLOAT3		vPosition;

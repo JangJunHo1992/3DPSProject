@@ -23,26 +23,27 @@ namespace Engine
 	typedef		float						_float;
 	typedef		double						_double;
 
+	typedef		size_t						_hashcode;
 
 	/* 저장용 데이터 타입. */
-	typedef		XMFLOAT4X4					_float4x4;
+/*	typedef		XMFLOAT4X4					_float4x4;*/
 
 	/* 연산용 데이터 타입. */
-	typedef		XMMATRIX					_matrix;
-	typedef		FXMMATRIX					_fmatrix;
-	typedef		CXMMATRIX					_cmatrix;
+// 	typedef		XMMATRIX					_matrix;
+// 	typedef		FXMMATRIX					_fmatrix;
+// 	typedef		CXMMATRIX					_cmatrix;
 
 	/* 저장용 데이터 타입. */
-	typedef		XMFLOAT4					_float4;
-	typedef		XMFLOAT3					_float3;
-	typedef		XMFLOAT2					_float2;
+// 	typedef		XMFLOAT4					_float4;
+// 	typedef		XMFLOAT3					_float3;
+// 	typedef		XMFLOAT2					_float2;
 
 	/* 연산용 데이터 타입. */
-	typedef		XMVECTOR					_vector;
-	typedef		FXMVECTOR					_fvector;
-	typedef		GXMVECTOR					_gvector;
-	typedef		HXMVECTOR					_hvector;
-	typedef		CXMVECTOR					_cvector;
+// 	typedef		XMVECTOR					_vector;
+// 	typedef		FXMVECTOR					_fvector;
+// 	typedef		GXMVECTOR					_gvector;
+// 	typedef		HXMVECTOR					_hvector;
+// 	typedef		CXMVECTOR					_cvector;
 
 	typedef struct ENGINE_DLL	float2 : public DirectX::XMFLOAT2
 	{
@@ -258,14 +259,14 @@ namespace Engine
 	} _float4x4;
 
 	typedef DirectX::XMVECTOR	_vector;
-	typedef DirectX::FXMVECTOR	_vectorf;
-	typedef DirectX::GXMVECTOR	_vectorg;
-	typedef DirectX::HXMVECTOR	_vectorh;
-	typedef DirectX::CXMVECTOR	_vectorc;
+	typedef DirectX::FXMVECTOR	_fvector;
+	typedef DirectX::GXMVECTOR	_gvector;
+	typedef DirectX::HXMVECTOR	_hvector;
+	typedef DirectX::CXMVECTOR	_cvector;
 
 	typedef DirectX::XMMATRIX	_matrix;
-	typedef DirectX::FXMMATRIX	_matrixf;
-	typedef DirectX::CXMMATRIX	_matrixc;
+	typedef DirectX::FXMMATRIX	_fmatrix;
+	typedef DirectX::CXMMATRIX	_cmatrix;
 
 	typedef array<float3, 3>	POLYGON;
 }
