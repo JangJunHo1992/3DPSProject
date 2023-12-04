@@ -1,4 +1,7 @@
 #include "stdafx.h"
+#include "../../Reference/Imgui/imgui.h"
+#include "../../Reference/Imgui/imgui_impl_win32.h"
+#include "../../Reference/Imgui/imgui_impl_dx11.h"
 #include "ImGui_Window.h"
 
 CImGui_Window::CImGui_Window()

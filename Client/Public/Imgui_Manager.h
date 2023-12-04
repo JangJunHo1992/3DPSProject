@@ -11,8 +11,25 @@ BEGIN(Client)
 class CImGui_Window;
 class CTerrain;
 
-class CImgui_Manager final : public CBase
+class CImgui_Manager  : public CBase
 {
+public:
+	enum class IMGUI_WINDOW_TYPE
+	{
+		IMGUI_UIVIEW,
+		IMGUI_PROTOTYPEVIEW,
+		IMGUI_HIERARCHYVIEW,
+		IMGUI_COMPONENTVIEW,
+		IMGUI_END
+	};
+
+	enum class EDITER_TYPE
+	{
+		SCENE,
+		EFFECT,
+		MODEL,
+		TYPE_END
+	};
 	DECLARE_SINGLETON(CImgui_Manager)
 private:
 	CImgui_Manager() = default;
@@ -23,15 +40,23 @@ public:
 	void	Tick(_float fTimeDelta);
 	void	Render();
 
-	bool CreateDeviceD3D(HWND hWnd);
-	void CleanupDeviceD3D();
-	void CreateRenderTarget();
-	void CleanupRenderTarget();
-	LRESULT WINAPI ImGui_WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+public:
+	void Save_EffectJson();
+public:
+	_bool Open_File(string& Out_szSelectedFile, string& Out_szFilePath);
+private:
+	void Init_SceneEditer();
+	void Init_EffectEditer();
+	void Init_ModelEditer();
+
+	//void Release_CurrentEditer();
+	void Write_Json(const string& In_szPath);
+	void Load_FromJson(const string& In_szPath);
+
+	void Toggle_PhysXInfo();
 
 public:
 	virtual void Free() override;
-
 
 private:
 	char*	ConvertWCtoC(const wchar_t* str);
@@ -41,11 +66,6 @@ private:
 	_bool				 m_bMainTool = { true };
 	_bool				 m_bMapTool, m_bEffectTool, m_bObjectTool, m_bCameraTool = { false };
 	_bool				 m_StartImgui = true;
-
-	_bool show_demo_window = true;
-	_bool show_another_window = false;
-	_bool done = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 private:
 	void	HelpMarker(const char* desc);
@@ -57,10 +77,7 @@ private:
 	void	ShowObjectTool();
 	void	ShowCameraTool();
 private:
-	ID3D11Device* g_pd3dDevice = NULL;
-	ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
-	IDXGISwapChain* g_pSwapChain = NULL;
-	ID3D11RenderTargetView* g_mainRenderTargetView = NULL;
+
 
 public:
 	vector<shared_ptr<CImGui_Window>> m_arrWindows;
@@ -68,7 +85,7 @@ public:
 private: /* For Json */
 	string m_szJsonPath = "../Bin/LevelData/";
 	string m_szCurrentLocalPath;
-	json m_CurrentLevelJson;
+	//rapid m_CurrentLevelJson;
 
 	EDITER_TYPE m_eCurrentEditerType = EDITER_TYPE::TYPE_END;
 

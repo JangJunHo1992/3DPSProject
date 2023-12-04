@@ -73,7 +73,10 @@ PS_OUT PS_MAIN(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 
-	vector vMtrlDiffuse = vector(1.f, 1.f, 1.f, 1.f);
+	vector vMtrlDiffuse = g_DiffuseTexture.Sample(DefaultSampler,In.vTexcoord);
+	//알파테스트 코드임 이것이 매우 간단쓰
+	if (vMtrlDiffuse.a < 0.3f)
+		discard;
 
 	float		fShade = max(dot(normalize(g_vLightDir) * -1.f, normalize(In.vNormal)), 0.f);
 
