@@ -274,7 +274,53 @@ _long CGameInstance::Get_DIMouseMove(MOUSEMOVESTATE eMouseState)
 
 	return m_pInput_Device->Get_DIMouseMove(eMouseState);
 }
+RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int   g_iWinSizeX, const unsigned int   g_iWinSizeY)
+{
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(g_hWnd, &pt);
 
+	_vector vProjPos(XMVectorSet(pt.x / (g_iWinSizeX * 0.5f) - 1.f, pt.y / -(g_iWinSizeY * 0.5f) + 1.f, 0.f, 0.f));
+
+	_matrix ProjMatrixInv = Get_TransformMatrixInverse(CPipeLine::D3DTRANSFORMSTATE::D3DTS_PROJ);
+
+	_vector vViewPos(XMVector3TransformCoord(vProjPos, ProjMatrixInv));
+
+	_vector vRayDir(vViewPos);
+	_vector vRayPos(XMVectorSet(0.f, 0.f, 0.f, 1.f));
+
+	_matrix ViewMatrixInv = Get_TransformMatrixInverse(CPipeLine::D3DTRANSFORMSTATE::D3DTS_VIEW);
+
+	RAY MouseRay;
+	ZeroMemory(&MouseRay, sizeof(RAY));
+
+	XMStoreFloat3(&MouseRay.vDirection, XMVector3Normalize(XMVector3TransformNormal(vRayDir, ViewMatrixInv)));
+	XMStoreFloat4(&MouseRay.vPosition, XMVector3TransformCoord(vRayPos, ViewMatrixInv));
+
+	MouseRay.fLength = 1000000.0f;
+	return MouseRay;
+}
+
+RAY CGameInstance::Get_MouseRayLocal(HWND g_hWnd, const unsigned int   g_iWinSizeX, const unsigned int   g_iWinSizeY, _matrix matWorld)
+{
+	RAY vMouseRayLocal;
+	ZeroMemory(&vMouseRayLocal, sizeof(vMouseRayLocal));
+
+	RAY vMouseRayWorld = Get_MouseRayWorld(g_hWnd, g_iWinSizeX, g_iWinSizeY);
+
+	_vector vMousePos = XMLoadFloat4(&vMouseRayWorld.vPosition);
+	_vector vMouseDir = XMLoadFloat3(&vMouseRayWorld.vDirection);
+
+	_matrix matWorldInv = XMMatrixInverse(nullptr, matWorld);
+	vMousePos = XMVector3TransformCoord(vMousePos, matWorldInv);
+	vMouseDir = XMVector3Normalize(XMVector3TransformNormal(vMouseDir, matWorldInv));
+
+	XMStoreFloat4(&vMouseRayLocal.vPosition, vMousePos);
+	XMStoreFloat3(&vMouseRayLocal.vDirection, vMouseDir);
+	vMouseRayLocal.fLength = 1000000.0f;
+
+	return vMouseRayLocal;
+}
 
 void CGameInstance::Release_Manager()
 {

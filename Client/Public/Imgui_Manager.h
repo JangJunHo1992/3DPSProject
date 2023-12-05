@@ -65,7 +65,6 @@ private:
 private:
 	_bool				 m_bMainTool = { true };
 	_bool				 m_bMapTool, m_bEffectTool, m_bObjectTool, m_bCameraTool = { false };
-	_bool				 m_StartImgui = true;
 
 private:
 	void	HelpMarker(const char* desc);
@@ -80,7 +79,7 @@ private:
 
 
 public:
-	vector<shared_ptr<CImGui_Window>> m_arrWindows;
+	vector<CImGui_Window*>			m_arrWindows;
 
 private: /* For Json */
 	string m_szJsonPath = "../Bin/LevelData/";

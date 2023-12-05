@@ -67,6 +67,18 @@
     <Filter Include="96. Imgui\ImguiWindow">
       <UniqueIdentifier>{d1c63ac7-4174-423c-a6c3-de45f11e4848}</UniqueIdentifier>
     </Filter>
+    <Filter Include="96. Imgui\ImguiWindow\Map_Window">
+      <UniqueIdentifier>{302832ae-29e4-4b6e-99cc-7d602afdb7da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96. Imgui\ImguiWindow\Effect_Window">
+      <UniqueIdentifier>{de6e292c-26c7-4a7b-89fe-16e87f6c73d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96. Imgui\ImguiWindow\Object_Window">
+      <UniqueIdentifier>{c7aa34dd-7984-4a32-bf5f-944379e59449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96. Imgui\ImguiWindow\Camera_Window">
+      <UniqueIdentifier>{9eaccf42-c249-4da2-81e3-217c8e138e9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -138,9 +150,6 @@
     <ClInclude Include="..\Public\Terrain_GamePlay.h">
       <Filter>02.GameObjects\Terrain\01.Terrain_GamePlay</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Terrain_MapTool.h">
-      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Level_MapTool.h">
       <Filter>01.Levels\02.Tool</Filter>
     </ClInclude>
@@ -152,6 +161,24 @@
     </ClInclude>
     <ClInclude Include="..\Public\ImGui_Window.h">
       <Filter>96. Imgui\ImguiWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map_Window.h">
+      <Filter>96. Imgui\ImguiWindow\Map_Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Effect_Window.h">
+      <Filter>96. Imgui\ImguiWindow\Effect_Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Camera_Window.h">
+      <Filter>96. Imgui\ImguiWindow\Camera_Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Object_Window.h">
+      <Filter>96. Imgui\ImguiWindow\Object_Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ImGui_Struct.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Terrain_MapTool.h">
+      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +239,6 @@
     <ClCompile Include="..\Private\Terrain_GamePlay.cpp">
       <Filter>02.GameObjects\Terrain\01.Terrain_GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Terrain_MapTool.cpp">
-      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Level_MapTool.cpp">
       <Filter>01.Levels\02.Tool</Filter>
     </ClCompile>
@@ -226,6 +250,21 @@
     </ClCompile>
     <ClCompile Include="..\Private\ImGui_Window.cpp">
       <Filter>96. Imgui\ImguiWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map_Window.cpp">
+      <Filter>96. Imgui\ImguiWindow\Map_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Effect_Window.cpp">
+      <Filter>96. Imgui\ImguiWindow\Effect_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Camera_Window.cpp">
+      <Filter>96. Imgui\ImguiWindow\Camera_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Object_Window.cpp">
+      <Filter>96. Imgui\ImguiWindow\Object_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Terrain_MapTool.cpp">
+      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

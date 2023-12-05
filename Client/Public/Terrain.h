@@ -36,7 +36,7 @@ protected:
 protected:
 	virtual HRESULT Ready_Components() = 0;
 	HRESULT Ready_Components_Origin(LEVEL eLEVEL);
-	HRESULT Bind_ShaderResources();
+	virtual HRESULT Bind_ShaderResources();
 
 
 //public:

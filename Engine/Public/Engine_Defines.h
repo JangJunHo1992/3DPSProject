@@ -19,7 +19,6 @@
 
 #include <d3dcompiler.h>
 using namespace DirectX;
-
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/prettywriter.h"

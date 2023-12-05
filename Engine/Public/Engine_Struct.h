@@ -69,5 +69,11 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXANIMMESH;
 
+	typedef struct ENGINE_DLL tagRayDesc
+	{
+		XMFLOAT4   vPosition;
+		XMFLOAT3   vDirection;
+		float      fLength;
+	}RAY;
 	
 }

@@ -65,8 +65,9 @@ public: //For Input_Device
 	_byte   Get_DIKeyState(_ubyte byKeyID);
 	_byte   Get_DIMouseState(MOUSEKEYSTATE eMouse);
 	_long   Get_DIMouseMove(MOUSEMOVESTATE eMouseState);
-
-
+public: //for. RayMouse
+	RAY     Get_MouseRayWorld(HWND g_hWnd, const unsigned int   g_iWinSizeX, const unsigned int   g_iWinSizeY);
+	RAY		Get_MouseRayLocal(HWND g_hWnd, const unsigned int   g_iWinSizeX, const unsigned int   g_iWinSizeY, _matrix matWorld);
 private:
 	class CGraphic_Device*			m_pGraphic_Device = { nullptr };
 	class CTimer_Manager*			m_pTimer_Manager = { nullptr };

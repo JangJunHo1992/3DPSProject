@@ -16,15 +16,24 @@ HRESULT CImgui_Manager::SetUp_Imgui(ID3D11Device* pDevice, ID3D11DeviceContext* 
 	ImGui::CreateContext();
 
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
-	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 	//io.ConfigViewportsNoAutoMerge = true;
+
+	ImGui::StyleColorsDark();
+
+	//ImGui::StyleColorsClassic();
+
+	ImGuiStyle& style = ImGui::GetStyle();
+	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		style.WindowRounding = 0.0f;
+		style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+	}
 
 	ImGui_ImplWin32_Init(g_hWnd);
 	ImGui_ImplDX11_Init(pDevice, pContext);
-	//ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dDeviceContext);
-	ImGui::StyleColorsDark();
 	io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\malgun.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesKorean());
 	
 
@@ -34,7 +43,7 @@ HRESULT CImgui_Manager::SetUp_Imgui(ID3D11Device* pDevice, ID3D11DeviceContext* 
 void CImgui_Manager::Tick(_float fTimeDelta)
 {
 
-	ImGui_ImplDX11_NewFrame();
+	/*ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
@@ -47,54 +56,149 @@ void CImgui_Manager::Tick(_float fTimeDelta)
 	const ImVec4 bgColor = ImVec4(0.1, 0.1, 0.1, 0.5);
 	colors[ImGuiCol_WindowBg] = bgColor;
 	colors[ImGuiCol_ChildBg] = bgColor;
-	colors[ImGuiCol_TitleBg] = bgColor;
+	colors[ImGuiCol_TitleBg] = bgColor;*/
 	
 
-	ImGui::Begin(u8"메인 툴", &m_bMainTool, ImGuiWindowFlags_AlwaysAutoResize);
+	//ImGui::Begin(u8"메인 툴", &m_bMainTool, ImGuiWindowFlags_AlwaysAutoResize);
 
-	if (ImGui::BeginMenu(u8"툴"))
-	{
-		ImGui::MenuItem(u8"맵툴", NULL, &m_bMapTool);
-		ImGui::MenuItem(u8"이펙트툴", NULL, &m_bEffectTool);
-		ImGui::MenuItem(u8"오브젝트툴", NULL, &m_bObjectTool);
-		ImGui::MenuItem(u8"카메라툴", NULL, &m_bCameraTool);
+	//if (ImGui::BeginMenu(u8"툴"))
+	//{
+	//	ImGui::MenuItem(u8"맵툴", NULL, &m_bMapTool);
+	//	ImGui::MenuItem(u8"이펙트툴", NULL, &m_bEffectTool);
+	//	ImGui::MenuItem(u8"오브젝트툴", NULL, &m_bObjectTool);
+	//	ImGui::MenuItem(u8"카메라툴", NULL, &m_bCameraTool);
 
-		ImGui::EndMenu();
-	}
+	//	ImGui::EndMenu();
+	//}
 
-	if (m_bMapTool)	ShowMapTool();
-	if (m_bEffectTool) ShowEffectTool();
-	if (m_bCameraTool) ShowCameraTool();
-	if (m_bObjectTool) ShowObjectTool();
+	//if (m_bMapTool)	ShowMapTool();
+	//if (m_bEffectTool) ShowEffectTool();
+	//if (m_bCameraTool) ShowCameraTool();
+	//if (m_bObjectTool) ShowObjectTool();
 
 	
-	ImGui::End();
+	//ImGui::End();
 	
 }
 
 void CImgui_Manager::Render()
 {
- 	if (m_StartImgui)
- 	{
- 		ImGui_ImplDX11_NewFrame();
- 		ImGui_ImplWin32_NewFrame();
- 		ImGui::NewFrame();
- 		m_StartImgui = false;
- 	}
+//  	if (m_StartImgui)
+//  	{
+//  		ImGui_ImplDX11_NewFrame();
+// 		ImGui_ImplWin32_NewFrame();
+// 		m_StartImgui = false;
+//  		ImGui::NewFrame();
+//  	}
+// 
+// 	// Rendering
+// 	ImGui::Render();
+// // 	const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
+// // 	g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, NULL);
+// // 	g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
+// 
+// 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+// 	ImGuiIO& io = ImGui::GetIO(); (void)io;
+// 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+// 	{
+// 		ImGui::UpdatePlatformWindows();
+// 		ImGui::RenderPlatformWindowsDefault();
+// 	}
 
-	// Rendering
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+
+	ImGui::NewFrame();
+
+	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->Pos);
+	ImGui::SetNextWindowSize(viewport->Size);
+	ImGui::SetNextWindowViewport(viewport->ID);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+	window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+	window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+
+	ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
+	if (dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
+		window_flags |= ImGuiWindowFlags_NoBackground;
+
+	ImGui::SetNextWindowSize(ImVec2(g_iWinSizeX, g_iWinSizeY), ImGuiCond_Always);
+	ImGui::Begin("Dock", nullptr, window_flags);
+	ImGui::PopStyleVar(2);
+	ImGuiID dockspaceID = ImGui::GetID("DockSpace");
+	ImGui::DockSpace(dockspaceID, ImVec2(0, 0), dockspaceFlags);
+	ImGui::End();
+
+
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Save"))
+			{
+				
+
+			}
+
+	
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("View"))
+		{
+			if (ImGui::MenuItem("PhysX_Collider", "PgUp"))
+			{
+				
+
+
+			}
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Level"))
+		{
+			//추후에 Level 생기면 여기에 넣어서 볼수 있게 ㄱㄱ 
+
+
+
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Editer"))
+		{
+			
+			if (ImGui::MenuItem(u8"맵툴"))
+			{
+				if (m_bMapTool)	ShowMapTool();
+			}
+			if (ImGui::MenuItem(u8"이펙트툴"))
+			{
+				if (m_bEffectTool) ShowEffectTool();
+			}
+			if (ImGui::MenuItem(u8"오브젝트툴"))
+			{
+				if (m_bObjectTool) ShowObjectTool();
+			}
+			if (ImGui::MenuItem(u8"카메라툴"))
+			{
+				if (m_bCameraTool) ShowCameraTool();
+			}
+
+			ImGui::EndMenu();
+			
+
+		}
+
+		ImGui::EndMainMenuBar();
+	}
+
 	ImGui::Render();
-// 	const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
-// 	g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, NULL);
-// 	g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-	{
-		ImGui::UpdatePlatformWindows();
-		ImGui::RenderPlatformWindowsDefault();
-	}
+
 }
 
 void CImgui_Manager::Save_EffectJson()

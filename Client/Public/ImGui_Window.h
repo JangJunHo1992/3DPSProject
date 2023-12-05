@@ -6,30 +6,18 @@ BEGIN(Engine)
 class CGameObject;
 END
 
-
 BEGIN(Client)
 
 class CImGui_Window abstract : public CBase
 {
 	friend class CImGui_Manager;
-
 public:
-// 	struct GAMEOBJECT_DESC
-// 	{
-// 		_hashcode				HashCode;
-// 		string					TypeName;
-// 		weak_ptr<CGameObject>	pInstance;
-// 	};
-
-public:
-// 	struct ImGuiDESC
-// 	{
-// 		string				strName;
-// 		ImGuiWindowFlags	eWindowFlags = ImGuiWindowFlags_None;
-// 		ImVec2				vWindowSize = { 0.f, 0.f };
-// 
-// 	};
-
+	struct GAMEOBJECT_DESC
+	{
+		_hashcode				HashCode;
+		string					TypeName;
+		class CGameObject*		pInstance;
+	};
 public:
 	CImGui_Window();
 	virtual ~CImGui_Window();
@@ -50,16 +38,12 @@ public:
 
 protected:
 	_bool			m_bEnable = false;
-	//ImGuiDESC		m_tImGuiDESC;
-	//ImVec4		m_BackgroundColor = ImVec4(1.f, 1.f, 1.f, 1.f);
 	_float			m_fTimeDelta = 0.f;
 	_float			m_fWindowAhlpa = 1.f;
 	string			m_strImGuiName;
 public:
 	HRESULT			Begin();
 	HRESULT			End();
-
-
 };
 
 END
