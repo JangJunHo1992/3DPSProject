@@ -1,6 +1,7 @@
 #include "Model.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Bone.h"
 
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CComponent(pDevice, pContext)
@@ -46,7 +47,9 @@ HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath,
 
 	if (FAILED(Ready_Materials(strModelFilePath)))
 		return E_FAIL;
-
+	//-1인 이유는 -1이 mrootbone이기 때문임
+	if (FAILED(Ready_Bones(m_pAIScene->mRootNode, -1)))
+		return E_FAIL;
 	return S_OK;
 }
 
@@ -64,6 +67,19 @@ HRESULT CModel::Render(_uint iMeshIndex)
 	m_Meshes[iMeshIndex]->Render();
 
 	return S_OK;
+}
+
+void CModel::Play_Animation(_float fTimeDelta)
+{
+	/* 현재 애니메이션이 사용하고 있는 뼈들의 TransformationMatrix를 갱신한다. */
+
+
+/* 화면에 최종적인 상태로 그려내기위해서는 반드시 뼈들의 CombinedTransformationMatrix가 갱신되어야한다. */
+/* 모든 뼈들을 다 갱신하며 부모로부터 자식까지 쭈우우욱돌아서 CombinedTransformationMatrix를 갱신한다. */
+	for (auto& pBone : m_Bones)
+	{
+		pBone->Invalidate_CombinedTransformationMatrix(m_Bones);
+	}
 }
 
 HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType)
@@ -86,7 +102,7 @@ HRESULT CModel::Ready_Meshes(_fmatrix PivotMatrix)
 
 	for (size_t i = 0; i < m_iNumMeshes; i++)
 	{
-		CMesh* pMesh = CMesh::Create(m_pDevice, m_pContext, m_pAIScene->mMeshes[i], PivotMatrix);
+		CMesh* pMesh = CMesh::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene->mMeshes[i], PivotMatrix);
 
 		if (nullptr == pMesh)
 			return E_FAIL;
@@ -145,6 +161,24 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 		}
 
 		m_Materials.push_back(MaterialDesc);
+	}
+
+	return S_OK;
+}
+
+HRESULT CModel::Ready_Bones(aiNode* pAINode, _int iParentIndex)
+{
+	CBone* pBone = CBone::Create(pAINode, iParentIndex);
+	if (nullptr == pBone)
+		return E_FAIL;
+
+	m_Bones.push_back(pBone);
+
+	_int		iParentIdx = m_Bones.size() - 1;
+
+	for (size_t i = 0; i < pAINode->mNumChildren; i++)
+	{
+		Ready_Bones(pAINode->mChildren[i], iParentIdx);
 	}
 
 	return S_OK;

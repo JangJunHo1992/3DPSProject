@@ -22,7 +22,8 @@ public:
 	virtual HRESULT Initialize_Prototype(TYPE eType, const string & strModelFilePath, _fmatrix PivotMatrix);
 	virtual HRESULT Initialize(void* pArg);
 	virtual HRESULT Render(_uint iMeshIndex);
-
+public:
+	void Play_Animation(_float fTimeDelta);
 public:
 	HRESULT	Bind_ShaderResource(class CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType);
 private:
@@ -38,9 +39,15 @@ private:
 	_uint					m_iNumMaterials = { 0 };
 	vector<MATERIAL_DESC>	m_Materials;
 
+	/* 내 모델의 전체 뼈들을 부모관계를 포함하여 저장한다. */
+	vector<class CBone*>	m_Bones;
+public:
+	typedef vector<class CBone*>	BONES;
+
 private:
 	HRESULT	Ready_Meshes(_fmatrix PivotMatrix);
 	HRESULT Ready_Materials(const string& strModelFilePath);
+	HRESULT Ready_Bones(aiNode* pAINode, _int iParentIndex);
 public:
 	static CModel* Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext, TYPE eType, const string & strModelFilePath, _fmatrix PivotMatrix);
 	virtual CComponent* Clone(void* pArg) override;

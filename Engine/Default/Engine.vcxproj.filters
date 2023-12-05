@@ -100,6 +100,9 @@
     <Filter Include="99.Defines\Engine_ini">
       <UniqueIdentifier>{f048bbcd-3a56-47fb-bfd5-4a3c4f6cd2b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.Components\05.Model\Bone">
+      <UniqueIdentifier>{ccba10bc-9112-4545-84e5-266244cf8650}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -198,6 +201,9 @@
     <ClInclude Include="..\Public\Picking.h">
       <Filter>01.Utility\10.Picking</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Bone.h">
+      <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Base.cpp">
@@ -277,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Picking.cpp">
       <Filter>01.Utility\10.Picking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Bone.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
