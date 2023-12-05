@@ -15,8 +15,8 @@ namespace Engine
 	typedef		unsigned short				_ushort;
 
 	typedef		signed int					_int;
+	typedef      XMINT2						_int2;
 	typedef		unsigned int				_uint;
-
 	typedef		signed long					_long;
 	typedef		unsigned long				_ulong;
 

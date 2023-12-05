@@ -35,6 +35,8 @@ HRESULT CTerrain::Initialize(void* pArg)
 void CTerrain::Priority_Tick(_float fTimeDelta)
 {
 	
+
+	
 }
 
 void CTerrain::Tick(_float fTimeDelta)
@@ -65,7 +67,6 @@ HRESULT CTerrain::Render()
 	return S_OK;
 }
 
-
 HRESULT CTerrain::Ready_Components_Origin(LEVEL eLEVEL)
 {
 	/* For.Com_Shader */
@@ -88,15 +89,18 @@ HRESULT CTerrain::Ready_Components_Origin(LEVEL eLEVEL)
 		TEXT("Com_Mask"), reinterpret_cast<CComponent**>(&m_pTextureCom[TYPE_MASK]))))
 		return E_FAIL;
 
-	/* For.Com_Brush */
-	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Texture_Terrain_Brush"),
-		TEXT("Com_Brush"), reinterpret_cast<CComponent**>(&m_pTextureCom[TYPE_BRUSH]))))
-		return E_FAIL;
+	///* For.Com_Brush */
+	//if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Texture_Terrain_Brush"),
+	//	TEXT("Com_Brush"), reinterpret_cast<CComponent**>(&m_pTextureCom[TYPE_BRUSH]))))
+	//	return E_FAIL;
+
 
 	return S_OK;
 }
 
-HRESULT CTerrain::Bind_ShaderResources()
+
+
+HRESULT CTerrain::Bind_ShaderResources_Origin()
 {
 	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
 		return E_FAIL;
@@ -108,14 +112,43 @@ HRESULT CTerrain::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pTextureCom[TYPE_MASK]->Bind_ShaderResource(m_pShaderCom, "g_MaskTexture", 0)))
 		return E_FAIL;
-	if (FAILED(m_pTextureCom[TYPE_BRUSH]->Bind_ShaderResource(m_pShaderCom, "g_BrushTexture", 0)))
-		return E_FAIL;
+
+
+
 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
 		return E_FAIL;
+
 
 	return S_OK;
 }
 
+
+
+//CTerrain * CTerrain::Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
+//{
+//	CTerrain*		pInstance = new CTerrain(pDevice, pContext);
+//
+//	/* 원형객체를 초기화한다.  */
+//	if (FAILED(pInstance->Initialize_Prototype()))
+//	{
+//		MSG_BOX("Failed to Created : CTerrain");
+//		Safe_Release(pInstance);
+//	}
+//	return pInstance;
+//}
+//
+//CGameObject * CTerrain::Clone(void* pArg)
+//{
+//	CTerrain*		pInstance = new CTerrain(*this);
+//
+//	/* 원형객체를 초기화한다.  */
+//	if (FAILED(pInstance->Initialize(pArg)))
+//	{
+//		MSG_BOX("Failed to Cloned : CTerrain");
+//		Safe_Release(pInstance);
+//	}
+//	return pInstance;
+//}
 
 void CTerrain::Free()
 {

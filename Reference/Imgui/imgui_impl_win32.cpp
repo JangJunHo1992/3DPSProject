@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 // dear imgui: Platform Backend for Windows (standard windows API for 32-bits AND 64-bits applications)
 // This needs to be used along with a Renderer (e.g. DirectX11, OpenGL3, Vulkan..)
 
@@ -639,8 +641,6 @@ static ImGuiMouseSource GetMouseSourceFromMessageExtraInfo()
         return ImGuiMouseSource_TouchScreen;
     return ImGuiMouseSource_Mouse;
 }
-
-
 
 IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {

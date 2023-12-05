@@ -37,7 +37,7 @@ public:
 	HRESULT Loading();
 	HRESULT Loading_For_Logo_Level();
 
-	template<class T>
+	template<class T, class T2>
 	HRESULT	Loading_For_Level(LEVEL eLEVEL);
 	HRESULT Loading_For_GamePlay_Level();
 	HRESULT Loading_For_Tool_Level();

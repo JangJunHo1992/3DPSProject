@@ -1,4 +1,5 @@
 #include "VIBuffer_Terrain.h"
+#include <DirectXCollision.h>
 
 CVIBuffer_Terrain::CVIBuffer_Terrain(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CVIBuffer(pDevice,pContext)
@@ -7,7 +8,10 @@ CVIBuffer_Terrain::CVIBuffer_Terrain(ID3D11Device* pDevice, ID3D11DeviceContext*
 
 CVIBuffer_Terrain::CVIBuffer_Terrain(const CVIBuffer_Terrain& rhs)
 	: CVIBuffer(rhs)
+	, m_iNumVerticesX(rhs.m_iNumVerticesX)
+	, m_iNumVerticesZ(rhs.m_iNumVerticesZ)
 {
+	
 }
 
 HRESULT CVIBuffer_Terrain::Initialize_Prototype(const wstring& strHeightMapFilePath)
@@ -40,6 +44,7 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const wstring& strHeightMapFileP
 	m_iIndexStride = m_iNumVertices >= 65535 ? 4 : 2;
 	m_eIndexFormat = m_iIndexStride == 2 ? DXGI_FORMAT_R16_UINT : DXGI_FORMAT_R32_UINT;
 	m_eTopology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+
 
 #pragma region VERTEX_BUFFER
 
@@ -110,6 +115,7 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const wstring& strHeightMapFileP
 			pIndices[iNumIndices++] = iIndices[0];
 			pIndices[iNumIndices++] = iIndices[2];
 			pIndices[iNumIndices++] = iIndices[3];
+
 
 			vSourDir = XMLoadFloat3(&pVertices[iIndices[2]].vPosition) - XMLoadFloat3(&pVertices[iIndices[0]].vPosition);
 			vDestDir = XMLoadFloat3(&pVertices[iIndices[3]].vPosition) - XMLoadFloat3(&pVertices[iIndices[2]].vPosition);

@@ -94,14 +94,14 @@
     <Filter Include="01.Utility\03.Components\05.Model\Mesh">
       <UniqueIdentifier>{8bb95207-9fe7-4e9f-bca8-d75c9fed42d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\10.Picking">
-      <UniqueIdentifier>{e59df07e-9f2b-4d3c-ad81-52f4362bfc46}</UniqueIdentifier>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic">
+      <UniqueIdentifier>{a1b7f292-30ec-4414-b15d-872fbbac8153}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99.Defines\Engine_ini">
-      <UniqueIdentifier>{f048bbcd-3a56-47fb-bfd5-4a3c4f6cd2b3}</UniqueIdentifier>
+    <Filter Include="01.Utility\91.RapidJson">
+      <UniqueIdentifier>{be2c1af3-4e18-4b8d-ba19-2e595e13211a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\03.Components\05.Model\Bone">
-      <UniqueIdentifier>{ccba10bc-9112-4545-84e5-266244cf8650}</UniqueIdentifier>
+    <Filter Include="01.Utility\91.RapidJson\Json">
+      <UniqueIdentifier>{22594367-3c7e-4b88-a4c6-2aad439174da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -198,11 +198,14 @@
     <ClInclude Include="..\Public\Mesh.h">
       <Filter>01.Utility\03.Components\05.Model\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Picking.h">
-      <Filter>01.Utility\10.Picking</Filter>
+    <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Bone.h">
-      <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
+    <ClInclude Include="..\Public\RapidJson.h">
+      <Filter>01.Utility\91.RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Json\json.hpp">
+      <Filter>01.Utility\91.RapidJson\Json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -281,11 +284,12 @@
     <ClCompile Include="..\Private\Mesh.cpp">
       <Filter>01.Utility\03.Components\05.Model\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Picking.cpp">
-      <Filter>01.Utility\10.Picking</Filter>
+    <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Bone.cpp">
-      <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
+    <ClCompile Include="..\Public\RapidJson.cpp" />
+    <ClCompile Include="..\Private\RapidJson.cpp">
+      <Filter>01.Utility\91.RapidJson</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

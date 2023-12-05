@@ -3,8 +3,13 @@
 #include "GameInstance.h"
 #include "Camera_Dynamic.h"
 #include "Level_Loading.h"
-
+#include "GameObject.h"
 #include "Imgui_Manager.h"
+
+#include "Terrain_MapTool.h"
+#include "MapTool_State_Terrain.h"
+#include "RapidJson.h"
+
 
 CLevel_MapTool::CLevel_MapTool(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
 	: CLevel(pDevice, pContext)
@@ -13,18 +18,42 @@ CLevel_MapTool::CLevel_MapTool(ID3D11Device * pDevice, ID3D11DeviceContext * pCo
 
 HRESULT CLevel_MapTool::Initialize()
 {
-	
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
 		return E_FAIL;
 
+// 	if (FAILED(Ready_Layer_Raider(TEXT("Layer_Raider"))))
+// 		return E_FAIL;
+
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 		return E_FAIL;
+
+
 	m_pImguiManager = CImgui_Manager::GetInstance();
 	Safe_AddRef(m_pImguiManager);
 
+
 	if (FAILED(m_pImguiManager->SetUp_Imgui(m_pDevice, m_pContext)))
 		return E_FAIL;
+
+
 	
+	list<CGameObject*> pGameObjects = *(m_pGameInstance->Get_GameObjects(LEVEL_TOOL, TEXT("Layer_BackGround")));
+	
+	for (CGameObject* pGameObject : pGameObjects) 
+	{
+		CTerrain_MapTool* pTerrain = dynamic_cast<CTerrain_MapTool*>(pGameObject);
+		if (pTerrain) 
+		{
+			m_pTerrain = pTerrain;
+			Safe_AddRef(pTerrain);
+			break;
+		}
+	}
+
+	
+	m_pActor = new CActor<CLevel_MapTool>(this);
+	m_pActor->Set_State(new CMapTool_State_Terrain());
+
 	return S_OK;
 }
 
@@ -36,15 +65,54 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_GAMEPLAY))))
 			return;
 	}
+
+	m_pActor->Update_State();
+
 }
 
 HRESULT CLevel_MapTool::Render()
 {
-	SetWindowText(g_hWnd, TEXT("게임플레이레벨입니다."));
+	SetWindowText(g_hWnd, TEXT("맵툴레벨입니다."));
 	m_pImguiManager->Render();
 
 	return S_OK;
 }
+
+void CLevel_MapTool::Update_MousePos()
+{
+	m_pTerrain->Update_MousePos();
+}
+
+void CLevel_MapTool::Terrain_Pick()
+{
+	if (m_pGameInstance->Get_DIMouseState(DIM_LB) & 0x80)
+	{
+		if (nullptr == m_pTerrain)
+			return;
+
+		m_pTerrain->pick();
+	}
+}
+
+void CLevel_MapTool::Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag)
+{
+	m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, strPrototypeTag);
+	
+	list<CGameObject*> pGameObjects = *(m_pGameInstance->Get_GameObjects(LEVEL_TOOL, strLayerTag));
+	CGameObject* pGameObject = pGameObjects.back();
+	
+	const _float3& temp = m_pTerrain->Get_PickedPosFloat3();
+	pGameObject->Set_Position(temp);
+
+	//const _float3 & vState
+}
+
+void CLevel_MapTool::Create_Raider()
+{
+	//Create_Object(TEXT("Layer_Raider"), TEXT("Prototype_GameObject_Raider"));
+}
+
+
 
 HRESULT CLevel_MapTool::Ready_Layer_Camera(const wstring& strLayerTag)
 {
@@ -66,12 +134,25 @@ HRESULT CLevel_MapTool::Ready_Layer_Camera(const wstring& strLayerTag)
 	return S_OK;
 }
 
+HRESULT CLevel_MapTool::Ready_Layer_Raider(const wstring& strLayerTag)
+{
+// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Raider"))))
+// 		return E_FAIL;
+
+	return S_OK;
+}
+
 HRESULT CLevel_MapTool::Ready_Layer_BackGround(const wstring& strLayerTag)
 {
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Terrain"))))
 		return E_FAIL;
 
 	return S_OK;
+}
+
+void CLevel_MapTool::Set_BrushRange(_float _fBrushRange)
+{
+	m_pTerrain->Set_BrushRange(_fBrushRange); 
 }
 
 CLevel_MapTool * CLevel_MapTool::Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
@@ -89,6 +170,10 @@ CLevel_MapTool * CLevel_MapTool::Create(ID3D11Device * pDevice, ID3D11DeviceCont
 void CLevel_MapTool::Free()
 {
 	Safe_Release(m_pImguiManager);
+
+	m_pActor->Free();
+
+	Safe_Release(m_pTerrain);
 
 	__super::Free();
 

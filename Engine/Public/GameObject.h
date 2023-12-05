@@ -30,6 +30,12 @@ public:
 	virtual void Late_Tick(_float fTimeDelta);
 	virtual HRESULT Render();
 
+public:
+	void Set_Position(const _float3& vState);
+
+//public:
+//	virtual void pick() {};
+
 protected:
 	ID3D11Device*				m_pDevice = { nullptr };
 	ID3D11DeviceContext*		m_pContext = { nullptr };

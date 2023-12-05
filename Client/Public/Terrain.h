@@ -6,14 +6,15 @@
 BEGIN(Engine)
 class CShader;
 class CTexture;
-class CVIBuffer_Terrain;
+class CVIBuffer_Dynamic_Terrain;
 END
 
 BEGIN(Client)
 
 class CTerrain : public CGameObject
 {
-	enum TEXTURE { TYPE_DIFFUSE, TYPE_MASK,TYPE_BRUSH, TYPE_END };
+public:
+	enum TEXTURE { TYPE_DIFFUSE, TYPE_MASK, TYPE_BRUSH, TYPE_END };
 	
 protected:
 	CTerrain(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
@@ -29,14 +30,15 @@ public:
 	virtual HRESULT Render() override;
 
 protected:
-	CShader*			m_pShaderCom = { nullptr };
-	CTexture*			m_pTextureCom[TYPE_END] = { nullptr };
-	CVIBuffer_Terrain*	m_pVIBufferCom = { nullptr };
+	CShader*					m_pShaderCom = { nullptr };
+	CTexture*					m_pTextureCom[TYPE_END] = { nullptr };
+	CVIBuffer_Dynamic_Terrain*	m_pVIBufferCom = { nullptr };
 
 protected:
 	virtual HRESULT Ready_Components() = 0;
 	HRESULT Ready_Components_Origin(LEVEL eLEVEL);
-	virtual HRESULT Bind_ShaderResources();
+	virtual HRESULT Bind_ShaderResources() = 0;
+	HRESULT Bind_ShaderResources_Origin();
 
 
 //public:

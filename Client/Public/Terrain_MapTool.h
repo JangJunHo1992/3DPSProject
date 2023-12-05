@@ -1,9 +1,10 @@
 #pragma once
 #include "Terrain.h"
+#include "IPick.h"
 
 BEGIN(Client)
 
-class CTerrain_MapTool final : public CTerrain
+class CTerrain_MapTool final : public CTerrain, public IPick
 {
 
 protected:
@@ -21,6 +22,9 @@ public:
 	/* 사본객체를 생성한다. */
 	virtual CGameObject* Clone(void* pArg) override;
 
+
+	// IPick을(를) 통해 상속됨
+	virtual void pick() override;
 
 	// CTerrain을(를) 통해 상속됨
 	virtual HRESULT Bind_ShaderResources() override;

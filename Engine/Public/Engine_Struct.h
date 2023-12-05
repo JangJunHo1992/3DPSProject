@@ -19,6 +19,7 @@ namespace Engine
 		class CTexture* pMtrlTextures[AI_TEXTURE_TYPE_MAX];
 	}MATERIAL_DESC;
 
+
 	typedef struct ENGINE_DLL tagVertex_Position_Texcoord
 	{
 		XMFLOAT3		vPosition;
@@ -45,7 +46,7 @@ namespace Engine
 		BYTE      Buttons[4];
 	} DIMOUSESTATE, * LPDIMOUSESTATE;
 
-	typedef struct ENGINE_DLL tagVTXMESH
+	typedef struct ENGINE_DLL tagMeshDesc // <- 이런 식으로. 원래 없었음
 	{
 		XMFLOAT3		vPosition;
 		XMFLOAT3		vNormal;
@@ -56,24 +57,24 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXMESH;
 
-	typedef struct ENGINE_DLL
-	{
-		XMFLOAT3		vPosition;
-		XMFLOAT3		vNormal;
-		XMFLOAT2		vTexcoord;
-		XMFLOAT3		vTangent;
-		XMUINT4			vBlendIndices;
-		XMFLOAT4		vBlendWeights;
-
-		static const unsigned int					iNumElements = 6;
-		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
-	}VTXANIMMESH;
-
 	typedef struct ENGINE_DLL tagRayDesc
 	{
-		XMFLOAT4   vPosition;
-		XMFLOAT3   vDirection;
-		float      fLength;
+		XMFLOAT4	vPosition;
+		XMFLOAT3	vDirection;
+		float		fLength;
 	}RAY;
-	
+
+	typedef struct ENGINE_DLL tagCellDesc
+	{
+		_float3	vPositions[3] = {};
+	}CELL;
+
+	typedef struct ENGINE_DLL tagPickableObjectDesc
+	{
+		class CGameObject*	pHitTarget;
+		XMFLOAT3			vHitPosition;
+		float				fDistance;
+	}PICKING_RESULT;
+
+
 }

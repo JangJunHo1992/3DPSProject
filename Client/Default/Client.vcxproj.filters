@@ -58,26 +58,53 @@
     <Filter Include="02.GameObjects\Terrain\02.Terrain_Tool">
       <UniqueIdentifier>{cc596d66-7f4d-479e-910e-7bf825efa10b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObjects\ForkLift">
-      <UniqueIdentifier>{391729fd-6ea7-4c66-8cd5-ad814eeace48}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObjects\Monster">
-      <UniqueIdentifier>{6a759b02-917b-4bc3-adbb-507ab4df32d4}</UniqueIdentifier>
+      <UniqueIdentifier>{c5c08d17-f2da-4a8b-a060-ac98b3e401ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\ForkLift">
+      <UniqueIdentifier>{fb9e37b8-cb9f-49eb-b6b5-a0a64df25c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Terrain\02.Terrain_Tool\State">
+      <UniqueIdentifier>{ce40ba25-29e1-4323-bca8-930a2197bea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="95.Component">
+      <UniqueIdentifier>{62acb790-c3a5-48a7-b628-03ea9c7da896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="95.Component\Actor">
+      <UniqueIdentifier>{b7ccba19-6cb1-4aea-888c-eed1105c6875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\02.Tool\State">
+      <UniqueIdentifier>{47602064-67d5-4c5b-9991-bb38e611525c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="94. Interface">
+      <UniqueIdentifier>{8135bab4-e9bd-4123-8231-9b9d91bf7269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Raider">
+      <UniqueIdentifier>{f7de3185-2cc1-4949-b7f9-5718545846ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\02.Tool\State\Terrain">
+      <UniqueIdentifier>{dc963e35-1961-47fb-95a5-95fa9a36a6f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\02.Tool\State\Object">
+      <UniqueIdentifier>{2a35f2c4-c09b-4be9-b07f-febea12ce020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\02.Tool\State\Object\Create">
+      <UniqueIdentifier>{70a5e3b0-5617-4177-bd87-4302716e87ee}</UniqueIdentifier>
     </Filter>
     <Filter Include="96. Imgui\ImguiWindow">
-      <UniqueIdentifier>{d1c63ac7-4174-423c-a6c3-de45f11e4848}</UniqueIdentifier>
+      <UniqueIdentifier>{3bef0b7a-eccb-4050-9c96-b4a6ae69ef42}</UniqueIdentifier>
     </Filter>
     <Filter Include="96. Imgui\ImguiWindow\Map_Window">
-      <UniqueIdentifier>{302832ae-29e4-4b6e-99cc-7d602afdb7da}</UniqueIdentifier>
+      <UniqueIdentifier>{97e2f3cc-ddb2-4264-941f-6cdc1820e1e2}</UniqueIdentifier>
     </Filter>
     <Filter Include="96. Imgui\ImguiWindow\Effect_Window">
-      <UniqueIdentifier>{de6e292c-26c7-4a7b-89fe-16e87f6c73d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="96. Imgui\ImguiWindow\Object_Window">
-      <UniqueIdentifier>{c7aa34dd-7984-4a32-bf5f-944379e59449}</UniqueIdentifier>
+      <UniqueIdentifier>{9708d306-3652-4601-a187-73f63e6ad90e}</UniqueIdentifier>
     </Filter>
     <Filter Include="96. Imgui\ImguiWindow\Camera_Window">
-      <UniqueIdentifier>{9eaccf42-c249-4da2-81e3-217c8e138e9c}</UniqueIdentifier>
+      <UniqueIdentifier>{dda0f036-407e-4d59-ae7f-df7e8091875f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96. Imgui\ImguiWindow\Object_Window">
+      <UniqueIdentifier>{c37e0ee4-aa24-450f-bc64-2595315f46dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +177,9 @@
     <ClInclude Include="..\Public\Terrain_GamePlay.h">
       <Filter>02.GameObjects\Terrain\01.Terrain_GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Terrain_MapTool.h">
+      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\Level_MapTool.h">
       <Filter>01.Levels\02.Tool</Filter>
     </ClInclude>
@@ -159,26 +189,41 @@
     <ClInclude Include="..\Public\ForkLift.h">
       <Filter>02.GameObjects\ForkLift</Filter>
     </ClInclude>
+    <ClInclude Include="TerrainState.h">
+      <Filter>02.GameObjects\Terrain\02.Terrain_Tool\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Actor.h">
+      <Filter>95.Component\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\State.h">
+      <Filter>95.Component\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\IPick.h">
+      <Filter>94. Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Private\Raider.h">
+      <Filter>02.GameObjects\Raider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MapTool_State_Terrain.h">
+      <Filter>01.Levels\02.Tool\State\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MapTool_State_Object_Create.h">
+      <Filter>01.Levels\02.Tool\State\Object\Create</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\ImGui_Window.h">
       <Filter>96. Imgui\ImguiWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Map_Window.h">
-      <Filter>96. Imgui\ImguiWindow\Map_Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Effect_Window.h">
-      <Filter>96. Imgui\ImguiWindow\Effect_Window</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Camera_Window.h">
       <Filter>96. Imgui\ImguiWindow\Camera_Window</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Effect_Window.h">
+      <Filter>96. Imgui\ImguiWindow\Effect_Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map_Window.h">
+      <Filter>96. Imgui\ImguiWindow\Map_Window</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\Object_Window.h">
       <Filter>96. Imgui\ImguiWindow\Object_Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\ImGui_Struct.h">
-      <Filter>99.Defines</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Terrain_MapTool.h">
-      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +284,9 @@
     <ClCompile Include="..\Private\Terrain_GamePlay.cpp">
       <Filter>02.GameObjects\Terrain\01.Terrain_GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\Terrain_MapTool.cpp">
+      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\Level_MapTool.cpp">
       <Filter>01.Levels\02.Tool</Filter>
     </ClCompile>
@@ -248,23 +296,32 @@
     <ClCompile Include="..\Private\ForkLift.cpp">
       <Filter>02.GameObjects\ForkLift</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\Actor.cpp">
+      <Filter>95.Component\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Raider.cpp">
+      <Filter>02.GameObjects\Raider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Public\MapTool_State_Terrain.cpp">
+      <Filter>01.Levels\02.Tool\State\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MapTool_State_Object_Create.cpp">
+      <Filter>01.Levels\02.Tool\State\Object\Create</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\ImGui_Window.cpp">
       <Filter>96. Imgui\ImguiWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Map_Window.cpp">
-      <Filter>96. Imgui\ImguiWindow\Map_Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Effect_Window.cpp">
-      <Filter>96. Imgui\ImguiWindow\Effect_Window</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Camera_Window.cpp">
       <Filter>96. Imgui\ImguiWindow\Camera_Window</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\Effect_Window.cpp">
+      <Filter>96. Imgui\ImguiWindow\Effect_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map_Window.cpp">
+      <Filter>96. Imgui\ImguiWindow\Map_Window</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\Object_Window.cpp">
       <Filter>96. Imgui\ImguiWindow\Object_Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Terrain_MapTool.cpp">
-      <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

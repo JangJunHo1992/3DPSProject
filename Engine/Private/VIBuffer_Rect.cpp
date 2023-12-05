@@ -46,6 +46,26 @@ HRESULT CVIBuffer_Rect::Initialize_Prototype()
 	pVertices[3].vPosition = _float3(-0.5f, -0.5f, 0.f);
 	pVertices[3].vTexcoord = _float2(0.0f, 1.0f);
 
+	//m_pCells = new CELL[]
+	//{
+	//	CELL cell;
+	//	ZeroMemory(&cell, sizeof(CELL));
+	//	cell.vPositions[0] = pVertices[0].vPosition;
+	//	cell.vPositions[1] = pVertices[1].vPosition;
+	//	cell.vPositions[2] = pVertices[2].vPosition;
+	//	Add_Cell(cell);
+	//}
+
+	//{
+	//	CELL cell;
+	//	ZeroMemory(&cell, sizeof(CELL));
+	//	cell.vPositions[0] = pVertices[0].vPosition;
+	//	cell.vPositions[1] = pVertices[2].vPosition;
+	//	cell.vPositions[2] = pVertices[3].vPosition;
+	//	Add_Cell(cell);
+	//}
+
+
 	m_SubResourceData.pSysMem = pVertices;
 
 	/* pVertices에 할당하여 채워놨던 정점들의 정보를 ID3D11Buffer로 할당한 공간에 복사하여 채워넣는다. */
@@ -76,7 +96,7 @@ HRESULT CVIBuffer_Rect::Initialize_Prototype()
 	pIndices[3] = 0;
 	pIndices[4] = 2;
 	pIndices[5] = 3;
-	
+
 	m_SubResourceData.pSysMem = pIndices;
 
 	if (FAILED(__super::Create_Buffer(&m_pIB)))

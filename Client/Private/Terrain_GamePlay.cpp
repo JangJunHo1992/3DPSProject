@@ -42,3 +42,13 @@ CGameObject* CTerrain_GamePlay::Clone(void* pArg)
 	}
 	return pInstance;
 }
+
+HRESULT CTerrain_GamePlay::Bind_ShaderResources()
+{
+	if (FAILED(Bind_ShaderResources_Origin()))
+		return E_FAIL;
+
+
+
+	return S_OK;
+}

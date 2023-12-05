@@ -5,6 +5,12 @@
 #include "InputDev.h"
 #include "Component_Manager.h"
 
+#include "Json/json.hpp"
+using namespace nlohmann;
+
+//#include "Json/json.hpp"
+//using namespace nlohmann;
+
 /* 클라이언트에서 엔진의 기능을 사용하기위해 반드시 거쳐야하는 객체. */
 
 /* DX11을 통해 필요한 객체를 생성하고 렌더링하는 작업을 수행한다. */
@@ -43,6 +49,7 @@ public: /* For.Level_Manager */
 public: /* For.Object_Manager */
 	HRESULT Add_Prototype(const wstring& strPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_CloneObject(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strPrototypeTag, void* pArg = nullptr);
+	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
 
 public: /* For.Component_Manager */
 	HRESULT Add_Prototype(_uint iLevelIndex, const wstring & strPrototypeTag, class CComponent* pPrototype);
@@ -65,6 +72,18 @@ public: //For Input_Device
 	_byte   Get_DIKeyState(_ubyte byKeyID);
 	_byte   Get_DIMouseState(MOUSEKEYSTATE eMouse);
 	_long   Get_DIMouseMove(MOUSEMOVESTATE eMouseState);
+
+	_bool	Key_Up(const _int & _iKey);
+	_bool	Key_Down(const _int & _iKey);
+	_bool	Key_Pressing(const _int & _iKey);
+
+
+public:
+	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
+	RAY	Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY, _matrix matWorld);
+
+	HRESULT		Load_Json(string _strPath, json & pOut);
+	HRESULT		Save_Json(string _strPath, json _json);
 
 
 private:

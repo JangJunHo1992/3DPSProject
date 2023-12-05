@@ -5,6 +5,9 @@
 #include "Object_Manager.h"
 #include "Renderer.h"
 
+#include "RapidJson.h"
+//#include "Json_Utility.h"
+
 IMPLEMENT_SINGLETON(CGameInstance)
 
 CGameInstance::CGameInstance()
@@ -165,6 +168,11 @@ HRESULT CGameInstance::Add_CloneObject(_uint iLevelIndex, const wstring & strLay
 	return m_pObject_Manager->Add_CloneObject(iLevelIndex, strLayerTag, strPrototypeTag, pArg);
 }
 
+list<class CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag)
+{
+	return m_pObject_Manager->Get_GameObjects(iLevelIndex, strLayerTag);
+}
+
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const wstring& strPrototypeTag, CComponent* pPrototype)
 {
 	if (nullptr == m_pComponent_Manager)
@@ -274,7 +282,23 @@ _long CGameInstance::Get_DIMouseMove(MOUSEMOVESTATE eMouseState)
 
 	return m_pInput_Device->Get_DIMouseMove(eMouseState);
 }
-RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int   g_iWinSizeX, const unsigned int   g_iWinSizeY)
+
+_bool CGameInstance::Key_Up(const _int& _iKey)
+{
+	return m_pInput_Device->Key_Up(_iKey);
+}
+
+_bool CGameInstance::Key_Down(const _int& _iKey)
+{
+	return m_pInput_Device->Key_Down(_iKey);
+}
+
+_bool CGameInstance::Key_Pressing(const _int& _iKey)
+{
+	return m_pInput_Device->Key_Pressing(_iKey);
+}
+
+RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY)
 {
 	POINT pt;
 	GetCursorPos(&pt);
@@ -301,13 +325,13 @@ RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int   g_iWinSiz
 	return MouseRay;
 }
 
-RAY CGameInstance::Get_MouseRayLocal(HWND g_hWnd, const unsigned int   g_iWinSizeX, const unsigned int   g_iWinSizeY, _matrix matWorld)
+RAY CGameInstance::Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY, _matrix matWorld)
 {
 	RAY vMouseRayLocal;
 	ZeroMemory(&vMouseRayLocal, sizeof(vMouseRayLocal));
 
 	RAY vMouseRayWorld = Get_MouseRayWorld(g_hWnd, g_iWinSizeX, g_iWinSizeY);
-
+	
 	_vector vMousePos = XMLoadFloat4(&vMouseRayWorld.vPosition);
 	_vector vMouseDir = XMLoadFloat3(&vMouseRayWorld.vDirection);
 
@@ -321,6 +345,57 @@ RAY CGameInstance::Get_MouseRayLocal(HWND g_hWnd, const unsigned int   g_iWinSiz
 
 	return vMouseRayLocal;
 }
+
+HRESULT CGameInstance::Load_Json(string _strPath, json& pOut)
+{
+	json JsonTemp;
+
+	ifstream fin;
+	
+	
+	string	directoryPath = "../Bin/RapidJson/";
+
+	string filePath = directoryPath + _strPath;
+
+	fin.open(filePath.c_str());
+
+	if (fin.is_open())
+	{
+		fin >> (JsonTemp);
+	}
+	else
+	{
+		return E_FAIL;
+	}
+
+	fin.close();
+	pOut = JsonTemp;
+
+	return S_OK;
+}
+
+HRESULT CGameInstance::Save_Json(string _strPath, json _json)
+{
+	ofstream fout;
+
+	string directoryPath = "../Bin/RapidJson/";
+
+	string filePath = directoryPath + _strPath;
+
+	fout.open(filePath.c_str());
+
+	if (fout.is_open())
+	{
+		fout << _json << endl;
+	}
+	else
+		return E_FAIL;
+
+	fout.close();
+
+	return S_OK;
+}
+
 
 void CGameInstance::Release_Manager()
 {

@@ -6,5 +6,3 @@ namespace Engine
 	enum MOUSEMOVESTATE { DIMS_X, DIMS_Y, DIMS_Z, DIMS_END };
 
 }
-
-enum class PICKER { LOCAL, WORLD, MAX };

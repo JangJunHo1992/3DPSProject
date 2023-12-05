@@ -25,7 +25,7 @@ private:
 	ID3D11Device*			m_pDevice = { nullptr };
 	ID3D11DeviceContext*	m_pContext = { nullptr };
 	CGameInstance*			m_pGameInstance = { nullptr };
-	class CImgui_Manager*	m_pImguiManager = { nullptr };
+	//class CImgui_Manager*	m_pImguiManager = { nullptr };
 private:
 	HRESULT Open_Level(LEVEL eStartLevelID);
 	HRESULT Ready_Prototype_Component_ForStaticLevel();

@@ -78,6 +78,16 @@ public:
 	void Look_At(_fvector vTargetPos);
 	void Look_At_OnLand(_fvector vTargetPos);
 
+
+public:
+	void Set_Position(const _float3& vState)
+	{
+		_vector vPosVec = XMLoadFloat3(&vState);
+		_float4 vPos;
+		XMStoreFloat4(&vPos, vPosVec);
+		Set_State(STATE::STATE_POSITION, vPos);
+	}
+
 public:
 	HRESULT	Bind_ShaderResource(class CShader* pShader, const _char* pConstantName);
 private:

@@ -65,6 +65,11 @@ HRESULT CGameObject::Render()
 	return S_OK;
 }
 
+void CGameObject::Set_Position(const _float3& vState)
+{
+	m_pTransformCom->Set_Position(vState);
+}
+
 HRESULT CGameObject::Add_Component(_uint iLevelIndex, const wstring& strPrototypeTag, const wstring& strComTag, CComponent** ppOut, void* pArg)
 {
 	if (nullptr != Find_Component(strComTag))

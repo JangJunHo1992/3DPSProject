@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ForkLift.h"
+#include "..\Public\ForkLift.h"
 
 #include "GameInstance.h"
 

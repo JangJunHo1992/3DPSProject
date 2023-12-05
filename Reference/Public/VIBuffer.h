@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Engine_Defines.h"
 #include "Component.h"
 
 /* 특정 형태(Rect, Cube, Terrain, Model) 를 구성하기위한 클래스들의 부모가 되는 클래스다 .*/
@@ -11,7 +10,7 @@ BEGIN(Engine)
 class ENGINE_DLL CVIBuffer abstract : public CComponent
 {
 protected:
-	CVIBuffer(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
+	CVIBuffer(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CVIBuffer(const CVIBuffer& rhs);
 	virtual ~CVIBuffer() = default;
 
@@ -21,16 +20,16 @@ public:
 	virtual HRESULT Render();
 
 public:
-	_bool							Intersect(_In_opt_ const _float4x4 _mWorld = g_mUnit) const;
-	_bool							Intersect(_Out_ _float3& _vOut, _In_opt_ const _float4x4 _mWorld = g_mUnit) const;
 
 	HRESULT Bind_VIBuffers();
 	/* 정점, 인덱스, 인스턴스 버퍼들을 생성한다. */
-	HRESULT Create_Buffer(_Inout_ ID3D11Buffer * *ppBuffer);
+	HRESULT Create_Buffer(_Inout_ ID3D11Buffer**	ppBuffer);
+
+
 
 protected:
-	ID3D11Buffer* m_pVB = { nullptr };
-	ID3D11Buffer* m_pIB = { nullptr };
+	ID3D11Buffer*				m_pVB = { nullptr };
+	ID3D11Buffer*				m_pIB = { nullptr };
 
 	/* 지금 내가 만들려고 하는 버퍼의 속성을 설정하낟. */
 	D3D11_BUFFER_DESC			m_BufferDesc;
@@ -42,8 +41,9 @@ protected:
 
 	_uint						m_iNumIndices = { 0 };
 	_uint						m_iIndexStride = { 0 };
-	DXGI_FORMAT					m_eIndexFormat = {  };
-	D3D11_PRIMITIVE_TOPOLOGY	m_eTopology = { };
+	DXGI_FORMAT					m_eIndexFormat = {};
+	D3D11_PRIMITIVE_TOPOLOGY	m_eTopology = {};
+
 public:
 	virtual CComponent* Clone(void* pArg) = 0;
 	virtual void Free() override;

@@ -19,20 +19,21 @@
 
 #include <d3dcompiler.h>
 using namespace DirectX;
+
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
-#include "rapidjson/prettywriter.h"
 #include "rapidjson/stringbuffer.h"
-#include "rapidjson/pointer.h"
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/reader.h"
-#include "rapidjson/filereadstream.h"
-#include <locale>
-#include <codecvt>
+#include "rapidjson/prettywriter.h"
+
 using namespace rapidjson;
 
-#include "commdlg.h"
-#include "shlwapi.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+
+
+
+
 
 #include <unordered_map>
 #include <algorithm>
@@ -55,7 +56,6 @@ namespace Engine
 #include "Engine_Enum.h"
 using namespace Engine;
 
-const XMMATRIX		g_mUnit = XMMatrixIdentity();
 
 
 
