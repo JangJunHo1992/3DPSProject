@@ -157,6 +157,10 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Model.hlsl"), VTXMESH::Elements, VTXMESH::iNumElements))))
 		return E_FAIL;
 
+	/* For.Prototype_Component_Shader_AnimModel */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_AnimModel"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_AnimModel.hlsl"), VTXANIMMESH::Elements, VTXANIMMESH::iNumElements))))
+		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("원형객체를(을) 로드하는 중입니다."));
 	/* For.Prototype_GameObject_Terrain */
@@ -195,7 +199,7 @@ HRESULT CLoader::Loading_For_GamePlay_Level()
 
 
 
-	if (E_FAIL == Loading_For_Level<CTerrain_GamePlay, CVIBuffer_Terrain>(LEVEL_GAMEPLAY))
+	if (E_FAIL == Loading_For_Level<CTerrain_GamePlay, CVIBuffer_Terrain>(LEVEL::LEVEL_GAMEPLAY))
 		return E_FAIL;
 
 
@@ -225,7 +229,7 @@ HRESULT CLoader::Loading_For_Tool_Level()
 // 		return E_FAIL;
 
 
-	if (E_FAIL == Loading_For_Level<CTerrain_MapTool, CVIBuffer_Dynamic_Terrain>(LEVEL_TOOL))
+	if (E_FAIL == Loading_For_Level<CTerrain_MapTool, CVIBuffer_Dynamic_Terrain>(LEVEL::LEVEL_TOOL))
 		return E_FAIL;
 
 // 	/* For.Prototype_GameObject_Raider */

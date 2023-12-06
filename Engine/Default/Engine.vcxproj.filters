@@ -103,6 +103,9 @@
     <Filter Include="01.Utility\91.RapidJson\Json">
       <UniqueIdentifier>{22594367-3c7e-4b88-a4c6-2aad439174da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.Components\05.Model\Bone">
+      <UniqueIdentifier>{8d844f17-0926-4f45-964b-65c82a5c5d24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -207,6 +210,9 @@
     <ClInclude Include="..\Public\Json\json.hpp">
       <Filter>01.Utility\91.RapidJson\Json</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Bone.h">
+      <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Base.cpp">
@@ -290,6 +296,9 @@
     <ClCompile Include="..\Public\RapidJson.cpp" />
     <ClCompile Include="..\Private\RapidJson.cpp">
       <Filter>01.Utility\91.RapidJson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Bone.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

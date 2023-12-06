@@ -1,6 +1,7 @@
 #include "Model.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Bone.h"
 
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CComponent(pDevice,pContext)
@@ -9,12 +10,17 @@ CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 
 CModel::CModel(const CModel& rhs)
 	:CComponent(rhs)
+	,m_PivotMatrix(rhs.m_PivotMatrix)
 	, m_eModelType(rhs.m_eModelType)
 	, m_iNumMeshes(rhs.m_iNumMeshes)
 	, m_Meshes(rhs.m_Meshes)
 	, m_iNumMaterials(rhs.m_iNumMaterials)
 	, m_Materials(rhs.m_Materials)
+	, m_Bones(rhs.m_Bones)
 {
+	for (auto& pBone : m_Bones)
+		Safe_AddRef(pBone);
+
 	for (auto& MaterialDesc : m_Materials)
 	{
 		for (auto& pTexture : MaterialDesc.pMtrlTextures)
@@ -29,6 +35,8 @@ CModel::CModel(const CModel& rhs)
 
 HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
+	/*aiProcess_PreTransformVertices | aiProcess_GlobalScale*/
+
 	m_eModelType = eType;
 
 	_uint	iFlag = aiProcess_ConvertToLeftHanded | aiProcessPreset_TargetRealtime_Fast;
@@ -37,8 +45,12 @@ HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath,
 		iFlag |= aiProcess_PreTransformVertices;
 
 	m_pAIScene = m_Importer.ReadFile(strModelFilePath, iFlag);
-
 	if (nullptr == m_pAIScene)
+		return E_FAIL;
+
+	XMStoreFloat4x4(&m_PivotMatrix, PivotMatrix);
+	//Bone이 항상 Mesh보다 먼저 만들어져야 함 메쉬안에 본관련 함수 있기 떄문에 ! 
+	if (FAILED(Ready_Bones(m_pAIScene->mRootNode, -1)))
 		return E_FAIL;
 
 	if (FAILED(Ready_Meshes(PivotMatrix)))
@@ -46,7 +58,6 @@ HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath,
 
 	if (FAILED(Ready_Materials(strModelFilePath)))
 		return E_FAIL;
-
 
 	return S_OK;
 }
@@ -65,6 +76,24 @@ HRESULT CModel::Render(_uint iMeshIndex)
 	m_Meshes[iMeshIndex]->Render();
 
 	return S_OK;
+}
+
+void CModel::Play_Animation(_float fTimeDelta)
+{
+	/* 현재 애니메이션이 사용하고 있는 뼈들의 TransformationMatrix를 갱신한다. */
+
+
+	/* 화면에 최종적인 상태로 그려내기위해서는 반드시 뼈들의 CombinedTransformationMatrix가 갱신되어야한다. */
+	/* 모든 뼈들을 다 갱신하며 부모로부터 자식까지 쭈우우욱돌아서 CombinedTransformationMatrix를 갱신한다. */
+	for (auto& pBone : m_Bones)
+	{
+		pBone->Invalidate_CombinedTransformationMatrix(m_Bones, XMLoadFloat4x4(&m_PivotMatrix));
+	}
+}
+
+HRESULT CModel::Bind_BoneMatrices(CShader* pShader, const _char* pConstantName, _uint iMeshIndex)
+{
+	return m_Meshes[iMeshIndex]->Bind_BoneMatrices(pShader, pConstantName, m_Bones);
 }
 
 HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType)
@@ -87,7 +116,7 @@ HRESULT CModel::Ready_Meshes(_fmatrix PivotMatrix)
 
 	for (size_t i = 0; i < m_iNumMeshes; i++)
 	{
-		CMesh* pMesh = CMesh::Create(m_pDevice, m_pContext, m_pAIScene->mMeshes[i], PivotMatrix);
+		CMesh* pMesh = CMesh::Create(m_pDevice, m_pContext,m_eModelType, m_pAIScene->mMeshes[i], PivotMatrix, m_Bones);
 
 		if (nullptr == pMesh)
 			return E_FAIL;
@@ -149,6 +178,24 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 	return S_OK;
 }
 
+HRESULT CModel::Ready_Bones(aiNode* pAINode, _int iParentIndex)
+{
+	CBone* pBone = CBone::Create(pAINode, iParentIndex);
+	if (nullptr == pBone)
+		return E_FAIL;
+
+	m_Bones.push_back(pBone);
+
+	_int		iParentIdx = m_Bones.size() - 1;
+
+	for (size_t i = 0; i < pAINode->mNumChildren; i++)
+	{
+		Ready_Bones(pAINode->mChildren[i], iParentIdx);
+	}
+
+	return S_OK;
+}
+
 CModel* CModel::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
 	CModel* pInstance = new CModel(pDevice, pContext);
@@ -178,6 +225,11 @@ CComponent* CModel::Clone(void* pArg)
 void CModel::Free()
 {
 	__super::Free();
+
+	for (auto& pBone : m_Bones)
+		Safe_Release(pBone);
+
+	m_Bones.clear();
 
 	for (auto& MaterialDesc : m_Materials)
 	{
