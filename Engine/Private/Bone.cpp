@@ -22,7 +22,7 @@ HRESULT CBone::Initialize(aiNode* pAINode, _int iParentIndex)
 void CBone::Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatrix PivotMatrix)
 {
 	if (-1 == m_iParentIndex)
-		m_CombinedTransformationMatrix = m_TransformationMatrix;
+		XMStoreFloat4x4(&m_CombinedTransformationMatrix, XMLoadFloat4x4(&m_TransformationMatrix) * PivotMatrix);
 	else
 	{
 		XMStoreFloat4x4(&m_CombinedTransformationMatrix,

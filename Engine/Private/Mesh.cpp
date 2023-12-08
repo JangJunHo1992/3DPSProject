@@ -1,7 +1,6 @@
-#include "..\Public\Mesh.h"
+#include "Mesh.h"
 #include "Shader.h"
 #include "Bone.h"
-
 
 CMesh::CMesh(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CVIBuffer(pDevice, pContext)
@@ -140,7 +139,7 @@ HRESULT CMesh::Ready_Vertices_Anim(const aiMesh* pAIMesh, const vector<class CBo
 	m_BufferDesc.StructureByteStride = m_iStride;
 
 	ZeroMemory(&m_SubResourceData, sizeof m_SubResourceData);
-	//ZeroMemory 안했다가 밑에서 0 비교하는거 통과안되서 정썜이 고생했음 ㅋ
+
 	VTXANIMMESH* pVertices = new VTXANIMMESH[m_iNumVertices];
 	ZeroMemory(pVertices, sizeof(VTXANIMMESH) * m_iNumVertices);
 
@@ -221,7 +220,7 @@ HRESULT CMesh::Ready_Vertices_Anim(const aiMesh* pAIMesh, const vector<class CBo
 		return E_FAIL;
 
 	Safe_Delete_Array(pVertices);
-	//뼈정보가 없는 놈들은 여기서 다시 한번 돌려주면서 붙어있는 메쉬 정점 정보를 찾고 다시 만들어준다! 
+
 	if (0 == m_iNumBones)
 	{
 		m_iNumBones = 1;

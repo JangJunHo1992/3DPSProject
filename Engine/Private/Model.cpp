@@ -5,20 +5,25 @@
 #include "Animation.h"
 
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	:CComponent(pDevice,pContext)
+	: CComponent(pDevice, pContext)
 {
 }
 
 CModel::CModel(const CModel& rhs)
-	:CComponent(rhs)
-	,m_PivotMatrix(rhs.m_PivotMatrix)
+	: CComponent(rhs)
+	, m_PivotMatrix(rhs.m_PivotMatrix)
 	, m_eModelType(rhs.m_eModelType)
 	, m_iNumMeshes(rhs.m_iNumMeshes)
 	, m_Meshes(rhs.m_Meshes)
 	, m_iNumMaterials(rhs.m_iNumMaterials)
 	, m_Materials(rhs.m_Materials)
 	, m_Bones(rhs.m_Bones)
+	, m_iNumAnimations(rhs.m_iNumAnimations)
+	, m_Animations(rhs.m_Animations)
 {
+	for (auto& pAnimation : m_Animations)
+		Safe_AddRef(pAnimation);
+
 	for (auto& pBone : m_Bones)
 		Safe_AddRef(pBone);
 
@@ -50,7 +55,7 @@ HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath,
 		return E_FAIL;
 
 	XMStoreFloat4x4(&m_PivotMatrix, PivotMatrix);
-	//Bone이 항상 Mesh보다 먼저 만들어져야 함 메쉬안에 본관련 함수 있기 떄문에 ! 
+
 	if (FAILED(Ready_Bones(m_pAIScene->mRootNode, -1)))
 		return E_FAIL;
 
@@ -82,12 +87,14 @@ HRESULT CModel::Render(_uint iMeshIndex)
 	return S_OK;
 }
 
-void CModel::Play_Animation(_float fTimeDelta)
+void CModel::Play_Animation(_float fTimeDelta, _bool isLoop)
 {
 	if (m_iCurrentAnimIndex >= m_iNumAnimations)
 		return;
+
 	/* 현재 애니메이션이 사용하고 있는 뼈들의 TransformationMatrix를 갱신한다. */
-	m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(fTimeDelta);
+	m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(isLoop, fTimeDelta, m_Bones);
+
 
 	/* 화면에 최종적인 상태로 그려내기위해서는 반드시 뼈들의 CombinedTransformationMatrix가 갱신되어야한다. */
 	/* 모든 뼈들을 다 갱신하며 부모로부터 자식까지 쭈우우욱돌아서 CombinedTransformationMatrix를 갱신한다. */
@@ -104,14 +111,12 @@ HRESULT CModel::Bind_BoneMatrices(CShader* pShader, const _char* pConstantName, 
 
 HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType)
 {
+
 	_uint		iMaterialIndex = m_Meshes[iMeshIndex]->Get_MaterialIndex();
 	if (iMaterialIndex >= m_iNumMaterials)
 		return E_FAIL;
 
 	return m_Materials[iMaterialIndex].pMtrlTextures[eTextureType]->Bind_ShaderResource(pShader, pConstantName);
-
-
-	return S_OK;
 }
 
 HRESULT CModel::Ready_Meshes(_fmatrix PivotMatrix)
@@ -122,7 +127,7 @@ HRESULT CModel::Ready_Meshes(_fmatrix PivotMatrix)
 
 	for (size_t i = 0; i < m_iNumMeshes; i++)
 	{
-		CMesh* pMesh = CMesh::Create(m_pDevice, m_pContext,m_eModelType, m_pAIScene->mMeshes[i], PivotMatrix, m_Bones);
+		CMesh* pMesh = CMesh::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene->mMeshes[i], PivotMatrix, m_Bones);
 
 		if (nullptr == pMesh)
 			return E_FAIL;
@@ -145,6 +150,11 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 
 		for (size_t j = 1; j < AI_TEXTURE_TYPE_MAX; j++)
 		{
+			/*for (size_t k = 0; k < pAIMaterial->GetTextureCount(aiTextureType(j)); k++)
+			{
+				pAIMaterial->GetTexture(aiTextureType(j), k, );
+			};*/
+
 			_char		szDrive[MAX_PATH] = "";
 			_char		szDirectory[MAX_PATH] = "";
 
@@ -164,9 +174,6 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 			strcat_s(szTmp, szDirectory);
 			strcat_s(szTmp, szFileName);
 			strcat_s(szTmp, szEXT);
-
-			//_char szTest[MAX_PATH] = ".dds";
-			//strcat_s(szTmp, szTest);
 
 			_tchar		szFullPath[MAX_PATH] = TEXT("");
 
@@ -208,7 +215,7 @@ HRESULT CModel::Ready_Animations()
 
 	for (size_t i = 0; i < m_iNumAnimations; i++)
 	{
-		CAnimation* pAnimation = CAnimation::Create(m_pAIScene->mAnimations[i]);
+		CAnimation* pAnimation = CAnimation::Create(m_pAIScene->mAnimations[i], m_Bones);
 		if (nullptr == pAnimation)
 			return E_FAIL;
 
@@ -248,6 +255,9 @@ void CModel::Free()
 {
 	__super::Free();
 
+	for (auto& pAnimation : m_Animations)
+		Safe_Release(pAnimation);
+
 	for (auto& pBone : m_Bones)
 		Safe_Release(pBone);
 
@@ -268,5 +278,4 @@ void CModel::Free()
 
 	if (false == m_isCloned)
 		m_Importer.FreeScene();
-
 }

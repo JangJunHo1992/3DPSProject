@@ -23,10 +23,9 @@ float			g_fBrushRange = 10.f;
 
 sampler DefaultSampler = sampler_state
 {
-	Filter = MIN_MAG_MIP_LINEAR;
+	Filter = MIN_MAG_MIP_POINT;
 	AddressU = wrap;
 	AddressV = wrap;
-
 };
 
 struct VS_IN
@@ -43,7 +42,6 @@ struct VS_OUT
 	float4		vNormal : NORMAL;
 	float2		vTexcoord : TEXCOORD0;
 	float4		vWorldPos : TEXCOORD1;
-
 };
 
 
@@ -94,12 +92,12 @@ PS_OUT PS_MAIN(PS_IN In)
 	/* 첫번째 인자의 방식으로 두번째 인자의 위치에 있는 픽셀의 색을 얻어온다. */
 	vector		vSourDiffuse = g_DiffuseTexture[0].Sample(DefaultSampler, In.vTexcoord * 100.0f);
 	vector		vDestDiffuse = g_DiffuseTexture[1].Sample(DefaultSampler, In.vTexcoord * 100.0f);
-	vector		vBrush = vector(0.f, 0.f, 0.f, 0.f); //0으로 초기화
-	//브러쉬 를 내 텍스쳐에 맞춰서 영역 조절한거임
+	vector		vBrush = vector(0.f, 0.f, 0.f, 0.f);
+	// vector		vBrush = g_BrushTexture.Sample(DefaultSampler, In.vTexcoord);
+
 	if (g_vBrushPos.x - g_fBrushRange < In.vWorldPos.x && In.vWorldPos.x <= g_vBrushPos.x + g_fBrushRange &&
 		g_vBrushPos.z - g_fBrushRange < In.vWorldPos.z && In.vWorldPos.z <= g_vBrushPos.z + g_fBrushRange)
 	{
-		//UV좌표계가 그대로 들어가면 맵전체에 그러지고 브러쉬 영역만 그려질것이기 떄문에 UV좌표를 다시 넣어줘야 함 
 		float2		vUV;
 
 		vUV.x = (In.vWorldPos.x - (g_vBrushPos.x - g_fBrushRange)) / (2.f * g_fBrushRange);
@@ -109,16 +107,16 @@ PS_OUT PS_MAIN(PS_IN In)
 	}
 
 	vector		vMask = g_MaskTexture.Sample(DefaultSampler, In.vTexcoord);
-	//두가지중 어떤것의 색을 나타낼건지 알기 위해서 식을 이렇게 만들어둠
-	vector vMtrlDiffuse = vMask * vDestDiffuse + (1.f - vMask) * vSourDiffuse + vBrush;
+
+	vector		vMtrlDiffuse = vMask * vDestDiffuse + (1.f - vMask) * vSourDiffuse + vBrush;
 
 	float		fShade = max(dot(normalize(g_vLightDir) * -1.f, normalize(In.vNormal)), 0.f);
 
 	/* 스펙큘러가 보여져야하는 영역에서는 1로, 아닌 영역에서는 0으로 정의되는 스펙큘러의 세기가 필요하다. */
 	vector		vLook = In.vWorldPos - g_vCamPosition;
-	vector		vReflect = reflect(normalize(g_vLightDir), normalize(In.vNormal));//이 함수를 사용하므로서 반사벡터를 한번에 처리해준다
+	vector		vReflect = reflect(normalize(g_vLightDir), normalize(In.vNormal));
 
-	float		fSpecular = pow(max(dot(normalize(vLook) * -1.f, normalize(vReflect)), 0.f), 100.f);//pow는 제곱근을 하는거임
+	float		fSpecular = pow(max(dot(normalize(vLook) * -1.f, normalize(vReflect)), 0.f), 30.f);
 
 	Out.vColor = g_vLightDiffuse * vMtrlDiffuse * min((fShade + (g_vLightAmbient * g_vMtrlAmbient)), 1.f)
 		+ (g_vLightSpecular * g_vMtrlSpecular) * fSpecular;
@@ -152,6 +150,7 @@ PS_OUT PS_MAIN_POINT(PS_IN In)
 	return Out;
 }
 
+
 technique11 DefaultTechnique
 {
 	/* 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
@@ -164,7 +163,7 @@ technique11 DefaultTechnique
 		DomainShader = NULL;
 		PixelShader = compile ps_5_0 PS_MAIN();
 	}
-	//임시.. 점광원 테스트용// 이름만 보아도 곧 지울것같다
+
 	pass Delete
 	{
 		/* 렌더스테이츠 */
@@ -174,4 +173,5 @@ technique11 DefaultTechnique
 		DomainShader = NULL;
 		PixelShader = compile ps_5_0 PS_MAIN_POINT();
 	}
+
 }

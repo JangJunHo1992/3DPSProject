@@ -17,6 +17,10 @@ public:
 	_matrix Get_CombinedTransformationMatrix() const {
 		return XMLoadFloat4x4(&m_CombinedTransformationMatrix);
 	}
+public:
+	void Set_TransformationMatrix(_fmatrix TransformationMatrix) {
+		XMStoreFloat4x4(&m_TransformationMatrix, TransformationMatrix);
+	}
 
 public:
 	HRESULT	Initialize(aiNode* pAINode, _int iParentIndex);
