@@ -53,7 +53,7 @@ HRESULT CLevel_MapTool::Initialize()
 
 void CLevel_MapTool::Tick(_float fTimeDelta)
 {
-	if (m_pGameInstance->Key_Down(DIK_LSHIFT)& 0x80)
+	if (m_pGameInstance->Key_Pressing(DIK_LSHIFT))
 		m_bStop = !m_bStop;
 		
 	if (m_bStop)
