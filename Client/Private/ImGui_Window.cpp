@@ -4,11 +4,8 @@
 #include "../../Reference/Imgui/imgui_impl_dx11.h"
 #include "ImGui_Window.h"
 
-CImGui_Window::CImGui_Window()
-{
-}
 
-CImGui_Window::~CImGui_Window()
+CImGui_Window::CImGui_Window()
 {
 }
 
@@ -36,4 +33,8 @@ HRESULT CImGui_Window::End()
 	ImGui::End();
 
 	return S_OK;
+}
+
+void CImGui_Window::Free()
+{
 }

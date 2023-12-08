@@ -10,9 +10,14 @@ BEGIN(Client)
 
 class CImGui_Window;
 class CTerrain;
+class CMap_Window;
+class CObject_Window;
+class CCamera_Window;
+class CEffect_Window;
 
 class CImgui_Manager  : public CBase
 {
+	
 public:
 	enum class IMGUI_WINDOW_TYPE
 	{
@@ -23,11 +28,12 @@ public:
 		IMGUI_END
 	};
 
-	enum class EDITER_TYPE
+	enum EDITER_TYPE
 	{
-		SCENE,
+		MAP,
+		OBJ,
+		CAM,
 		EFFECT,
-		MODEL,
 		TYPE_END
 	};
 	DECLARE_SINGLETON(CImgui_Manager)
@@ -64,7 +70,10 @@ private:
 
 private:
 	_bool				 m_bMainTool = { true };
-	_bool				 m_bMapTool, m_bEffectTool, m_bObjectTool, m_bCameraTool = { false };
+	_bool				 m_bMapTool = { false };
+	_bool				 m_bEffectTool = { false };
+	_bool				 m_bObjectTool = { false };
+	_bool				 m_bCameraTool = { false };
 
 private:
 	void	HelpMarker(const char* desc);
@@ -76,10 +85,20 @@ private:
 	void	ShowObjectTool();
 	void	ShowCameraTool();
 private:
+	void	Init_Window();
+private:
+	CMap_Window* m_pMapWindow = { nullptr };
+	CObject_Window* m_pObjWindow = { nullptr };
+	CCamera_Window* m_pCamWindow = { nullptr };
+	CEffect_Window* m_pEffectWindow = { nullptr };
 
+	ID3D11Device*			m_pDevice = nullptr;
+	ID3D11DeviceContext*	m_pContext = nullptr;
 
 public:
-	vector<CImGui_Window*>			m_arrWindows;
+	CImGui_Window* pWindows[EDITER_TYPE::TYPE_END];
+	EDITER_TYPE	eEditorType = EDITER_TYPE::TYPE_END;
+
 
 private: /* For Json */
 	string m_szJsonPath = "../Bin/LevelData/";

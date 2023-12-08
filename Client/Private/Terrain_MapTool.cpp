@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Terrain_MapTool.h"
 #include "GameInstance.h"
+#include "Map_Window.h"
 
 CTerrain_MapTool::CTerrain_MapTool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CTerrain(pDevice, pContext)
@@ -23,7 +24,20 @@ HRESULT CTerrain_MapTool::Ready_Components()
 	if (FAILED(__super::Add_Component(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Texture_Terrain_Brush"),
 		TEXT("Com_Brush"), reinterpret_cast<CComponent**>(&m_pTextureCom[TYPE_BRUSH]))))
 		return E_FAIL;
+	
 
+	return S_OK;
+}
+
+HRESULT CTerrain_MapTool::Initialize_CreateBuffer(void* pArg)
+{
+	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_TOOL)))
+		return E_FAIL;
+
+	/* For.Com_Brush */
+	if (FAILED(__super::Add_Component(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Texture_Terrain_Brush"),
+		TEXT("Com_Brush"), reinterpret_cast<CComponent**>(&m_pTextureCom[TYPE_BRUSH]))))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -54,11 +68,9 @@ CGameObject* CTerrain_MapTool::Clone(void* pArg)
 	return pInstance;
 }
 
-
-
 void CTerrain_MapTool::pick()
 {
-	m_pVIBufferCom->Update_Terrain(m_vPickedPos, m_fBrushRange * 2 / 3.f, 1.0f);
+	m_pVIBufferCom->Update_Terrain(m_vPickedPos, m_fBrushRange * 2 / 3.f, m_fBrushHeight,m_iMode);
 }
 
 HRESULT CTerrain_MapTool::Bind_ShaderResources()

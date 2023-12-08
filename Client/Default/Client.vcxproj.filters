@@ -225,6 +225,9 @@
     <ClInclude Include="..\Public\Object_Window.h">
       <Filter>96. Imgui\ImguiWindow\Object_Window</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Client_Typedef.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">

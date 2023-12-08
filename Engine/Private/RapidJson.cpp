@@ -116,27 +116,27 @@ HRESULT CRapidJson::Save_RapidJson(string _strPath, json& pOut)
 
 
 
-
-//string projectName = "rapidjson";
-//_int value = 100;
-//
-//json jsonData =
-//{
-//	{"project", projectName},
-//	{"stars", value}
-//};
-//
-////CRapidJson rapidJson;
-//m_pGameInstance->Save_Json("json1.json", jsonData);
-//
-//json json2;
-//m_pGameInstance->Load_Json("json1.json", json2);
-//
-//string test1 = json2["project"];
-//_int test2 = json2["stars"];
-//
-//string result = json2.dump(2);
-//_bool stop = true;
+// 
+// string projectName = "rapidjson";
+// _int value = 100;
+// 
+// json jsonData =
+// {
+// 	{"project", projectName},
+// 	{"stars", value}
+// };
+// 
+// //CRapidJson rapidJson;
+// m_pGameInstance->Save_Json("json1.json", jsonData);
+// 
+// json json2;
+// m_pGameInstance->Load_Json("json1.json", json2);
+// 
+// string test1 = json2["project"];
+// _int test2 = json2["stars"];
+// 
+// string result = json2.dump(2);
+// _bool stop = true;
 
 
 

@@ -27,38 +27,37 @@ HRESULT CLevel_MapTool::Initialize()
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 		return E_FAIL;
 
+	list<CGameObject*> pGameObjects = *(m_pGameInstance->Get_GameObjects(LEVEL_TOOL, TEXT("Layer_BackGround")));
+		
+		for (CGameObject* pGameObject : pGameObjects) 
+		{
+			CTerrain_MapTool* pTerrain = dynamic_cast<CTerrain_MapTool*>(pGameObject);
+			if (pTerrain) 
+			{
+				m_pTerrain = pTerrain;
+				Safe_AddRef(pTerrain);
+				break;
+			}
+		}
 
 	m_pImguiManager = CImgui_Manager::GetInstance();
 	Safe_AddRef(m_pImguiManager);
 
-
 	if (FAILED(m_pImguiManager->SetUp_Imgui(m_pDevice, m_pContext)))
 		return E_FAIL;
 
-
-	
-	list<CGameObject*> pGameObjects = *(m_pGameInstance->Get_GameObjects(LEVEL_TOOL, TEXT("Layer_BackGround")));
-	
-	for (CGameObject* pGameObject : pGameObjects) 
-	{
-		CTerrain_MapTool* pTerrain = dynamic_cast<CTerrain_MapTool*>(pGameObject);
-		if (pTerrain) 
-		{
-			m_pTerrain = pTerrain;
-			Safe_AddRef(pTerrain);
-			break;
-		}
-	}
-
-	
 	m_pActor = new CActor<CLevel_MapTool>(this);
 	m_pActor->Set_State(new CMapTool_State_Terrain());
-
 	return S_OK;
 }
 
 void CLevel_MapTool::Tick(_float fTimeDelta)
 {
+	if (m_pGameInstance->Key_Down(DIK_LSHIFT)& 0x80)
+		m_bStop = !m_bStop;
+		
+	if (m_bStop)
+		return;
 	m_pImguiManager->Tick(fTimeDelta);
 	if (m_pGameInstance->Get_DIKeyState(DIK_G) & 0x80)
 	{
@@ -171,7 +170,7 @@ void CLevel_MapTool::Free()
 {
 	Safe_Release(m_pImguiManager);
 
-	m_pActor->Free();
+	//m_pActor->Free();
 
 	Safe_Release(m_pTerrain);
 

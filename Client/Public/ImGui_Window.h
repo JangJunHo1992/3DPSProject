@@ -20,21 +20,18 @@ public:
 	};
 public:
 	CImGui_Window();
-	virtual ~CImGui_Window();
-
-public:
-	_bool			Is_Enable() { return m_bEnable; }
+	virtual ~CImGui_Window() =default;
 
 public:
 	virtual HRESULT	Initialize() PURE;
-	virtual void	Start() PURE;
+	virtual void	Start() {};
 	virtual void	Tick(_float fTimeDelta);
-	virtual void	Background_Tick(_float fTimeDelta) {}
-	virtual HRESULT	Render(ID3D11DeviceContext* pDeviceContext) PURE;
+	//virtual void	Background_Tick(_float fTimeDelta) {}
+	virtual HRESULT	Render(ID3D11DeviceContext* pContext) PURE;
 
-public:
-	virtual void OnLevelLoad() {};
-	virtual void OnEventMessage(_uint iArg) {}
+// public:
+// 	virtual void OnLevelLoad() {};
+// 	virtual void OnEventMessage(_uint iArg) {}
 
 protected:
 	_bool			m_bEnable = false;
@@ -44,6 +41,8 @@ protected:
 public:
 	HRESULT			Begin();
 	HRESULT			End();
+public:
+	virtual void Free() override;
 };
 
 END

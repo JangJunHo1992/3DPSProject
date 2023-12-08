@@ -20,7 +20,7 @@ public:
 
 public:
 	void Update_MousePos();
-
+	
 public:
 	void Terrain_Pick();
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
@@ -49,6 +49,8 @@ public:
 
 private:
 	CActor<CLevel_MapTool>* m_pActor = { nullptr };
+private:
+	_bool			m_bStop = false;
 };
 
 END

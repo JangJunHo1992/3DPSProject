@@ -1,6 +1,11 @@
 #pragma once
 
 #pragma warning(disable : 4251)
+#define MAX_DINPUT_KEY         256
+#define MAX_DINPUT_MOUSE      DIM_END
+
+#define DIRECTINPUT_VERSION   0x0800
+#include <dinput.h>
 
 #include <d3d11.h>
 #include <DirectXMath.h>
@@ -46,8 +51,7 @@ namespace Engine
 {
 	static const wchar_t* g_pTransformTag = TEXT("Com_Transform");
 }
-#define DIRECTINPUT_VERSION   0x0800
-#include <dinput.h>
+
 
 #include "Engine_Macro.h"
 #include "Engine_Typedef.h"

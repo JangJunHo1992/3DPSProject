@@ -7,17 +7,29 @@
 #include <tchar.h>
 
 #include "Imgui_Manager.h"
+#include "Map_Window.h"
+#include "Object_Window.h"
+#include "Camera_Window.h"
+#include "Effect_Window.h"
+
 
 IMPLEMENT_SINGLETON(CImgui_Manager)
 
 HRESULT CImgui_Manager::SetUp_Imgui(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
+	m_pDevice = pDevice;
+	m_pContext = pContext;
+	Safe_AddRef(m_pDevice);
+	Safe_AddRef(m_pContext);
+
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
 	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 	//io.ConfigViewportsNoAutoMerge = true;
 
@@ -36,75 +48,20 @@ HRESULT CImgui_Manager::SetUp_Imgui(ID3D11Device* pDevice, ID3D11DeviceContext* 
 	ImGui_ImplDX11_Init(pDevice, pContext);
 	io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\malgun.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesKorean());
 	
-
+	Init_Window();
+	
+	
 	return S_OK;
 }
 
 void CImgui_Manager::Tick(_float fTimeDelta)
 {
-
-	/*ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-
 	ImGuiWindowFlags window_flags = 0;
 	window_flags |= ImGuiWindowFlags_NoBackground;
-
-	auto& style = ImGui::GetStyle();
-	ImVec4* colors = style.Colors;
-
-	const ImVec4 bgColor = ImVec4(0.1, 0.1, 0.1, 0.5);
-	colors[ImGuiCol_WindowBg] = bgColor;
-	colors[ImGuiCol_ChildBg] = bgColor;
-	colors[ImGuiCol_TitleBg] = bgColor;*/
-	
-
-	//ImGui::Begin(u8"메인 툴", &m_bMainTool, ImGuiWindowFlags_AlwaysAutoResize);
-
-	//if (ImGui::BeginMenu(u8"툴"))
-	//{
-	//	ImGui::MenuItem(u8"맵툴", NULL, &m_bMapTool);
-	//	ImGui::MenuItem(u8"이펙트툴", NULL, &m_bEffectTool);
-	//	ImGui::MenuItem(u8"오브젝트툴", NULL, &m_bObjectTool);
-	//	ImGui::MenuItem(u8"카메라툴", NULL, &m_bCameraTool);
-
-	//	ImGui::EndMenu();
-	//}
-
-	//if (m_bMapTool)	ShowMapTool();
-	//if (m_bEffectTool) ShowEffectTool();
-	//if (m_bCameraTool) ShowCameraTool();
-	//if (m_bObjectTool) ShowObjectTool();
-
-	
-	//ImGui::End();
-	
 }
 
 void CImgui_Manager::Render()
 {
-//  	if (m_StartImgui)
-//  	{
-//  		ImGui_ImplDX11_NewFrame();
-// 		ImGui_ImplWin32_NewFrame();
-// 		m_StartImgui = false;
-//  		ImGui::NewFrame();
-//  	}
-// 
-// 	// Rendering
-// 	ImGui::Render();
-// // 	const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
-// // 	g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, NULL);
-// // 	g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
-// 
-// 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-// 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-// 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-// 	{
-// 		ImGui::UpdatePlatformWindows();
-// 		ImGui::RenderPlatformWindowsDefault();
-// 	}
-
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 
@@ -132,17 +89,24 @@ void CImgui_Manager::Render()
 	ImGui::DockSpace(dockspaceID, ImVec2(0, 0), dockspaceFlags);
 	ImGui::End();
 
-
 	if (ImGui::BeginMainMenuBar())
 	{
+		if (m_bMapTool)	ShowMapTool();
+		if (m_bEffectTool) ShowEffectTool();
+		if (m_bObjectTool) ShowObjectTool();
+		if (m_bCameraTool) ShowCameraTool();
+
 		if (ImGui::BeginMenu("File"))
 		{
 			if (ImGui::MenuItem("Save"))
 			{
 				
+			}
+			if (ImGui::MenuItem("Load"))
+			{
+
 
 			}
-
 	
 			ImGui::EndMenu();
 		}
@@ -170,21 +134,20 @@ void CImgui_Manager::Render()
 		if (ImGui::BeginMenu("Editer"))
 		{
 			
-			if (ImGui::MenuItem(u8"맵툴"))
+			if (ImGui::MenuItem(u8"맵툴","",&m_bMapTool))
 			{
-				if (m_bMapTool)	ShowMapTool();
+				
 			}
-			if (ImGui::MenuItem(u8"이펙트툴"))
+			if (ImGui::MenuItem(u8"이펙트툴", "", &m_bEffectTool))
 			{
-				if (m_bEffectTool) ShowEffectTool();
+
 			}
-			if (ImGui::MenuItem(u8"오브젝트툴"))
+			if (ImGui::MenuItem(u8"오브젝트툴", "", &m_bObjectTool))
 			{
-				if (m_bObjectTool) ShowObjectTool();
+
 			}
-			if (ImGui::MenuItem(u8"카메라툴"))
+			if (ImGui::MenuItem(u8"카메라툴","", &m_bCameraTool))
 			{
-				if (m_bCameraTool) ShowCameraTool();
 			}
 
 			ImGui::EndMenu();
@@ -194,11 +157,9 @@ void CImgui_Manager::Render()
 
 		ImGui::EndMainMenuBar();
 	}
-
 	ImGui::Render();
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
 }
 
 void CImgui_Manager::Save_EffectJson()
@@ -243,6 +204,8 @@ void CImgui_Manager::Free()
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
 
+	Safe_Release(m_pDevice);
+	Safe_Release(m_pContext);
 
 }
 
@@ -276,36 +239,8 @@ wchar_t* CImgui_Manager::ConvertCtoWC(const char* str)
 
 void CImgui_Manager::ShowMapTool()
 {
-	ImGui::Begin(u8"맵툴");
-	if (ImGui::BeginTabBar("##MapTabBar"))
-	{
-		//TODO 타일 탭 시작
-		if (ImGui::BeginTabItem(u8"타일"))
-		{
-			ImGui::Text(u8"타일");
-			ImGui::EndTabItem();
-		}
-		//TODO 타일 탭 종료
+	m_pMapWindow->Render(m_pContext);
 
-		//! 환경 탭 시작
-		if (ImGui::BeginTabItem(u8"환경"))
-		{
-			ImGui::Text(u8"환경");
-			ImGui::EndTabItem();
-		}
-		//! 환경 탭 종료
-
-		//! 높이 탭 시작
-		if (ImGui::BeginTabItem(u8"높이"))
-		{
-			ImGui::Text(u8"높이");
-			ImGui::EndTabItem();
-		}
-		//! 높이 탭 종료
-
-		ImGui::EndTabBar();
-	}
-	ImGui::End();
 }
 
 
@@ -383,6 +318,14 @@ void CImgui_Manager::ShowCameraTool()
 		ImGui::EndTabBar();
 	}
 	ImGui::End();
+}
+
+void CImgui_Manager::Init_Window()
+{
+	m_pMapWindow = CMap_Window::GetInstance();
+	m_pMapWindow->Initialize();
+	m_pObjWindow = CObject_Window::GetInstance();
+	m_pObjWindow->Initialize();
 }
 
 

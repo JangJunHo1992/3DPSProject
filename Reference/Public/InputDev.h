@@ -48,7 +48,9 @@ private:
 	IDirectInputDevice8* m_pMouse = nullptr;
 
 private:
-	_byte               m_byKeyState[256];      // 키보드에 있는 모든 키값을 저장하기 위한 변수
+	_byte               m_byKeyState[256];  // 키보드에 있는 모든 키값을 저장하기 위한 변수
+	_bool				m_bKeyUp[256];
+	_bool				m_bKeyDown[256];
 	DIMOUSESTATE        m_tMouseState;
 	_bool				m_bKeyState[VK_MAX];
 	HWND				m_bFocus{};

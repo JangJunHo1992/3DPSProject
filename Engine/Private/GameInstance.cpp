@@ -4,7 +4,6 @@
 #include "Level_Manager.h"
 #include "Object_Manager.h"
 #include "Renderer.h"
-
 #include "RapidJson.h"
 //#include "Json_Utility.h"
 
@@ -21,14 +20,16 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
+	m_pInput_Device = CKeyMgr::Create(hInstance, GraphicDesc.hWnd);
+	if (nullptr == m_pInput_Device)
+		return E_FAIL;
+
 	/* 타이머를 사용할 준비를 하자. */
 	m_pTimer_Manager = CTimer_Manager::Create();
 	if (nullptr == m_pTimer_Manager)
 		return E_FAIL;
 
-	m_pInput_Device = CInput_Device::Create(hInstance, GraphicDesc.hWnd);
-	if (nullptr == m_pInput_Device)
-		return E_FAIL;
+
 
 	m_pLevel_Manager = CLevel_Manager::Create();
 	if (nullptr == m_pLevel_Manager)
@@ -55,13 +56,13 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 
 void CGameInstance::Tick_Engine(_float fTimeDelta)
 {
-	if (nullptr == m_pLevel_Manager ||
+	if (nullptr == m_pInput_Device ||
 		nullptr == m_pObject_Manager ||
 		nullptr == m_pPipeLine ||
-		nullptr == m_pInput_Device)
+		nullptr == m_pLevel_Manager)
 		return;
-
-	m_pInput_Device->Tick();
+	
+	m_pInput_Device->Update_Key();
 
 	m_pObject_Manager->Priority_Tick(fTimeDelta);
 
@@ -72,6 +73,7 @@ void CGameInstance::Tick_Engine(_float fTimeDelta)
 	m_pObject_Manager->Late_Tick(fTimeDelta);
 
 	m_pLevel_Manager->Tick(fTimeDelta);
+
 
 }
 
@@ -296,6 +298,57 @@ _bool CGameInstance::Key_Down(const _int& _iKey)
 _bool CGameInstance::Key_Pressing(const _int& _iKey)
 {
 	return m_pInput_Device->Key_Pressing(_iKey);
+}
+
+void CGameInstance::Write_Float2(json& Out_Json, const _float2& In_Float2)
+{
+	m_pJson_Utility->Write_Float2(Out_Json, In_Float2);
+}
+
+void CGameInstance::Write_Float3(json& Out_Json, const _float3& In_Float3)
+{
+	m_pJson_Utility->Write_Float3(Out_Json, In_Float3);
+}
+
+void CGameInstance::Write_Float4(json& Out_Json, const _float4& In_Float4)
+{
+	m_pJson_Utility->Write_Float4(Out_Json, In_Float4);
+}
+
+void CGameInstance::Load_Float2(const json& In_Json, _float2& Out_Float2)
+{
+	m_pJson_Utility->Load_Float2(In_Json, Out_Float2);
+}
+
+void CGameInstance::Load_Float3(const json& In_Json, _float3& Out_Float3)
+{
+	m_pJson_Utility->Load_Float3(In_Json, Out_Float3);
+}
+
+void CGameInstance::Load_Float4(const json& In_Json, _float4& Out_Float4)
+{
+	m_pJson_Utility->Load_Float4(In_Json, Out_Float4);
+}
+
+void CGameInstance::Load_JsonFloat4x4(const json& _Json, _float4x4& Out_Float4x4)
+{
+	m_pJson_Utility->Load_JsonFloat4x4(_Json, Out_Float4x4);
+}
+
+XMFLOAT4 CGameInstance::Get_VectorFromJson(json& _json)
+{
+	if (nullptr == m_pJson_Utility)
+		return XMFLOAT4();
+
+	return m_pJson_Utility->Get_VectorFromJson(_json);
+}
+
+XMFLOAT4X4 CGameInstance::Get_MatrixFromJson(json& _json)
+{
+	if (nullptr == m_pJson_Utility)
+		return XMFLOAT4X4();
+
+	return m_pJson_Utility->Get_MatrixFromJson(_json);
 }
 
 RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY)

@@ -2,10 +2,11 @@
 
 #include "Renderer.h"
 #include "PipeLine.h"
-#include "InputDev.h"
+#include "KeyMgr.h"
 #include "Component_Manager.h"
 
 #include "Json/json.hpp"
+#include "Json/Json_Utility.h"
 using namespace nlohmann;
 
 //#include "Json/json.hpp"
@@ -77,13 +78,24 @@ public: //For Input_Device
 	_bool	Key_Down(const _int & _iKey);
 	_bool	Key_Pressing(const _int & _iKey);
 
+public://For. Json
+	HRESULT			Load_Json(string _strPath, json & pOut);
+	HRESULT			Save_Json(string _strPath, json _json);
+	void			Write_Float2(json & Out_Json, const _float2 & In_Float2);
+	void			Write_Float3(json & Out_Json, const _float3 & In_Float3);
+	void			Write_Float4(json & Out_Json, const _float4 & In_Float4);
+	void			Load_Float2(const json & In_Json, _float2 & Out_Float2);
+	void			Load_Float3(const json & In_Json, _float3 & Out_Float3);
+	void			Load_Float4(const json & In_Json, _float4 & Out_Float4);
+	void			Load_JsonFloat4x4(const json & _Json, _float4x4 & Out_Float4x4);
 
+	XMFLOAT4		Get_VectorFromJson(json & _json);
+	XMFLOAT4X4		Get_MatrixFromJson(json & _json);
 public:
 	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
 	RAY	Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY, _matrix matWorld);
 
-	HRESULT		Load_Json(string _strPath, json & pOut);
-	HRESULT		Save_Json(string _strPath, json _json);
+
 
 
 private:
@@ -94,8 +106,8 @@ private:
 	class CComponent_Manager*		m_pComponent_Manager = { nullptr };
 	class CRenderer*				m_pRenderer = { nullptr };
 	class CPipeLine*				m_pPipeLine = { nullptr };
-	class CInput_Device*			m_pInput_Device = { nullptr };
-
+	class CKeyMgr*					m_pInput_Device = { nullptr };
+	class CJson_Utility*			m_pJson_Utility = { nullptr };
 public:
 	void Release_Manager();
 	static void Release_Engine();

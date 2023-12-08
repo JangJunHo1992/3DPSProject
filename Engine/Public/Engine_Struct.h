@@ -39,12 +39,12 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXNORTEX;
 
-	typedef struct _DIMOUSESTATE {
-		_long      lX;
-		_long      lY;
-		_long      lZ;
-		BYTE      Buttons[4];
-	} DIMOUSESTATE, * LPDIMOUSESTATE;
+// 	typedef struct _DIMOUSESTATE {
+// 		_long      lX;
+// 		_long      lY;
+// 		_long      lZ;
+// 		BYTE      Buttons[4];
+// 	} DIMOUSESTATE, * LPDIMOUSESTATE;
 
 	typedef struct ENGINE_DLL tagMeshDesc // <- 이런 식으로. 원래 없었음
 	{
@@ -89,5 +89,11 @@ namespace Engine
 		float				fDistance;
 	}PICKING_RESULT;
 
+	typedef struct
+	{
+		XMFLOAT3		vScale, vPosition;
+		XMFLOAT4		vRotation;
+		float			fTrackPosition;
+	}KEYFRAME;
 
 }

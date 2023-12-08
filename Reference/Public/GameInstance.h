@@ -2,7 +2,7 @@
 
 #include "Renderer.h"
 #include "PipeLine.h"
-#include "InputDev.h"
+#include "KeyMgr.h"
 #include "Component_Manager.h"
 
 #include "Json/json.hpp"
@@ -94,7 +94,7 @@ private:
 	class CComponent_Manager*		m_pComponent_Manager = { nullptr };
 	class CRenderer*				m_pRenderer = { nullptr };
 	class CPipeLine*				m_pPipeLine = { nullptr };
-	class CInput_Device*			m_pInput_Device = { nullptr };
+	class CKeyMgr*					m_pInput_Device = { nullptr };
 
 public:
 	void Release_Manager();
