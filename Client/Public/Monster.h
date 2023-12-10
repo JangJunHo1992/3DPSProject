@@ -10,9 +10,9 @@ END
 
 BEGIN(Client)
 
-class CMonster final : public CGameObject
+class CMonster abstract : public CGameObject
 {
-private:
+protected:
 	CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CMonster(const CMonster& rhs);
 	virtual ~CMonster() = default;
@@ -25,21 +25,27 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-private:
-	CShader* m_pShaderCom = { nullptr };
-	CModel* m_pModelCom = { nullptr };
+public:
+	virtual void Write_Json(json& Out_Json) override;
 
-private:
-	HRESULT Ready_Components();
+protected:
+	CShader*		m_pShaderCom = { nullptr };
+	CModel*			m_pModelCom = { nullptr };
+
+	
+
+protected:
+	virtual HRESULT Ready_Components() PURE;
+	HRESULT Ready_Components_Origin();
 	HRESULT Bind_ShaderResources();
 
 
 public:
 	/* 원형객체를 생성한다. */
-	static CMonster* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	//static CMonster* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 
 	/* 사본객체를 생성한다. */
-	virtual CGameObject* Clone(void* pArg) override;
+	//virtual CGameObject* Clone(void* pArg) override;
 
 	virtual void Free() override;
 };

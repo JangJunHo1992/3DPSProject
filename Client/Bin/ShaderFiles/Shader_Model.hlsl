@@ -14,7 +14,7 @@ vector			g_vMtrlSpecular = vector(1.f, 1.f, 1.f, 1.f);
 vector			g_vCamPosition;
 
 sampler DefaultSampler = sampler_state
-{
+{	
 	Filter = MIN_MAG_MIP_LINEAR;
 };
 
@@ -31,7 +31,7 @@ struct VS_OUT
 {
 	float4		vPosition : SV_POSITION;
 	float4		vNormal : NORMAL;
-	float2		vTexcoord : TEXCOORD0;
+	float2		vTexcoord : TEXCOORD0;	
 	float4		vWorldPos : TEXCOORD1;
 };
 
@@ -63,7 +63,7 @@ struct PS_IN
 	float4		vWorldPos : TEXCOORD1;
 };
 
-struct PS_OUT
+struct PS_OUT 
 {
 	float4		vColor : SV_TARGET0;
 };
@@ -95,9 +95,9 @@ PS_OUT PS_MAIN(PS_IN In)
 
 
 technique11 DefaultTechnique
-{
+{	
 	pass Model
-	{
+	{		
 		VertexShader = compile vs_5_0 VS_MAIN();
 		GeometryShader = NULL;
 		HullShader = NULL;

@@ -2,14 +2,31 @@
 #include "Loader.h"
 #include "GameInstance.h"
 #include "BackGround.h"
-#include "ForkLift.h"
-#include "Terrain_MapTool.h"
+
+//#include "VIBuffer_Dynamic_Terrain.h"
+#include "VIBuffer_Static_Terrain.h"
+#include "VIBuffer_Dynamic_Plane.h"
+
+#include "Terrain_Tool.h"
 #include "Terrain_GamePlay.h"
-#include "Monster.h"
+
+#include "ForkLift_Tool.h"
+#include "ForkLift_GamePlay.h"
+
+#include "Monster_Tool.h"
+#include "Monster_GamePlay.h"
+
+#include "Raider_Tool.h"
+#include "Raider_GamePlay.h"
+
+#include "Model_Tool.h"
+#include "Model_GamePlay.h"
+
+
 #include "Camera_Dynamic.h"
 #include <process.h>
 
-#include "Raider.h"
+
 
 CLoader::CLoader(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
 	: m_pDevice(pDevice)
@@ -104,7 +121,7 @@ HRESULT CLoader::Loading_For_Logo_Level()
 	lstrcpy(m_szLoadingText, TEXT("원형객체를(을) 로드하는 중입니다."));
 
 	/* For.Prototype_GameObject_BackGround */
-	if (FAILED(m_pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BackGround"),
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_BackGround"),
 		CBackGround::Create(m_pDevice, m_pContext))))
 		return E_FAIL;	
 
@@ -115,12 +132,11 @@ HRESULT CLoader::Loading_For_Logo_Level()
 	return S_OK;
 }
 
-template<class T, class T2>
 HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 {
-	
 	/* 게임플레이 레벨에 필요한 자원을 로드하자. */
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
+
 	/* For.Prototype_Component_Texture_Terrain */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Tile%d.dds"), 2))))
@@ -140,21 +156,57 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 
 	_matrix		PivotMatrix;
-	if (eLEVEL == LEVEL_GAMEPLAY)
+
+	if (LEVEL_TOOL == eLEVEL)
 	{
-		/* For.Prototype_Component_VIBuffer_Terrain */
-		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Terrain"),
-			CVIBuffer_Terrain::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Height1.bmp")))))
+
+	}
+	else 
+	{
+		/* For.Prototype_Component_Model_Fiona */
+		PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
+			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Fiona/Fiona.fbx", PivotMatrix))))
 			return E_FAIL;
 	}
-	else if (eLEVEL == LEVEL_TOOL)
+
+	if (LEVEL_TOOL == eLEVEL)
 	{
-		/* For.Prototype_Component_VIBuffer_Terrain */
-		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Terrain"),
-			CVIBuffer_Dynamic_Terrain::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Height1.bmp")))))
+		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Model_Raider_Tool"),
+			CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/King/King.fbx", PivotMatrix))))
 			return E_FAIL;
 	}
-	
+	else
+	{
+		/* For.Prototype_Component_Model_ForkLift */
+		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift_GamePlay"),
+			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift.fbx", PivotMatrix))))
+			return E_FAIL;
+	}
+
+	if (LEVEL_TOOL == eLEVEL) 
+	{
+		/* For.Prototype_Component_VIBuffer_Terrain */
+		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Terrain_Tool"),
+			CVIBuffer_Dynamic_Terrain::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Height2.bmp")))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_VIBuffer_Plane */
+		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Plane_Tool"),
+			CVIBuffer_Dynamic_Plane::Create(m_pDevice, m_pContext, 50, 50))))
+			return E_FAIL;
+	}
+	else 
+	{
+		/* For.Prototype_Component_VIBuffer_Terrain */
+		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Terrain_GamePlay"),
+			CVIBuffer_Static_Terrain::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Height2.bmp")))))
+			return E_FAIL;
+	}
+
+
 	
 	lstrcpy(m_szLoadingText, TEXT("셰이더를(을) 로드하는 중입니다."));
 	/* For.Prototype_Component_Shader_VtxNorTex */
@@ -172,15 +224,59 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_AnimModel.hlsl"), VTXANIMMESH::Elements, VTXANIMMESH::iNumElements))))
 		return E_FAIL;
 
+
 	lstrcpy(m_szLoadingText, TEXT("원형객체를(을) 로드하는 중입니다."));
-	/* For.Prototype_GameObject_Terrain */
-	if (FAILED(m_pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Terrain"),
-		T::Create(m_pDevice, m_pContext))))
-		return E_FAIL;
+
+	if (LEVEL_TOOL == eLEVEL)
+	{
+		/* For.Prototype_GameObject_Terrain */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Terrain_Tool"),
+			CTerrain_Tool::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+
+		/* For.Prototype_GameObject_Terrain */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Plane_Tool"),
+			CTerrain_Tool::Create(m_pDevice, m_pContext, true))))
+			return E_FAIL;
+	}
+	else 
+	{
+		/* For.Prototype_GameObject_Terrain */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Terrain_GamePlay"),
+			CTerrain_GamePlay::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
+
+	if (LEVEL_TOOL == eLEVEL)
+	{
+		/* For.Prototype_GameObject_Raider */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Raider_Tool"),
+			CRaider_Tool::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
+	else 
+	{
+		/* For.Prototype_GameObject_Monster */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Monster_GamePlay"),
+			CMonster_GamePlay::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
+
+	if (LEVEL_TOOL == eLEVEL)
+	{
+
+	}
+	else
+	{
+		/* For.Prototype_GameObject_ForkLift */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_ForkLift_GamePlay"),
+			CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
 
 
 	/* For.Prototype_GameObject_Camera_Dynamic */
-	if (FAILED(m_pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Camera_Dynamic"),
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Camera_Dynamic"),
 		CCamera_Dynamic::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 
@@ -193,61 +289,12 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 HRESULT CLoader::Loading_For_GamePlay_Level()
 {
-	_matrix		PivotMatrix;
-
-	/* For.Prototype_Component_Model_Fiona */
-	PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
-		CModel::Create(m_pDevice, m_pContext, CModel::TYPE::TYPE_ANIM, "../Bin/Resources/Models/Fiona/Fiona.fbx", PivotMatrix))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Model_ForkLift */
-	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift"),
-		CModel::Create(m_pDevice, m_pContext, CModel::TYPE::TYPE_NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift.fbx", PivotMatrix))))
-		return E_FAIL;
-
-
-
-	if (E_FAIL == Loading_For_Level<CTerrain_GamePlay, CVIBuffer_Terrain>(LEVEL::LEVEL_GAMEPLAY))
-		return E_FAIL;
-
-
-
-	/* For.Prototype_GameObject_Monster */
-	if (FAILED(m_pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Monster"),
-		CMonster::Create(m_pDevice, m_pContext))))
-		return E_FAIL;
-
-	/* For.Prototype_GameObject_ForkLift */
-	if (FAILED(m_pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ForkLift"),
-		CForkLift::Create(m_pDevice, m_pContext))))
-		return E_FAIL;
-
-
-	return S_OK;
-
+	return Loading_For_Level(LEVEL_GAMEPLAY);
 }
 
 HRESULT CLoader::Loading_For_Tool_Level()
 {
-	_matrix		PivotMatrix;
-
-// 	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Model_Raider"),
-// 		CModel::Create(m_pDevice, m_pContext, CModel::TYPE::TYPE_NONANIM, "../Bin/Resources/Models/King/King.fbx", PivotMatrix))))
-// 		return E_FAIL;
-
-
-	if (E_FAIL == Loading_For_Level<CTerrain_MapTool, CVIBuffer_Dynamic_Terrain>(LEVEL::LEVEL_TOOL))
-		return E_FAIL;
-
-// 	/* For.Prototype_GameObject_Raider */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Raider"),
-// 		CRaider::Create(m_pDevice, m_pContext))))
-// 		return E_FAIL;
-
-	return S_OK;
+	return Loading_For_Level(LEVEL_TOOL);
 }
 
 CLoader * CLoader::Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext, LEVEL eNextLevelID)

@@ -24,20 +24,15 @@ public:
 		return m_isFinished;
 	}
 		
-
-
 public:	
 	HRESULT Initialize(LEVEL eNextLevelID);
 
 	void Print_LoadingText();
 
-
-
 public:
 	HRESULT Loading();
 	HRESULT Loading_For_Logo_Level();
 
-	template<class T, class T2>
 	HRESULT	Loading_For_Level(LEVEL eLEVEL);
 	HRESULT Loading_For_GamePlay_Level();
 	HRESULT Loading_For_Tool_Level();

@@ -1,28 +1,26 @@
 
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
-				//임시 점광원
+
 vector			g_vLightPos = vector(50.f, 10.f, 50.f, 1.f);
 float			g_fLightRange = 30.f;
-				//방향성광원
+
 vector			g_vLightDir = vector(1.f, -1.f, 1.f, 0.f);
 vector			g_vLightDiffuse = vector(1.f, 1.f, 1.f, 1.f);
 vector			g_vLightAmbient = vector(1.f, 1.f, 1.f, 1.f);
 vector			g_vLightSpecular = vector(1.f, 1.f, 1.f, 1.f);
-				//엠비언트, 스펙큘러
+
 vector			g_vMtrlAmbient = vector(0.3f, 0.3f, 0.3f, 1.f);
 vector			g_vMtrlSpecular = vector(1.f, 1.f, 1.f, 1.f);
-				//텍스쳐
 texture2D		g_DiffuseTexture[2];
 texture2D		g_MaskTexture;
 texture2D		g_BrushTexture;
-				//카메라 위치
+
 vector			g_vCamPosition;
-				//브러쉬 위치
 vector			g_vBrushPos = vector(50.f, 0.f, 20.f, 1.f);
 float			g_fBrushRange = 10.f;
 
 sampler DefaultSampler = sampler_state
-{
+{	
 	Filter = MIN_MAG_MIP_POINT;
 	AddressU = wrap;
 	AddressV = wrap;
@@ -40,7 +38,7 @@ struct VS_OUT
 {
 	float4		vPosition : SV_POSITION;
 	float4		vNormal : NORMAL;
-	float2		vTexcoord : TEXCOORD0;
+	float2		vTexcoord : TEXCOORD0;	
 	float4		vWorldPos : TEXCOORD1;
 };
 
@@ -66,8 +64,8 @@ VS_OUT VS_MAIN(VS_IN In)
 
 /* 통과된 정점을 대기 .*/
 
-/* 투영변환 : /w */ /* -> -1, 1 ~ 1, -1 */
-/* 뷰포트변환-> 0, 0 ~ WINSX, WINSY */
+/* 투영변환 : /w */ /* -> -1, 1 ~ 1, -1 */ 
+/* 뷰포트변환-> 0, 0 ~ WINSX, WINSY */ 
 /* 래스터라이즈 : 정점정보에 기반하여 픽셀의 정보를 만든다. */
 
 
@@ -79,7 +77,7 @@ struct PS_IN
 	float4		vWorldPos : TEXCOORD1;
 };
 
-struct PS_OUT
+struct PS_OUT 
 {
 	float4		vColor : SV_TARGET0;
 };
@@ -90,12 +88,12 @@ PS_OUT PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	/* 첫번째 인자의 방식으로 두번째 인자의 위치에 있는 픽셀의 색을 얻어온다. */
-	vector		vSourDiffuse = g_DiffuseTexture[0].Sample(DefaultSampler, In.vTexcoord * 100.0f);
+	vector		vSourDiffuse = g_DiffuseTexture[0].Sample(DefaultSampler, In.vTexcoord * 100.0f);		
 	vector		vDestDiffuse = g_DiffuseTexture[1].Sample(DefaultSampler, In.vTexcoord * 100.0f);
 	vector		vBrush = vector(0.f, 0.f, 0.f, 0.f);
 	// vector		vBrush = g_BrushTexture.Sample(DefaultSampler, In.vTexcoord);
 
-	if (g_vBrushPos.x - g_fBrushRange < In.vWorldPos.x && In.vWorldPos.x <= g_vBrushPos.x + g_fBrushRange &&
+	if (g_vBrushPos.x - g_fBrushRange < In.vWorldPos.x && In.vWorldPos.x <= g_vBrushPos.x + g_fBrushRange && 
 		g_vBrushPos.z - g_fBrushRange < In.vWorldPos.z && In.vWorldPos.z <= g_vBrushPos.z + g_fBrushRange)
 	{
 		float2		vUV;

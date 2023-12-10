@@ -3,7 +3,7 @@
 #include "../../Reference/Imgui/imgui_impl_win32.h"
 #include "../../Reference/Imgui/imgui_impl_dx11.h"
 
-#include "Terrain_MapTool.h"
+#include "Terrain_Tool.h"
 #include "GameInstance.h"
 IMPLEMENT_SINGLETON(CMap_Window)
 
@@ -19,11 +19,14 @@ HRESULT CMap_Window::Initialize()
 	Safe_AddRef(m_pGameInstance);
 
 
-	list<CGameObject*> pGameObjects = *(m_pGameInstance->Get_GameObjects(LEVEL_TOOL, TEXT("Layer_BackGround")));
+	list<CGameObject*>* pGameObjects = (m_pGameInstance->Get_GameObjects(LEVEL_TOOL, TEXT("Layer_BackGround")));
 
-	for (CGameObject* pGameObject : pGameObjects)
+	if (nullptr == pGameObjects)
+		return S_OK;
+
+	for (CGameObject* pGameObject : *pGameObjects)
 	{
-		CTerrain_MapTool* pTerrain = dynamic_cast<CTerrain_MapTool*>(pGameObject);
+		CTerrain_Tool* pTerrain = dynamic_cast<CTerrain_Tool*>(pGameObject);
 		if (pTerrain)
 		{
 			m_pTerrain = pTerrain;

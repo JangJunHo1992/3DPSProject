@@ -70,6 +70,38 @@ void CGameObject::Set_Position(const _float3& vState)
 	m_pTransformCom->Set_Position(vState);
 }
 
+void CGameObject::Test_ResetPos()
+{
+	_float3 resetPos = { 0.f, 0.f, 0.f };
+	m_pTransformCom->Set_Position(resetPos);
+}
+
+void CGameObject::Set_WorldMatrix(_float4x4 matrix)
+{
+	m_pTransformCom->Set_WorldMatrix(matrix);
+}
+
+void CGameObject::Write_Json(json& Out_Json)
+{
+	
+	for (auto& elem_List : m_Components)
+	{
+		elem_List.second->Write_Json(Out_Json["Component"]);
+	}
+}
+
+void CGameObject::Load_FromJson(const json& In_Json)
+{
+	for (auto& elem_List : m_Components)
+	{
+		elem_List.second->Load_FromJson(In_Json["Component"]);
+	}
+
+	_float4x4 WorldMatrix;
+	ZeroMemory(&WorldMatrix, sizeof(_float4x4));
+	CJson_Utility::Load_JsonFloat4x4(In_Json["Component"]["Transform"], WorldMatrix);
+}
+
 HRESULT CGameObject::Add_Component(_uint iLevelIndex, const wstring& strPrototypeTag, const wstring& strComTag, CComponent** ppOut, void* pArg)
 {
 	if (nullptr != Find_Component(strComTag))
@@ -87,6 +119,8 @@ HRESULT CGameObject::Add_Component(_uint iLevelIndex, const wstring& strPrototyp
 
 	return S_OK;
 }
+
+
 
 CComponent* CGameObject::Find_Component(const wstring& strComTag)
 {

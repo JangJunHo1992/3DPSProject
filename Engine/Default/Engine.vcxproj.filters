@@ -85,6 +85,9 @@
     <Filter Include="01.Utility\04.PipeLine">
       <UniqueIdentifier>{5ba9b9e2-70da-4bb4-b227-b91ffe9993f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.System\02.InputDev">
+      <UniqueIdentifier>{e67c3bd5-02a1-457f-a20c-34d17b079218}</UniqueIdentifier>
+    </Filter>
     <Filter Include="01.Utility\03.Components\05.Model">
       <UniqueIdentifier>{702d591c-4b9d-41a1-8b32-c409df795f36}</UniqueIdentifier>
     </Filter>
@@ -100,17 +103,38 @@
     <Filter Include="01.Utility\91.RapidJson\Json">
       <UniqueIdentifier>{22594367-3c7e-4b88-a4c6-2aad439174da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.Components\05.Model\Mesh\GamePlay">
+      <UniqueIdentifier>{3ef59217-f0e6-4d74-afdf-9e0997e20845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\05.Model\Mesh\Tool">
+      <UniqueIdentifier>{02f67cea-56ab-4551-acec-9e52e235eeab}</UniqueIdentifier>
+    </Filter>
     <Filter Include="01.Utility\03.Components\05.Model\Bone">
-      <UniqueIdentifier>{8d844f17-0926-4f45-964b-65c82a5c5d24}</UniqueIdentifier>
+      <UniqueIdentifier>{e111a3bf-9b75-4c02-957b-71114869593f}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Utility\03.Components\05.Model\Animation">
-      <UniqueIdentifier>{44a4624a-8eae-47b7-8ec9-f5daf43d9b65}</UniqueIdentifier>
+      <UniqueIdentifier>{dd54c86a-8fee-43f0-b293-1242dbaaa17a}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Utility\03.Components\05.Model\Animation\Channel">
-      <UniqueIdentifier>{352e141b-9911-4347-b8cb-3613a2ccb23e}</UniqueIdentifier>
+      <UniqueIdentifier>{1e247e24-c486-426a-890d-4a7b64472099}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00.System\02.KeyMgr">
-      <UniqueIdentifier>{e67c3bd5-02a1-457f-a20c-34d17b079218}</UniqueIdentifier>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Terrain\Static">
+      <UniqueIdentifier>{e056d15b-2e2b-44a8-a5fe-7bafab53eae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\05.Model\Model">
+      <UniqueIdentifier>{85e6bbf0-7fdc-4757-a4b7-8ba139e731a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\05.Model\Model\Tool">
+      <UniqueIdentifier>{93bef476-751a-4fbd-8843-fc0243dfe42f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\05.Model\Model\GamePlay">
+      <UniqueIdentifier>{3ac28e4c-013b-46b1-81fe-b5a94891fd05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Plane">
+      <UniqueIdentifier>{a7d51065-269f-4d81-8230-1ade511ba69a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Terrain">
+      <UniqueIdentifier>{90db5b33-d629-4281-aa34-1548a5140d13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,20 +219,14 @@
     <ClInclude Include="..\Public\PipeLine.h">
       <Filter>01.Utility\04.PipeLine</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\KeyMgr.h">
-      <Filter>00.System\02.KeyMgr</Filter>
+    <ClInclude Include="..\Public\InputDev.h">
+      <Filter>00.System\02.InputDev</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Engine_Enum.h">
       <Filter>99.Defines</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Model.h">
-      <Filter>01.Utility\03.Components\05.Model</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Mesh.h">
       <Filter>01.Utility\03.Components\05.Model\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain.h">
-      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\RapidJson.h">
       <Filter>01.Utility\91.RapidJson</Filter>
@@ -219,14 +237,41 @@
     <ClInclude Include="..\Public\Bone.h">
       <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Mesh_Tool.h">
+      <Filter>01.Utility\03.Components\05.Model\Mesh\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Mesh_GamePlay.h">
+      <Filter>01.Utility\03.Components\05.Model\Mesh\GamePlay</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\Animation.h">
       <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Channel.h">
       <Filter>01.Utility\03.Components\05.Model\Animation\Channel</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Static_Terrain.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Model.h">
+      <Filter>01.Utility\03.Components\05.Model\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Model_Tool.h">
+      <Filter>01.Utility\03.Components\05.Model\Model\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Model_GamePlay.h">
+      <Filter>01.Utility\03.Components\05.Model\Model\GamePlay</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\Json\Json_Utility.h">
       <Filter>01.Utility\91.RapidJson\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Dynamic_Plane.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain_Origin.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Terrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -278,9 +323,6 @@
     <ClCompile Include="..\Private\Shader.cpp">
       <Filter>01.Utility\03.Components\02.Shader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Public\Engine_Struct.cpp">
-      <Filter>99.Defines</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Transform.cpp">
       <Filter>01.Utility\03.Components\03.Transform</Filter>
     </ClCompile>
@@ -296,17 +338,11 @@
     <ClCompile Include="..\Private\PipeLine.cpp">
       <Filter>01.Utility\04.PipeLine</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\KeyMgr.cpp">
-      <Filter>00.System\02.KeyMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Model.cpp">
-      <Filter>01.Utility\03.Components\05.Model</Filter>
+    <ClCompile Include="..\Private\InputDev.cpp">
+      <Filter>00.System\02.InputDev</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Mesh.cpp">
       <Filter>01.Utility\03.Components\05.Model\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain.cpp">
-      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
     </ClCompile>
     <ClCompile Include="..\Public\RapidJson.cpp" />
     <ClCompile Include="..\Private\RapidJson.cpp">
@@ -315,14 +351,44 @@
     <ClCompile Include="..\Private\Bone.cpp">
       <Filter>01.Utility\03.Components\05.Model\Bone</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\Mesh_Tool.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Mesh\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Mesh_GamePlay.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Mesh\GamePlay</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\Animation.cpp">
       <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Channel.cpp">
       <Filter>01.Utility\03.Components\05.Model\Animation\Channel</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Static_Terrain.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Model.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Model_Tool.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Model\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Model_GamePlay.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Model\GamePlay</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\Json\Json_Utility.cpp">
       <Filter>01.Utility\91.RapidJson\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Engine_Struct.cpp">
+      <Filter>99.Defines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Dynamic_Plane.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain_Origin.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

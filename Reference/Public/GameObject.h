@@ -32,9 +32,15 @@ public:
 
 public:
 	void Set_Position(const _float3& vState);
+	void Test_ResetPos();
+	void Set_WorldMatrix(_float4x4 matrix);
 
-//public:
-//	virtual void pick() {};
+public:
+	virtual _bool Pick(_float3* out) { return false; }
+
+public:
+	virtual void Write_Json(json& Out_Json) override;
+	virtual void Load_FromJson(const json& In_Json) override;
 
 protected:
 	ID3D11Device*				m_pDevice = { nullptr };
@@ -47,6 +53,11 @@ protected:
 	map<const wstring, class CComponent*>	m_Components;
 protected:
 	_bool						m_isCloned = { false };
+
+protected:
+	string						m_sName = "";
+	string						m_sLayerTag = "";
+
 
 protected:
 	class CComponent* Find_Component(const wstring& strComTag);

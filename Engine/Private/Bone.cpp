@@ -1,4 +1,4 @@
-#include "Bone.h"
+#include "..\Public\Bone.h"
 
 CBone::CBone()
 {
@@ -28,7 +28,7 @@ void CBone::Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatr
 		XMStoreFloat4x4(&m_CombinedTransformationMatrix,
 			XMLoadFloat4x4(&m_TransformationMatrix) * XMLoadFloat4x4(&Bones[m_iParentIndex]->m_CombinedTransformationMatrix));
 	}
-	
+
 
 }
 

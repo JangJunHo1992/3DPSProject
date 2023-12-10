@@ -2,12 +2,9 @@
 
 #include "Renderer.h"
 #include "PipeLine.h"
-#include "KeyMgr.h"
+#include "InputDev.h"
 #include "Component_Manager.h"
 
-#include "Json/json.hpp"
-#include "Json/Json_Utility.h"
-using namespace nlohmann;
 
 //#include "Json/json.hpp"
 //using namespace nlohmann;
@@ -48,9 +45,15 @@ public: /* For.Level_Manager */
 	HRESULT Open_Level(_uint iCurrentLevelIndex, class CLevel* pNewLevel);
 
 public: /* For.Object_Manager */
-	HRESULT Add_Prototype(const wstring& strPrototypeTag, class CGameObject* pPrototype);
+	HRESULT Add_Prototype_Object(const wstring& strPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_CloneObject(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strPrototypeTag, void* pArg = nullptr);
+	HRESULT Add_Object(_uint iLevelIndex, const wstring & strLayerTag, class CGameObject* pGameObject, void* pArg = nullptr);
+
 	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
+	HRESULT Save_Objects_With_Json(_uint iLevelIndex, string filePath);
+	//HRESULT Load_Objects_With_Json(_uint iLevelIndex, string filePath);
+
+	
 
 public: /* For.Component_Manager */
 	HRESULT Add_Prototype(_uint iLevelIndex, const wstring & strPrototypeTag, class CComponent* pPrototype);
@@ -78,24 +81,24 @@ public: //For Input_Device
 	_bool	Key_Down(const _int & _iKey);
 	_bool	Key_Pressing(const _int & _iKey);
 
-public://For. Json
-	HRESULT			Load_Json(string _strPath, json & pOut);
-	HRESULT			Save_Json(string _strPath, json _json);
-	void			Write_Float2(json & Out_Json, const _float2 & In_Float2);
-	void			Write_Float3(json & Out_Json, const _float3 & In_Float3);
-	void			Write_Float4(json & Out_Json, const _float4 & In_Float4);
-	void			Load_Float2(const json & In_Json, _float2 & Out_Float2);
-	void			Load_Float3(const json & In_Json, _float3 & Out_Float3);
-	void			Load_Float4(const json & In_Json, _float4 & Out_Float4);
-	void			Load_JsonFloat4x4(const json & _Json, _float4x4 & Out_Float4x4);
+	_bool	Mouse_Pressing(MOUSEKEYSTATE eMouseID);
+	_bool	Mouse_Down(MOUSEKEYSTATE eMouseID);
+	_bool	Mouse_Up(MOUSEKEYSTATE eMouseID);
 
-	XMFLOAT4		Get_VectorFromJson(json & _json);
-	XMFLOAT4X4		Get_MatrixFromJson(json & _json);
+
 public:
 	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
 	RAY	Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY, _matrix matWorld);
 
+	_bool		Picking_Mesh(RAY ray, _float3 * out, vector<class CMesh*>* Meshes);
+	_bool		Picking_Vertex(RAY ray, _float3 * out, _uint triNum, VTXMESH * pVertices, _uint * pIndices);
 
+
+	HRESULT		Load_Json(string _strPath, json & pOut);
+	HRESULT		Save_Json(string _strPath, json _json);
+
+	void		String_To_WString(string _string, wstring& _wstring);
+	void		WString_To_String(wstring _wstring, string& _string);
 
 
 private:
@@ -106,8 +109,8 @@ private:
 	class CComponent_Manager*		m_pComponent_Manager = { nullptr };
 	class CRenderer*				m_pRenderer = { nullptr };
 	class CPipeLine*				m_pPipeLine = { nullptr };
-	class CKeyMgr*					m_pInput_Device = { nullptr };
-	class CJson_Utility*			m_pJson_Utility = { nullptr };
+	class CInput_Device*			m_pInput_Device = { nullptr };
+
 public:
 	void Release_Manager();
 	static void Release_Engine();

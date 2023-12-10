@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Terrain.h"
-
+#include "VIBuffer_Dynamic_Terrain_Origin.h"
+#include "VIBuffer_Dynamic_Plane.h"
 #include "GameInstance.h"
 
 
@@ -12,22 +13,40 @@ CTerrain::CTerrain(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 
 CTerrain::CTerrain(const CTerrain & rhs)
 	: CGameObject(rhs)
+	, m_bIsPlane(rhs.m_bIsPlane)
 {
 }
 
-HRESULT CTerrain::Initialize_Prototype()
+HRESULT CTerrain::Initialize_Prototype(_bool bIsPlane)
 {	
-
+	m_bIsPlane = bIsPlane;
 	return S_OK;
 }
 
+
+
 HRESULT CTerrain::Initialize(void* pArg)
 {	
+	m_sName = "Terrain";
+	m_sLayerTag = "Layer_BackGround";
+
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;	
 
+	//if (m_bIsPlane) 
+	//{
+	//	
+	//}
+	//else 
+	//{
+	//	if (FAILED(Ready_Components()))
+	//		return E_FAIL;
+	//}
+
 	if (FAILED(Ready_Components()))
 		return E_FAIL;
+
+
 
 	return S_OK;
 }
@@ -67,17 +86,45 @@ HRESULT CTerrain::Render()
 	return S_OK;
 }
 
+void CTerrain::Write_Json(json& Out_Json)
+{
+	Out_Json["Name"] = m_sName;
+	Out_Json["LayerTag"] = m_sLayerTag;
+	__super::Write_Json(Out_Json);
+}
+
 HRESULT CTerrain::Ready_Components_Origin(LEVEL eLEVEL)
 {
 	/* For.Com_Shader */
+
+
 	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Shader_VtxNorTex"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_VIBuffer_Terrain"),
-		TEXT("Com_VIBuffer"), reinterpret_cast<CComponent**>(&m_pVIBufferCom))))
-		return E_FAIL;
+
+	if (LEVEL_TOOL == eLEVEL) 
+	{
+		if (m_bIsPlane) 
+		{
+			if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_VIBuffer_Plane_Tool"),
+				TEXT("Com_VIBuffer"), reinterpret_cast<CComponent**>(&m_pVIBufferCom))))
+				return E_FAIL;
+		}
+		else 
+		{
+			if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_VIBuffer_Terrain_Tool"),
+				TEXT("Com_VIBuffer"), reinterpret_cast<CComponent**>(&m_pVIBufferCom))))
+				return E_FAIL;
+		}
+	}
+	else 
+	{
+		if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_VIBuffer_Terrain_GamePlay"),
+			TEXT("Com_VIBuffer"), reinterpret_cast<CComponent**>(&m_pVIBufferCom))))
+			return E_FAIL;
+	}
 
 	/* For.Com_Texture */
 	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Texture_Terrain"),
@@ -163,4 +210,9 @@ void CTerrain::Free()
 
 	Safe_Release(m_pShaderCom);
 }
+
+//CGameObject* CTerrain::Clone(void* pArg)
+//{
+//	return nullptr;
+//}
 

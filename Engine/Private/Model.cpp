@@ -5,12 +5,12 @@
 #include "Animation.h"
 
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CComponent(pDevice, pContext)
+	:CComponent(pDevice,pContext)
 {
 }
 
 CModel::CModel(const CModel& rhs)
-	: CComponent(rhs)
+	:CComponent(rhs)
 	, m_PivotMatrix(rhs.m_PivotMatrix)
 	, m_eModelType(rhs.m_eModelType)
 	, m_iNumMeshes(rhs.m_iNumMeshes)
@@ -41,8 +41,6 @@ CModel::CModel(const CModel& rhs)
 
 HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
-	/*aiProcess_PreTransformVertices | aiProcess_GlobalScale*/
-
 	m_eModelType = eType;
 
 	_uint	iFlag = aiProcess_ConvertToLeftHanded | aiProcessPreset_TargetRealtime_Fast;
@@ -51,6 +49,7 @@ HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath,
 		iFlag |= aiProcess_PreTransformVertices;
 
 	m_pAIScene = m_Importer.ReadFile(strModelFilePath, iFlag);
+
 	if (nullptr == m_pAIScene)
 		return E_FAIL;
 
@@ -111,7 +110,6 @@ HRESULT CModel::Bind_BoneMatrices(CShader* pShader, const _char* pConstantName, 
 
 HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType)
 {
-
 	_uint		iMaterialIndex = m_Meshes[iMeshIndex]->Get_MaterialIndex();
 	if (iMaterialIndex >= m_iNumMaterials)
 		return E_FAIL;
@@ -119,7 +117,8 @@ HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName
 	return m_Materials[iMaterialIndex].pMtrlTextures[eTextureType]->Bind_ShaderResource(pShader, pConstantName);
 }
 
-HRESULT CModel::Ready_Meshes(_fmatrix PivotMatrix)
+template<class T>
+HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
 {
 	m_iNumMeshes = m_pAIScene->mNumMeshes;
 
@@ -127,7 +126,7 @@ HRESULT CModel::Ready_Meshes(_fmatrix PivotMatrix)
 
 	for (size_t i = 0; i < m_iNumMeshes; i++)
 	{
-		CMesh* pMesh = CMesh::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene->mMeshes[i], PivotMatrix, m_Bones);
+		T* pMesh = T::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene->mMeshes[i], PivotMatrix, m_Bones);
 
 		if (nullptr == pMesh)
 			return E_FAIL;
@@ -150,11 +149,6 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 
 		for (size_t j = 1; j < AI_TEXTURE_TYPE_MAX; j++)
 		{
-			/*for (size_t k = 0; k < pAIMaterial->GetTextureCount(aiTextureType(j)); k++)
-			{
-				pAIMaterial->GetTexture(aiTextureType(j), k, );
-			};*/
-
 			_char		szDrive[MAX_PATH] = "";
 			_char		szDirectory[MAX_PATH] = "";
 
@@ -174,6 +168,9 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 			strcat_s(szTmp, szDirectory);
 			strcat_s(szTmp, szFileName);
 			strcat_s(szTmp, szEXT);
+
+			//_char szTest[MAX_PATH] = ".dds";
+			//strcat_s(szTmp, szTest);
 
 			_tchar		szFullPath[MAX_PATH] = TEXT("");
 
@@ -225,30 +222,48 @@ HRESULT CModel::Ready_Animations()
 	return S_OK;
 }
 
-CModel* CModel::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
-{
-	CModel* pInstance = new CModel(pDevice, pContext);
+//void CModel::Write_Json(json& Out_Json)
+//{
+//	Out_Json.emplace("Model", m_szModelKey);
+//}
+//
+//void CModel::Load_FromJson(const json& In_Json)
+//{
+//	if (In_Json.end() == In_Json.find("Model"))
+//		return;
+//
+//	m_szModelKey = In_Json["Model"];
+//	if (!m_szModelKey.empty())
+//	{
+//		Init_Model(m_szModelKey.c_str());
+//	}
+//}
 
-	if (FAILED(pInstance->Initialize_Prototype(eType, strModelFilePath, PivotMatrix)))
-	{
-		MSG_BOX("Failed to Created : CModel");
-		Safe_Release(pInstance);
-	}
-	return pInstance;
-}
 
-CComponent* CModel::Clone(void* pArg)
-{
-	CModel* pInstance = new CModel(*this);
+//CModel* CModel::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
+//{
+//	CModel* pInstance = new CModel(pDevice, pContext);
+//
+//	if (FAILED(pInstance->Initialize_Prototype(eType, strModelFilePath, PivotMatrix)))
+//	{
+//		MSG_BOX("Failed to Created : CModel");
+//		Safe_Release(pInstance);
+//	}
+//	return pInstance;
+//}
 
-	/* 원형객체를 초기화한다.  */
-	if (FAILED(pInstance->Initialize(pArg)))
-	{
-		MSG_BOX("Failed to Cloned : CComponent");
-		Safe_Release(pInstance);
-	}
-	return pInstance;
-}
+//CComponent* CModel::Clone(void* pArg)
+//{
+//	CModel* pInstance = new CModel(*this);
+//
+//	/* 원형객체를 초기화한다.  */
+//	if (FAILED(pInstance->Initialize(pArg)))
+//	{
+//		MSG_BOX("Failed to Cloned : CComponent");
+//		Safe_Release(pInstance);
+//	}
+//	return pInstance;
+//}
 
 
 void CModel::Free()
@@ -278,4 +293,5 @@ void CModel::Free()
 
 	if (false == m_isCloned)
 		m_Importer.FreeScene();
+
 }

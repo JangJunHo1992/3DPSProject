@@ -1,4 +1,4 @@
-#include "Channel.h"
+#include "..\Public\Channel.h"
 #include "Bone.h"
 
 CChannel::CChannel()

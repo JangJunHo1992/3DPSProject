@@ -19,6 +19,9 @@ HRESULT CCamera_Dynamic::Initialize_Prototype()
 
 HRESULT CCamera_Dynamic::Initialize(void* pArg)
 {
+	m_sName = "Camera";
+	m_sLayerTag = "Layer_Camera";
+
 	if (nullptr == pArg)
 		return E_FAIL;
 
@@ -75,6 +78,12 @@ void CCamera_Dynamic::Tick(_float fTimeDelta)
 
 void CCamera_Dynamic::Late_Tick(_float fTimeDelta)
 {
+}
+
+void CCamera_Dynamic::Write_Json(json& Out_Json)
+{
+	Out_Json["Name"] = m_sName;
+	__super::Write_Json(Out_Json);
 }
 
 CCamera_Dynamic* CCamera_Dynamic::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)

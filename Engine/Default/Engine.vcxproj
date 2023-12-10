@@ -110,7 +110,6 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../Public/;../Default/;../Public/rapidjson/;../Public/Json/</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,14 +193,18 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClInclude Include="..\public\GameInstance.h" />
     <ClInclude Include="..\Public\GameObject.h" />
     <ClInclude Include="..\Public\Graphic_Device.h" />
-    <ClInclude Include="..\Public\Json\Json_Utility.h" />
-    <ClInclude Include="..\Public\KeyMgr.h" />
+    <ClInclude Include="..\Public\InputDev.h" />
     <ClInclude Include="..\Public\Json\json.hpp" />
+    <ClInclude Include="..\Public\Json\Json_Utility.h" />
     <ClInclude Include="..\Public\Layer.h" />
     <ClInclude Include="..\public\Level.h" />
     <ClInclude Include="..\public\Level_Manager.h" />
     <ClInclude Include="..\Public\Mesh.h" />
+    <ClInclude Include="..\Public\Mesh_GamePlay.h" />
+    <ClInclude Include="..\Public\Mesh_Tool.h" />
     <ClInclude Include="..\Public\Model.h" />
+    <ClInclude Include="..\Public\Model_GamePlay.h" />
+    <ClInclude Include="..\Public\Model_Tool.h" />
     <ClInclude Include="..\public\Object_Manager.h" />
     <ClInclude Include="..\Public\PipeLine.h" />
     <ClInclude Include="..\Public\RapidJson.h" />
@@ -212,8 +215,11 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClInclude Include="..\Public\Timer_Manager.h" />
     <ClInclude Include="..\Public\Transform.h" />
     <ClInclude Include="..\public\VIBuffer.h" />
+    <ClInclude Include="..\Public\VIBuffer_Dynamic_Plane.h" />
     <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain.h" />
+    <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain_Origin.h" />
     <ClInclude Include="..\public\VIBuffer_Rect.h" />
+    <ClInclude Include="..\Public\VIBuffer_Static_Terrain.h" />
     <ClInclude Include="..\Public\VIBuffer_Terrain.h" />
   </ItemGroup>
   <ItemGroup>
@@ -224,16 +230,21 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClCompile Include="..\Private\Channel.cpp" />
     <ClCompile Include="..\private\Component.cpp" />
     <ClCompile Include="..\Private\Component_Manager.cpp" />
+    <ClCompile Include="..\Private\Engine_Struct.cpp" />
     <ClCompile Include="..\private\GameInstance.cpp" />
     <ClCompile Include="..\Private\GameObject.cpp" />
     <ClCompile Include="..\Private\Graphic_Device.cpp" />
+    <ClCompile Include="..\Private\InputDev.cpp" />
     <ClCompile Include="..\Private\Json\Json_Utility.cpp" />
-    <ClCompile Include="..\Private\KeyMgr.cpp" />
     <ClCompile Include="..\Private\Layer.cpp" />
     <ClCompile Include="..\private\Level.cpp" />
     <ClCompile Include="..\private\Level_Manager.cpp" />
     <ClCompile Include="..\Private\Mesh.cpp" />
+    <ClCompile Include="..\Private\Mesh_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Mesh_Tool.cpp" />
     <ClCompile Include="..\Private\Model.cpp" />
+    <ClCompile Include="..\Private\Model_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Model_Tool.cpp" />
     <ClCompile Include="..\private\Object_Manager.cpp" />
     <ClCompile Include="..\Private\PipeLine.cpp" />
     <ClCompile Include="..\Private\RapidJson.cpp" />
@@ -244,10 +255,12 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClCompile Include="..\Private\Timer_Manager.cpp" />
     <ClCompile Include="..\Private\Transform.cpp" />
     <ClCompile Include="..\private\VIBuffer.cpp" />
+    <ClCompile Include="..\Private\VIBuffer_Dynamic_Plane.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain.cpp" />
+    <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain_Origin.cpp" />
     <ClCompile Include="..\private\VIBuffer_Rect.cpp" />
+    <ClCompile Include="..\Private\VIBuffer_Static_Terrain.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Terrain.cpp" />
-    <ClCompile Include="..\Public\Engine_Struct.cpp" />
     <ClCompile Include="..\Public\RapidJson.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

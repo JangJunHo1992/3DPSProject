@@ -39,12 +39,12 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXNORTEX;
 
-// 	typedef struct _DIMOUSESTATE {
-// 		_long      lX;
-// 		_long      lY;
-// 		_long      lZ;
-// 		BYTE      Buttons[4];
-// 	} DIMOUSESTATE, * LPDIMOUSESTATE;
+	typedef struct _DIMOUSESTATE {
+		_long      lX;
+		_long      lY;
+		_long      lZ;
+		BYTE      Buttons[4];
+	} DIMOUSESTATE, * LPDIMOUSESTATE;
 
 	typedef struct ENGINE_DLL tagMeshDesc // <- 이런 식으로. 원래 없었음
 	{
@@ -57,7 +57,7 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXMESH;
 
-	typedef struct ENGINE_DLL tagAnimMeshDesc
+	typedef struct ENGINE_DLL tagAnimMesh
 	{
 		XMFLOAT3		vPosition;
 		XMFLOAT3		vNormal;
@@ -76,18 +76,6 @@ namespace Engine
 		XMFLOAT3	vDirection;
 		float		fLength;
 	}RAY;
-
-	typedef struct ENGINE_DLL tagCellDesc
-	{
-		_float3	vPositions[3] = {};
-	}CELL;
-
-	typedef struct ENGINE_DLL tagPickableObjectDesc
-	{
-		class CGameObject*	pHitTarget;
-		XMFLOAT3			vHitPosition;
-		float				fDistance;
-	}PICKING_RESULT;
 
 	typedef struct
 	{

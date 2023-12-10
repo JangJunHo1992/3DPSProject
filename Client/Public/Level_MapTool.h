@@ -20,25 +20,33 @@ public:
 
 public:
 	void Update_MousePos();
-	
+
 public:
 	void Terrain_Pick();
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
 	void Create_Raider();
+	
+	class CGameObject* Select_Object(const wstring& strLayerTag);
+	void Delete_Object(class CGameObject* pGameObject);
+
+public:
+	HRESULT Load_Objects_With_Json(_uint iLevelIndex, string filePath);
 
 
 private:
 	HRESULT Ready_Layer_Camera(const wstring& strLayerTag);
-	HRESULT Ready_Layer_Raider(const wstring& strLayerTag);
+	HRESULT Ready_Layer_Monster(const wstring& strLayerTag);
 	HRESULT Ready_Layer_BackGround(const wstring& strLayerTag);
 
 
 private:
-	class CImgui_Manager* m_pImguiManager = { nullptr };
-	class CTerrain_MapTool*		m_pTerrain = { nullptr };
-	//list<class CGameObject*>	m_pPickableObjects;
 
-	class CTerrain_MapTool*		m_pTerrain_MapTool = { nullptr };
+	ID3D11Device*			m_pDevice	= { nullptr };
+	ID3D11DeviceContext*	m_pContext	= { nullptr };
+
+	class CImgui_Manager*		m_pImguiManager = { nullptr };
+	class CTerrain_Tool*		m_pTerrain = { nullptr };
+
 
 public:
 	void	Set_BrushRange(_float _fBrushRange);
@@ -49,6 +57,7 @@ public:
 
 private:
 	CActor<CLevel_MapTool>* m_pActor = { nullptr };
+
 private:
 	_bool			m_bStop = false;
 };

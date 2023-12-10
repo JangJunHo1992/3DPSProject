@@ -1,6 +1,7 @@
 #include "..\Public\Object_Manager.h"
 #include "GameObject.h"
 #include "Layer.h"
+#include "GameInstance.h"
 
 CObject_Manager::CObject_Manager()
 {
@@ -18,7 +19,7 @@ HRESULT CObject_Manager::Initialize(_uint iNumLevels)
 	return S_OK;
 }
 
-HRESULT CObject_Manager::Add_Prototype(const wstring & strPrototypeTag, CGameObject * pPrototype)
+HRESULT CObject_Manager::Add_Prototype_Object(const wstring & strPrototypeTag, CGameObject * pPrototype)
 {
 	if (nullptr == pPrototype || 
 		nullptr != Find_Prototype(strPrototypeTag))
@@ -61,6 +62,33 @@ HRESULT CObject_Manager::Add_CloneObject(_uint iLevelIndex, const wstring & strL
 	else
 		pLayer->Add_GameObject(pGameObject);
 	
+	return S_OK;
+}
+
+HRESULT CObject_Manager::Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject, void* pArg)
+{
+	if (nullptr == pGameObject)
+		return E_FAIL;
+
+	/* 만들어낸 사본객체를 추가해야할 레이어를 찾자. */
+	CLayer* pLayer = Find_Layer(iLevelIndex, strLayerTag);
+
+	/* 아직 해당 이름을 가진 레이어가 없었다. */
+	/* 이 이름을 가진 레이어에 최초로 추가하고 있는 상황이다. */
+	if (nullptr == pLayer)
+	{
+		pLayer = CLayer::Create();
+		if (nullptr == pLayer)
+			return E_FAIL;
+
+		pLayer->Add_GameObject(pGameObject);
+
+		m_pLayers[iLevelIndex].emplace(strLayerTag, pLayer);
+	}
+	/* 이미 이름을 가진 레이어가 있었어. */
+	else
+		pLayer->Add_GameObject(pGameObject);
+
 	return S_OK;
 }
 
@@ -109,6 +137,27 @@ list<class CGameObject*>* CObject_Manager::Get_GameObjects(_uint iLevelIndex, co
 
 	return layer->Get_GameObjects();
 }
+
+void CObject_Manager::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
+{
+	json Out_Json;
+
+	_ushort iIndex = 0;
+	for (auto& Pair : m_pLayers[iLevelIndex])
+	{
+		list<class CGameObject*>* pGameObjects = Pair.second->Get_GameObjects();
+		for (auto& pGameObject : *pGameObjects)
+		{
+			json object;
+			pGameObject->Write_Json(object);
+			Out_Json.emplace(to_string(iIndex++), object);
+		}
+	}
+
+	CGameInstance::GetInstance()->Save_Json(filePath, Out_Json);
+}
+
+
 
 CGameObject * CObject_Manager::Find_Prototype(const wstring & strPrototypeTag)
 {

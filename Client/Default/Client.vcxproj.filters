@@ -64,9 +64,6 @@
     <Filter Include="02.GameObjects\ForkLift">
       <UniqueIdentifier>{fb9e37b8-cb9f-49eb-b6b5-a0a64df25c7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObjects\Terrain\02.Terrain_Tool\State">
-      <UniqueIdentifier>{ce40ba25-29e1-4323-bca8-930a2197bea4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="95.Component">
       <UniqueIdentifier>{62acb790-c3a5-48a7-b628-03ea9c7da896}</UniqueIdentifier>
     </Filter>
@@ -105,6 +102,27 @@
     </Filter>
     <Filter Include="96. Imgui\ImguiWindow\Object_Window">
       <UniqueIdentifier>{c37e0ee4-aa24-450f-bc64-2595315f46dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\02.Tool\State\Object\Delete">
+      <UniqueIdentifier>{b7e5ce65-5537-495c-b542-04e2978391cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Raider\Tool">
+      <UniqueIdentifier>{a940560e-9f41-46ab-8554-fd918539b358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Raider\GamePlay">
+      <UniqueIdentifier>{658f5bd5-3f76-4dd8-97a3-e08ae95cfa2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Monster\GamePlay">
+      <UniqueIdentifier>{7ba0a9e9-241b-4976-b96a-acfa0fa16473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Monster\Tool">
+      <UniqueIdentifier>{b28e953b-9c12-4f01-94f7-fab22f27940b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\ForkLift\GamePlay">
+      <UniqueIdentifier>{061ebe86-5306-4526-b4b6-b8bf539c2a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\ForkLift\Tool">
+      <UniqueIdentifier>{0bdcc605-2ae7-42a3-a3cd-5961c4f77922}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +195,7 @@
     <ClInclude Include="..\Public\Terrain_GamePlay.h">
       <Filter>02.GameObjects\Terrain\01.Terrain_GamePlay</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Terrain_MapTool.h">
+    <ClInclude Include="..\Public\Terrain_Tool.h">
       <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Level_MapTool.h">
@@ -189,9 +207,6 @@
     <ClInclude Include="..\Public\ForkLift.h">
       <Filter>02.GameObjects\ForkLift</Filter>
     </ClInclude>
-    <ClInclude Include="TerrainState.h">
-      <Filter>02.GameObjects\Terrain\02.Terrain_Tool\State</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Actor.h">
       <Filter>95.Component\Actor</Filter>
     </ClInclude>
@@ -200,9 +215,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\IPick.h">
       <Filter>94. Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Private\Raider.h">
-      <Filter>02.GameObjects\Raider</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\MapTool_State_Terrain.h">
       <Filter>01.Levels\02.Tool\State\Terrain</Filter>
@@ -225,8 +237,29 @@
     <ClInclude Include="..\Public\Object_Window.h">
       <Filter>96. Imgui\ImguiWindow\Object_Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Client_Typedef.h">
-      <Filter>99.Defines</Filter>
+    <ClInclude Include="..\Public\MapTool_State_Object_Delete.h">
+      <Filter>01.Levels\02.Tool\State\Object\Delete</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Raider.h">
+      <Filter>02.GameObjects\Raider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Raider_Tool.h">
+      <Filter>02.GameObjects\Raider\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Raider_GamePlay.h">
+      <Filter>02.GameObjects\Raider\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Monster_Tool.h">
+      <Filter>02.GameObjects\Monster\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Monster_GamePlay.h">
+      <Filter>02.GameObjects\Monster\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ForkLift_Tool.h">
+      <Filter>02.GameObjects\ForkLift\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ForkLift_GamePlay.h">
+      <Filter>02.GameObjects\ForkLift\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,7 +320,7 @@
     <ClCompile Include="..\Private\Terrain_GamePlay.cpp">
       <Filter>02.GameObjects\Terrain\01.Terrain_GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Terrain_MapTool.cpp">
+    <ClCompile Include="..\Private\Terrain_Tool.cpp">
       <Filter>02.GameObjects\Terrain\02.Terrain_Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Level_MapTool.cpp">
@@ -304,9 +337,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\Raider.cpp">
       <Filter>02.GameObjects\Raider</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Public\MapTool_State_Terrain.cpp">
-      <Filter>01.Levels\02.Tool\State\Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\MapTool_State_Object_Create.cpp">
       <Filter>01.Levels\02.Tool\State\Object\Create</Filter>
@@ -325,6 +355,30 @@
     </ClCompile>
     <ClCompile Include="..\Private\Object_Window.cpp">
       <Filter>96. Imgui\ImguiWindow\Object_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MapTool_State_Object_Delete.cpp">
+      <Filter>01.Levels\02.Tool\State\Object\Delete</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Raider_Tool.cpp">
+      <Filter>02.GameObjects\Raider\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Raider_GamePlay.cpp">
+      <Filter>02.GameObjects\Raider\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Monster_Tool.cpp">
+      <Filter>02.GameObjects\Monster\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Monster_GamePlay.cpp">
+      <Filter>02.GameObjects\Monster\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ForkLift_Tool.cpp">
+      <Filter>02.GameObjects\ForkLift\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ForkLift_GamePlay.cpp">
+      <Filter>02.GameObjects\ForkLift\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MapTool_State_Terrain.cpp">
+      <Filter>01.Levels\02.Tool\State\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,9 +407,6 @@
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Model.hlsl">
-      <Filter>97.ShaderFiles</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Bin\ShaderFiles\Shader_AnimModel.hlsl">
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

@@ -10,9 +10,9 @@ END
 
 BEGIN(Client)
 
-class CForkLift final : public CGameObject
+class CForkLift abstract : public CGameObject
 {
-private:
+protected:
 	CForkLift(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CForkLift(const CForkLift& rhs);
 	virtual ~CForkLift() = default;
@@ -25,21 +25,26 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-private:
+public:
+	virtual void Write_Json(json& Out_Json) override;
+
+protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };
 
-private:
-	HRESULT Ready_Components();
+	
+protected:
+	virtual HRESULT Ready_Components() PURE;
+	HRESULT Ready_Components_Origin();
 	HRESULT Bind_ShaderResources();
 
 
 public:
-	/* 원형객체를 생성한다. */
-	static CForkLift* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	///* 원형객체를 생성한다. */
+	//static CForkLift* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 
-	/* 사본객체를 생성한다. */
-	virtual CGameObject* Clone(void* pArg) override;
+	///* 사본객체를 생성한다. */
+	//virtual CGameObject* Clone(void* pArg) override;
 
 	virtual void Free() override;
 };

@@ -23,7 +23,7 @@ public:
 	virtual HRESULT	Render(ID3D11DeviceContext* pContext) override;
 
 public:
-	class CTerrain_MapTool*		m_pTerrain = nullptr;
+	class CTerrain_Tool*		m_pTerrain = nullptr;
 	class CGameInstance* m_pGameInstance = { nullptr };
 public:
 	_float*						m_fBrushRange = { nullptr };

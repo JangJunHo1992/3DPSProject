@@ -4,7 +4,9 @@
 #include "Level_Manager.h"
 #include "Object_Manager.h"
 #include "Renderer.h"
+
 #include "RapidJson.h"
+#include "Mesh_Tool.h"
 //#include "Json_Utility.h"
 
 IMPLEMENT_SINGLETON(CGameInstance)
@@ -20,16 +22,14 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
-	m_pInput_Device = CKeyMgr::Create(hInstance, GraphicDesc.hWnd);
-	if (nullptr == m_pInput_Device)
-		return E_FAIL;
-
 	/* 타이머를 사용할 준비를 하자. */
 	m_pTimer_Manager = CTimer_Manager::Create();
 	if (nullptr == m_pTimer_Manager)
 		return E_FAIL;
 
-
+	m_pInput_Device = CInput_Device::Create(hInstance, GraphicDesc.hWnd);
+	if (nullptr == m_pInput_Device)
+		return E_FAIL;
 
 	m_pLevel_Manager = CLevel_Manager::Create();
 	if (nullptr == m_pLevel_Manager)
@@ -56,13 +56,13 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 
 void CGameInstance::Tick_Engine(_float fTimeDelta)
 {
-	if (nullptr == m_pInput_Device ||
+	if (nullptr == m_pLevel_Manager ||
 		nullptr == m_pObject_Manager ||
 		nullptr == m_pPipeLine ||
-		nullptr == m_pLevel_Manager)
+		nullptr == m_pInput_Device)
 		return;
-	
-	m_pInput_Device->Update_Key();
+
+	m_pInput_Device->Tick();
 
 	m_pObject_Manager->Priority_Tick(fTimeDelta);
 
@@ -73,7 +73,6 @@ void CGameInstance::Tick_Engine(_float fTimeDelta)
 	m_pObject_Manager->Late_Tick(fTimeDelta);
 
 	m_pLevel_Manager->Tick(fTimeDelta);
-
 
 }
 
@@ -154,12 +153,12 @@ HRESULT CGameInstance::Open_Level(_uint iCurrentLevelIndex, CLevel * pNewLevel)
 	return m_pLevel_Manager->Open_Level(iCurrentLevelIndex, pNewLevel);
 }
 
-HRESULT CGameInstance::Add_Prototype(const wstring & strPrototypeTag, CGameObject * pPrototype)
+HRESULT CGameInstance::Add_Prototype_Object(const wstring & strPrototypeTag, CGameObject * pPrototype)
 {
 	if (nullptr == m_pObject_Manager)
 		return E_FAIL;
 
-	return m_pObject_Manager->Add_Prototype(strPrototypeTag, pPrototype);
+	return m_pObject_Manager->Add_Prototype_Object(strPrototypeTag, pPrototype);
 }
 
 HRESULT CGameInstance::Add_CloneObject(_uint iLevelIndex, const wstring & strLayerTag, const wstring & strPrototypeTag, void * pArg)
@@ -170,10 +169,29 @@ HRESULT CGameInstance::Add_CloneObject(_uint iLevelIndex, const wstring & strLay
 	return m_pObject_Manager->Add_CloneObject(iLevelIndex, strLayerTag, strPrototypeTag, pArg);
 }
 
+HRESULT CGameInstance::Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject, void* pArg)
+{
+	return m_pObject_Manager->Add_Object(iLevelIndex, strLayerTag, pGameObject, pArg);
+}
+
 list<class CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag)
 {
 	return m_pObject_Manager->Get_GameObjects(iLevelIndex, strLayerTag);
 }
+
+HRESULT CGameInstance::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
+{
+	m_pObject_Manager->Save_Objects_With_Json(iLevelIndex, filePath);
+
+	return S_OK;
+}
+
+//HRESULT CGameInstance::Load_Objects_With_Json(_uint iLevelIndex, string filePath)
+//{
+//	m_pObject_Manager->Load_Objects_With_Json(iLevelIndex, filePath);
+//
+//	return S_OK;
+//}
 
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const wstring& strPrototypeTag, CComponent* pPrototype)
 {
@@ -300,55 +318,19 @@ _bool CGameInstance::Key_Pressing(const _int& _iKey)
 	return m_pInput_Device->Key_Pressing(_iKey);
 }
 
-void CGameInstance::Write_Float2(json& Out_Json, const _float2& In_Float2)
+_bool CGameInstance::Mouse_Pressing(MOUSEKEYSTATE eMouseID)
 {
-	m_pJson_Utility->Write_Float2(Out_Json, In_Float2);
+	return m_pInput_Device->Mouse_Pressing(eMouseID);
 }
 
-void CGameInstance::Write_Float3(json& Out_Json, const _float3& In_Float3)
+_bool CGameInstance::Mouse_Down(MOUSEKEYSTATE eMouseID)
 {
-	m_pJson_Utility->Write_Float3(Out_Json, In_Float3);
+	return m_pInput_Device->Mouse_Down(eMouseID);
 }
 
-void CGameInstance::Write_Float4(json& Out_Json, const _float4& In_Float4)
+_bool CGameInstance::Mouse_Up(MOUSEKEYSTATE eMouseID)
 {
-	m_pJson_Utility->Write_Float4(Out_Json, In_Float4);
-}
-
-void CGameInstance::Load_Float2(const json& In_Json, _float2& Out_Float2)
-{
-	m_pJson_Utility->Load_Float2(In_Json, Out_Float2);
-}
-
-void CGameInstance::Load_Float3(const json& In_Json, _float3& Out_Float3)
-{
-	m_pJson_Utility->Load_Float3(In_Json, Out_Float3);
-}
-
-void CGameInstance::Load_Float4(const json& In_Json, _float4& Out_Float4)
-{
-	m_pJson_Utility->Load_Float4(In_Json, Out_Float4);
-}
-
-void CGameInstance::Load_JsonFloat4x4(const json& _Json, _float4x4& Out_Float4x4)
-{
-	m_pJson_Utility->Load_JsonFloat4x4(_Json, Out_Float4x4);
-}
-
-XMFLOAT4 CGameInstance::Get_VectorFromJson(json& _json)
-{
-	if (nullptr == m_pJson_Utility)
-		return XMFLOAT4();
-
-	return m_pJson_Utility->Get_VectorFromJson(_json);
-}
-
-XMFLOAT4X4 CGameInstance::Get_MatrixFromJson(json& _json)
-{
-	if (nullptr == m_pJson_Utility)
-		return XMFLOAT4X4();
-
-	return m_pJson_Utility->Get_MatrixFromJson(_json);
+	return m_pInput_Device->Mouse_Up(eMouseID);
 }
 
 RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY)
@@ -399,6 +381,64 @@ RAY CGameInstance::Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX
 	return vMouseRayLocal;
 }
 
+_bool CGameInstance::Picking_Mesh(RAY ray, _float3* out, vector<class CMesh*>* Meshes)
+{
+	_vector		vPickedPos;
+	_vector		vVec0, vVec1, vVec2;
+
+	_vector		vRayPos = XMLoadFloat4(&ray.vPosition);
+	_vector		vRayDir = XMLoadFloat3(&ray.vDirection);
+	_float		fDist = 0.f;
+
+	for (CMesh* mesh : *Meshes) 
+	{
+		CMesh_Tool* pMesh_Tool = dynamic_cast<CMesh_Tool*>(mesh);
+		if (nullptr == pMesh_Tool)
+			return false;
+
+		if (pMesh_Tool->Picking(ray, out))
+			return true;
+	}
+
+
+	return false;
+}
+
+_bool CGameInstance::Picking_Vertex(RAY ray, _float3* out, _uint triNum, VTXMESH* pVertices, _uint* pIndices)
+{
+	_vector		vPickedPos;
+	_vector		vVec0, vVec1, vVec2;
+
+	_vector		vRayPos = XMLoadFloat4(&ray.vPosition);
+	_vector		vRayDir = XMLoadFloat3(&ray.vDirection);
+	_float		fDist = 0.f;
+
+	for (_uint i = 0; i < triNum; ++i)
+	{
+		_int iStartIndex = i * 3;
+
+		_float3 vVtxPos1 = pVertices[pIndices[iStartIndex + 0]].vPosition;
+		_float3 vVtxPos2 = pVertices[pIndices[iStartIndex + 1]].vPosition;
+		_float3 vVtxPos3 = pVertices[pIndices[iStartIndex + 2]].vPosition;
+
+		vVec0 = XMLoadFloat3(&vVtxPos1);
+		vVec1 = XMLoadFloat3(&vVtxPos2);
+		vVec2 = XMLoadFloat3(&vVtxPos3);
+
+		if (DirectX::TriangleTests::Intersects(
+			vRayPos, vRayDir,
+			vVec0, vVec1, vVec2,
+			fDist))
+		{
+			vPickedPos = vRayPos + XMVector3Normalize(vRayDir) * fDist;
+			XMStoreFloat3(out, vPickedPos);
+			return true;
+		}
+	}
+	return false;
+}
+
+
 HRESULT CGameInstance::Load_Json(string _strPath, json& pOut)
 {
 	json JsonTemp;
@@ -447,6 +487,16 @@ HRESULT CGameInstance::Save_Json(string _strPath, json _json)
 	fout.close();
 
 	return S_OK;
+}
+
+void CGameInstance::String_To_WString(string _string, wstring& _wstring)
+{
+	_wstring.assign(_string.begin(), _string.end());
+}
+
+void CGameInstance::WString_To_String(wstring _wstring, string& _string)
+{
+	_string.assign(_wstring.begin(), _wstring.end());
 }
 
 

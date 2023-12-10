@@ -24,6 +24,7 @@ private:
 
 	_uint					m_iNumChannels = { 0 }; /* 이 애니메이션이 사용하는 뼈의 갯수. */
 	vector<class CChannel*>	m_Channels;
+
 	_bool					m_isFinished = { false };
 
 public:

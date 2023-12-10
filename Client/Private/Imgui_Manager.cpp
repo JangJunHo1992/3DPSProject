@@ -272,27 +272,9 @@ void CImgui_Manager::ShowEffectTool()
 
 void CImgui_Manager::ShowObjectTool()
 {
-	ImGui::Begin(u8"오브젝트툴");
-	if (ImGui::BeginTabBar("##ObjectTabBar"))
-	{
-		//TODO 오브젝트1 탭 시작
-		if (ImGui::BeginTabItem(u8"오브젝트1"))
-		{
-			ImGui::Text(u8"오브젝트1");
-			ImGui::EndTabItem();
-		}
-		//TODO 오브젝트1 탭 종료
+	m_pObjWindow->Render(m_pContext);
 
-		//! 오브젝트2 탭 시작
-		if (ImGui::BeginTabItem(u8"오브젝트2"))
-		{
-			ImGui::Text(u8"오브젝트2");
-			ImGui::EndTabItem();
-		}
-		//! 오브젝트2 탭 종료
-		ImGui::EndTabBar();
-	}
-	ImGui::End();
+	
 }
 
 void CImgui_Manager::ShowCameraTool()

@@ -18,8 +18,9 @@ private:
 
 public:
 	HRESULT Initialize(_uint iNumLevels);
-	HRESULT Add_Prototype(const wstring& strPrototypeTag, class CGameObject* pPrototype);
+	HRESULT Add_Prototype_Object(const wstring& strPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_CloneObject(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strPrototypeTag, void* pArg);
+	HRESULT Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject ,void* pArg);
 	void Priority_Tick(_float fTimeDelta);
 	void Tick(_float fTimeDelta);
 	void Late_Tick(_float fTimeDelta);
@@ -27,6 +28,10 @@ public:
 
 public:
 	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag);
+
+public:
+	void Save_Objects_With_Json(_uint iLevelIndex, string filePath);
+	
 
 private:
 	_uint			m_iNumLevels = { 0 };

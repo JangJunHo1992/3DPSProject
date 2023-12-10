@@ -27,6 +27,7 @@ public:
 
 public:
 	json					m_ObjectJson;
+	_bool					m_bguizmo =false;
 public:
 	virtual void Free() override;
 };

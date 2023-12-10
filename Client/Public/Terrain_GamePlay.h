@@ -13,6 +13,7 @@ protected:
 
 private:
 	virtual HRESULT Ready_Components() override;
+	virtual HRESULT Bind_ShaderResources() override;
 
 public:
 	/* 원형객체를 생성한다. */
@@ -21,9 +22,8 @@ public:
 	/* 사본객체를 생성한다. */
 	virtual CGameObject* Clone(void* pArg) override;
 
+	virtual void Free() override;
 
-	// CTerrain을(를) 통해 상속됨
-	virtual HRESULT Bind_ShaderResources() override;
 
 };
 

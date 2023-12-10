@@ -1,4 +1,4 @@
-#include "Animation.h"
+#include "..\Public\Animation.h"
 #include "Channel.h"
 
 CAnimation::CAnimation()
@@ -69,5 +69,4 @@ void CAnimation::Free()
 		Safe_Release(pChannel);
 
 	m_Channels.clear();
-
 }

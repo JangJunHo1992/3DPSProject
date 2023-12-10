@@ -64,6 +64,8 @@ public:
 		return InverseMatrix;
 	}
 
+	void	Set_WorldMatrix(_float4x4 matrix) { m_WorldMatrix = matrix; }
+
 public:
 	HRESULT Initialize_Prototype(_float fSpeedPerSec, _float fRotationPerSec);
 
@@ -90,6 +92,12 @@ public:
 
 public:
 	HRESULT	Bind_ShaderResource(class CShader* pShader, const _char* pConstantName);
+
+public:
+	virtual void Write_Json(json& Out_Json) override;
+	virtual void Load_FromJson(const json& In_Json) override;
+
+
 private:
 	_float				m_fSpeedPerSec = { 0.0f };
 	_float				m_fRotationPerSec = { 0.0f };

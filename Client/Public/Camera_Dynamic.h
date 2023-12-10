@@ -25,6 +25,9 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void Late_Tick(_float fTimeDelta) override;
 
+public:
+	virtual void Write_Json(json& Out_Json) override;
+
 private:
 	_float				m_fMouseSensor = { 0.0f };
 
