@@ -5,6 +5,7 @@
 
 #include "Terrain_Tool.h"
 #include "GameInstance.h"
+#include "Level_MapTool.h"
 
 IMPLEMENT_SINGLETON(CObject_Window)
 
@@ -18,6 +19,23 @@ HRESULT CObject_Window::Initialize()
 	m_pGameInstance = CGameInstance::GetInstance();
 	Safe_AddRef(m_pGameInstance);
 
+	list<CGameObject*>* pGameObjects = (m_pGameInstance->Get_GameObjects(LEVEL_TOOL, TEXT("Layer_BackGround")));
+
+	if (nullptr == pGameObjects)
+		return S_OK;
+
+	for (CGameObject* pGameObject : *pGameObjects)
+	{
+		CTerrain_Tool* pTerrain = dynamic_cast<CTerrain_Tool*>(pGameObject);
+		if (pTerrain)
+		{
+			m_pTerrain = pTerrain;
+			Safe_AddRef(pTerrain);
+			break;
+		}
+	}
+
+	 
 	return S_OK;
 }
 
@@ -35,19 +53,71 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 	if (ImGui::BeginTabBar("##ObjectTabBar"))
 	{
 		//TODO 오브젝트1 탭 시작
-		if (ImGui::BeginTabItem(u8"오브젝트1"))
+		if (ImGui::BeginTabItem(u8"오브젝트"))
 		{
-			ImGui::Text(u8"오브젝트1");
+			ImGui::Text(u8"오브젝트");
+			
+			if (ImGui::TreeNode("ObjectList"))
+			{
+				
+				//const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD", "EEEE", "FFFF", "GGGG", "HHHH", "IIII", "JJJJ", "KKKK", "LLLLLLL", "MMMM", "OOOOOOO" };
+				m_pGameInstance->Fill_PrototypeTags(&m_vObjectTag);
+
+				static int Object_idx = 0; // Here we store our selection data as an index.
+				int ObjectTagSize = m_vObjectTag.size();
+				if (ImGui::BeginListBox("ObjectList"))
+				{
+					for (int n = 0; n < IM_ARRAYSIZE(&ObjectTagSize); n++)
+					{
+						const bool is_selected = (Object_idx == n);
+						if (ImGui::Selectable(m_vObjectTag[n].c_str(), is_selected))
+							Object_idx = n;
+
+						// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+						if (is_selected)
+							ImGui::SetItemDefaultFocus();
+					}
+					ImGui::EndListBox();
+				}
+
+				// Custom size: use all width, 5 items tall
+				if (ImGui::BeginListBox("CreateList"))
+				{
+					for (int n = 0; n < IM_ARRAYSIZE(&ObjectTagSize); n++)
+					{
+						const bool is_selected = (Object_idx == n);
+						if (ImGui::Selectable(m_vObjectTag[n].c_str(), is_selected))
+							Object_idx = n;
+
+						// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+						if (is_selected)
+							ImGui::SetItemDefaultFocus();
+					}
+					ImGui::EndListBox();
+				}
+
+				ImGui::TreePop();
+			}
+
 			//ImGui::ListBox("ObjectList");
-			ImGui::Button("Create");
-			ImGui::SameLine();
-			ImGui::Button("Delete");
+			//ImGui::SameLine();
 			//ImGui::ListBox("CreateList");
-			ImGui::Checkbox(u8"기즈모on",&m_bguizmo);
+			if (ImGui::Button("Create"))
+			{
+				
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Delete"))
+			{
+
+			}
+			ImGui::Checkbox(u8"기즈모on/off",&m_bguizmo);
+			ImGui::Checkbox("Terrain/Mesh", & m_Terrain_Mesh);
 			//여기에 기즈모 넣어 
 
 			ImGui::EndTabItem();
 		}
+		ImGui::EndTabBar();
 	}
 	ImGui::End();
 
@@ -55,6 +125,24 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 	return S_OK;
 }
 
+void CObject_Window::Set_LevelTool(CLevel_MapTool* _LevelMapTool)
+{
+	m_pLevel_MapTool = _LevelMapTool;
+}
+
+char* CObject_Window::ConverWStringtoC(const wstring& wstr)
+{
+	int size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
+
+	char* result = new char[size_needed];
+
+	WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, result, size_needed, NULL, NULL);
+
+	return result;
+}
+
 void CObject_Window::Free()
 {
+	Safe_Release(m_pGameInstance);
+	Safe_Release(m_pTerrain);
 }

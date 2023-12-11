@@ -17,7 +17,7 @@ HRESULT CLevel_Logo::Initialize()
 
 	return S_OK;
 }
-
+//Gameobject map에서 Object_Window로 가져오기
 void CLevel_Logo::Tick(_float fTimeDelta)
 {
 	if (m_pGameInstance->Get_DIKeyState(DIK_SPACE) & 0x80)

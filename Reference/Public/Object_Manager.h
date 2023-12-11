@@ -29,13 +29,13 @@ public:
 public:
 	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag);
 
+	void Fill_PrototypeTags(vector<string>* _vector);
 public:
 	void Save_Objects_With_Json(_uint iLevelIndex, string filePath);
-	
-
 private:
 	_uint			m_iNumLevels = { 0 };
 
+	class CGameInstance*		m_pGameInstance = { nullptr };
 private:
 	map<const wstring, class CGameObject*>			m_Prototypes;
 	map<const wstring, class CLayer*>*				m_pLayers = { nullptr } ;

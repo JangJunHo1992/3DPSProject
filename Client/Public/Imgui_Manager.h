@@ -4,6 +4,7 @@
 
 BEGIN(Engine)
 class CGameObject;
+class CGameInstance;
 END
 
 BEGIN(Client)
@@ -59,8 +60,11 @@ private:
 	void Write_Json(const string& In_szPath);
 	void Load_FromJson(const string& In_szPath);
 
+	HRESULT Load_Objects_With_Json(_uint iLevelIndex, string filePath);
+
 	void Toggle_PhysXInfo();
 
+public:
 public:
 	virtual void Free() override;
 
@@ -91,6 +95,7 @@ private:
 	CObject_Window* m_pObjWindow = { nullptr };
 	CCamera_Window* m_pCamWindow = { nullptr };
 	CEffect_Window* m_pEffectWindow = { nullptr };
+	CGameInstance* m_pGameInstance = { nullptr };
 
 	ID3D11Device*			m_pDevice = nullptr;
 	ID3D11DeviceContext*	m_pContext = nullptr;

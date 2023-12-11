@@ -174,6 +174,11 @@ HRESULT CGameInstance::Add_Object(_uint iLevelIndex, const wstring& strLayerTag,
 	return m_pObject_Manager->Add_Object(iLevelIndex, strLayerTag, pGameObject, pArg);
 }
 
+void CGameInstance::Fill_PrototypeTags(vector<string>* _vector)
+{
+	m_pObject_Manager->Fill_PrototypeTags(_vector);
+}
+
 list<class CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag)
 {
 	return m_pObject_Manager->Get_GameObjects(iLevelIndex, strLayerTag);

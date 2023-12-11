@@ -120,8 +120,6 @@ HRESULT CGameObject::Add_Component(_uint iLevelIndex, const wstring& strPrototyp
 	return S_OK;
 }
 
-
-
 CComponent* CGameObject::Find_Component(const wstring& strComTag)
 {
 	auto	iter = m_Components.find(strComTag);

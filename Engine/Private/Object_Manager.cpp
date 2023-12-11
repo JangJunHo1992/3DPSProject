@@ -16,6 +16,8 @@ HRESULT CObject_Manager::Initialize(_uint iNumLevels)
 
 	m_pLayers = new LAYERS[iNumLevels];
 
+	m_pGameInstance= CGameInstance::GetInstance();
+
 	return S_OK;
 }
 
@@ -155,6 +157,17 @@ void CObject_Manager::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
 	}
 
 	CGameInstance::GetInstance()->Save_Json(filePath, Out_Json);
+}
+
+void CObject_Manager::Fill_PrototypeTags(vector<string>* _vector)
+{
+	for (auto& item : m_Prototypes) 
+	{
+		string key;
+		m_pGameInstance->WString_To_String(item.first, key);
+
+		_vector->push_back(key);
+	}
 }
 
 

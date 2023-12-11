@@ -12,6 +12,8 @@
 #include "Camera_Window.h"
 #include "Effect_Window.h"
 
+#include "Camera_Dynamic.h"
+#include "GameInstance.h"
 
 IMPLEMENT_SINGLETON(CImgui_Manager)
 
@@ -100,11 +102,11 @@ void CImgui_Manager::Render()
 		{
 			if (ImGui::MenuItem("Save"))
 			{
-				
+				m_pGameInstance->Save_Objects_With_Json(LEVEL::LEVEL_TOOL, "Test1");
 			}
 			if (ImGui::MenuItem("Load"))
 			{
-
+				Load_Objects_With_Json(LEVEL::LEVEL_TOOL, "Test1");
 
 			}
 	
@@ -192,9 +194,93 @@ void CImgui_Manager::Load_FromJson(const string& In_szPath)
 {
 }
 
+HRESULT CImgui_Manager::Load_Objects_With_Json(_uint iLevelIndex, string filePath)
+{
+	json json_in;
+	m_pGameInstance->Load_Json(filePath, json_in);
+
+	for (auto& item : json_in.items())
+	{
+		json object = item.value();
+
+		string tagObject = "Prototype_GameObject_";
+
+		string targetName = object["Name"];
+		tagObject += targetName;
+
+		string tagLayer;
+
+		if (targetName == "Camera")
+		{
+			tagObject += "_Dynamic";
+			tagLayer = "Layer_Camera";
+		}
+		else if (targetName == "Terrain")
+		{
+			tagLayer = "Layer_BackGround";
+			tagObject += "_Tool";
+		}
+		else
+		{
+			tagObject += "_Tool";
+			tagLayer = "Layer_Monster";
+		}
+
+		wstring wStringLayerTag;
+		wStringLayerTag.assign(tagLayer.begin(), tagLayer.end());
+
+		wstring wStringObjTag;
+		wStringObjTag.assign(tagObject.begin(), tagObject.end());
+
+		_bool test = false;
+
+		if ("Layer_Camera" == tagLayer)
+		{
+			CCamera_Dynamic::DYNAMIC_CAMERA_DESC		Desc = {};
+
+			Desc.fMouseSensor = 0.05f;
+			Desc.vEye = _float4(0.f, 20.f, -15.f, 1.f);
+			Desc.vAt = _float4(0.f, 0.f, 0.f, 1.f);
+			Desc.fFovy = XMConvertToRadians(60.0f);
+			Desc.fAspect = (_float)g_iWinSizeX / g_iWinSizeY;
+			Desc.fNear = 0.1f;
+			Desc.fFar = 1000.f;
+			Desc.fSpeedPerSec = 20.f;
+			Desc.fRotationPerSec = XMConvertToRadians(180.0f);
+
+			if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, wStringLayerTag, TEXT("Prototype_GameObject_Camera_Dynamic"), &Desc)))
+				return E_FAIL;
+		}
+		else
+		{
+			if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, wStringLayerTag, wStringObjTag)))
+				return E_FAIL;
+
+			list<CGameObject*>* pGameObjects = m_pGameInstance->Get_GameObjects(LEVEL_TOOL, wStringLayerTag);
+			if (nullptr == pGameObjects)
+				continue;
+
+			CGameObject* pGameObject = pGameObjects->back();
+			if (nullptr == pGameObject)
+				continue;
+
+			_float4x4 WorldMatrix;
+			ZeroMemory(&WorldMatrix, sizeof(_float4x4));
+			CJson_Utility::Load_JsonFloat4x4(object["Component"]["Transform"], WorldMatrix);
+
+			pGameObject->Set_WorldMatrix(WorldMatrix);
+		}
+
+	}
+
+	return S_OK;
+}
+
 void CImgui_Manager::Toggle_PhysXInfo()
 {
 }
+
+
 
 void CImgui_Manager::Free()
 {
@@ -273,8 +359,6 @@ void CImgui_Manager::ShowEffectTool()
 void CImgui_Manager::ShowObjectTool()
 {
 	m_pObjWindow->Render(m_pContext);
-
-	
 }
 
 void CImgui_Manager::ShowCameraTool()
@@ -304,6 +388,7 @@ void CImgui_Manager::ShowCameraTool()
 
 void CImgui_Manager::Init_Window()
 {
+	m_pGameInstance = CGameInstance::GetInstance();
 	m_pMapWindow = CMap_Window::GetInstance();
 	m_pMapWindow->Initialize();
 	m_pObjWindow = CObject_Window::GetInstance();
