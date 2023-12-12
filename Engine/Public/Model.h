@@ -21,6 +21,9 @@ public:
 	vector<class CMesh*>* Get_Meshes() {
 		return &m_Meshes;
 	}
+	void Set_Animation(_uint iAnimIndex) {
+		m_iCurrentAnimIndex = iAnimIndex;
+	}
 
 public:
 	virtual HRESULT Initialize_Prototype(TYPE eType, const string & strModelFilePath, _fmatrix PivotMatrix);

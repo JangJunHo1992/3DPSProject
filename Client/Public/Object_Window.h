@@ -34,6 +34,7 @@ public:
 
 public:
 	vector<string>			m_vObjectTag;
+	vector<_uint>			m_CreateIndex;
 public:
 	json					m_ObjectJson;
 	_bool					m_bguizmo =false;

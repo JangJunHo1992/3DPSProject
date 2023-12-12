@@ -1,5 +1,7 @@
-#include "..\Public\Model_GamePlay.h"
+#include "Model_GamePlay.h"
 #include "Mesh_GamePlay.h"
+#include "Bone.h"
+#include "Animation.h"
 
 CModel_GamePlay::CModel_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CModel(pDevice, pContext)
@@ -9,6 +11,11 @@ CModel_GamePlay::CModel_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pCo
 CModel_GamePlay::CModel_GamePlay(const CModel_GamePlay& rhs)
 	: CModel(rhs)
 {
+	for (auto& pPrototypeAnimation : rhs.m_Animations)
+		m_Animations.push_back(pPrototypeAnimation->Clone());
+
+	for (auto& pPrototypeBone : rhs.m_Bones)
+		m_Bones.push_back(pPrototypeBone->Clone());
 }
 
 HRESULT CModel_GamePlay::Ready_Meshes(_fmatrix PivotMatrix)

@@ -1,8 +1,23 @@
-#include "..\Public\Animation.h"
+#include "Animation.h"
 #include "Channel.h"
 
 CAnimation::CAnimation()
 {
+}
+
+CAnimation::CAnimation(const CAnimation& rhs)
+	: m_fDuration(rhs.m_fDuration)
+	, m_fTickPerSecond(rhs.m_fTickPerSecond)
+	, m_fTrackPosition(rhs.m_fTrackPosition)
+	, m_iNumChannels(rhs.m_iNumChannels)
+	, m_Channels(rhs.m_Channels)
+	, m_isFinished(rhs.m_isFinished)
+	, m_CurrentKeyFrames(rhs.m_CurrentKeyFrames)
+{
+	strcpy_s(m_szName, rhs.m_szName);
+
+	for (auto& pChannel : m_Channels)
+		Safe_AddRef(pChannel);
 }
 
 HRESULT CAnimation::Initialize(const aiAnimation* pAIAnimation, const CModel::BONES& Bones)
@@ -13,6 +28,8 @@ HRESULT CAnimation::Initialize(const aiAnimation* pAIAnimation, const CModel::BO
 	m_fTickPerSecond = (_float)pAIAnimation->mTicksPerSecond;
 
 	m_iNumChannels = pAIAnimation->mNumChannels;
+
+	m_CurrentKeyFrames.resize(m_iNumChannels);
 
 	/* 이 애니메이션에서 사용하기위한 뼈(aiNodeAnim,채널)의 정보를 만든다. */
 	for (size_t i = 0; i < m_iNumChannels; i++)
@@ -46,7 +63,7 @@ void CAnimation::Invalidate_TransformationMatrix(_bool isLoop, _float fTimeDelta
 	/* 내 애니메이션이 이용하는 전체 뼈의 상태를 m_fTrackPosition 시간에 맞는 상태로 갱신하다.*/
 	for (size_t i = 0; i < m_iNumChannels; i++)
 	{
-		m_Channels[i]->Invalidate_TransformationMatrix(m_fTrackPosition, Bones);
+		m_Channels[i]->Invalidate_TransformationMatrix(m_fTrackPosition, Bones, &m_CurrentKeyFrames[i]);
 	}
 }
 
@@ -62,6 +79,11 @@ CAnimation* CAnimation::Create(const aiAnimation* pAIAnimation, const CModel::BO
 	return pInstance;
 }
 
+CAnimation* CAnimation::Clone()
+{
+	return new CAnimation(*this);
+}
+
 
 void CAnimation::Free()
 {
@@ -69,4 +91,5 @@ void CAnimation::Free()
 		Safe_Release(pChannel);
 
 	m_Channels.clear();
+
 }

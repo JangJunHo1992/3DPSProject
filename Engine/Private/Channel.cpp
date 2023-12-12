@@ -1,4 +1,4 @@
-#include "..\Public\Channel.h"
+#include "Channel.h"
 #include "Bone.h"
 
 CChannel::CChannel()
@@ -69,10 +69,10 @@ HRESULT CChannel::Initialize(const aiNodeAnim* pChannel, const CModel::BONES& Bo
 	return S_OK;
 }
 
-void CChannel::Invalidate_TransformationMatrix(_float fCurrentTrackPosition, const CModel::BONES& Bones)
+void CChannel::Invalidate_TransformationMatrix(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex)
 {
 	if (0.0f == fCurrentTrackPosition)
-		m_iCurrentKeyFrameIndex = 0;
+		*pCurrentKeyFrameIndex = 0;
 
 	_vector		vScale;
 	_vector		vRotation;
@@ -90,23 +90,23 @@ void CChannel::Invalidate_TransformationMatrix(_float fCurrentTrackPosition, con
 	/* 선형보간을 통해 현재의 상태을 만들어낸다. */
 	else
 	{
-		while (fCurrentTrackPosition >= m_KeyFrames[m_iCurrentKeyFrameIndex + 1].fTrackPosition)
-			++m_iCurrentKeyFrameIndex;
+		while (fCurrentTrackPosition >= m_KeyFrames[*pCurrentKeyFrameIndex + 1].fTrackPosition)
+			++* pCurrentKeyFrameIndex;
 
 		_float3		vSourScale, vDestScale;
 		_float4		vSourRotation, vDestRotation;
 		_float3		vSourPosition, vDestPosition;
 
-		vSourScale = m_KeyFrames[m_iCurrentKeyFrameIndex].vScale;
-		vSourRotation = m_KeyFrames[m_iCurrentKeyFrameIndex].vRotation;
-		vSourPosition = m_KeyFrames[m_iCurrentKeyFrameIndex].vPosition;
+		vSourScale = m_KeyFrames[*pCurrentKeyFrameIndex].vScale;
+		vSourRotation = m_KeyFrames[*pCurrentKeyFrameIndex].vRotation;
+		vSourPosition = m_KeyFrames[*pCurrentKeyFrameIndex].vPosition;
 
-		vDestScale = m_KeyFrames[m_iCurrentKeyFrameIndex + 1].vScale;
-		vDestRotation = m_KeyFrames[m_iCurrentKeyFrameIndex + 1].vRotation;
-		vDestPosition = m_KeyFrames[m_iCurrentKeyFrameIndex + 1].vPosition;
+		vDestScale = m_KeyFrames[*pCurrentKeyFrameIndex + 1].vScale;
+		vDestRotation = m_KeyFrames[*pCurrentKeyFrameIndex + 1].vRotation;
+		vDestPosition = m_KeyFrames[*pCurrentKeyFrameIndex + 1].vPosition;
 
-		_float		fRatio = (fCurrentTrackPosition - m_KeyFrames[m_iCurrentKeyFrameIndex].fTrackPosition) /
-			(m_KeyFrames[m_iCurrentKeyFrameIndex + 1].fTrackPosition - m_KeyFrames[m_iCurrentKeyFrameIndex].fTrackPosition);
+		_float		fRatio = (fCurrentTrackPosition - m_KeyFrames[*pCurrentKeyFrameIndex].fTrackPosition) /
+			(m_KeyFrames[*pCurrentKeyFrameIndex + 1].fTrackPosition - m_KeyFrames[*pCurrentKeyFrameIndex].fTrackPosition);
 
 		vScale = XMVectorLerp(XMLoadFloat3(&vSourScale), XMLoadFloat3(&vDestScale), fRatio);
 		vRotation = XMQuaternionSlerp(XMLoadFloat4(&vSourRotation), XMLoadFloat4(&vDestRotation), fRatio);

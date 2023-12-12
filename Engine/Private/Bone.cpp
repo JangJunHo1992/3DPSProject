@@ -1,4 +1,4 @@
-#include "..\Public\Bone.h"
+#include "Bone.h"
 
 CBone::CBone()
 {
@@ -42,6 +42,11 @@ CBone* CBone::Create(aiNode* pAINode, _int iParentIndex)
 		Safe_Release(pInstance);
 	}
 	return pInstance;
+}
+
+CBone* CBone::Clone()
+{
+	return new CBone(*this);
 }
 
 

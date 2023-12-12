@@ -3,6 +3,7 @@
 #include "VIBuffer_Dynamic_Terrain_Origin.h"
 #include "VIBuffer_Dynamic_Plane.h"
 #include "GameInstance.h"
+#include "Navigation.h"
 
 
 CTerrain::CTerrain(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -82,7 +83,9 @@ HRESULT CTerrain::Render()
 
 	/* 바인딩된 정점, 인덱스를 그려. */
 	m_pVIBufferCom->Render();
-
+#ifdef _DEBUG	
+	m_pNavigationCom->Render();
+#endif
 	return S_OK;
 }
 
@@ -96,6 +99,9 @@ void CTerrain::Write_Json(json& Out_Json)
 HRESULT CTerrain::Ready_Components_Origin(LEVEL eLEVEL)
 {
 	/* For.Com_Shader */
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Navigation"),
+		TEXT("Com_Navigation"), reinterpret_cast<CComponent**>(&m_pNavigationCom))))
+		return E_FAIL;
 
 
 	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Shader_VtxNorTex"),
@@ -200,6 +206,8 @@ HRESULT CTerrain::Bind_ShaderResources_Origin()
 void CTerrain::Free()
 {
 	__super::Free();
+
+	Safe_Release(m_pNavigationCom);
 
 	Safe_Release(m_pVIBufferCom);
 

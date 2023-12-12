@@ -10,22 +10,17 @@ CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 }
 
 CModel::CModel(const CModel& rhs)
-	:CComponent(rhs)
+	: CComponent(rhs)
 	, m_PivotMatrix(rhs.m_PivotMatrix)
 	, m_eModelType(rhs.m_eModelType)
 	, m_iNumMeshes(rhs.m_iNumMeshes)
 	, m_Meshes(rhs.m_Meshes)
 	, m_iNumMaterials(rhs.m_iNumMaterials)
 	, m_Materials(rhs.m_Materials)
-	, m_Bones(rhs.m_Bones)
 	, m_iNumAnimations(rhs.m_iNumAnimations)
-	, m_Animations(rhs.m_Animations)
-{
-	for (auto& pAnimation : m_Animations)
-		Safe_AddRef(pAnimation);
 
-	for (auto& pBone : m_Bones)
-		Safe_AddRef(pBone);
+{
+	
 
 	for (auto& MaterialDesc : m_Materials)
 	{
@@ -293,5 +288,4 @@ void CModel::Free()
 
 	if (false == m_isCloned)
 		m_Importer.FreeScene();
-
 }

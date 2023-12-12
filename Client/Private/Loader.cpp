@@ -2,7 +2,7 @@
 #include "Loader.h"
 #include "GameInstance.h"
 #include "BackGround.h"
-
+#include "Navigation.h"
 //#include "VIBuffer_Dynamic_Terrain.h"
 #include "VIBuffer_Static_Terrain.h"
 #include "VIBuffer_Dynamic_Plane.h"
@@ -224,6 +224,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_AnimModel.hlsl"), VTXANIMMESH::Elements, VTXANIMMESH::iNumElements))))
 		return E_FAIL;
 
+	lstrcpy(m_szLoadingText, TEXT("네비게이션를(을) 로드하는 중입니다."));
+	/* For.Prototype_Component_Navigation */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Navigation"),
+		CNavigation::Create(m_pDevice, m_pContext, TEXT("../Bin/DataFiles/Navigation.dat")))))
+		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("원형객체를(을) 로드하는 중입니다."));
 

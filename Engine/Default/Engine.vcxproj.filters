@@ -136,6 +136,18 @@
     <Filter Include="01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Terrain">
       <UniqueIdentifier>{90db5b33-d629-4281-aa34-1548a5140d13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98.ShaderFiles">
+      <UniqueIdentifier>{9d69793e-d86e-4e87-8770-3b47210a7b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\06.Navigation">
+      <UniqueIdentifier>{3a8910a5-289c-4cbc-87cd-177a5025cab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\06.Navigation\Cell">
+      <UniqueIdentifier>{6d63b51e-bea1-4c0b-a126-40a91e7abed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Cell">
+      <UniqueIdentifier>{3bef20e3-96f0-47e7-8d15-58482561ca00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -273,6 +285,15 @@
     <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Navigation.h">
+      <Filter>01.Utility\03.Components\06.Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Cell.h">
+      <Filter>01.Utility\03.Components\06.Navigation\Cell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Cell.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Base.cpp">
@@ -344,7 +365,6 @@
     <ClCompile Include="..\Private\Mesh.cpp">
       <Filter>01.Utility\03.Components\05.Model\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Public\RapidJson.cpp" />
     <ClCompile Include="..\Private\RapidJson.cpp">
       <Filter>01.Utility\91.RapidJson</Filter>
     </ClCompile>
@@ -390,5 +410,19 @@
     <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain_Origin.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\Navigation.cpp">
+      <Filter>01.Utility\03.Components\06.Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Cell.cpp">
+      <Filter>01.Utility\03.Components\06.Navigation\Cell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Cell.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl">
+      <Filter>98.ShaderFiles</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

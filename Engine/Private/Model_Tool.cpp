@@ -1,5 +1,7 @@
-#include "..\Public\Model_Tool.h"
+#include "Model_Tool.h"
 #include "Mesh_Tool.h"
+#include "Animation.h"
+#include "Bone.h"
 
 CModel_Tool::CModel_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CModel(pDevice, pContext)
@@ -9,6 +11,11 @@ CModel_Tool::CModel_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 CModel_Tool::CModel_Tool(const CModel_Tool& rhs)
 	: CModel(rhs)
 {
+	for (auto& pPrototypeAnimation : rhs.m_Animations)
+		m_Animations.push_back(pPrototypeAnimation->Clone());
+
+	for (auto& pPrototypeBone : rhs.m_Bones)
+		m_Bones.push_back(pPrototypeBone->Clone());
 }
 
 HRESULT CModel_Tool::Ready_Meshes(_fmatrix PivotMatrix)

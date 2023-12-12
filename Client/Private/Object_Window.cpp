@@ -79,7 +79,10 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 					}
 					ImGui::EndListBox();
 				}
-
+				if (ImGui::Button("Create"))
+				{
+					m_pGameInstance->Add_CloneObject(LEVEL_TOOL,)
+				}
 				// Custom size: use all width, 5 items tall
 				if (ImGui::BeginListBox("CreateList"))
 				{
@@ -95,22 +98,14 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 					}
 					ImGui::EndListBox();
 				}
+				if (ImGui::Button("Delete"))
+				{
 
+				}
 				ImGui::TreePop();
 			}
 
-			//ImGui::ListBox("ObjectList");
-			//ImGui::SameLine();
-			//ImGui::ListBox("CreateList");
-			if (ImGui::Button("Create"))
-			{
-				
-			}
-			ImGui::SameLine();
-			if (ImGui::Button("Delete"))
-			{
-
-			}
+			
 			ImGui::Checkbox(u8"기즈모on/off",&m_bguizmo);
 			ImGui::Checkbox("Terrain/Mesh", & m_Terrain_Mesh);
 			//여기에 기즈모 넣어 

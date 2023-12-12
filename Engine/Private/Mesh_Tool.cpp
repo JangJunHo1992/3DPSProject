@@ -1,4 +1,4 @@
-#include "..\Public\Mesh_Tool.h"
+#include "Mesh_Tool.h"
 #include "GameInstance.h"
 
 CMesh_Tool::CMesh_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)

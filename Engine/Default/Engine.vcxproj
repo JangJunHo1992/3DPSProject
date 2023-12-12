@@ -109,7 +109,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../Public/;../Default/;../Public/rapidjson/;../Public/Json/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Public/;../Default/;../Public/rapidjson/;../Public/Json/;../Bin/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -118,14 +118,21 @@
       <AdditionalLibraryDirectories>../ThirdPartyLib/</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command> attrib -r "$(SolutionDir)Reference\Public\*.*" /s
+      <Command>attrib -r "$(SolutionDir)Reference\Public\*.*" /s
 xcopy "$(SolutionDir)Engine\Public\*.*"    "$(SolutionDir)Reference\Public\" /y /e
 attrib +r "$(SolutionDir)Reference\Public\*.*" /s
 xcopy "$(OutDir)$(ProjectName).lib" "$(SolutionDir)Reference\Librarys\" /y
 xcopy "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Client\Bin\\$(Configuration)\$(PlatformTarget)\" /y
 xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys\" /y /e
+xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\ShaderFiles\" /y
 </Command>
     </PostBuildEvent>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -172,7 +179,7 @@ attrib +r "$(SolutionDir)Reference\Public\*.*" /s
 xcopy "$(OutDir)$(ProjectName).lib" "$(SolutionDir)Reference\Librarys\" /y
 xcopy "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Client\Bin\\$(Configuration)\$(PlatformTarget)\" /y
 xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys\" /y /e
-</Command>
+xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\ShaderFiles\" /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -181,6 +188,7 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClInclude Include="..\Public\Bone.h" />
     <ClInclude Include="..\Public\BrainTree.h" />
     <ClInclude Include="..\Public\Camera.h" />
+    <ClInclude Include="..\Public\Cell.h" />
     <ClInclude Include="..\Public\Channel.h" />
     <ClInclude Include="..\public\Component.h" />
     <ClInclude Include="..\Public\Component_Manager.h" />
@@ -205,6 +213,7 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClInclude Include="..\Public\Model.h" />
     <ClInclude Include="..\Public\Model_GamePlay.h" />
     <ClInclude Include="..\Public\Model_Tool.h" />
+    <ClInclude Include="..\Public\Navigation.h" />
     <ClInclude Include="..\public\Object_Manager.h" />
     <ClInclude Include="..\Public\PipeLine.h" />
     <ClInclude Include="..\Public\RapidJson.h" />
@@ -215,6 +224,7 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClInclude Include="..\Public\Timer_Manager.h" />
     <ClInclude Include="..\Public\Transform.h" />
     <ClInclude Include="..\public\VIBuffer.h" />
+    <ClInclude Include="..\Public\VIBuffer_Cell.h" />
     <ClInclude Include="..\Public\VIBuffer_Dynamic_Plane.h" />
     <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain.h" />
     <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain_Origin.h" />
@@ -227,6 +237,7 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClCompile Include="..\private\Base.cpp" />
     <ClCompile Include="..\Private\Bone.cpp" />
     <ClCompile Include="..\Private\Camera.cpp" />
+    <ClCompile Include="..\Private\Cell.cpp" />
     <ClCompile Include="..\Private\Channel.cpp" />
     <ClCompile Include="..\private\Component.cpp" />
     <ClCompile Include="..\Private\Component_Manager.cpp" />
@@ -245,6 +256,7 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClCompile Include="..\Private\Model.cpp" />
     <ClCompile Include="..\Private\Model_GamePlay.cpp" />
     <ClCompile Include="..\Private\Model_Tool.cpp" />
+    <ClCompile Include="..\Private\Navigation.cpp" />
     <ClCompile Include="..\private\Object_Manager.cpp" />
     <ClCompile Include="..\Private\PipeLine.cpp" />
     <ClCompile Include="..\Private\RapidJson.cpp" />
@@ -255,12 +267,16 @@ xcopy "$(SolutionDir)Engine\ThirdPartyLib\*.*" "$(SolutionDir)Reference\Librarys
     <ClCompile Include="..\Private\Timer_Manager.cpp" />
     <ClCompile Include="..\Private\Transform.cpp" />
     <ClCompile Include="..\private\VIBuffer.cpp" />
+    <ClCompile Include="..\Private\VIBuffer_Cell.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Dynamic_Plane.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain_Origin.cpp" />
     <ClCompile Include="..\private\VIBuffer_Rect.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Static_Terrain.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Terrain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

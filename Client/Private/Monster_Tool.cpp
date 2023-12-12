@@ -1,4 +1,4 @@
-#include "..\Public\Monster_Tool.h"
+#include "Monster_Tool.h"
 #include "GameInstance.h"
 
 CMonster_Tool::CMonster_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)

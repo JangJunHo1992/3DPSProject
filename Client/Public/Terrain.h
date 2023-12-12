@@ -7,6 +7,7 @@ BEGIN(Engine)
 class CShader;
 class CTexture;
 class CVIBuffer_Dynamic_Terrain_Origin;
+class CNavigation;
 
 END
 
@@ -38,7 +39,7 @@ protected:
 	CShader*							m_pShaderCom = { nullptr };
 	CTexture*							m_pTextureCom[TYPE_END] = { nullptr };
 	CVIBuffer_Dynamic_Terrain_Origin*	m_pVIBufferCom = { nullptr };
-
+	CNavigation*						m_pNavigationCom = { nullptr };
 
 	_bool								m_bIsPlane = false;
 

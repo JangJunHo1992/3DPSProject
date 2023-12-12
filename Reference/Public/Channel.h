@@ -15,13 +15,13 @@ private:
 
 public:
 	HRESULT Initialize(const aiNodeAnim* pChannel, const CModel::BONES& Bones);
-	void Invalidate_TransformationMatrix(_float fCurrentTrackPosition, const CModel::BONES& Bones);
+	void Invalidate_TransformationMatrix(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
 
 private:
 	_char				m_szName[MAX_PATH] = "";
 	_uint				m_iNumKeyFrames = { 0 };
 	vector<KEYFRAME>	m_KeyFrames;
-	_uint				m_iCurrentKeyFrameIndex = { 0 };
+	/*_uint				m_iCurrentKeyFrameIndex = { 0 };*///이거 애니 메이션으로 옮겼음
 	_uint				m_iBoneIndex = { 0 };
 
 public:

@@ -1,4 +1,4 @@
-#include "..\Public\Monster_GamePlay.h"
+#include "Monster_GamePlay.h"
 
 CMonster_GamePlay::CMonster_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMonster(pDevice, pContext)

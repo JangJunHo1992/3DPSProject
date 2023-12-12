@@ -10,6 +10,7 @@ class CAnimation final : public CBase
 {
 private:
 	CAnimation();
+	CAnimation(const CAnimation& rhs);
 	virtual ~CAnimation() = default;
 
 public:
@@ -24,11 +25,12 @@ private:
 
 	_uint					m_iNumChannels = { 0 }; /* 이 애니메이션이 사용하는 뼈의 갯수. */
 	vector<class CChannel*>	m_Channels;
-
+	vector<_uint>			m_CurrentKeyFrames;
 	_bool					m_isFinished = { false };
 
 public:
 	static CAnimation* Create(const aiAnimation* pAIAnimation, const CModel::BONES& Bones);
+	CAnimation* Clone();
 	virtual void Free() override;
 };
 
