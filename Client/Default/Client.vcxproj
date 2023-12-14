@@ -177,6 +177,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
   <ItemGroup>
     <ClInclude Include="..\..\Reference\Imgui\imconfig.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialogConfig.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_impl_dx11.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_impl_win32.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_internal.h" />
@@ -224,6 +226,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Reference\Imgui\imgui.cpp" />
+    <ClCompile Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.cpp" />
     <ClCompile Include="..\..\Reference\Imgui\imgui_demo.cpp" />
     <ClCompile Include="..\..\Reference\Imgui\imgui_draw.cpp" />
     <ClCompile Include="..\..\Reference\Imgui\imgui_impl_dx11.cpp" />

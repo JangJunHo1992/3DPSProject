@@ -127,6 +127,9 @@
     <Filter Include="02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool">
       <UniqueIdentifier>{502ae3ac-713f-41b9-a66e-475336b5425a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="96. Imgui\ImGuidialogfile">
+      <UniqueIdentifier>{1799f4ac-4308-4e2c-80b1-62e834b00d2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -267,6 +270,12 @@
     <ClInclude Include="..\Public\Camera_Dynamic_Tool.h">
       <Filter>02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.h">
+      <Filter>96. Imgui\ImGuidialogfile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialogConfig.h">
+      <Filter>96. Imgui\ImGuidialogfile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -388,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Camera_Dynamic_Tool.cpp">
       <Filter>02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.cpp">
+      <Filter>96. Imgui\ImGuidialogfile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

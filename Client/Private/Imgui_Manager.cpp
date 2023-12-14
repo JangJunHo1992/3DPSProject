@@ -3,6 +3,7 @@
 #include "../../Reference/Imgui/imgui.h"
 #include "../../Reference/Imgui/imgui_impl_win32.h"
 #include "../../Reference/Imgui/imgui_impl_dx11.h"
+#include "../../Reference/Imgui/ImGuiFileDialog/ImGuiFileDialog.h"
 #include <d3d11.h>
 #include <tchar.h>
 
@@ -107,8 +108,9 @@ void CImgui_Manager::Render()
 			}
 			if (ImGui::MenuItem("Load"))
 			{
-				Load_Objects_With_Json(LEVEL::LEVEL_TOOL, "Test1");
-
+				//Load_Objects_With_Json(LEVEL::LEVEL_TOOL, "Test1");
+				m_bdialogCheck = true;
+				
 			}
 	
 			ImGui::EndMenu();
@@ -163,6 +165,30 @@ void CImgui_Manager::Render()
 
 		ImGui::EndMainMenuBar();
 	}
+
+	if (m_bdialogCheck)
+	{
+		if (ImGui::Button("Open File Dialog"))
+			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", nullptr, ".");
+
+		// display
+		if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+		{
+			// action if OK
+			if (ImGuiFileDialog::Instance()->IsOk())
+			{
+				std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+				std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+				// action
+			}
+
+			// close
+			ImGuiFileDialog::Instance()->Close();
+			m_bdialogCheck = false;
+		}
+	}
+	
+
 	ImGui::Render();
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

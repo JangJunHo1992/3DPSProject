@@ -83,7 +83,7 @@ private:
 	_bool				 m_bEffectTool = { false };
 	_bool				 m_bObjectTool = { false };
 	_bool				 m_bCameraTool = { false };
-
+	_bool				 m_bdialogCheck = { false };
 private:
 	void	HelpMarker(const char* desc);
 	char* ConverWStringtoC(const wstring& wstr);
