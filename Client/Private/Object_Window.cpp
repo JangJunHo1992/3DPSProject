@@ -79,6 +79,7 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 						// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
 						if (is_selected)
 							ImGui::SetItemDefaultFocus();
+
 					}
 					ImGui::EndListBox();
 				}
@@ -95,8 +96,8 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 						if (is_selected)
 						{
 							ImGui::SetItemDefaultFocus();
-// 							if(m_bCreateCheck)
-// 								m_pGameInstance->Add_CloneObject(LEVEL_TOOL,)
+							if (m_bCreateCheck)
+								Create_Object(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
 						}
 
 					}
@@ -154,6 +155,43 @@ char* CObject_Window::ConverWStringtoC(const wstring& wstr)
 	WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, result, size_needed, NULL, NULL);
 
 	return result;
+}
+char* CObject_Window::ConvertWCtoC(const wchar_t* str)
+{
+	//반환할 char* 변수 선언
+	char* pStr;
+	//입력받은 wchar_t 변수의 길이를 구함
+	int strSize = WideCharToMultiByte(CP_ACP, 0, str, -1, NULL, 0, NULL, NULL);
+	//char* 메모리 할당
+	pStr = new char[strSize];
+	//형 변환
+	WideCharToMultiByte(CP_ACP, 0, str, -1, pStr, strSize, 0, 0);
+	return pStr;
+}
+
+wchar_t* CObject_Window::ConvertCtoWC(const char* str)
+{
+	//wchar_t형 변수 선언
+	wchar_t* pStr;
+	//멀티 바이트 크기 계산 길이 반환
+	int strSize = MultiByteToWideChar(CP_ACP, 0, str, -1, NULL, NULL);
+	//wchar_t 메모리 할당
+	pStr = new WCHAR[strSize];
+	//형 변환
+	MultiByteToWideChar(CP_ACP, 0, str, (int)strlen(str) + 1, pStr, strSize);
+	return pStr;
+}
+
+void CObject_Window::Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag)
+{
+	m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, strPrototypeTag);
+
+	list<CGameObject*> pGameObjects = *(m_pGameInstance->Get_GameObjects(LEVEL_TOOL, strLayerTag));
+	CGameObject* pGameObject = pGameObjects.back();
+
+	const _float3& temp = m_pTerrain->Get_PickedPosFloat3();
+	pGameObject->Set_Position(temp);
+
 }
 
 void CObject_Window::Free()

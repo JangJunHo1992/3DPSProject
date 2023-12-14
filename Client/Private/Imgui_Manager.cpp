@@ -60,6 +60,7 @@ void CImgui_Manager::Tick(_float fTimeDelta)
 {
 	ImGuiWindowFlags window_flags = 0;
 	window_flags |= ImGuiWindowFlags_NoBackground;
+	CheckPicking(m_ePickMode);
 }
 
 void CImgui_Manager::Render()
@@ -132,10 +133,13 @@ void CImgui_Manager::Render()
 
 			ImGui::EndMenu();
 		}
-
+		
 		if (ImGui::BeginMenu("Editer"))
 		{
-			
+			ImGui::RadioButton("NO_PICKING", &m_ePickMode, 0); ImGui::SameLine();
+			ImGui::RadioButton("TERRAIN_PICKING", &m_ePickMode, 1); ImGui::SameLine();
+			ImGui::RadioButton("MESH_PICKING", &m_ePickMode, 2);
+
 			if (ImGui::MenuItem(u8"¸ÊÅø","",&m_bMapTool))
 			{
 				
@@ -281,6 +285,25 @@ void CImgui_Manager::Toggle_PhysXInfo()
 }
 
 
+
+_int CImgui_Manager::CheckPicking(_int ePickMode)
+{
+	switch (m_ePickMode)
+	{
+	case NO_PICKING:
+		
+		break;
+	case TERRAIN_PICKING:
+
+		break;
+	case MESH_PICKING:
+
+		break;
+	
+	
+	}
+	return ePickMode;
+}
 
 void CImgui_Manager::Free()
 {

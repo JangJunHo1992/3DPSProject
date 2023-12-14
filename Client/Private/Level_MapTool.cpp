@@ -46,8 +46,8 @@ HRESULT CLevel_MapTool::Initialize()
 	if (FAILED(m_pImguiManager->SetUp_Imgui(m_pDevice, m_pContext)))
 		return E_FAIL;
 
-	m_pActor = new CActor<CLevel_MapTool>(this);
-	m_pActor->Set_State(new CMapTool_State_Terrain());
+	//m_pActor = new CActor<CLevel_MapTool>(this);
+	//m_pActor->Set_State(new CMapTool_State_Terrain());
 
 	m_pObjectWin->Set_LevelTool(this);
 
@@ -95,7 +95,7 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 			return;
 	}
 
-	m_pActor->Update_State();
+	//m_pActor->Update_State();
 
 }
 

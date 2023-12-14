@@ -10,7 +10,7 @@ END
 BEGIN(Client)
 
 class CImGui_Window;
-class CTerrain;
+class CTerrain_Tool;
 class CMap_Window;
 class CObject_Window;
 class CCamera_Window;
@@ -37,6 +37,9 @@ public:
 		EFFECT,
 		TYPE_END
 	};
+
+public:
+	enum PickMode { NO_PICKING= 0, TERRAIN_PICKING, MESH_PICKING, PICKING_END };
 	DECLARE_SINGLETON(CImgui_Manager)
 private:
 	CImgui_Manager() = default;
@@ -64,7 +67,8 @@ private:
 
 	void Toggle_PhysXInfo();
 
-public:
+private:
+	_int CheckPicking(_int ePickMode);
 public:
 	virtual void Free() override;
 
@@ -96,6 +100,8 @@ private:
 	CCamera_Window* m_pCamWindow = { nullptr };
 	CEffect_Window* m_pEffectWindow = { nullptr };
 	CGameInstance* m_pGameInstance = { nullptr };
+	CTerrain_Tool* m_pTerrainTool = { nullptr };
+
 
 	ID3D11Device*			m_pDevice = nullptr;
 	ID3D11DeviceContext*	m_pContext = nullptr;
@@ -103,7 +109,7 @@ private:
 public:
 	CImGui_Window* pWindows[EDITER_TYPE::TYPE_END];
 	EDITER_TYPE	eEditorType = EDITER_TYPE::TYPE_END;
-
+	_int		m_ePickMode = PickMode::NO_PICKING;
 
 private: /* For Json */
 	string m_szJsonPath = "../Bin/LevelData/";
