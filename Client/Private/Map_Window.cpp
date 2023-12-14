@@ -75,6 +75,8 @@ HRESULT CMap_Window::Render(ID3D11DeviceContext* pDeviceContext)
 			}
 			ImGui::SliderFloat("BrushHeight", m_fBrushHeight, -10.f, 10.f);
 			ImGui::SliderFloat("BrushRange",m_fBrushRange, 0.1f, 30.f);
+			ImGui::RadioButton(u8"사용안함", m_iMode, -1);
+			ImGui::SameLine();
 			ImGui::RadioButton(u8"원기둥", m_iMode, 0);
 			ImGui::SameLine();
 			ImGui::RadioButton(u8"원형", m_iMode, 1);
