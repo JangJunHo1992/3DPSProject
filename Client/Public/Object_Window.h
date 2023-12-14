@@ -31,6 +31,7 @@ public:
 	wchar_t* ConvertCtoWC(const char* str);
 public:
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
+	
 public:
 	CTerrain_Tool*			m_pTerrain = nullptr;
 	CGameInstance*			m_pGameInstance = { nullptr };
@@ -38,13 +39,16 @@ public:
 
 public:
 	vector<string>			m_vObjectTag;
-	vector<CGameObject*>	m_CreateList;
+	vector<CGameObject*>*	m_CreateList;
 public:
 	json					m_ObjectJson;
 	_bool					m_bguizmo =false;
 	_bool					m_Terrain_Mesh = false;
 	_bool					m_bCreateCheck = false;
-	
+	_bool					m_bDeleteCheck = false;
+	_bool					m_bListCheck = false;
+
+	_int					m_iCreateObjectSize = 0;
 public:
 	virtual void Free() override;
 };

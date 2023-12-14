@@ -36,8 +36,8 @@ HRESULT CObject_Window::Initialize()
 	}
 	//objectList
 	m_pGameInstance->Fill_PrototypeTags(&m_vObjectTag);
-
-	 
+	m_pGameInstance->Get_CloneGameObjects(LEVEL_TOOL, m_CreateList);
+	
 	return S_OK;
 }
 
@@ -47,10 +47,13 @@ void CObject_Window::Start()
 
 void CObject_Window::Tick(_float fTimeDelta)
 {
+
+
 }
 
 HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 {
+
 	ImGui::Begin(u8"오브젝트툴");
 	if (ImGui::BeginTabBar("##ObjectTabBar"))
 	{
@@ -97,8 +100,11 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 						{
 							ImGui::SetItemDefaultFocus();
 							if (m_bCreateCheck)
-								if(m_pGameInstance->Mouse_Down(DIM_LB))
+								if (m_pGameInstance->Mouse_Down(DIM_LB))
+								{
 									Create_Object(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
+									m_bListCheck = true;
+								}
 						}
 
 					}
@@ -106,25 +112,36 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 				}
 				ImGui::Spacing();
 				ImGui::Checkbox("Create",&m_bCreateCheck);
-				// Custom size: use all width, 5 items tall
-				if (ImGui::BeginListBox("CreateList"))
+				ImGui::Checkbox("Delete",& m_bDeleteCheck);
+				
+
+				
+				static int CreateIndex = 0; // Here we store our selection data as an index.
+				
+				if (m_bListCheck)
 				{
-					for (int n = 0; n < IM_ARRAYSIZE(&ObjectTagSize); n++)
+					//m_iCreateObjectSize = m_CreateList->size();
+					if (ImGui::BeginListBox("CreateList"))
 					{
-						const bool is_selected = (Object_idx == n);
-						if (ImGui::Selectable(m_vObjectTag[n].c_str(), is_selected))
-							Object_idx = n;
 
-						// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
-						if (is_selected)
-							ImGui::SetItemDefaultFocus();
+						for (int n = 0; n < m_CreateList->size(); n++)
+						{
+							string str = m_vObjectTag[n];
+							string str2 = to_string(n);
+
+							const bool is_selected = (CreateIndex == n);
+							if (ImGui::Selectable((str + "." + str2).c_str(), is_selected))
+								CreateIndex = n;
+
+							// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+							if (is_selected)
+								ImGui::SetItemDefaultFocus();
+						}
+						ImGui::EndListBox();
 					}
-					ImGui::EndListBox();
 				}
-				if (ImGui::Button("Delete"))
-				{
-
-				}
+				
+				
 				ImGui::TreePop();
 			}
 

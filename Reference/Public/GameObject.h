@@ -58,7 +58,7 @@ protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";
 
-
+	
 protected:
 	class CComponent* Find_Component(const wstring& strComTag);
 	HRESULT	Add_Component(_uint iLevelIndex, const wstring& strPrototypeTag,

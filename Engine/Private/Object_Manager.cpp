@@ -140,6 +140,20 @@ list<class CGameObject*>* CObject_Manager::Get_GameObjects(_uint iLevelIndex, co
 	return layer->Get_GameObjects();
 }
 
+void CObject_Manager::Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector)
+{
+	for (auto& item : *m_pLayers) 
+	{
+		CLayer* pLayer = Find_Layer(iLevelIndex,item.first);
+		list<CGameObject*> pGameObjects = *pLayer->Get_GameObjects();
+		for (auto& pGameObject : pGameObjects)
+		{
+			clonevector->push_back(pGameObject);
+		}
+	}
+	
+}
+
 void CObject_Manager::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
 {
 	json Out_Json;

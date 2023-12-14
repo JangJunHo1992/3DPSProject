@@ -179,6 +179,11 @@ void CGameInstance::Fill_PrototypeTags(vector<string>* _vector)
 	m_pObject_Manager->Fill_PrototypeTags(_vector);
 }
 
+void CGameInstance::Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector)
+{
+	m_pObject_Manager->Get_CloneGameObjects(iLevelIndex, clonevector);
+}
+
 list<class CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag)
 {
 	return m_pObject_Manager->Get_GameObjects(iLevelIndex, strLayerTag);
