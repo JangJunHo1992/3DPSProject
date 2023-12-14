@@ -97,7 +97,8 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 						{
 							ImGui::SetItemDefaultFocus();
 							if (m_bCreateCheck)
-								Create_Object(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
+								if(m_pGameInstance->Mouse_Down(DIM_LB))
+									Create_Object(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
 						}
 
 					}

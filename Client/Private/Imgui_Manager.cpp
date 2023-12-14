@@ -165,23 +165,30 @@ void CImgui_Manager::Render()
 
 		ImGui::EndMainMenuBar();
 	}
-
+	static bool canValidateDialog = false;
+	
 	if (m_bdialogCheck)
 	{
 		if (ImGui::Button("Open File Dialog"))
-			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", nullptr, ".");
+			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".cpp,.h,.hpp",
+				".", 1, nullptr, ImGuiFileDialogFlags_Modal);
 
 		// display
 		if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
 		{
-			// action if OK
 			if (ImGuiFileDialog::Instance()->IsOk())
 			{
 				std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
 				std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+				std::string filter = ImGuiFileDialog::Instance()->GetCurrentFilter();
+				// here convert from string because a string was passed as a userDatas, but it can be what you want
+				std::string userDatas;
+				if (ImGuiFileDialog::Instance()->GetUserDatas())
+					userDatas = std::string((const char*)ImGuiFileDialog::Instance()->GetUserDatas());
+				auto selection = ImGuiFileDialog::Instance()->GetSelection(); // multiselection
+
 				// action
 			}
-
 			// close
 			ImGuiFileDialog::Instance()->Close();
 			m_bdialogCheck = false;
