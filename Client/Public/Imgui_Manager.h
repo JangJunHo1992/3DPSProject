@@ -15,6 +15,7 @@ class CMap_Window;
 class CObject_Window;
 class CCamera_Window;
 class CEffect_Window;
+class CTerrain;
 
 class CImgui_Manager  : public CBase
 {
