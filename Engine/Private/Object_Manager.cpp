@@ -144,14 +144,14 @@ void CObject_Manager::Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject
 {
 	for (auto& item : *m_pLayers) 
 	{
-		CLayer* pLayer = Find_Layer(iLevelIndex,item.first);
+		CLayer* pLayer = item.second;
 		list<CGameObject*> pGameObjects = *pLayer->Get_GameObjects();
 		for (auto& pGameObject : pGameObjects)
 		{
 			clonevector->push_back(pGameObject);
 		}
 	}
-	
+	//_bool test = false;
 }
 
 void CObject_Manager::Save_Objects_With_Json(_uint iLevelIndex, string filePath)

@@ -36,7 +36,7 @@ HRESULT CObject_Window::Initialize()
 	}
 	//objectList
 	m_pGameInstance->Fill_PrototypeTags(&m_vObjectTag);
-	m_pGameInstance->Get_CloneGameObjects(LEVEL_TOOL, m_CreateList);
+	m_pGameInstance->Get_CloneGameObjects(LEVEL_TOOL, &m_CreateList);
 	
 	return S_OK;
 }
@@ -120,13 +120,13 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 				
 				if (m_bListCheck)
 				{
-					//m_iCreateObjectSize = m_CreateList->size();
+					m_iCreateObjectSize =m_CreateList.size();
 					if (ImGui::BeginListBox("CreateList"))
 					{
 
-						for (int n = 0; n < m_CreateList->size(); n++)
+						for (int n = 0; n < m_iCreateObjectSize; n++)
 						{
-							string str = m_vObjectTag[n];
+							string str ="Object";
 							string str2 = to_string(n);
 
 							const bool is_selected = (CreateIndex == n);

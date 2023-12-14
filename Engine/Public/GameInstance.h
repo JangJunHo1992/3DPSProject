@@ -49,7 +49,7 @@ public: /* For.Object_Manager */
 	HRESULT Add_CloneObject(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strPrototypeTag, void* pArg = nullptr);
 	HRESULT Add_Object(_uint iLevelIndex, const wstring & strLayerTag, class CGameObject* pGameObject, void* pArg = nullptr);
 	void Fill_PrototypeTags(vector<string>*_vector);
-	void Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>*clonevector);
+	void Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector);
 	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
 	HRESULT Save_Objects_With_Json(_uint iLevelIndex, string filePath);
 	//HRESULT Load_Objects_With_Json(_uint iLevelIndex, string filePath);
