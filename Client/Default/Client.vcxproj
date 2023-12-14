@@ -186,6 +186,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Actor.h" />
     <ClInclude Include="..\public\BackGround.h" />
     <ClInclude Include="..\Public\Camera_Dynamic.h" />
+    <ClInclude Include="..\Public\Camera_Dynamic_Tool.h" />
     <ClInclude Include="..\Public\Camera_Window.h" />
     <ClInclude Include="..\Public\Client_Defines.h" />
     <ClInclude Include="..\Public\Effect_Window.h" />
@@ -232,6 +233,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Actor.cpp" />
     <ClCompile Include="..\private\BackGround.cpp" />
     <ClCompile Include="..\Private\Camera_Dynamic.cpp" />
+    <ClCompile Include="..\Private\Camera_Dynamic_Tool.cpp" />
     <ClCompile Include="..\Private\Camera_Window.cpp" />
     <ClCompile Include="..\Private\Effect_Window.cpp" />
     <ClCompile Include="..\Private\ForkLift.cpp" />

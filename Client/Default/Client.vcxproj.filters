@@ -124,6 +124,9 @@
     <Filter Include="02.GameObjects\ForkLift\Tool">
       <UniqueIdentifier>{0bdcc605-2ae7-42a3-a3cd-5961c4f77922}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool">
+      <UniqueIdentifier>{502ae3ac-713f-41b9-a66e-475336b5425a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -261,6 +264,9 @@
     <ClInclude Include="..\Public\ForkLift_GamePlay.h">
       <Filter>02.GameObjects\ForkLift\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Camera_Dynamic_Tool.h">
+      <Filter>02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -379,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\MapTool_State_Terrain.cpp">
       <Filter>01.Levels\02.Tool\State\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Camera_Dynamic_Tool.cpp">
+      <Filter>02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
