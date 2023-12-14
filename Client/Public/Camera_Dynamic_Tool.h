@@ -5,7 +5,7 @@
 
 BEGIN(Client)
 
-class CCamera_Dynamic final : public CCamera
+class CCamera_Dynamic_Tool final : public CCamera
 {
 public:
 	typedef struct tagDynamicCameraDesc : public tagCameraDesc
@@ -14,9 +14,9 @@ public:
 	}DYNAMIC_CAMERA_DESC;
 
 private:
-	CCamera_Dynamic(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-	CCamera_Dynamic(const CCamera_Dynamic& rhs);
-	virtual ~CCamera_Dynamic() = default;
+	CCamera_Dynamic_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	CCamera_Dynamic_Tool(const CCamera_Dynamic_Tool& rhs);
+	virtual ~CCamera_Dynamic_Tool() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -32,7 +32,7 @@ private:
 	_float				m_fMouseSensor = { 0.0f };
 	LEVEL				m_eLevel;
 public:
-	static CCamera_Dynamic* Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
+	static CCamera_Dynamic_Tool* Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
 	virtual CGameObject* Clone(void* pArg) override;
 	virtual void Free() override;
 };

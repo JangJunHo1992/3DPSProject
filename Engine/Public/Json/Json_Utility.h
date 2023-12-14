@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine_Defines.h"
+#include <stdio.h>
 #include "json.hpp"
 using namespace nlohmann;
 

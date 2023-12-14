@@ -47,7 +47,7 @@ private:
 	_float3   m_vPickedPosFloat3 = { 0.f, 0.f, 0.f };
 	_float   m_fBrushRange = { 5.f };
 	_float  m_fBrushHeight = { 1.f };
-	_int   m_iMode = { 0 };
+	_int   m_iMode = { -1 };
 
 	class CGameInstance* m_pGameInstance = nullptr;
 

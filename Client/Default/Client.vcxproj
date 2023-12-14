@@ -177,6 +177,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
   <ItemGroup>
     <ClInclude Include="..\..\Reference\Imgui\imconfig.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialogConfig.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_impl_dx11.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_impl_win32.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_internal.h" />
@@ -186,6 +188,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Actor.h" />
     <ClInclude Include="..\public\BackGround.h" />
     <ClInclude Include="..\Public\Camera_Dynamic.h" />
+    <ClInclude Include="..\Public\Camera_Dynamic_Tool.h" />
     <ClInclude Include="..\Public\Camera_Window.h" />
     <ClInclude Include="..\Public\Client_Defines.h" />
     <ClInclude Include="..\Public\Effect_Window.h" />
@@ -223,6 +226,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Reference\Imgui\imgui.cpp" />
+    <ClCompile Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.cpp" />
     <ClCompile Include="..\..\Reference\Imgui\imgui_demo.cpp" />
     <ClCompile Include="..\..\Reference\Imgui\imgui_draw.cpp" />
     <ClCompile Include="..\..\Reference\Imgui\imgui_impl_dx11.cpp" />
@@ -232,6 +236,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Actor.cpp" />
     <ClCompile Include="..\private\BackGround.cpp" />
     <ClCompile Include="..\Private\Camera_Dynamic.cpp" />
+    <ClCompile Include="..\Private\Camera_Dynamic_Tool.cpp" />
     <ClCompile Include="..\Private\Camera_Window.cpp" />
     <ClCompile Include="..\Private\Effect_Window.cpp" />
     <ClCompile Include="..\Private\ForkLift.cpp" />

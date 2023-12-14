@@ -124,6 +124,9 @@
     <Filter Include="02.GameObjects\ForkLift\Tool">
       <UniqueIdentifier>{0bdcc605-2ae7-42a3-a3cd-5961c4f77922}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool">
+      <UniqueIdentifier>{823fb04d-b377-420e-a612-d67a61e0027d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -261,6 +264,15 @@
     <ClInclude Include="..\Public\ForkLift_GamePlay.h">
       <Filter>02.GameObjects\ForkLift\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Camera_Dynamic_Tool.h">
+      <Filter>02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.h">
+      <Filter>96. Imgui\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialogConfig.h">
+      <Filter>96. Imgui\Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -379,6 +391,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\MapTool_State_Terrain.cpp">
       <Filter>01.Levels\02.Tool\State\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Camera_Dynamic_Tool.cpp">
+      <Filter>02.GameObjects\Camera_Dynamic\Camera_Dynamic_Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.cpp">
+      <Filter>96. Imgui\Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

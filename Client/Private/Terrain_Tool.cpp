@@ -37,7 +37,8 @@ HRESULT CTerrain_Tool::Initialize(void* pArg)
 
 void CTerrain_Tool::pick()
 {
-	m_pVIBufferCom->Invalidate_Terrain(m_vPickedPos, m_fBrushRange * 2 / 3.f, m_fBrushHeight, m_iMode);
+	if(m_iMode >= 0)
+		m_pVIBufferCom->Invalidate_Terrain(m_vPickedPos, m_fBrushRange * 2 / 3.f, m_fBrushHeight, m_iMode);
 }
 
 HRESULT CTerrain_Tool::Bind_ShaderResources()
