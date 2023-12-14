@@ -34,6 +34,8 @@ HRESULT CObject_Window::Initialize()
 			break;
 		}
 	}
+	//objectList
+	m_pGameInstance->Fill_PrototypeTags(&m_vObjectTag);
 
 	 
 	return S_OK;
@@ -60,14 +62,15 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 			if (ImGui::TreeNode("ObjectList"))
 			{
 				
-				//const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD", "EEEE", "FFFF", "GGGG", "HHHH", "IIII", "JJJJ", "KKKK", "LLLLLLL", "MMMM", "OOOOOOO" };
-				m_pGameInstance->Fill_PrototypeTags(&m_vObjectTag);
+				string items[] = { "Layer_Monster","Layer_Environment","Layer_Object","Layer_Something"};
 
 				static int Object_idx = 0; // Here we store our selection data as an index.
+				static int Layer_idx = 0; // Here we store our selection data as an index.
 				int ObjectTagSize = m_vObjectTag.size();
+
 				if (ImGui::BeginListBox("ObjectList"))
 				{
-					for (int n = 0; n < IM_ARRAYSIZE(&ObjectTagSize); n++)
+					for (int n = 0; n < ObjectTagSize; n++)
 					{
 						const bool is_selected = (Object_idx == n);
 						if (ImGui::Selectable(m_vObjectTag[n].c_str(), is_selected))
@@ -79,10 +82,28 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 					}
 					ImGui::EndListBox();
 				}
-				if (ImGui::Button("Create"))
+				ImGui::Spacing();
+				if (ImGui::BeginListBox("LayerList"))
 				{
-					m_pGameInstance->Add_CloneObject(LEVEL_TOOL,)
+					for (int n = 0; n <4; n++)
+					{
+						const bool is_selected = (Layer_idx == n);
+						if (ImGui::Selectable(items[n].c_str(), is_selected))
+							Layer_idx = n;
+
+						// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+						if (is_selected)
+						{
+							ImGui::SetItemDefaultFocus();
+// 							if(m_bCreateCheck)
+// 								m_pGameInstance->Add_CloneObject(LEVEL_TOOL,)
+						}
+
+					}
+					ImGui::EndListBox();
 				}
+				ImGui::Spacing();
+				ImGui::Checkbox("Create",&m_bCreateCheck);
 				// Custom size: use all width, 5 items tall
 				if (ImGui::BeginListBox("CreateList"))
 				{
@@ -105,7 +126,6 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 				ImGui::TreePop();
 			}
 
-			
 			ImGui::Checkbox(u8"기즈모on/off",&m_bguizmo);
 			ImGui::Checkbox("Terrain/Mesh", & m_Terrain_Mesh);
 			//여기에 기즈모 넣어 

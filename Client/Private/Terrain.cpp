@@ -99,7 +99,7 @@ void CTerrain::Write_Json(json& Out_Json)
 HRESULT CTerrain::Ready_Components_Origin(LEVEL eLEVEL)
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Navigation"),
+	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Navigation"),
 		TEXT("Com_Navigation"), reinterpret_cast<CComponent**>(&m_pNavigationCom))))
 		return E_FAIL;
 

@@ -170,6 +170,11 @@ void CObject_Manager::Fill_PrototypeTags(vector<string>* _vector)
 	}
 }
 
+void CObject_Manager::Fill_LayerTags(vector<string>* _vector)
+{
+
+}
+
 
 
 CGameObject * CObject_Manager::Find_Prototype(const wstring & strPrototypeTag)

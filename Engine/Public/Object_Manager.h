@@ -30,6 +30,7 @@ public:
 	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag);
 
 	void Fill_PrototypeTags(vector<string>* _vector);
+	void Fill_LayerTags(vector<string>* _vector);
 public:
 	void Save_Objects_With_Json(_uint iLevelIndex, string filePath);
 private:
