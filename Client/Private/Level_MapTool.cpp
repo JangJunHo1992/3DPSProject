@@ -2,6 +2,7 @@
 #include "Level_MapTool.h"
 #include "GameInstance.h"
 #include "Camera_Dynamic.h"
+#include "Camera_Dynamic_Tool.h"
 #include "Level_Loading.h"
 #include "GameObject.h"
 #include "Imgui_Manager.h"
@@ -46,8 +47,8 @@ HRESULT CLevel_MapTool::Initialize()
 	if (FAILED(m_pImguiManager->SetUp_Imgui(m_pDevice, m_pContext)))
 		return E_FAIL;
 
-	//m_pActor = new CActor<CLevel_MapTool>(this);
-	//m_pActor->Set_State(new CMapTool_State_Terrain());
+	m_pActor = new CActor<CLevel_MapTool>(this);
+	m_pActor->Set_State(new CMapTool_State_Terrain());
 
 	m_pObjectWin->Set_LevelTool(this);
 
@@ -95,7 +96,7 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 			return;
 	}
 
-	//m_pActor->Update_State();
+	m_pActor->Update_State();
 
 }
 
@@ -171,7 +172,7 @@ void CLevel_MapTool::Delete_Object(CGameObject* pGameObject)
 
 HRESULT CLevel_MapTool::Ready_Layer_Camera(const wstring& strLayerTag)
 {
-	CCamera_Dynamic::DYNAMIC_CAMERA_DESC		Desc = {};
+	CCamera_Dynamic_Tool::DYNAMIC_CAMERA_DESC		Desc = {};
 
 	Desc.fMouseSensor = 0.05f;
 	Desc.vEye = _float4(0.f, 20.f, -15.f, 1.f);
@@ -183,7 +184,7 @@ HRESULT CLevel_MapTool::Ready_Layer_Camera(const wstring& strLayerTag)
 	Desc.fSpeedPerSec = 20.f;
 	Desc.fRotationPerSec = XMConvertToRadians(180.0f);
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Camera_Dynamic"), &Desc)))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Camera_Dynamic_Tool"), &Desc)))
 		return E_FAIL;
 
 	return S_OK;

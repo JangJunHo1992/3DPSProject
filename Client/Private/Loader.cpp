@@ -24,6 +24,7 @@
 
 
 #include "Camera_Dynamic.h"
+#include "Camera_Dynamic_Tool.h"
 #include <process.h>
 
 
@@ -278,12 +279,22 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
 			return E_FAIL;
 	}
+	if (LEVEL_TOOL == eLEVEL)
+	{
+		/* For.Prototype_GameObject_Camera_Dynamic */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Camera_Dynamic_Tool"),
+			CCamera_Dynamic_Tool::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
+	else
+	{
+		/* For.Prototype_GameObject_Camera_Dynamic */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Camera_Dynamic"),
+			CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
 
-
-	/* For.Prototype_GameObject_Camera_Dynamic */
-	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Camera_Dynamic"),
-		CCamera_Dynamic::Create(m_pDevice, m_pContext))))
-		return E_FAIL;
+	
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 
