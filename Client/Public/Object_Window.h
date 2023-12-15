@@ -49,6 +49,7 @@ public:
 	_bool					m_bCreateCheck = false;
 	_bool					m_bDeleteCheck = false;
 	_bool					m_bListCheck = false;
+	_bool					m_bCloneCount = false;
 
 	_int					m_iCreateObjectSize = 0;
 public:

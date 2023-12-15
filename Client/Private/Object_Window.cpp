@@ -6,6 +6,7 @@
 #include "Terrain_Tool.h"
 #include "GameInstance.h"
 #include "Level_MapTool.h"
+#include "GameObject.h"
 
 IMPLEMENT_SINGLETON(CObject_Window)
 
@@ -37,7 +38,7 @@ HRESULT CObject_Window::Initialize()
 	//objectList
 	m_pGameInstance->Fill_PrototypeTags(&m_vObjectTag);
 	m_pGameInstance->Get_CloneGameObjects(LEVEL_TOOL, &m_CreateList);
-	
+
 	return S_OK;
 }
 
@@ -47,8 +48,6 @@ void CObject_Window::Start()
 
 void CObject_Window::Tick(_float fTimeDelta)
 {
-
-
 }
 
 HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
@@ -103,11 +102,15 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 								if (m_pGameInstance->Mouse_Down(DIM_LB))
 								{
 									Create_Object(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
+
+									m_bCloneCount = true;
 									m_bListCheck = true;
 								}
+							
 						}
 
 					}
+					
 					ImGui::EndListBox();
 				}
 				ImGui::Spacing();
@@ -135,7 +138,17 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 
 							// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
 							if (is_selected)
+							{
 								ImGui::SetItemDefaultFocus();
+								if (m_bDeleteCheck)
+								{
+									_bool isdead = true;
+									m_CreateList[CreateIndex]->Set_isdead(isdead);
+									m_CreateList.erase(m_CreateList.begin() + CreateIndex);
+									m_bDeleteCheck = false;
+								}
+									
+							}
 						}
 						ImGui::EndListBox();
 					}
@@ -154,6 +167,13 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 		ImGui::EndTabBar();
 	}
 	ImGui::End();
+	if (m_bCloneCount)
+	{
+		m_CreateList.clear();
+		m_pGameInstance->Get_CloneGameObjects(LEVEL_TOOL, &m_CreateList);
+
+		m_bCloneCount = false;
+	}
 
 
 	return S_OK;
@@ -216,4 +236,8 @@ void CObject_Window::Free()
 {
 	Safe_Release(m_pGameInstance);
 	Safe_Release(m_pTerrain);
+	for (auto& CloneCount : m_CreateList)
+	{
+		Safe_Release(CloneCount);
+	}
 }

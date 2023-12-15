@@ -101,6 +101,8 @@ void CObject_Manager::Priority_Tick(_float fTimeDelta)
 		for (auto& Pair : m_pLayers[i])
 		{
 			Pair.second->Priority_Tick(fTimeDelta);		
+
+			
 		}
 	}
 }
@@ -119,9 +121,24 @@ void CObject_Manager::Late_Tick(_float fTimeDelta)
 	for (size_t i = 0; i < m_iNumLevels; i++)
 	{
 		for (auto& Pair : m_pLayers[i])
+		{
 			Pair.second->Late_Tick(fTimeDelta);
+
+			//list<CGameObject*> pGameObjects = *Pair.second->Get_GameObjects();
+
+// 			for (auto& pGameObject : pGameObjects)
+// 			{
+// 				if (true == pGameObject->Get_isdead())
+// 				{
+// 					Safe_Release(pGameObject);
+// 					pGameObjects.erase(pGameObject);
+// 				}
+// 			}
+
+		}
 	}
 }
+
 
 void CObject_Manager::Clear(_uint iLevelIndex)
 {
@@ -142,10 +159,10 @@ list<class CGameObject*>* CObject_Manager::Get_GameObjects(_uint iLevelIndex, co
 
 void CObject_Manager::Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector)
 {
-	for (auto& item : *m_pLayers) 
+	for (auto& item : m_pLayers[iLevelIndex]) 
 	{
-		CLayer* pLayer = item.second;
-		list<CGameObject*> pGameObjects = *pLayer->Get_GameObjects();
+		
+		list<CGameObject*> pGameObjects = *item.second->Get_GameObjects();
 		for (auto& pGameObject : pGameObjects)
 		{
 			clonevector->push_back(pGameObject);
