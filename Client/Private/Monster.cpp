@@ -5,13 +5,13 @@
 
 
 CMonster::CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CGameObject(pDevice, pContext)
+	: CCharacter(pDevice, pContext)
 {
 
 }
 
 CMonster::CMonster(const CMonster& rhs)
-	: CGameObject(rhs)
+	: CCharacter(rhs)
 {
 }
 
@@ -31,9 +31,12 @@ HRESULT CMonster::Initialize(void* pArg)
 	if (FAILED(Ready_Components()))
 		return E_FAIL;
 
-	m_pModelCom->Set_Animation(rand() % 20);
+	//m_pModelCom->Set_Animation(0, CModel::ANIM_STATE_LOOP);
+	m_pModelCom->Set_Animation(rand() % 20, CModel::ANIM_STATE_LOOP, false);
+	//m_pModelCom->Set_Next_AnimationIndex(m_pModelCom->Get_CurrentAnimIndex()+1);
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(rand() % 20, 0.f, rand() % 20, 1.f));
+
 
 	return S_OK;
 }
@@ -47,7 +50,7 @@ void CMonster::Priority_Tick(_float fTimeDelta)
 
 void CMonster::Tick(_float fTimeDelta)
 {
-	m_pModelCom->Play_Animation(fTimeDelta, true);
+	m_pModelCom->Play_Animation(fTimeDelta);
 }
 
 void CMonster::Late_Tick(_float fTimeDelta)
@@ -115,31 +118,6 @@ HRESULT CMonster::Bind_ShaderResources()
 	return S_OK;
 }
 
-//CMonster* CMonster::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-//{
-//	CMonster* pInstance = new CMonster(pDevice, pContext);
-//
-//	/* 원형객체를 초기화한다.  */
-//	if (FAILED(pInstance->Initialize_Prototype()))
-//	{
-//		MSG_BOX("Failed to Created : CMonster");
-//		Safe_Release(pInstance);
-//	}
-//	return pInstance;
-//}
-//
-//CGameObject* CMonster::Clone(void* pArg)
-//{
-//	CMonster* pInstance = new CMonster(*this);
-//
-//	/* 원형객체를 초기화한다.  */
-//	if (FAILED(pInstance->Initialize(pArg)))
-//	{
-//		MSG_BOX("Failed to Cloned : CMonster");
-//		Safe_Release(pInstance);
-//	}
-//	return pInstance;
-//}
 
 void CMonster::Free()
 {

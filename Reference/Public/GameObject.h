@@ -36,6 +36,7 @@ public:
 	void Set_Position(const _float3& vState);
 	void Test_ResetPos();
 	void Set_WorldMatrix(_float4x4 matrix);
+	void Invaildate_Components();
 
 public:
 	CTransform* Get_TransformComp() { return m_pTransformCom; }

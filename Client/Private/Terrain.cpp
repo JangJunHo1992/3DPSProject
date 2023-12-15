@@ -3,7 +3,6 @@
 #include "VIBuffer_Dynamic_Terrain_Origin.h"
 #include "VIBuffer_Dynamic_Plane.h"
 #include "GameInstance.h"
-#include "Navigation.h"
 
 
 CTerrain::CTerrain(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -31,7 +30,7 @@ HRESULT CTerrain::Initialize(void* pArg)
 	m_sName = "Terrain";
 	m_sLayerTag = "Layer_BackGround";
 
-	if (FAILED(__super::Initialize(pArg)))
+	if (FAILED(__super::Initialize(&GAMEOBJECT_DESC(0.0f, XMConvertToRadians(20.0f)))))
 		return E_FAIL;	
 
 	//if (m_bIsPlane) 
@@ -54,9 +53,7 @@ HRESULT CTerrain::Initialize(void* pArg)
 
 void CTerrain::Priority_Tick(_float fTimeDelta)
 {
-	
-
-	
+	m_pNavigationCom->Update(m_pTransformCom->Get_WorldMatrix());
 }
 
 void CTerrain::Tick(_float fTimeDelta)
@@ -83,9 +80,11 @@ HRESULT CTerrain::Render()
 
 	/* 바인딩된 정점, 인덱스를 그려. */
 	m_pVIBufferCom->Render();
-#ifdef _DEBUG	
+
+#ifdef _DEBUG
 	m_pNavigationCom->Render();
 #endif
+
 	return S_OK;
 }
 
@@ -102,7 +101,6 @@ HRESULT CTerrain::Ready_Components_Origin(LEVEL eLEVEL)
 	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Navigation"),
 		TEXT("Com_Navigation"), reinterpret_cast<CComponent**>(&m_pNavigationCom))))
 		return E_FAIL;
-
 
 	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Shader_VtxNorTex"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))

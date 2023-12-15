@@ -81,6 +81,14 @@ void CGameObject::Set_WorldMatrix(_float4x4 matrix)
 	m_pTransformCom->Set_WorldMatrix(matrix);
 }
 
+void CGameObject::Invaildate_Components()
+{
+	for (auto& elem_List : m_Components)
+	{
+		elem_List.second->Initialize_Prototype();
+	}
+}
+
 void CGameObject::Write_Json(json& Out_Json)
 {
 	

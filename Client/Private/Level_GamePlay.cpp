@@ -3,7 +3,8 @@
 #include "GameInstance.h"
 #include "Camera_Dynamic.h"
 #include "Level_Loading.h"
-
+#include "Monster.h"
+#include "Player.h"
 
 CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
 	: CLevel(pDevice, pContext)
@@ -13,6 +14,9 @@ CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * p
 HRESULT CLevel_GamePlay::Initialize()
 {
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
+		return E_FAIL;
+
+	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
@@ -31,6 +35,46 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
 			return;
 	}
+
+	
+
+	list<CGameObject*>* pMonsters = m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+	
+	if (m_pGameInstance->Key_Down(DIK_SPACE))
+	{
+		for (CGameObject* pGameObject : *pMonsters)
+		{
+			CMonster* pMonster = dynamic_cast<CMonster*>(pGameObject);
+			if (pMonster)
+			{
+				//_int iNextAnimIndex = pMonster->Get_CurrentAnimIndex() + 2;
+
+				_uint iNumAnimations = pMonster->Get_NumAnimations();
+				_uint iAnimIndex = pMonster->Get_CurrentAnimIndex() + 1;
+				if (iAnimIndex >= iNumAnimations - 1)
+				{
+					iAnimIndex = 0;
+				}
+				pMonster->Set_Animation(iAnimIndex, CModel::ANIM_STATE::ANIM_STATE_LOOP, true);
+
+				//pMonster->Set_Next_AnimationIndex(iNextAnimIndex);
+
+			}
+
+		}
+	}
+
+	//for (CGameObject* pGameObject : *pMonsters)
+	//{
+	//	CMonster* pMonster = dynamic_cast<CMonster*>(pGameObject);
+	//	if (pMonster)
+	//	{
+	//		if (pMonster->Is_TransitionEnd())
+	//		{
+	//			//pMonster->Test_Animation();
+	//		}
+	//	}
+	//}
 }
 
 HRESULT CLevel_GamePlay::Render()
@@ -60,15 +104,30 @@ HRESULT CLevel_GamePlay::Ready_Layer_Camera(const wstring& strLayerTag)
 	return S_OK;
 }
 
+HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
+{
+	CPlayer::PLAYER_DESC		PlayerDesc = {};
+
+	PlayerDesc.a = 10;
+	PlayerDesc.fRotationPerSec = XMConvertToRadians(90.0f);
+	PlayerDesc.fSpeedPerSec = 7.0f;
+
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player_GamePlay"), &PlayerDesc)))
+		return E_FAIL;
+
+// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Raider_GamePlay"), &PlayerDesc)))
+// 		return E_FAIL;
+
+	return S_OK;
+}
+
 HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 {
-	for (size_t i = 0; i<20 ; ++i)
+	for (size_t i = 0; i < 20; i++)
 	{
 		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster_GamePlay"))))
 			return E_FAIL;
 	}
-	
-
 
 	return S_OK;
 }

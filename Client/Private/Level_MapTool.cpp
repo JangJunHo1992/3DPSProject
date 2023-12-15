@@ -145,6 +145,14 @@ void CLevel_MapTool::Create_Raider()
 	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Raider_Tool"));
 }
 
+void CLevel_MapTool::Resize_Plane(_ushort x, _ushort z)
+{
+	if (m_pTerrain->IsPlane()) 
+	{
+		//m_pTerrain.
+	}
+}
+
 CGameObject* CLevel_MapTool::Select_Object(const wstring& strLayerTag)
 {
 	list<CGameObject*> pGameObjects = *(m_pGameInstance->Get_GameObjects(LEVEL_TOOL, strLayerTag));

@@ -27,18 +27,6 @@ void CActor<T>::Update_State()
     CState<T>* pNowState = m_pState->Update(m_pOwner);
 
     Set_State(pNowState);
-
-
-    //if (nullptr != pNowState)
-    //{
-    //    m_pState->Release(m_pOwner);
-
-    //    delete m_pState;
-    //    //m_pState = nullptr;
-    //}
-
-    //pNowState->Initialize(m_pOwner);
-    //m_pState = pNowState;
 }
 
 template<class T>

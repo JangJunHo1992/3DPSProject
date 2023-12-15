@@ -22,6 +22,7 @@
 #include "Model_Tool.h"
 #include "Model_GamePlay.h"
 
+#include "Player.h"
 
 #include "Camera_Dynamic.h"
 #include "Camera_Dynamic_Tool.h"
@@ -232,6 +233,17 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("원형객체를(을) 로드하는 중입니다."));
+
+	if (LEVEL_TOOL == eLEVEL)
+	{
+	}
+	else
+	{
+		/* For.Prototype_GameObject_Player */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Player_GamePlay"),
+			CPlayer::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
 
 	if (LEVEL_TOOL == eLEVEL)
 	{

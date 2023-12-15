@@ -218,6 +218,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Monster_GamePlay.h" />
     <ClInclude Include="..\Public\Monster_Tool.h" />
     <ClInclude Include="..\Public\Object_Window.h" />
+    <ClInclude Include="..\Public\Player.h" />
     <ClInclude Include="..\Public\Raider.h" />
     <ClInclude Include="..\Public\Raider_GamePlay.h" />
     <ClInclude Include="..\Public\Raider_Tool.h" />
@@ -264,6 +265,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Monster_GamePlay.cpp" />
     <ClCompile Include="..\Private\Monster_Tool.cpp" />
     <ClCompile Include="..\Private\Object_Window.cpp" />
+    <ClCompile Include="..\Private\Player.cpp" />
     <ClCompile Include="..\Private\Raider.cpp" />
     <ClCompile Include="..\Private\Raider_GamePlay.cpp" />
     <ClCompile Include="..\Private\Raider_Tool.cpp" />
@@ -286,7 +288,12 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Bin\ShaderFiles\Shader_Defines.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_AnimModel.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Model.hlsl" />
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxNorTex.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_VtxPosTex.hlsl" />
   </ItemGroup>

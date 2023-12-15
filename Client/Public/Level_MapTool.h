@@ -25,12 +25,12 @@ public:
 	void Terrain_Pick();
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
 	void Create_Raider();
+	void Resize_Plane(_ushort x, _ushort z);
 	
 	class CGameObject* Select_Object(const wstring& strLayerTag);
 	void Delete_Object(class CGameObject* pGameObject);
 
 public:
-
 
 private:
 	HRESULT Ready_Layer_Camera(const wstring& strLayerTag);

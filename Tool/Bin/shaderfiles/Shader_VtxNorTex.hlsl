@@ -1,4 +1,6 @@
 
+#include "Shader_Defines.hlsli"
+
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
 
 vector			g_vLightPos = vector(50.f, 10.f, 50.f, 1.f);
@@ -154,6 +156,10 @@ technique11 DefaultTechnique
 	/* 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
 	pass Terrain
 	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
 		/* 렌더스테이츠 */
 		VertexShader = compile vs_5_0 VS_MAIN();
 		GeometryShader = NULL;
@@ -164,6 +170,10 @@ technique11 DefaultTechnique
 
 	pass Delete
 	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
 		/* 렌더스테이츠 */
 		VertexShader = compile vs_5_0 VS_MAIN();
 		GeometryShader = NULL;

@@ -136,17 +136,26 @@
     <Filter Include="01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Terrain">
       <UniqueIdentifier>{90db5b33-d629-4281-aa34-1548a5140d13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="98.ShaderFiles">
-      <UniqueIdentifier>{9d69793e-d86e-4e87-8770-3b47210a7b4d}</UniqueIdentifier>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Cell">
+      <UniqueIdentifier>{533ce6b1-7c28-4518-8250-e55dfa53c026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\03.Components\06.Navigation">
-      <UniqueIdentifier>{3a8910a5-289c-4cbc-87cd-177a5025cab4}</UniqueIdentifier>
+    <Filter Include="01.Utility\02.GameObjects\Character">
+      <UniqueIdentifier>{6648278e-a456-4262-85bd-e6a36fe4e644}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\03.Components\06.Navigation\Cell">
-      <UniqueIdentifier>{6d63b51e-bea1-4c0b-a126-40a91e7abed3}</UniqueIdentifier>
+    <Filter Include="01.Utility\03.Components\99. StatePattern">
+      <UniqueIdentifier>{98e39436-539c-42f0-8a7b-d8845a482c70}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Utility\03.Components\01.VIBuffer\Cell">
       <UniqueIdentifier>{3bef20e3-96f0-47e7-8d15-58482561ca00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\06.Navigation">
+      <UniqueIdentifier>{1b55f55b-0bf7-46e3-90f6-0bf49c44debf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\06.Navigation\Cell">
+      <UniqueIdentifier>{f6ae09a2-decc-43a8-8eec-2098c6ede900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="91.ShaderFiles">
+      <UniqueIdentifier>{5f93ed6c-e779-45f0-b182-344e51c83a58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -255,17 +264,11 @@
     <ClInclude Include="..\Public\Mesh_GamePlay.h">
       <Filter>01.Utility\03.Components\05.Model\Mesh\GamePlay</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Animation.h">
-      <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Channel.h">
       <Filter>01.Utility\03.Components\05.Model\Animation\Channel</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\VIBuffer_Static_Terrain.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Static</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Model.h">
-      <Filter>01.Utility\03.Components\05.Model\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Model_Tool.h">
       <Filter>01.Utility\03.Components\05.Model\Model\Tool</Filter>
@@ -285,14 +288,23 @@
     <ClInclude Include="..\Public\VIBuffer_Dynamic_Terrain.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic\Dynamic_Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Cell.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character.h">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Animation.h">
+      <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\Navigation.h">
       <Filter>01.Utility\03.Components\06.Navigation</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Cell.h">
       <Filter>01.Utility\03.Components\06.Navigation\Cell</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\VIBuffer_Cell.h">
-      <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
+    <ClInclude Include="..\Public\Model.h">
+      <Filter>01.Utility\03.Components\05.Model\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -377,17 +389,11 @@
     <ClCompile Include="..\Private\Mesh_GamePlay.cpp">
       <Filter>01.Utility\03.Components\05.Model\Mesh\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Animation.cpp">
-      <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Channel.cpp">
       <Filter>01.Utility\03.Components\05.Model\Animation\Channel</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\VIBuffer_Static_Terrain.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Static</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Model.cpp">
-      <Filter>01.Utility\03.Components\05.Model\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Model_Tool.cpp">
       <Filter>01.Utility\03.Components\05.Model\Model\Tool</Filter>
@@ -410,6 +416,12 @@
     <ClCompile Include="..\Private\VIBuffer_Dynamic_Terrain_Origin.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Terrain\Dynamic</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Cell.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Character.cpp">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\Navigation.cpp">
       <Filter>01.Utility\03.Components\06.Navigation</Filter>
     </ClCompile>
@@ -419,10 +431,22 @@
     <ClCompile Include="..\Private\VIBuffer_Cell.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\Animation.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Cell.cpp">
+      <Filter>01.Utility\03.Components\06.Navigation\Cell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Navigation.cpp">
+      <Filter>01.Utility\03.Components\06.Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Model.cpp">
+      <Filter>01.Utility\03.Components\05.Model\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl">
-      <Filter>98.ShaderFiles</Filter>
+      <Filter>91.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

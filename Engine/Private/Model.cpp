@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Bone.h"
 #include "Animation.h"
+#include "Channel.h"
 
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CComponent(pDevice,pContext)
@@ -18,9 +19,12 @@ CModel::CModel(const CModel& rhs)
 	, m_iNumMaterials(rhs.m_iNumMaterials)
 	, m_Materials(rhs.m_Materials)
 	, m_iNumAnimations(rhs.m_iNumAnimations)
-
 {
-	
+	for (auto& pPrototypeAnimation : rhs.m_Animations)
+		m_Animations.push_back(pPrototypeAnimation->Clone());
+
+	for (auto& pPrototypeBone : rhs.m_Bones)
+		m_Bones.push_back(pPrototypeBone->Clone());
 
 	for (auto& MaterialDesc : m_Materials)
 	{
@@ -33,6 +37,7 @@ CModel::CModel(const CModel& rhs)
 		Safe_AddRef(pMesh);
 	}
 }
+
 
 HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
@@ -81,23 +86,6 @@ HRESULT CModel::Render(_uint iMeshIndex)
 	return S_OK;
 }
 
-void CModel::Play_Animation(_float fTimeDelta, _bool isLoop)
-{
-	if (m_iCurrentAnimIndex >= m_iNumAnimations)
-		return;
-
-	/* 현재 애니메이션이 사용하고 있는 뼈들의 TransformationMatrix를 갱신한다. */
-	m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(isLoop, fTimeDelta, m_Bones);
-
-
-	/* 화면에 최종적인 상태로 그려내기위해서는 반드시 뼈들의 CombinedTransformationMatrix가 갱신되어야한다. */
-	/* 모든 뼈들을 다 갱신하며 부모로부터 자식까지 쭈우우욱돌아서 CombinedTransformationMatrix를 갱신한다. */
-	for (auto& pBone : m_Bones)
-	{
-		pBone->Invalidate_CombinedTransformationMatrix(m_Bones, XMLoadFloat4x4(&m_PivotMatrix));
-	}
-}
-
 HRESULT CModel::Bind_BoneMatrices(CShader* pShader, const _char* pConstantName, _uint iMeshIndex)
 {
 	return m_Meshes[iMeshIndex]->Bind_BoneMatrices(pShader, pConstantName, m_Bones);
@@ -111,6 +99,93 @@ HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName
 
 	return m_Materials[iMaterialIndex].pMtrlTextures[eTextureType]->Bind_ShaderResource(pShader, pConstantName);
 }
+
+void CModel::Play_Animation(_float fTimeDelta)
+{
+	if (m_iCurrentAnimIndex >= m_iNumAnimations)
+		return;
+
+	m_bIsAnimEnd = m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(m_eAnimState, fTimeDelta, m_Bones);
+		
+	for (auto& pBone : m_Bones)
+	{
+		pBone->Invalidate_CombinedTransformationMatrix(m_Bones, XMLoadFloat4x4(&m_PivotMatrix));
+	}
+
+}
+
+void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration)
+{
+	m_eAnimState = _eAnimState;
+
+	if (_iAnimationIndex != m_iCurrentAnimIndex)
+	{
+		Reset_Animation(_iAnimationIndex);
+		
+		if (_bIsTransition)
+		{
+			Set_Animation_Transition(_iAnimationIndex, _fTransitionDuration);
+		}
+		else 
+		{
+			m_iCurrentAnimIndex = _iAnimationIndex;
+		}
+	}
+}
+
+void CModel::Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration)
+{
+	CAnimation* currentAnimation = m_Animations[m_iCurrentAnimIndex];
+	CAnimation* targetAnimation = m_Animations[_iAnimationIndex];
+
+	_float fCurrentTrackPosition = m_Animations[m_iCurrentAnimIndex]->Get_TrackPosition();
+	_float fTransitionDuration = _fTransitionDuration > 0.f ? _fTransitionDuration : 0.2f;
+
+	_float fTransitionDuration_Start = 0.0f;
+	_float fTransitionDuration_End = 0.0f;
+	
+
+
+	vector<CChannel*> currentChannels = *currentAnimation->Get_Channels();
+
+	for (CChannel* currnetChannel : currentChannels)
+	{
+		_uint	targetBoneIndex = currnetChannel->Get_BoneIndex();
+		
+		CChannel* targetChannel = targetAnimation->Get_Channel_By_BoneIndex(targetBoneIndex);
+		if (nullptr == targetChannel)
+		{
+			_uint test = targetBoneIndex;
+		}
+		else
+		{
+			KEYFRAME startFrame = currnetChannel->Make_NowFrame(fCurrentTrackPosition);
+			KEYFRAME endFrame = targetChannel->Get_First_KeyFrame();
+			targetChannel->Set_Transition(startFrame, endFrame, &fTransitionDuration);
+			fTransitionDuration_End = endFrame.fTrackPosition;
+		}
+	}
+	fTransitionDuration_Start = fTransitionDuration_End - fTransitionDuration;
+
+	m_iCurrentAnimIndex = _iAnimationIndex;
+
+	m_Animations[m_iCurrentAnimIndex]->Set_IsTransition_True();
+	//m_Animations[m_iCurrentAnimIndex]->Set_TransitionDuration(0.0f);
+	m_Animations[m_iCurrentAnimIndex]->Set_TransitionDuration(&fTransitionDuration_End);
+	//m_Animations[m_iCurrentAnimIndex]->Set_TrackPosition(-0.2f);
+	m_Animations[m_iCurrentAnimIndex]->Set_TrackPosition(&fTransitionDuration_Start);
+	_bool test = false;
+
+}
+
+void CModel::Reset_Animation(_int iAnimIndex)
+{
+	if (iAnimIndex == -1)
+		m_Animations[m_iCurrentAnimIndex]->Reset_Animation(m_Bones);
+	else
+		m_Animations[iAnimIndex]->Reset_Animation(m_Bones);
+}
+
 
 template<class T>
 HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
@@ -217,49 +292,6 @@ HRESULT CModel::Ready_Animations()
 	return S_OK;
 }
 
-//void CModel::Write_Json(json& Out_Json)
-//{
-//	Out_Json.emplace("Model", m_szModelKey);
-//}
-//
-//void CModel::Load_FromJson(const json& In_Json)
-//{
-//	if (In_Json.end() == In_Json.find("Model"))
-//		return;
-//
-//	m_szModelKey = In_Json["Model"];
-//	if (!m_szModelKey.empty())
-//	{
-//		Init_Model(m_szModelKey.c_str());
-//	}
-//}
-
-
-//CModel* CModel::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
-//{
-//	CModel* pInstance = new CModel(pDevice, pContext);
-//
-//	if (FAILED(pInstance->Initialize_Prototype(eType, strModelFilePath, PivotMatrix)))
-//	{
-//		MSG_BOX("Failed to Created : CModel");
-//		Safe_Release(pInstance);
-//	}
-//	return pInstance;
-//}
-
-//CComponent* CModel::Clone(void* pArg)
-//{
-//	CModel* pInstance = new CModel(*this);
-//
-//	/* 원형객체를 초기화한다.  */
-//	if (FAILED(pInstance->Initialize(pArg)))
-//	{
-//		MSG_BOX("Failed to Cloned : CComponent");
-//		Safe_Release(pInstance);
-//	}
-//	return pInstance;
-//}
-
 
 void CModel::Free()
 {
@@ -288,4 +320,5 @@ void CModel::Free()
 
 	if (false == m_isCloned)
 		m_Importer.FreeScene();
+
 }

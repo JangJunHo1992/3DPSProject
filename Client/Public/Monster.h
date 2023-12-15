@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Client_Defines.h"
-#include "GameObject.h"
+//#include "GameObject.h"
+#include "Character.h"
+
 
 BEGIN(Engine)
 class CShader;
@@ -10,7 +12,7 @@ END
 
 BEGIN(Client)
 
-class CMonster abstract : public CGameObject
+class CMonster abstract : public CCharacter
 {
 protected:
 	CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
@@ -30,7 +32,7 @@ public:
 
 protected:
 	CShader*		m_pShaderCom = { nullptr };
-	CModel*			m_pModelCom = { nullptr };
+	//CModel*			m_pModelCom = { nullptr };
 
 	
 
