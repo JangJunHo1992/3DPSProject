@@ -3,6 +3,8 @@
 #include "Base.h"
 
 BEGIN(Engine)
+class CGameInstance;
+class CTransform;
 
 class ENGINE_DLL CGameObject abstract : public CBase
 {
@@ -36,6 +38,8 @@ public:
 	void Set_WorldMatrix(_float4x4 matrix);
 
 public:
+	CTransform* Get_TransformComp() { return m_pTransformCom; }
+public:
 	virtual _bool Pick(_float3* out) { return false; }
 
 public:
@@ -50,8 +54,8 @@ protected:
 	ID3D11DeviceContext*		m_pContext = { nullptr };
 
 protected:
-	class CGameInstance*		m_pGameInstance = { nullptr };
-	class CTransform*			m_pTransformCom = { nullptr };
+	CGameInstance*		m_pGameInstance = { nullptr };
+	CTransform*			m_pTransformCom = { nullptr };
 protected:
 	map<const wstring, class CComponent*>	m_Components;
 protected:

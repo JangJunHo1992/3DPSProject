@@ -113,7 +113,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;DirectXTKd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;DirectXTKd.lib;imguizmod.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderType>Effect</ShaderType>
@@ -159,7 +159,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../Reference/Librarys/</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;DirectXTK.lib;imguizmo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderType>Effect</ShaderType>
@@ -179,6 +179,12 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\..\Reference\Imgui\imgui.h" />
     <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialog.h" />
     <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialogConfig.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\GraphEditor.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImCurveEdit.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImGradient.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImGuizmo.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImSequencer.h" />
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImZoomSlider.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_impl_dx11.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_impl_win32.h" />
     <ClInclude Include="..\..\Reference\Imgui\imgui_internal.h" />

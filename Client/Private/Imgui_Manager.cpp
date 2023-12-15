@@ -4,6 +4,11 @@
 #include "../../Reference/Imgui/imgui_impl_win32.h"
 #include "../../Reference/Imgui/imgui_impl_dx11.h"
 #include "../../Reference/Imgui/ImGuiFileDialog/ImGuiFileDialog.h"
+#include "../../Reference/Imgui/ImGuizmo/ImGuizmo.h"
+#include "../../Reference/Imgui/ImGuizmo/ImSequencer.h"
+#include "../../Reference/Imgui/ImGuizmo/ImZoomSlider.h"
+#include "../../Reference/Imgui/ImGuizmo/ImCurveEdit.h"
+#include "../../Reference/Imgui/ImGuizmo/GraphEditor.h"
 #include <d3d11.h>
 #include <tchar.h>
 
@@ -70,7 +75,7 @@ void CImgui_Manager::Render()
 	ImGui_ImplWin32_NewFrame();
 
 	ImGui::NewFrame();
-
+	ImGuizmo::BeginFrame();
 	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
 
 	ImGuiViewport* viewport = ImGui::GetMainViewport();

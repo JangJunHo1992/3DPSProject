@@ -130,6 +130,9 @@
     <Filter Include="96. Imgui\ImGuidialogfile">
       <UniqueIdentifier>{1799f4ac-4308-4e2c-80b1-62e834b00d2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="96. Imgui\ImGuizmo">
+      <UniqueIdentifier>{f0b77eb5-419c-4037-b8cd-3b3c558f4890}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -275,6 +278,24 @@
     </ClInclude>
     <ClInclude Include="..\..\Reference\Imgui\ImGuiFileDialog\ImGuiFileDialogConfig.h">
       <Filter>96. Imgui\ImGuidialogfile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\GraphEditor.h">
+      <Filter>96. Imgui\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImCurveEdit.h">
+      <Filter>96. Imgui\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImGradient.h">
+      <Filter>96. Imgui\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImGuizmo.h">
+      <Filter>96. Imgui\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImSequencer.h">
+      <Filter>96. Imgui\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Reference\Imgui\ImGuizmo\ImZoomSlider.h">
+      <Filter>96. Imgui\ImGuizmo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
