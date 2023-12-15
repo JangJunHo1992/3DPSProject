@@ -154,7 +154,7 @@
     <Filter Include="01.Utility\03.Components\06.Navigation\Cell">
       <UniqueIdentifier>{f6ae09a2-decc-43a8-8eec-2098c6ede900}</UniqueIdentifier>
     </Filter>
-    <Filter Include="91.ShaderFiles">
+    <Filter Include="98.ShaderFiles">
       <UniqueIdentifier>{5f93ed6c-e779-45f0-b182-344e51c83a58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -446,7 +446,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl">
-      <Filter>91.ShaderFiles</Filter>
+      <Filter>98.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
