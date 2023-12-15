@@ -55,6 +55,7 @@ public:
 	void Save_EffectJson();
 public:
 	_bool Open_File(string& Out_szSelectedFile, string& Out_szFilePath);
+	_bool Check_ImGui_Rect();
 private:
 	void Init_SceneEditer();
 	void Init_EffectEditer();

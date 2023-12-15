@@ -62,6 +62,7 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 {
 
 	ImGui::Begin(u8"오브젝트툴");
+	Check_ImGui_Rect();
 	if (ImGui::BeginTabBar("##ObjectTabBar"))
 	{
 		//TODO 오브젝트1 탭 시작
@@ -168,6 +169,8 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 			}
 
 			ImGui::Checkbox(u8"기즈모on/off",&m_bguizmo);
+			if (m_bguizmo)
+				Compress_Guizmo_Mode();
 			ImGui::Checkbox("Terrain/Mesh", & m_Terrain_Mesh);
 			//여기에 기즈모 넣어 
 
@@ -183,8 +186,7 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 
 		m_bCloneCount = false;
 	}
-	if (m_bguizmo)
-		Compress_Guizmo_Mode();
+
 
 	return S_OK;
 }
@@ -360,6 +362,23 @@ void CObject_Window::Create_Object(const wstring& strLayerTag, const wstring& st
 	const _float3& temp = m_pTerrain->Get_PickedPosFloat3();
 	pGameObject->Set_Position(temp);
 
+}
+
+_bool CObject_Window::Check_ImGui_Rect()
+{
+	POINT tMouse = {};
+	GetCursorPos(&tMouse);
+	ScreenToClient(m_pGameInstance->Get_GraphicDesc().hWnd, &tMouse);
+
+	ImVec2 windowPos = ImGui::GetWindowPos(); //왼쪽상단모서리점
+	ImVec2 windowSize = ImGui::GetWindowSize();
+
+	if (tMouse.x >= windowPos.x && tMouse.x <= windowPos.x + windowSize.x &&
+		tMouse.y >= windowPos.y && tMouse.y <= windowPos.y + windowSize.y)
+	{
+		return false; //ImGui 영역 내
+	}
+	return true; //ImGui 영역이랑 안 겹침!
 }
 
 void CObject_Window::Free()

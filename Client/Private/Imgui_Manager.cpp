@@ -93,6 +93,7 @@ void CImgui_Manager::Render()
 
 	ImGui::SetNextWindowSize(ImVec2(g_iWinSizeX, g_iWinSizeY), ImGuiCond_Always);
 	ImGui::Begin("Dock", nullptr, window_flags);
+	Check_ImGui_Rect();
 	ImGui::PopStyleVar(2);
 	ImGuiID dockspaceID = ImGui::GetID("DockSpace");
 	ImGui::DockSpace(dockspaceID, ImVec2(0, 0), dockspaceFlags);
@@ -479,3 +480,19 @@ char* CImgui_Manager::ConverWStringtoC(const wstring& wstr)
 	return result;
 }
 
+_bool CImgui_Manager::Check_ImGui_Rect()
+{
+	POINT tMouse = {};
+	GetCursorPos(&tMouse);
+	ScreenToClient (m_pGameInstance->Get_GraphicDesc().hWnd, &tMouse);
+	
+	ImVec2 windowPos = ImGui::GetWindowPos(); //왼쪽상단모서리점
+	ImVec2 windowSize = ImGui::GetWindowSize();
+
+	if (tMouse.x >= windowPos.x && tMouse.x <= windowPos.x + windowSize.x &&
+		tMouse.y >= windowPos.y && tMouse.y <= windowPos.y + windowSize.y)
+	{
+		return false; //ImGui 영역 내
+	}
+	return true; //ImGui 영역이랑 안 겹침!
+}

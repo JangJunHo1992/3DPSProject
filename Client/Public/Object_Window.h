@@ -31,7 +31,7 @@ public:
 	wchar_t* ConvertCtoWC(const char* str);
 public:
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
-	
+	_bool Check_ImGui_Rect();
 public://guizmo
 	void ImGuizmo_Initialize();
 	void Set_GuizmoCamProj();
