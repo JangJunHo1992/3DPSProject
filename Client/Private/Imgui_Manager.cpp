@@ -176,7 +176,7 @@ void CImgui_Manager::Render()
 	if (m_bdialogCheck)
 	{
 		if (ImGui::Button("Open File Dialog"))
-			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".cpp,.h,.hpp",
+			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".fbx,.bin,.png,.dds",
 				".", 1, nullptr, ImGuiFileDialogFlags_Modal);
 
 		// display
