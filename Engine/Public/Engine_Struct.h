@@ -14,7 +14,7 @@ namespace Engine
 
 	}GRAPHIC_DESC;
 
-	typedef struct
+	typedef struct tagMaterialDesc
 	{
 		class CTexture* pMtrlTextures[AI_TEXTURE_TYPE_MAX];
 	}MATERIAL_DESC;
@@ -52,6 +52,14 @@ namespace Engine
 		_long      lZ;
 		BYTE      Buttons[4];
 	} DIMOUSESTATE, * LPDIMOUSESTATE;
+
+	typedef struct tag_MeshVertextPostion
+	{
+		_float3 vMin;
+		_float3 vMax;
+		_float3 vCenter;
+
+	} MESH_VTX_INFO;
 
 	typedef struct ENGINE_DLL tagMeshDesc // <- 이런 식으로. 원래 없었음
 	{

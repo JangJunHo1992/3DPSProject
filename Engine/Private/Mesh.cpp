@@ -85,6 +85,7 @@ HRESULT CMesh::Bind_BoneMatrices(CShader* pShader, const _char* pConstantName, c
 	return pShader->Bind_Matrices(pConstantName, BoneMatrices, 256);
 }
 
+
 HRESULT CMesh::Ready_Vertices_NonAnim_Origin(const aiMesh* pAIMesh, _fmatrix PivotMatrix)
 {
 	m_iStride = sizeof(VTXMESH);

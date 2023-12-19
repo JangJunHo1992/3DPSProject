@@ -32,6 +32,7 @@ void CBone::Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatr
 
 }
 
+
 CBone* CBone::Create(aiNode* pAINode, _int iParentIndex)
 {
 	CBone* pInstance = new CBone();

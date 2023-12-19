@@ -41,6 +41,8 @@ CModel::CModel(const CModel& rhs)
 
 HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
+	//! ModelData
+
 	m_eModelType = eType;
 
 	_uint	iFlag = aiProcess_ConvertToLeftHanded | aiProcessPreset_TargetRealtime_Fast;
@@ -187,6 +189,7 @@ void CModel::Reset_Animation(_int iAnimIndex)
 }
 
 
+
 template<class T>
 HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
 {
@@ -213,7 +216,7 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 
 	for (size_t i = 0; i < m_iNumMaterials; i++)
 	{
-		aiMaterial* pAIMaterial = m_pAIScene->mMaterials[i];
+		m_pAIMaterial = m_pAIScene->mMaterials[i];
 
 		MATERIAL_DESC			MaterialDesc = {  };
 
@@ -225,7 +228,7 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 			_splitpath_s(strModelFilePath.c_str(), szDrive, MAX_PATH, szDirectory, MAX_PATH, nullptr, 0, nullptr, 0);
 
 			aiString			strPath;
-			if (FAILED(pAIMaterial->GetTexture(aiTextureType(j), 0, &strPath)))
+			if (FAILED(m_pAIMaterial->GetTexture(aiTextureType(j), 0, &strPath)))
 				continue;
 
 			_char		szFileName[MAX_PATH] = "";

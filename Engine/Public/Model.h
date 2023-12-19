@@ -72,6 +72,7 @@ public:
 protected:
 	const aiScene*			m_pAIScene = { nullptr };
 	Assimp::Importer		m_Importer;
+	aiMaterial*				m_pAIMaterial = { nullptr };
 
 protected:
 	_float4x4				m_PivotMatrix;
@@ -89,9 +90,13 @@ protected:
 
 	_bool							m_bIsAnimEnd = { false };
 
+	string                          m_szModelFilePath;
+	string                          m_szModelFileName;
+	string							m_szTextureName[AI_TEXTURE_TYPE_MAX];
+
+	MESH_VTX_INFO                   m_VertexInfo;
 
 	ANIM_STATE						m_eAnimState = { CModel::ANIM_STATE::ANIM_STATE_END };
-
 	/* 내 모델의 전체 뼈들을 부모관계를 포함하여 저장한다. */
 	vector<class CBone*>	m_Bones;
 public:

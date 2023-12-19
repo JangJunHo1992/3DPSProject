@@ -166,9 +166,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	else 
 	{
 		/* For.Prototype_Component_Model_Fiona */
-		PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
+		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
-			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Fiona/Fiona.fbx", PivotMatrix))))
+			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/DesmondDemon/S_Desmond_Demon_Form.fbx", PivotMatrix))))
 			return E_FAIL;
 	}
 

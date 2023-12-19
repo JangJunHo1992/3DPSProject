@@ -25,7 +25,6 @@ public:
 public:
 	HRESULT Bind_BoneMatrices(class CShader* pShader, const _char* pConstantName, const vector<CBone*>& Bones);
 
-
 protected:
 	_char				m_szName[MAX_PATH];
 	_uint				m_iMaterialIndex = { 0 };
@@ -39,6 +38,7 @@ protected:
 	VTXMESH*			m_pVertices = { nullptr };
 	_uint*				m_pIndices = { nullptr };
 
+	CModel::TYPE		m_eModelType;
 protected:
 	HRESULT Ready_Vertices_NonAnim_Origin(const aiMesh* pAIMesh, _fmatrix PivotMatrix);
 	HRESULT Ready_Vertices_Anim_Origin(const aiMesh* pAIMesh, const vector<class CBone*>& Bones);

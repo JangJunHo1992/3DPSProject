@@ -69,6 +69,8 @@ private:
 
 	void Toggle_PhysXInfo();
 
+	void  Bake_Binary(string strFbxPath);
+
 private:
 	_int CheckPicking(_int ePickMode);
 public:
@@ -112,6 +114,7 @@ public:
 	CImGui_Window* pWindows[EDITER_TYPE::TYPE_END];
 	EDITER_TYPE	eEditorType = EDITER_TYPE::TYPE_END;
 	_int		m_ePickMode = PickMode::NO_PICKING;
+	const aiScene* m_pAIScene = { nullptr };
 
 private: /* For Json */
 	string m_szJsonPath = "../Bin/LevelData/";

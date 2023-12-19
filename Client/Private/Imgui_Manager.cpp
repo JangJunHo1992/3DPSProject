@@ -323,6 +323,43 @@ void CImgui_Manager::Toggle_PhysXInfo()
 {
 }
 
+void CImgui_Manager::Bake_Binary(string strFbxPath)
+{
+	Assimp::Importer AIImpoter;
+
+	string strFbxPath = "";
+
+	m_pAIScene = AIImpoter.ReadFile(strFbxPath);
+
+	//BoneData test;
+	aiNode* pRootNode = m_pAIScene->mRootNode;
+
+	_int iChildrenSize = pRootNode->mNumChildren;
+
+	for (size_t i = 0; i < iChildrenSize; ++i)
+	{
+		aiBone* pBone = pRootNode->mChildren[i];
+
+	}
+
+		//	CBone* pBone = CBone::Create(pAINode, iParentIndex);
+		//if (nullptr == pBone)
+		//	return E_FAIL;
+		//
+		//m_Bones.push_back(pBone);
+		//
+		//_int		iParentIdx = m_Bones.size() - 1;
+		//
+		//for (size_t i = 0; i < pAINode->mNumChildren; i++)
+		//{
+		//	Ready_Bones(pAINode->mChildren[i], iParentIdx);
+		//}
+
+	
+	
+
+}
+
 
 
 _int CImgui_Manager::CheckPicking(_int ePickMode)
