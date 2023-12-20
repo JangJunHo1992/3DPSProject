@@ -23,7 +23,7 @@ HRESULT CModel_Tool::Ready_Meshes(_fmatrix PivotMatrix)
 	return Ready_Meshes_Origin<CMesh_Tool>(PivotMatrix);
 }
 
-CModel_Tool* CModel_Tool::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
+CModel_Tool* CModel_Tool::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, const MODEL_TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
 	CModel_Tool* pInstance = new CModel_Tool(pDevice, pContext);
 

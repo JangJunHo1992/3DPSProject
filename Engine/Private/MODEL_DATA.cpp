@@ -4,7 +4,7 @@
 
 const static _bool g_bUseAssimp = false;
 
-HRESULT MODEL_DATA::Make_ModelData(const char* szFilePath, const CModel::TYPE& In_eModelType, _fmatrix In_TransformMatrix, _bool bAnimZero)
+HRESULT MODEL_DATA::Make_ModelData(const char* szFilePath, const MODEL_TYPE& In_eModelType, _fmatrix In_TransformMatrix, _bool bAnimZero)
 {
     eModelType = In_eModelType;
 
@@ -25,7 +25,7 @@ HRESULT MODEL_DATA::Make_ModelData(const char* szFilePath, const CModel::TYPE& I
         return S_OK;
     }*/
 
-    string          szBinFilePath;
+   
 
     char			szDir[MAX_PATH] = "";
     char			szFileName[MAX_PATH] = "";
@@ -54,7 +54,7 @@ HRESULT MODEL_DATA::Make_ModelData(const char* szFilePath, const CModel::TYPE& I
 
 #ifdef _DEBUG
 
-    if (CModel::TYPE::TYPE_ANIM == eModelType)
+    if (MODEL_TYPE::ANIM == eModelType)
     {
         string szDebugFileName;
 
@@ -269,13 +269,14 @@ _float MODEL_DATA::Get_MaxOffsetRange() const
 HRESULT MODEL_DATA::Load_FromAssimp(const _bool In_bAnimZero)
 {
     const aiScene* pAiSceneModel = nullptr;
-
-    if (CModel::TYPE::TYPE_NONANIM == eModelType)
+    
+    szModelFilePath += ".fbx";
+    if (MODEL_TYPE::NONANIM == eModelType)
     {
         pAiSceneModel = AiImporter.ReadFile(szModelFilePath, aiProcess_PreTransformVertices | aiProcess_ConvertToLeftHanded | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
     }
 
-    else if (CModel::TYPE::TYPE_ANIM == eModelType)
+    else if (MODEL_TYPE::ANIM == eModelType)
     {
         pAiSceneModel = AiImporter.ReadFile(szModelFilePath, aiProcess_ConvertToLeftHanded | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
     }

@@ -5,7 +5,7 @@ BEGIN(Engine)
 
 struct ENGINE_DLL MATERIAL_DATA
 {
-	string                              szTextureName[AI_TEXTURE_TYPE_MAX];
+	string                  szTextureName[AI_TEXTURE_TYPE_MAX];
 
 	HRESULT Make_NodeData(aiMaterial* In_pMaterial);
 

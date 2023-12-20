@@ -1,14 +1,11 @@
 #pragma once
 
 #include "Component.h"
-
+#include "MODEL_DATA.h"
 BEGIN(Engine)
 
 class ENGINE_DLL CModel abstract : public CComponent
 {
-public:
-	enum TYPE { TYPE_NONANIM, TYPE_ANIM, TYPE_END };
-
 public:
 	enum ANIM_STATE { ANIM_STATE_NORMAL, ANIM_STATE_LOOP, ANIM_STATE_REVERSE, ANIM_STATE_STOP, ANIM_STATE_END };
 
@@ -48,13 +45,13 @@ public:
 
 
 public:
-	virtual HRESULT Initialize_Prototype(TYPE eType, const string & strModelFilePath, _fmatrix PivotMatrix);
+	virtual HRESULT Initialize_Prototype(const MODEL_TYPE eType, const string & strModelFilePath, _fmatrix PivotMatrix);
 	virtual HRESULT Initialize(void* pArg);
 	virtual HRESULT Render(_uint iMeshIndex);
 
 public:
 	HRESULT Bind_BoneMatrices(class CShader* pShader, const _char* pConstantName, _uint iMeshIndex);
-	HRESULT Bind_ShaderResource(class CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType);
+	HRESULT Bind_ShaderResource(class CShader* pShader, const _char* pConstantName, _uint iMeshIndex, TextureType eTextureType);
 
 public:
 	void	Play_Animation(_float fTimeDelta);
@@ -66,13 +63,13 @@ public:
 
 
 protected:
-	const aiScene*			m_pAIScene = { nullptr };
-	Assimp::Importer		m_Importer;
-	aiMaterial*				m_pAIMaterial = { nullptr };
+	MODEL_DATA*				m_pAIScene = { nullptr };
+	
+	MATERIAL_DATA*			m_pAIMaterial = { nullptr };
 
 protected:
 	_float4x4				m_PivotMatrix;
-	TYPE					m_eModelType = { TYPE_END };
+	MODEL_TYPE				m_eModelType = {TYPE_END};
 
 	_uint					m_iNumMeshes = { 0 };
 	vector<class CMesh*>	m_Meshes;
@@ -90,7 +87,6 @@ protected:
 	string                          m_szModelFileName;
 	string							m_szTextureName[AI_TEXTURE_TYPE_MAX];
 
-	MESH_VTX_INFO                   m_VertexInfo;
 
 	ANIM_STATE						m_eAnimState = { CModel::ANIM_STATE::ANIM_STATE_END };
 	/* 내 모델의 전체 뼈들을 부모관계를 포함하여 저장한다. */
@@ -105,7 +101,7 @@ protected:
 	virtual HRESULT	Ready_Meshes(_fmatrix PivotMatrix) PURE;
 
 	HRESULT Ready_Materials(const string& strModelFilePath);
-	HRESULT Ready_Bones(aiNode* pAINode, _int iParentIndex);
+	HRESULT Ready_Bones(NODE_DATA* pAINode, _int iParentIndex);
 	HRESULT Ready_Animations();
 
 

@@ -2,7 +2,7 @@
 
 #include "VIBuffer.h"
 #include "Model.h"
-
+#include "MESH_DATA.h"
 BEGIN(Engine)
 
 class CMesh abstract : public CVIBuffer
@@ -18,8 +18,8 @@ public:
 	}
 
 public:
-	HRESULT Initialize_Prototype_Origin(CModel::TYPE eModelType, const aiMesh* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones);
-	virtual HRESULT Initialize_Prototype(CModel::TYPE eModelType, const aiMesh* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones) = 0;
+	HRESULT Initialize_Prototype_Origin(const MODEL_TYPE eModelType, const MESH_DATA* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones);
+	virtual HRESULT Initialize_Prototype(const MODEL_TYPE eModelType, const MESH_DATA* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones) = 0;
 	virtual HRESULT Initialize(void* pArg) override;
 
 public:
@@ -38,13 +38,13 @@ protected:
 	VTXMESH*			m_pVertices = { nullptr };
 	_uint*				m_pIndices = { nullptr };
 
-	CModel::TYPE		m_eModelType;
+	MODEL_TYPE			m_eModelType;
 protected:
-	HRESULT Ready_Vertices_NonAnim_Origin(const aiMesh* pAIMesh, _fmatrix PivotMatrix);
-	HRESULT Ready_Vertices_Anim_Origin(const aiMesh* pAIMesh, const vector<class CBone*>& Bones);
+	HRESULT Ready_Vertices_NonAnim_Origin(const MESH_DATA* pAIMesh, _fmatrix PivotMatrix);
+	HRESULT Ready_Vertices_Anim_Origin(const MESH_DATA* pAIMesh, const vector<class CBone*>& Bones);
 
-	virtual HRESULT Ready_Vertices_NonAnim(const aiMesh* pAIMesh, _fmatrix PivotMatrix) = 0;
-	virtual HRESULT Ready_Vertices_Anim(const aiMesh* pAIMesh, const vector<class CBone*>& Bones) = 0;
+	virtual HRESULT Ready_Vertices_NonAnim(const MESH_DATA* pAIMesh, _fmatrix PivotMatrix) = 0;
+	virtual HRESULT Ready_Vertices_Anim(const MESH_DATA* pAIMesh, const vector<class CBone*>& Bones) = 0;
 
 
 

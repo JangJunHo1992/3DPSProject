@@ -7,7 +7,6 @@
 #include "MATERIAL_DATA.h"
 
 BEGIN(Engine)
-class CModel;
 
 struct ENGINE_DLL MODEL_DATA
 {
@@ -26,15 +25,15 @@ struct ENGINE_DLL MODEL_DATA
 	_uint                               iNumMaterials;
 	_uint                               iNumAnimations;
 
-	CModel::TYPE                        eModelType;
+	MODEL_TYPE                        eModelType;
 
 	string                              szModelFilePath;
 	string                              szModelFileName;
-
+	string								szBinFilePath;
 	MESH_VTX_INFO                       VertexInfo;
 
 
-	HRESULT Make_ModelData(const char* szFilePath, const CModel::TYPE& eInModelType, _fmatrix TransformMatrix, _bool bAnimZero = false);
+	HRESULT Make_ModelData(const char* szFilePath, const MODEL_TYPE& eInModelType, _fmatrix TransformMatrix, _bool bAnimZero = false);
 
 	void OnDestroy();
 	~MODEL_DATA();

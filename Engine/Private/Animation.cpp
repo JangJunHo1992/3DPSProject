@@ -20,21 +20,21 @@ CAnimation::CAnimation(const CAnimation& rhs)
 		Safe_AddRef(pChannel);
 }
 
-HRESULT CAnimation::Initialize(const aiAnimation* pAIAnimation, const CModel::BONES& Bones)
+HRESULT CAnimation::Initialize(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones)
 {
-	strcpy_s(m_szName, pAIAnimation->mName.data);
+	strcpy_s(m_szName, pAIAnimation->szName.c_str());
 
-	m_fDuration = (_float)pAIAnimation->mDuration;
-	m_fTickPerSecond = (_float)pAIAnimation->mTicksPerSecond;
+	m_fDuration = (_float)pAIAnimation->fDuration;
+	m_fTickPerSecond = (_float)pAIAnimation->fTickPerSecond;
 
-	m_iNumChannels = pAIAnimation->mNumChannels;
+	m_iNumChannels = pAIAnimation->iNumChannels;
 
 	m_CurrentKeyFrames.resize(m_iNumChannels);
 
 	/* 이 애니메이션에서 사용하기위한 뼈(aiNodeAnim,채널)의 정보를 만든다. */
 	for (size_t i = 0; i < m_iNumChannels; i++)
 	{
-		CChannel* pChannel = CChannel::Create(pAIAnimation->mChannels[i], Bones);
+		CChannel* pChannel = CChannel::Create(pAIAnimation->Channel_Datas[i], Bones);
 		if (nullptr == pChannel)
 			return E_FAIL;
 
@@ -121,7 +121,7 @@ CChannel* CAnimation::Get_Channel_By_BoneIndex(_uint _iBoneIndex)
 }
 
 
-CAnimation* CAnimation::Create(const aiAnimation* pAIAnimation, const CModel::BONES& Bones)
+CAnimation* CAnimation::Create(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones)
 {
 	CAnimation* pInstance = new CAnimation();
 

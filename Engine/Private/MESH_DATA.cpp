@@ -1,6 +1,6 @@
 #include "MESH_DATA.h"
 
-HRESULT MESH_DATA::Make_MeshData(const CModel::TYPE& In_eModelType, aiMesh* In_pAiMesh, const _fmatrix& In_TransformMatrix, MESH_VTX_INFO* In_pVertexInfo)
+HRESULT MESH_DATA::Make_MeshData(const MODEL_TYPE& In_eModelType, aiMesh* In_pAiMesh, const _fmatrix& In_TransformMatrix, MESH_VTX_INFO* In_pVertexInfo)
 {
 	szName = In_pAiMesh->mName.C_Str();
 	eModelType = In_eModelType;
@@ -10,7 +10,7 @@ HRESULT MESH_DATA::Make_MeshData(const CModel::TYPE& In_eModelType, aiMesh* In_p
 	iMaterialIndex = In_pAiMesh->mMaterialIndex;
 
 	// 애니메이션
-	if (CModel::TYPE::TYPE_ANIM == In_eModelType)
+	if (MODEL_TYPE::ANIM == In_eModelType)
 	{
 		for (_uint i(0); i < iNumBones; i++)
 		{
@@ -39,7 +39,6 @@ HRESULT MESH_DATA::Make_MeshData(const CModel::TYPE& In_eModelType, aiMesh* In_p
 		for (_uint i(0); i < iNumBones; ++i)
 		{
 			aiBone* pAIBone = In_pAiMesh->mBones[i];
-
 			/* pAIBone->mNumWeights : 이 뼈는 몇개의 정점에 영향릉 주는지 */
 			for (_uint j(0); j < pAIBone->mNumWeights; ++j)
 			{
@@ -75,7 +74,7 @@ HRESULT MESH_DATA::Make_MeshData(const CModel::TYPE& In_eModelType, aiMesh* In_p
 	}
 
 	// 애니메이션이 아님
-	else if (CModel::TYPE::TYPE_NONANIM == In_eModelType)
+	else if (MODEL_TYPE::NONANIM == In_eModelType)
 	{
 		pVertices = new VTXMESH[iNumVertices];
 		pPosVertices = new VTXPOS[iNumVertices];
@@ -140,7 +139,7 @@ void MESH_DATA::Bake_Binary(ofstream& os)
 	write_typed_data(os, iNumBones);
 	write_typed_data(os, iMaterialIndex);
 
-	if (CModel::TYPE_ANIM == eModelType)
+	if (MODEL_TYPE::ANIM == eModelType)
 	{
 		for (_uint i(0); i < iNumBones; i++)
 			Bone_Datas[i]->Bake_Binary(os);
@@ -149,7 +148,7 @@ void MESH_DATA::Bake_Binary(ofstream& os)
 			write_typed_data(os, pAnimVertices[i]);
 	}
 
-	else if (CModel::TYPE_NONANIM == eModelType)
+	else if (MODEL_TYPE::NONANIM == eModelType)
 	{
 		for (_uint i(0); i < iNumVertices; ++i)
 			write_typed_data(os, pVertices[i]);
@@ -181,7 +180,7 @@ void MESH_DATA::Load_FromBinary(ifstream& is)
 	read_typed_data(is, iNumBones);
 	read_typed_data(is, iMaterialIndex);
 
-	if (CModel::TYPE_ANIM == eModelType)
+	if (MODEL_TYPE::ANIM == eModelType)
 	{
 		for (_uint i(0); i < iNumBones; i++)
 		{
@@ -199,7 +198,7 @@ void MESH_DATA::Load_FromBinary(ifstream& is)
 
 	}
 
-	else if (CModel::TYPE_NONANIM == eModelType)
+	else if (MODEL_TYPE::NONANIM == eModelType)
 	{
 		pVertices = new VTXMESH[iNumVertices];
 		//pPosVertices = shared_ptr<VTXPOS[]>(DBG_NEW VTXPOS[iNumVertices]);

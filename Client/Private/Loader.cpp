@@ -168,7 +168,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		/* For.Prototype_Component_Model_Fiona */
 		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
-			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/DesmondDemon/S_Desmond_Demon_Form.fbx", PivotMatrix))))
+			CModel_GamePlay::Create(m_pDevice, m_pContext,MODEL_TYPE::ANIM, "../Bin/Resources/Models/DesmondDemon/S_Desmond_Demon_Form", PivotMatrix))))
 			return E_FAIL;
 	}
 
@@ -176,7 +176,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	{
 		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Model_Raider_Tool"),
-			CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/King/King.fbx", PivotMatrix))))
+			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::NONANIM, "../Bin/Resources/Models/King/King", PivotMatrix))))
 			return E_FAIL;
 	}
 	else
@@ -184,7 +184,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		/* For.Prototype_Component_Model_ForkLift */
 		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift_GamePlay"),
-			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift.fbx", PivotMatrix))))
+			CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift", PivotMatrix))))
 			return E_FAIL;
 	}
 

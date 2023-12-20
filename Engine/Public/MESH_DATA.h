@@ -1,7 +1,6 @@
 #pragma once
 #include "Base.h"
 #include "BONE_DATA.h"
-#include "Model.h"
 BEGIN(Engine)
 
 struct ENGINE_DLL MESH_DATA
@@ -13,15 +12,14 @@ struct ENGINE_DLL MESH_DATA
 	FACEINDICES32*						pIndices;
 
 	string                              szName;
-
 	_uint                               iNumVertices;
 	_uint                               iNumFaces;
 	_uint                               iNumBones;
 	_uint                               iMaterialIndex;
 
-	CModel::TYPE                        eModelType;
+	MODEL_TYPE							eModelType;
 
-	HRESULT Make_MeshData(const CModel::TYPE& In_eModelType, aiMesh* In_pAiMesh, const _fmatrix& In_TransformMatrix, MESH_VTX_INFO* In_pVertexInfo);
+	HRESULT Make_MeshData(const MODEL_TYPE& In_eModelType, aiMesh* In_pAiMesh, const _fmatrix& In_TransformMatrix, MESH_VTX_INFO* In_pVertexInfo);
 
 public:
 	void Bake_Binary(ofstream& os);

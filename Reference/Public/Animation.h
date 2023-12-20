@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Model.h"
-
+#include "ANIMATION_DATA.h"
 /* 특정 애니메이션(대기, 걷기, 뛰기, 때리기, 맞기) 을 표현하기위한 데이터들을 가진다. */
 
 BEGIN(Engine)
@@ -17,7 +17,7 @@ private:
 	virtual ~CAnimation() = default;
 
 public:
-	HRESULT Initialize(const aiAnimation* pAIAnimation, const CModel::BONES& Bones);
+	HRESULT Initialize(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones);
 	_bool Invalidate_TransformationMatrix(CModel::ANIM_STATE _eAnimState, _float fTimeDelta, const CModel::BONES& Bones);
 
 public:
@@ -49,7 +49,7 @@ private:
 	_float					m_fTransitionDuration = { 0.f };
 
 public:
-	static CAnimation* Create(const aiAnimation* pAIAnimation, const CModel::BONES& Bones);
+	static CAnimation* Create(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones);
 	CAnimation* Clone();
 	virtual void Free() override;
 };

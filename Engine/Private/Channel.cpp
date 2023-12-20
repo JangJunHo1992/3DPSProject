@@ -5,9 +5,9 @@ CChannel::CChannel()
 {
 }
 
-HRESULT CChannel::Initialize(const aiNodeAnim* pChannel, const CModel::BONES& Bones)
+HRESULT CChannel::Initialize(const CHANNEL_DATA* pChannel, const CModel::BONES& Bones)
 {
-	strcpy_s(m_szName, pChannel->mNodeName.data);
+	strcpy_s(m_szName, pChannel->szNodeName.c_str());
 
 	_uint		iBoneIndex = { 0 };
 
@@ -28,8 +28,8 @@ HRESULT CChannel::Initialize(const aiNodeAnim* pChannel, const CModel::BONES& Bo
 
 	m_iBoneIndex = iBoneIndex;
 
-	m_iNumKeyFrames = max(pChannel->mNumScalingKeys, pChannel->mNumRotationKeys);
-	m_iNumKeyFrames = max(pChannel->mNumPositionKeys, m_iNumKeyFrames);
+	m_iNumKeyFrames = max(pChannel->iNumScalingKeys, pChannel->iNumRotationKeys);
+	m_iNumKeyFrames = max(pChannel->iNumPositionKeys, m_iNumKeyFrames);
 
 	_float3		vScale;
 	_float4		vRotation;
@@ -39,24 +39,24 @@ HRESULT CChannel::Initialize(const aiNodeAnim* pChannel, const CModel::BONES& Bo
 	{
 		KEYFRAME			KeyFrame = {};
 
-		if (i < pChannel->mNumScalingKeys)
+		if (i < pChannel->iNumScalingKeys)
 		{
-			memcpy(&vScale, &pChannel->mScalingKeys[i].mValue, sizeof(_float3));
-			KeyFrame.fTrackPosition = pChannel->mScalingKeys[i].mTime;
+			memcpy(&vScale, &pChannel->tKeyFrames[i].vScale, sizeof(_float3));
+			KeyFrame.fTrackPosition = pChannel->tKeyFrames[i].fTrackPosition;
 		}
-		if (i < pChannel->mNumRotationKeys)
+		if (i < pChannel->iNumRotationKeys)
 		{
 			// memcpy(&vRotation, &pChannel->mRotationKeys[i].mValue, sizeof(_float4));
-			vRotation.x = pChannel->mRotationKeys[i].mValue.x;
-			vRotation.y = pChannel->mRotationKeys[i].mValue.y;
-			vRotation.z = pChannel->mRotationKeys[i].mValue.z;
-			vRotation.w = pChannel->mRotationKeys[i].mValue.w;
-			KeyFrame.fTrackPosition = pChannel->mRotationKeys[i].mTime;
+			vRotation.x = pChannel->tKeyFrames[i].vRotation.x;
+			vRotation.y = pChannel->tKeyFrames[i].vRotation.y;
+			vRotation.z = pChannel->tKeyFrames[i].vRotation.z;
+			vRotation.w = pChannel->tKeyFrames[i].vRotation.w;
+			KeyFrame.fTrackPosition = pChannel->tKeyFrames[i].fTrackPosition;
 		}
-		if (i < pChannel->mNumPositionKeys)
+		if (i < pChannel->iNumPositionKeys)
 		{
-			memcpy(&vPosition, &pChannel->mPositionKeys[i].mValue, sizeof(_float3));
-			KeyFrame.fTrackPosition = pChannel->mPositionKeys[i].mTime;
+			memcpy(&vPosition, &pChannel->tKeyFrames[i].vPosition, sizeof(_float3));
+			KeyFrame.fTrackPosition = pChannel->tKeyFrames[i].fTrackPosition;
 		}
 
 		KeyFrame.vScale = vScale;
@@ -257,7 +257,7 @@ void CChannel::Set_Transition(KEYFRAME _StartFrame, KEYFRAME _EndFrame, _float* 
 
 
 
-CChannel* CChannel::Create(const aiNodeAnim* pChannel, const CModel::BONES& Bones)
+CChannel* CChannel::Create(const CHANNEL_DATA* pChannel, const CModel::BONES& Bones)
 {
 	CChannel* pInstance = new CChannel();
 

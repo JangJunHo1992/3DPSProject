@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Model.h"
-
+#include "NODE_DATA.h"
 BEGIN(Engine)
 
 class CBone final : public CBase
@@ -24,7 +24,7 @@ public:
 	}
 
 public:
-	HRESULT Initialize(aiNode* pAINode, _int iParentIndex);
+	HRESULT Initialize(NODE_DATA* pAINode, _int iParentIndex);
 	void Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatrix PivotMatrix);
 
 private:
@@ -38,7 +38,7 @@ private:
 	_float4x4			m_CombinedTransformationMatrix;
 
 public:
-	static CBone* Create(aiNode* pAINode, _int iParentIndex);
+	static CBone* Create(NODE_DATA* pAINode, _int iParentIndex);
 	CBone* Clone();
 	virtual void Free() override;
 };
