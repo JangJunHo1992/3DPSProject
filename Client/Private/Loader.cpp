@@ -175,8 +175,13 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	if (LEVEL_TOOL == eLEVEL)
 	{
 		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Model_Fiona_Tool"),
+			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/DesmondDemon/S_Desmond_Demon_Form", PivotMatrix))))
+			return E_FAIL;
+
+		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Model_Raider_Tool"),
-			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::NONANIM, "../Bin/Resources/Models/King/King", PivotMatrix))))
+			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/King/King", PivotMatrix))))
 			return E_FAIL;
 	}
 	else
@@ -270,6 +275,10 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		/* For.Prototype_GameObject_Raider */
 		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Raider_Tool"),
 			CRaider_Tool::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Monster_Tool"),
+			CMonster_Tool::Create(m_pDevice, m_pContext))))
 			return E_FAIL;
 	}
 	else 

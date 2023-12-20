@@ -143,6 +143,8 @@ void CLevel_MapTool::Create_Object(const wstring& strLayerTag, const wstring& st
 void CLevel_MapTool::Create_Raider()
 {
 	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Raider_Tool"));
+	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Monster_Tool"));
+
 }
 
 void CLevel_MapTool::Resize_Plane(_ushort x, _ushort z)
@@ -202,7 +204,8 @@ HRESULT CLevel_MapTool::Ready_Layer_Monster(const wstring& strLayerTag)
 {
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Raider_Tool"))))
 		return E_FAIL;
-
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Monster_Tool"))))
+		return E_FAIL;
 	return S_OK;
 }
 

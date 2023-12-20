@@ -30,7 +30,8 @@ HRESULT CRaider::Initialize(void* pArg)
 
 	if (FAILED(Ready_Components()))
 		return E_FAIL;
-
+	m_pModelCom->Set_Animation(rand() % 20, CModel::ANIM_STATE_LOOP, false);
+	//m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(rand() % 20, 0.f, rand() % 20, 1.f));
 	return S_OK;
 }
 
@@ -43,7 +44,7 @@ void CRaider::Priority_Tick(_float fTimeDelta)
 
 void CRaider::Tick(_float fTimeDelta)
 {
-
+	m_pModelCom->Play_Animation(fTimeDelta);
 }
 
 void CRaider::Late_Tick(_float fTimeDelta)
@@ -61,6 +62,8 @@ HRESULT CRaider::Render()
 
 	for (size_t i = 0; i < iNumMeshes; i++)
 	{
+		m_pModelCom->Bind_BoneMatrices(m_pShaderCom, "g_BoneMatrices", i);
+
 		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, Type_DIFFUSE);
 
 		m_pShaderCom->Begin(0);
@@ -81,7 +84,7 @@ void CRaider::Write_Json(json& Out_Json)
 HRESULT CRaider::Ready_Components_Origin()
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Shader_Model"),
+	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Shader_AnimModel"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
 
