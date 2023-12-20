@@ -14,7 +14,7 @@ namespace Engine
 
 	}GRAPHIC_DESC;
 
-	typedef struct
+	typedef struct tagMaterialDesc
 	{
 		class CTexture* pMtrlTextures[AI_TEXTURE_TYPE_MAX];
 	}MATERIAL_DESC;
@@ -26,6 +26,11 @@ namespace Engine
 		static const unsigned int					iNumElements = 1;
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXPOS;
+
+	typedef struct tagFaceIndices32
+	{
+		unsigned long _1, _2, _3;
+	}FACEINDICES32;
 
 	typedef struct ENGINE_DLL tagVertex_Position_Texcoord
 	{
@@ -52,6 +57,14 @@ namespace Engine
 		_long      lZ;
 		BYTE      Buttons[4];
 	} DIMOUSESTATE, * LPDIMOUSESTATE;
+
+	typedef struct tag_MeshVertextPostion
+	{
+		_float3 vMin;
+		_float3 vMax;
+		_float3 vCenter;
+
+	} MESH_VTX_INFO;
 
 	typedef struct ENGINE_DLL tagMeshDesc // <- 이런 식으로. 원래 없었음
 	{

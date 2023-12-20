@@ -27,6 +27,11 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXPOS;
 
+	typedef struct tagFaceIndices32
+	{
+		unsigned long _1, _2, _3;
+	}FACEINDICES32;
+
 	typedef struct ENGINE_DLL tagVertex_Position_Texcoord
 	{
 		XMFLOAT3		vPosition;

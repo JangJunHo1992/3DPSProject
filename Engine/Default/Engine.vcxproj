@@ -190,12 +190,15 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Animation.h" />
+    <ClInclude Include="..\Public\ANIMATION_DATA.h" />
     <ClInclude Include="..\public\Base.h" />
     <ClInclude Include="..\Public\Bone.h" />
+    <ClInclude Include="..\Public\BONE_DATA.h" />
     <ClInclude Include="..\Public\BrainTree.h" />
     <ClInclude Include="..\Public\Camera.h" />
     <ClInclude Include="..\Public\Cell.h" />
     <ClInclude Include="..\Public\Channel.h" />
+    <ClInclude Include="..\Public\CHANNEL_DATA.h" />
     <ClInclude Include="..\Public\Character.h" />
     <ClInclude Include="..\public\Component.h" />
     <ClInclude Include="..\Public\Component_Manager.h" />
@@ -214,13 +217,17 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClInclude Include="..\Public\Layer.h" />
     <ClInclude Include="..\public\Level.h" />
     <ClInclude Include="..\public\Level_Manager.h" />
+    <ClInclude Include="..\Public\MATERIAL_DATA.h" />
     <ClInclude Include="..\Public\Mesh.h" />
+    <ClInclude Include="..\Public\MESH_DATA.h" />
     <ClInclude Include="..\Public\Mesh_GamePlay.h" />
     <ClInclude Include="..\Public\Mesh_Tool.h" />
     <ClInclude Include="..\Public\Model.h" />
+    <ClInclude Include="..\Public\MODEL_DATA.h" />
     <ClInclude Include="..\Public\Model_GamePlay.h" />
     <ClInclude Include="..\Public\Model_Tool.h" />
     <ClInclude Include="..\Public\Navigation.h" />
+    <ClInclude Include="..\Public\NODE_DATA.h" />
     <ClInclude Include="..\public\Object_Manager.h" />
     <ClInclude Include="..\Public\PipeLine.h" />
     <ClInclude Include="..\Public\RapidJson.h" />
@@ -241,11 +248,14 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Animation.cpp" />
+    <ClCompile Include="..\Private\ANIMATION_DATA.cpp" />
     <ClCompile Include="..\private\Base.cpp" />
     <ClCompile Include="..\Private\Bone.cpp" />
+    <ClCompile Include="..\Private\BONE_DATA.cpp" />
     <ClCompile Include="..\Private\Camera.cpp" />
     <ClCompile Include="..\Private\Cell.cpp" />
     <ClCompile Include="..\Private\Channel.cpp" />
+    <ClCompile Include="..\Private\CHANNEL_DATA.cpp" />
     <ClCompile Include="..\Private\Character.cpp" />
     <ClCompile Include="..\private\Component.cpp" />
     <ClCompile Include="..\Private\Component_Manager.cpp" />
@@ -258,13 +268,17 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClCompile Include="..\Private\Layer.cpp" />
     <ClCompile Include="..\private\Level.cpp" />
     <ClCompile Include="..\private\Level_Manager.cpp" />
+    <ClCompile Include="..\Private\MATERIAL_DATA.cpp" />
     <ClCompile Include="..\Private\Mesh.cpp" />
+    <ClCompile Include="..\Private\MESH_DATA.cpp" />
     <ClCompile Include="..\Private\Mesh_GamePlay.cpp" />
     <ClCompile Include="..\Private\Mesh_Tool.cpp" />
     <ClCompile Include="..\Private\Model.cpp" />
+    <ClCompile Include="..\Private\MODEL_DATA.cpp" />
     <ClCompile Include="..\Private\Model_GamePlay.cpp" />
     <ClCompile Include="..\Private\Model_Tool.cpp" />
     <ClCompile Include="..\Private\Navigation.cpp" />
+    <ClCompile Include="..\Private\NODE_DATA.cpp" />
     <ClCompile Include="..\private\Object_Manager.cpp" />
     <ClCompile Include="..\Private\PipeLine.cpp" />
     <ClCompile Include="..\Private\RapidJson.cpp" />

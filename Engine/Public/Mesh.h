@@ -2,7 +2,7 @@
 
 #include "VIBuffer.h"
 #include "Model.h"
-
+#include "MESH_DATA.h"
 BEGIN(Engine)
 
 class CMesh abstract : public CVIBuffer

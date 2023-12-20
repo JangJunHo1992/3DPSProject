@@ -47,10 +47,6 @@ public:
 	}
 
 
-	
-
-
-
 public:
 	virtual HRESULT Initialize_Prototype(TYPE eType, const string & strModelFilePath, _fmatrix PivotMatrix);
 	virtual HRESULT Initialize(void* pArg);

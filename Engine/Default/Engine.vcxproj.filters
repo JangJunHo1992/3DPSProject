@@ -157,6 +157,30 @@
     <Filter Include="98.ShaderFiles">
       <UniqueIdentifier>{5f93ed6c-e779-45f0-b182-344e51c83a58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\97.DATA">
+      <UniqueIdentifier>{d156f5ac-32fd-46b4-8033-d738e0c85c4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.DATA\AnimationData">
+      <UniqueIdentifier>{9f41b939-a222-4cfa-b25d-4289644fbb32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.DATA\ModelData">
+      <UniqueIdentifier>{295e3f78-2312-4ef5-b296-e9a343b855c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.DATA\MeshData">
+      <UniqueIdentifier>{745cc1b9-66d7-441e-821a-ae3b2286bb48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.DATA\MaterialData">
+      <UniqueIdentifier>{49bf7cca-5eea-4f53-96a8-e40c7e988d1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.DATA\BoneData">
+      <UniqueIdentifier>{6b05fa11-61f9-4c6e-ae07-b36b618c92f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.DATA\ChannelData">
+      <UniqueIdentifier>{45c11753-74f3-49c4-8ddf-ab243ba3cff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.DATA\NodeData">
+      <UniqueIdentifier>{d1262ff3-3302-4fd7-b166-da7390da0feb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -306,6 +330,27 @@
     <ClInclude Include="..\Public\Model.h">
       <Filter>01.Utility\03.Components\05.Model\Model</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\MODEL_DATA.h">
+      <Filter>01.Utility\97.DATA\ModelData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ANIMATION_DATA.h">
+      <Filter>01.Utility\97.DATA\AnimationData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MESH_DATA.h">
+      <Filter>01.Utility\97.DATA\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\NODE_DATA.h">
+      <Filter>01.Utility\97.DATA\NodeData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MATERIAL_DATA.h">
+      <Filter>01.Utility\97.DATA\MaterialData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CHANNEL_DATA.h">
+      <Filter>01.Utility\97.DATA\ChannelData</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BONE_DATA.h">
+      <Filter>01.Utility\97.DATA\BoneData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Base.cpp">
@@ -442,6 +487,27 @@
     </ClCompile>
     <ClCompile Include="..\Private\Model.cpp">
       <Filter>01.Utility\03.Components\05.Model\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MODEL_DATA.cpp">
+      <Filter>01.Utility\97.DATA\ModelData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ANIMATION_DATA.cpp">
+      <Filter>01.Utility\97.DATA\AnimationData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MESH_DATA.cpp">
+      <Filter>01.Utility\97.DATA\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\NODE_DATA.cpp">
+      <Filter>01.Utility\97.DATA\NodeData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MATERIAL_DATA.cpp">
+      <Filter>01.Utility\97.DATA\MaterialData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CHANNEL_DATA.cpp">
+      <Filter>01.Utility\97.DATA\ChannelData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BONE_DATA.cpp">
+      <Filter>01.Utility\97.DATA\BoneData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
