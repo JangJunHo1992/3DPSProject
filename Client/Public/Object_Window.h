@@ -31,11 +31,29 @@ public:
 	wchar_t* ConvertCtoWC(const char* str);
 public:
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
+	_bool Check_ImGui_Rect();
+public://guizmo
+	void ImGuizmo_Initialize();
+	void Set_GuizmoCamProj();
+	void Set_GuizmoCamView();
+	void Setup_Guizmo();
+	void Compress_Guizmo_Mode();
+	ImGuizmo::OPERATION		mCurrentGizmoOperation;
+	ImGuizmo::MODE			mCurrentGizmoMode;
+
+public://guizmo 변수
+	_float* m_arrView = { nullptr };
+	_float* m_arrProj = { nullptr };
+	_float  snap[3] = { 1.f,1.f,1.f }; //1틱 움직이는 거리
+	_bool	useSnap = { false };
+
+public:
+	vector<string>	Get_ObjectTag() { return m_vObjectTag; }
 public:
 	CTerrain_Tool*			m_pTerrain = nullptr;
 	CGameInstance*			m_pGameInstance = { nullptr };
 	CLevel_MapTool*			m_pLevel_MapTool = { nullptr };
-
+	CGameObject*			m_PickingObject = { nullptr };
 public:
 	vector<string>			m_vObjectTag;
 	vector<CGameObject*>	m_CreateList;
@@ -44,7 +62,11 @@ public:
 	_bool					m_bguizmo =false;
 	_bool					m_Terrain_Mesh = false;
 	_bool					m_bCreateCheck = false;
-	
+	_bool					m_bDeleteCheck = false;
+	_bool					m_bListCheck = false;
+	_bool					m_bCloneCount = false;
+
+	_int					m_iCreateObjectSize = 0;
 public:
 	virtual void Free() override;
 };

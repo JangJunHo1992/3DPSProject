@@ -6,8 +6,8 @@
 BEGIN(Engine)
 class CShader;
 class CTexture;
-class CVIBuffer_Dynamic_Terrain_Origin;
 class CNavigation;
+class CVIBuffer_Dynamic_Terrain_Origin;
 
 END
 
@@ -32,14 +32,15 @@ public:
 	virtual HRESULT Render() override;
 
 public:
-	
 	virtual void Write_Json(json& Out_Json) override;
+	_bool		IsPlane() { return m_bIsPlane; }
 
 protected:
 	CShader*							m_pShaderCom = { nullptr };
 	CTexture*							m_pTextureCom[TYPE_END] = { nullptr };
-	CVIBuffer_Dynamic_Terrain_Origin*	m_pVIBufferCom = { nullptr };
 	CNavigation*						m_pNavigationCom = { nullptr };
+	CVIBuffer_Dynamic_Terrain_Origin*	m_pVIBufferCom = { nullptr };
+
 
 	_bool								m_bIsPlane = false;
 

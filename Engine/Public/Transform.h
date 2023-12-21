@@ -70,7 +70,7 @@ public:
 	HRESULT Initialize_Prototype(_float fSpeedPerSec, _float fRotationPerSec);
 
 public:
-	void Go_Straight(_float fTimeDelta);
+	void Go_Straight(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 	void Go_Left(_float fTimeDelta);
 	void Go_Right(_float fTimeDelta);
 	void Go_Backward(_float fTimeDelta);
@@ -88,6 +88,17 @@ public:
 		_float4 vPos;
 		XMStoreFloat4(&vPos, vPosVec);
 		Set_State(STATE::STATE_POSITION, vPos);
+	}
+
+	void Add_Position(const _float3& vState)
+	{
+		_vector vPosVec = XMLoadFloat3(&vState);
+		//_float4 vPos;
+		//XMStoreFloat4(&vPos, vPosVec);
+		m_WorldMatrix.m[STATE::STATE_POSITION][0] += vState.x;
+		m_WorldMatrix.m[STATE::STATE_POSITION][1] += vState.y;
+		m_WorldMatrix.m[STATE::STATE_POSITION][2] += vState.z;
+
 	}
 
 public:

@@ -16,10 +16,17 @@ private:
 	virtual ~CVIBuffer_Dynamic_Plane() = default;
 
 public:
-	virtual HRESULT Initialize_Prototype(_ushort x, _ushort z);
+	virtual HRESULT Initialize_Prototype();
 	virtual HRESULT Initialize_Prototype(const wstring & strHeightMapFilePath) { return S_OK; };
 
 	virtual HRESULT Initialize(void* pArg) override;
+
+public:
+	void	Set_Size(_ushort _iSizeX, _ushort _iSizeZ);
+
+private:
+	_ushort		m_iSizeX = { 0 };
+	_ushort		m_iSizeZ = { 0 };
 
 
 public:

@@ -3,6 +3,12 @@
 #include "../../Reference/Imgui/imgui.h"
 #include "../../Reference/Imgui/imgui_impl_win32.h"
 #include "../../Reference/Imgui/imgui_impl_dx11.h"
+#include "../../Reference/Imgui/ImGuiFileDialog/ImGuiFileDialog.h"
+#include "../../Reference/Imgui/ImGuizmo/ImGuizmo.h"
+#include "../../Reference/Imgui/ImGuizmo/ImSequencer.h"
+#include "../../Reference/Imgui/ImGuizmo/ImZoomSlider.h"
+#include "../../Reference/Imgui/ImGuizmo/ImCurveEdit.h"
+#include "../../Reference/Imgui/ImGuizmo/GraphEditor.h"
 #include <d3d11.h>
 #include <tchar.h>
 
@@ -69,7 +75,7 @@ void CImgui_Manager::Render()
 	ImGui_ImplWin32_NewFrame();
 
 	ImGui::NewFrame();
-
+	ImGuizmo::BeginFrame();
 	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
 
 	ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -87,6 +93,7 @@ void CImgui_Manager::Render()
 
 	ImGui::SetNextWindowSize(ImVec2(g_iWinSizeX, g_iWinSizeY), ImGuiCond_Always);
 	ImGui::Begin("Dock", nullptr, window_flags);
+	Check_ImGui_Rect();
 	ImGui::PopStyleVar(2);
 	ImGuiID dockspaceID = ImGui::GetID("DockSpace");
 	ImGui::DockSpace(dockspaceID, ImVec2(0, 0), dockspaceFlags);
@@ -107,8 +114,9 @@ void CImgui_Manager::Render()
 			}
 			if (ImGui::MenuItem("Load"))
 			{
-				Load_Objects_With_Json(LEVEL::LEVEL_TOOL, "Test1");
-
+				//Load_Objects_With_Json(LEVEL::LEVEL_TOOL, "Test1");
+				m_bdialogCheck = true;
+				
 			}
 	
 			ImGui::EndMenu();
@@ -163,6 +171,37 @@ void CImgui_Manager::Render()
 
 		ImGui::EndMainMenuBar();
 	}
+	static bool canValidateDialog = false;
+	
+	if (m_bdialogCheck)
+	{
+		if (ImGui::Button("Open File Dialog"))
+			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".fbx,.bin,.png,.dds",
+				".", 1, nullptr, ImGuiFileDialogFlags_Modal);
+
+		// display
+		if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+		{
+			if (ImGuiFileDialog::Instance()->IsOk())
+			{
+				std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+				std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+				std::string filter = ImGuiFileDialog::Instance()->GetCurrentFilter();
+				// here convert from string because a string was passed as a userDatas, but it can be what you want
+				std::string userDatas;
+				if (ImGuiFileDialog::Instance()->GetUserDatas())
+					userDatas = std::string((const char*)ImGuiFileDialog::Instance()->GetUserDatas());
+				auto selection = ImGuiFileDialog::Instance()->GetSelection(); // multiselection
+
+				// action
+			}
+			// close
+			ImGuiFileDialog::Instance()->Close();
+			m_bdialogCheck = false;
+		}
+	}
+	
+
 	ImGui::Render();
 
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -283,8 +322,6 @@ HRESULT CImgui_Manager::Load_Objects_With_Json(_uint iLevelIndex, string filePat
 void CImgui_Manager::Toggle_PhysXInfo()
 {
 }
-
-
 
 _int CImgui_Manager::CheckPicking(_int ePickMode)
 {
@@ -441,3 +478,19 @@ char* CImgui_Manager::ConverWStringtoC(const wstring& wstr)
 	return result;
 }
 
+_bool CImgui_Manager::Check_ImGui_Rect()
+{
+	POINT tMouse = {};
+	GetCursorPos(&tMouse);
+	ScreenToClient (m_pGameInstance->Get_GraphicDesc().hWnd, &tMouse);
+	
+	ImVec2 windowPos = ImGui::GetWindowPos(); //왼쪽상단모서리점
+	ImVec2 windowSize = ImGui::GetWindowSize();
+
+	if (tMouse.x >= windowPos.x && tMouse.x <= windowPos.x + windowSize.x &&
+		tMouse.y >= windowPos.y && tMouse.y <= windowPos.y + windowSize.y)
+	{
+		return false; //ImGui 영역 내
+	}
+	return true; //ImGui 영역이랑 안 겹침!
+}

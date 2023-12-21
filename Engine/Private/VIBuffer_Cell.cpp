@@ -1,4 +1,4 @@
-#include "VIBuffer_Cell.h"
+#include "..\Public\VIBuffer_Cell.h"
 
 CVIBuffer_Cell::CVIBuffer_Cell(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CVIBuffer(pDevice, pContext)

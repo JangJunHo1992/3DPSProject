@@ -31,7 +31,7 @@ _bool CMonster_Tool::Pick(_float3* out)
 
 HRESULT CMonster_Tool::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin()))
+	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_TOOL)))
 		return E_FAIL;
 
 	/* For.Com_Model */

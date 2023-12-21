@@ -26,7 +26,7 @@ namespace Engine
 	typedef		size_t						_hashcode;
 
 	/* 저장용 데이터 타입. */
-/*	typedef		XMFLOAT4X4					_float4x4;*/
+	typedef		XMFLOAT4X4					__float4x4;
 
 	/* 연산용 데이터 타입. */
 // 	typedef		XMMATRIX					_matrix;

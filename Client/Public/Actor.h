@@ -12,7 +12,7 @@ public:
 	virtual ~CActor();
 
 public:
-	void	Update_State();
+	void	Update_State(_float fTimeDelta);
 	void	Set_State(CState<T>* _pState);
 	void	Free();
 

@@ -1,5 +1,7 @@
 #include "..\Public\Raider_GamePlay.h"
 
+#include "GreatDualBlade_Idle.h"
+
 CRaider_GamePlay::CRaider_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CRaider(pDevice, pContext)
 {
@@ -12,7 +14,7 @@ CRaider_GamePlay::CRaider_GamePlay(const CRaider_GamePlay& rhs)
 
 HRESULT CRaider_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin()))
+	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_GAMEPLAY)))
 		return E_FAIL;
 
 	/* For.Com_Model */
@@ -21,6 +23,22 @@ HRESULT CRaider_GamePlay::Ready_Components()
 		return E_FAIL;
 
 	return S_OK;
+}
+
+HRESULT CRaider_GamePlay::Initialize(void* pArg)
+{
+	__super::Initialize(pArg);
+
+	m_pActor = new CActor<CRaider_GamePlay>(this);
+	m_pActor->Set_State(new CGreatDualBlade_Idle());
+
+	return S_OK;
+}
+
+void CRaider_GamePlay::Tick(_float fTimeDelta)
+{
+	__super::Tick(fTimeDelta);
+	m_pActor->Update_State(fTimeDelta);
 }
 
 CRaider_GamePlay* CRaider_GamePlay::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)

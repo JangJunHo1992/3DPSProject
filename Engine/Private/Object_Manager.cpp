@@ -67,6 +67,15 @@ HRESULT CObject_Manager::Add_CloneObject(_uint iLevelIndex, const wstring & strL
 	return S_OK;
 }
 
+CGameObject* CObject_Manager::Clone_Prototype(const wstring& strPrototypeTag, void* pArg)
+{
+	CGameObject* pPrototype = Find_Prototype(strPrototypeTag);
+	if (nullptr == pPrototype)
+		return nullptr;
+
+	return pPrototype->Clone(pArg);
+}
+
 HRESULT CObject_Manager::Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject, void* pArg)
 {
 	if (nullptr == pGameObject)
@@ -101,6 +110,8 @@ void CObject_Manager::Priority_Tick(_float fTimeDelta)
 		for (auto& Pair : m_pLayers[i])
 		{
 			Pair.second->Priority_Tick(fTimeDelta);		
+
+			
 		}
 	}
 }
@@ -119,9 +130,24 @@ void CObject_Manager::Late_Tick(_float fTimeDelta)
 	for (size_t i = 0; i < m_iNumLevels; i++)
 	{
 		for (auto& Pair : m_pLayers[i])
+		{
 			Pair.second->Late_Tick(fTimeDelta);
+
+			//list<CGameObject*> pGameObjects = *Pair.second->Get_GameObjects();
+
+// 			for (auto& pGameObject : pGameObjects)
+// 			{
+// 				if (true == pGameObject->Get_isdead())
+// 				{
+// 					Safe_Release(pGameObject);
+// 					pGameObjects.erase(pGameObject);
+// 				}
+// 			}
+
+		}
 	}
 }
+
 
 void CObject_Manager::Clear(_uint iLevelIndex)
 {
@@ -138,6 +164,20 @@ list<class CGameObject*>* CObject_Manager::Get_GameObjects(_uint iLevelIndex, co
 		return nullptr;
 
 	return layer->Get_GameObjects();
+}
+
+void CObject_Manager::Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector)
+{
+	for (auto& item : m_pLayers[iLevelIndex]) 
+	{
+		
+		list<CGameObject*> pGameObjects = *item.second->Get_GameObjects();
+		for (auto& pGameObject : pGameObjects)
+		{
+			clonevector->push_back(pGameObject);
+		}
+	}
+	//_bool test = false;
 }
 
 void CObject_Manager::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
@@ -174,8 +214,6 @@ void CObject_Manager::Fill_LayerTags(vector<string>* _vector)
 {
 
 }
-
-
 
 CGameObject * CObject_Manager::Find_Prototype(const wstring & strPrototypeTag)
 {

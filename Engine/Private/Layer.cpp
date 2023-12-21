@@ -40,6 +40,20 @@ void CLayer::Late_Tick(_float fTimeDelta)
 	{
 		if (nullptr != pGameObject)
 			pGameObject->Late_Tick(fTimeDelta);
+
+		 for (auto iter = m_GameObjects.begin(); iter != m_GameObjects.end();)
+		{
+			if ((*iter)->Get_isdead() == true)
+			{
+				Safe_Release((*iter));
+				iter = m_GameObjects.erase(iter);
+
+			}
+			else
+			{
+				++iter;
+			}
+		}
 	}
 }
 

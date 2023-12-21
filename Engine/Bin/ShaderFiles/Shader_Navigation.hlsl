@@ -1,4 +1,4 @@
-
+#include "Shader_Defines.hlsli"
 
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
 vector			g_vColor = vector(1.f, 1.f, 1.f, 1.f);
@@ -11,7 +11,7 @@ struct VS_IN
 
 struct VS_OUT
 {
-	float4		vPosition : SV_POSITION;
+	float4		vPosition : SV_POSITION;	
 };
 
 
@@ -27,7 +27,7 @@ VS_OUT VS_MAIN(VS_IN In)
 	matWVP = mul(matWV, g_ProjMatrix);
 
 	Out.vPosition = mul(float4(In.vPosition, 1.f), matWVP);
-
+	
 
 	return Out;
 }
@@ -42,7 +42,7 @@ VS_OUT VS_MAIN(VS_IN In)
 struct PS_IN
 {
 	float4		vPosition : SV_POSITION;
-
+	
 };
 
 struct PS_OUT

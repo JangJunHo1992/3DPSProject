@@ -9,14 +9,16 @@ CVIBuffer_Dynamic_Plane::CVIBuffer_Dynamic_Plane(ID3D11Device* pDevice, ID3D11De
 
 CVIBuffer_Dynamic_Plane::CVIBuffer_Dynamic_Plane(const CVIBuffer_Dynamic_Plane& rhs)
 	: CVIBuffer_Dynamic_Terrain_Origin(rhs)
+	, m_iSizeX(rhs.m_iSizeX)
+	, m_iSizeZ(rhs.m_iSizeZ)
 {
 
 }
 
-HRESULT CVIBuffer_Dynamic_Plane::Initialize_Prototype(_ushort x, _ushort z)
+HRESULT CVIBuffer_Dynamic_Plane::Initialize_Prototype()
 {
-	m_iNumVerticesX = x;
-	m_iNumVerticesZ = z;
+	m_iNumVerticesX = m_iSizeX;
+	m_iNumVerticesZ = m_iSizeZ;
 
 	m_iNumVertexBuffers = 1;
 	m_iNumVertices = m_iNumVerticesX * m_iNumVerticesZ;
@@ -155,13 +157,20 @@ HRESULT CVIBuffer_Dynamic_Plane::Initialize(void* pArg)
 	return S_OK;
 }
 
+void CVIBuffer_Dynamic_Plane::Set_Size(_ushort _iSizeX, _ushort _iSizeZ)
+{
+	m_iSizeX = _iSizeX;
+	m_iSizeZ = _iSizeZ;
+}
+
 
 CVIBuffer_Dynamic_Plane* CVIBuffer_Dynamic_Plane::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, _ushort x, _ushort z)
 {
 	CVIBuffer_Dynamic_Plane* pInstance = new CVIBuffer_Dynamic_Plane(pDevice, pContext);
+	pInstance->Set_Size(x, z);
 
 	/* 원형객체를 초기화한다.  */
-	if (FAILED(pInstance->Initialize_Prototype(x, z)))
+	if (FAILED(pInstance->Initialize_Prototype()))
 	{
 		MSG_BOX("Failed to Created : CVIBuffer_Dynamic_Plane");
 		Safe_Release(pInstance);

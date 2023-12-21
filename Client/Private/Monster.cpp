@@ -5,13 +5,13 @@
 
 
 CMonster::CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CGameObject(pDevice, pContext)
+	: CCharacter(pDevice, pContext)
 {
 
 }
 
 CMonster::CMonster(const CMonster& rhs)
-	: CGameObject(rhs)
+	: CCharacter(rhs)
 {
 }
 
@@ -31,9 +31,12 @@ HRESULT CMonster::Initialize(void* pArg)
 	if (FAILED(Ready_Components()))
 		return E_FAIL;
 
-	m_pModelCom->Set_Animation(rand() % 20);
+	//m_pModelCom->Set_Animation(0, CModel::ANIM_STATE_LOOP);
+	m_pModelCom->Set_Animation(rand() % 20, CModel::ANIM_STATE_LOOP, false);
+	//m_pModelCom->Set_Next_AnimationIndex(m_pModelCom->Get_CurrentAnimIndex()+1);
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(rand() % 20, 0.f, rand() % 20, 1.f));
+
 
 	return S_OK;
 }
@@ -47,7 +50,8 @@ void CMonster::Priority_Tick(_float fTimeDelta)
 
 void CMonster::Tick(_float fTimeDelta)
 {
-	m_pModelCom->Play_Animation(fTimeDelta, true);
+	_float3 vPos;
+	m_pModelCom->Play_Animation(fTimeDelta, vPos);
 }
 
 void CMonster::Late_Tick(_float fTimeDelta)
@@ -67,7 +71,7 @@ HRESULT CMonster::Render()
 	{
 		m_pModelCom->Bind_BoneMatrices(m_pShaderCom, "g_BoneMatrices", i);
 
-		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
+		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, Type_DIFFUSE);
 
 		m_pShaderCom->Begin(0);
 
@@ -84,17 +88,12 @@ void CMonster::Write_Json(json& Out_Json)
 	__super::Write_Json(Out_Json);
 }
 
-HRESULT CMonster::Ready_Components_Origin()
+HRESULT CMonster::Ready_Components_Origin(LEVEL eLevel)
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_AnimModel"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Shader_AnimModel"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
-
-	/* For.Com_Model */
-	//if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
-	//	TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
-	//	return E_FAIL;
 
 	return S_OK;
 }
@@ -109,37 +108,9 @@ HRESULT CMonster::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
 		return E_FAIL;
-
-	//if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-	//	return E_FAIL;
 	return S_OK;
 }
 
-//CMonster* CMonster::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-//{
-//	CMonster* pInstance = new CMonster(pDevice, pContext);
-//
-//	/* 원형객체를 초기화한다.  */
-//	if (FAILED(pInstance->Initialize_Prototype()))
-//	{
-//		MSG_BOX("Failed to Created : CMonster");
-//		Safe_Release(pInstance);
-//	}
-//	return pInstance;
-//}
-//
-//CGameObject* CMonster::Clone(void* pArg)
-//{
-//	CMonster* pInstance = new CMonster(*this);
-//
-//	/* 원형객체를 초기화한다.  */
-//	if (FAILED(pInstance->Initialize(pArg)))
-//	{
-//		MSG_BOX("Failed to Cloned : CMonster");
-//		Safe_Release(pInstance);
-//	}
-//	return pInstance;
-//}
 
 void CMonster::Free()
 {

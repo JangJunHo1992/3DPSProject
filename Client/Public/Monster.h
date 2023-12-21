@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Client_Defines.h"
-#include "GameObject.h"
+//#include "GameObject.h"
+#include "Character.h"
+
 
 BEGIN(Engine)
 class CShader;
@@ -10,7 +12,7 @@ END
 
 BEGIN(Client)
 
-class CMonster abstract : public CGameObject
+class CMonster abstract : public CCharacter
 {
 protected:
 	CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
@@ -30,23 +32,17 @@ public:
 
 protected:
 	CShader*		m_pShaderCom = { nullptr };
-	CModel*			m_pModelCom = { nullptr };
+	//CModel*			m_pModelCom = { nullptr };
 
 	
 
 protected:
 	virtual HRESULT Ready_Components() PURE;
-	HRESULT Ready_Components_Origin();
+	HRESULT Ready_Components_Origin(LEVEL eLevel);
 	HRESULT Bind_ShaderResources();
 
 
 public:
-	/* 원형객체를 생성한다. */
-	//static CMonster* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-
-	/* 사본객체를 생성한다. */
-	//virtual CGameObject* Clone(void* pArg) override;
-
 	virtual void Free() override;
 };
 

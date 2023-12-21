@@ -20,6 +20,7 @@ public:
 	HRESULT Initialize(_uint iNumLevels);
 	HRESULT Add_Prototype_Object(const wstring& strPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_CloneObject(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strPrototypeTag, void* pArg);
+	CGameObject* Clone_Prototype(const wstring& strPrototypeTag, void* pArg);
 	HRESULT Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject ,void* pArg);
 	void Priority_Tick(_float fTimeDelta);
 	void Tick(_float fTimeDelta);
@@ -28,7 +29,7 @@ public:
 
 public:
 	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag);
-
+	void Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector);
 	void Fill_PrototypeTags(vector<string>* _vector);
 	void Fill_LayerTags(vector<string>* _vector);
 public:

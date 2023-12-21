@@ -46,6 +46,8 @@ using namespace std;
 namespace Engine
 {
 	static const wchar_t* g_pTransformTag = TEXT("Com_Transform");
+
+
 }
 #define DIRECTINPUT_VERSION   0x0800
 #include <dinput.h>

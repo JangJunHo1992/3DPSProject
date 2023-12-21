@@ -30,7 +30,7 @@ public:
 
 private:
 	_float				m_fMouseSensor = { 0.0f };
-	LEVEL				m_eLevel;
+
 public:
 	static CCamera_Dynamic* Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
 	virtual CGameObject* Clone(void* pArg) override;

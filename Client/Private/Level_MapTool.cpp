@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Level_MapTool.h"
 #include "GameInstance.h"
+#include "Camera_Dynamic.h"
 #include "Camera_Dynamic_Tool.h"
 #include "Level_Loading.h"
 #include "GameObject.h"
@@ -95,7 +96,7 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 			return;
 	}
 
-	m_pActor->Update_State();
+	m_pActor->Update_State(fTimeDelta);
 
 }
 
@@ -142,6 +143,16 @@ void CLevel_MapTool::Create_Object(const wstring& strLayerTag, const wstring& st
 void CLevel_MapTool::Create_Raider()
 {
 	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Raider_Tool"));
+	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Monster_Tool"));
+
+}
+
+void CLevel_MapTool::Resize_Plane(_ushort x, _ushort z)
+{
+	if (m_pTerrain->IsPlane()) 
+	{
+		//m_pTerrain.
+	}
 }
 
 CGameObject* CLevel_MapTool::Select_Object(const wstring& strLayerTag)
@@ -193,7 +204,8 @@ HRESULT CLevel_MapTool::Ready_Layer_Monster(const wstring& strLayerTag)
 {
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Raider_Tool"))))
 		return E_FAIL;
-
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Monster_Tool"))))
+		return E_FAIL;
 	return S_OK;
 }
 

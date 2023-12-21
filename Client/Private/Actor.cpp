@@ -19,26 +19,14 @@ CActor<T>::~CActor()
 
 
 template<class T>
-void CActor<T>::Update_State()
+void CActor<T>::Update_State(_float fTimeDelta)
 {
     if (nullptr == m_pOwner || nullptr == m_pState)
         return;
 
-    CState<T>* pNowState = m_pState->Update(m_pOwner);
+    CState<T>* pNowState = m_pState->Update(m_pOwner, fTimeDelta);
 
     Set_State(pNowState);
-
-
-    //if (nullptr != pNowState)
-    //{
-    //    m_pState->Release(m_pOwner);
-
-    //    delete m_pState;
-    //    //m_pState = nullptr;
-    //}
-
-    //pNowState->Initialize(m_pOwner);
-    //m_pState = pNowState;
 }
 
 template<class T>

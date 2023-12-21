@@ -12,7 +12,7 @@ CMonster_GamePlay::CMonster_GamePlay(const CMonster_GamePlay& rhs)
 
 HRESULT CMonster_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin()))
+	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_GAMEPLAY)))
 		return E_FAIL;
 
 	/* For.Com_Model */

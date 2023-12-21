@@ -2,7 +2,6 @@
 #include "Camera_Dynamic.h"
 #include "GameInstance.h"
 
-
 CCamera_Dynamic::CCamera_Dynamic(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CCamera(pDevice, pContext)
 {
@@ -33,8 +32,6 @@ HRESULT CCamera_Dynamic::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(pDesc)))
 		return E_FAIL;
 
-	
-
 	return S_OK;
 }
 
@@ -64,35 +61,17 @@ void CCamera_Dynamic::Tick(_float fTimeDelta)
 		m_pTransformCom->Go_Backward(fTimeDelta);
 	}
 	//마우스 회전//
-		_long	MouseMove = 0;
-	if (m_eLevel == LEVEL_TOOL)
-	{
-		if (MouseMove = m_pGameInstance->Get_DIMouseState(DIM_RB))
-		{
-			if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_X))
-			{
-				m_pTransformCom->Turn(XMVectorSet(0.f, 1.f, 0.f, 0.f), m_fMouseSensor * MouseMove * fTimeDelta);
-			}
+	_long	MouseMove = 0;
 
-			if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_Y))
-			{
-				m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), m_fMouseSensor * MouseMove * fTimeDelta);
-			}
-		}
-	}
-	else
+	if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_X))
 	{
-		if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_X))
-		{
-			m_pTransformCom->Turn(XMVectorSet(0.f, 1.f, 0.f, 0.f), m_fMouseSensor * MouseMove * fTimeDelta);
-		}
-
-		if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_Y))
-		{
-			m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), m_fMouseSensor * MouseMove * fTimeDelta);
-		}
+		m_pTransformCom->Turn(XMVectorSet(0.f, 1.f, 0.f, 0.f), m_fMouseSensor * MouseMove * fTimeDelta);
 	}
-	
+
+	if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_Y))
+	{
+		m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), m_fMouseSensor * MouseMove * fTimeDelta);
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	__super::Tick(fTimeDelta);
 }

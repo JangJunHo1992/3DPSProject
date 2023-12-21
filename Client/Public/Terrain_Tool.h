@@ -18,6 +18,7 @@ private:
 
 public:
 	void Change_Plane_Buffer(_ushort x, _ushort z);
+
 	
 public:
 	virtual HRESULT Initialize(void* pArg) override;
@@ -34,9 +35,8 @@ public:
 	_float3   Get_PickedPosFloat3() { return m_vPickedPosFloat3; };
 
 	void	Update_MousePos();
+	
 
-private:
-	HRESULT Initialize_Object(_ushort x, _ushort z);
 
 //public:
 //	virtual void Write_Json(json& Out_Json) override;
@@ -56,7 +56,6 @@ public:
 public:
 	/* 원형객체를 생성한다. */
 	static CTerrain_Tool* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, _bool isPlane = false);
-	static CTerrain_Tool* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, _ushort x, _ushort z);
 
 	/* 사본객체를 생성한다. */
 	virtual CGameObject* Clone(void* pArg) override;

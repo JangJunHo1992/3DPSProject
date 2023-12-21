@@ -89,6 +89,22 @@ HRESULT CMainApp::Ready_Prototype_Component_ForStaticLevel()
 
 HRESULT CMainApp::Ready_Gara()
 {
+	//D3D11_BLEND_DESC			BlendDesc;
+	//D3D11_DEPTH_STENCIL_DESC	DepthStencilDesc;
+	//D3D11_RASTERIZER_DESC		RasterizerDesc;
+
+
+	//RasterizerDesc.CullMode
+
+	//ID3D11RasterizerState*		pRSState;
+	//m_pDevice->CreateRasterizerState(RasterizerDesc, &pRSState);
+
+	/*m_pContext->RSSetState();
+	m_pContext->OMSetDepthStencilState();
+	m_pContext->OMSetBlendState();*/
+
+
+
 	/* 텍스쳐를 생성해보자. */
 	ID3D11Texture2D* pTexture2D = { nullptr };
 
