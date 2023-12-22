@@ -71,6 +71,7 @@ HRESULT MESH_DATA::Make_MeshData(const MODEL_TYPE& In_eModelType, aiMesh* In_pAi
 			}
 		}
 
+
 	}
 
 	// 애니메이션이 아님

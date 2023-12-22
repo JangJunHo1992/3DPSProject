@@ -105,11 +105,12 @@ HRESULT CMesh::Ready_Vertices_NonAnim_Origin(const MESH_DATA* pAIMesh, _fmatrix 
 	ZeroMemory(&m_SubResourceData, sizeof m_SubResourceData);
 
 	m_pVertices = new VTXMESH[m_iNumVertices];
-
+	m_pPosVertices = new VTXPOS[m_iNumVertices];
 	for (size_t i = 0; i < m_iNumVertices; i++)
 	{
-		memcpy(&m_pVertices[i].vPosition, &pAIMesh->pVertices[i].vPosition, sizeof(_float3));
+		memcpy(&m_pVertices[i].vPosition, &pAIMesh->pVertices[i], sizeof(_float3));
 		XMStoreFloat3(&m_pVertices[i].vPosition, XMVector3TransformCoord(XMLoadFloat3(&m_pVertices[i].vPosition), PivotMatrix));
+		memcpy(&m_pPosVertices[i].vPosition, &m_pVertices[i].vPosition, sizeof(_float3));
 
 		memcpy(&m_pVertices[i].vNormal, &pAIMesh->pVertices[i].vNormal, sizeof(_float3));
 		XMStoreFloat3(&m_pVertices[i].vNormal, XMVector3TransformNormal(XMLoadFloat3(&m_pVertices[i].vNormal), PivotMatrix));

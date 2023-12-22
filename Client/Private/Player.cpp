@@ -6,6 +6,7 @@
 #include "Body_Player.h"
 
 
+
 CPlayer::CPlayer(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
 {
@@ -50,6 +51,7 @@ void CPlayer::Priority_Tick(_float fTimeDelta)
 			Pair.second->Priority_Tick(fTimeDelta);
 	}
 
+
 }
 
 void CPlayer::Tick(_float fTimeDelta)
@@ -72,13 +74,11 @@ void CPlayer::Tick(_float fTimeDelta)
 	if (GetKeyState(VK_UP) & 0x8000)
 	{
 		m_pTransformCom->Go_Straight(fTimeDelta, m_pNavigationCom);
-		pBody->SetUp_Animation(4, CModel::ANIM_STATE::ANIM_STATE_LOOP);
+		pBody->SetUp_Animation(4);
 	}
-	else 
-	{
-		pBody->SetUp_Animation(3, CModel::ANIM_STATE::ANIM_STATE_LOOP);
-	}
-		
+	else
+		pBody->SetUp_Animation(3);
+
 	for (auto& Pair : m_PartObjects)
 	{
 		if (nullptr != Pair.second)
@@ -87,6 +87,7 @@ void CPlayer::Tick(_float fTimeDelta)
 
 	Safe_Release(pBody);
 
+/*	m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());*/
 }
 
 void CPlayer::Late_Tick(_float fTimeDelta)
@@ -103,10 +104,11 @@ void CPlayer::Late_Tick(_float fTimeDelta)
 
 HRESULT CPlayer::Render()
 {
-	
+
 #ifdef _DEBUG
 	m_pNavigationCom->Render();
-#endif
+	/*m_pColliderCom->Render();*/
+#endif	
 
 	return S_OK;
 }
@@ -131,6 +133,16 @@ HRESULT CPlayer::Ready_Components()
 		TEXT("Com_Navigation"), reinterpret_cast<CComponent**>(&m_pNavigationCom), &NaviDesc)))
 		return E_FAIL;
 
+	/* For.Com_Collider */
+// 	CBounding_OBB::BOUNDING_OBB_DESC		BoundingDesc = {};
+// 
+// 	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
+// 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
+// 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
+// 
+// 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Collider_OBB"),
+// 		TEXT("Com_Collider"), reinterpret_cast<CComponent**>(&m_pColliderCom), &BoundingDesc)))
+// 		return E_FAIL;
 
 	return S_OK;
 }
@@ -144,17 +156,17 @@ HRESULT CPlayer::Ready_PartObjects()
 		return E_FAIL;
 
 
-// 	CWeapon_Player::WEAPON_DESC	WeaponDesc = {};
-// 
-// 	CBody_Player* pBody = (CBody_Player*)Find_PartObject(TEXT("Part_Body"));
-// 
-// 	WeaponDesc.m_pSocketBone = pBody->Get_BonePtr("SWORD");
-// 	WeaponDesc.m_pParentTransform = m_pTransformCom;
-// 
-// 
-// 	/* For.Part_Weapon*/
-// 	if (FAILED(Add_PartObject(TEXT("Prototype_GameObject_Weapon_Player"), TEXT("Part_Weapon"), &WeaponDesc)))
-// 		return E_FAIL;
+	CWeapon_Player::WEAPON_DESC	WeaponDesc = {};
+
+	CBody_Player* pBody = (CBody_Player*)Find_PartObject(TEXT("Part_Body"));
+
+	WeaponDesc.m_pSocketBone = pBody->Get_BonePtr("SWORD");
+	WeaponDesc.m_pParentTransform = m_pTransformCom;
+
+
+	/* For.Part_Weapon*/
+	if (FAILED(Add_PartObject(TEXT("Prototype_GameObject_Weapon_Player"), TEXT("Part_Weapon"), &WeaponDesc)))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -173,11 +185,13 @@ HRESULT CPlayer::Add_PartObject(const wstring& strPrototypeTag, const wstring& s
 	return S_OK;
 }
 
+
+
 CPlayer* CPlayer::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
 	CPlayer* pInstance = new CPlayer(pDevice, pContext);
 
-	/* ������ü�� �ʱ�ȭ�Ѵ�.  */
+	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
 		MSG_BOX("Failed to Created : CPlayer");
@@ -190,7 +204,7 @@ CGameObject* CPlayer::Clone(void* pArg)
 {
 	CPlayer* pInstance = new CPlayer(*this);
 
-	/* ������ü�� �ʱ�ȭ�Ѵ�.  */
+	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
 		MSG_BOX("Failed to Cloned : CPlayer");
@@ -207,6 +221,7 @@ void CPlayer::Free()
 		Safe_Release(Pair.second);
 	m_PartObjects.clear();
 
+	/*Safe_Release(m_pColliderCom);*/
 	Safe_Release(m_pNavigationCom);
 }
 

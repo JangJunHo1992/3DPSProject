@@ -21,7 +21,7 @@ public:
 	_bool Invalidate_TransformationMatrix(CModel::ANIM_STATE _eAnimState, _float fTimeDelta, const CModel::BONES& Bones);
 
 public:
-	vector<class CChannel*>* Get_Channels() { return &m_Channels; };
+	vector<CChannel*>* Get_Channels() { return &m_Channels; };
 	CChannel* Get_Channel_By_BoneIndex(_uint _iBoneIndex, _uint& _iChannelIndex);
 	void	Reset_Animation(const CModel::BONES& Bones);
 
@@ -62,7 +62,7 @@ private:
 	_float					m_fTrackPosition = { 0.f }; /* 현재 재생되고 있는 위치. */
 
 	_uint					m_iNumChannels = { 0 }; /* 이 애니메이션이 사용하는 뼈의 갯수. */
-	vector<class CChannel*>	m_Channels;
+	vector<CChannel*>		m_Channels;
 
 	vector<_uint>			m_CurrentKeyFrames;
 	_bool					m_isFinished = { false };

@@ -93,22 +93,22 @@ HRESULT MODEL_DATA::Make_ModelData(const char* szFilePath, const MODEL_TYPE& In_
 
 MODEL_DATA::~MODEL_DATA()
 {
-    for (_uint i = 0; i < iNumMaterials; i++)
-        Safe_Delete_Array(Material_Datas[i]);
-
-    Material_Datas.clear();
-
-    for (_uint i = 0; i < iNumMeshs; i++)
-        Safe_Delete_Array(Mesh_Datas[i]);
-
-	Mesh_Datas.clear();
-	
-    for (_uint i = 0; i < iNumAnimations; i++)
-        Safe_Delete_Array(Animation_Datas[i]);
-
-	Animation_Datas.clear();
-	
-    Safe_Delete(RootNode);
+//     for (_uint i = 0; i < iNumMaterials; i++)
+//         Safe_Delete_Array(Material_Datas[i]);
+// 
+//     Material_Datas.clear();
+// 
+//     for (_uint i = 0; i < iNumMeshs; i++)
+//         Safe_Delete_Array(Mesh_Datas[i]);
+// 
+// 	Mesh_Datas.clear();
+// 	
+//     for (_uint i = 0; i < iNumAnimations; i++)
+//         Safe_Delete_Array(Animation_Datas[i]);
+// 
+// 	Animation_Datas.clear();
+// 	
+//     Safe_Delete(RootNode);
 	
 }
 

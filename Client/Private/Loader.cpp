@@ -196,10 +196,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	}
 	else
 	{
-		//"../Bin/Resources/Models/Desmond/BaseHumanSkeleton"이게 왜 안되지?
-		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+		PivotMatrix = /*XMMatrixScaling(0.01f, 0.01f, 0.01f) **/ XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
-			CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/DesmondDemon/S_Desmond_Demon_Form", PivotMatrix))))
+			CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/Fiona/Fiona", PivotMatrix))))
 			return E_FAIL;
 	}
 	//Raider
@@ -222,15 +221,15 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	{
 		/* For.Prototype_Component_Model_ForkLift */
 		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift_Tool"),
+		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_ForkLift_Tool"),
 			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift", PivotMatrix))))
 			return E_FAIL;
 	}
 	else
 	{
 		/* For.Prototype_Component_Model_ForkLift */
-		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift_GamePlay"),
+		PivotMatrix = XMMatrixScaling(0.1f, 0.1f, 0.1f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_ForkLift_GamePlay"),
 			CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift", PivotMatrix))))
 			return E_FAIL;
 	}

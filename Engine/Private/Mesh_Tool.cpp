@@ -35,7 +35,7 @@ HRESULT CMesh_Tool::Ready_Vertices_NonAnim(const MESH_DATA* pAIMesh, DirectX::XM
     return S_OK;
 }
 
-HRESULT CMesh_Tool::Ready_Vertices_Anim(const MESH_DATA* pAIMesh, const std::vector<Engine::CBone*, std::allocator<Engine::CBone*>>& Bones)
+HRESULT CMesh_Tool::Ready_Vertices_Anim(const MESH_DATA* pAIMesh, const vector<Engine::CBone*>& Bones)
 {
     Ready_Vertices_Anim_Origin(pAIMesh, Bones);
     //Safe_Delete_Array(m_pAnimVertices);

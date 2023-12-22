@@ -36,6 +36,7 @@ protected:
 
 	VTXANIMMESH*		m_pAnimVertices = { nullptr };
 	VTXMESH*			m_pVertices = { nullptr };
+	VTXPOS*				m_pPosVertices = { nullptr };
 	_uint*				m_pIndices = { nullptr };
 
 	MODEL_TYPE			m_eModelType;
