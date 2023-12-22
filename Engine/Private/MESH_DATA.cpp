@@ -201,7 +201,7 @@ void MESH_DATA::Load_FromBinary(ifstream& is)
 	else if (MODEL_TYPE::NONANIM == eModelType)
 	{
 		pVertices = new VTXMESH[iNumVertices];
-		//pPosVertices = shared_ptr<VTXPOS[]>(DBG_NEW VTXPOS[iNumVertices]);
+		pPosVertices = new VTXPOS[iNumVertices];
 
 		for (_uint i(0); i < iNumVertices; ++i)
 		{

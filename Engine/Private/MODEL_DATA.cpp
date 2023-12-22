@@ -298,7 +298,7 @@ HRESULT MODEL_DATA::Load_FromAssimp(const _bool In_bAnimZero)
 
     for (_uint i = 0; i < iNumMaterials; i++)
     {
-        MATERIAL_DATA* MaterialData = new MATERIAL_DATA();
+        MATERIAL_DATA* MaterialData = new MATERIAL_DATA;
         MaterialData->Make_NodeData(pAiSceneModel->mMaterials[i]);
         Material_Datas.push_back(MaterialData);
     }
@@ -315,7 +315,7 @@ HRESULT MODEL_DATA::Load_FromAssimp(const _bool In_bAnimZero)
 
     for (_uint i = 0; i < iNumMeshs; i++)
     {
-        MESH_DATA* MeshData = new MESH_DATA();
+        MESH_DATA* MeshData = new MESH_DATA;
         Mesh_Datas.push_back(MeshData);
         Mesh_Datas.back()->Make_MeshData(eModelType, pAiSceneModel->mMeshes[i], XMLoadFloat4x4(&TransformMatrix), &VertexInfo);
     }
@@ -333,7 +333,7 @@ HRESULT MODEL_DATA::Load_FromAssimp(const _bool In_bAnimZero)
     }
     for (i; i < iNumAnimations; i++)
     {
-        ANIMATION_DATA* AnimationData = new ANIMATION_DATA();
+        ANIMATION_DATA* AnimationData = new ANIMATION_DATA;
         Animation_Datas.push_back(AnimationData);
         Animation_Datas.back()->Make_AnimationData(pAiSceneModel->mAnimations[i]);
     }

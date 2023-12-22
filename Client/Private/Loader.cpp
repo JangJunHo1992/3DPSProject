@@ -186,114 +186,37 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	lstrcpy(m_szLoadingText, TEXT("모델를(을) 로드하는 중입니다."));
 
 	_matrix		PivotMatrix;
-
+	//플레이어 
 	if (LEVEL_TOOL == eLEVEL)
 	{
 		PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Fiona_Tool"),
-			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/Fiona/Fiona", PivotMatrix))))
+			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/DesmondDemon/S_Desmond_Demon_Form", PivotMatrix))))
 			return E_FAIL;
 	}
 	else
 	{
-		PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
+		//"../Bin/Resources/Models/Desmond/BaseHumanSkeleton"이게 왜 안되지?
+		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
-			CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/Fiona/Fiona", PivotMatrix))))
+			CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/DesmondDemon/S_Desmond_Demon_Form", PivotMatrix))))
 			return E_FAIL;
 	}
-
-	//if (LEVEL_TOOL == eLEVEL)
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Raider_Tool"),
-	//		CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-	//else
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Raider_GamePlay"),
-	//		CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-
-	//if (LEVEL_TOOL == eLEVEL)
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_King_Tool"),
-	//		CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/King/King", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-	//else
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_King_GamePlay"),
-	//		CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/King/King", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-
-	//if (LEVEL_TOOL == eLEVEL)
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_DarkKnight_Tool"),
-	//		CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/DarkKnight/DarkKnight", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-	//else
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_DarkKnight_GamePlay"),
-	//		CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/DarkKnight/DarkKnight", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-
-	//if (LEVEL_TOOL == eLEVEL)
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_KnightGuard_Tool"),
-	//		CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/KnightGuard/KnightGuard", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-	//else
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_KnightGuard_GamePlay"),
-	//		CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/KnightGuard/KnightGuard", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-
-	//if (LEVEL_TOOL == eLEVEL)
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Golem_Tool"),
-	//		CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/StoneGolem/StoneGolem", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-	//else
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Golem_GamePlay"),
-	//		CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/StoneGolem/StoneGolem", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-
-	//if (LEVEL_TOOL == eLEVEL)
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Wizard_Tool"),
-	//		CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Wizard/Wizard", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-	//else
-	//{
-	//	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	//	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Wizard_GamePlay"),
-	//		CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Wizard/Wizard", PivotMatrix))))
-	//		return E_FAIL;
-	//}
-
-
-
+	//Raider
+// 	if (LEVEL_TOOL == eLEVEL)
+// 	{
+// 		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+// 		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Raider_Tool"),
+// 			CModel_Tool::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
+// 			return E_FAIL;
+// 	}
+// 	else
+// 	{
+// 		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+// 		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Raider_GamePlay"),
+// 			CModel_GamePlay::Create(m_pDevice, m_pContext, MODEL_TYPE::ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
+// 			return E_FAIL;
+// 	}
 
 	if (LEVEL_TOOL == eLEVEL)
 	{
@@ -525,17 +448,17 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			return E_FAIL;
 	}
 
-	//if (LEVEL_TOOL == eLEVEL)
-	//{
+	if (LEVEL_TOOL == eLEVEL)
+	{
 
-	//}
-	//else
-	//{
-	//	/* For.Prototype_GameObject_ForkLift */
-	//	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_ForkLift_GamePlay"),
-	//		CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
-	//		return E_FAIL;
-	//}
+	}
+	else
+	{
+		/* For.Prototype_GameObject_ForkLift */
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_ForkLift_GamePlay"),
+			CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
 
 	if (LEVEL_TOOL == eLEVEL)
 	{

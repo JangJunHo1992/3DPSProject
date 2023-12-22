@@ -60,8 +60,8 @@ HRESULT CTexture::Initialize_Prototype(const wstring& strTextureFilePath, _uint 
 		}
 
 		if (FAILED(hr))
-			return E_FAIL;
-
+			continue;;
+		
 		m_SRVs.push_back(pSRV);
 	}
 

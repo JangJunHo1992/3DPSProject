@@ -227,7 +227,7 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 	{
 		m_pAIMaterial = m_pAIScene->Material_Datas[i];
 
-		MATERIAL_DESC			MaterialDesc = {  };
+		MATERIAL_DESC			MaterialDesc = {};
 
 		for (size_t j = 1; j < TextureType::Type_UNKNOWN; j++)
 		{
@@ -239,7 +239,7 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 			string		strPath;
 // 			if (FAILED(m_pAIMaterial->GetTexture(TextureType(j), 0, &strPath)))
 // 				continue;
-			strPath = m_pAIMaterial->szTextureName[TextureType(j)].c_str();
+			strPath = m_pAIMaterial->szTextureName[TextureType(j)];
 
 			if(strPath == "")
 				continue;
@@ -265,7 +265,10 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 
 			MaterialDesc.pMtrlTextures[j] = CTexture::Create(m_pDevice, m_pContext, szFullPath, 1);
 			if (nullptr == MaterialDesc.pMtrlTextures[j])
-				return E_FAIL;
+			{
+				/*return E_FAIL;*/
+				continue;
+			}
 		}
 
 		m_Materials.push_back(MaterialDesc);

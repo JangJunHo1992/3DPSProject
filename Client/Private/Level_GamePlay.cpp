@@ -133,26 +133,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Camera(const wstring& strLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 {
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player_GamePlay"))))
-	//	return E_FAIL;
-
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Raider_GamePlay"))))
-	// 	return E_FAIL;
-
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_King_GamePlay"), &PlayerDesc)))
-	//	return E_FAIL;
-
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_DarkKnight_GamePlay"), &PlayerDesc)))
-	//	return E_FAIL;
-
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_KnightGuard_GamePlay"), &PlayerDesc)))
-	//	return E_FAIL;
-
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Golem_GamePlay"), &PlayerDesc)))
-	//	return E_FAIL;
-
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Wizard_GamePlay"), &PlayerDesc)))
-	//	return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player_GamePlay"))))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -164,7 +146,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster_GamePlay"))))
 			return E_FAIL;
 	}
-
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_ForkLift_GamePlay"))))
+			return E_FAIL;
 	return S_OK;
 }
 
@@ -176,8 +159,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const wstring& strLayerTag)
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Sky"))))
 		return E_FAIL;
 
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_ForkLift_GamePlay"))))
-	//	return E_FAIL;
+	
 
 	return S_OK;
 

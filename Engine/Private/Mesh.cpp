@@ -108,7 +108,7 @@ HRESULT CMesh::Ready_Vertices_NonAnim_Origin(const MESH_DATA* pAIMesh, _fmatrix 
 
 	for (size_t i = 0; i < m_iNumVertices; i++)
 	{
-		memcpy(&m_pVertices[i].vPosition, &pAIMesh->pVertices[i], sizeof(_float3));
+		memcpy(&m_pVertices[i].vPosition, &pAIMesh->pVertices[i].vPosition, sizeof(_float3));
 		XMStoreFloat3(&m_pVertices[i].vPosition, XMVector3TransformCoord(XMLoadFloat3(&m_pVertices[i].vPosition), PivotMatrix));
 
 		memcpy(&m_pVertices[i].vNormal, &pAIMesh->pVertices[i].vNormal, sizeof(_float3));

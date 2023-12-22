@@ -144,17 +144,17 @@ HRESULT CPlayer::Ready_PartObjects()
 		return E_FAIL;
 
 
-	CWeapon_Player::WEAPON_DESC	WeaponDesc = {};
-
-	CBody_Player* pBody = (CBody_Player*)Find_PartObject(TEXT("Part_Body"));
-
-	WeaponDesc.m_pSocketBone = pBody->Get_BonePtr("SWORD");
-	WeaponDesc.m_pParentTransform = m_pTransformCom;
-
-
-	/* For.Part_Weapon*/
-	if (FAILED(Add_PartObject(TEXT("Prototype_GameObject_Weapon_Player"), TEXT("Part_Weapon"), &WeaponDesc)))
-		return E_FAIL;
+// 	CWeapon_Player::WEAPON_DESC	WeaponDesc = {};
+// 
+// 	CBody_Player* pBody = (CBody_Player*)Find_PartObject(TEXT("Part_Body"));
+// 
+// 	WeaponDesc.m_pSocketBone = pBody->Get_BonePtr("SWORD");
+// 	WeaponDesc.m_pParentTransform = m_pTransformCom;
+// 
+// 
+// 	/* For.Part_Weapon*/
+// 	if (FAILED(Add_PartObject(TEXT("Prototype_GameObject_Weapon_Player"), TEXT("Part_Weapon"), &WeaponDesc)))
+// 		return E_FAIL;
 
 	return S_OK;
 }
