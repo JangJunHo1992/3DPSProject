@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Raider.h"
+#include "Actor.h"
 
 BEGIN(Client)
 
@@ -13,6 +14,11 @@ private:
 
 private:
 	virtual HRESULT Ready_Components() override;
+	virtual HRESULT Initialize(void* pArg) override;
+	virtual void Tick(_float fTimeDelta) override;
+
+private:
+	CActor<CRaider_GamePlay>* m_pActor = { nullptr };
 
 public:
 	/* 원형객체를 생성한다. */

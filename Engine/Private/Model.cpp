@@ -4,6 +4,12 @@
 #include "Bone.h"
 #include "Animation.h"
 #include "Channel.h"
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> JJH
 
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CComponent(pDevice,pContext)
@@ -38,6 +44,23 @@ CModel::CModel(const CModel& rhs)
 	}
 }
 
+<<<<<<< HEAD
+=======
+CBone* CModel::Get_BonePtr(const _char* pBoneName) const
+{
+	auto	iter = find_if(m_Bones.begin(), m_Bones.end(), [&](CBone* pBone)
+		{
+			if (!strcmp(pBone->Get_Name(), pBoneName))
+				return true;
+			return false;
+		});
+
+	if (iter == m_Bones.end())
+		return nullptr;
+
+	return *iter;
+}
+>>>>>>> JJH
 
 HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
@@ -48,14 +71,19 @@ HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath,
 	if (TYPE_NONANIM == eType)
 		iFlag |= aiProcess_PreTransformVertices;
 
-	m_pAIScene = m_Importer.ReadFile(strModelFilePath, iFlag);
 
-	if (nullptr == m_pAIScene)
-		return E_FAIL;
+	m_pAIScene = m_MyAssimp.ReadFile(strModelFilePath, iFlag);
+
+	//if (nullptr == m_pAIScene.Get_AIScene())
+	//	return E_FAIL;
 
 	XMStoreFloat4x4(&m_PivotMatrix, PivotMatrix);
+	
+	_bool test = false;
+	CMyAINode root = m_pAIScene.Get_RootNode();
+	_bool test2 = false;
 
-	if (FAILED(Ready_Bones(m_pAIScene->mRootNode, -1)))
+	if (FAILED(Ready_Bones(m_pAIScene.Get_RootNode(), -1)))
 		return E_FAIL;
 
 	if (FAILED(Ready_Meshes(PivotMatrix)))
@@ -100,12 +128,17 @@ HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName
 	return m_Materials[iMaterialIndex].pMtrlTextures[eTextureType]->Bind_ShaderResource(pShader, pConstantName);
 }
 
+<<<<<<< HEAD
 void CModel::Play_Animation(_float fTimeDelta)
+=======
+void CModel::Play_Animation(_float fTimeDelta, _float3& _Pos)
+>>>>>>> JJH
 {
 	if (m_iCurrentAnimIndex >= m_iNumAnimations)
 		return;
 
 	m_bIsAnimEnd = m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(m_eAnimState, fTimeDelta, m_Bones);
+<<<<<<< HEAD
 		
 	for (auto& pBone : m_Bones)
 	{
@@ -115,6 +148,33 @@ void CModel::Play_Animation(_float fTimeDelta)
 }
 
 void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration)
+=======
+	
+
+	_float3 NowPos;
+	for (auto& pBone : m_Bones)
+	{
+		pBone->Invalidate_CombinedTransformationMatrix(m_Bones, XMLoadFloat4x4(&m_PivotMatrix), NowPos);
+	}
+
+	if (true == m_bUseAnimationPos && false == m_bIsAnimEnd && false == Is_Transition()) 
+	{
+		if (false == m_Animations[m_iCurrentAnimIndex]->Is_TransitionEnd_Now())
+		{
+			_float3 ChangedPos = NowPos - m_Animations[m_iCurrentAnimIndex]->Get_PrevPos();
+			_Pos = ChangedPos;
+		}
+
+		m_Animations[m_iCurrentAnimIndex]->Set_PrevPos(NowPos);
+
+	}
+	
+
+
+}
+
+void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration, _uint iTargetKeyFrameIndex)
+>>>>>>> JJH
 {
 	m_eAnimState = _eAnimState;
 
@@ -124,13 +184,18 @@ void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimStat
 		
 		if (_bIsTransition)
 		{
+<<<<<<< HEAD
 			Set_Animation_Transition(_iAnimationIndex, _fTransitionDuration);
+=======
+   			Set_Animation_Transition(_iAnimationIndex, _fTransitionDuration, iTargetKeyFrameIndex);
+>>>>>>> JJH
 		}
 		else 
 		{
 			m_iCurrentAnimIndex = _iAnimationIndex;
 		}
 	}
+<<<<<<< HEAD
 }
 
 void CModel::Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration)
@@ -176,6 +241,23 @@ void CModel::Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitio
 	m_Animations[m_iCurrentAnimIndex]->Set_TrackPosition(&fTransitionDuration_Start);
 	_bool test = false;
 
+=======
+
+}
+
+void CModel::Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration, _uint iTargetKeyFrameIndex)
+{
+	if (_iAnimationIndex == m_iCurrentAnimIndex) return;	// 임시
+
+	CAnimation* currentAnimation = m_Animations[m_iCurrentAnimIndex];
+	CAnimation* targetAnimation = m_Animations[_iAnimationIndex];
+
+	targetAnimation->Reset_Animation(m_Bones);		// 임시
+
+	targetAnimation->Set_Transition(currentAnimation, _fTransitionDuration, iTargetKeyFrameIndex);
+
+	m_iCurrentAnimIndex = _iAnimationIndex;
+>>>>>>> JJH
 }
 
 void CModel::Reset_Animation(_int iAnimIndex)
@@ -186,17 +268,40 @@ void CModel::Reset_Animation(_int iAnimIndex)
 		m_Animations[iAnimIndex]->Reset_Animation(m_Bones);
 }
 
+<<<<<<< HEAD
+=======
+_float CModel::Get_TickPerSecond()
+{
+	return m_Animations[m_iCurrentAnimIndex]->Get_TickPerSecond();
+}
+
+_bool CModel::Is_Transition()
+{
+	return m_Animations[m_iCurrentAnimIndex]->Is_Transition();
+}
+
+_bool CModel::Is_Inputable_Front(_uint _iIndexFront)
+{
+	return m_Animations[m_iCurrentAnimIndex]->Is_Inputable_Front(_iIndexFront);
+}
+
+_bool CModel::Is_Inputable_Back(_uint _iIndexBack)
+{
+	return m_Animations[m_iCurrentAnimIndex]->Is_Inputable_Back(_iIndexBack);
+}
+
+>>>>>>> JJH
 
 template<class T>
 HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
 {
-	m_iNumMeshes = m_pAIScene->mNumMeshes;
+	m_iNumMeshes = m_pAIScene.Get_NumMeshes();
 
 	m_Meshes.reserve(m_iNumMeshes);
 
 	for (size_t i = 0; i < m_iNumMeshes; i++)
 	{
-		T* pMesh = T::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene->mMeshes[i], PivotMatrix, m_Bones);
+		T* pMesh = T::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene.Get_Mesh(i), PivotMatrix, m_Bones);
 
 		if (nullptr == pMesh)
 			return E_FAIL;
@@ -209,11 +314,11 @@ HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
 
 HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 {
-	m_iNumMaterials = m_pAIScene->mNumMaterials;
+	m_iNumMaterials = m_pAIScene.Get_NumMaterials();
 
 	for (size_t i = 0; i < m_iNumMaterials; i++)
 	{
-		aiMaterial* pAIMaterial = m_pAIScene->mMaterials[i];
+		CMyAIMaterial pAIMaterial = m_pAIScene.Get_Material(i);
 
 		MATERIAL_DESC			MaterialDesc = {  };
 
@@ -224,14 +329,19 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 
 			_splitpath_s(strModelFilePath.c_str(), szDrive, MAX_PATH, szDirectory, MAX_PATH, nullptr, 0, nullptr, 0);
 
-			aiString			strPath;
-			if (FAILED(pAIMaterial->GetTexture(aiTextureType(j), 0, &strPath)))
+			//aiString			strPath;
+			//if (FAILED(pAIMaterial.GetTexture(aiTextureType(j), 0, &strPath)))
+			//	continue;
+
+			string strPath = pAIMaterial.Get_Textures(j);
+			if (strPath == "")
 				continue;
 
 			_char		szFileName[MAX_PATH] = "";
 			_char		szEXT[MAX_PATH] = "";
 
-			_splitpath_s(strPath.data, nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
+			//_splitpath_s(strPath.data, nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
+			_splitpath_s(strPath.c_str(), nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
 
 			_char		szTmp[MAX_PATH] = "";
 			strcpy_s(szTmp, szDrive);
@@ -258,7 +368,7 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 	return S_OK;
 }
 
-HRESULT CModel::Ready_Bones(aiNode* pAINode, _int iParentIndex)
+HRESULT CModel::Ready_Bones(CMyAINode pAINode, _int iParentIndex)
 {
 	CBone* pBone = CBone::Create(pAINode, iParentIndex);
 	if (nullptr == pBone)
@@ -268,9 +378,9 @@ HRESULT CModel::Ready_Bones(aiNode* pAINode, _int iParentIndex)
 
 	_int		iParentIdx = m_Bones.size() - 1;
 
-	for (size_t i = 0; i < pAINode->mNumChildren; i++)
+	for (size_t i = 0; i < pAINode.Get_NumChildren(); i++)
 	{
-		Ready_Bones(pAINode->mChildren[i], iParentIdx);
+		Ready_Bones(CMyAINode(pAINode.Get_Children(i)), iParentIdx);
 	}
 
 	return S_OK;
@@ -278,11 +388,11 @@ HRESULT CModel::Ready_Bones(aiNode* pAINode, _int iParentIndex)
 
 HRESULT CModel::Ready_Animations()
 {
-	m_iNumAnimations = m_pAIScene->mNumAnimations;
+	m_iNumAnimations = m_pAIScene.Get_NumAnimations();
 
 	for (size_t i = 0; i < m_iNumAnimations; i++)
 	{
-		CAnimation* pAnimation = CAnimation::Create(m_pAIScene->mAnimations[i], m_Bones);
+		CAnimation* pAnimation = CAnimation::Create(m_pAIScene.Get_Animation(i), m_Bones);
 		if (nullptr == pAnimation)
 			return E_FAIL;
 
@@ -319,6 +429,10 @@ void CModel::Free()
 	m_Meshes.clear();
 
 	if (false == m_isCloned)
+<<<<<<< HEAD
 		m_Importer.FreeScene();
+=======
+		m_MyAssimp.FreeScene();
+>>>>>>> JJH
 
 }

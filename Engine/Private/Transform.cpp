@@ -63,31 +63,119 @@ void CTransform::Go_Straight(_float fTimeDelta, class CNavigation* pNavigation)
 	Set_State(STATE_POSITION,vPosition);
 }
 
-void CTransform::Go_Left(_float fTimeDelta)
+void CTransform::Go_Straight_L45(_float fTimeDelta, CNavigation* pNavigation)
+{
+	_vector	vPosition = Get_State(STATE_POSITION);
+	_vector vLook = Get_State(STATE_LOOK);
+	_vector vRight = Get_State(STATE_RIGHT);
+
+	vPosition += XMVector3Normalize(vLook - vRight) * m_fSpeedPerSec * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
+	Set_State(STATE_POSITION, vPosition);
+}
+
+void CTransform::Go_Straight_R45(_float fTimeDelta, CNavigation* pNavigation)
+{
+	_vector	vPosition = Get_State(STATE_POSITION);
+	_vector vLook = Get_State(STATE_LOOK);
+	_vector vRight = Get_State(STATE_RIGHT);
+
+	vPosition += XMVector3Normalize(vLook + vRight) * m_fSpeedPerSec * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
+	Set_State(STATE_POSITION, vPosition);
+}
+
+void CTransform::Go_Left(_float fTimeDelta, class CNavigation* pNavigation)
 {
 	_vector vPosition = Get_State(STATE_POSITION);
 	_vector vRight = Get_State(STATE_RIGHT);
 
 	vPosition -= XMVector3Normalize(vRight) * m_fSpeedPerSec * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
 	Set_State(STATE_POSITION, vPosition);
 
 }
 
-void CTransform::Go_Right(_float fTimeDelta)
+void CTransform::Go_Right(_float fTimeDelta, class CNavigation* pNavigation)
 {
 	_vector vPosition = Get_State(STATE_POSITION);
 	_vector vRight = Get_State(STATE_RIGHT);
 
 	vPosition += XMVector3Normalize(vRight) * m_fSpeedPerSec * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
 	Set_State(STATE_POSITION, vPosition);
 }
 
-void CTransform::Go_Backward(_float fTimeDelta)
+void CTransform::Go_Backward(_float fTimeDelta, class CNavigation* pNavigation)
 {
 	_vector	vPosition = Get_State(STATE_POSITION);
 	_vector vLook = Get_State(STATE_LOOK);
 
 	vPosition -= XMVector3Normalize(vLook) * m_fSpeedPerSec * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
+	Set_State(STATE_POSITION, vPosition);
+}
+
+void CTransform::Go_Backward_L45(_float fTimeDelta, CNavigation* pNavigation)
+{
+	_vector	vPosition = Get_State(STATE_POSITION);
+	_vector vLook = Get_State(STATE_LOOK);
+	_vector vRight = Get_State(STATE_RIGHT);
+
+	vPosition -= XMVector3Normalize(vLook + vRight) * m_fSpeedPerSec * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
+	Set_State(STATE_POSITION, vPosition);
+}
+
+void CTransform::Go_Backward_R45(_float fTimeDelta, CNavigation* pNavigation)
+{
+	_vector	vPosition = Get_State(STATE_POSITION);
+	_vector vLook = Get_State(STATE_LOOK);
+	_vector vRight = Get_State(STATE_RIGHT);
+
+	vPosition -= XMVector3Normalize(vLook - vRight) * m_fSpeedPerSec * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
 
 	Set_State(STATE_POSITION, vPosition);
 }

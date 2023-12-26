@@ -169,6 +169,14 @@ HRESULT CGameInstance::Add_CloneObject(_uint iLevelIndex, const wstring & strLay
 	return m_pObject_Manager->Add_CloneObject(iLevelIndex, strLayerTag, strPrototypeTag, pArg);
 }
 
+CGameObject* CGameInstance::Clone_Prototype(const wstring& strPrototypeTag, void* pArg)
+{
+	if (nullptr == m_pObject_Manager)
+		return nullptr;
+
+	return m_pObject_Manager->Clone_Prototype(strPrototypeTag, pArg);
+}
+
 HRESULT CGameInstance::Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject, void* pArg)
 {
 	return m_pObject_Manager->Add_Object(iLevelIndex, strLayerTag, pGameObject, pArg);
@@ -187,6 +195,14 @@ void CGameInstance::Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>
 list<class CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag)
 {
 	return m_pObject_Manager->Get_GameObjects(iLevelIndex, strLayerTag);
+}
+
+CComponent* CGameInstance::Get_Component(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strComponentTag, _uint iIndex)
+{
+	if (nullptr == m_pObject_Manager)
+		return nullptr;
+
+	return m_pObject_Manager->Get_Component(iLevelIndex, strLayerTag, strComponentTag, iIndex);
 }
 
 HRESULT CGameInstance::Save_Objects_With_Json(_uint iLevelIndex, string filePath)

@@ -12,11 +12,11 @@ CMonster_GamePlay::CMonster_GamePlay(const CMonster_GamePlay& rhs)
 
 HRESULT CMonster_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin()))
+	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
 		return E_FAIL;
 
 	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 

@@ -141,9 +141,12 @@
     </Filter>
     <Filter Include="01.Utility\02.GameObjects\Character">
       <UniqueIdentifier>{6648278e-a456-4262-85bd-e6a36fe4e644}</UniqueIdentifier>
+<<<<<<< HEAD
     </Filter>
     <Filter Include="01.Utility\03.Components\99. StatePattern">
       <UniqueIdentifier>{98e39436-539c-42f0-8a7b-d8845a482c70}</UniqueIdentifier>
+=======
+>>>>>>> JJH
     </Filter>
     <Filter Include="01.Utility\03.Components\01.VIBuffer\Cell">
       <UniqueIdentifier>{3bef20e3-96f0-47e7-8d15-58482561ca00}</UniqueIdentifier>
@@ -154,9 +157,84 @@
     <Filter Include="01.Utility\03.Components\06.Navigation\Cell">
       <UniqueIdentifier>{f6ae09a2-decc-43a8-8eec-2098c6ede900}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="98.ShaderFiles">
       <UniqueIdentifier>{5f93ed6c-e779-45f0-b182-344e51c83a58}</UniqueIdentifier>
     </Filter>
+=======
+    <Filter Include="91.ShaderFiles">
+      <UniqueIdentifier>{5f93ed6c-e779-45f0-b182-344e51c83a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Cube">
+      <UniqueIdentifier>{3be7f3be-9695-4eeb-9723-692009aad681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp">
+      <UniqueIdentifier>{30d1e5a9-21e1-4835-be41-470e795f85e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\0.Importer">
+      <UniqueIdentifier>{36994a88-1ac1-4bd9-998c-9a31fb9bd292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\1.AIScene">
+      <UniqueIdentifier>{a2ed1d5a-a829-470c-806b-223c9f24a33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\2.AIMesh">
+      <UniqueIdentifier>{763df2f4-4c1d-4e2d-b485-801af0f9f768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\3.AIMaterial">
+      <UniqueIdentifier>{943567eb-37b0-4160-b8d2-73f3bc784e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\4.AIAnimation">
+      <UniqueIdentifier>{b0eb9e79-6366-40f6-ae82-a3c5d6e5e398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\4.AIAnimation\AINodeAnim">
+      <UniqueIdentifier>{cf1820b9-3636-40e7-b26d-cf58e1885e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\1.AIScene\AINode">
+      <UniqueIdentifier>{22ba9862-97f8-4322-b7b7-5e9a592f5ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\4.AIAnimation\AINodeAnim\AIVectorKey">
+      <UniqueIdentifier>{0cd7925a-a398-451d-9274-3de4034dd55a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\4.AIAnimation\AINodeAnim\AIQuatKey">
+      <UniqueIdentifier>{ab490601-2bd8-44cb-93a3-4a63a338e3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\2.AIMesh\AIFace">
+      <UniqueIdentifier>{5188ff4d-c612-41ed-9257-4ffd0e3aa8b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\2.AIMesh\AIBone">
+      <UniqueIdentifier>{5588b394-ae65-4efa-85ae-fafadf31d97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\97.MyAssimp\2.AIMesh\AIBone\AIVertexWeight">
+      <UniqueIdentifier>{e97375c9-8668-4697-81cd-e25c31fc773e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\07.Collider">
+      <UniqueIdentifier>{c05576ab-fdaa-47ca-9f7f-539aeaff5a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\07.Collider\Bounding">
+      <UniqueIdentifier>{3a0f4769-0b8f-4248-89e6-fce01dea1abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\07.Collider\Bounding\AABB">
+      <UniqueIdentifier>{78aa47ed-0bb9-4a72-919d-532435d6ab2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\07.Collider\Bounding\OBB">
+      <UniqueIdentifier>{9db9a942-9660-43f5-89b6-735fc1bbe04f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\07.Collider\Bounding\Sphere">
+      <UniqueIdentifier>{0e9e269e-29ae-4749-8ad7-3c4d6eb745bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\07.Collider\DebugDraw">
+      <UniqueIdentifier>{d1cfc08b-5c59-454a-bc46-dba7e4f7f329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.GameObjects\Character\Parts">
+      <UniqueIdentifier>{d529dc5c-1a04-4e27-8945-ee75942c5896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.GameObjects\Character\Parts\Body">
+      <UniqueIdentifier>{8df045ee-de67-432d-b8ad-b4052056b031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.GameObjects\Character\Parts\Weapon">
+      <UniqueIdentifier>{0e160323-00aa-4665-8fef-a787303f4465}</UniqueIdentifier>
+    </Filter>
+>>>>>>> JJH
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -305,6 +383,72 @@
     </ClInclude>
     <ClInclude Include="..\Public\Model.h">
       <Filter>01.Utility\03.Components\05.Model\Model</Filter>
+<<<<<<< HEAD
+=======
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Cube.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAssimp.h">
+      <Filter>01.Utility\97.MyAssimp\0.Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIScene.h">
+      <Filter>01.Utility\97.MyAssimp\1.AIScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIMesh.h">
+      <Filter>01.Utility\97.MyAssimp\2.AIMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAINodeAnimation.h">
+      <Filter>01.Utility\97.MyAssimp\4.AIAnimation\AINodeAnim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIBone.h">
+      <Filter>01.Utility\97.MyAssimp\2.AIMesh\AIBone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAINode.h">
+      <Filter>01.Utility\97.MyAssimp\1.AIScene\AINode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIVertexWeight.h">
+      <Filter>01.Utility\97.MyAssimp\2.AIMesh\AIBone\AIVertexWeight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIVectorKey.h">
+      <Filter>01.Utility\97.MyAssimp\4.AIAnimation\AINodeAnim\AIVectorKey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIQuatKey.h">
+      <Filter>01.Utility\97.MyAssimp\4.AIAnimation\AINodeAnim\AIQuatKey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIAnimation.h">
+      <Filter>01.Utility\97.MyAssimp\4.AIAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIFace.h">
+      <Filter>01.Utility\97.MyAssimp\2.AIMesh\AIFace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MyAIMaterial.h">
+      <Filter>01.Utility\97.MyAssimp\3.AIMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\DebugDraw.h">
+      <Filter>01.Utility\03.Components\07.Collider\DebugDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Bounding.h">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Bounding_AABB.h">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding\AABB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Bounding_OBB.h">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding\OBB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Bounding_Sphere.h">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Collider.h">
+      <Filter>01.Utility\03.Components\07.Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Body.h">
+      <Filter>01.Utility\02.GameObjects\Character\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Weapon.h">
+      <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
+>>>>>>> JJH
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -443,10 +587,59 @@
     <ClCompile Include="..\Private\Model.cpp">
       <Filter>01.Utility\03.Components\05.Model\Model</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="..\Private\VIBuffer_Cube.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Public\MyAssimp.cpp" />
+    <ClCompile Include="..\Private\MyAssimp.cpp">
+      <Filter>01.Utility\97.MyAssimp\0.Importer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Public\MyAIScene.cpp" />
+    <ClCompile Include="..\Private\MyAIScene.cpp">
+      <Filter>01.Utility\97.MyAssimp\1.AIScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MyAINode.cpp">
+      <Filter>01.Utility\97.MyAssimp\1.AIScene\AINode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MyAIMesh.cpp">
+      <Filter>01.Utility\97.MyAssimp\2.AIMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\DebugDraw.cpp">
+      <Filter>01.Utility\03.Components\07.Collider\DebugDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Bounding.cpp">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Bounding_AABB.cpp">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding\AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Bounding_OBB.cpp">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding\OBB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Bounding_Sphere.cpp">
+      <Filter>01.Utility\03.Components\07.Collider\Bounding\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Collider.cpp">
+      <Filter>01.Utility\03.Components\07.Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Body.cpp">
+      <Filter>01.Utility\02.GameObjects\Character\Parts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Weapon.cpp">
+      <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
+    </ClCompile>
+>>>>>>> JJH
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl">
-      <Filter>98.ShaderFiles</Filter>
+      <Filter>91.ShaderFiles</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Bin\ShaderFiles\Shader_Defines.hlsli">
+      <Filter>91.ShaderFiles</Filter>
+    </None>
   </ItemGroup>
 </Project>

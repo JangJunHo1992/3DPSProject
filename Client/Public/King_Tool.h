@@ -1,0 +1,36 @@
+#pragma once
+
+#include "King.h"
+
+BEGIN(Client)
+
+class CKing_Tool final : public CKing
+{
+private:
+	CKing_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	CKing_Tool(const CKing_Tool& rhs);
+	virtual ~CKing_Tool() = default;
+
+public:
+	virtual HRESULT Initialize(void* pArg) override;
+	virtual _bool Pick(_float3* out) override;
+
+private:
+	virtual HRESULT Ready_Components() override;
+
+public:
+	/* 원형객체를 생성한다. */
+	static CKing_Tool* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+
+	/* 사본객체를 생성한다. */
+	virtual CKing_Tool* Clone(void* pArg) override;
+
+	virtual void Free() override;
+
+private:
+	class CGameInstance* m_pGameInstance = nullptr;
+
+
+};
+
+END

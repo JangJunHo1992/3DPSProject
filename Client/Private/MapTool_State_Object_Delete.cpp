@@ -10,7 +10,7 @@ void CMapTool_State_Object_Delete::Initialize(CLevel_MapTool* pActor)
 {
 }
 
-CState<CLevel_MapTool>* CMapTool_State_Object_Delete::Update(CLevel_MapTool* pActor)
+CState<CLevel_MapTool>* CMapTool_State_Object_Delete::Update(CLevel_MapTool* pActor, _float fTimeDelta)
 {
 	if (CGameInstance::GetInstance()->Mouse_Down(DIM_LB))
 	{

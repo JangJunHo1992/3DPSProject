@@ -17,9 +17,13 @@ private:
 	virtual ~CObject_Manager() = default;
 
 public:
+	class CComponent* Get_Component(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strComponentTag, _uint iIndex);
+
+public:
 	HRESULT Initialize(_uint iNumLevels);
 	HRESULT Add_Prototype_Object(const wstring& strPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_CloneObject(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strPrototypeTag, void* pArg);
+	CGameObject* Clone_Prototype(const wstring& strPrototypeTag, void* pArg);
 	HRESULT Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject ,void* pArg);
 	void Priority_Tick(_float fTimeDelta);
 	void Tick(_float fTimeDelta);

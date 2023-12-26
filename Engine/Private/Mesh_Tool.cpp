@@ -11,7 +11,7 @@ CMesh_Tool::CMesh_Tool(const CMesh_Tool& rhs)
 {
 }
 
-HRESULT CMesh_Tool::Initialize_Prototype(CModel::TYPE eModelType, const aiMesh* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
+HRESULT CMesh_Tool::Initialize_Prototype(CModel::TYPE eModelType, CMyAIMesh pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
 {
     Initialize_Prototype_Origin(eModelType, pAIMesh, PivotMatrix, Bones);
     //Safe_Delete_Array(m_pIndices);
@@ -28,14 +28,14 @@ HRESULT CMesh_Tool::Initialize(void* pArg)
     return S_OK;
 }
 
-HRESULT CMesh_Tool::Ready_Vertices_NonAnim(const aiMesh* pAIMesh, DirectX::XMMATRIX PivotMatrix)
+HRESULT CMesh_Tool::Ready_Vertices_NonAnim(CMyAIMesh pAIMesh, DirectX::XMMATRIX PivotMatrix)
 {
     Ready_Vertices_NonAnim_Origin(pAIMesh, PivotMatrix);
     //Safe_Delete_Array(m_pVertices);
     return S_OK;
 }
 
-HRESULT CMesh_Tool::Ready_Vertices_Anim(const aiMesh* pAIMesh, const std::vector<Engine::CBone*, std::allocator<Engine::CBone*>>& Bones)
+HRESULT CMesh_Tool::Ready_Vertices_Anim(CMyAIMesh pAIMesh, const std::vector<Engine::CBone*, std::allocator<Engine::CBone*>>& Bones)
 {
     Ready_Vertices_Anim_Origin(pAIMesh, Bones);
     //Safe_Delete_Array(m_pAnimVertices);
@@ -49,7 +49,7 @@ _bool CMesh_Tool::Picking(RAY ray, _float3* out)
     return m_pGameInstance->Picking_Vertex(ray, out, triNum, m_pVertices, m_pIndices);
 }
 
-CMesh_Tool* CMesh_Tool::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, CModel::TYPE eModelType, const aiMesh* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
+CMesh_Tool* CMesh_Tool::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, CModel::TYPE eModelType, CMyAIMesh pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
 {
     CMesh_Tool* pInstance = new CMesh_Tool(pDevice, pContext);
 

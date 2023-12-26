@@ -54,6 +54,7 @@ VS_OUT VS_MAIN(VS_IN In)
 		g_BoneMatrices[In.vBlendIndices.w] * fWeightW;
 
 	vector		vPosition = mul(vector(In.vPosition, 1.f), BoneMatrix);
+	vector		vNormal = mul(vector(In.vNormal, 0.f), BoneMatrix);
 
 	matrix		matWV, matWVP;
 
@@ -61,7 +62,7 @@ VS_OUT VS_MAIN(VS_IN In)
 	matWVP = mul(matWV, g_ProjMatrix);
 
 	Out.vPosition = mul(vPosition, matWVP);
-	Out.vNormal = mul(float4(In.vNormal, 0.f), g_WorldMatrix);
+	Out.vNormal = mul(vNormal, g_WorldMatrix);
 	Out.vTexcoord = In.vTexcoord;
 	Out.vWorldPos = mul(float4(In.vPosition, 1.f), g_WorldMatrix);
 

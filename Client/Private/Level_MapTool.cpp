@@ -96,7 +96,11 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 			return;
 	}
 
+<<<<<<< HEAD
 	m_pActor->Update_State();
+=======
+	m_pActor->Update_State(fTimeDelta);
+>>>>>>> JJH
 
 }
 
@@ -142,7 +146,15 @@ void CLevel_MapTool::Create_Object(const wstring& strLayerTag, const wstring& st
 
 void CLevel_MapTool::Create_Raider()
 {
-	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Raider_Tool"));
+	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Raider"));
+}
+
+void CLevel_MapTool::Resize_Plane(_ushort x, _ushort z)
+{
+	if (m_pTerrain->IsPlane()) 
+	{
+		//m_pTerrain.
+	}
 }
 
 void CLevel_MapTool::Resize_Plane(_ushort x, _ushort z)
@@ -200,8 +212,8 @@ HRESULT CLevel_MapTool::Ready_Layer_Camera(const wstring& strLayerTag)
 
 HRESULT CLevel_MapTool::Ready_Layer_Monster(const wstring& strLayerTag)
 {
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Raider_Tool"))))
-		return E_FAIL;
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Raider_Tool"))))
+	//	return E_FAIL;
 
 	return S_OK;
 }
@@ -211,7 +223,7 @@ HRESULT CLevel_MapTool::Ready_Layer_BackGround(const wstring& strLayerTag)
 	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Terrain_Tool"))))
 	//	return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Plane_Tool"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Plane"))))
 		return E_FAIL;
 
 	return S_OK;
@@ -241,7 +253,9 @@ void CLevel_MapTool::Free()
 {
 	Safe_Release(m_pImguiManager);
 	Safe_Release(m_pObjectWin);
-	m_pActor->Free();
+
+	Safe_Delete(m_pActor);
+	//m_pActor->Free();
 
 	Safe_Release(m_pTerrain);
 

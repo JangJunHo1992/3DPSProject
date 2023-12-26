@@ -5,6 +5,12 @@
 #include "Level_Loading.h"
 #include "Monster.h"
 #include "Player.h"
+<<<<<<< HEAD
+=======
+#include "King.h"
+#include "DarkKnight.h"
+#include "Wizard.h"
+>>>>>>> JJH
 
 CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
 	: CLevel(pDevice, pContext)
@@ -30,6 +36,7 @@ HRESULT CLevel_GamePlay::Initialize()
 
 void CLevel_GamePlay::Tick(_float fTimeDelta)
 {
+<<<<<<< HEAD
 	if (m_pGameInstance->Get_DIKeyState(DIK_M) & 0x80)
 	{
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
@@ -75,6 +82,14 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 	//		}
 	//	}
 	//}
+=======
+	//if (m_pGameInstance->Get_DIKeyState(DIK_M) & 0x80)
+	//{
+	//	if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
+	//		return;
+	//}
+
+>>>>>>> JJH
 }
 
 HRESULT CLevel_GamePlay::Render()
@@ -106,6 +121,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Camera(const wstring& strLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 {
+<<<<<<< HEAD
 	CPlayer::PLAYER_DESC		PlayerDesc = {};
 
 	PlayerDesc.a = 10;
@@ -117,6 +133,13 @@ HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 
 // 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Raider_GamePlay"), &PlayerDesc)))
 // 		return E_FAIL;
+=======
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player"))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Raider"))))
+	 	return E_FAIL;
+>>>>>>> JJH
 
 	return S_OK;
 }
@@ -125,7 +148,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 {
 	for (size_t i = 0; i < 20; i++)
 	{
-		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster_GamePlay"))))
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster"))))
 			return E_FAIL;
 	}
 
@@ -134,11 +157,14 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const wstring& strLayerTag)
 {
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Terrain_GamePlay"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Terrain"))))
 		return E_FAIL;
 
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_ForkLift"))))
-	//	return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Sky"))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_ForkLift"))))
+		return E_FAIL;
 
 	return S_OK;
 

@@ -2,6 +2,9 @@
 
 #include "Component.h"
 
+#include "MyAssimp.h"
+#include "MyAIScene.h"
+
 BEGIN(Engine)
 
 class ENGINE_DLL CModel abstract : public CComponent
@@ -28,6 +31,11 @@ public:
 		return &m_Meshes;
 	}
 
+<<<<<<< HEAD
+=======
+	class CBone* Get_BonePtr(const _char* pBoneName) const;
+
+>>>>>>> JJH
 	_uint Get_NumAnimations()
 	{
 		return m_iNumAnimations;
@@ -46,9 +54,13 @@ public:
 		m_iCurrentAnimIndex = iAnimIndex;
 	}
 
+<<<<<<< HEAD
 
 	
 
+=======
+	_bool Is_AnimEnd() { return m_bIsAnimEnd; };
+>>>>>>> JJH
 
 
 public:
@@ -61,6 +73,7 @@ public:
 	HRESULT Bind_ShaderResource(class CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType);
 
 public:
+<<<<<<< HEAD
 	void	Play_Animation(_float fTimeDelta);
 	void	Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_END, _bool _bIsTransition = true, _float _fTransitionDuration = 0.2f);
 	void	Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration = 0.2f);
@@ -72,28 +85,65 @@ public:
 protected:
 	const aiScene*			m_pAIScene = { nullptr };
 	Assimp::Importer		m_Importer;
+=======
+	void	Play_Animation(_float fTimeDelta, _float3& _Pos);
+	void	Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_END, _bool _bIsTransition = true, _float _fTransitionDuration = 0.2f, _uint iTargetKeyFrameIndex = 0);
+	void	Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration = 0.2f, _uint iTargetKeyFrameIndex = 0);
+	void	Reset_Animation(_int iAnimIndex = -1);
+	
+	_float	Get_TickPerSecond();
+	_bool	Is_Transition();
+
+	void	Set_UseAnimationPos(_bool _bUseAnimationPos) { m_bUseAnimationPos = _bUseAnimationPos; };
+
+	_bool	Is_Inputable_Front(_uint _iIndexFront);
+	_bool	Is_Inputable_Back(_uint _iIndexBack);
+
+>>>>>>> JJH
 
 protected:
-	_float4x4				m_PivotMatrix;
-	TYPE					m_eModelType = { TYPE_END };
+	CMyAssimp					m_MyAssimp;
+	CMyAIScene				m_pAIScene;
+	
 
-	_uint					m_iNumMeshes = { 0 };
-	vector<class CMesh*>	m_Meshes;
+protected:
+	_float4x4						m_PivotMatrix;
+	TYPE							m_eModelType = { TYPE_END };
 
-	_uint					m_iNumMaterials = { 0 };
-	vector<MATERIAL_DESC>	m_Materials;
+	_uint							m_iNumMeshes = { 0 };
+	vector<class CMesh*>			m_Meshes;
 
+<<<<<<< HEAD
+=======
+	_uint							m_iNumMaterials = { 0 };
+	vector<MATERIAL_DESC>			m_Materials;
+
+>>>>>>> JJH
 	_uint							m_iNumAnimations = { 0 };
 	_uint							m_iCurrentAnimIndex = { 0 };
 	vector<class CAnimation*>		m_Animations;
 
 	_bool							m_bIsAnimEnd = { false };
 
+<<<<<<< HEAD
 
 	ANIM_STATE						m_eAnimState = { CModel::ANIM_STATE::ANIM_STATE_END };
 
+=======
+	ANIM_STATE						m_eAnimState = { CModel::ANIM_STATE::ANIM_STATE_END };
+
+	_bool							m_bUseAnimationPos = false;
+
+	
+
+	//_char m_szRootNode[MAX_PATH] = "root";
+
+>>>>>>> JJH
 	/* 내 모델의 전체 뼈들을 부모관계를 포함하여 저장한다. */
 	vector<class CBone*>	m_Bones;
+	
+
+
 public:
 	typedef vector<class CBone*>	BONES;
 
@@ -104,7 +154,7 @@ protected:
 	virtual HRESULT	Ready_Meshes(_fmatrix PivotMatrix) PURE;
 
 	HRESULT Ready_Materials(const string& strModelFilePath);
-	HRESULT Ready_Bones(aiNode* pAINode, _int iParentIndex);
+	HRESULT Ready_Bones(CMyAINode pAINode, _int iParentIndex);
 	HRESULT Ready_Animations();
 
 

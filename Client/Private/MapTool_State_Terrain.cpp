@@ -12,7 +12,7 @@ void CMapTool_State_Terrain::Initialize(CLevel_MapTool* pActor)
 	pActor->Set_BrushRange(30.f);
 }
 
-CState<CLevel_MapTool>* CMapTool_State_Terrain::Update(CLevel_MapTool* pActor)
+CState<CLevel_MapTool>* CMapTool_State_Terrain::Update(CLevel_MapTool* pActor, _float fTimeDelta)
 {
 	pActor->Update_MousePos();
 

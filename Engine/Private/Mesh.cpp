@@ -2,6 +2,8 @@
 #include "Shader.h"
 #include "Bone.h"
 
+#include "MyAIBone.h"
+
 CMesh::CMesh(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CVIBuffer(pDevice,pContext)
 {
@@ -12,13 +14,13 @@ CMesh::CMesh(const CMesh& rhs)
 {
 }
 
-HRESULT CMesh::Initialize_Prototype_Origin(CModel::TYPE eModelType, const aiMesh* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
+HRESULT CMesh::Initialize_Prototype_Origin(CModel::TYPE eModelType, CMyAIMesh pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
 {
-	m_iMaterialIndex = pAIMesh->mMaterialIndex;
-	strcpy_s(m_szName, pAIMesh->mName.data);
+	m_iMaterialIndex = pAIMesh.Get_MaterialIndex();
+	strcpy_s(m_szName, pAIMesh.Get_Name().c_str());
 	m_iNumVertexBuffers = 1;
-	m_iNumVertices = pAIMesh->mNumVertices;
-	m_iNumIndices = pAIMesh->mNumFaces * 3;//삼각형의 정점 인덱스기 떄문에 *3 한거임
+	m_iNumVertices = pAIMesh.Get_NumVertices();
+	m_iNumIndices = pAIMesh.Get_NumFaces() * 3;//삼각형의 정점 인덱스기 떄문에 *3 한거임
 	m_iIndexStride = 4;
 	m_eIndexFormat = m_iIndexStride == 2 ? DXGI_FORMAT_R16_UINT : DXGI_FORMAT_R32_UINT;
 	m_eTopology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
@@ -47,11 +49,11 @@ HRESULT CMesh::Initialize_Prototype_Origin(CModel::TYPE eModelType, const aiMesh
 
 	_uint		iNumIndices = { 0 };
 
-	for (size_t i = 0; i < pAIMesh->mNumFaces; i++)
+	for (size_t i = 0; i < pAIMesh.Get_NumFaces(); i++)
 	{
-		m_pIndices[iNumIndices++] = pAIMesh->mFaces[i].mIndices[0];
-		m_pIndices[iNumIndices++] = pAIMesh->mFaces[i].mIndices[1];
-		m_pIndices[iNumIndices++] = pAIMesh->mFaces[i].mIndices[2];
+		m_pIndices[iNumIndices++] = pAIMesh.Get_Face(i).Get_Indices()[0];
+		m_pIndices[iNumIndices++] = pAIMesh.Get_Face(i).Get_Indices()[1];
+		m_pIndices[iNumIndices++] = pAIMesh.Get_Face(i).Get_Indices()[2];
 	}
 
 	m_SubResourceData.pSysMem = m_pIndices;
@@ -82,10 +84,12 @@ HRESULT CMesh::Bind_BoneMatrices(CShader* pShader, const _char* pConstantName, c
 		XMStoreFloat4x4(&BoneMatrices[i], XMLoadFloat4x4(&m_OffsetMatrices[i]) * Bones[m_BoneIndices[i]]->Get_CombinedTransformationMatrix());
 	}
 
+
+
 	return pShader->Bind_Matrices(pConstantName, BoneMatrices, 256);
 }
 
-HRESULT CMesh::Ready_Vertices_NonAnim_Origin(const aiMesh* pAIMesh, _fmatrix PivotMatrix)
+HRESULT CMesh::Ready_Vertices_NonAnim_Origin(CMyAIMesh pAIMesh, _fmatrix PivotMatrix)
 {
 	m_iStride = sizeof(VTXMESH);
 
@@ -104,14 +108,14 @@ HRESULT CMesh::Ready_Vertices_NonAnim_Origin(const aiMesh* pAIMesh, _fmatrix Piv
 
 	for (size_t i = 0; i < m_iNumVertices; i++)
 	{
-		memcpy(&m_pVertices[i].vPosition, &pAIMesh->mVertices[i], sizeof(_float3));
+		memcpy(&m_pVertices[i].vPosition, &pAIMesh.Get_Vertice(i), sizeof(_float3));
 		XMStoreFloat3(&m_pVertices[i].vPosition, XMVector3TransformCoord(XMLoadFloat3(&m_pVertices[i].vPosition), PivotMatrix));
 
-		memcpy(&m_pVertices[i].vNormal, &pAIMesh->mNormals[i], sizeof(_float3));
+		memcpy(&m_pVertices[i].vNormal, &pAIMesh.Get_Normal(i), sizeof(_float3));
 		XMStoreFloat3(&m_pVertices[i].vNormal, XMVector3TransformNormal(XMLoadFloat3(&m_pVertices[i].vNormal), PivotMatrix));
 
-		memcpy(&m_pVertices[i].vTexcoord, &pAIMesh->mTextureCoords[0][i], sizeof(_float3));
-		memcpy(&m_pVertices[i].vTangent, &pAIMesh->mTangents[i], sizeof(_float3));
+		memcpy(&m_pVertices[i].vTexcoord, &pAIMesh.Get_TextureCoord(i), sizeof(_float3));
+		memcpy(&m_pVertices[i].vTangent, &pAIMesh.Get_Tangent(i), sizeof(_float3));
 	}
 
 
@@ -126,7 +130,7 @@ HRESULT CMesh::Ready_Vertices_NonAnim_Origin(const aiMesh* pAIMesh, _fmatrix Piv
 	return S_OK;
 }
 
-HRESULT CMesh::Ready_Vertices_Anim_Origin(const aiMesh* pAIMesh, const vector<class CBone*>& Bones)
+HRESULT CMesh::Ready_Vertices_Anim_Origin(CMyAIMesh pAIMesh, const vector<class CBone*>& Bones)
 {
 	m_iStride = sizeof(VTXANIMMESH);
 
@@ -146,21 +150,21 @@ HRESULT CMesh::Ready_Vertices_Anim_Origin(const aiMesh* pAIMesh, const vector<cl
 
 	for (size_t i = 0; i < m_iNumVertices; i++)
 	{
-		memcpy(&m_pAnimVertices[i].vPosition, &pAIMesh->mVertices[i], sizeof(_float3));
-		memcpy(&m_pAnimVertices[i].vNormal, &pAIMesh->mNormals[i], sizeof(_float3));
-		memcpy(&m_pAnimVertices[i].vTexcoord, &pAIMesh->mTextureCoords[0][i], sizeof(_float3));
-		memcpy(&m_pAnimVertices[i].vTangent, &pAIMesh->mTangents[i], sizeof(_float3));
+		memcpy(&m_pAnimVertices[i].vPosition, &pAIMesh.Get_Vertice(i), sizeof(_float3));
+		memcpy(&m_pAnimVertices[i].vNormal, &pAIMesh.Get_Normal(i), sizeof(_float3));
+		memcpy(&m_pAnimVertices[i].vTexcoord, &pAIMesh.Get_TextureCoord(i), sizeof(_float3));
+		memcpy(&m_pAnimVertices[i].vTangent, &pAIMesh.Get_Tangent(i), sizeof(_float3));
 	}
 
-	m_iNumBones = pAIMesh->mNumBones;
+	m_iNumBones = pAIMesh.Get_NumBones();
 
 	/* 이 메시에게 영향을 주는 뼈을 순회하면서 각각의 뼈가 어떤 정점들에게 영향을 주는지 파악한다.*/
-	for (size_t i = 0; i < pAIMesh->mNumBones; i++)
+	for (size_t i = 0; i < pAIMesh.Get_NumBones(); i++)
 	{
-		aiBone*		pAIBone = pAIMesh->mBones[i];
+		CMyAIBone		pAIBone = pAIMesh.Get_Bone(i);
 
 		_float4x4		OffsetMatrix;
-		memcpy(&OffsetMatrix, &pAIBone->mOffsetMatrix, sizeof(_float4x4));
+		memcpy(&OffsetMatrix, &pAIBone.Get_OffsetMatrix(), sizeof(_float4x4));
 		XMStoreFloat4x4(&OffsetMatrix, XMMatrixTranspose(XMLoadFloat4x4(&OffsetMatrix)));
 
 		m_OffsetMatrices.push_back(OffsetMatrix);
@@ -169,7 +173,7 @@ HRESULT CMesh::Ready_Vertices_Anim_Origin(const aiMesh* pAIMesh, const vector<cl
 
 		auto	iter = find_if(Bones.begin(), Bones.end(), [&](CBone* pBone)
 			{
-				if (false == strcmp(pAIBone->mName.data, pBone->Get_Name()))
+				if (false == strcmp(pAIBone.Get_Name().c_str(), pBone->Get_Name()))
 				{
 					return true;
 				}
@@ -185,32 +189,32 @@ HRESULT CMesh::Ready_Vertices_Anim_Origin(const aiMesh* pAIMesh, const vector<cl
 		m_BoneIndices.push_back(iBoneIndex);
 
 		/* 이 뼈는 몇개의 정점에게 영향을 주는가?! */
-		for (size_t j = 0; j < pAIBone->mNumWeights; j++)
+		for (size_t j = 0; j < pAIBone.Get_NumWeights(); j++)
 		{
 			/* pAIBone->mWeights[j].mVertexId : 이 뼈가 영향을 주는 j번째 정점의 인덱스 */
 
-			if(0.0f == m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.x)
+			if(0.0f == m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.x)
 			{
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendIndices.x = i;
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.x = pAIBone->mWeights[j].mWeight;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendIndices.x = i;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.x = pAIBone.Get_Weights(j).Get_Weight();
 			}
 
-			else if (0.0f == m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.y)
+			else if (0.0f == m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.y)
 			{
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendIndices.y = i;
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.y = pAIBone->mWeights[j].mWeight;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendIndices.y = i;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.y = pAIBone.Get_Weights(j).Get_Weight();
 			}
 
-			else if (0.0f == m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.z)
+			else if (0.0f == m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.z)
 			{
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendIndices.z = i;
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.z = pAIBone->mWeights[j].mWeight;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendIndices.z = i;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.z = pAIBone.Get_Weights(j).Get_Weight();
 			}
 
-			else if (0.0f == m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.w)
+			else if (0.0f == m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.w)
 			{
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendIndices.w = i;
-				m_pAnimVertices[pAIBone->mWeights[j].mVertexId].vBlendWeights.w = pAIBone->mWeights[j].mWeight;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendIndices.w = i;
+				m_pAnimVertices[pAIBone.Get_Weights(j).Get_VertexId()].vBlendWeights.w = pAIBone.Get_Weights(j).Get_Weight();
 			}
 		}		
 	};

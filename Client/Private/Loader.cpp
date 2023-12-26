@@ -3,7 +3,13 @@
 #include "GameInstance.h"
 #include "BackGround.h"
 #include "Navigation.h"
-//#include "VIBuffer_Dynamic_Terrain.h"
+#include "Sky.h"
+#include "Player.h"
+#include "Camera_Dynamic.h"
+#include "Camera_Dynamic_Tool.h"
+#include "Weapon_Player.h"
+#include "Body_Player.h"
+
 #include "VIBuffer_Static_Terrain.h"
 #include "VIBuffer_Dynamic_Plane.h"
 
@@ -19,13 +25,35 @@
 #include "Raider_Tool.h"
 #include "Raider_GamePlay.h"
 
+#include "King_Tool.h"
+#include "King_GamePlay.h"
+
+#include "DarkKnight_Tool.h"
+#include "DarkKnight_GamePlay.h"
+
+#include "KnightGuard_Tool.h"
+#include "KnightGuard_GamePlay.h"
+
+#include "Wizard_Tool.h"
+#include "Wizard_GamePlay.h"
+
+#include "King_Tool.h"
+#include "King_GamePlay.h"
+
+#include "Golem_Tool.h"
+#include "Golem_GamePlay.h"
+
+
 #include "Model_Tool.h"
 #include "Model_GamePlay.h"
 
+<<<<<<< HEAD
 #include "Player.h"
 
 #include "Camera_Dynamic.h"
 #include "Camera_Dynamic_Tool.h"
+=======
+>>>>>>> JJH
 #include <process.h>
 
 
@@ -154,39 +182,73 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Brush.png"), 1))))
 		return E_FAIL;
 
-	lstrcpy(m_szLoadingText, TEXT("모델를(을) 로드하는 중입니다."));
+	/* For.Prototype_Component_Texture_Sky */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
+		return E_FAIL;
 
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	lstrcpy(m_szLoadingText, TEXT("모델를(을) 로드하는 중입니다."));
 
 	_matrix		PivotMatrix;
 
-	if (LEVEL_TOOL == eLEVEL)
+
 	{
+		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Raider");
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+			if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+				CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
+				return E_FAIL;
+		}
+		else
+		{
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+			if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
+				return E_FAIL;
+		}
+	}
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Fiona");
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+
+		}
+		else
+		{
+			/* For.Prototype_Component_Model_Fiona */
+			PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
+			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, strPrototypeTag,
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Fiona/Fiona", PivotMatrix))))
+				return E_FAIL;
+		}
 
 	}
-	else 
+	
 	{
-		/* For.Prototype_Component_Model_Fiona */
-		PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
-		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
-			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Fiona/Fiona.fbx", PivotMatrix))))
-			return E_FAIL;
-	}
+		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_ForkLift");
 
-	if (LEVEL_TOOL == eLEVEL)
-	{
-		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, TEXT("Prototype_Component_Model_Raider_Tool"),
-			CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/King/King.fbx", PivotMatrix))))
-			return E_FAIL;
+		if (LEVEL_TOOL == eLEVEL)
+		{
+
+		}
+		else
+		{
+			/* For.Prototype_Component_Model_ForkLift */
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, strPrototypeTag,
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift", PivotMatrix))))
+				return E_FAIL;
+		}
 	}
-	else
-	{
-		/* For.Prototype_Component_Model_ForkLift */
-		PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift_GamePlay"),
-			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift.fbx", PivotMatrix))))
-			return E_FAIL;
-	}
+	
 
 	if (LEVEL_TOOL == eLEVEL) 
 	{
@@ -208,6 +270,19 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			return E_FAIL;
 	}
 
+	if (LEVEL_TOOL == eLEVEL)
+	{
+	}
+	else 
+	{
+		/* For.Prototype_Component_VIBuffer_Cube */
+		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Cube"),
+			CVIBuffer_Cube::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 	
 	lstrcpy(m_szLoadingText, TEXT("셰이더를(을) 로드하는 중입니다."));
@@ -226,14 +301,40 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_AnimModel.hlsl"), VTXANIMMESH::Elements, VTXANIMMESH::iNumElements))))
 		return E_FAIL;
 
+	/* For.Prototype_Component_Shader_VtxCube */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_VtxCube"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_VtxCube.hlsl"), VTXCUBE::Elements, VTXCUBE::iNumElements))))
+		return E_FAIL;
+
 	lstrcpy(m_szLoadingText, TEXT("네비게이션를(을) 로드하는 중입니다."));
 	/* For.Prototype_Component_Navigation */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Navigation"),
 		CNavigation::Create(m_pDevice, m_pContext, TEXT("../Bin/DataFiles/Navigation.dat")))))
 		return E_FAIL;
 
+	lstrcpy(m_szLoadingText, TEXT("콜리이더를(을) 로드하는 중입니다."));
+	/* For.Prototype_Component_Collider_AABB */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Collider_AABB"),
+		CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_AABB))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Collider_OBB */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Collider_OBB"),
+		CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_OBB))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Collider_Sphere */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Collider_Sphere"),
+		CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_SPHERE))))
+		return E_FAIL;
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	lstrcpy(m_szLoadingText, TEXT("원형객체를(을) 로드하는 중입니다."));
 
+<<<<<<< HEAD
 	if (LEVEL_TOOL == eLEVEL)
 	{
 	}
@@ -307,6 +408,143 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	}
 
 	
+=======
+	/* For.Prototype_GameObject_Body_Player */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Body_Player"),
+		CBody_Player::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+>>>>>>> JJH
+
+	/* For.Prototype_GameObject_Weapon_Player */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Weapon_Player"),
+		CWeapon_Player::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Player");
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+
+		}
+		else
+		{
+			/* For.Prototype_GameObject_Player */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CPlayer::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Terrain");
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+			/* For.Prototype_GameObject_Terrain */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CTerrain_Tool::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+
+			/* For.Prototype_GameObject_Terrain */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Plane"),
+				CTerrain_Tool::Create(m_pDevice, m_pContext, true))))
+				return E_FAIL;
+		}
+		else
+		{
+			/* For.Prototype_GameObject_Terrain */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CTerrain_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+	
+
+	
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Raider");
+	
+		if (LEVEL_TOOL == eLEVEL)
+		{
+			/* For.Prototype_GameObject_Raider */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CRaider_Tool::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+		else
+		{
+			/* For.Prototype_GameObject_Raider */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CRaider_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");
+	
+		if (LEVEL_TOOL == eLEVEL)
+		{
+
+		}
+		else
+		{
+			/* For.Prototype_GameObject_Monster */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CMonster_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_ForkLift");
+	
+		if (LEVEL_TOOL == eLEVEL)
+		{
+
+		}
+		else
+		{
+			/* For.Prototype_GameObject_ForkLift */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+	
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Camera_Dynamic");
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+			/* For.Prototype_GameObject_Camera_Dynamic */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CCamera_Dynamic_Tool::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+		else
+		{
+			/* For.Prototype_GameObject_Camera_Dynamic */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+
+
+	/* For.Prototype_GameObject_Sky */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Sky"),
+		CSky::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 
