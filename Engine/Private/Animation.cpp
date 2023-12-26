@@ -20,21 +20,21 @@ CAnimation::CAnimation(const CAnimation& rhs)
 		Safe_AddRef(pChannel);
 }
 
-HRESULT CAnimation::Initialize(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones)
+HRESULT CAnimation::Initialize(CMyAIAnimation pAIAnimation, const CModel::BONES& Bones)
 {
-	strcpy_s(m_szName, pAIAnimation->szName.c_str());
+	strcpy_s(m_szName, pAIAnimation.Get_Name().c_str());
 
-	m_fDuration = (_float)pAIAnimation->fDuration;
-	m_fTickPerSecond = (_float)pAIAnimation->fTickPerSecond;
+	m_fDuration = (_float)pAIAnimation.Get_Duration();
+	m_fTickPerSecond = (_float)pAIAnimation.Get_TickPerSecond();
 
-	m_iNumChannels = pAIAnimation->iNumChannels;
+	m_iNumChannels = pAIAnimation.Get_NumChannels();
 
 	m_CurrentKeyFrames.resize(m_iNumChannels);
 
 	/* 이 애니메이션에서 사용하기위한 뼈(aiNodeAnim,채널)의 정보를 만든다. */
 	for (size_t i = 0; i < m_iNumChannels; i++)
 	{
-		CChannel* pChannel = CChannel::Create(pAIAnimation->Channel_Datas[i], Bones);
+		CChannel* pChannel = CChannel::Create(pAIAnimation.Get_Channel(i), Bones);
 		if (nullptr == pChannel)
 			return E_FAIL;
 
@@ -46,11 +46,9 @@ HRESULT CAnimation::Initialize(const ANIMATION_DATA* pAIAnimation, const CModel:
 
 _bool CAnimation::Invalidate_TransformationMatrix(CModel::ANIM_STATE _eAnimState, _float fTimeDelta, const CModel::BONES& Bones)
 {
+	_bool _bPrevTransition = m_bIsTransition;
 	if (m_bIsTransition)
 	{
-		//_float tick = min(m_fTickPerSecond * fTimeDelta, 0.1f);
-		//m_fTrackPosition += tick;
-
 		m_fTrackPosition += m_fTickPerSecond * fTimeDelta;
 
 		if (m_fTransitionEnd<= m_fTrackPosition) 
@@ -122,10 +120,14 @@ _bool CAnimation::Invalidate_TransformationMatrix(CModel::ANIM_STATE _eAnimState
 		
 	}
 
-	if (m_isFinished) 
-	{
-		m_PrevPos = { 0.f, 0.f, 0.f };
-	}
+	m_bIsTransitionEnd_Now = _bPrevTransition != m_bIsTransition;
+
+	//if (m_isFinished) 
+	//{
+	//	m_PrevPos = { 0.f, 0.f, 0.f };
+	//}
+
+	
 
 	return m_isFinished;
 }
@@ -257,8 +259,27 @@ KEYFRAME CAnimation::Make_NowFrame(_uint m_iChannelIndex)
 	return result;
 }
 
+//_bool CAnimation::Is_Inputable()
+//{
+//	for (_uint i = 0; i < m_iNumChannels; ++i) 
+//	{
+//		return m_Channels[0]->Is_Inputable(m_fTrackPosition, );
+//	}
+//	return false; 
+//}
 
-CAnimation* CAnimation::Create(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones)
+_bool CAnimation::Is_Inputable_Front(_uint _iIndexFront)
+{
+	return m_Channels[0]->Is_Inputable_Front(m_fTrackPosition, _iIndexFront);
+}
+
+_bool CAnimation::Is_Inputable_Back(_uint _iIndexBack)
+{
+	return m_Channels[0]->Is_Inputable_Back(m_fTrackPosition, _iIndexBack);
+}
+
+
+CAnimation* CAnimation::Create(CMyAIAnimation pAIAnimation, const CModel::BONES& Bones)
 {
 	CAnimation* pInstance = new CAnimation();
 

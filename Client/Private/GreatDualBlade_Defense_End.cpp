@@ -2,7 +2,7 @@
 #include "GreatDualBlade_Defense_End.h"
 #include "GameInstance.h"
 
-#include "GreatDualBlade_Defense.h"
+#include "GreatDualBlade_Idle.h"
 
 
 void CGreatDualBlade_Defense_End::Initialize(CRaider_GamePlay* pActor)
@@ -14,7 +14,7 @@ CState<CRaider_GamePlay>* CGreatDualBlade_Defense_End::Update(CRaider_GamePlay* 
 {
 	if (pActor->Is_Animation_End()) 
 	{
-		return new CGreatDualBlade_Defense();
+		return new CGreatDualBlade_Idle();
 	}
 
 	return nullptr;

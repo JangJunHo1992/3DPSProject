@@ -10,7 +10,9 @@ void CGreatDualBlade_Run_Front::Initialize(CRaider_GamePlay* pActor)
 
 CState<CRaider_GamePlay>* CGreatDualBlade_Run_Front::Update(CRaider_GamePlay* pActor, _float fTimeDelta)
 {
-	return Run(pActor, fTimeDelta, g_iAnimIndex);
+	pActor->Go_Straight(fTimeDelta);
+
+	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
 
 void CGreatDualBlade_Run_Front::Release(CRaider_GamePlay* pActor)

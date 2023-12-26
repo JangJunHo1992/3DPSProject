@@ -197,6 +197,14 @@ list<class CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, cons
 	return m_pObject_Manager->Get_GameObjects(iLevelIndex, strLayerTag);
 }
 
+CComponent* CGameInstance::Get_Component(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strComponentTag, _uint iIndex)
+{
+	if (nullptr == m_pObject_Manager)
+		return nullptr;
+
+	return m_pObject_Manager->Get_Component(iLevelIndex, strLayerTag, strComponentTag, iIndex);
+}
+
 HRESULT CGameInstance::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
 {
 	m_pObject_Manager->Save_Objects_With_Json(iLevelIndex, filePath);

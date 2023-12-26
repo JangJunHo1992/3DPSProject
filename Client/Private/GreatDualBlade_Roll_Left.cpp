@@ -1,8 +1,5 @@
 #include "stdafx.h"
 #include "GreatDualBlade_Roll_Left.h"
-#include "GameInstance.h"
-
-#include "GreatDualBlade_Roll_Right.h"
 
 
 void CGreatDualBlade_Roll_Left::Initialize(CRaider_GamePlay* pActor)
@@ -12,12 +9,7 @@ void CGreatDualBlade_Roll_Left::Initialize(CRaider_GamePlay* pActor)
 
 CState<CRaider_GamePlay>* CGreatDualBlade_Roll_Left::Update(CRaider_GamePlay* pActor, _float fTimeDelta)
 {
-	if (pActor->Is_Animation_End()) 
-	{
-		return new CGreatDualBlade_Roll_Right();
-	}
-
-	return nullptr;
+	return Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
 
 void CGreatDualBlade_Roll_Left::Release(CRaider_GamePlay* pActor)

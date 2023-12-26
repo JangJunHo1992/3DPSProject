@@ -2593,11 +2593,14 @@
     <Filter Include="02.GameObjects\0. MyAssets\Raider\GamePlay\Parts\Weapon">
       <UniqueIdentifier>{b345889d-c78a-465e-aa69-d7dbee85c18c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Run\0. Parents">
-      <UniqueIdentifier>{e35e26de-7761-4c7d-87b5-59fd0f7a882b}</UniqueIdentifier>
+    <Filter Include="02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Roll\0. Parent">
+      <UniqueIdentifier>{955a9bb5-3f66-4e31-9b02-e1c46079b118}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\0. Parents">
+    <Filter Include="02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\0. Parent">
       <UniqueIdentifier>{a1314f18-b55d-4356-874d-2fbb4df0beb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Run\0. Parent">
+      <UniqueIdentifier>{e35e26de-7761-4c7d-87b5-59fd0f7a882b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -4774,10 +4777,13 @@
       <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Magical_Knight\Walk\Front\R45</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\GreatDualBlade_Run.h">
-      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Run\0. Parents</Filter>
+      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Run\0. Parent</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\GreatDualBlade_State.h">
-      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\0. Parents</Filter>
+      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\0. Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GreatDualBlade_Roll.h">
+      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Roll\0. Parent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -6915,10 +6921,13 @@
       <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Magical_Knight\Walk\Front\R45</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\GreatDualBlade_Run.cpp">
-      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Run\0. Parents</Filter>
+      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Run\0. Parent</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\GreatDualBlade_State.cpp">
-      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\0. Parents</Filter>
+      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\0. Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GreatDualBlade_Roll.cpp">
+      <Filter>02.GameObjects\0. MyAssets\Raider\GamePlay\State\Greate_DualBlade\Roll\0. Parent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

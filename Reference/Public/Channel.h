@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Model.h"
-#include "CHANNEL_DATA.h"
+#include "MyAINodeAnimation.h"
+
 /* 이 애니메이션에서 사용하는 뼈의 정보다. */
 /* 시간대에 따른 뼈의 상태(Scale, Rotation, Position)를 저장한다.*/
 
@@ -14,7 +15,7 @@ private:
 	virtual ~CChannel() = default;
 
 public:
-	HRESULT Initialize(const CHANNEL_DATA* pChannel, const CModel::BONES& Bones);
+	HRESULT Initialize(CMyAINodeAnimation pChannel, const CModel::BONES& Bones);
 	void	Invalidate_TransformationMatrix(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
 	void	Invalidate_TransformationMatrix_Normal(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
 	void	Invalidate_TransformationMatrix_Reverse(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
@@ -31,6 +32,10 @@ public:
 
 		return m_KeyFrames[_iKeyFrameIndex];
 	};
+	_uint		Get_MaxKeyFrameIndex() { return m_iNumKeyFrames - 1; };
+	_bool		Is_Inputable(_float fCurrentTrackPosition, _uint _iIndex);
+	_bool		Is_Inputable_Front(_float fCurrentTrackPosition, _uint _iIndexFront);
+	_bool		Is_Inputable_Back(_float fCurrentTrackPosition, _uint _iIndexBack);
 
 public:
 	_bool	Update_KeyFrame(KEYFRAME& _StartFrame, KEYFRAME& _EndFrame, _float fCurrentTrackPosition, _uint* pCurrentKeyFrameIndex);
@@ -53,7 +58,7 @@ private:
 	
 
 public:
-	static CChannel* Create(const CHANNEL_DATA* pChannel, const CModel::BONES& Bones);
+	static CChannel* Create(CMyAINodeAnimation pChannel, const CModel::BONES& Bones);
 	virtual void Free() override;
 };
 

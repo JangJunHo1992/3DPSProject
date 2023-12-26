@@ -19,8 +19,8 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
 		return E_FAIL;
 
- 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
- 		return E_FAIL;
+	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
+		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
 		return E_FAIL;
@@ -33,75 +33,12 @@ HRESULT CLevel_GamePlay::Initialize()
 
 void CLevel_GamePlay::Tick(_float fTimeDelta)
 {
-	if (m_pGameInstance->Get_DIKeyState(DIK_M) & 0x80)
-	{
-		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
-			return;
-	}
-
-	list<CGameObject*>* pPlayers = m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
-
-	if (m_pGameInstance->Key_Down(DIK_SPACE))
-	{
-		for (CGameObject* pGameObject : *pPlayers)
-		{
-			CCharacter* pCharacter = dynamic_cast<CCharacter*>(pGameObject);
-			if (pCharacter)
-			{
-				_uint iNumAnimations = pCharacter->Get_NumAnimations();
-				_uint iAnimIndex = pCharacter->Get_CurrentAnimIndex() + 1;
-				if (iAnimIndex >= iNumAnimations - 1)
-				{
-					iAnimIndex = 0;
-				}
-				pCharacter->Set_Animation(iAnimIndex, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-
-			}
-
-		}
-	}
-
-
-	//if (m_pGameInstance->Key_Down(DIK_V))
+	//if (m_pGameInstance->Get_DIKeyState(DIK_M) & 0x80)
 	//{
-	//	for (CGameObject* pGameObject : *pMonsters)
-	//	{
-	//		CMonster* pMonster = dynamic_cast<CMonster*>(pGameObject);
-	//		if (pMonster)
-	//		{
-	//			_uint iAnimIndex = pMonster->Get_CurrentAnimIndex();
-	//			pMonster->Set_Animation(iAnimIndex, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	//		}
-
-	//	}
+	//	if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
+	//		return;
 	//}
 
-	//if (m_pGameInstance->Key_Down(DIK_B))
-	//{
-	//	for (CGameObject* pGameObject : *pMonsters)
-	//	{
-	//		CMonster* pMonster = dynamic_cast<CMonster*>(pGameObject);
-	//		if (pMonster)
-	//		{
-	//			_uint iAnimIndex = pMonster->Get_CurrentAnimIndex();
-	//			pMonster->Set_Animation(iAnimIndex, CModel::ANIM_STATE::ANIM_STATE_STOP, true);
-	//		}
-
-	//	}
-	//}
-
-	//if (m_pGameInstance->Key_Down(DIK_N))
-	//{
-	//	for (CGameObject* pGameObject : *pMonsters)
-	//	{
-	//		CMonster* pMonster = dynamic_cast<CMonster*>(pGameObject);
-	//		if (pMonster)
-	//		{
-	//			_uint iAnimIndex = pMonster->Get_CurrentAnimIndex();
-	//			pMonster->Set_Animation(iAnimIndex, CModel::ANIM_STATE::ANIM_STATE_REVERSE, true);
-	//		}
-	//	}
-	//}
 }
 
 HRESULT CLevel_GamePlay::Render()
@@ -133,8 +70,11 @@ HRESULT CLevel_GamePlay::Ready_Layer_Camera(const wstring& strLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 {
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player_GamePlay"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player"))))
 		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Raider"))))
+	 	return E_FAIL;
 
 	return S_OK;
 }
@@ -143,7 +83,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 {
 	for (size_t i = 0; i < 20; i++)
 	{
-		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster_GamePlay"))))
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster"))))
 			return E_FAIL;
 	}
 
@@ -152,14 +92,14 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const wstring& strLayerTag)
 {
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Terrain_GamePlay"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Terrain"))))
 		return E_FAIL;
 
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Sky"))))
 		return E_FAIL;
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_ForkLift_GamePlay"))))
+
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_ForkLift"))))
 		return E_FAIL;
-	
 
 	return S_OK;
 

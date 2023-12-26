@@ -13,7 +13,11 @@ void CGreatDualBlade_Idle::Initialize(CRaider_GamePlay* pActor)
 
 CState<CRaider_GamePlay>* CGreatDualBlade_Idle::Update(CRaider_GamePlay* pActor, _float fTimeDelta)
 {
-	return Run(pActor, fTimeDelta, g_iAnimIndex);
+	CState<CRaider_GamePlay>* pState;
+	pState = Hitted(pActor, fTimeDelta, g_iAnimIndex);
+	if (pState)	return pState;
+
+	return Ground_Normal(pActor, fTimeDelta, g_iAnimIndex);
 }
 
 void CGreatDualBlade_Idle::Release(CRaider_GamePlay* pActor)

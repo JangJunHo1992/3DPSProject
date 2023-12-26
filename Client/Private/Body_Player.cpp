@@ -5,38 +5,28 @@
 
 
 CBody_Player::CBody_Player(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CGameObject(pDevice, pContext)
+	: CBody(pDevice, pContext)
 {
 
 }
 
 CBody_Player::CBody_Player(const CBody_Player& rhs)
-	: CGameObject(rhs)
+	: CBody(rhs)
 {
 }
 
-CBone* CBody_Player::Get_BonePtr(const _char* pBoneName)
-{
-	return m_pModelCom->Get_BonePtr(pBoneName);
-}
 
 HRESULT CBody_Player::Initialize_Prototype()
 {
+	if (FAILED(__super::Initialize_Prototype()))
+		return E_FAIL;
 
 	return S_OK;
 }
 
 HRESULT CBody_Player::Initialize(void* pArg)
 {
-	m_pParentTransform = ((BODY_DESC*)pArg)->m_pParentTransform;
-	if (nullptr == m_pParentTransform)
-		return E_FAIL;
-	Safe_AddRef(m_pParentTransform);
-
 	if (FAILED(__super::Initialize(pArg)))
-		return E_FAIL;
-
-	if (FAILED(Ready_Components()))
 		return E_FAIL;
 
 	m_pModelCom->Set_Animation(3, CModel::ANIM_STATE::ANIM_STATE_LOOP, true);
@@ -46,11 +36,13 @@ HRESULT CBody_Player::Initialize(void* pArg)
 
 void CBody_Player::Priority_Tick(_float fTimeDelta)
 {
-
+	__super::Priority_Tick(fTimeDelta);
 }
 
 void CBody_Player::Tick(_float fTimeDelta)
 {
+	__super::Tick(fTimeDelta);
+
 	_float3 fTemp;
 	m_pModelCom->Play_Animation(fTimeDelta, fTemp);
 }
@@ -74,7 +66,7 @@ HRESULT CBody_Player::Render()
 	{
 		m_pModelCom->Bind_BoneMatrices(m_pShaderCom, "g_BoneMatrices", i);
 
-		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, Type_DIFFUSE);
+		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
 
 		m_pShaderCom->Begin(0);
 
@@ -99,7 +91,7 @@ HRESULT CBody_Player::Ready_Components()
 		return E_FAIL;
 
 	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona_GamePlay"),
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 

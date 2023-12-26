@@ -1,25 +1,14 @@
 #pragma once
 
 #include "Client_Defines.h"
-#include "GameObject.h"
-
-BEGIN(Engine)
-class CShader;
-class CModel;
-class CBone;
-END
+#include "Weapon.h"
 
 BEGIN(Client)
 
-class CWeapon_Player final : public CGameObject
+class CWeapon_Player : public CWeapon
 {
-public:
-	typedef struct
-	{
-		class CBone* m_pSocketBone = { nullptr };
-		class CTransform* m_pParentTransform = { nullptr };
-	}WEAPON_DESC;
-private:
+
+protected:
 	CWeapon_Player(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CWeapon_Player(const CWeapon_Player& rhs);
 	virtual ~CWeapon_Player() = default;
@@ -32,19 +21,13 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-private:
-	CShader* m_pShaderCom = { nullptr };
-	CModel* m_pModelCom = { nullptr };
+
 
 private:
-	class CTransform* m_pParentTransform = { nullptr };
-	class CBone* m_pSocketBone = { nullptr };
-	_float4x4			m_WorldMatrix = {};
+	virtual HRESULT Ready_Components();
+	virtual HRESULT Ready_Components_Origin(LEVEL eLevel);
 
-private:
-	HRESULT Ready_Components();
-	HRESULT Bind_ShaderResources();
-
+	virtual HRESULT Bind_ShaderResources();
 
 public:
 	/* 원형객체를 생성한다. */

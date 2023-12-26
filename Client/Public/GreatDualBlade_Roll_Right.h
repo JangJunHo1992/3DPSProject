@@ -1,10 +1,10 @@
 #pragma once
 #include "State.h"
-#include "Raider_GamePlay.h"
+#include "GreatDualBlade_Roll.h"
 
 BEGIN(Client)
 
-class CGreatDualBlade_Roll_Right : public CState<CRaider_GamePlay>
+class CGreatDualBlade_Roll_Right : public CGreatDualBlade_Roll
 {
 public:
 	virtual void Initialize(CRaider_GamePlay* pActor) override;

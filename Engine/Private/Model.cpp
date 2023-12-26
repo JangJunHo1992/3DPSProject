@@ -5,6 +5,9 @@
 #include "Animation.h"
 #include "Channel.h"
 
+
+
+
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CComponent(pDevice,pContext)
 {
@@ -53,29 +56,28 @@ CBone* CModel::Get_BonePtr(const _char* pBoneName) const
 	return *iter;
 }
 
-HRESULT CModel::Initialize_Prototype(const MODEL_TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
+HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
-	//! ModelData
-
 	m_eModelType = eType;
 
-// 	_uint	iFlag = aiProcess_ConvertToLeftHanded | aiProcessPreset_TargetRealtime_Fast;
-// 
-// 	if (TYPE_NONANIM == eType)
-// 		iFlag |= aiProcess_PreTransformVertices;
-// 
-// 	m_pAIScene = m_Importer.ReadFile(strModelFilePath, iFlag);
-// 
-// 	if (nullptr == m_pAIScene)
-// 		return E_FAIL;
-	m_pAIScene = new MODEL_DATA;
+	_uint	iFlag = aiProcess_ConvertToLeftHanded | aiProcessPreset_TargetRealtime_Fast;
 
-	if (FAILED(m_pAIScene->Make_ModelData(strModelFilePath.c_str(), m_eModelType, PivotMatrix)))
-		return E_FAIL;
+	if (TYPE_NONANIM == eType)
+		iFlag |= aiProcess_PreTransformVertices;
+
+
+	m_pAIScene = m_MyAssimp.ReadFile(strModelFilePath, iFlag);
+
+	//if (nullptr == m_pAIScene.Get_AIScene())
+	//	return E_FAIL;
 
 	XMStoreFloat4x4(&m_PivotMatrix, PivotMatrix);
+	
+	_bool test = false;
+	CMyAINode root = m_pAIScene.Get_RootNode();
+	_bool test2 = false;
 
-	if (FAILED(Ready_Bones(m_pAIScene->RootNode, -1)))
+	if (FAILED(Ready_Bones(m_pAIScene.Get_RootNode(), -1)))
 		return E_FAIL;
 
 	if (FAILED(Ready_Meshes(PivotMatrix)))
@@ -111,7 +113,7 @@ HRESULT CModel::Bind_BoneMatrices(CShader* pShader, const _char* pConstantName, 
 	return m_Meshes[iMeshIndex]->Bind_BoneMatrices(pShader, pConstantName, m_Bones);
 }
 
-HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName, _uint iMeshIndex, TextureType eTextureType)
+HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType)
 {
 	_uint		iMaterialIndex = m_Meshes[iMeshIndex]->Get_MaterialIndex();
 	if (iMaterialIndex >= m_iNumMaterials)
@@ -126,7 +128,7 @@ void CModel::Play_Animation(_float fTimeDelta, _float3& _Pos)
 		return;
 
 	m_bIsAnimEnd = m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(m_eAnimState, fTimeDelta, m_Bones);
-		
+	
 
 	_float3 NowPos;
 	for (auto& pBone : m_Bones)
@@ -134,18 +136,23 @@ void CModel::Play_Animation(_float fTimeDelta, _float3& _Pos)
 		pBone->Invalidate_CombinedTransformationMatrix(m_Bones, XMLoadFloat4x4(&m_PivotMatrix), NowPos);
 	}
 
-	if (true == m_bUseAnimationPos && false == Is_Transition()) //false == m_bIsAnimEnd && 
+	if (true == m_bUseAnimationPos && false == m_bIsAnimEnd && false == Is_Transition()) 
 	{
-		_float3 ChangedPos = NowPos - m_Animations[m_iCurrentAnimIndex]->Get_PrevPos();
-		_Pos = ChangedPos;
+		if (false == m_Animations[m_iCurrentAnimIndex]->Is_TransitionEnd_Now())
+		{
+			_float3 ChangedPos = NowPos - m_Animations[m_iCurrentAnimIndex]->Get_PrevPos();
+			_Pos = ChangedPos;
+		}
+
 		m_Animations[m_iCurrentAnimIndex]->Set_PrevPos(NowPos);
+
 	}
 	
 
 
 }
 
-void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration)
+void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration, _uint iTargetKeyFrameIndex)
 {
 	m_eAnimState = _eAnimState;
 
@@ -155,7 +162,7 @@ void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimStat
 		
 		if (_bIsTransition)
 		{
-   			Set_Animation_Transition(_iAnimationIndex, _fTransitionDuration);
+   			Set_Animation_Transition(_iAnimationIndex, _fTransitionDuration, iTargetKeyFrameIndex);
 		}
 		else 
 		{
@@ -197,18 +204,27 @@ _bool CModel::Is_Transition()
 	return m_Animations[m_iCurrentAnimIndex]->Is_Transition();
 }
 
+_bool CModel::Is_Inputable_Front(_uint _iIndexFront)
+{
+	return m_Animations[m_iCurrentAnimIndex]->Is_Inputable_Front(_iIndexFront);
+}
+
+_bool CModel::Is_Inputable_Back(_uint _iIndexBack)
+{
+	return m_Animations[m_iCurrentAnimIndex]->Is_Inputable_Back(_iIndexBack);
+}
 
 
 template<class T>
 HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
 {
-	m_iNumMeshes = m_pAIScene->iNumMeshs;
+	m_iNumMeshes = m_pAIScene.Get_NumMeshes();
 
 	m_Meshes.reserve(m_iNumMeshes);
 
 	for (size_t i = 0; i < m_iNumMeshes; i++)
 	{
-		T* pMesh = T::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene->Mesh_Datas[i], PivotMatrix, m_Bones);
+		T* pMesh = T::Create(m_pDevice, m_pContext, m_eModelType, m_pAIScene.Get_Mesh(i), PivotMatrix, m_Bones);
 
 		if (nullptr == pMesh)
 			return E_FAIL;
@@ -221,32 +237,33 @@ HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
 
 HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 {
-	m_iNumMaterials = m_pAIScene->iNumMaterials;
-	
+	m_iNumMaterials = m_pAIScene.Get_NumMaterials();
+
 	for (size_t i = 0; i < m_iNumMaterials; i++)
 	{
-		m_pAIMaterial = m_pAIScene->Material_Datas[i];
+		CMyAIMaterial pAIMaterial = m_pAIScene.Get_Material(i);
 
-		MATERIAL_DESC			MaterialDesc = {};
+		MATERIAL_DESC			MaterialDesc = {  };
 
-		for (size_t j = 1; j < TextureType::Type_UNKNOWN; j++)
+		for (size_t j = 1; j < AI_TEXTURE_TYPE_MAX; j++)
 		{
 			_char		szDrive[MAX_PATH] = "";
 			_char		szDirectory[MAX_PATH] = "";
 
 			_splitpath_s(strModelFilePath.c_str(), szDrive, MAX_PATH, szDirectory, MAX_PATH, nullptr, 0, nullptr, 0);
 
-			string		strPath;
-// 			if (FAILED(m_pAIMaterial->GetTexture(TextureType(j), 0, &strPath)))
-// 				continue;
-			strPath = m_pAIMaterial->szTextureName[TextureType(j)];
+			//aiString			strPath;
+			//if (FAILED(pAIMaterial.GetTexture(aiTextureType(j), 0, &strPath)))
+			//	continue;
 
-			if(strPath == "")
+			string strPath = pAIMaterial.Get_Textures(j);
+			if (strPath == "")
 				continue;
 
 			_char		szFileName[MAX_PATH] = "";
 			_char		szEXT[MAX_PATH] = "";
 
+			//_splitpath_s(strPath.data, nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
 			_splitpath_s(strPath.c_str(), nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
 
 			_char		szTmp[MAX_PATH] = "";
@@ -265,10 +282,7 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 
 			MaterialDesc.pMtrlTextures[j] = CTexture::Create(m_pDevice, m_pContext, szFullPath, 1);
 			if (nullptr == MaterialDesc.pMtrlTextures[j])
-			{
-				/*return E_FAIL;*/
-				continue;
-			}
+				return E_FAIL;
 		}
 
 		m_Materials.push_back(MaterialDesc);
@@ -277,7 +291,7 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 	return S_OK;
 }
 
-HRESULT CModel::Ready_Bones(NODE_DATA* pAINode, _int iParentIndex)
+HRESULT CModel::Ready_Bones(CMyAINode pAINode, _int iParentIndex)
 {
 	CBone* pBone = CBone::Create(pAINode, iParentIndex);
 	if (nullptr == pBone)
@@ -287,9 +301,9 @@ HRESULT CModel::Ready_Bones(NODE_DATA* pAINode, _int iParentIndex)
 
 	_int		iParentIdx = m_Bones.size() - 1;
 
-	for (size_t i = 0; i < pAINode->iNumChildren; i++)
+	for (size_t i = 0; i < pAINode.Get_NumChildren(); i++)
 	{
-		Ready_Bones(pAINode->pChildren[i], iParentIdx);
+		Ready_Bones(CMyAINode(pAINode.Get_Children(i)), iParentIdx);
 	}
 
 	return S_OK;
@@ -297,11 +311,11 @@ HRESULT CModel::Ready_Bones(NODE_DATA* pAINode, _int iParentIndex)
 
 HRESULT CModel::Ready_Animations()
 {
-	m_iNumAnimations = m_pAIScene->iNumAnimations;
+	m_iNumAnimations = m_pAIScene.Get_NumAnimations();
 
 	for (size_t i = 0; i < m_iNumAnimations; i++)
 	{
-		CAnimation* pAnimation = CAnimation::Create(m_pAIScene->Animation_Datas[i], m_Bones);
+		CAnimation* pAnimation = CAnimation::Create(m_pAIScene.Get_Animation(i), m_Bones);
 		if (nullptr == pAnimation)
 			return E_FAIL;
 
@@ -337,7 +351,7 @@ void CModel::Free()
 	}
 	m_Meshes.clear();
 
-// 	if (false == m_isCloned)
-// 		m_Importer.FreeScene();
+	if (false == m_isCloned)
+		m_MyAssimp.FreeScene();
 
 }

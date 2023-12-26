@@ -2,8 +2,7 @@
 #include "GreatDualBlade_Dead_01.h"
 #include "GameInstance.h"
 
-#include "GreatDualBlade_Dead_02.h"
-
+#include "GreatDualBlade_Rise_02.h"
 
 void CGreatDualBlade_Dead_01::Initialize(CRaider_GamePlay* pActor)
 {
@@ -14,9 +13,8 @@ CState<CRaider_GamePlay>* CGreatDualBlade_Dead_01::Update(CRaider_GamePlay* pAct
 {
 	if (pActor->Is_Animation_End()) 
 	{
-		return new CGreatDualBlade_Dead_02();
+		return new CGreatDualBlade_Rise_02();
 	}
-
 	return nullptr;
 }
 

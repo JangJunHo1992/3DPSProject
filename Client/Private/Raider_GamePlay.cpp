@@ -18,7 +18,7 @@ HRESULT CRaider_GamePlay::Ready_Components()
 		return E_FAIL;
 
 	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Raider_GamePlay"),
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Raider"),
 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 
@@ -70,4 +70,5 @@ CRaider_GamePlay* CRaider_GamePlay::Clone(void* pArg)
 void CRaider_GamePlay::Free()
 {
 	__super::Free();
+	Safe_Delete(m_pActor);
 }

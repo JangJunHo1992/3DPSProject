@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Model.h"
-#include "ANIMATION_DATA.h"
+#include "MyAIAnimation.h"
+
 /* 특정 애니메이션(대기, 걷기, 뛰기, 때리기, 맞기) 을 표현하기위한 데이터들을 가진다. */
 
 BEGIN(Engine)
@@ -17,11 +18,11 @@ private:
 	virtual ~CAnimation() = default;
 
 public:
-	HRESULT Initialize(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones);
+	HRESULT Initialize(CMyAIAnimation pAIAnimation, const CModel::BONES& Bones);
 	_bool Invalidate_TransformationMatrix(CModel::ANIM_STATE _eAnimState, _float fTimeDelta, const CModel::BONES& Bones);
 
 public:
-	vector<CChannel*>* Get_Channels() { return &m_Channels; };
+	vector<class CChannel*>* Get_Channels() { return &m_Channels; };
 	CChannel* Get_Channel_By_BoneIndex(_uint _iBoneIndex, _uint& _iChannelIndex);
 	void	Reset_Animation(const CModel::BONES& Bones);
 
@@ -50,9 +51,21 @@ public:
 		return m_PrevPos;
 	}
 
-	void	Set_PrevPos(_float3 _PrevPos) { m_PrevPos = _PrevPos; }
+	void	Set_PrevPos(_float3 _PrevPos) { 
+		m_PrevPos = _PrevPos; 
+	}
 
-	_float	Get_TickPerSecond() { return m_fTickPerSecond; }
+	_float	Get_TickPerSecond() { 
+		return m_fTickPerSecond; 
+	}
+
+	_bool	Is_TransitionEnd_Now() {
+		return m_bIsTransitionEnd_Now;
+	}
+
+	//_bool	Is_Inputable();
+	_bool	Is_Inputable_Front(_uint _iIndexFront);
+	_bool	Is_Inputable_Back(_uint _iIndexBack);
 
 
 private:
@@ -62,12 +75,14 @@ private:
 	_float					m_fTrackPosition = { 0.f }; /* 현재 재생되고 있는 위치. */
 
 	_uint					m_iNumChannels = { 0 }; /* 이 애니메이션이 사용하는 뼈의 갯수. */
-	vector<CChannel*>		m_Channels;
+	vector<class CChannel*>	m_Channels;
 
 	vector<_uint>			m_CurrentKeyFrames;
 	_bool					m_isFinished = { false };
 	
 	_bool					m_bIsTransition = { false };
+	_bool					m_bIsTransitionEnd_Now = { false };
+
 	_float					m_fTransitionEnd = { 0.f };
 
 	vector<KEYFRAME>		m_StartTransitionKeyFrame;
@@ -77,7 +92,7 @@ private:
 
 
 public:
-	static CAnimation* Create(const ANIMATION_DATA* pAIAnimation, const CModel::BONES& Bones);
+	static CAnimation* Create(CMyAIAnimation pAIAnimation, const CModel::BONES& Bones);
 	CAnimation* Clone();
 	virtual void Free() override;
 };

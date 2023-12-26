@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Model.h"
-#include "NODE_DATA.h"
+#include "MyAINode.h"
+
 BEGIN(Engine)
 
 class ENGINE_DLL CBone final : public CBase
@@ -24,22 +25,22 @@ public:
 	}
 
 public:
-	HRESULT Initialize(NODE_DATA* pAINode, _int iParentIndex);
+	HRESULT Initialize(CMyAINode pAINode, _int iParentIndex);
 	void Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatrix PivotMatrix, _float3& _Pos);
 
 private:
 	_char				m_szName[MAX_PATH] = "";
 	_int				m_iParentIndex = { 0 };
 
-	/* ?? ?????? ??????? */
+	/* 이 뼈만의 상태행렬 */
 	_float4x4			m_TransformationMatrix;
 
-	/* ?? ?????? ??????? * ?θ???? m_CombindTransformationMatrix */
+	/* 이 뼈만의 상태행렬 * 부모뼈의 m_CombindTransformationMatrix */
 	_float4x4			m_CombinedTransformationMatrix;
 
 
 public:
-	static CBone* Create(NODE_DATA* pAINode, _int iParentIndex);
+	static CBone* Create(CMyAINode pAINode, _int iParentIndex);
 	CBone* Clone();
 	virtual void Free() override;
 };

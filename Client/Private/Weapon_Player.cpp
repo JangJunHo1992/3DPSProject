@@ -6,39 +6,30 @@
 
 
 CWeapon_Player::CWeapon_Player(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CGameObject(pDevice, pContext)
+	: CWeapon(pDevice, pContext)
 {
 
 }
 
 CWeapon_Player::CWeapon_Player(const CWeapon_Player& rhs)
-	: CGameObject(rhs)
+	: CWeapon(rhs)
 {
 }
 
 HRESULT CWeapon_Player::Initialize_Prototype()
 {
+	if(FAILED(__super::Initialize_Prototype())) {
+		return E_FAIL;
+	}
 
 	return S_OK;
 }
 
 HRESULT CWeapon_Player::Initialize(void* pArg)
 {
-	m_pParentTransform = ((WEAPON_DESC*)pArg)->m_pParentTransform;
-	if (nullptr == m_pParentTransform)
+	if (FAILED(__super::Initialize(pArg))) {
 		return E_FAIL;
-	Safe_AddRef(m_pParentTransform);
-
-	m_pSocketBone = ((WEAPON_DESC*)pArg)->m_pSocketBone;
-	if (nullptr == m_pSocketBone)
-		return E_FAIL;
-	Safe_AddRef(m_pSocketBone);
-
-	if (FAILED(__super::Initialize(pArg)))
-		return E_FAIL;
-
-	if (FAILED(Ready_Components()))
-		return E_FAIL;
+	}
 
 	m_pTransformCom->Set_Scaling(0.1f, 0.1f, 0.1f);
 	m_pTransformCom->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(90.0f));
@@ -50,55 +41,34 @@ HRESULT CWeapon_Player::Initialize(void* pArg)
 
 void CWeapon_Player::Priority_Tick(_float fTimeDelta)
 {
-
+	__super::Priority_Tick(fTimeDelta);
 }
 
 void CWeapon_Player::Tick(_float fTimeDelta)
 {
-
+	__super::Tick(fTimeDelta);
 }
 
 void CWeapon_Player::Late_Tick(_float fTimeDelta)
 {
-	_matrix		SocketMatrix = m_pSocketBone->Get_CombinedTransformationMatrix();
-
-	for (size_t i = 0; i < 3; i++)
-	{
-		SocketMatrix.r[i] = XMVector3Normalize(SocketMatrix.r[i]);
-	}
-
-
-
-	XMStoreFloat4x4(&m_WorldMatrix, m_pTransformCom->Get_WorldMatrix() * SocketMatrix * m_pParentTransform->Get_WorldMatrix());
-
-	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
-		return;
+	__super::Late_Tick(fTimeDelta);
 }
 
 HRESULT CWeapon_Player::Render()
 {
-	if (FAILED(Bind_ShaderResources()))
+	if (FAILED(__super::Render())) {
 		return E_FAIL;
-
-	_uint		iNumMeshes = m_pModelCom->Get_NumMeshes();
-
-	for (size_t i = 0; i < iNumMeshes; i++)
-	{
-		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i,Type_DIFFUSE);
-
-		m_pShaderCom->Begin(0);
-
-		m_pModelCom->Render(i);
 	}
-
-
 
 	return S_OK;
 }
 
-
-
 HRESULT CWeapon_Player::Ready_Components()
+{
+	return Ready_Components_Origin(LEVEL::LEVEL_GAMEPLAY);
+}
+
+HRESULT CWeapon_Player::Ready_Components_Origin(LEVEL eLevel)
 {
 	/* For.Com_Shader */
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Model"),
@@ -106,7 +76,7 @@ HRESULT CWeapon_Player::Ready_Components()
 		return E_FAIL;
 
 	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift_GamePlay"),
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift"),
 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 
@@ -118,13 +88,7 @@ HRESULT CWeapon_Player::Bind_ShaderResources()
 	/*if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
 		return E_FAIL;*/
 
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_WorldMatrix", &m_WorldMatrix)))
-		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_ViewMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_VIEW))))
-		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
-		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
+	if (FAILED(__super::Bind_ShaderResources()))
 		return E_FAIL;
 
 	return S_OK;
@@ -159,10 +123,5 @@ CGameObject* CWeapon_Player::Clone(void* pArg)
 void CWeapon_Player::Free()
 {
 	__super::Free();
-
-	Safe_Release(m_pParentTransform);
-	Safe_Release(m_pSocketBone);
-	Safe_Release(m_pShaderCom);
-	Safe_Release(m_pModelCom);
 }
 

@@ -3,18 +3,25 @@
 #include "GameInstance.h"
 
 #include "GreatDualBlade_Combo_01_03.h"
+#include "GreatDualBlade_Idle.h"
 
 
 void CGreatDualBlade_Combo_01_02::Initialize(CRaider_GamePlay* pActor)
 {
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true, true, 6);
 }
 
 CState<CRaider_GamePlay>* CGreatDualBlade_Combo_01_02::Update(CRaider_GamePlay* pActor, _float fTimeDelta)
 {
-	if (pActor->Is_Animation_End()) 
+	_uint iMinimumPlayTime = 30;
+
+	if (pActor->Is_Inputable_Front(iMinimumPlayTime) && CGameInstance::GetInstance()->Key_Down(DIK_Z))
 	{
 		return new CGreatDualBlade_Combo_01_03();
+	}
+	if (pActor->Is_Animation_End())
+	{
+		return new CGreatDualBlade_Idle();
 	}
 
 	return nullptr;

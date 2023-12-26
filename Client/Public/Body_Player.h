@@ -1,30 +1,17 @@
 #pragma once
 
 #include "Client_Defines.h"
-#include "GameObject.h"
+#include "Body.h"
 
-BEGIN(Engine)
-class CShader;
-class CModel;
-class CBone;
-END
 
 BEGIN(Client)
 
-class CBody_Player final : public CGameObject
+class CBody_Player : public CBody
 {
-public:
-	typedef struct
-	{
-		class CTransform* m_pParentTransform = { nullptr };
-	}BODY_DESC;
-private:
+protected:
 	CBody_Player(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CBody_Player(const CBody_Player& rhs);
 	virtual ~CBody_Player() = default;
-
-public:
-	class CBone* Get_BonePtr(const _char* pBoneName);
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -37,17 +24,10 @@ public:
 public:
 	void SetUp_Animation(_uint iAnimIndex, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_END, _bool _bIsTransition = true, _float _fTransitionDuration = 0.2f);
 
-private:
-	CShader* m_pShaderCom = { nullptr };
-	CModel* m_pModelCom = { nullptr };
 
-private:
-	class CTransform* m_pParentTransform = { nullptr };
-	_float4x4			m_WorldMatrix = {};
-
-private:
-	HRESULT Ready_Components();
-	HRESULT Bind_ShaderResources();
+protected:
+	virtual HRESULT Ready_Components();
+	virtual HRESULT Bind_ShaderResources();
 
 
 public:

@@ -8,6 +8,7 @@
 BEGIN(Engine)
 class CShader;
 class CModel;
+class CCollider;
 END
 
 BEGIN(Client)
@@ -33,6 +34,7 @@ public:
 protected:
 	CShader*		m_pShaderCom = { nullptr };
 	//CModel*			m_pModelCom = { nullptr };
+	CCollider*		m_pColliderCom = { nullptr };
 
 	
 

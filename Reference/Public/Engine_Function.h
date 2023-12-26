@@ -63,6 +63,7 @@ namespace Engine
 	std::istream& read_typed_data(std::istream& stream, T& value) {
 		return stream.read(reinterpret_cast<char*>(&value), sizeof(T));
 	}
+
 }
 
 #endif // Engine_Function_h__

@@ -5,6 +5,7 @@
 
 BEGIN(Engine)
 class CNavigation;
+class CCollider;
 END
 
 BEGIN(Client)
@@ -29,6 +30,7 @@ public:
 
 private:
 	CNavigation* m_pNavigationCom = { nullptr };
+	CCollider* m_pColliderCom = { nullptr };
 
 private:
 	map<const wstring, class CGameObject*>		m_PartObjects;

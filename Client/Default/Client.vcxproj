@@ -305,6 +305,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\GreatDualBlade_Rise_02.h" />
     <ClInclude Include="..\Public\GreatDualBlade_Rise_Left_Up.h" />
     <ClInclude Include="..\Public\GreatDualBlade_Rise_Right_Up.h" />
+    <ClInclude Include="..\Public\GreatDualBlade_Roll.h" />
     <ClInclude Include="..\Public\GreatDualBlade_Roll_Back.h" />
     <ClInclude Include="..\Public\GreatDualBlade_Roll_Front.h" />
     <ClInclude Include="..\Public\GreatDualBlade_Roll_Left.h" />
@@ -1025,6 +1026,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\GreatDualBlade_Rise_02.cpp" />
     <ClCompile Include="..\Private\GreatDualBlade_Rise_Left_Up.cpp" />
     <ClCompile Include="..\Private\GreatDualBlade_Rise_Right_Up.cpp" />
+    <ClCompile Include="..\Private\GreatDualBlade_Roll.cpp" />
     <ClCompile Include="..\Private\GreatDualBlade_Roll_Back.cpp" />
     <ClCompile Include="..\Private\GreatDualBlade_Roll_Front.cpp" />
     <ClCompile Include="..\Private\GreatDualBlade_Roll_Left.cpp" />

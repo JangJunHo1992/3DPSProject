@@ -10,14 +10,14 @@ CMesh_GamePlay::CMesh_GamePlay(const CMesh_GamePlay& rhs)
 {
 }
 
-HRESULT CMesh_GamePlay::Initialize_Prototype(const MODEL_TYPE eModelType, const MESH_DATA* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
+HRESULT CMesh_GamePlay::Initialize_Prototype(CModel::TYPE eModelType, CMyAIMesh pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
 {
     Initialize_Prototype_Origin(eModelType, pAIMesh, PivotMatrix, Bones);
     Safe_Delete_Array(m_pIndices);
     return S_OK;
 }
 
-HRESULT CMesh_GamePlay::Ready_Vertices_NonAnim(const MESH_DATA* pAIMesh, DirectX::XMMATRIX PivotMatrix)
+HRESULT CMesh_GamePlay::Ready_Vertices_NonAnim(CMyAIMesh pAIMesh, DirectX::XMMATRIX PivotMatrix)
 {
     Ready_Vertices_NonAnim_Origin(pAIMesh, PivotMatrix);
     Safe_Delete_Array(m_pVertices);
@@ -25,14 +25,14 @@ HRESULT CMesh_GamePlay::Ready_Vertices_NonAnim(const MESH_DATA* pAIMesh, DirectX
 }
 
 
-HRESULT CMesh_GamePlay::Ready_Vertices_Anim(const MESH_DATA* pAIMesh, const vector<Engine::CBone*>& Bones)
+HRESULT CMesh_GamePlay::Ready_Vertices_Anim(CMyAIMesh pAIMesh, const std::vector<Engine::CBone*, std::allocator<Engine::CBone*>>& Bones)
 {
     Ready_Vertices_Anim_Origin(pAIMesh, Bones);
     Safe_Delete_Array(m_pAnimVertices);
     return S_OK;
 }
 
-CMesh_GamePlay* CMesh_GamePlay::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, const MODEL_TYPE eModelType, const MESH_DATA* pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
+CMesh_GamePlay* CMesh_GamePlay::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, CModel::TYPE eModelType, CMyAIMesh pAIMesh, _fmatrix PivotMatrix, const vector<class CBone*>& Bones)
 {
     CMesh_GamePlay* pInstance = new CMesh_GamePlay(pDevice, pContext);
 
