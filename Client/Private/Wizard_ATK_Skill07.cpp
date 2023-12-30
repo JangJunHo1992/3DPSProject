@@ -2,7 +2,7 @@
 #include "Wizard_ATK_Skill07.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Wizard_ATK_Skill08.h"
 
 void CWizard_ATK_Skill07::Initialize(CWizard_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CWizard_ATK_Skill07::Initialize(CWizard_GamePlay* pActor)
 
 CState<CWizard_GamePlay>* CWizard_ATK_Skill07::Update(CWizard_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CWizard_ATK_Skill08();
+	}
 
 	return nullptr;
 }

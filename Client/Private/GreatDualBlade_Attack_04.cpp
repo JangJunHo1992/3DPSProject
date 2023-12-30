@@ -7,6 +7,7 @@
 
 void CGreat_DualBlade_Attack_04::Initialize(CRaider_GamePlay* pActor)
 {
+	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
 }
 

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Model.h"
 
 BEGIN(Engine)
 
 class CShader;
-class CModel;
 class CBone;
 
 
@@ -33,7 +33,17 @@ public:
 	virtual HRESULT Render() override;
 
 public:
-	void SetUp_Animation(_uint iAnimIndex, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_END, _bool _bIsTransition = true, _float _fTransitionDuration = 0.2f);
+	void Set_Animation(
+		_uint _iNextAnimation
+		, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_NORMAL
+		, _bool _bIsTransition = true
+		, _bool _bUseAnimationPos = true
+		, _uint iTargetKeyFrameIndex = 0
+	);
+
+	_bool	Is_Animation_End();
+	_bool	Is_Inputable_Front(_uint _iIndexFront);
+	_bool	Is_Inputable_Back(_uint _iIndexBack);
 
 protected:
 	CShader* m_pShaderCom = { nullptr };
@@ -44,15 +54,14 @@ protected:
 	_float4x4			m_WorldMatrix = {};
 
 protected:
+	_bool		m_bNoUseRootY = { false };
+
+protected:
 	virtual HRESULT Ready_Components() PURE;
-	HRESULT Bind_ShaderResources();
+	virtual HRESULT Bind_ShaderResources();
 
 
 public:
-	/* 원형객체를 생성한다. */
-	//static CBody* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-
-	/* 사본객체를 생성한다. */
 	virtual CGameObject* Clone(void* pArg) PURE;
 
 	virtual void Free() override;

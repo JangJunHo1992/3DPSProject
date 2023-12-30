@@ -1,16 +1,11 @@
 #pragma once
 
 #include "Client_Defines.h"
-#include "Character.h"
-
-BEGIN(Engine)
-class CShader;
-class CModel;
-END
+#include "Character_Client.h"
 
 BEGIN(Client)
 
-class CGolem abstract : public CCharacter
+class CGolem abstract : public CCharacter_Client
 {
 public:
 	enum Golem_State 
@@ -71,18 +66,9 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-public:
-	virtual void Write_Json(json& Out_Json) override;
-
 protected:
-	CShader* m_pShaderCom = { nullptr };
-
-
-
-protected:
-	virtual HRESULT Ready_Components() PURE;
-	HRESULT Ready_Components_Origin(LEVEL eLevel);
-	HRESULT Bind_ShaderResources();
+	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
+	virtual HRESULT Ready_PartObjects() override;
 
 
 public:

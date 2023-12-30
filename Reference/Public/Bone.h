@@ -25,8 +25,18 @@ public:
 	}
 
 public:
+	void Set_TransformationY(_float fY) {
+		m_TransformationMatrix._42 = fY;
+	}
+
+public:
 	HRESULT Initialize(CMyAINode pAINode, _int iParentIndex);
+	void Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatrix PivotMatrix);
+
 	void Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatrix PivotMatrix, _float3& _Pos);
+
+	void Invalidate_CombinedTransformationMatrix(CModel::BONES& Bones, _fmatrix PivotMatrix, _float3& _Pos, _float& fMinY);
+
 
 private:
 	_char				m_szName[MAX_PATH] = "";

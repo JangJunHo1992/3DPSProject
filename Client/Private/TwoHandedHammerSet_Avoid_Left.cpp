@@ -2,7 +2,7 @@
 #include "TwoHandedHammerSet_Avoid_Left.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "TwoHandedHammerSet_Avoid_Right.h"
 
 void CTwoHandedHammerSet_Avoid_Left::Initialize(CKing_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CTwoHandedHammerSet_Avoid_Left::Initialize(CKing_GamePlay* pActor)
 
 CState<CKing_GamePlay>* CTwoHandedHammerSet_Avoid_Left::Update(CKing_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CTwoHandedHammerSet_Avoid_Right();
+	}
 
 	return nullptr;
 }

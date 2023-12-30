@@ -2,7 +2,7 @@
 #include "Spear_Shield_Attack_Swing.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Spear_Shield_Combo_Stings_01.h"
 
 void CSpear_Shield_Attack_Swing::Initialize(CKnightGuard_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CSpear_Shield_Attack_Swing::Initialize(CKnightGuard_GamePlay* pActor)
 
 CState<CKnightGuard_GamePlay>* CSpear_Shield_Attack_Swing::Update(CKnightGuard_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CSpear_Shield_Combo_Stings_01();
+	}
 
 	return nullptr;
 }

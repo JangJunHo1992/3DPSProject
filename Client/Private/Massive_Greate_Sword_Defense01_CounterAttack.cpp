@@ -2,7 +2,7 @@
 #include "Massive_Greate_Sword_Defense01_CounterAttack.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Massive_Greate_Sword_Defense01_Start.h"
 
 void CMassive_Greate_Sword_Defense01_CounterAttack::Initialize(CDarkKnight_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CMassive_Greate_Sword_Defense01_CounterAttack::Initialize(CDarkKnight_GameP
 
 CState<CDarkKnight_GamePlay>* CMassive_Greate_Sword_Defense01_CounterAttack::Update(CDarkKnight_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CMassive_Greate_Sword_Defense01_Start();
+	}
 
 	return nullptr;
 }

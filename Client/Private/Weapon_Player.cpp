@@ -2,17 +2,16 @@
 #include "..\Public\Weapon_Player.h"
 
 #include "GameInstance.h"
-#include "Bone.h"
 
 
 CWeapon_Player::CWeapon_Player(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CWeapon(pDevice, pContext)
+	: CWeapon_Client(pDevice, pContext)
 {
 
 }
 
 CWeapon_Player::CWeapon_Player(const CWeapon_Player& rhs)
-	: CWeapon(rhs)
+	: CWeapon_Client(rhs)
 {
 }
 
@@ -61,6 +60,11 @@ HRESULT CWeapon_Player::Render()
 	}
 
 	return S_OK;
+}
+
+_bool CWeapon_Player::Collision_Chcek()
+{
+	return false;
 }
 
 HRESULT CWeapon_Player::Ready_Components()

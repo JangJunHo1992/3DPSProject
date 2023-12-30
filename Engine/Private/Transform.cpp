@@ -130,6 +130,22 @@ void CTransform::Go_Right(_float fTimeDelta, class CNavigation* pNavigation)
 	Set_State(STATE_POSITION, vPosition);
 }
 
+void CTransform::Knockback(_float fTimeDelta, CNavigation* pNavigation)
+{
+	_vector	vPosition = Get_State(STATE_POSITION);
+	_vector vLook = Get_State(STATE_LOOK);
+
+	vPosition -= XMVector3Normalize(vLook) * 2 * fTimeDelta;
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
+	Set_State(STATE_POSITION, vPosition);
+}
+
 void CTransform::Go_Backward(_float fTimeDelta, class CNavigation* pNavigation)
 {
 	_vector	vPosition = Get_State(STATE_POSITION);

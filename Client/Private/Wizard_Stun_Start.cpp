@@ -2,7 +2,7 @@
 #include "Wizard_Stun_Start.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Wizard_Stun_Loop.h"
 
 void CWizard_Stun_Start::Initialize(CWizard_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CWizard_Stun_Start::Initialize(CWizard_GamePlay* pActor)
 
 CState<CWizard_GamePlay>* CWizard_Stun_Start::Update(CWizard_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CWizard_Stun_Loop();
+	}
 
 	return nullptr;
 }

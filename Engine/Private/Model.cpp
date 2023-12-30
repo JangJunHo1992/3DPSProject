@@ -148,8 +148,35 @@ void CModel::Play_Animation(_float fTimeDelta, _float3& _Pos)
 
 	}
 	
+}
+
+void CModel::Play_Animation(_float fTimeDelta, _float3& _Pos, _float& fMinY)
+{
+	if (m_iCurrentAnimIndex >= m_iNumAnimations)
+		return;
+
+	m_bIsAnimEnd = m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(m_eAnimState, fTimeDelta, m_Bones);
 
 
+	_float3 NowPos;
+	for (auto& pBone : m_Bones)
+	{
+		pBone->Invalidate_CombinedTransformationMatrix(m_Bones, XMLoadFloat4x4(&m_PivotMatrix), NowPos, fMinY);
+	}
+
+	//NowPos.y -= fMinY;
+	//_bool test = false;
+
+	if (true == m_bUseAnimationPos && false == m_bIsAnimEnd && false == Is_Transition())
+	{
+		if (false == m_Animations[m_iCurrentAnimIndex]->Is_TransitionEnd_Now())
+		{
+			_float3 ChangedPos = NowPos - m_Animations[m_iCurrentAnimIndex]->Get_PrevPos();
+			_Pos = ChangedPos;
+		}
+
+		m_Animations[m_iCurrentAnimIndex]->Set_PrevPos(NowPos);
+	}
 }
 
 void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration, _uint iTargetKeyFrameIndex)

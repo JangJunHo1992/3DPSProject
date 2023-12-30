@@ -2,7 +2,7 @@
 #include "Massive_Greate_Sword_Move_Run_Back_L45.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Massive_Greate_Sword_Move_Run_Back_R45.h"
 
 void CMassive_Greate_Sword_Move_Run_Back_L45::Initialize(CDarkKnight_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CMassive_Greate_Sword_Move_Run_Back_L45::Initialize(CDarkKnight_GamePlay* p
 
 CState<CDarkKnight_GamePlay>* CMassive_Greate_Sword_Move_Run_Back_L45::Update(CDarkKnight_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CMassive_Greate_Sword_Move_Run_Back_R45();
+	}
 
 	return nullptr;
 }

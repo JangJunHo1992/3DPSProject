@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Client_Defines.h"
-#include "Body.h"
+//#include "Client_Defines.h"
+#include "Body_Client.h"
 
 
 BEGIN(Client)
 
-class CBody_Player : public CBody
+class CBody_Player : public CBody_Client
 {
 protected:
 	CBody_Player(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
@@ -21,13 +21,11 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-public:
-	void SetUp_Animation(_uint iAnimIndex, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_END, _bool _bIsTransition = true, _float _fTransitionDuration = 0.2f);
-
 
 protected:
-	virtual HRESULT Ready_Components();
-	virtual HRESULT Bind_ShaderResources();
+	virtual HRESULT Ready_Components() override;
+	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
+	virtual HRESULT Bind_ShaderResources() override;
 
 
 public:

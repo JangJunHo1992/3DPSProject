@@ -4,44 +4,64 @@
 #include "BackGround.h"
 #include "Navigation.h"
 #include "Sky.h"
-#include "Player.h"
 #include "Camera_Dynamic.h"
 #include "Camera_Dynamic_Tool.h"
+#include "VIBuffer_Static_Terrain.h"
+#include "VIBuffer_Dynamic_Plane.h"
+#include "Terrain_Tool.h"
+#include "Terrain_GamePlay.h"
+#include "ForkLift_Tool.h"
+#include "ForkLift_GamePlay.h"
+#include "Monster_Tool.h"
+#include "Monster_GamePlay.h"
+#include "Player_GamePlay.h"
+#include "Player_Tool.h"
 #include "Weapon_Player.h"
 #include "Body_Player.h"
 
-#include "VIBuffer_Static_Terrain.h"
-#include "VIBuffer_Dynamic_Plane.h"
-
-#include "Terrain_Tool.h"
-#include "Terrain_GamePlay.h"
-
-#include "ForkLift_Tool.h"
-#include "ForkLift_GamePlay.h"
-
-#include "Monster_Tool.h"
-#include "Monster_GamePlay.h"
 
 #include "Raider_Tool.h"
 #include "Raider_GamePlay.h"
+#include "Raider_Body_GamePlay.h"
+#include "Raider_Body_Tool.h"
+#include "Raider_Weapon_GamePlay.h"
+#include "Raider_Weapon_Tool.h"
 
 #include "King_Tool.h"
 #include "King_GamePlay.h"
+#include "King_Body_GamePlay.h"
+#include "King_Body_Tool.h"
+#include "King_Weapon_GamePlay.h"
+#include "King_Weapon_Tool.h"
 
 #include "DarkKnight_Tool.h"
 #include "DarkKnight_GamePlay.h"
+#include "DarkKnight_Body_GamePlay.h"
+#include "DarkKnight_Body_Tool.h"
+//#include "DarkKnight_Weapon_GamePlay.h"
+//#include "DarkKnight_Weapon_Tool.h"
 
 #include "KnightGuard_Tool.h"
 #include "KnightGuard_GamePlay.h"
+#include "KnightGuard_Body_GamePlay.h"
+#include "KnightGuard_Body_Tool.h"
+//#include "KnightGuard_Weapon_GamePlay.h"
+//#include "KnightGuard_Weapon_Tool.h"
 
 #include "Wizard_Tool.h"
 #include "Wizard_GamePlay.h"
+#include "Wizard_Body_GamePlay.h"
+#include "Wizard_Body_Tool.h"
+//#include "Wizard_Weapon_GamePlay.h"
+//#include "Wizard_Weapon_Tool.h"
 
-#include "King_Tool.h"
-#include "King_GamePlay.h"
 
 #include "Golem_Tool.h"
 #include "Golem_GamePlay.h"
+#include "Golem_Body_GamePlay.h"
+#include "Golem_Body_Tool.h"
+//#include "Golem_Weapon_GamePlay.h"
+//#include "Golem_Weapon_Tool.h"
 
 
 #include "Model_Tool.h"
@@ -189,23 +209,172 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 
 	{
-		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Raider");
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Raider");
+			string strFilePath = "../Bin/Resources/Models/Raider/Raider";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 
-		if (LEVEL_TOOL == eLEVEL)
-		{
-			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-			if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-				CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
-				return E_FAIL;
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
 		}
-		else
+
 		{
-			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-			if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
-				return E_FAIL;
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Raider_Weapon");
+			string strFilePath = "../Bin/Resources/Models/Weapon/Raider/Sword_01/Sword_01";
+
+			_float fRadiusY = 270.0f;
+			_float fRadiusZ = 90.0f;
+
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
 		}
 	}
+	
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_King");
+			string strFilePath = "../Bin/Resources/Models/King/King";
+			//string strFilePath = "../Bin/Resources/Models/King/test/King";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) *XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+	}
+
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_DarkKnight");
+			string strFilePath = "../Bin/Resources/Models/DarkKnight/DarkKnight";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) *XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+	}
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_KnightGuard");
+			string strFilePath = "../Bin/Resources/Models/KnightGuard/KnightGuard";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+	}
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Golem");
+			string strFilePath = "../Bin/Resources/Models/StoneGolem/StoneGolem";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+	}
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Wizard");
+			string strFilePath = "../Bin/Resources/Models/Wizard/Wizard";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+	}
+
+	
+
+
+
+
+
 
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Fiona");
@@ -337,8 +506,280 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CWeapon_Player::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 
+
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Player");
+
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CPlayer_Tool::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+		else
+		{
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CPlayer_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Raider_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CRaider_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CRaider_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Raider_Weapon");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CRaider_Weapon_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CRaider_Weapon_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Raider");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CRaider_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CRaider_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+
+	
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_King_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKing_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKing_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_King");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKing_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKing_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_DarkKnight_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CDarkKnight_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CDarkKnight_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_DarkKnight");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CDarkKnight_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CDarkKnight_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Golem_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CGolem_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CGolem_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Golem");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CGolem_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CGolem_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_KnightGuard_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKnightGuard_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKnightGuard_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_KnightGuard");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKnightGuard_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CKnightGuard_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Wizard_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CWizard_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CWizard_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Wizard");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CWizard_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CWizard_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+	
+
+
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");
 
 		if (LEVEL_TOOL == eLEVEL)
 		{
@@ -346,12 +787,31 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 		else
 		{
-			/* For.Prototype_GameObject_Player */
+			/* For.Prototype_GameObject_Monster */
 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CPlayer::Create(m_pDevice, m_pContext))))
+				CMonster_GamePlay::Create(m_pDevice, m_pContext))))
 				return E_FAIL;
 		}
 	}
+
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_ForkLift");
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+
+		}
+		else
+		{
+			/* For.Prototype_GameObject_ForkLift */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+
 
 
 	{
@@ -374,61 +834,6 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			/* For.Prototype_GameObject_Terrain */
 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
 				CTerrain_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-	}
-	
-
-	
-
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Raider");
-	
-		if (LEVEL_TOOL == eLEVEL)
-		{
-			/* For.Prototype_GameObject_Raider */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CRaider_Tool::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-		else
-		{
-			/* For.Prototype_GameObject_Raider */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CRaider_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-	}
-
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");
-	
-		if (LEVEL_TOOL == eLEVEL)
-		{
-
-		}
-		else
-		{
-			/* For.Prototype_GameObject_Monster */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CMonster_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-	}
-
-
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_ForkLift");
-	
-		if (LEVEL_TOOL == eLEVEL)
-		{
-
-		}
-		else
-		{
-			/* For.Prototype_GameObject_ForkLift */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
 				return E_FAIL;
 		}
 	}

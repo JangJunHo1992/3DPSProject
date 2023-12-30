@@ -2,7 +2,7 @@
 #include "Spear_Shield_Hit_Body_Front.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Spear_Shield_Attack_01.h"
 
 void CSpear_Shield_Hit_Body_Front::Initialize(CKnightGuard_GamePlay* pActor)
 {
@@ -11,10 +11,11 @@ void CSpear_Shield_Hit_Body_Front::Initialize(CKnightGuard_GamePlay* pActor)
 
 CState<CKnightGuard_GamePlay>* CSpear_Shield_Hit_Body_Front::Update(CKnightGuard_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	//pActor->Knockback(fTimeDelta);
+	if (pActor->Is_Animation_End())
+	{
+		return new CSpear_Shield_Attack_01();
+	}
 
 	return nullptr;
 }

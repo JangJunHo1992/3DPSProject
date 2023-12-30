@@ -223,6 +223,9 @@
     <Filter Include="01.Utility\02.GameObjects\Character\Parts\Weapon">
       <UniqueIdentifier>{0e160323-00aa-4665-8fef-a787303f4465}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\02.GameObjects\Character\Temp">
+      <UniqueIdentifier>{a1104ab2-9c26-48bb-81e7-c9844b8f137d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -357,9 +360,6 @@
     <ClInclude Include="..\Public\VIBuffer_Cell.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Character.h">
-      <Filter>01.Utility\02.GameObjects\Character</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Animation.h">
       <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
     </ClInclude>
@@ -434,6 +434,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\Weapon.h">
       <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character_Temp.h">
+      <Filter>01.Utility\02.GameObjects\Character\Temp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character.h">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -548,9 +554,6 @@
     <ClCompile Include="..\Private\VIBuffer_Cell.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Character.cpp">
-      <Filter>01.Utility\02.GameObjects\Character</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Navigation.cpp">
       <Filter>01.Utility\03.Components\06.Navigation</Filter>
     </ClCompile>
@@ -612,6 +615,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\Weapon.cpp">
       <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Character_Temp.cpp">
+      <Filter>01.Utility\02.GameObjects\Character\Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Character.cpp">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

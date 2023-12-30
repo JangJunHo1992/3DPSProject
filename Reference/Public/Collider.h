@@ -11,6 +11,8 @@
 
 BEGIN(Engine)
 
+class CGameObject;
+
 class ENGINE_DLL CCollider final : public CComponent
 {
 public:
@@ -38,6 +40,10 @@ public:
 	void Update(_fmatrix TransformMatrix);
 	_bool Collision(CCollider* pTargetCollider);
 
+
+//public:
+//	void Set_Owner(CGameObject* pOwner);
+
 #ifdef _DEBUG
 public:
 	HRESULT Render();
@@ -45,8 +51,10 @@ public:
 
 private:
 	TYPE					m_eType = { TYPE_END };
-	class CBounding* m_pBounding = { nullptr };
+	class CBounding*		m_pBounding = { nullptr };
 	_bool					m_isCollision = { false };
+
+	CGameObject*			m_pOwner = { nullptr };
 
 #ifdef _DEBUG
 private:

@@ -6,7 +6,7 @@
 
 void CWizard_Idle00::Initialize(CWizard_GamePlay* pActor)
 {
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true);
 }
 
 CState<CWizard_GamePlay>* CWizard_Idle00::Update(CWizard_GamePlay* pActor, _float fTimeDelta)

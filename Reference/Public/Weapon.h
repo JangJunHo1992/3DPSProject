@@ -3,9 +3,13 @@
 #include "GameObject.h"
 
 BEGIN(Engine)
+class CTransform;
+class CCharacter;
+class CCollider;
 class CShader;
 class CModel;
 class CBone;
+
 
 class ENGINE_DLL CWeapon abstract : public CGameObject
 {
@@ -22,6 +26,9 @@ protected:
 	virtual ~CWeapon() = default;
 
 public:
+	void Set_IsAttack(_bool _bIsAttack) { m_bIsAttack = _bIsAttack; };
+
+public:
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize(void* pArg) override;
 	virtual void Priority_Tick(_float fTimeDelta) override;
@@ -29,14 +36,23 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
+public:
+	virtual _bool Collision_Chcek() PURE;
+	void Attack(CCharacter* pCharacter);
+
 protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };
 
 protected:
-	class CTransform* m_pParentTransform = { nullptr };
-	class CBone* m_pSocketBone = { nullptr };
+	CTransform* m_pParentTransform = { nullptr };
+	CBone*		m_pSocketBone = { nullptr };
 	_float4x4	m_WorldMatrix = {};
+
+protected:
+	vector<CCollider*> m_pColliders = { nullptr };
+	_uint	m_iColliderSize = {0};
+	_bool	m_bIsAttack = { false };
 
 protected:
 	virtual HRESULT Ready_Components() PURE;

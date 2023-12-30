@@ -54,6 +54,8 @@ public: /* For.Object_Manager */
 	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
 	class CComponent* Get_Component(_uint iLevelIndex, const wstring & strLayerTag, const wstring & strComponentTag, _uint iIndex = 0);
 
+
+
 	HRESULT Save_Objects_With_Json(_uint iLevelIndex, string filePath);
 	//HRESULT Load_Objects_With_Json(_uint iLevelIndex, string filePath);
 

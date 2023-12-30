@@ -1,6 +1,8 @@
 #include "..\Public\Golem_Tool.h"
 #include "GameInstance.h"
 
+#include "Massive_Greate_Sword_Hit_Front.h"
+
 CGolem_Tool::CGolem_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGolem(pDevice, pContext)
 {
@@ -9,6 +11,14 @@ CGolem_Tool::CGolem_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 CGolem_Tool::CGolem_Tool(const CGolem_Tool& rhs)
 	: CGolem(rhs)
 {
+}
+
+HRESULT CGolem_Tool::Initialize_Prototype()
+{
+	if (FAILED(__super::Initialize_Prototype()))
+		return E_FAIL;
+
+	return S_OK;
 }
 
 HRESULT CGolem_Tool::Initialize(void* pArg)
@@ -22,22 +32,43 @@ HRESULT CGolem_Tool::Initialize(void* pArg)
 	return S_OK;
 }
 
+void CGolem_Tool::Priority_Tick(_float fTimeDelta)
+{
+	__super::Priority_Tick(fTimeDelta);
+}
+
+void CGolem_Tool::Tick(_float fTimeDelta)
+{
+	__super::Tick(fTimeDelta);
+}
+
+void CGolem_Tool::Late_Tick(_float fTimeDelta)
+{
+	__super::Late_Tick(fTimeDelta);
+}
+
+HRESULT CGolem_Tool::Render()
+{
+	if (FAILED(__super::Render()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+void CGolem_Tool::Set_Hitted()
+{
+	CGolem::Golem_State eHitted = CGolem::Golem_State::Giant_Golem_Hit_Light_Front;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+}
+
 _bool CGolem_Tool::Pick(_float3* out)
 {
-
-	RAY ray = m_pGameInstance->Get_MouseRayLocal(g_hWnd, g_iWinSizeX, g_iWinSizeY, m_pTransformCom->Get_WorldMatrix());
-	vector<class CMesh*>* meshes = m_pModelCom->Get_Meshes();
-	return m_pGameInstance->Picking_Mesh(ray, out, meshes);
+	return m_pBody->Pick(out);
 }
 
 HRESULT CGolem_Tool::Ready_Components()
 {
 	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_TOOL)))
-		return E_FAIL;
-
-	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Model_Golem_Tool"),
-		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 
 	return S_OK;

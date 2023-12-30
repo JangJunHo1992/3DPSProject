@@ -2,7 +2,7 @@
 #include "TwoHandedHammerSet_Attack05.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "TwoHandedHammerSet_Attack06.h"
 
 void CTwoHandedHammerSet_Attack05::Initialize(CKing_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CTwoHandedHammerSet_Attack05::Initialize(CKing_GamePlay* pActor)
 
 CState<CKing_GamePlay>* CTwoHandedHammerSet_Attack05::Update(CKing_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CTwoHandedHammerSet_Attack06();
+	}
 
 	return nullptr;
 }
