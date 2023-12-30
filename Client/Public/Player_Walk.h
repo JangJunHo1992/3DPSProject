@@ -4,15 +4,15 @@
 
 BEGIN(Client)
 
-class CPlayer_Walk : public CDefaultState
+class CCovus_Walk : public CDefaultState
 {
 public:
-	virtual void Initialize(CPlayer* pActor) override;
-	virtual CState<CPlayer>* Update(CPlayer* pActor, _float fTimeDelta) PURE;
-	virtual void Release(CPlayer* pActor) override;
+	virtual void Initialize(CCovus_GamePlay* pActor) override;
+	virtual CState<CCovus_GamePlay>* Update(CCovus_GamePlay* pActor, _float fTimeDelta) PURE;
+	virtual void Release(CCovus_GamePlay* pActor) override;
 
 public:
-	virtual CState<CPlayer>* Update_State(CPlayer* pActor, _float fTimeDelta, _uint _iAnimIndex) override;
+	virtual CState<CCovus_GamePlay>* Update_State(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex) override;
 };
 
 END

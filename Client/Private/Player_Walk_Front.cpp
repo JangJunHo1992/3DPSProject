@@ -3,20 +3,20 @@
 #include "GameInstance.h"
 
 
-void CPlayer_Walk_Front::Initialize(CPlayer* pActor)
+void CCovus_Walk_Front::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true, false);
 }
 
-CState<CPlayer>* CPlayer_Walk_Front::Update(CPlayer* pActor, _float fTimeDelta)
+CState<CCovus_GamePlay>* CCovus_Walk_Front::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
 	pActor->Go_Straight(fTimeDelta);
 
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
 
-void CPlayer_Walk_Front::Release(CPlayer* pActor)
+void CCovus_Walk_Front::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }

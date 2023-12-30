@@ -2,17 +2,17 @@
 
 
 
-void CPlayer_Run::Initialize(CPlayer* pActor)
+void CCovus_Run::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 }
 
-void CPlayer_Run::Release(CPlayer* pActor)
+void CCovus_Run::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }
 
-CState<CPlayer>* CPlayer_Run::Update_State(CPlayer* pActor, _float fTimeDelta, _uint _iAnimIndex)
+CState<CCovus_GamePlay>* CCovus_Run::Update_State(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
 {
 	return Ground_Normal(pActor, fTimeDelta, _iAnimIndex);
 }

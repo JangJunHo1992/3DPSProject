@@ -4,15 +4,15 @@
 
 BEGIN(Client)
 
-class CPlayer_Walk_Back_R45 : public CPlayer_Walk
+class CCovus_Walk_Back_R45 : public CCovus_Walk
 {
 public:
-	virtual void Initialize(CPlayer* pActor) override;
-	virtual CState<CPlayer>* Update(CPlayer* pActor, _float fTimeDelta) override;
-	virtual void Release(CPlayer* pActor) override;
+	virtual void Initialize(CCovus_GamePlay* pActor) override;
+	virtual CState<CCovus_GamePlay>* Update(CCovus_GamePlay* pActor, _float fTimeDelta) override;
+	virtual void Release(CCovus_GamePlay* pActor) override;
 
 public:
-	static const _uint g_iAnimIndex = CPlayer::PlayerState::SD_WalkBR;
+	static const _uint g_iAnimIndex = CCovus::PlayerState::SD_WalkBR;
 };
 
 END

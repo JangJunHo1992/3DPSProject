@@ -3,13 +3,13 @@
 #include "GameInstance.h"
 
 
-void CPlayer_Dash_Front::Initialize(CPlayer* pActor)
+void CCovus_Dash_Front::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true, true);
 }
 
-CState<CPlayer>* CPlayer_Dash_Front::Update(CPlayer* pActor, _float fTimeDelta)
+CState<CCovus_GamePlay>* CCovus_Dash_Front::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
 	//pActor->Go_Straight(fTimeDelta);
 	if (pActor->Is_Animation_End())
@@ -19,7 +19,7 @@ CState<CPlayer>* CPlayer_Dash_Front::Update(CPlayer* pActor, _float fTimeDelta)
 	return nullptr;
 }
 
-void CPlayer_Dash_Front::Release(CPlayer* pActor)
+void CCovus_Dash_Front::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }

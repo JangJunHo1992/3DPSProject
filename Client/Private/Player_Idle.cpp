@@ -4,23 +4,23 @@
 
 
 
-void CPlayer_Idle::Initialize(CPlayer* pActor)
+void CCovus_Idle::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true);
 }
 
-CState<CPlayer>* CPlayer_Idle::Update(CPlayer* pActor, _float fTimeDelta)
+CState<CCovus_GamePlay>* CCovus_Idle::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
-	CState<CPlayer>* pState;
+	CState<CCovus_GamePlay>* pState;
 	pState = Hitted(pActor, fTimeDelta, g_iAnimIndex);
 	if (pState)	return pState;
 
 	return Ground_Normal(pActor, fTimeDelta, g_iAnimIndex);
 }
 
-void CPlayer_Idle::Release(CPlayer* pActor)
+void CCovus_Idle::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }

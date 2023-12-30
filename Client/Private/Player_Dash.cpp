@@ -2,17 +2,17 @@
 
 
 
-void CPlayer_Dash::Initialize(CPlayer* pActor)
+void CCovus_Dash::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 }
 
-void CPlayer_Dash::Release(CPlayer* pActor)
+void CCovus_Dash::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }
 
-CState<CPlayer>* CPlayer_Dash::Update_State(CPlayer* pActor, _float fTimeDelta, _uint _iAnimIndex)
+CState<CCovus_GamePlay>* CCovus_Dash::Update_State(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
 {
 	return Ground_Normal(pActor, fTimeDelta, _iAnimIndex);
 }

@@ -2,20 +2,20 @@
 #include "Player_Run_Back_R45.h"
 #include "GameInstance.h"
 
-void CPlayer_Run_Back_R45::Initialize(CPlayer* pActor)
+void CCovus_Run_Back_R45::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true, false);
 }
 
-CState<CPlayer>* CPlayer_Run_Back_R45::Update(CPlayer* pActor, _float fTimeDelta)
+CState<CCovus_GamePlay>* CCovus_Run_Back_R45::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
 	pActor->Go_Backward_R45(fTimeDelta);
 
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
 
-void CPlayer_Run_Back_R45::Release(CPlayer* pActor)
+void CCovus_Run_Back_R45::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }

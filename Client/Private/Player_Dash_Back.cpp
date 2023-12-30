@@ -3,20 +3,20 @@
 #include "GameInstance.h"
 
 
-void CPlayer_Dash_Back::Initialize(CPlayer* pActor)
+void CCovus_Dash_Back::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true, true);
 }
 
-CState<CPlayer>* CPlayer_Dash_Back::Update(CPlayer* pActor, _float fTimeDelta)
+CState<CCovus_GamePlay>* CCovus_Dash_Back::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
 	pActor->Go_Backward(fTimeDelta);
 	
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
 
-void CPlayer_Dash_Back::Release(CPlayer* pActor)
+void CCovus_Dash_Back::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }

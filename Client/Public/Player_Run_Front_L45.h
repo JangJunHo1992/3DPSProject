@@ -4,15 +4,15 @@
 
 BEGIN(Client)
 
-class CPlayer_Run_Front_L45 : public CPlayer_Run
+class CCovus_Run_Front_L45 : public CCovus_Run
 {
 public:
-	virtual void Initialize(CPlayer* pActor) override;
-	virtual CState<CPlayer>* Update(CPlayer* pActor, _float fTimeDelta) override;
-	virtual void Release(CPlayer* pActor) override;
+	virtual void Initialize(CCovus_GamePlay* pActor) override;
+	virtual CState<CCovus_GamePlay>* Update(CCovus_GamePlay* pActor, _float fTimeDelta) override;
+	virtual void Release(CCovus_GamePlay* pActor) override;
 
 public:
-	static const _uint g_iAnimIndex = CPlayer::PlayerState::RunFL;
+	static const _uint g_iAnimIndex = CCovus::PlayerState::RunFL;
 };
 
 END
