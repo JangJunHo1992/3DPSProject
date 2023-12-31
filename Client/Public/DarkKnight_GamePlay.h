@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DarkKnight.h"
+#include "Actor.h"
 
 BEGIN(Client)
 
@@ -11,9 +12,21 @@ private:
 	CDarkKnight_GamePlay(const CDarkKnight_GamePlay& rhs);
 	virtual ~CDarkKnight_GamePlay() = default;
 
+public:
+	virtual HRESULT Initialize_Prototype() override;
+	virtual HRESULT Initialize(void* pArg) override;
+	virtual void Priority_Tick(_float fTimeDelta) override;
+	virtual void Tick(_float fTimeDelta) override;
+	virtual void Late_Tick(_float fTimeDelta) override;
+	virtual HRESULT Render() override;
+
+public:
+	virtual void Set_Hitted() override;
+
 private:
 	virtual HRESULT Ready_Components() override;
 
+private:
 	CActor<CDarkKnight_GamePlay>* m_pActor = { nullptr };
 
 public:

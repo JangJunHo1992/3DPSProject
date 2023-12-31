@@ -41,22 +41,22 @@ void CCamera_Dynamic::Priority_Tick(_float fTimeDelta)
 
 void CCamera_Dynamic::Tick(_float fTimeDelta)
 {
-	if (GetKeyState('A') & 0x8000)
+	if (m_pGameInstance->Key_Pressing(DIK_LEFT))
 	{
 		m_pTransformCom->Go_Left(fTimeDelta);
 	}
 
-	if (GetKeyState('D') & 0x8000)
+	if (m_pGameInstance->Key_Pressing(DIK_RIGHT))
 	{
 		m_pTransformCom->Go_Right(fTimeDelta);
 	}
 
-	if (GetKeyState('W') & 0x8000)
+	if (m_pGameInstance->Key_Pressing(DIK_UP))
 	{
 		m_pTransformCom->Go_Straight(fTimeDelta);
 	}
 
-	if (GetKeyState('S') & 0x8000)
+	if (m_pGameInstance->Key_Pressing(DIK_DOWN))
 	{
 		m_pTransformCom->Go_Backward(fTimeDelta);
 	}

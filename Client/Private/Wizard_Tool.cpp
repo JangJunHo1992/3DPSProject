@@ -1,6 +1,8 @@
 #include "..\Public\Wizard_Tool.h"
 #include "GameInstance.h"
 
+//#include "Massive_Greate_Sword_Hit_Front.h"
+
 CWizard_Tool::CWizard_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CWizard(pDevice, pContext)
 {
@@ -9,6 +11,14 @@ CWizard_Tool::CWizard_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 CWizard_Tool::CWizard_Tool(const CWizard_Tool& rhs)
 	: CWizard(rhs)
 {
+}
+
+HRESULT CWizard_Tool::Initialize_Prototype()
+{
+	if (FAILED(__super::Initialize_Prototype()))
+		return E_FAIL;
+
+	return S_OK;
 }
 
 HRESULT CWizard_Tool::Initialize(void* pArg)
@@ -22,22 +32,43 @@ HRESULT CWizard_Tool::Initialize(void* pArg)
 	return S_OK;
 }
 
+void CWizard_Tool::Priority_Tick(_float fTimeDelta)
+{
+	__super::Priority_Tick(fTimeDelta);
+}
+
+void CWizard_Tool::Tick(_float fTimeDelta)
+{
+	__super::Tick(fTimeDelta);
+}
+
+void CWizard_Tool::Late_Tick(_float fTimeDelta)
+{
+	__super::Late_Tick(fTimeDelta);
+}
+
+HRESULT CWizard_Tool::Render()
+{
+	if (FAILED(__super::Render()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+void CWizard_Tool::Set_Hitted()
+{
+	CWizard::Wizard_State eHitted = CWizard::Wizard_State::Wizard_Hit_Body_Front;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+}
+
 _bool CWizard_Tool::Pick(_float3* out)
 {
-
-	RAY ray = m_pGameInstance->Get_MouseRayLocal(g_hWnd, g_iWinSizeX, g_iWinSizeY, m_pTransformCom->Get_WorldMatrix());
-	vector<class CMesh*>* meshes = m_pModelCom->Get_Meshes();
-	return m_pGameInstance->Picking_Mesh(ray, out, meshes);
+	return m_pBody->Pick(out);
 }
 
 HRESULT CWizard_Tool::Ready_Components()
 {
 	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_TOOL)))
-		return E_FAIL;
-
-	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Model_Wizard_Tool"),
-		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 
 	return S_OK;

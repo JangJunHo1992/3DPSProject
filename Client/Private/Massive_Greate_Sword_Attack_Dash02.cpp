@@ -2,7 +2,7 @@
 #include "Massive_Greate_Sword_Attack_Dash02.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Massive_Greate_Sword_Attack_Ground01.h"
 
 void CMassive_Greate_Sword_Attack_Dash02::Initialize(CDarkKnight_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CMassive_Greate_Sword_Attack_Dash02::Initialize(CDarkKnight_GamePlay* pActo
 
 CState<CDarkKnight_GamePlay>* CMassive_Greate_Sword_Attack_Dash02::Update(CDarkKnight_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CMassive_Greate_Sword_Attack_Ground01();
+	}
 
 	return nullptr;
 }

@@ -1,31 +1,12 @@
 #pragma once
 
-#include "Client_Defines.h"
-#include "GameObject.h"
-
-BEGIN(Engine)
-class CNavigation;
-<<<<<<< HEAD
-class CShader;
-class CModel;
-=======
-class CCollider;
->>>>>>> JJH
-END
+#include "Character_Client.h"
 
 BEGIN(Client)
 
-class CPlayer final : public CGameObject
+class CPlayer abstract : public CCharacter_Client
 {
-<<<<<<< HEAD
-public:
-	typedef struct tagPlayerDesc : public GAMEOBJECT_DESC
-	{
-		int a;
-	}PLAYER_DESC;
-=======
->>>>>>> JJH
-private:
+protected:
 	CPlayer(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CPlayer(const CPlayer& rhs);
 	virtual ~CPlayer() = default;
@@ -38,40 +19,17 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-<<<<<<< HEAD
-private:
-	CNavigation* m_pNavigationCom = { nullptr };
-	CShader* m_pShaderCom = { nullptr };
-	CModel* m_pModelCom = { nullptr };
-
-private:
-	HRESULT Ready_Components();
-	HRESULT Bind_ShaderResources();
-=======
 public:
-	CGameObject* Find_PartObject(const wstring& strPartTag);
+	virtual void Set_Hitted() override;
 
-private:
-	CNavigation* m_pNavigationCom = { nullptr };
-	CCollider* m_pColliderCom = { nullptr };
 
-private:
-	map<const wstring, class CGameObject*>		m_PartObjects;
-
-private:
-	HRESULT Ready_Components();
-	HRESULT Ready_PartObjects();
-	HRESULT Add_PartObject(const wstring& strPrototypeTag, const wstring& strPartTag, void* pArg);
->>>>>>> JJH
+protected:
+	virtual HRESULT Ready_Components() PURE;
+	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
+	virtual HRESULT Ready_PartObjects() override;
 
 
 public:
-	/* 원형객체를 생성한다. */
-	static CPlayer* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-
-	/* 사본객체를 생성한다. */
-	virtual CGameObject* Clone(void* pArg) override;
-
 	virtual void Free() override;
 };
 

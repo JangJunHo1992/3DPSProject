@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Client_Defines.h"
-#include "Weapon.h"
+//#include "Client_Defines.h"
+#include "Weapon_Client.h"
 
 BEGIN(Client)
 
-class CWeapon_Player : public CWeapon
+class CWeapon_Player : public CWeapon_Client
 {
 
 protected:
@@ -21,13 +21,13 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-
+public:
+	virtual _bool Collision_Chcek();
 
 private:
-	virtual HRESULT Ready_Components();
+	virtual HRESULT Ready_Components() override;
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel);
-
-	virtual HRESULT Bind_ShaderResources();
+	virtual HRESULT Bind_ShaderResources() override;
 
 public:
 	/* 원형객체를 생성한다. */

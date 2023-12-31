@@ -8,17 +8,23 @@
 
 void CGreatDualBlade_Combo_01_02::Initialize(CRaider_GamePlay* pActor)
 {
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true, true, 6);
+	__super::Initialize(pActor);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true, true, 3);
 }
 
 CState<CRaider_GamePlay>* CGreatDualBlade_Combo_01_02::Update(CRaider_GamePlay* pActor, _float fTimeDelta)
 {
 	_uint iMinimumPlayTime = 30;
 
-	if (pActor->Is_Inputable_Front(iMinimumPlayTime) && CGameInstance::GetInstance()->Key_Down(DIK_Z))
+	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
 	{
-		return new CGreatDualBlade_Combo_01_03();
+		if (CGameInstance::GetInstance()->Key_Down(DIK_Z))
+		{
+			return new CGreatDualBlade_Combo_01_03();
+		}
+		pActor->Set_IsAttack(false);
 	}
+
 	if (pActor->Is_Animation_End())
 	{
 		return new CGreatDualBlade_Idle();
@@ -29,5 +35,5 @@ CState<CRaider_GamePlay>* CGreatDualBlade_Combo_01_02::Update(CRaider_GamePlay* 
 
 void CGreatDualBlade_Combo_01_02::Release(CRaider_GamePlay* pActor)
 {
-	
+	__super::Release(pActor);
 }

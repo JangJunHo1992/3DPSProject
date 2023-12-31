@@ -2,7 +2,7 @@
 #include "Wizard_Hit_Body_Front.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Wizard_ATK_Skill01.h"
 
 void CWizard_Hit_Body_Front::Initialize(CWizard_GamePlay* pActor)
 {
@@ -11,10 +11,11 @@ void CWizard_Hit_Body_Front::Initialize(CWizard_GamePlay* pActor)
 
 CState<CWizard_GamePlay>* CWizard_Hit_Body_Front::Update(CWizard_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	pActor->Knockback(fTimeDelta);
+	if (pActor->Is_Animation_End())
+	{
+		return new CWizard_ATK_Skill01();
+	}
 
 	return nullptr;
 }

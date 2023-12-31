@@ -1,16 +1,11 @@
 #pragma once
 
-#include "Client_Defines.h"
-#include "Character.h"
+#include "Character_Client.h"
 
-BEGIN(Engine)
-class CShader;
-class CModel;
-END
 
 BEGIN(Client)
 
-class CRaider abstract : public CCharacter
+class CRaider abstract : public CCharacter_Client
 {
 public:
 	enum Raider_State 
@@ -251,17 +246,15 @@ public:
 	virtual HRESULT Render() override;
 
 public:
-	virtual void Write_Json(json& Out_Json) override;
+	virtual void Set_Hitted() override;
+
+//public:
+//	virtual void Write_Json(json& Out_Json) override;
 
 protected:
-	CShader* m_pShaderCom = { nullptr };
-
-	
-
-protected:
-	virtual HRESULT Ready_Components() PURE;
-	HRESULT Ready_Components_Origin(LEVEL eLevel);
-	HRESULT Bind_ShaderResources();
+	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
+	virtual HRESULT Ready_PartObjects() override;
+	//HRESULT Bind_ShaderResources();
 
 
 public:

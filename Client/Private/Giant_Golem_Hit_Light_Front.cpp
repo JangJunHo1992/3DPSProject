@@ -2,7 +2,7 @@
 #include "Giant_Golem_Hit_Light_Front.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Giant_Golem_Atk_Dash.h"
 
 void CGiant_Golem_Hit_Light_Front::Initialize(CGolem_GamePlay* pActor)
 {
@@ -11,10 +11,11 @@ void CGiant_Golem_Hit_Light_Front::Initialize(CGolem_GamePlay* pActor)
 
 CState<CGolem_GamePlay>* CGiant_Golem_Hit_Light_Front::Update(CGolem_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	//pActor->Knockback(fTimeDelta);
+	if (pActor->Is_Animation_End())
+	{
+		return new CGiant_Golem_Atk_Dash();
+	}
 
 	return nullptr;
 }

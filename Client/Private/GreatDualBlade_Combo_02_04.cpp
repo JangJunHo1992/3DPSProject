@@ -7,6 +7,7 @@
 
 void CGreatDualBlade_Combo_02_04::Initialize(CRaider_GamePlay* pActor)
 {
+	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
 }
 
@@ -22,5 +23,5 @@ CState<CRaider_GamePlay>* CGreatDualBlade_Combo_02_04::Update(CRaider_GamePlay* 
 
 void CGreatDualBlade_Combo_02_04::Release(CRaider_GamePlay* pActor)
 {
-	
+	__super::Release(pActor);
 }

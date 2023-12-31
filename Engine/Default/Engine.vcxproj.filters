@@ -141,12 +141,6 @@
     </Filter>
     <Filter Include="01.Utility\02.GameObjects\Character">
       <UniqueIdentifier>{6648278e-a456-4262-85bd-e6a36fe4e644}</UniqueIdentifier>
-<<<<<<< HEAD
-    </Filter>
-    <Filter Include="01.Utility\03.Components\99. StatePattern">
-      <UniqueIdentifier>{98e39436-539c-42f0-8a7b-d8845a482c70}</UniqueIdentifier>
-=======
->>>>>>> JJH
     </Filter>
     <Filter Include="01.Utility\03.Components\01.VIBuffer\Cell">
       <UniqueIdentifier>{3bef20e3-96f0-47e7-8d15-58482561ca00}</UniqueIdentifier>
@@ -157,11 +151,6 @@
     <Filter Include="01.Utility\03.Components\06.Navigation\Cell">
       <UniqueIdentifier>{f6ae09a2-decc-43a8-8eec-2098c6ede900}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
-    <Filter Include="98.ShaderFiles">
-      <UniqueIdentifier>{5f93ed6c-e779-45f0-b182-344e51c83a58}</UniqueIdentifier>
-    </Filter>
-=======
     <Filter Include="91.ShaderFiles">
       <UniqueIdentifier>{5f93ed6c-e779-45f0-b182-344e51c83a58}</UniqueIdentifier>
     </Filter>
@@ -234,7 +223,9 @@
     <Filter Include="01.Utility\02.GameObjects\Character\Parts\Weapon">
       <UniqueIdentifier>{0e160323-00aa-4665-8fef-a787303f4465}</UniqueIdentifier>
     </Filter>
->>>>>>> JJH
+    <Filter Include="01.Utility\02.GameObjects\Character\Temp">
+      <UniqueIdentifier>{a1104ab2-9c26-48bb-81e7-c9844b8f137d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -369,9 +360,6 @@
     <ClInclude Include="..\Public\VIBuffer_Cell.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Character.h">
-      <Filter>01.Utility\02.GameObjects\Character</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Animation.h">
       <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
     </ClInclude>
@@ -383,8 +371,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\Model.h">
       <Filter>01.Utility\03.Components\05.Model\Model</Filter>
-<<<<<<< HEAD
-=======
     </ClInclude>
     <ClInclude Include="..\Public\VIBuffer_Cube.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cube</Filter>
@@ -448,7 +434,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\Weapon.h">
       <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
->>>>>>> JJH
+    </ClInclude>
+    <ClInclude Include="..\Public\Character_Temp.h">
+      <Filter>01.Utility\02.GameObjects\Character\Temp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character.h">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -563,9 +554,6 @@
     <ClCompile Include="..\Private\VIBuffer_Cell.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Character.cpp">
-      <Filter>01.Utility\02.GameObjects\Character</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Navigation.cpp">
       <Filter>01.Utility\03.Components\06.Navigation</Filter>
     </ClCompile>
@@ -587,8 +575,6 @@
     <ClCompile Include="..\Private\Model.cpp">
       <Filter>01.Utility\03.Components\05.Model\Model</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
     <ClCompile Include="..\Private\VIBuffer_Cube.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cube</Filter>
     </ClCompile>
@@ -630,7 +616,12 @@
     <ClCompile Include="..\Private\Weapon.cpp">
       <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
     </ClCompile>
->>>>>>> JJH
+    <ClCompile Include="..\Private\Character_Temp.cpp">
+      <Filter>01.Utility\02.GameObjects\Character\Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Character.cpp">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl">

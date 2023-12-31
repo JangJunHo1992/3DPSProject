@@ -1,50 +1,63 @@
 #pragma once
 
 #include "GameObject.h"
-<<<<<<< HEAD
-
-BEGIN(Engine)
-
-class CModel;
-=======
 #include "Model.h"
 
+#include "Body.h"
+#include "Weapon.h"
+
 BEGIN(Engine)
 
-//class CModel;
->>>>>>> JJH
+class CNavigation;
+class CCollider;
+
+//class CBody;
+//class CWeapon;
 
 class ENGINE_DLL CCharacter abstract : public CGameObject
 {
 protected:
-<<<<<<< HEAD
-	CCharacter(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-	CCharacter(const CCharacter& rhs);
-	virtual ~CCharacter() = default;
-
-
-
-public:
-	void	Set_Animation(_int _iNextAnimation = -1, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_NORMAL, _bool _bIsTransition = true);
-	void	Test_Animation();
-	_uint	Get_CurrentAnimIndex();
-	void	Set_Next_AnimationIndex(_int _iNextAnimIndex);
-	
-	_uint	Get_NumAnimations();
-
-protected:
-	CModel* m_pModelCom = { nullptr };
-=======
 	CCharacter(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
 	CCharacter(const CCharacter& rhs);
 	virtual ~CCharacter() = default;
 
 public:
-	void	Set_Animation(_int _iNextAnimation = -1, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_NORMAL, _bool _bIsTransition = true, _bool _bUseAnimationPos = true, _uint iTargetKeyFrameIndex = 0);
-	_uint	Get_CurrentAnimIndex();
+	virtual HRESULT Initialize_Prototype() override;
+	virtual HRESULT Initialize(void* pArg) override;
+	virtual void Priority_Tick(_float fTimeDelta) override;
+	virtual void Tick(_float fTimeDelta) override;
+	virtual void Late_Tick(_float fTimeDelta) override;
+	virtual HRESULT Render() override;
 
-	_uint	Get_NumAnimations();
-	_float	Get_TickPerSecond();
+public:
+	CGameObject* Find_PartObject(const wstring & strPartTag);
+	CBody* Get_Body();
+	CWeapon* Get_Weapon(const wstring & strWeaponTag = TEXT("Part_Weapon"));
+	CCollider* Get_Collider();
+
+	virtual void Set_Hitted() PURE;
+	void Set_IsAttack(_bool _bIsAttack) 
+	{
+		for (CWeapon* pWeapon : m_Weapons)
+			pWeapon->Set_IsAttack(_bIsAttack);
+	};
+
+protected:
+	virtual HRESULT Ready_Components() PURE;
+	virtual HRESULT Ready_PartObjects() PURE;
+
+	HRESULT Add_PartObject(const wstring & strPrototypeTag, const wstring & strPartTag, void* pArg);
+	HRESULT Add_Body(const wstring & strPrototypeTag, CBody::BODY_DESC pArg);
+	HRESULT Add_Weapon(const wstring & strPrototypeTag, string strBoneName, CWeapon::WEAPON_DESC pArg, const wstring& strWeaponTag = TEXT("Part_Weapon"));
+
+public:
+	void	Set_Animation(
+		_uint _iNextAnimation
+		, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_NORMAL
+		, _bool _bIsTransition = true
+		, _bool _bUseAnimationPos = true
+		, _uint iTargetKeyFrameIndex = 0);
+
 
 	_bool	Is_Animation_End();
 	_bool	Is_Inputable_Front(_uint _iIndexFront);
@@ -60,12 +73,27 @@ public:
 	void Go_Right(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 
 
+	void Knockback(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
+
+
+
+
 protected:
-	CModel* m_pModelCom = { nullptr };
+	CNavigation* m_pNavigationCom = { nullptr };
+	CCollider* m_pColliderCom = { nullptr };
+
+	CBody* m_pBody = { nullptr };
+	vector<CWeapon*> m_Weapons;
 
 
+protected:
+	map<const wstring, class CGameObject*>		m_PartObjects;
 
->>>>>>> JJH
+
+protected:
+	virtual CGameObject* Clone(void* pArg) PURE;
+
+	virtual void Free() override;
 };
 
 END

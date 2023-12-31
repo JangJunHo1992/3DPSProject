@@ -1,6 +1,8 @@
 #include "..\Public\KnightGuard_Tool.h"
 #include "GameInstance.h"
 
+//#include "Spear_Shield_Hit_Body_Front.h"
+
 CKnightGuard_Tool::CKnightGuard_Tool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CKnightGuard(pDevice, pContext)
 {
@@ -9,6 +11,14 @@ CKnightGuard_Tool::CKnightGuard_Tool(ID3D11Device* pDevice, ID3D11DeviceContext*
 CKnightGuard_Tool::CKnightGuard_Tool(const CKnightGuard_Tool& rhs)
 	: CKnightGuard(rhs)
 {
+}
+
+HRESULT CKnightGuard_Tool::Initialize_Prototype()
+{
+	if (FAILED(__super::Initialize_Prototype()))
+		return E_FAIL;
+
+	return S_OK;
 }
 
 HRESULT CKnightGuard_Tool::Initialize(void* pArg)
@@ -22,22 +32,43 @@ HRESULT CKnightGuard_Tool::Initialize(void* pArg)
 	return S_OK;
 }
 
+void CKnightGuard_Tool::Priority_Tick(_float fTimeDelta)
+{
+	__super::Priority_Tick(fTimeDelta);
+}
+
+void CKnightGuard_Tool::Tick(_float fTimeDelta)
+{
+	__super::Tick(fTimeDelta);
+}
+
+void CKnightGuard_Tool::Late_Tick(_float fTimeDelta)
+{
+	__super::Late_Tick(fTimeDelta);
+}
+
+HRESULT CKnightGuard_Tool::Render()
+{
+	if (FAILED(__super::Render()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+void CKnightGuard_Tool::Set_Hitted()
+{
+	CKnightGuard::KnightGuard_State eHitted = CKnightGuard::KnightGuard_State::Spear_Shield_Hit_Body_Front;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+}
+
 _bool CKnightGuard_Tool::Pick(_float3* out)
 {
-
-	RAY ray = m_pGameInstance->Get_MouseRayLocal(g_hWnd, g_iWinSizeX, g_iWinSizeY, m_pTransformCom->Get_WorldMatrix());
-	vector<class CMesh*>* meshes = m_pModelCom->Get_Meshes();
-	return m_pGameInstance->Picking_Mesh(ray, out, meshes);
+	return m_pBody->Pick(out);
 }
 
 HRESULT CKnightGuard_Tool::Ready_Components()
 {
 	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_TOOL)))
-		return E_FAIL;
-
-	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Model_KnightGuard_Tool"),
-		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 
 	return S_OK;

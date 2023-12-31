@@ -11,6 +11,14 @@ CKing_Tool::CKing_Tool(const CKing_Tool& rhs)
 {
 }
 
+HRESULT CKing_Tool::Initialize_Prototype()
+{
+	if (FAILED(__super::Initialize_Prototype()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
 HRESULT CKing_Tool::Initialize(void* pArg)
 {
 	if (FAILED(__super::Initialize(pArg)))
@@ -22,22 +30,43 @@ HRESULT CKing_Tool::Initialize(void* pArg)
 	return S_OK;
 }
 
+void CKing_Tool::Priority_Tick(_float fTimeDelta)
+{
+	__super::Priority_Tick(fTimeDelta);
+}
+
+void CKing_Tool::Tick(_float fTimeDelta)
+{
+	__super::Tick(fTimeDelta);
+}
+
+void CKing_Tool::Late_Tick(_float fTimeDelta)
+{
+	__super::Late_Tick(fTimeDelta);
+}
+
+HRESULT CKing_Tool::Render()
+{
+	if (FAILED(__super::Render()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+void CKing_Tool::Set_Hitted()
+{
+	CKing::King_State eHitted = CKing::King_State::TwoHandedHammerSet_Hit_Body_Front;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+}
+
 _bool CKing_Tool::Pick(_float3* out)
 {
-
-	RAY ray = m_pGameInstance->Get_MouseRayLocal(g_hWnd, g_iWinSizeX, g_iWinSizeY, m_pTransformCom->Get_WorldMatrix());
-	vector<class CMesh*>* meshes = m_pModelCom->Get_Meshes();
-	return m_pGameInstance->Picking_Mesh(ray, out, meshes);
+	return m_pBody->Pick(out);
 }
 
 HRESULT CKing_Tool::Ready_Components()
 {
 	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_TOOL)))
-		return E_FAIL;
-
-	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Model_King_Tool"),
-		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 
 	return S_OK;

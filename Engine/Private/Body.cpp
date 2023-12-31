@@ -50,8 +50,22 @@ void CBody::Tick(_float fTimeDelta)
 	__super::Tick(fTimeDelta);
 
 	_float3 vPos = { 0.f, 0.f, 0.f };
-	m_pModelCom->Play_Animation(fTimeDelta, vPos);
-	m_pTransformCom->Add_Position(vPos);
+
+	if (m_bNoUseRootY) 
+	{
+		_float fMinY = 10000;
+		m_pModelCom->Play_Animation(fTimeDelta, vPos, fMinY);
+		//vPos.y -= fMinY;
+	}
+	else 
+	{
+		m_pModelCom->Play_Animation(fTimeDelta, vPos);
+	}
+
+	//m_pModelCom->Play_Animation(fTimeDelta, vPos);
+	//m_pTransformCom->Add_Position(vPos);
+	m_pParentTransform->Add_Position(vPos);
+
 }
 
 void CBody::Late_Tick(_float fTimeDelta)
@@ -87,9 +101,25 @@ HRESULT CBody::Render()
 	return S_OK;
 }
 
-void CBody::SetUp_Animation(_uint iAnimIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration)
+void CBody::Set_Animation(_uint _iNextAnimation, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _bool _bUseAnimationPos, _uint iTargetKeyFrameIndex)
 {
-	m_pModelCom->Set_Animation(iAnimIndex, _eAnimState, _bIsTransition, _fTransitionDuration);
+	m_pModelCom->Set_Animation(_iNextAnimation, _eAnimState, _bIsTransition, m_pModelCom->Get_TickPerSecond() / 10.f, iTargetKeyFrameIndex);
+	m_pModelCom->Set_UseAnimationPos(_bUseAnimationPos);
+}
+
+_bool CBody::Is_Animation_End()
+{
+	return m_pModelCom->Is_AnimEnd();
+}
+
+_bool CBody::Is_Inputable_Front(_uint _iIndexFront)
+{
+	return m_pModelCom->Is_Inputable_Front(_iIndexFront);
+}
+
+_bool CBody::Is_Inputable_Back(_uint _iIndexBack)
+{
+	return m_pModelCom->Is_Inputable_Back(_iIndexBack);
 }
 
 

@@ -6,7 +6,7 @@
 
 void CGiant_Golem_Idle::Initialize(CGolem_GamePlay* pActor)
 {
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true);
 }
 
 CState<CGolem_GamePlay>* CGiant_Golem_Idle::Update(CGolem_GamePlay* pActor, _float fTimeDelta)

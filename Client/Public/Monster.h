@@ -2,7 +2,7 @@
 
 #include "Client_Defines.h"
 //#include "GameObject.h"
-#include "Character.h"
+#include "Character_Temp.h"
 
 
 BEGIN(Engine)
@@ -13,7 +13,7 @@ END
 
 BEGIN(Client)
 
-class CMonster abstract : public CCharacter
+class CMonster abstract : public CCharacter_Temp
 {
 protected:
 	CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);

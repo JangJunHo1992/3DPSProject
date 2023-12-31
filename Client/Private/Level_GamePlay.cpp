@@ -5,12 +5,7 @@
 #include "Level_Loading.h"
 #include "Monster.h"
 #include "Player.h"
-<<<<<<< HEAD
-=======
-#include "King.h"
-#include "DarkKnight.h"
-#include "Wizard.h"
->>>>>>> JJH
+
 
 CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
 	: CLevel(pDevice, pContext)
@@ -36,60 +31,12 @@ HRESULT CLevel_GamePlay::Initialize()
 
 void CLevel_GamePlay::Tick(_float fTimeDelta)
 {
-<<<<<<< HEAD
-	if (m_pGameInstance->Get_DIKeyState(DIK_M) & 0x80)
-	{
-		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
-			return;
-	}
-
-	
-
-	list<CGameObject*>* pMonsters = m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
-	
-	if (m_pGameInstance->Key_Down(DIK_SPACE))
-	{
-		for (CGameObject* pGameObject : *pMonsters)
-		{
-			CMonster* pMonster = dynamic_cast<CMonster*>(pGameObject);
-			if (pMonster)
-			{
-				//_int iNextAnimIndex = pMonster->Get_CurrentAnimIndex() + 2;
-
-				_uint iNumAnimations = pMonster->Get_NumAnimations();
-				_uint iAnimIndex = pMonster->Get_CurrentAnimIndex() + 1;
-				if (iAnimIndex >= iNumAnimations - 1)
-				{
-					iAnimIndex = 0;
-				}
-				pMonster->Set_Animation(iAnimIndex, CModel::ANIM_STATE::ANIM_STATE_LOOP, true);
-
-				//pMonster->Set_Next_AnimationIndex(iNextAnimIndex);
-
-			}
-
-		}
-	}
-
-	//for (CGameObject* pGameObject : *pMonsters)
-	//{
-	//	CMonster* pMonster = dynamic_cast<CMonster*>(pGameObject);
-	//	if (pMonster)
-	//	{
-	//		if (pMonster->Is_TransitionEnd())
-	//		{
-	//			//pMonster->Test_Animation();
-	//		}
-	//	}
-	//}
-=======
 	//if (m_pGameInstance->Get_DIKeyState(DIK_M) & 0x80)
 	//{
 	//	if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
 	//		return;
 	//}
 
->>>>>>> JJH
 }
 
 HRESULT CLevel_GamePlay::Render()
@@ -121,25 +68,11 @@ HRESULT CLevel_GamePlay::Ready_Layer_Camera(const wstring& strLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 {
-<<<<<<< HEAD
-	CPlayer::PLAYER_DESC		PlayerDesc = {};
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player"))))
+	//	return E_FAIL;
 
-	PlayerDesc.a = 10;
-	PlayerDesc.fRotationPerSec = XMConvertToRadians(90.0f);
-	PlayerDesc.fSpeedPerSec = 7.0f;
-
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player_GamePlay"), &PlayerDesc)))
-		return E_FAIL;
-
-// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Raider_GamePlay"), &PlayerDesc)))
-// 		return E_FAIL;
-=======
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player"))))
-		return E_FAIL;
-
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Raider"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
 	 	return E_FAIL;
->>>>>>> JJH
 
 	return S_OK;
 }
@@ -151,6 +84,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster"))))
 			return E_FAIL;
 	}
+
 
 	return S_OK;
 }

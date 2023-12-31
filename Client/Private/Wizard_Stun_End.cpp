@@ -2,7 +2,7 @@
 #include "Wizard_Stun_End.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Wizard_Idle00.h"
 
 void CWizard_Stun_End::Initialize(CWizard_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CWizard_Stun_End::Initialize(CWizard_GamePlay* pActor)
 
 CState<CWizard_GamePlay>* CWizard_Stun_End::Update(CWizard_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CWizard_Idle00();
+	}
 
 	return nullptr;
 }

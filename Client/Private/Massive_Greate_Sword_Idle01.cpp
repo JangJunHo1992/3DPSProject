@@ -6,7 +6,7 @@
 
 void CMassive_Greate_Sword_Idle01::Initialize(CDarkKnight_GamePlay* pActor)
 {
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true);
 }
 
 CState<CDarkKnight_GamePlay>* CMassive_Greate_Sword_Idle01::Update(CDarkKnight_GamePlay* pActor, _float fTimeDelta)

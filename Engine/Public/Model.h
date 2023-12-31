@@ -62,6 +62,8 @@ public:
 	_bool Is_AnimEnd() { return m_bIsAnimEnd; };
 >>>>>>> JJH
 
+	//void Rotate_PivotMatrix(_float )
+
 
 public:
 	virtual HRESULT Initialize_Prototype(TYPE eType, const string & strModelFilePath, _fmatrix PivotMatrix);
@@ -87,6 +89,8 @@ protected:
 	Assimp::Importer		m_Importer;
 =======
 	void	Play_Animation(_float fTimeDelta, _float3& _Pos);
+	void	Play_Animation(_float fTimeDelta, _float3& _Pos, _float& fMinY);
+
 	void	Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_END, _bool _bIsTransition = true, _float _fTransitionDuration = 0.2f, _uint iTargetKeyFrameIndex = 0);
 	void	Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration = 0.2f, _uint iTargetKeyFrameIndex = 0);
 	void	Reset_Animation(_int iAnimIndex = -1);
@@ -103,7 +107,7 @@ protected:
 
 protected:
 	CMyAssimp					m_MyAssimp;
-	CMyAIScene				m_pAIScene;
+	CMyAIScene					m_pAIScene;
 	
 
 protected:

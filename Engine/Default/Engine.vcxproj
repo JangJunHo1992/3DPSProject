@@ -202,10 +202,8 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClInclude Include="..\Public\Cell.h" />
     <ClInclude Include="..\Public\Channel.h" />
     <ClInclude Include="..\Public\Character.h" />
-<<<<<<< HEAD
-=======
+    <ClInclude Include="..\Public\Character_Temp.h" />
     <ClInclude Include="..\Public\Collider.h" />
->>>>>>> JJH
     <ClInclude Include="..\public\Component.h" />
     <ClInclude Include="..\Public\Component_Manager.h" />
     <ClInclude Include="..\Public\DebugDraw.h" />
@@ -276,10 +274,8 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClCompile Include="..\Private\Cell.cpp" />
     <ClCompile Include="..\Private\Channel.cpp" />
     <ClCompile Include="..\Private\Character.cpp" />
-<<<<<<< HEAD
-=======
+    <ClCompile Include="..\Private\Character_Temp.cpp" />
     <ClCompile Include="..\Private\Collider.cpp" />
->>>>>>> JJH
     <ClCompile Include="..\private\Component.cpp" />
     <ClCompile Include="..\Private\Component_Manager.cpp" />
     <ClCompile Include="..\Private\DebugDraw.cpp" />

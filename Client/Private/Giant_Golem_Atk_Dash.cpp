@@ -2,7 +2,7 @@
 #include "Giant_Golem_Atk_Dash.h"
 #include "GameInstance.h"
 
-//#include "GreatDualBlade_Attack_02.h"
+#include "Giant_Golem_Atk_L_foot.h"
 
 void CGiant_Golem_Atk_Dash::Initialize(CGolem_GamePlay* pActor)
 {
@@ -11,10 +11,10 @@ void CGiant_Golem_Atk_Dash::Initialize(CGolem_GamePlay* pActor)
 
 CState<CGolem_GamePlay>* CGiant_Golem_Atk_Dash::Update(CGolem_GamePlay* pActor, _float fTimeDelta)
 {
-	//if (pActor->Is_Animation_End())
-	//{
-	//	return new CGreat_DualBlade_Attack_02();
-	//}
+	if (pActor->Is_Animation_End())
+	{
+		return new CGiant_Golem_Atk_L_foot();
+	}
 
 	return nullptr;
 }
