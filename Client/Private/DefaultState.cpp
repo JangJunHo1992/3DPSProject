@@ -24,6 +24,8 @@
 #include "Player_Dash_Front.h"
 #include "Player_Dash_Left.h"
 #include "Player_Dash_Right.h"
+
+#include "Covus_Attack1.h"
 // #include "Covus_Combo_01_01.h"
 // #include "Covus_Combo_02_01.h"
 // #include "Covus_Combo_03_01.h"
@@ -62,7 +64,10 @@ CState<CCovus_GamePlay>* CDefaultState::Ground_Normal(CCovus_GamePlay* pActor, _
 // 	{
 // 		return new CGreatDualBlade_Combo_01_01();
 // 	}
-
+	if (m_pGameInstance->Mouse_Down(DIM_LB))
+	{
+		return new CCovus_Attack1;
+	}
 	pState = Walk(pActor, fTimeDelta, _iAnimIndex);
 	if (pState)	return pState;
 

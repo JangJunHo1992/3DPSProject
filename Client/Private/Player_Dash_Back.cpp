@@ -11,9 +11,12 @@ void CCovus_Dash_Back::Initialize(CCovus_GamePlay* pActor)
 
 CState<CCovus_GamePlay>* CCovus_Dash_Back::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
-	pActor->Go_Backward(fTimeDelta);
-	
-	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
+	//pActor->Go_Straight(fTimeDelta);
+	if (pActor->Is_Animation_End())
+	{
+		return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
+	}
+	return nullptr;
 }
 
 void CCovus_Dash_Back::Release(CCovus_GamePlay* pActor)

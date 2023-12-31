@@ -71,7 +71,7 @@ HRESULT CCovus_Weapon::Ready_Components_Origin(LEVEL eLevel)
 
 
 	/* For.Com_Collider */
-	m_iColliderSize = 12;
+	m_iColliderSize = 10;
 	m_pColliders.resize(m_iColliderSize);
 	//m_pColliders = new CCollider*[m_iColliderSize];
 

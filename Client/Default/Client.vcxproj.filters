@@ -1060,6 +1060,27 @@
     <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back">
       <UniqueIdentifier>{74f02f98-4e3d-442f-a463-11628a83fe6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\8.Healing">
+      <UniqueIdentifier>{5d3d79df-a08c-401a-ae51-c75dd34620b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry">
+      <UniqueIdentifier>{936b20f5-858c-42c1-a36f-dd0c9b509a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack1">
+      <UniqueIdentifier>{1f67acfa-c83e-49d2-92a2-e80093645c82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack2">
+      <UniqueIdentifier>{31e097e5-8a98-4bdd-bcf8-f90ca2e4034c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack3">
+      <UniqueIdentifier>{8c9bcfb5-2fa8-45fd-a6c2-1cf443a4467f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack4">
+      <UniqueIdentifier>{8e74e6ac-758a-4c95-b139-34dadc3611f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack5">
+      <UniqueIdentifier>{c0bd455e-0791-4ddd-ba5e-0aca71fafdbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -2019,6 +2040,27 @@
     <ClInclude Include="..\Public\Player_Run_Back_R45.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Covus_Dead.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\3.Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Attack1.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Attack2.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Attack3.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Attack4.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Attack5.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Attack.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2930,6 +2972,27 @@
     </ClCompile>
     <ClCompile Include="..\Private\Player_Run_Back_R45.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Dead.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\3.Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Attack1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Attack2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Attack3.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Attack4.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Attack5.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Attack.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

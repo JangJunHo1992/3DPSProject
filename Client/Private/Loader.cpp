@@ -196,13 +196,13 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon");
 			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Weapon";
 
-			_float fRadiusY = 270.0f;
-			_float fRadiusZ = 90.0f;
+// 			_float fRadiusY = 270.0f;
+// 			_float fRadiusZ = 90.0f;
 
 			PivotMatrix =
-				XMMatrixScaling(0.01f, 0.01f, 0.01f)
-				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+				XMMatrixScaling(0.01f, 0.01f, 0.01f);
+// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
 			if (LEVEL_TOOL == eLEVEL)
 			{
