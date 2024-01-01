@@ -1,0 +1,25 @@
+#include "stdafx.h"
+#include "Wizard_ATK_Skill19.h"
+#include "GameInstance.h"
+
+#include "Wizard_ATK_Skill20.h"
+
+void CWizard_ATK_Skill19::Initialize(CWizard_GamePlay* pActor)
+{
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+}
+
+CState<CWizard_GamePlay>* CWizard_ATK_Skill19::Update(CWizard_GamePlay* pActor, _float fTimeDelta)
+{
+	if (pActor->Is_Animation_End())
+	{
+		return new CWizard_ATK_Skill20();
+	}
+
+	return nullptr;
+}
+
+void CWizard_ATK_Skill19::Release(CWizard_GamePlay* pActor)
+{
+
+}

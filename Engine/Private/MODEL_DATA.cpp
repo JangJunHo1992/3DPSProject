@@ -93,22 +93,22 @@ HRESULT MODEL_DATA::Make_ModelData(const char* szFilePath, const MODEL_TYPE& In_
 
 MODEL_DATA::~MODEL_DATA()
 {
-    for (_uint i = 0; i < iNumMaterials; i++)
-        Safe_Delete_Array(Material_Datas[i]);
-
-    Material_Datas.clear();
-
-    for (_uint i = 0; i < iNumMeshs; i++)
-        Safe_Delete_Array(Mesh_Datas[i]);
-
-	Mesh_Datas.clear();
-	
-    for (_uint i = 0; i < iNumAnimations; i++)
-        Safe_Delete_Array(Animation_Datas[i]);
-
-	Animation_Datas.clear();
-	
-    Safe_Delete(RootNode);
+//     for (_uint i = 0; i < iNumMaterials; i++)
+//         Safe_Delete_Array(Material_Datas[i]);
+// 
+//     Material_Datas.clear();
+// 
+//     for (_uint i = 0; i < iNumMeshs; i++)
+//         Safe_Delete_Array(Mesh_Datas[i]);
+// 
+// 	Mesh_Datas.clear();
+// 	
+//     for (_uint i = 0; i < iNumAnimations; i++)
+//         Safe_Delete_Array(Animation_Datas[i]);
+// 
+// 	Animation_Datas.clear();
+// 	
+//     Safe_Delete(RootNode);
 	
 }
 
@@ -298,7 +298,7 @@ HRESULT MODEL_DATA::Load_FromAssimp(const _bool In_bAnimZero)
 
     for (_uint i = 0; i < iNumMaterials; i++)
     {
-        MATERIAL_DATA* MaterialData = new MATERIAL_DATA();
+        MATERIAL_DATA* MaterialData = new MATERIAL_DATA;
         MaterialData->Make_NodeData(pAiSceneModel->mMaterials[i]);
         Material_Datas.push_back(MaterialData);
     }
@@ -315,7 +315,7 @@ HRESULT MODEL_DATA::Load_FromAssimp(const _bool In_bAnimZero)
 
     for (_uint i = 0; i < iNumMeshs; i++)
     {
-        MESH_DATA* MeshData = new MESH_DATA();
+        MESH_DATA* MeshData = new MESH_DATA;
         Mesh_Datas.push_back(MeshData);
         Mesh_Datas.back()->Make_MeshData(eModelType, pAiSceneModel->mMeshes[i], XMLoadFloat4x4(&TransformMatrix), &VertexInfo);
     }
@@ -333,7 +333,7 @@ HRESULT MODEL_DATA::Load_FromAssimp(const _bool In_bAnimZero)
     }
     for (i; i < iNumAnimations; i++)
     {
-        ANIMATION_DATA* AnimationData = new ANIMATION_DATA();
+        ANIMATION_DATA* AnimationData = new ANIMATION_DATA;
         Animation_Datas.push_back(AnimationData);
         Animation_Datas.back()->Make_AnimationData(pAiSceneModel->mAnimations[i]);
     }

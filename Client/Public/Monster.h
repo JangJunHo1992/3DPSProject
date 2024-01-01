@@ -2,17 +2,18 @@
 
 #include "Client_Defines.h"
 //#include "GameObject.h"
-#include "Character.h"
+#include "Character_Temp.h"
 
 
 BEGIN(Engine)
 class CShader;
 class CModel;
+class CCollider;
 END
 
 BEGIN(Client)
 
-class CMonster abstract : public CCharacter
+class CMonster abstract : public CCharacter_Temp
 {
 protected:
 	CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
@@ -33,22 +34,17 @@ public:
 protected:
 	CShader*		m_pShaderCom = { nullptr };
 	//CModel*			m_pModelCom = { nullptr };
+	CCollider*		m_pColliderCom = { nullptr };
 
 	
 
 protected:
 	virtual HRESULT Ready_Components() PURE;
-	HRESULT Ready_Components_Origin();
+	HRESULT Ready_Components_Origin(LEVEL eLevel);
 	HRESULT Bind_ShaderResources();
 
 
 public:
-	/* 원형객체를 생성한다. */
-	//static CMonster* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-
-	/* 사본객체를 생성한다. */
-	//virtual CGameObject* Clone(void* pArg) override;
-
 	virtual void Free() override;
 };
 

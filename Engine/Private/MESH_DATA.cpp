@@ -71,6 +71,7 @@ HRESULT MESH_DATA::Make_MeshData(const MODEL_TYPE& In_eModelType, aiMesh* In_pAi
 			}
 		}
 
+
 	}
 
 	// 애니메이션이 아님
@@ -201,7 +202,7 @@ void MESH_DATA::Load_FromBinary(ifstream& is)
 	else if (MODEL_TYPE::NONANIM == eModelType)
 	{
 		pVertices = new VTXMESH[iNumVertices];
-		//pPosVertices = shared_ptr<VTXPOS[]>(DBG_NEW VTXPOS[iNumVertices]);
+		pPosVertices = new VTXPOS[iNumVertices];
 
 		for (_uint i(0); i < iNumVertices; ++i)
 		{

@@ -5,13 +5,13 @@
 
 
 CMonster::CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CCharacter(pDevice, pContext)
+	: CCharacter_Temp(pDevice, pContext)
 {
 
 }
 
 CMonster::CMonster(const CMonster& rhs)
-	: CCharacter(rhs)
+	: CCharacter_Temp(rhs)
 {
 }
 
@@ -50,11 +50,18 @@ void CMonster::Priority_Tick(_float fTimeDelta)
 
 void CMonster::Tick(_float fTimeDelta)
 {
-	m_pModelCom->Play_Animation(fTimeDelta);
+	_float3 vPos;
+	m_pModelCom->Play_Animation(fTimeDelta, vPos);
+
+	m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());
 }
 
 void CMonster::Late_Tick(_float fTimeDelta)
 {
+	CCollider* pTargetCollider = dynamic_cast<CCollider*>(m_pGameInstance->Get_Component(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Collider")));
+
+	m_pColliderCom->Collision(pTargetCollider);
+
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
 		return;
 }
@@ -70,12 +77,18 @@ HRESULT CMonster::Render()
 	{
 		m_pModelCom->Bind_BoneMatrices(m_pShaderCom, "g_BoneMatrices", i);
 
-		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, Type_DIFFUSE);
+		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
 
 		m_pShaderCom->Begin(0);
 
 		m_pModelCom->Render(i);
 	}
+
+#ifdef _DEBUG
+
+	m_pColliderCom->Render();
+
+#endif
 
 	return S_OK;
 }
@@ -87,16 +100,24 @@ void CMonster::Write_Json(json& Out_Json)
 	__super::Write_Json(Out_Json);
 }
 
-HRESULT CMonster::Ready_Components_Origin()
+HRESULT CMonster::Ready_Components_Origin(LEVEL eLevel)
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Shader_AnimModel"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Shader_AnimModel"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
-	/* For.Com_Model */
-	//if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
-	//	TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
-	//	return E_FAIL;
+
+
+	/* For.Com_Collider */
+	CBounding_AABB::BOUNDING_AABB_DESC		BoundingDesc = {};
+
+	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
+	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
+
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_AABB"),
+		TEXT("Com_Collider"), reinterpret_cast<CComponent**>(&m_pColliderCom), &BoundingDesc)))
+		return E_FAIL;
+
 
 	return S_OK;
 }
@@ -111,9 +132,6 @@ HRESULT CMonster::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
 		return E_FAIL;
-
-	//if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-	//	return E_FAIL;
 	return S_OK;
 }
 
@@ -122,6 +140,7 @@ void CMonster::Free()
 {
 	__super::Free();
 
+	Safe_Release(m_pColliderCom);
 	Safe_Release(m_pModelCom);
 	Safe_Release(m_pShaderCom);
 }

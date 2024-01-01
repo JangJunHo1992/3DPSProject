@@ -18,6 +18,12 @@
 #include "DirectXTK\SimpleMath.h"
 #include <DirectXCollision.h>
 
+#include "DirectXTK\VertexTypes.h"
+#include "DirectXTK\PrimitiveBatch.h"
+#include "DirectXTK\Effects.h"
+#include "DirectXTK\SpriteBatch.h"
+#include "DirectXTK\SpriteFont.h"
+
 #include <d3dcompiler.h>
 using namespace DirectX;
 

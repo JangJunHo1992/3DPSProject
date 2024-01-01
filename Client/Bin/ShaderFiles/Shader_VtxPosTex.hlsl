@@ -1,4 +1,4 @@
-
+#include "Shader_Defines.hlsli"
 
 
 /* float2, float3, float4 == vector */
@@ -92,6 +92,10 @@ technique11 DefaultTechnique
 	/* 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
 	pass UI
 	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
 		/* 렌더스테이츠 */
 		VertexShader = compile vs_5_0 VS_MAIN();
 		GeometryShader = NULL;
@@ -103,6 +107,10 @@ technique11 DefaultTechnique
 	/* 위와 다른 형태에 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
 	pass Particle
 	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
 		VertexShader = compile vs_5_0 VS_MAIN();
 		PixelShader = compile ps_5_0 PS_MAIN();
 	}	

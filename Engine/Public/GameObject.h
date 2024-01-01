@@ -33,6 +33,9 @@ public:
 	virtual HRESULT Render();
 
 public:
+	class CComponent* Find_Component(const wstring& strComTag);
+
+public:
 	void Set_Position(const _float3& vState);
 	void Test_ResetPos();
 	void Set_WorldMatrix(_float4x4 matrix);
@@ -68,7 +71,6 @@ protected:
 
 	
 protected:
-	class CComponent* Find_Component(const wstring& strComTag);
 	HRESULT	Add_Component(_uint iLevelIndex, const wstring& strPrototypeTag,
 							const wstring& strComTag, _Inout_ CComponent** ppOut, void* pArg = nullptr);
 	

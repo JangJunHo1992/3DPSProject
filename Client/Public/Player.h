@@ -1,24 +1,12 @@
 #pragma once
 
-#include "Client_Defines.h"
-#include "GameObject.h"
-
-BEGIN(Engine)
-class CNavigation;
-class CShader;
-class CModel;
-END
+#include "Character_Client.h"
 
 BEGIN(Client)
 
-class CPlayer final : public CGameObject
+class CPlayer abstract : public CCharacter_Client
 {
-public:
-	typedef struct tagPlayerDesc : public GAMEOBJECT_DESC
-	{
-		int a;
-	}PLAYER_DESC;
-private:
+protected:
 	CPlayer(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CPlayer(const CPlayer& rhs);
 	virtual ~CPlayer() = default;
@@ -31,23 +19,17 @@ public:
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-private:
-	CNavigation* m_pNavigationCom = { nullptr };
-	CShader* m_pShaderCom = { nullptr };
-	CModel* m_pModelCom = { nullptr };
+public:
+	virtual void Set_Hitted() override;
 
-private:
-	HRESULT Ready_Components();
-	HRESULT Bind_ShaderResources();
+
+protected:
+	virtual HRESULT Ready_Components() PURE;
+	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
+	virtual HRESULT Ready_PartObjects() override;
 
 
 public:
-	/* 원형객체를 생성한다. */
-	static CPlayer* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-
-	/* 사본객체를 생성한다. */
-	virtual CGameObject* Clone(void* pArg) override;
-
 	virtual void Free() override;
 };
 

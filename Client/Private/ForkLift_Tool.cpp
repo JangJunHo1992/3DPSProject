@@ -27,7 +27,7 @@ HRESULT CForkLift_Tool::Ready_Components()
 	if (FAILED(Ready_Components_Origin()))
 		return E_FAIL;
 
-	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Model_ForkLift_Tool"),
+	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Model_ForkLift"),
 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 

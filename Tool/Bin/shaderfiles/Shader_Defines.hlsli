@@ -13,6 +13,13 @@ RasterizerState RS_Fill_Wireframe
 	FrontCounterClockwise = false;
 };
 
+RasterizerState RS_Cull_None
+{
+	FillMode = Solid;
+	CullMode = None;
+	FrontCounterClockwise = false;
+};
+
 DepthStencilState DSS_Default
 {
 	DepthEnable = true;

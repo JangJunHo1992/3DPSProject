@@ -1,6 +1,7 @@
 #pragma once
 #include "Base.h"
 #include "BONE_DATA.h"
+
 BEGIN(Engine)
 
 struct ENGINE_DLL MESH_DATA
@@ -16,7 +17,7 @@ struct ENGINE_DLL MESH_DATA
 	_uint                               iNumFaces;
 	_uint                               iNumBones;
 	_uint                               iMaterialIndex;
-
+	vector<_uint>						BoneIndices;
 	MODEL_TYPE							eModelType;
 
 	HRESULT Make_MeshData(const MODEL_TYPE& In_eModelType, aiMesh* In_pAiMesh, const _fmatrix& In_TransformMatrix, MESH_VTX_INFO* In_pVertexInfo);

@@ -176,7 +176,7 @@ void CImgui_Manager::Render()
 	if (m_bdialogCheck)
 	{
 		if (ImGui::Button("Open File Dialog"))
-			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".fbx,.bin,.png,.dds",
+			ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".cpp,.h,.hpp",
 				".", 1, nullptr, ImGuiFileDialogFlags_Modal);
 
 		// display
@@ -322,6 +322,8 @@ HRESULT CImgui_Manager::Load_Objects_With_Json(_uint iLevelIndex, string filePat
 void CImgui_Manager::Toggle_PhysXInfo()
 {
 }
+
+
 
 _int CImgui_Manager::CheckPicking(_int ePickMode)
 {

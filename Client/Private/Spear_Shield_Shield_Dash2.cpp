@@ -1,0 +1,25 @@
+#include "stdafx.h"
+#include "Spear_Shield_Shield_Dash2.h"
+#include "GameInstance.h"
+
+#include "Spear_Shield_Shield_Dash3.h"
+
+void CSpear_Shield_Shield_Dash2::Initialize(CKnightGuard_GamePlay* pActor)
+{
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+}
+
+CState<CKnightGuard_GamePlay>* CSpear_Shield_Shield_Dash2::Update(CKnightGuard_GamePlay* pActor, _float fTimeDelta)
+{
+	if (pActor->Is_Animation_End())
+	{
+		return new CSpear_Shield_Shield_Dash3();
+	}
+
+	return nullptr;
+}
+
+void CSpear_Shield_Shield_Dash2::Release(CKnightGuard_GamePlay* pActor)
+{
+
+}

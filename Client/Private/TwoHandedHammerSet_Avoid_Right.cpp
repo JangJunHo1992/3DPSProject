@@ -1,0 +1,25 @@
+#include "stdafx.h"
+#include "TwoHandedHammerSet_Avoid_Right.h"
+#include "GameInstance.h"
+
+#include "TwoHandedHammerSet_Buff01.h"
+
+void CTwoHandedHammerSet_Avoid_Right::Initialize(CKing_GamePlay* pActor)
+{
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+}
+
+CState<CKing_GamePlay>* CTwoHandedHammerSet_Avoid_Right::Update(CKing_GamePlay* pActor, _float fTimeDelta)
+{
+	if (pActor->Is_Animation_End())
+	{
+		return new CTwoHandedHammerSet_Buff01();
+	}
+
+	return nullptr;
+}
+
+void CTwoHandedHammerSet_Avoid_Right::Release(CKing_GamePlay* pActor)
+{
+
+}
