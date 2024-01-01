@@ -23,7 +23,7 @@ HRESULT CModel_GamePlay::Ready_Meshes(_fmatrix PivotMatrix)
 	return Ready_Meshes_Origin<CMesh_GamePlay>(PivotMatrix);
 }
 
-CModel_GamePlay* CModel_GamePlay::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, const MODEL_TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
+CModel_GamePlay* CModel_GamePlay::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
 	CModel_GamePlay* pInstance = new CModel_GamePlay(pDevice, pContext);
 

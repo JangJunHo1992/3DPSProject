@@ -69,8 +69,6 @@ private:
 
 	void Toggle_PhysXInfo();
 
-	
-
 private:
 	_int CheckPicking(_int ePickMode);
 public:
