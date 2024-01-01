@@ -2,6 +2,8 @@
 #include "Player_Run_Front_L45.h"
 #include "GameInstance.h"
 
+
+
 void CCovus_Run_Front_L45::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
@@ -10,7 +12,7 @@ void CCovus_Run_Front_L45::Initialize(CCovus_GamePlay* pActor)
 
 CState<CCovus_GamePlay>* CCovus_Run_Front_L45::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
-	pActor->Go_Backward_L45(fTimeDelta);
+	pActor->Go_Straight_L45(fTimeDelta);
 
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
@@ -18,4 +20,5 @@ CState<CCovus_GamePlay>* CCovus_Run_Front_L45::Update(CCovus_GamePlay* pActor, _
 void CCovus_Run_Front_L45::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
+
 }

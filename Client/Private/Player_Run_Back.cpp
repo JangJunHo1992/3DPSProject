@@ -3,10 +3,11 @@
 #include "GameInstance.h"
 
 
+
 void CCovus_Run_Back::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true, false);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true,false);
 }
 
 CState<CCovus_GamePlay>* CCovus_Run_Back::Update(CCovus_GamePlay* pActor, _float fTimeDelta)

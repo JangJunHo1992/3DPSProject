@@ -12,12 +12,12 @@ void CCovus_Walk_Back::Initialize(CCovus_GamePlay* pActor)
 
 CState<CCovus_GamePlay>* CCovus_Walk_Back::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
-	pActor->Go_Backward(fTimeDelta);
+	pActor->Go_Backward(fTimeDelta*0.5);
 
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
 
 void CCovus_Walk_Back::Release(CCovus_GamePlay* pActor)
 {
-	
+	__super::Release(pActor);
 }

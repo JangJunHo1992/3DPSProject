@@ -2,6 +2,8 @@
 #include "Player_Run_Back_L45.h"
 #include "GameInstance.h"
 
+
+
 void CCovus_Run_Back_L45::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);

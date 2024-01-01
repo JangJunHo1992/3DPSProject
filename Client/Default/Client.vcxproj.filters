@@ -1986,9 +1986,6 @@
     <ClInclude Include="..\Public\Player_Idle.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\6.Idle</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Player_Run.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Player_Walk.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\1.Walk</Filter>
     </ClInclude>
@@ -2016,30 +2013,6 @@
     <ClInclude Include="..\Public\Player_Walk_Right.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\1.Walk\Player_Walk_Right</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Right.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Right</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Left.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Left</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Front_R45.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Front.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Front_L45.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Back.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Back_L45.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Player_Run_Back_R45.h">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Covus_Dead.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\3.Dead</Filter>
     </ClInclude>
@@ -2060,6 +2033,33 @@
     </ClInclude>
     <ClInclude Include="..\Public\Covus_Attack.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Back.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Back_L45.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Back_R45.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Front.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Front_L45.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Front_R45.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Left.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Left</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_Run_Right.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Right</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2919,9 +2919,6 @@
     <ClCompile Include="..\Private\Player_Idle.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\6.Idle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Player_Run.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Player_Walk.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\1.Walk</Filter>
     </ClCompile>
@@ -2949,30 +2946,6 @@
     <ClCompile Include="..\Private\Player_Walk_Right.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\1.Walk\Player_Walk_Right</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Right.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Right</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Left.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Left</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Front.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Front_L45.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Front_R45.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Back.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Back_L45.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Player_Run_Back_R45.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Covus_Dead.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\3.Dead</Filter>
     </ClCompile>
@@ -2993,6 +2966,33 @@
     </ClCompile>
     <ClCompile Include="..\Private\Covus_Attack.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Back.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Back_L45.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Back_R45.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Back</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Front.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Front_L45.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Front_R45.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Front</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Left.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Left</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_Run_Right.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Right</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
