@@ -1081,6 +1081,42 @@
     <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack\Attack5">
       <UniqueIdentifier>{c0bd455e-0791-4ddd-ba5e-0aca71fafdbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician">
+      <UniqueIdentifier>{1ec59ea3-0a32-4e16-af0e-1779933d1de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire">
+      <UniqueIdentifier>{764ad539-c622-4356-95f9-566848342e55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay">
+      <UniqueIdentifier>{95e61d45-1884-4900-8343-c4d47960c8f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\Tool">
+      <UniqueIdentifier>{4bda4297-ace1-4e0a-ac9d-019ba6f53976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts">
+      <UniqueIdentifier>{d776c8b6-20dc-4b64-b98a-6a4a4e7df26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Body">
+      <UniqueIdentifier>{cbf5b4b3-9b7c-4e03-8e5f-85b5863c1ce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon">
+      <UniqueIdentifier>{bfd6ab07-19ee-4350-b329-e9843b4be37a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Body\Game_Play">
+      <UniqueIdentifier>{f900f073-12a3-4eed-9d59-216362c1833c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Body\Tool">
+      <UniqueIdentifier>{98db3221-cf18-4da8-a50e-873ddf14f256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Game_Play">
+      <UniqueIdentifier>{a81f31fc-9f3e-4fbd-81ae-48d53281fc2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Tool">
+      <UniqueIdentifier>{7f89ae04-d6a2-47be-b502-12171e13776c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State">
+      <UniqueIdentifier>{83406ba7-7234-451a-b320-af1cf15a7f89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -2061,6 +2097,33 @@
     <ClInclude Include="..\Public\Player_Run_Right.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Right</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Magician.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Body.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Body_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Body\Game_Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Body_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Body\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Weapon.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Weapon_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Game_Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Weapon_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2993,6 +3056,33 @@
     </ClCompile>
     <ClCompile Include="..\Private\Player_Run_Right.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\2.Run\Player_Run_Right</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Body.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Body_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Body\Game_Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Body_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Body\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Weapon.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Weapon_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Game_Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Weapon_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
