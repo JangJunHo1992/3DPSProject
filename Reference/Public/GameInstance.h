@@ -90,6 +90,10 @@ public: //For Input_Device
 	_bool	Mouse_Down(MOUSEKEYSTATE eMouseID);
 	_bool	Mouse_Up(MOUSEKEYSTATE eMouseID);
 
+public: /* For.Font_Manager */
+	HRESULT Add_Font(const wstring & strFontTag, const wstring & strFontFilePath);
+	HRESULT Render_Font(const wstring & strFontTag, const wstring & strText, const _float2 & vPosition, _fvector vColor = XMVectorSet(1.f, 1.f, 1.f, 1.f), _float fScale = 1.f, _float2 vOrigin = _float2(0.f, 0.f), _float fRotation = 0.f);
+
 
 public:
 	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
@@ -115,7 +119,7 @@ private:
 	class CRenderer*				m_pRenderer = { nullptr };
 	class CPipeLine*				m_pPipeLine = { nullptr };
 	class CInput_Device*			m_pInput_Device = { nullptr };
-
+	class CFonts_Manager*			m_pFonts_Manager = { nullptr };
 public:
 	void Release_Manager();
 	static void Release_Engine();

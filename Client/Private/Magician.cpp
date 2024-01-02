@@ -65,7 +65,7 @@ HRESULT CMagician::Render()
 
 void CMagician::Set_Hitted()
 {
-	CMagician::MagicianState eHitted = CMagician::MagicianState::HurtMFL;
+	CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 

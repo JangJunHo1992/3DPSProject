@@ -1117,6 +1117,27 @@
     <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State">
       <UniqueIdentifier>{83406ba7-7234-451a-b320-af1cf15a7f89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\0.Parent">
+      <UniqueIdentifier>{023e5788-7c79-4f06-8afd-9d198fc06de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk">
+      <UniqueIdentifier>{472b2561-7e85-4ffb-a90a-b6557f180157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\2.Dead">
+      <UniqueIdentifier>{68486081-f04b-41c4-9e03-c19d528b61a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\3.Attack">
+      <UniqueIdentifier>{3199a20d-6488-48eb-b04b-19fe5b9eaa82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\4.Idle">
+      <UniqueIdentifier>{ce922f62-8244-4372-95de-cf2c30cf0c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\5.Disappear">
+      <UniqueIdentifier>{07ae1e66-b07a-4d81-9110-f1267626c4dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\SpringCamera">
+      <UniqueIdentifier>{5365f8a6-ee97-4ea5-b67e-30eda2685249}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -2124,6 +2145,15 @@
     <ClInclude Include="..\Public\Magician_Weapon_Tool.h">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\MagicianDefaultState.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\0.Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Idle.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\4.Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SpringCamera.h">
+      <Filter>02.GameObjects\SpringCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -3083,6 +3113,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Magician_Weapon_Tool.cpp">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MagicianDefaultState.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\0.Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Idle.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\4.Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SpringCamera.cpp">
+      <Filter>02.GameObjects\SpringCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

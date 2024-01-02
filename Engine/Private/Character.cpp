@@ -1,5 +1,5 @@
-#include "..\Public\Character.h"
-#include "..\Public\Model.h"
+#include "Character.h"
+#include "Model.h"
 #include "GameInstance.h"
 
 //#include "Body.h"

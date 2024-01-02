@@ -445,10 +445,12 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Magical_Knight_Walk_Stop_L.h" />
     <ClInclude Include="..\Public\Magical_Knight_Walk_Stop_R.h" />
     <ClInclude Include="..\Public\Magician.h" />
+    <ClInclude Include="..\Public\MagicianDefaultState.h" />
     <ClInclude Include="..\Public\Magician_Body.h" />
     <ClInclude Include="..\Public\Magician_Body_GamePlay.h" />
     <ClInclude Include="..\Public\Magician_Body_Tool.h" />
     <ClInclude Include="..\Public\Magician_GamePlay.h" />
+    <ClInclude Include="..\Public\Magician_Idle.h" />
     <ClInclude Include="..\Public\Magician_Tool.h" />
     <ClInclude Include="..\Public\Magician_Weapon.h" />
     <ClInclude Include="..\Public\Magician_Weapon_GamePlay.h" />
@@ -499,6 +501,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Raider_Weapon_GamePlay.h" />
     <ClInclude Include="..\Public\Raider_Weapon_Tool.h" />
     <ClInclude Include="..\Public\Sky.h" />
+    <ClInclude Include="..\Public\SpringCamera.h" />
     <ClInclude Include="..\Public\State.h" />
     <ClInclude Include="..\Public\Terrain.h" />
     <ClInclude Include="..\Public\Terrain_GamePlay.h" />
@@ -771,10 +774,12 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Magical_Knight_Walk_Stop_L.cpp" />
     <ClCompile Include="..\Private\Magical_Knight_Walk_Stop_R.cpp" />
     <ClCompile Include="..\Private\Magician.cpp" />
+    <ClCompile Include="..\Private\MagicianDefaultState.cpp" />
     <ClCompile Include="..\Private\Magician_Body.cpp" />
     <ClCompile Include="..\Private\Magician_Body_GamePlay.cpp" />
     <ClCompile Include="..\Private\Magician_Body_Tool.cpp" />
     <ClCompile Include="..\Private\Magician_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Magician_Idle.cpp" />
     <ClCompile Include="..\Private\Magician_Tool.cpp" />
     <ClCompile Include="..\Private\Magician_Weapon.cpp" />
     <ClCompile Include="..\Private\Magician_Weapon_GamePlay.cpp" />
@@ -825,6 +830,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Raider_Weapon_GamePlay.cpp" />
     <ClCompile Include="..\Private\Raider_Weapon_Tool.cpp" />
     <ClCompile Include="..\Private\Sky.cpp" />
+    <ClCompile Include="..\Private\SpringCamera.cpp" />
     <ClCompile Include="..\Private\Terrain.cpp" />
     <ClCompile Include="..\Private\Terrain_GamePlay.cpp" />
     <ClCompile Include="..\Private\Terrain_Tool.cpp" />

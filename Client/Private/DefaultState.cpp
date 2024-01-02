@@ -26,17 +26,10 @@
 #include "Player_Dash_Right.h"
 
 #include "Covus_Attack1.h"
-// #include "Covus_Combo_01_01.h"
-// #include "Covus_Combo_02_01.h"
-// #include "Covus_Combo_03_01.h"
-// #include "Covus_Combo_04_01.h"
-// #include "Covus_Combo_05_01.h"
-// 
+
 // #include "Covus_Hit_01.h"
 // #include "Covus_Dead_01.h"
 // #include "Covus_Defense_Start.h"
-
-
 
 
 void CDefaultState::Initialize(CCovus_GamePlay* pActor)
