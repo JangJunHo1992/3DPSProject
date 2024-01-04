@@ -92,9 +92,9 @@ public:
 	void Set_Position(const _float3& vState)
 	{
 		_vector vPosVec = XMLoadFloat3(&vState);
-		_float4 vPos;
-		XMStoreFloat4(&vPos, vPosVec);
-		Set_State(STATE::STATE_POSITION, vPos);
+		
+		XMStoreFloat4(&m_fPosition, vPosVec);
+		Set_State(STATE::STATE_POSITION, m_fPosition);
 	}
 
 	void Add_Position(const _float3& vState)
@@ -107,6 +107,7 @@ public:
 		m_WorldMatrix.m[STATE::STATE_POSITION][2] += vState.z;
 
 	}
+public:
 
 public:
 	HRESULT	Bind_ShaderResource(class CShader* pShader, const _char* pConstantName);
@@ -121,7 +122,7 @@ private:
 	_float				m_fRotationPerSec = { 0.0f };
 
 	_float4x4			m_WorldMatrix = {};
-
+	_float4				m_fPosition = {};
 public:
 	static CTransform* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, _float fSpeedPerSec, _float fRotationPerSec);
 	virtual CComponent* Clone(void* pArg) override;

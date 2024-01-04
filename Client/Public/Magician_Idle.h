@@ -1,18 +1,18 @@
 #pragma once
 #include "State.h"
-#include "Player_Run.h"
+#include "Magician_Walk.h"
 
 BEGIN(Client)
 
-class CCovus_Idle : public CCovus_Run
+class CMagician_Idle : public CMagician_Walk
 {
 public:
-	virtual void Initialize(CCovus_GamePlay* pActor) override;
-	virtual CState<CCovus_GamePlay>* Update(CCovus_GamePlay* pActor, _float fTimeDelta) override;
-	virtual void Release(CCovus_GamePlay* pActor) override;
+	virtual void Initialize(CMagician_GamePlay* pActor) override;
+	virtual CState<CMagician_GamePlay>* Update(CMagician_GamePlay* pActor, _float fTimeDelta) override;
+	virtual void Release(CMagician_GamePlay* pActor) override;
 
 public:
-	static const _uint g_iAnimIndex = CCovus::PlayerState::Idle;
+	static const _uint g_iAnimIndex = CMagician::MagicianState::Idle;
 };
 
 END

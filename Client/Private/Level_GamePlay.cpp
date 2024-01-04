@@ -14,10 +14,10 @@ CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * p
 
 HRESULT CLevel_GamePlay::Initialize()
 {
-	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
+	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
+	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
 		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
@@ -74,16 +74,21 @@ HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
 	 	return E_FAIL;
 
+	list<CGameObject*> m_pPlayerLayer = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, strLayerTag);
+
+	CGameObject* pPlayer = m_pPlayerLayer.back();
+
+	m_pGameInstance->Set_Player(pPlayer);
+
 	return S_OK;
 }
 
 HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 {
-	for (size_t i = 0; i < 20; i++)
-	{
-		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster"))))
-			return E_FAIL;
-	}
+	
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster"))))
+		return E_FAIL;
+
 
 
 	return S_OK;

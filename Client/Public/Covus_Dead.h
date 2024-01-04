@@ -1,10 +1,10 @@
 #pragma once
 #include "State.h"
-#include "Covus_GamePlay.h"
+#include "Covus_Hurt.h"
 
 BEGIN(Client)
 
-class CCovus_Dead : public CState<CCovus_GamePlay>
+class CCovus_Dead : public CCovus_Hurt
 {
 public:
 	virtual void Initialize(CCovus_GamePlay* pActor) override;

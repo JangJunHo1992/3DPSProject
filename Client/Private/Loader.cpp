@@ -6,6 +6,7 @@
 #include "Sky.h"
 #include "Camera_Dynamic.h"
 #include "Camera_Dynamic_Tool.h"
+#include "SpringCamera.h"
 #include "VIBuffer_Static_Terrain.h"
 #include "VIBuffer_Dynamic_Plane.h"
 #include "Terrain_Tool.h"
@@ -500,8 +501,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		else
 		{
 			/* For.Prototype_GameObject_Camera_Dynamic */
+// 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+// 				CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+// 				return E_FAIL;
 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+				CSpringCamera::Create(m_pDevice, m_pContext))))
 				return E_FAIL;
 		}
 	}

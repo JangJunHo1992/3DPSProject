@@ -1027,9 +1027,6 @@
     <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\4.Attack">
       <UniqueIdentifier>{c717db82-8be7-463f-a566-bf8706d294e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hit">
-      <UniqueIdentifier>{714ae6f2-2e90-40c9-8c41-abfd8a22a36e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\6.Idle">
       <UniqueIdentifier>{58bff4e7-f3db-4439-9c67-2e5b591a7a12}</UniqueIdentifier>
     </Filter>
@@ -1137,6 +1134,42 @@
     </Filter>
     <Filter Include="02.GameObjects\SpringCamera">
       <UniqueIdentifier>{5365f8a6-ee97-4ea5-b67e-30eda2685249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Back">
+      <UniqueIdentifier>{f2662a08-5a24-4d15-9250-4dc4c3f1a1a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Front">
+      <UniqueIdentifier>{caa75196-d97a-461b-97bf-1e9b4b63852f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Left">
+      <UniqueIdentifier>{c46375fd-3c53-4ea5-87e2-79fb7ed90262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Right">
+      <UniqueIdentifier>{fb3cc81b-b3de-41ab-bcee-e7caeeac6d86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry\Covus_Parry_L">
+      <UniqueIdentifier>{27e4e02e-cab6-4d15-bd9e-e9bbe1febc9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry\Covus_Parry_R">
+      <UniqueIdentifier>{0e446ea5-9fa2-4ff0-96a0-24ab7d7487d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt">
+      <UniqueIdentifier>{714ae6f2-2e90-40c9-8c41-abfd8a22a36e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFL">
+      <UniqueIdentifier>{9158d864-2105-4bf3-bf07-823071aadba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFR">
+      <UniqueIdentifier>{8c308dba-eacd-466c-83f9-27a1a91424c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtSL">
+      <UniqueIdentifier>{f7676a30-08b9-4a09-98ed-99afb70f5f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtSR">
+      <UniqueIdentifier>{460bf40c-8e3a-4bb1-80dd-ce3bede73477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover">
+      <UniqueIdentifier>{347b19ef-f210-4924-80ef-871628cd6b04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2154,6 +2187,48 @@
     <ClInclude Include="..\Public\SpringCamera.h">
       <Filter>02.GameObjects\SpringCamera</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Magician_Walk.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Walk_Back.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Back</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Walk_Front.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Front</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Walk_Left.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Left</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Walk_Right.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Right</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Healing.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\8.Healing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Parry.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Parry_L.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry\Covus_Parry_L</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Parry_R.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry\Covus_Parry_R</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Hurt.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_HurtSR.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtSR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_HurtSL.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_HurtMFR.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_HurtMFL.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -3122,6 +3197,48 @@
     </ClCompile>
     <ClCompile Include="..\Private\SpringCamera.cpp">
       <Filter>02.GameObjects\SpringCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Walk.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Walk_Back.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Back</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Walk_Front.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Front</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Walk_Left.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Left</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Walk_Right.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\1.Walk\Magician_Walk_Right</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Healing.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\8.Healing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Parry.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Parry_L.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry\Covus_Parry_L</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Parry_R.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\9.Parry\Covus_Parry_R</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Hurt.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_HurtSR.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtSR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_HurtSL.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_HurtMFR.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_HurtMFL.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

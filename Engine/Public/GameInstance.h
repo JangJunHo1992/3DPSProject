@@ -17,6 +17,8 @@
 /* 내가 생성한 여러 컴포넌트들의 원형을 보관하고 복제하여 가져온다. */
 
 BEGIN(Engine)
+class CGameObject;
+class CLayer;
 
 class ENGINE_DLL CGameInstance final : public CBase
 {
@@ -51,9 +53,10 @@ public: /* For.Object_Manager */
 	HRESULT Add_Object(_uint iLevelIndex, const wstring & strLayerTag, class CGameObject* pGameObject, void* pArg = nullptr);
 	void Fill_PrototypeTags(vector<string>*_vector);
 	void Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector);
-	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
+	list<CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
 	class CComponent* Get_Component(_uint iLevelIndex, const wstring & strLayerTag, const wstring & strComponentTag, _uint iIndex = 0);
-
+	CGameObject* Get_Player();
+	void	Set_Player(CGameObject * _pPlayer);
 
 
 	HRESULT Save_Objects_With_Json(_uint iLevelIndex, string filePath);

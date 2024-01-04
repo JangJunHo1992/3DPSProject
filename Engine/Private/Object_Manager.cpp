@@ -211,6 +211,16 @@ void CObject_Manager::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
 	CGameInstance::GetInstance()->Save_Json(filePath, Out_Json);
 }
 
+CGameObject* CObject_Manager::Get_Player()
+{
+	return m_pPlayer;
+}
+
+void CObject_Manager::Set_Player(CGameObject* _pPlayer)
+{
+	m_pPlayer = _pPlayer;
+}
+
 void CObject_Manager::Fill_PrototypeTags(vector<string>* _vector)
 {
 	for (auto& item : m_Prototypes) 

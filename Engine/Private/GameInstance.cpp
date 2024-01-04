@@ -206,6 +206,16 @@ CComponent* CGameInstance::Get_Component(_uint iLevelIndex, const wstring& strLa
 	return m_pObject_Manager->Get_Component(iLevelIndex, strLayerTag, strComponentTag, iIndex);
 }
 
+CGameObject* CGameInstance::Get_Player()
+{
+	return m_pObject_Manager->Get_Player();
+}
+
+void CGameInstance::Set_Player(CGameObject* _pPlayer)
+{
+	m_pObject_Manager->Set_Player(_pPlayer);
+}
+
 HRESULT CGameInstance::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
 {
 	m_pObject_Manager->Save_Objects_With_Json(iLevelIndex, filePath);

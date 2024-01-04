@@ -27,8 +27,12 @@
 
 #include "Covus_Attack1.h"
 
-// #include "Covus_Hit_01.h"
-// #include "Covus_Dead_01.h"
+#include "Covus_HurtMFL.h"
+#include "Covus_HurtMFR.h"
+#include "Covus_HurtSL.h"
+#include "Covus_HurtSR.h"
+
+#include "Covus_Dead.h"
 // #include "Covus_Defense_Start.h"
 
 
@@ -62,8 +66,10 @@ CState<CCovus_GamePlay>* CDefaultState::Ground_Normal(CCovus_GamePlay* pActor, _
 	pState = Run(pActor, fTimeDelta, _iAnimIndex);
 	if (pState)	return pState;
 
-
 	pState = Dash(pActor, fTimeDelta, _iAnimIndex);
+	if (pState)	return pState;
+
+	pState = Hitted(pActor, fTimeDelta, _iAnimIndex);
 	if (pState)	return pState;
 
 	return nullptr;

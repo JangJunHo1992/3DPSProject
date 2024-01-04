@@ -30,7 +30,7 @@ HRESULT CCovus::Initialize_Prototype()
 HRESULT CCovus::Initialize(void* pArg)
 {
 	m_sName = "Covus";
-	m_sLayerTag = "Layer_Monster";
+	m_sLayerTag = "Layer_Player";
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
@@ -50,6 +50,7 @@ void CCovus::Priority_Tick(_float fTimeDelta)
 
 void CCovus::Tick(_float fTimeDelta)
 {
+
 	__super::Tick(fTimeDelta);
 }
 

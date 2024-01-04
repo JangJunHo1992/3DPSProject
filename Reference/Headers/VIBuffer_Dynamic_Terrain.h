@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VIBuffer_Terrain.h"
+#include "VIBuffer_Dynamic_Terrain_Origin.h"
 
 /* »ç°¢Çü. */
 
@@ -8,7 +8,7 @@ BEGIN(Engine)
 
 class CGameInstance;
 
-class ENGINE_DLL CVIBuffer_Dynamic_Terrain final : public CVIBuffer_Terrain
+class ENGINE_DLL CVIBuffer_Dynamic_Terrain final : public CVIBuffer_Dynamic_Terrain_Origin
 {
 private:
 	CVIBuffer_Dynamic_Terrain(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
@@ -19,15 +19,6 @@ public:
 	virtual HRESULT Initialize_Prototype(const wstring & strHeightMapFilePath);
 	virtual HRESULT Initialize(void* pArg) override;
 
-public:
-	_bool			Picking(RAY ray, _float3 * out);
-	void			Invalidate_Terrain(_vector _vMousePos, _float _fRadious, _float _fPower);
-
-private:
-	CGameInstance* m_pGameInstance = nullptr;
-
-	VTXMESH*			m_pVertices = { nullptr };
-	_uint*				m_pIndices	= { nullptr };
 
 public:
 	static CVIBuffer_Dynamic_Terrain* Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext, const wstring & strHeightMapFilePath);
