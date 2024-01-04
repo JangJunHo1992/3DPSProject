@@ -1171,6 +1171,54 @@
     <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover">
       <UniqueIdentifier>{347b19ef-f210-4924-80ef-871628cd6b04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverB">
+      <UniqueIdentifier>{ae61a11a-ec84-44b8-a748-163d09ca7eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverF">
+      <UniqueIdentifier>{385ad3c3-d5d9-47b2-9aee-6faf67408f37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverR">
+      <UniqueIdentifier>{5efc95cf-d366-4e91-ae68-a88784aa0160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverL">
+      <UniqueIdentifier>{452d96ae-b186-47ab-890c-959af1b21f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg">
+      <UniqueIdentifier>{71d00b72-7ef7-4ee7-8352-bb1228a845e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire">
+      <UniqueIdentifier>{8ba4c084-0b52-4fc0-bcb6-d4b38b49fb63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Parts">
+      <UniqueIdentifier>{d1e6e38f-6655-4252-8f09-0f72fbbc878c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay">
+      <UniqueIdentifier>{7b7821ec-6c29-4325-ac44-f308f90eaace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\Tool">
+      <UniqueIdentifier>{d9584a85-d11f-4de5-aef2-160c8f1d8eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Parts\Body">
+      <UniqueIdentifier>{b3dd1c80-6de1-4eba-ae5b-9d825c6f9c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Parts\Weapon">
+      <UniqueIdentifier>{6cc58196-bb7a-4f23-8266-49e854c9315c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Parts\Body\GamePlay">
+      <UniqueIdentifier>{b34516b2-6f8e-4ee4-b764-166a1b689170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Parts\Body\Tool">
+      <UniqueIdentifier>{499ceaca-1d3c-44d5-ab70-0709e4ddbc1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Parts\Weapon\GamePlay">
+      <UniqueIdentifier>{de83848c-1bc0-4d4b-808f-b2bd8aa04902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Parts\Weapon\Tool">
+      <UniqueIdentifier>{5205aa67-3630-450c-9813-dedef31a1fe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State">
+      <UniqueIdentifier>{dac58dd7-6af6-4fb6-a026-41b623ff17c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -2229,6 +2277,48 @@
     <ClInclude Include="..\Public\Covus_HurtMFL.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFL</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Covus_Recover.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_RecoverF.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_RecoverL.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_RecoverR.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_RecoverB.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Body.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Body_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Body\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Body_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Body\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Weapon.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Weapon_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Weapon_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -3239,6 +3329,48 @@
     </ClCompile>
     <ClCompile Include="..\Private\Covus_HurtMFL.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\5.Hurt\HurtMFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Recover.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_RecoverF.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_RecoverL.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_RecoverR.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_RecoverB.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\10.Recover\RecoverB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Body.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Body_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Body\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Body_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Body\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Weapon.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Weapon_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Weapon_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
