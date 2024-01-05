@@ -181,8 +181,8 @@ _bool CChannel::Is_Inputable_Front(_float fCurrentTrackPosition, _uint _iIndexFr
 
 _bool CChannel::Is_Inputable_Back(_float fCurrentTrackPosition, _uint _iIndexBack)
 {
-	_uint iIndex = _iIndexBack;
-	if ((m_iNumKeyFrames - 1) - _iIndexBack <= 0)
+	_uint iIndex = (m_iNumKeyFrames - 1) - _iIndexBack;
+	if (iIndex < 0)
 		iIndex = 0;
 
 	return Is_Inputable(fCurrentTrackPosition, iIndex);

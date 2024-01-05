@@ -8,7 +8,7 @@ void CGreatDualBlade_Idle::Initialize(CRaider_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true);
 }
 
 CState<CRaider_GamePlay>* CGreatDualBlade_Idle::Update(CRaider_GamePlay* pActor, _float fTimeDelta)

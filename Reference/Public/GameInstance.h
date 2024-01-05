@@ -17,6 +17,8 @@
 /* 내가 생성한 여러 컴포넌트들의 원형을 보관하고 복제하여 가져온다. */
 
 BEGIN(Engine)
+class CGameObject;
+class CLayer;
 
 class ENGINE_DLL CGameInstance final : public CBase
 {
@@ -51,8 +53,11 @@ public: /* For.Object_Manager */
 	HRESULT Add_Object(_uint iLevelIndex, const wstring & strLayerTag, class CGameObject* pGameObject, void* pArg = nullptr);
 	void Fill_PrototypeTags(vector<string>*_vector);
 	void Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector);
-	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
+	list<CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
 	class CComponent* Get_Component(_uint iLevelIndex, const wstring & strLayerTag, const wstring & strComponentTag, _uint iIndex = 0);
+	CGameObject* Get_Player();
+	void	Set_Player(CGameObject * _pPlayer);
+
 
 	HRESULT Save_Objects_With_Json(_uint iLevelIndex, string filePath);
 	//HRESULT Load_Objects_With_Json(_uint iLevelIndex, string filePath);
@@ -88,6 +93,10 @@ public: //For Input_Device
 	_bool	Mouse_Down(MOUSEKEYSTATE eMouseID);
 	_bool	Mouse_Up(MOUSEKEYSTATE eMouseID);
 
+public: /* For.Font_Manager */
+	HRESULT Add_Font(const wstring & strFontTag, const wstring & strFontFilePath);
+	HRESULT Render_Font(const wstring & strFontTag, const wstring & strText, const _float2 & vPosition, _fvector vColor = XMVectorSet(1.f, 1.f, 1.f, 1.f), _float fScale = 1.f, _float2 vOrigin = _float2(0.f, 0.f), _float fRotation = 0.f);
+
 
 public:
 	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
@@ -113,7 +122,7 @@ private:
 	class CRenderer*				m_pRenderer = { nullptr };
 	class CPipeLine*				m_pPipeLine = { nullptr };
 	class CInput_Device*			m_pInput_Device = { nullptr };
-
+	class CFonts_Manager*			m_pFonts_Manager = { nullptr };
 public:
 	void Release_Manager();
 	static void Release_Engine();

@@ -5,13 +5,13 @@
 
 
 CBody_Player::CBody_Player(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CBody(pDevice, pContext)
+	: CBody_Client(pDevice, pContext)
 {
 
 }
 
 CBody_Player::CBody_Player(const CBody_Player& rhs)
-	: CBody(rhs)
+	: CBody_Client(rhs)
 {
 }
 
@@ -42,78 +42,49 @@ void CBody_Player::Priority_Tick(_float fTimeDelta)
 void CBody_Player::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-
-	_float3 fTemp;
-	m_pModelCom->Play_Animation(fTimeDelta, fTemp);
 }
 
 void CBody_Player::Late_Tick(_float fTimeDelta)
 {
-	XMStoreFloat4x4(&m_WorldMatrix, m_pTransformCom->Get_WorldMatrix() * m_pParentTransform->Get_WorldMatrix());
-
-	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
-		return;
+	__super::Late_Tick(fTimeDelta);
 }
 
 HRESULT CBody_Player::Render()
 {
-	if (FAILED(Bind_ShaderResources()))
+	if (FAILED(__super::Render()))
 		return E_FAIL;
-
-	_uint		iNumMeshes = m_pModelCom->Get_NumMeshes();
-
-	for (size_t i = 0; i < iNumMeshes; i++)
-	{
-		m_pModelCom->Bind_BoneMatrices(m_pShaderCom, "g_BoneMatrices", i);
-
-		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
-
-		m_pShaderCom->Begin(0);
-
-		m_pModelCom->Render(i);
-	}
-
-
 
 	return S_OK;
 }
 
-void CBody_Player::SetUp_Animation(_uint iAnimIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration)
-{
-	m_pModelCom->Set_Animation(iAnimIndex, _eAnimState, _bIsTransition, _fTransitionDuration);
-}
 
 HRESULT CBody_Player::Ready_Components()
 {
+	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+HRESULT CBody_Player::Ready_Components_Origin(LEVEL eLevel)
+{
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_AnimModel"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Shader_AnimModel"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
 
 	/* For.Com_Model */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Model_Fiona"),
 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
-
-	return S_OK;
 }
 
 HRESULT CBody_Player::Bind_ShaderResources()
 {
-	/*if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
-		return E_FAIL;*/
-
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_WorldMatrix", &m_WorldMatrix)))
+	if (FAILED(__super::Bind_ShaderResources()))
 		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_ViewMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_VIEW))))
-		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
-		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-		return E_FAIL;
-
-	return S_OK;
 }
+
 
 CBody_Player* CBody_Player::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
@@ -144,9 +115,5 @@ CGameObject* CBody_Player::Clone(void* pArg)
 void CBody_Player::Free()
 {
 	__super::Free();
-
-	Safe_Release(m_pParentTransform);
-	Safe_Release(m_pModelCom);
-	Safe_Release(m_pShaderCom);
 }
 

@@ -1,8 +1,13 @@
 #include "..\Public\Weapon.h"
 
 #include "GameInstance.h"
+#include "Transform.h"
+//#include "Collider.h"
+#include "Shader.h"
+#include "Model.h"
 #include "Bone.h"
 
+#include "Character.h"
 
 CWeapon::CWeapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
@@ -53,6 +58,9 @@ void CWeapon::Priority_Tick(_float fTimeDelta)
 void CWeapon::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
+
+	for (_uint i = 0; i < m_iColliderSize; ++i)
+		m_pColliders[i]->Update(m_WorldMatrix);
 }
 
 void CWeapon::Late_Tick(_float fTimeDelta)
@@ -68,6 +76,8 @@ void CWeapon::Late_Tick(_float fTimeDelta)
 
 	XMStoreFloat4x4(&m_WorldMatrix, m_pTransformCom->Get_WorldMatrix() * SocketMatrix * m_pParentTransform->Get_WorldMatrix());
 
+
+
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
 		return;
 }
@@ -75,6 +85,17 @@ void CWeapon::Late_Tick(_float fTimeDelta)
 HRESULT CWeapon::Render()
 {
 	__super::Render();
+
+#ifdef _DEBUG
+	//m_pNavigationCom->Render();
+
+	if (m_bIsAttack) 
+	{
+		for (_uint i = 0; i < m_iColliderSize; ++i)
+			m_pColliders[i]->Render();
+	}
+
+#endif
 
 	if (FAILED(Bind_ShaderResources()))
 		return E_FAIL;
@@ -91,6 +112,11 @@ HRESULT CWeapon::Render()
 	}
 
 	return S_OK;
+}
+
+void CWeapon::Attack(CCharacter* pCharacter)
+{
+	//pCharacter->Set_Hitted();
 }
 
 
@@ -114,7 +140,7 @@ HRESULT CWeapon::Bind_ShaderResources()
 void CWeapon::Free()
 {
 	__super::Free();
-
+	
 	Safe_Release(m_pParentTransform);
 	Safe_Release(m_pSocketBone);
 	Safe_Release(m_pShaderCom);

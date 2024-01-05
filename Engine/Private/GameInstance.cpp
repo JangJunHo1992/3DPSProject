@@ -4,6 +4,7 @@
 #include "Level_Manager.h"
 #include "Object_Manager.h"
 #include "Renderer.h"
+#include "Fonts_Manager.h"
 
 #include "RapidJson.h"
 #include "Mesh_Tool.h"
@@ -205,6 +206,16 @@ CComponent* CGameInstance::Get_Component(_uint iLevelIndex, const wstring& strLa
 	return m_pObject_Manager->Get_Component(iLevelIndex, strLayerTag, strComponentTag, iIndex);
 }
 
+CGameObject* CGameInstance::Get_Player()
+{
+	return m_pObject_Manager->Get_Player();
+}
+
+void CGameInstance::Set_Player(CGameObject* _pPlayer)
+{
+	m_pObject_Manager->Set_Player(_pPlayer);
+}
+
 HRESULT CGameInstance::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
 {
 	m_pObject_Manager->Save_Objects_With_Json(iLevelIndex, filePath);
@@ -357,6 +368,16 @@ _bool CGameInstance::Mouse_Down(MOUSEKEYSTATE eMouseID)
 _bool CGameInstance::Mouse_Up(MOUSEKEYSTATE eMouseID)
 {
 	return m_pInput_Device->Mouse_Up(eMouseID);
+}
+
+HRESULT CGameInstance::Add_Font(const wstring& strFontTag, const wstring& strFontFilePath)
+{
+	return m_pFonts_Manager->Add_Font(strFontTag, strFontFilePath);
+}
+
+HRESULT CGameInstance::Render_Font(const wstring& strFontTag, const wstring& strText, const _float2& vPosition, _fvector vColor, _float fScale, _float2 vOrigin, _float fRotation)
+{
+	return m_pFonts_Manager->Render(strFontTag, strText, vPosition, vColor, fScale, vOrigin, fRotation);
 }
 
 RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY)
@@ -528,6 +549,7 @@ void CGameInstance::WString_To_String(wstring _wstring, string& _string)
 
 void CGameInstance::Release_Manager()
 {
+	Safe_Release(m_pFonts_Manager);
 	Safe_Release(m_pPipeLine);
 	Safe_Release(m_pObject_Manager);
 	Safe_Release(m_pComponent_Manager);

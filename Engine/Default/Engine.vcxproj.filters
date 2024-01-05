@@ -223,6 +223,15 @@
     <Filter Include="01.Utility\02.GameObjects\Character\Parts\Weapon">
       <UniqueIdentifier>{0e160323-00aa-4665-8fef-a787303f4465}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\02.GameObjects\Character\Temp">
+      <UniqueIdentifier>{a1104ab2-9c26-48bb-81e7-c9844b8f137d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\05.Fonts">
+      <UniqueIdentifier>{726105f5-1ef2-4f39-a0f1-95fb4b92404e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\05.Fonts\Manager">
+      <UniqueIdentifier>{d3f6710f-7c77-4055-91c9-07fd23e221de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -357,9 +366,6 @@
     <ClInclude Include="..\Public\VIBuffer_Cell.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Character.h">
-      <Filter>01.Utility\02.GameObjects\Character</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Animation.h">
       <Filter>01.Utility\03.Components\05.Model\Animation</Filter>
     </ClInclude>
@@ -434,6 +440,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\Weapon.h">
       <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character_Temp.h">
+      <Filter>01.Utility\02.GameObjects\Character\Temp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character.h">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Fonts.h">
+      <Filter>01.Utility\05.Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Fonts_Manager.h">
+      <Filter>01.Utility\05.Fonts\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -548,9 +566,6 @@
     <ClCompile Include="..\Private\VIBuffer_Cell.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cell</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Character.cpp">
-      <Filter>01.Utility\02.GameObjects\Character</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Navigation.cpp">
       <Filter>01.Utility\03.Components\06.Navigation</Filter>
     </ClCompile>
@@ -575,11 +590,9 @@
     <ClCompile Include="..\Private\VIBuffer_Cube.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Cube</Filter>
     </ClCompile>
-    <ClCompile Include="..\Public\MyAssimp.cpp" />
     <ClCompile Include="..\Private\MyAssimp.cpp">
       <Filter>01.Utility\97.MyAssimp\0.Importer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Public\MyAIScene.cpp" />
     <ClCompile Include="..\Private\MyAIScene.cpp">
       <Filter>01.Utility\97.MyAssimp\1.AIScene</Filter>
     </ClCompile>
@@ -612,6 +625,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\Weapon.cpp">
       <Filter>01.Utility\02.GameObjects\Character\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Character_Temp.cpp">
+      <Filter>01.Utility\02.GameObjects\Character\Temp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Character.cpp">
+      <Filter>01.Utility\02.GameObjects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Fonts.cpp">
+      <Filter>01.Utility\05.Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Fonts_Manager.cpp">
+      <Filter>01.Utility\05.Fonts\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

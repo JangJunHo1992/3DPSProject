@@ -4,44 +4,28 @@
 #include "BackGround.h"
 #include "Navigation.h"
 #include "Sky.h"
-#include "Player.h"
 #include "Camera_Dynamic.h"
 #include "Camera_Dynamic_Tool.h"
+#include "SpringCamera.h"
+#include "VIBuffer_Static_Terrain.h"
+#include "VIBuffer_Dynamic_Plane.h"
+#include "Terrain_Tool.h"
+#include "Terrain_GamePlay.h"
+#include "ForkLift_Tool.h"
+#include "ForkLift_GamePlay.h"
+#include "Monster_Tool.h"
+#include "Monster_GamePlay.h"
+#include "Player_GamePlay.h"
+#include "Player_Tool.h"
 #include "Weapon_Player.h"
 #include "Body_Player.h"
 
-#include "VIBuffer_Static_Terrain.h"
-#include "VIBuffer_Dynamic_Plane.h"
-
-#include "Terrain_Tool.h"
-#include "Terrain_GamePlay.h"
-
-#include "ForkLift_Tool.h"
-#include "ForkLift_GamePlay.h"
-
-#include "Monster_Tool.h"
-#include "Monster_GamePlay.h"
-
-#include "Raider_Tool.h"
-#include "Raider_GamePlay.h"
-
-#include "King_Tool.h"
-#include "King_GamePlay.h"
-
-#include "DarkKnight_Tool.h"
-#include "DarkKnight_GamePlay.h"
-
-#include "KnightGuard_Tool.h"
-#include "KnightGuard_GamePlay.h"
-
-#include "Wizard_Tool.h"
-#include "Wizard_GamePlay.h"
-
-#include "King_Tool.h"
-#include "King_GamePlay.h"
-
-#include "Golem_Tool.h"
-#include "Golem_GamePlay.h"
+#include "Covus_Tool.h"
+#include "Covus_GamePlay.h"
+#include "Covus_Body_GamePlay.h"
+#include "Covus_Body_Tool.h"
+#include "Covus_Weapon_GamePlay.h"
+#include "Covus_Weapon_Tool.h"
 
 
 #include "Model_Tool.h"
@@ -189,23 +173,54 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 
 	{
-		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Raider");
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus");
+			string strFilePath = "../Bin/Resources/Models/Player/Player";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 
-		if (LEVEL_TOOL == eLEVEL)
-		{
-			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-			if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-				CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
-				return E_FAIL;
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
 		}
-		else
+
 		{
-			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-			if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Raider/Raider", PivotMatrix))))
-				return E_FAIL;
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon");
+			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Weapon";
+
+// 			_float fRadiusY = 270.0f;
+// 			_float fRadiusZ = 90.0f;
+
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f);
+// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
 		}
 	}
+
+
 
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Fiona");
@@ -337,8 +352,83 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CWeapon_Player::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 
+
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Player");
+
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CPlayer_Tool::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+		else
+		{
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CPlayer_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Weapon");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_Weapon_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_Weapon_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");
 
 		if (LEVEL_TOOL == eLEVEL)
 		{
@@ -346,12 +436,31 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 		else
 		{
-			/* For.Prototype_GameObject_Player */
+			/* For.Prototype_GameObject_Monster */
 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CPlayer::Create(m_pDevice, m_pContext))))
+				CMonster_GamePlay::Create(m_pDevice, m_pContext))))
 				return E_FAIL;
 		}
 	}
+
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_ForkLift");
+
+		if (LEVEL_TOOL == eLEVEL)
+		{
+
+		}
+		else
+		{
+			/* For.Prototype_GameObject_ForkLift */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+		}
+	}
+
+
 
 
 	{
@@ -379,61 +488,6 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	}
 	
 
-	
-
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Raider");
-	
-		if (LEVEL_TOOL == eLEVEL)
-		{
-			/* For.Prototype_GameObject_Raider */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CRaider_Tool::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-		else
-		{
-			/* For.Prototype_GameObject_Raider */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CRaider_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-	}
-
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");
-	
-		if (LEVEL_TOOL == eLEVEL)
-		{
-
-		}
-		else
-		{
-			/* For.Prototype_GameObject_Monster */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CMonster_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-	}
-
-
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_ForkLift");
-	
-		if (LEVEL_TOOL == eLEVEL)
-		{
-
-		}
-		else
-		{
-			/* For.Prototype_GameObject_ForkLift */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-	}
-	
-
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Camera_Dynamic");
 
@@ -447,8 +501,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		else
 		{
 			/* For.Prototype_GameObject_Camera_Dynamic */
+// 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+// 				CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+// 				return E_FAIL;
 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+				CSpringCamera::Create(m_pDevice, m_pContext))))
 				return E_FAIL;
 		}
 	}

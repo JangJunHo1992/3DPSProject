@@ -18,6 +18,12 @@
 #include "DirectXTK\SimpleMath.h"
 #include <DirectXCollision.h>
 
+#include "DirectXTK\VertexTypes.h"
+#include "DirectXTK\PrimitiveBatch.h"
+#include "DirectXTK\Effects.h"
+#include "DirectXTK\SpriteBatch.h"
+#include "DirectXTK\SpriteFont.h"
+
 #include <d3dcompiler.h>
 using namespace DirectX;
 
@@ -46,6 +52,8 @@ using namespace std;
 namespace Engine
 {
 	static const wchar_t* g_pTransformTag = TEXT("Com_Transform");
+
+
 }
 #define DIRECTINPUT_VERSION   0x0800
 #include <dinput.h>

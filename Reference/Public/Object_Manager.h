@@ -9,7 +9,8 @@
 
 
 BEGIN(Engine)
-
+class CGameObject;
+class CLayer;
 class CObject_Manager final : public CBase
 {
 private:
@@ -21,7 +22,7 @@ public:
 
 public:
 	HRESULT Initialize(_uint iNumLevels);
-	HRESULT Add_Prototype_Object(const wstring& strPrototypeTag, class CGameObject* pPrototype);
+	HRESULT Add_Prototype_Object(const wstring& strPrototypeTag, CGameObject* pPrototype);
 	HRESULT Add_CloneObject(_uint iLevelIndex, const wstring& strLayerTag, const wstring& strPrototypeTag, void* pArg);
 	CGameObject* Clone_Prototype(const wstring& strPrototypeTag, void* pArg);
 	HRESULT Add_Object(_uint iLevelIndex, const wstring& strLayerTag, CGameObject* pGameObject ,void* pArg);
@@ -31,24 +32,30 @@ public:
 	void Clear(_uint iLevelIndex);
 
 public:
-	list<class CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag);
+	list<CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag);
 	void Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector);
 	void Fill_PrototypeTags(vector<string>* _vector);
 	void Fill_LayerTags(vector<string>* _vector);
 public:
 	void Save_Objects_With_Json(_uint iLevelIndex, string filePath);
+
+public:
+	CGameObject* Get_Player();
+	void	Set_Player(CGameObject* _pPlayer);
+public:
+	CGameObject*	m_pPlayer = { nullptr };
 private:
 	_uint			m_iNumLevels = { 0 };
 
 	class CGameInstance*		m_pGameInstance = { nullptr };
 private:
-	map<const wstring, class CGameObject*>			m_Prototypes;
-	map<const wstring, class CLayer*>*				m_pLayers = { nullptr } ;
-	typedef map<const wstring, class CLayer*>		LAYERS;
+	map<const wstring, CGameObject*>			m_Prototypes;
+	map<const wstring, CLayer*>*				m_pLayers = { nullptr } ;
+	typedef map<const wstring, CLayer*>		LAYERS;
 
 private:
-	class CGameObject* Find_Prototype(const wstring& strPrototypeTag);
-	class CLayer* Find_Layer(_uint iLevelIndex, const wstring& strLayerTag);
+	CGameObject* Find_Prototype(const wstring& strPrototypeTag);
+	CLayer* Find_Layer(_uint iLevelIndex, const wstring& strLayerTag);
 public:
 	static CObject_Manager* Create(_uint iNumLevels);
 	virtual void Free() override;

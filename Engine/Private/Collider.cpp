@@ -77,6 +77,16 @@ _bool CCollider::Collision(CCollider* pTargetCollider)
 	return m_pBounding->Collision(pTargetCollider, &m_isCollision);
 }
 
+//void CCollider::Set_Owner(CGameObject* pOwner)
+//{
+//	if (nullptr == pOwner)
+//		return;
+//
+//	m_pOwner = pOwner;
+//	Safe_AddRef(pOwner);
+//}
+
+
 #ifdef _DEBUG
 
 HRESULT CCollider::Render()
@@ -133,6 +143,7 @@ CComponent* CCollider::Clone(void* pArg)
 void CCollider::Free()
 {
 	__super::Free();
+	//Safe_Release(m_pOwner);
 
 #ifdef _DEBUG
 

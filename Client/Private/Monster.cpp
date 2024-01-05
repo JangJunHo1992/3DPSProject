@@ -5,13 +5,13 @@
 
 
 CMonster::CMonster(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CCharacter(pDevice, pContext)
+	: CCharacter_Temp(pDevice, pContext)
 {
 
 }
 
 CMonster::CMonster(const CMonster& rhs)
-	: CCharacter(rhs)
+	: CCharacter_Temp(rhs)
 {
 }
 
