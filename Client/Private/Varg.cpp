@@ -65,7 +65,7 @@ HRESULT CVarg::Render()
 
 void CVarg::Set_Hitted()
 {
-	CVarg::VargState eHitted = CVarg::VargState::HurtFL;
+	CVarg::VargState eHitted = CVarg::VargState::HurtF;
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
