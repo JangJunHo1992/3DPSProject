@@ -35,11 +35,13 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 	{
 		DampConstant = 2.f * sqrt(SpringConstant);
 
-		hDist = 5.f; //Z 축 카메라와 플레이어 거리
-		vDist = 3.f; //Y 축 카메라와 플레이어 거리
+		hDist = 1.f; //Z 축 카메라와 플레이어 거리
+		vDist = 1.f; //Y 축 카메라와 플레이어 거리
+		m_CameraOffsetY = 3.f;
+		m_CameraOffsetZ = -5.f;
 		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
-		ActualPosition = m_ptarget->Get_State(CTransform::STATE_POSITION) - XMVector3Normalize(m_ptarget->Get_State(CTransform::STATE_LOOK)) * hDist + XMVector3Normalize(m_ptarget->Get_State(CTransform::STATE_UP)) * vDist;
-		m_pTransformCom->Set_Position(ActualPosition);
+		ActualPosition = m_pTransformCom->Get_State(CTransform::STATE_POSITION)/* - XMVector3Normalize(m_ptarget->Get_State(CTransform::STATE_LOOK)) * hDist + XMVector3Normalize(m_ptarget->Get_State(CTransform::STATE_UP)) * vDist*/;
+		//m_pTransformCom->Set_Position(ActualPosition);
 	}
 	return S_OK;
 }
@@ -51,27 +53,38 @@ void CSpringCamera::Priority_Tick(_float fTimeDelta)
 
 void CSpringCamera::Tick(_float fTimeDelta)
 {
+	//카메라 움직임은 Late_Tick에 있다!
+	_float3 currentCameraPosition = ActualPosition;
 	_float3 idealPosition = m_ptarget->Get_State(CTransform::STATE_POSITION);
 	_float3 displacement = ActualPosition - idealPosition;
 	_float3 SpringAccel = (-SpringConstant * displacement) - (DampConstant * Velocity);
 	Velocity += SpringAccel * fTimeDelta;
 	ActualPosition += Velocity * fTimeDelta ;
+	_long	MouseMoveX = m_pGameInstance->Get_DIMouseMove(DIMS_X);
+	_long	MouseMoveY = m_pGameInstance->Get_DIMouseMove(DIMS_Y);
+	// 캐릭터 주위를 중심으로 하는 회전을 계산
+	m_fAngle += m_fMouseSensor * MouseMoveX * fTimeDelta;
+	m_fPitch += m_fMouseSensor * MouseMoveY * fTimeDelta;
 
-	m_pTransformCom->Set_Position(ActualPosition - XMVector3Normalize(m_ptarget->Get_State(CTransform::STATE_LOOK)) * hDist + XMVector3Normalize(m_ptarget->Get_State(CTransform::STATE_UP)) * vDist);
+	//pitch 각도 제한
+	m_fPitch = max(-XM_PIDIV2, min(XM_PIDIV2, m_fPitch));
 
+	// 회전 행렬 계산
+	_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(m_fPitch, m_fAngle, 0.0f);
 
-	_long	MouseMove = 0;
+	// 카메라 위치 보간
+	currentCameraPosition.x = XMVectorGetX(XMVectorLerp(XMLoadFloat3(&currentCameraPosition), XMLoadFloat3(&idealPosition), 1.0f - expf(-CameraMoveSpeed * fTimeDelta)));
+	currentCameraPosition.y = XMVectorGetY(XMVectorLerp(XMLoadFloat3(&currentCameraPosition), XMLoadFloat3(&idealPosition), 1.0f - expf(-CameraMoveSpeed * fTimeDelta)));
+	currentCameraPosition.z = XMVectorGetZ(XMVectorLerp(XMLoadFloat3(&currentCameraPosition), XMLoadFloat3(&idealPosition), 1.0f - expf(-CameraMoveSpeed * fTimeDelta)));
 
-	if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_X))
-	{
-		m_pTransformCom->Turn(XMVectorSet(0.f, 1.f, 0.f, 0.f), m_fMouseSensor * MouseMove * fTimeDelta);
-	}
+	// 캐릭터 주위를 중심으로 하는 카메라 위치 계산
+	XMVECTOR cameraOffset = XMVectorSet(m_CameraOffsetX, m_CameraOffsetY, m_CameraOffsetZ, 0.0f);  // 카메라의 초기 위치
+	cameraOffset = XMVector3TransformCoord(cameraOffset, rotationMatrix);
 
-	if (MouseMove = m_pGameInstance->Get_DIMouseMove(DIMS_Y))
-	{
-		m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), m_fMouseSensor * MouseMove * fTimeDelta);
-	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 캐릭터의 위치 및 회전 적용
+	m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(ActualPosition));
+	m_pTransformCom->Set_Position(currentCameraPosition + cameraOffset * hDist);
+
 	__super::Tick(fTimeDelta);
 
 	
@@ -80,7 +93,20 @@ void CSpringCamera::Tick(_float fTimeDelta)
 
 void CSpringCamera::Late_Tick(_float fTimeDelta)
 {
-	
+	// 카메라가 플레이어랑 같이 Tick에서 위치 계산하고 움직임까지 넣어버리면 화면이 덜덜거림
+	//그래서 움직임 코드는 Late_Tick에다가 넣어줬음! 
+	_long	MouseMoveX = m_pGameInstance->Get_DIMouseMove(DIMS_X);
+	_long	MouseMoveY = m_pGameInstance->Get_DIMouseMove(DIMS_Y);
+
+	if (MouseMoveX != 0)
+	{
+		m_pTransformCom->Turn(XMVectorSet(0.f, 1.f, 0.f, 0.f), m_fMouseSensor * MouseMoveX * fTimeDelta);
+	}
+
+	if (MouseMoveY != 0)
+	{
+		m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), m_fMouseSensor * MouseMoveY * fTimeDelta);
+	}
 
 }
 
@@ -111,12 +137,17 @@ void CSpringCamera::CameraComputeMatrix()
 // 	
 }
 
+void CSpringCamera::CameraRotation()
+{
+
+}
+
+
 
 
 CSpringCamera* CSpringCamera::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
 	CSpringCamera* pInstance = new CSpringCamera(pDevice, pContext);
-
 	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{

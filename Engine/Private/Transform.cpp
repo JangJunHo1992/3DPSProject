@@ -272,6 +272,46 @@ void CTransform::Look_At_OnLand(_fvector vTargetPos)
 	Set_State(CTransform::STATE_LOOK, vLook);
 }
 
+void CTransform::Look_At_Around(_fvector vTargetPos, _float fTimeDelta)
+{
+	_vector		vPosition = Get_State(CTransform::STATE_POSITION);
+	_vector		vRotatedPosition = XMVector3TransformCoord(vTargetPos, Get_RotationMatrix(Get_WorldMatrix()));
+
+	_float3		vPitchYawRoll = Extract_PitchYawRollFromRotationMatrix(Get_RotationMatrix(Get_WorldMatrix()));
+	_vector		vPitchyawRollFromVector = XMLoadFloat3(&vPitchYawRoll);
+
+	vPosition = XMVectorAdd(vPosition, vRotatedPosition  /*(In_bReverse ? -1.f : 1.f)*/);
+	vPosition.m128_f32[3] = 1.f;
+	
+	Set_State(CTransform::STATE_POSITION, vPosition);
+}
+
+_matrix CTransform::Get_RotationMatrix(FXMMATRIX Mat)
+{
+	_matrix ResultMat(XMMatrixIdentity());
+	for (int i(0); i < 3; i++)
+		ResultMat.r[i] = XMVector3Normalize(Mat.r[i]);
+
+	return ResultMat;
+}
+
+_float3 CTransform::Extract_PitchYawRollFromRotationMatrix(FXMMATRIX Mat)
+{
+	XMFLOAT4X4 MatFrom4x4;
+	XMStoreFloat4x4(&MatFrom4x4, Mat);
+
+	float pitch(DirectX::XMScalarASin(-MatFrom4x4._32));
+
+	DirectX::XMVECTOR from(DirectX::XMVectorSet(MatFrom4x4._12, MatFrom4x4._31, 0.f, 0.f));
+	DirectX::XMVECTOR to(DirectX::XMVectorSet(MatFrom4x4._22, MatFrom4x4._33, 0.f, 0.f));
+	DirectX::XMVECTOR res(DirectX::XMVectorATan2(from, to));
+
+	float roll(DirectX::XMVectorGetX(res));
+	float yaw(DirectX::XMVectorGetY(res));
+
+	return XMFLOAT3(pitch, yaw, roll);
+}
+
 HRESULT CTransform::Bind_ShaderResource(CShader* pShader, const _char* pConstantName)
 {
 	return pShader->Bind_Matrix(pConstantName,&m_WorldMatrix);

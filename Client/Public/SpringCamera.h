@@ -29,7 +29,8 @@ public:
 	virtual void Write_Json(json & Out_Json) override;
 public:
 	void CameraComputeMatrix();
-	
+	void CameraRotation();
+
 public:
 	// 	수평 , 수직 수행거리
 	_float hDist  = 0.f;
@@ -38,10 +39,18 @@ public:
 	_float DampConstant=0.f;//용수철 상수를 바탕으로 한 감쇠(dampening)상수
 	_float3 Velocity = {};
 	_float3 ActualPosition = {};//속도벡터와 카메라의 실제 위치를 나타내는 벡터
+	_float3 PreActualPosition = {};//카메라 보간을 위해 이전 프레임 포지션가져옴
 	_float3 CameraTickPos = {};// tick 에서 값이 자꾸 이상하게 초기화되서 이걸로 다시 값을 맞춰줘야함 
 	CTransform* m_ptarget = { nullptr };//카메라가 따라다닐 타깃 오브젝트 //타깃 오브젝트는 위치, 방향벡터 , 타깃의 위쪽을 가리키는 벡터를 지닌다.
-
+	_float	m_fAngle = 0.f;
+	_float  m_fPitch = 0.f;
 	_matrix cameraMatrix;//최종 카메라 행렬
+public:
+	//카메라 X,Y,Z
+	_float m_CameraOffsetX = 0.f;
+	_float m_CameraOffsetY = 0.f;
+	_float m_CameraOffsetZ = 0.f;
+	_float CameraMoveSpeed = 3.f;//카메라 보간용 이동속도
 private:
 	_float				m_fMouseSensor = { 0.0f };
 public:
