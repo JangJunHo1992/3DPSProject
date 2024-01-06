@@ -93,8 +93,11 @@ CState<CCovus_GamePlay>* CDefaultState::Run(CCovus_GamePlay* pActor, _float fTim
 			}
 			else
 			{
+				pActor->Set_CheckRotatePlayer(true);
+
 				if (CCovus_Run_Front::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Run_Front();
+				
 			}
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_S))
@@ -147,6 +150,7 @@ CState<CCovus_GamePlay>* CDefaultState::Run(CCovus_GamePlay* pActor, _float fTim
 			}
 			else
 			{
+				pActor->Set_CheckRotatePlayer(true);
 				if (CCovus_Walk_Front::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Walk_Front();
 			}

@@ -4,6 +4,7 @@
 #include "Camera.h"
 
 BEGIN(Client)
+class CCovus;
 
 class CSpringCamera final : public CCamera
 {
@@ -28,8 +29,9 @@ public:
 public:
 	virtual void Write_Json(json & Out_Json) override;
 public:
-	void CameraComputeMatrix();
-	void CameraRotation();
+	void CameraRotation(_float fTimeDelta);
+public:
+	void RotatePlayer();
 
 public:
 	// 	수평 , 수직 수행거리
@@ -42,6 +44,7 @@ public:
 	_float3 PreActualPosition = {};//카메라 보간을 위해 이전 프레임 포지션가져옴
 	_float3 CameraTickPos = {};// tick 에서 값이 자꾸 이상하게 초기화되서 이걸로 다시 값을 맞춰줘야함 
 	CTransform* m_ptarget = { nullptr };//카메라가 따라다닐 타깃 오브젝트 //타깃 오브젝트는 위치, 방향벡터 , 타깃의 위쪽을 가리키는 벡터를 지닌다.
+	CCovus* m_pPlayer = { nullptr };
 	_float	m_fAngle = 0.f;
 	_float  m_fPitch = 0.f;
 	_matrix cameraMatrix;//최종 카메라 행렬
@@ -57,44 +60,6 @@ public:
 	static CSpringCamera* Create(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
 	virtual CGameObject* Clone(void* pArg) override;
 	virtual void Free() override;
-
-
-
-// 		
-// 		function ComputeMatrix()
-// 		
-// 		//필요한 상수와 카메라 방향을 초기화하는 함수 
-// 		function Initialize(GameObject myTarget, float mySpringconstant, float myHDist, float myVDist)
-// 		{
-// 			target = myTarget;
-// 			springConstant = mySpringconstant;
-// 			hDist = myHDist;
-// 			vDist = myVDist;
-// 			//용수철 상수를 바탕으로 감쇠 상수를 계산ㄷ
-// 			dampConstant = 2.f * sqrt(springConstant);
-// 			//이상적인 위치를 실제 위치의 초기값으로 삼는다.
-// 			//기본적인 수행 카메라의 눈의 위치와 비슷하다.
-// 			actualPosition = target.position - target.forward * hDist + target.up * vDist;
-// 			//카메라 속도의 초기값은 0이여야한다.
-// 			velocity = Vector3.Zero;
-// 			//카메라행렬에 초기값을 설정
-// 			ComputeMatrix();
-// 	
-// 		}
-// 		function Update(float timedelta)
-// 		{
-// 			//먼저 이상적인 위치를 계산
-// 			Vector3 idealPosition = targetPositon - target.position - target.forward * hDist + target.up * vDist;
-// 			//이상적인 위치에서 실제 위치로 향하는 벡터를 구한다.
-// 			Vector3 displacement = actualPosition - idealPosition;
-// 			//스프링의 가속도를 구한 뒤에 적분
-// 			Vector3 springAccel = (-springConstant * displacement) - (dampConstant * velocity);
-// 			velocity += springAccel * timedelta;
-// 			actualPosition += velocity * timedelta;
-// 			//카메라 행렬 업데이트 
-// 			ComputeMatrix();
-// 		}
-
 };
 
 END
