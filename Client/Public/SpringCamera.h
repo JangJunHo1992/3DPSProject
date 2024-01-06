@@ -32,7 +32,7 @@ public:
 	void CameraRotation(_float fTimeDelta);
 public:
 	void RotatePlayer();
-
+	void Mouse_Fix();
 public:
 	// 	수평 , 수직 수행거리
 	_float hDist  = 0.f;
@@ -48,6 +48,8 @@ public:
 	_float	m_fAngle = 0.f;
 	_float  m_fPitch = 0.f;
 	_matrix cameraMatrix;//최종 카메라 행렬
+	_bool m_bCheck = false;//마우스 가운데 모으기 
+	_bool m_bFix = true;//마우스 가운데 모으기 
 public:
 	//카메라 X,Y,Z
 	_float m_CameraOffsetX = 0.f;

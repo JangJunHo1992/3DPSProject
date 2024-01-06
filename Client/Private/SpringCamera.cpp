@@ -45,6 +45,7 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 		ActualPosition = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		
 	}
+	ShowCursor(FALSE);
 	return S_OK;
 }
 
@@ -61,6 +62,34 @@ void CSpringCamera::Tick(_float fTimeDelta)
 	{
 		RotatePlayer();
 	}
+
+	if (m_pGameInstance->Key_Up(DIK_TAB))
+	{
+		
+		if (m_bFix)
+		{
+			m_bFix = false;
+			m_bCheck = false;
+		}
+		else
+		{
+			m_bFix = true;
+			m_bCheck = true;
+		}
+	}
+	if (m_bCheck == false)
+		ShowCursor(FALSE);
+	else
+		ShowCursor(TRUE);
+		
+
+	if (false == m_bFix)
+		return;
+	if (true == m_bFix)
+	{
+		Mouse_Fix();
+	}
+	
 	__super::Tick(fTimeDelta);
 }
 
@@ -127,10 +156,19 @@ void CSpringCamera::CameraRotation(_float fTimeDelta)
 
 void CSpringCamera::RotatePlayer()
 {
+	_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(0.0f, m_fAngle, 0.0f);
+	
 	m_pPlayer->Set_CheckRotatePlayer(false);
-	m_ptarget->Set_State(CTransform::STATE_RIGHT, m_pTransformCom->Get_State(CTransform::STATE_RIGHT));
-	m_ptarget->Set_State(CTransform::STATE_LOOK, m_pTransformCom->Get_State(CTransform::STATE_LOOK));
-	m_ptarget->Set_State(CTransform::STATE_UP, m_pTransformCom->Get_State(CTransform::STATE_UP));
+	
+	m_ptarget->Set_WorldMatrix(rotationMatrix* XMMatrixTranslationFromVector(m_ptarget->Get_State(CTransform::STATE_POSITION)));
+}
+
+void CSpringCamera::Mouse_Fix()
+{
+	POINT   pt{ g_iWinSizeX >> 1, g_iWinSizeY >> 1 };
+
+	ClientToScreen(g_hWnd, &pt);
+	SetCursorPos(pt.x, pt.y);
 }
 
 
