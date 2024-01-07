@@ -286,6 +286,16 @@ void CTransform::Look_At_Around(_fvector vTargetPos, _float fTimeDelta)
 	Set_State(CTransform::STATE_POSITION, vPosition);
 }
 
+void CTransform::Add_RootBone_Position(const _float3& vPos)
+{
+	_float3 vReslut;
+	XMStoreFloat3(&vReslut, XMVector3TransformNormal(XMLoadFloat3(&vPos), m_WorldMatrix));
+
+	m_WorldMatrix.m[STATE::STATE_POSITION][0] += vReslut.x;
+	m_WorldMatrix.m[STATE::STATE_POSITION][1] += vReslut.y;
+	m_WorldMatrix.m[STATE::STATE_POSITION][2] += vReslut.z;
+}
+
 _matrix CTransform::Get_RotationMatrix(FXMMATRIX Mat)
 {
 	_matrix ResultMat(XMMatrixIdentity());

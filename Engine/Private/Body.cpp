@@ -51,21 +51,9 @@ void CBody::Tick(_float fTimeDelta)
 
 	_float3 vPos = { 0.f, 0.f, 0.f };
 
-	if (m_bNoUseRootY) 
-	{
-		_float fMinY = 10000;
-		m_pModelCom->Play_Animation(fTimeDelta, vPos, fMinY);
-		//vPos.y -= fMinY;
-	}
-	else 
-	{
-		m_pModelCom->Play_Animation(fTimeDelta, vPos);
-	}
+	m_pModelCom->Play_Animation(fTimeDelta, vPos);
 
-	//m_pModelCom->Play_Animation(fTimeDelta, vPos);
-	//m_pTransformCom->Add_Position(vPos);
-	m_pParentTransform->Add_Position(vPos);
-
+	m_pParentTransform->Add_RootBone_Position(vPos);
 }
 
 void CBody::Late_Tick(_float fTimeDelta)

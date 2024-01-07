@@ -114,17 +114,20 @@ CState<CCovus_GamePlay>* CDefaultState::Run(CCovus_GamePlay* pActor, _float fTim
 			}
 			else
 			{
+				pActor->Set_CheckRotatePlayer(true);
 				if (CCovus_Run_Back::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Run_Back();
 			}
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_A))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Run_Left::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Run_Left();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_D))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Run_Right::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Run_Right();
 		}
@@ -140,11 +143,13 @@ CState<CCovus_GamePlay>* CDefaultState::Run(CCovus_GamePlay* pActor, _float fTim
 		{
 			if (m_pGameInstance->Key_Pressing(DIK_A))
 			{
+				pActor->Set_CheckRotatePlayer(true);
 				if (CCovus_Walk_Front_L45::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Walk_Front_L45();
 			}
 			else if (m_pGameInstance->Key_Pressing(DIK_D))
 			{
+				pActor->Set_CheckRotatePlayer(true);
 				if (CCovus_Walk_Front_R45::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Walk_Front_R45();
 			}
@@ -169,17 +174,20 @@ CState<CCovus_GamePlay>* CDefaultState::Run(CCovus_GamePlay* pActor, _float fTim
 			}
 			else
 			{
+				pActor->Set_CheckRotatePlayer(true);
 				if (CCovus_Walk_Back::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Walk_Back();
 			}
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_A))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Walk_Left::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Walk_Left();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_D))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Walk_Right::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Walk_Right();
 		}
@@ -199,23 +207,32 @@ CState<CCovus_GamePlay>* CDefaultState::Dash(CCovus_GamePlay* pActor, _float fTi
 	{
 		if (m_pGameInstance->Key_Pressing(DIK_S))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Back::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Back();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_A))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Left::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Left();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_D))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Right::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Right();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_W))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Front::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Front();
+		}
+		else
+		{
+			if (CCovus_Idle::g_iAnimIndex != _iAnimIndex)
+				return new CCovus_Idle();
 		}
 	}
 

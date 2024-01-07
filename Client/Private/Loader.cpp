@@ -145,19 +145,19 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
 
 	/* For.Prototype_Component_Texture_Terrain */
-	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Tile%d.dds"), 2))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Texture_Terrain_Mask */
-	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain_Mask"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/MyMask.dds"), 1))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Texture_Terrain_Brush */
-	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain_Brush"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Brush.png"), 1))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain"),
+// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Tile%d.dds"), 2))))
+// 		return E_FAIL;
+// 
+// 	/* For.Prototype_Component_Texture_Terrain_Mask */
+// 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain_Mask"),
+// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/MyMask.dds"), 1))))
+// 		return E_FAIL;
+// 
+// 	/* For.Prototype_Component_Texture_Terrain_Brush */
+// 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain_Brush"),
+// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Brush.png"), 1))))
+// 		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Sky */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
@@ -485,10 +485,10 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 		else
 		{
-			/* For.Prototype_GameObject_Terrain */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CTerrain_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
+// 			/* For.Prototype_GameObject_Terrain */
+// 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+// 				CTerrain_GamePlay::Create(m_pDevice, m_pContext))))
+// 				return E_FAIL;
 		}
 	}
 	
