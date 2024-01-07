@@ -63,7 +63,7 @@ void CSpringCamera::Tick(_float fTimeDelta)
 		RotatePlayer();
 	}
 
-	if (m_pGameInstance->Key_Up(DIK_TAB))
+	if (m_pGameInstance->Get_DIKeyState(DIK_TAB))
 	{
 		
 		if (m_bFix)
