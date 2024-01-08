@@ -232,6 +232,18 @@
     <Filter Include="01.Utility\05.Fonts\Manager">
       <UniqueIdentifier>{d3f6710f-7c77-4055-91c9-07fd23e221de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle">
+      <UniqueIdentifier>{bb0d6aff-cf77-4906-9851-2900d938f773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle\Instancing">
+      <UniqueIdentifier>{3c053b18-2fe6-4ce9-87b0-c20f75c0e071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Point">
+      <UniqueIdentifier>{61347b4d-e1aa-4ccb-97c6-c2b6592d04d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect">
+      <UniqueIdentifier>{3c5f4562-77ce-43ed-8775-c48ba64a27fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -254,9 +266,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\Graphic_Device.h">
       <Filter>00.System\00.Device\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Engine_Struct.h">
-      <Filter>99.Defines</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Timer.h">
       <Filter>00.System\01.Timers</Filter>
@@ -447,10 +456,22 @@
     <ClInclude Include="..\Public\Character.h">
       <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Fonts.h">
+    <ClInclude Include="..\Public\VIBuffer_Instancing.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Particle_Point.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Particle_Rect.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Struct.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CustomFont.h">
       <Filter>01.Utility\05.Fonts</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Fonts_Manager.h">
+    <ClInclude Include="..\Public\Font_Manager.h">
       <Filter>01.Utility\05.Fonts\Manager</Filter>
     </ClInclude>
   </ItemGroup>
@@ -632,10 +653,19 @@
     <ClCompile Include="..\Private\Character.cpp">
       <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Fonts.cpp">
+    <ClCompile Include="..\Private\VIBuffer_Instancing.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Particle_Point.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Particle_Rect.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CustomFont.cpp">
       <Filter>01.Utility\05.Fonts</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Fonts_Manager.cpp">
+    <ClCompile Include="..\Private\Font_Manager.cpp">
       <Filter>01.Utility\05.Fonts\Manager</Filter>
     </ClCompile>
   </ItemGroup>

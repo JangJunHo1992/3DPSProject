@@ -86,7 +86,7 @@ public:
 	void Go_Target(_fvector vTargetPos, _float fTimeDelta, _float fSpare = 0.1f);
 	void Look_At(_fvector vTargetPos);
 	void Look_At_OnLand(_fvector vTargetPos);
-
+	void Look_At_Around(_fvector vTargetPos , _float fTimeDelta);
 
 public:
 	void Set_Position(const _float3& vState)
@@ -107,8 +107,10 @@ public:
 		m_WorldMatrix.m[STATE::STATE_POSITION][2] += vState.z;
 
 	}
+	void Add_RootBone_Position(const _float3& vPos);
 public:
-
+	_matrix		Get_RotationMatrix(FXMMATRIX Mat);
+	_float3		Extract_PitchYawRollFromRotationMatrix(FXMMATRIX Mat);
 public:
 	HRESULT	Bind_ShaderResource(class CShader* pShader, const _char* pConstantName);
 
@@ -123,6 +125,7 @@ private:
 
 	_float4x4			m_WorldMatrix = {};
 	_float4				m_fPosition = {};
+
 public:
 	static CTransform* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, _float fSpeedPerSec, _float fRotationPerSec);
 	virtual CComponent* Clone(void* pArg) override;

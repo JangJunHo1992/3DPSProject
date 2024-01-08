@@ -122,7 +122,7 @@ private:
 	class CRenderer*				m_pRenderer = { nullptr };
 	class CPipeLine*				m_pPipeLine = { nullptr };
 	class CInput_Device*			m_pInput_Device = { nullptr };
-	class CFonts_Manager*			m_pFonts_Manager = { nullptr };
+	class CFont_Manager*			m_pFonts_Manager = { nullptr };
 public:
 	void Release_Manager();
 	static void Release_Engine();

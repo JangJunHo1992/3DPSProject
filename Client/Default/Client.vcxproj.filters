@@ -1219,6 +1219,18 @@
     <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State">
       <UniqueIdentifier>{dac58dd7-6af6-4fb6-a026-41b623ff17c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Effect">
+      <UniqueIdentifier>{297b0fa0-2955-4170-8f1c-d209b10c323d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles">
+      <UniqueIdentifier>{a6a83eda-f7da-48d8-b550-80bad228d160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\Blue">
+      <UniqueIdentifier>{6be9b4e2-8d46-4e8a-98c5-6abed9328b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\Red">
+      <UniqueIdentifier>{e3ca59a6-1861-4dfb-b0e1-6fd2ee3b5107}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -2319,6 +2331,12 @@
     <ClInclude Include="..\Public\Varg_Weapon_Tool.h">
       <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\Tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Particle_Blue.h">
+      <Filter>02.GameObjects\Effect\Particles\Blue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Red.h">
+      <Filter>02.GameObjects\Effect\Particles\Red</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -3371,6 +3389,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\Varg_Weapon_Tool.cpp">
       <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Blue.cpp">
+      <Filter>02.GameObjects\Effect\Particles\Blue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Red.cpp">
+      <Filter>02.GameObjects\Effect\Particles\Red</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

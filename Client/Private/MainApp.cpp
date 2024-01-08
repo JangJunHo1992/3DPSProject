@@ -54,6 +54,9 @@ HRESULT CMainApp::Render()
 	/* ±×·Á¾ßÇÒ ¸ðµ¨µéÀ» ±×¸®³®.*/
 	m_pGameInstance->Render_Engine();
 
+	// MakeSpriteFont "³Ø½¼lv1°íµñ Bold" /FontSize:30 /FastPack /CharacterRegion:0x0020-0x00FF /CharacterRegion:0x3131-0x3163 /CharacterRegion:0xAC00-0xD800 /DefaultCharacter:0xAC00 138ex.spritefont
+	m_pGameInstance->Render_Font(TEXT("Font_Default"), TEXT("±×·¯´Ù 0¿øÈ÷ Ãë¾÷ ¸ø ÇÑ´Ù!!"), _float2(0.f, 0.f));
+
 	m_pGameInstance->Present();
 
 	return S_OK;
@@ -89,6 +92,8 @@ HRESULT CMainApp::Ready_Prototype_Component_ForStaticLevel()
 
 HRESULT CMainApp::Ready_Gara()
 {
+	if (FAILED(m_pGameInstance->Add_Font(TEXT("Font_Default"), TEXT("../Bin/Resources/Fonts/139ex.spritefont"))))
+		return E_FAIL;
 	//D3D11_BLEND_DESC			BlendDesc;
 	//D3D11_DEPTH_STENCIL_DESC	DepthStencilDesc;
 	//D3D11_RASTERIZER_DESC		RasterizerDesc;

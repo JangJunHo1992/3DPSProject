@@ -17,6 +17,7 @@ CCovus::CCovus(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 CCovus::CCovus(const CCovus& rhs)
 	: CCharacter_Client(rhs)
 {
+
 }
 
 HRESULT CCovus::Initialize_Prototype()
@@ -34,7 +35,7 @@ HRESULT CCovus::Initialize(void* pArg)
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
-	GameObjectDesc.fSpeedPerSec = 10.f;
+	GameObjectDesc.fSpeedPerSec = 8.f;
 	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
