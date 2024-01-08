@@ -308,9 +308,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+// 		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -343,9 +343,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 
 	/* For.Prototype_Component_Shader_Particle_Point */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Point"),
-		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Point"),
+// 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
+// 		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("네비게이션를(을) 로드하는 중입니다."));
 	/* For.Prototype_Component_Navigation */
@@ -556,9 +556,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 
 	/* For.Prototype_GameObject_Particle_Red */
-	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Red"),
-		CParticle_Red::Create(m_pDevice, m_pContext))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Red"),
+// 		CParticle_Red::Create(m_pDevice, m_pContext))))
+// 		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

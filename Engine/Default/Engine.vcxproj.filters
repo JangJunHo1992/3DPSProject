@@ -456,12 +456,6 @@
     <ClInclude Include="..\Public\Character.h">
       <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Fonts.h">
-      <Filter>01.Utility\05.Fonts</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Fonts_Manager.h">
-      <Filter>01.Utility\05.Fonts\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\VIBuffer_Instancing.h">
       <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing</Filter>
     </ClInclude>
@@ -473,6 +467,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\Engine_Struct.h">
       <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CustomFont.h">
+      <Filter>01.Utility\05.Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Font_Manager.h">
+      <Filter>01.Utility\05.Fonts\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -653,12 +653,6 @@
     <ClCompile Include="..\Private\Character.cpp">
       <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Fonts.cpp">
-      <Filter>01.Utility\05.Fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Fonts_Manager.cpp">
-      <Filter>01.Utility\05.Fonts\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\VIBuffer_Instancing.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing</Filter>
     </ClCompile>
@@ -667,6 +661,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\VIBuffer_Particle_Rect.cpp">
       <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CustomFont.cpp">
+      <Filter>01.Utility\05.Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Font_Manager.cpp">
+      <Filter>01.Utility\05.Fonts\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

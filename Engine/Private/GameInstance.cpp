@@ -4,7 +4,7 @@
 #include "Level_Manager.h"
 #include "Object_Manager.h"
 #include "Renderer.h"
-#include "Fonts_Manager.h"
+#include "Font_Manager.h"
 
 #include "RapidJson.h"
 #include "Mesh_Tool.h"
@@ -52,6 +52,9 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 	if (nullptr == m_pPipeLine)
 		return E_FAIL;
 
+	m_pFonts_Manager = CFont_Manager::Create(*ppDevice, *ppContext);
+	if (nullptr == m_pFonts_Manager)
+		return E_FAIL;
 	return S_OK;
 }
 
