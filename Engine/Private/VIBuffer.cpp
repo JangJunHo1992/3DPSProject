@@ -1,11 +1,11 @@
-#include "VIBuffer.h"
+#include "..\Public\VIBuffer.h"
 
-CVIBuffer::CVIBuffer(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
+CVIBuffer::CVIBuffer(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CComponent(pDevice, pContext)
 {
 }
 
-CVIBuffer::CVIBuffer(const CVIBuffer & rhs)
+CVIBuffer::CVIBuffer(const CVIBuffer& rhs)
 	: CComponent(rhs)
 	, m_pVB(rhs.m_pVB)
 	, m_pIB(rhs.m_pIB)
@@ -19,6 +19,8 @@ CVIBuffer::CVIBuffer(const CVIBuffer & rhs)
 	, m_eIndexFormat(rhs.m_eIndexFormat)
 	, m_eTopology(rhs.m_eTopology)
 {
+
+
 	Safe_AddRef(m_pVB);
 	Safe_AddRef(m_pIB);
 }
@@ -28,17 +30,16 @@ HRESULT CVIBuffer::Initialize_Prototype()
 	return S_OK;
 }
 
-HRESULT CVIBuffer::Initialize(void * pArg)
+HRESULT CVIBuffer::Initialize(void* pArg)
 {
-	
 	return S_OK;
 }
 
 HRESULT CVIBuffer::Render()
 {
-
-
 	m_pContext->DrawIndexed(m_iNumIndices, 0, 0);
+
+
 
 	return S_OK;
 }
@@ -51,15 +52,19 @@ HRESULT CVIBuffer::Bind_VIBuffers()
 
 	ID3D11Buffer* pVertexBuffers[] = {
 		m_pVB,
+
 	};
 
-	_uint		iStrides[] = {
+	_uint				iStrides[] = {
 		m_iStride,
+
 	};
 
-	_uint		iOffsets[] = {
+	_uint				iOffsets[] = {
 		0,
+
 	};
+
 
 	/* 어떤 버텍스 버퍼들을 이용할거다. */
 	m_pContext->IASetVertexBuffers(0, m_iNumVertexBuffers, pVertexBuffers, iStrides, iOffsets);
@@ -75,15 +80,15 @@ HRESULT CVIBuffer::Bind_VIBuffers()
 	//m_pContext->SetFVF(D3DFVF_XYZ | D3DFVF_TEX1);
 
 
+
+
 	return S_OK;
 }
 
-HRESULT CVIBuffer::Create_Buffer(_Inout_ ID3D11Buffer**	ppBuffer)
+HRESULT CVIBuffer::Create_Buffer(_Inout_ ID3D11Buffer** ppBuffer)
 {
 	return m_pDevice->CreateBuffer(&m_BufferDesc, &m_SubResourceData, ppBuffer);
 }
-
-	
 
 
 void CVIBuffer::Free()

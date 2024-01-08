@@ -20,6 +20,9 @@
 #include "Weapon_Player.h"
 #include "Body_Player.h"
 
+#include "Particle_Blue.h"
+#include "Particle_Red.h"
+
 #include "Covus_Tool.h"
 #include "Covus_GamePlay.h"
 #include "Covus_Body_GamePlay.h"
@@ -159,6 +162,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 // 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Brush.png"), 1))))
 // 		return E_FAIL;
 
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Snow"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Snow.png"), 1))))
+		return E_FAIL;
+
 	/* For.Prototype_Component_Texture_Sky */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
@@ -173,6 +181,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 
 	{
+
 		{
 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus");
 			string strFilePath = "../Bin/Resources/Models/Player/Player";
@@ -255,7 +264,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 // 				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/ForkLift/ForkLift", PivotMatrix))))
 // 				return E_FAIL;
 			/* For.Prototype_Component_Model_ForkLift */
-			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+			PivotMatrix = XMMatrixScaling(0.02f, 0.02f, 0.02f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, strPrototypeTag,
 				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/Stage1/Stage1", PivotMatrix))))
 				return E_FAIL;
@@ -293,6 +302,15 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			CVIBuffer_Cube::Create(m_pDevice, m_pContext))))
 			return E_FAIL;
 	}
+	/* For.Prototype_Component_VIBuffer_Particle_Rect */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Rect"),
+		CVIBuffer_Particle_Rect::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_VIBuffer_Particle_Point */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -317,6 +335,16 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	/* For.Prototype_Component_Shader_VtxCube */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_VtxCube"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_VtxCube.hlsl"), VTXCUBE::Elements, VTXCUBE::iNumElements))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Shader_Particle_Rect */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Rect"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Shader_Particle_Point */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("네비게이션를(을) 로드하는 중입니다."));
@@ -522,6 +550,15 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CSky::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 
+	/* For.Prototype_GameObject_Particle_Blue */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Blue"),
+		CParticle_Blue::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+	/* For.Prototype_GameObject_Particle_Red */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Red"),
+		CParticle_Red::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

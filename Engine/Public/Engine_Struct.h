@@ -27,6 +27,15 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXPOS;
 
+	typedef struct ENGINE_DLL tagVertex_Point
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT2		vPSize;
+
+		static const unsigned int					iNumElements = 2;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTXPOINT;
+
 	typedef struct ENGINE_DLL tagVertex_Position_Texcoord
 	{
 		XMFLOAT3		vPosition;
@@ -99,5 +108,23 @@ namespace Engine
 		XMFLOAT4		vRotation;
 		float			fTrackPosition;
 	}KEYFRAME;
+
+	typedef struct tagVectexInstance
+	{
+		XMFLOAT4		vRight, vUp, vLook, vPosition;
+		XMFLOAT4		vColor;
+	}VTXINSTANCE;
+
+	typedef struct ENGINE_DLL tagParticleRect
+	{
+		static const unsigned int					iNumElements = 7;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTX_PARTICLE_RECT;
+
+	typedef struct ENGINE_DLL tagParticlePoint
+	{
+		static const unsigned int					iNumElements = 7;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTX_PARTICLE_POINT;
 
 }

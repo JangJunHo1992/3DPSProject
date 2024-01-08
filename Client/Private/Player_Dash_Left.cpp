@@ -11,8 +11,8 @@ void CCovus_Dash_Left::Initialize(CCovus_GamePlay* pActor)
 
 CState<CCovus_GamePlay>* CCovus_Dash_Left::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
-	//pActor->Go_Straight(fTimeDelta);
-	if (pActor->Is_Animation_End())
+	pActor->Go_Left(fTimeDelta * 0.2);
+	if (pActor->Is_Inputable_Back(5))
 	{
 		return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 	}
