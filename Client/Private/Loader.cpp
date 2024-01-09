@@ -266,7 +266,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			/* For.Prototype_Component_Model_ForkLift */
 			PivotMatrix = XMMatrixScaling(0.02f, 0.02f, 0.02f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, strPrototypeTag,
-				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/Stage1/Stage1", PivotMatrix))))
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/TestMap/TestMap", PivotMatrix))))
 				return E_FAIL;
 		}
 	}

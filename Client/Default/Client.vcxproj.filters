@@ -1231,6 +1231,12 @@
     <Filter Include="02.GameObjects\Effect\Particles\Red">
       <UniqueIdentifier>{e3ca59a6-1861-4dfb-b0e1-6fd2ee3b5107}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1">
+      <UniqueIdentifier>{4b9ea446-c22d-4add-9ad3-50fcb947aba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2">
+      <UniqueIdentifier>{32f9f6d6-2e65-4330-955c-5f0f628a9e8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
