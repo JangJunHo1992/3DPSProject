@@ -27,7 +27,8 @@ HRESULT CMagician_GamePlay::Initialize(void* pArg)
 		return E_FAIL;
 
 	m_pActor = new CActor<CMagician_GamePlay>(this);
-	m_pActor->Set_State(new CMagician_Idle);
+	m_pActor->Set_State(new CMagician_Idle());
+
 
 	return S_OK;
 }

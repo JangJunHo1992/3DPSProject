@@ -37,6 +37,13 @@
 #include "Magician_Weapon_GamePlay.h"
 #include "Magician_Weapon_Tool.h"
 
+#include "Varg_Tool.h"
+#include "Varg_GamePlay.h"
+#include "Varg_Body_GamePlay.h"
+#include "Varg_Body_Tool.h"
+#include "Varg_Weapon_GamePlay.h"
+#include "Varg_Weapon_Tool.h"
+
 #include "Model_Tool.h"
 #include "Model_GamePlay.h"
 
@@ -283,7 +290,55 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			}
 		}
 	}
+	//Varg
+	{
 
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Varg");
+			string strFilePath = "../Bin/Resources/Models/Varg/Varg";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Varg_Weapon");
+			string strFilePath = "../Bin/Resources/Models/Varg/Weapon/VargWeapon";
+
+			// 			_float fRadiusY = 270.0f;
+			// 			_float fRadiusZ = 90.0f;
+
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f);
+			// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+			// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+	}
 
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Fiona");
@@ -567,7 +622,61 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			}
 		}
 	}
+	//Varg
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Varg_Body");
 
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CVarg_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CVarg_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Varg_Weapon");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CVarg_Weapon_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CVarg_Weapon_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Varg");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CVarg_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CVarg_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
 
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");

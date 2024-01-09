@@ -1,7 +1,7 @@
 #include "MagicianDefaultState.h"
 #include "GameInstance.h"
 
-// #include "Magician_Idle.h"
+#include "Magician_Idle.h"
 // #include "Magician_Run_Front.h"
 // #include "Magician_Run_Front_L45.h"
 // #include "Magician_Run_Front_R45.h"
