@@ -30,6 +30,12 @@
 #include "Covus_Weapon_GamePlay.h"
 #include "Covus_Weapon_Tool.h"
 
+#include "Magician_Tool.h"
+#include "Magician_GamePlay.h"
+#include "Magician_Body_GamePlay.h"
+#include "Magician_Body_Tool.h"
+#include "Magician_Weapon_GamePlay.h"
+#include "Magician_Weapon_Tool.h"
 
 #include "Model_Tool.h"
 #include "Model_GamePlay.h"
@@ -179,7 +185,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 	_matrix		PivotMatrix;
 
-
+	//Player
 	{
 
 		{
@@ -228,7 +234,55 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			}
 		}
 	}
+	//Magician- boss
+	{
 
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician");
+			string strFilePath = "../Bin/Resources/Models/MagicianTest/Magician";
+			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Weapon");
+			string strFilePath = "../Bin/Resources/Models/MagicianTest/Weapon/MagicianWeapon";
+
+			// 			_float fRadiusY = 270.0f;
+			// 			_float fRadiusZ = 90.0f;
+
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f);
+			// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+			// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+	}
 
 
 	{
@@ -266,7 +320,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			/* For.Prototype_Component_Model_ForkLift */
 			PivotMatrix = XMMatrixScaling(0.02f, 0.02f, 0.02f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, strPrototypeTag,
-				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/TestMap/TestMap", PivotMatrix))))
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/Stage1/Stage1", PivotMatrix))))
 				return E_FAIL;
 		}
 	}
@@ -454,6 +508,61 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 				/* For.Prototype_GameObject_Raider */
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
 					CCovus_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+	}
+	//Magician-boss
+	{
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Body");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_Body_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_Body_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Weapon");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_Weapon_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_Weapon_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				/* For.Prototype_GameObject_Raider */
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_GamePlay::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
 			}
 		}

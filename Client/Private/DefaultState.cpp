@@ -33,7 +33,7 @@
 #include "Covus_HurtSR.h"
 
 #include "Covus_Dead.h"
-// #include "Covus_Defense_Start.h"
+#include "Covus_Parry_L.h"
 
 
 void CDefaultState::Initialize(CCovus_GamePlay* pActor)
@@ -52,10 +52,10 @@ CState<CCovus_GamePlay>* CDefaultState::Ground_Normal(CCovus_GamePlay* pActor, _
 	CState<CCovus_GamePlay>* pState = nullptr;
 
 
-// 	if (m_pGameInstance->Key_Down(DIK_X))
-// 	{
-// 		return new CGreatDualBlade_Defense_Start();
-// 	}
+	if (m_pGameInstance->Key_Down(DIK_F))
+	{
+		return new CCovus_Parry_L();
+	}
 
 
 	if (m_pGameInstance->Mouse_Down(DIM_LB))

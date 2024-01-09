@@ -109,9 +109,9 @@ HRESULT CVarg::Ready_PartObjects()
 
 
 	{
-		CVarg_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
-			return E_FAIL;
+// 		CVarg_Weapon::WEAPON_DESC	WeaponDesc = {};
+// 		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
+// 			return E_FAIL;
 	}
 
 	{
@@ -120,12 +120,12 @@ HRESULT CVarg::Ready_PartObjects()
 			return E_FAIL;
 	}
 
-	CWeapon* m_pWeapon_L = Get_Weapon(TEXT("Weapon_L"));
+	/*CWeapon* m_pWeapon_L = Get_Weapon(TEXT("Weapon_L"));*/
 
 	CWeapon* m_pWeapon_R = Get_Weapon(TEXT("Weapon_R"));
 	m_pWeapon_R->Get_TransformComp()->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(180.0f));
 
-	m_pWeapon_L->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
+	//m_pWeapon_L->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
 	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(-0.1f, 0.f, 0.f, 1.f));
 
 

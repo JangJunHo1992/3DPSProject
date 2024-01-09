@@ -457,6 +457,78 @@
     <Filter Include="02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\7.Shoot\3">
       <UniqueIdentifier>{95c169f9-2e69-4b52-94b8-e2e86892829f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\0.VargDefaultState">
+      <UniqueIdentifier>{66b81acd-c02f-43b7-9ac4-d3b83e25bdf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\1.Idle">
+      <UniqueIdentifier>{1102ee9f-d32d-441c-ba47-1b23c4281460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk">
+      <UniqueIdentifier>{04c5121c-6784-4032-adbb-44130a176a76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\3.Dead">
+      <UniqueIdentifier>{a1a0d0dc-aa9a-4c1c-9815-79a84872853e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack">
+      <UniqueIdentifier>{80d01687-4f77-4757-99ff-b25615108705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkB">
+      <UniqueIdentifier>{e9317e3b-8281-49d2-bd58-048833fe002e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkF">
+      <UniqueIdentifier>{36b8a627-e4ca-4bf4-9bc2-57b455e9f7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkR">
+      <UniqueIdentifier>{92966a40-703e-4cb0-8987-9c19cb56599b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkL">
+      <UniqueIdentifier>{6c559c70-7b50-4821-9444-9296ad1dd132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\5.Hurt">
+      <UniqueIdentifier>{78592eaa-9af1-4cd0-8b2c-b98e417c4cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1">
+      <UniqueIdentifier>{1fcc63f6-bb2c-42ec-b62b-3b9041a0684e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\2">
+      <UniqueIdentifier>{4c6fab54-f5fb-4c24-bfab-ff98175deff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\3">
+      <UniqueIdentifier>{8fd89167-770a-49c9-9391-c852276bfa9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_1">
+      <UniqueIdentifier>{08166575-c102-4030-ad0b-863232b5e196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_2">
+      <UniqueIdentifier>{eebc690c-4599-47f3-bdf0-5adba73c8e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_3">
+      <UniqueIdentifier>{dfd160af-0836-4a40-993d-ed07a38e4c8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\2\2_1">
+      <UniqueIdentifier>{ab6c2355-bcaa-4e8a-9bfa-2ca6320747ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\2\2_2">
+      <UniqueIdentifier>{3a3d994a-b6e1-4218-bc16-20f31552eaea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack">
+      <UniqueIdentifier>{574bddcd-c469-4996-b45c-0092641fbe9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\1">
+      <UniqueIdentifier>{b5d8a367-a0fe-43b7-bc3b-b8e2954d1b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\2">
+      <UniqueIdentifier>{d1fff53f-4c9c-4236-b5f6-57870573548b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start">
+      <UniqueIdentifier>{e34b1de3-69ed-4486-9d88-c0ff05439724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start\StartIdle">
+      <UniqueIdentifier>{5c297409-4b5f-4d27-8530-83f3a0399b0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start\StartDemo">
+      <UniqueIdentifier>{620a0787-ea46-4a46-9dc1-0956571d5c0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -939,6 +1011,60 @@
     <ClInclude Include="..\Public\Magician_Shoot3.h">
       <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\7.Shoot\3</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\VargDefaultState.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\0.VargDefaultState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Walk.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Walk_Back.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Walk_Front.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Walk_Left.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Walk_Right.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Dead.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\3.Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Idle.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\1.Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Hurt.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Attack.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Attack1_1.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Attack2_1.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\2\2_1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Attack2_2.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\2\2_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Attack1_3.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Attack1_2.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Attack3.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_RaidAttack1.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_RaidAttack2.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1373,6 +1499,60 @@
     </ClCompile>
     <ClCompile Include="..\Private\Magician_Shoot3.cpp">
       <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\7.Shoot\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VargDefaultState.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\0.VargDefaultState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Dead.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\3.Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Hurt.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Idle.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\1.Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Walk.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Walk_Back.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Walk_Front.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Walk_Left.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Walk_Right.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\2.Walk\WalkR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Attack.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Attack1_1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Attack1_2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Attack1_3.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\1\1_3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Attack2_1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\2\2_1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Attack2_2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\2\2_2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Attack3.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\4.ComboAttack\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_RaidAttack1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_RaidAttack2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

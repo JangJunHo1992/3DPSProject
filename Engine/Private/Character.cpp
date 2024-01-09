@@ -124,7 +124,7 @@ HRESULT CCharacter::Add_Body(const wstring& strPrototypeTag, CBody::BODY_DESC pA
 	if (nullptr == m_pBody)
 		return E_FAIL;
 
-	Safe_AddRef(m_pBody);
+	//Safe_AddRef(m_pBody);
 
 	return S_OK;
 }
@@ -146,7 +146,7 @@ HRESULT CCharacter::Add_Weapon(const wstring& strPrototypeTag, string strBoneNam
 		return E_FAIL;
 
 	m_Weapons.push_back(pWeapon);
-	Safe_AddRef(pWeapon);
+	//Safe_AddRef(pWeapon);
 
 	return S_OK;
 }
