@@ -1,17 +1,17 @@
 #include "stdafx.h"
-#include "Player_Dash_Right.h"
+#include "Magician_DisappearR.h"
 #include "GameInstance.h"
 
 
-void CCovus_Dash_Right::Initialize(CCovus_GamePlay* pActor)
+void CMagician_DisappearR::Initialize(CMagician_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true, true);
 }
 
-CState<CCovus_GamePlay>* CCovus_Dash_Right::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
+CState<CMagician_GamePlay>* CMagician_DisappearR::Update(CMagician_GamePlay* pActor, _float fTimeDelta)
 {
-	pActor->Go_Right(fTimeDelta*0.25);
+	pActor->Go_Backward(fTimeDelta * 0.25);
 	if (pActor->Is_Inputable_Back(10))
 	{
 		return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
@@ -19,7 +19,7 @@ CState<CCovus_GamePlay>* CCovus_Dash_Right::Update(CCovus_GamePlay* pActor, _flo
 	return nullptr;
 }
 
-void CCovus_Dash_Right::Release(CCovus_GamePlay* pActor)
+void CMagician_DisappearR::Release(CMagician_GamePlay* pActor)
 {
 	__super::Release(pActor);
 }
