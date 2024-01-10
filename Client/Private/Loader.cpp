@@ -266,15 +266,16 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 		{
 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Weapon");
-			string strFilePath = "../Bin/Resources/Models/MagicianTest/Weapon/MagicianWeapon";
+			string strFilePath = "../Bin/Resources/Models/MagicianTest/Cane/MagicianWeapon";
 
-			// 			_float fRadiusY = 270.0f;
-			// 			_float fRadiusZ = 90.0f;
-
+			_float fRadiusX = 90.0f;
+			//_float fRadiusY = 270.0f;
+			//_float fRadiusZ = 90.0f;
 			PivotMatrix =
 				XMMatrixScaling(0.01f, 0.01f, 0.01f);
-			// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-			// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+				//* XMMatrixRotationX(XMConvertToRadians(fRadiusX));
+			 				//* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+			 				//* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
 			if (LEVEL_TOOL == eLEVEL)
 			{
@@ -317,13 +318,13 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Varg_Weapon");
 			string strFilePath = "../Bin/Resources/Models/Varg/Weapon/VargWeapon";
 
-			// 			_float fRadiusY = 270.0f;
-			// 			_float fRadiusZ = 90.0f;
+			 			_float fRadiusY = 90.0f;
+			 			//_float fRadiusZ = 90.0f;
 
-			PivotMatrix =
-				XMMatrixScaling(0.01f, 0.01f, 0.01f);
-			// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-			// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+						PivotMatrix =
+							XMMatrixScaling(0.01f, 0.01f, 0.01f)
+							* XMMatrixRotationY(XMConvertToRadians(fRadiusY));
+			 				//* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
 			if (LEVEL_TOOL == eLEVEL)
 			{
