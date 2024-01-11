@@ -61,8 +61,6 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::Ground_Normal(CMagician_GameP
 		pState = Attack(pActor, fTimeDelta, _iAnimIndex);
 		if (pState)	return pState;
 	}
-
-
 	
 
 	return nullptr;
@@ -70,14 +68,14 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::Ground_Normal(CMagician_GameP
 
 CState<CMagician_GamePlay>* CMagicianDefaultState::WalkandDisappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
 {
-	_uint iRandom = rand() % 2;
+	_uint iRandom = rand() % 1;
 
 	switch (iRandom)
 	{
 	case 0:
 		return new CMagician_Walk_Front();
-	case 1:
-		return new CMagician_DisappearF();
+// 	case 1:
+// 		return new CMagician_DisappearF();
 	}
 }
 
