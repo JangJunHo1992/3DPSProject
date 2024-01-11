@@ -1,7 +1,6 @@
 #include "Character.h"
 #include "Model.h"
 #include "GameInstance.h"
-
 //#include "Body.h"
 //#include "Weapon.h"
 
@@ -236,6 +235,65 @@ void CCharacter::Go_Right(_float fTimeDelta, CNavigation* pNavigation)
 void CCharacter::Knockback(_float fTimeDelta, CNavigation* pNavigation)
 {
 	m_pTransformCom->Knockback(fTimeDelta, pNavigation);
+}
+
+void CCharacter::Search_Target()
+{
+	if (nullptr == m_pTargetPlayer)
+	{
+		CCharacter* pTarget;
+		list<CGameObject*>* _ObjectList = m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
+
+		if (nullptr == _ObjectList)
+			return;
+
+		for (CGameObject* pObject : *_ObjectList)
+		{
+			pTarget = dynamic_cast<CCharacter*>(pObject);
+			if (nullptr == pTarget)
+				continue;
+
+			m_pTargetPlayer = pTarget;
+			Safe_AddRef(m_pTargetPlayer);
+			break;
+		}
+
+	}
+
+}
+
+_float CCharacter::Calc_Distance(CCharacter* pTarget)
+{
+	if (nullptr == pTarget)
+		return 1000000.f;
+
+	_float3 vPos =Get_Pos4();
+	_float3 vTargetPos = pTarget->Get_Pos4();
+
+	_float3 vDiff = vTargetPos - vPos;
+
+	return sqrt(vDiff.x * vDiff.x + vDiff.y * vDiff.y + vDiff.z * vDiff.z);
+
+}
+
+_float CCharacter::Calc_Distance()
+{
+	return Calc_Distance(m_pTargetPlayer);
+}
+
+void CCharacter::Look_At_Target()
+{
+	if (nullptr == m_pTargetPlayer)
+		return;
+
+	_fvector vTargetPos = m_pTargetPlayer->Get_Pos4();
+	m_pTransformCom->Look_At_OnLand(vTargetPos);
+}
+
+
+_float4 CCharacter::Get_Pos4()
+{
+	return m_pTransformCom->Get_Position();
 }
 
 

@@ -40,6 +40,9 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 void CVarg_GamePlay::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
+	if (nullptr == m_pTargetPlayer)
+		Search_Target();
+
 	m_pActor->Update_State(fTimeDelta);
 }
 

@@ -116,7 +116,7 @@ HRESULT CVarg::Ready_PartObjects()
 
 	{
 		CVarg_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "ik_hand_r", WeaponDesc, TEXT("Weapon_R"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "weapon_r", WeaponDesc, TEXT("Weapon_R"))))
 			return E_FAIL;
 	}
 

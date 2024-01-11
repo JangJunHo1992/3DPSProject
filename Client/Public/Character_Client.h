@@ -7,6 +7,7 @@ BEGIN(Client)
 
 class CCharacter_Client abstract : public CCharacter
 {
+	
 protected:
 	CCharacter_Client(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 		: CCharacter(pDevice, pContext)

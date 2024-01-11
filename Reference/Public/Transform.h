@@ -96,7 +96,7 @@ public:
 		XMStoreFloat4(&m_fPosition, vPosVec);
 		Set_State(STATE::STATE_POSITION, m_fPosition);
 	}
-
+	_float4 Get_Position() { return m_fPosition; }
 	void Add_Position(const _float3& vState)
 	{
 		_vector vPosVec = XMLoadFloat3(&vState);
