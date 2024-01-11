@@ -267,8 +267,8 @@ _float CCharacter::Calc_Distance(CCharacter* pTarget)
 	if (nullptr == pTarget)
 		return 1000000.f;
 
-	_float3 vPos =Get_Pos4();
-	_float3 vTargetPos = pTarget->Get_Pos4();
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	_float3 vTargetPos = pTarget->m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
 	_float3 vDiff = vTargetPos - vPos;
 
@@ -286,7 +286,7 @@ void CCharacter::Look_At_Target()
 	if (nullptr == m_pTargetPlayer)
 		return;
 
-	_fvector vTargetPos = m_pTargetPlayer->Get_Pos4();
+	_fvector vTargetPos = m_pTargetPlayer->m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	m_pTransformCom->Look_At_OnLand(vTargetPos);
 }
 
