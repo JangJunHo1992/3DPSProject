@@ -244,6 +244,9 @@
     <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect">
       <UniqueIdentifier>{3c5f4562-77ce-43ed-8775-c48ba64a27fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.Components\06.Navigation\NavigationPoint">
+      <UniqueIdentifier>{82c94314-2ba9-4a4a-8784-622a0b1f127d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -474,6 +477,9 @@
     <ClInclude Include="..\Public\Font_Manager.h">
       <Filter>01.Utility\05.Fonts\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\NavigationPoint.h">
+      <Filter>01.Utility\03.Components\06.Navigation\NavigationPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Base.cpp">
@@ -667,6 +673,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Font_Manager.cpp">
       <Filter>01.Utility\05.Fonts\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\NavigationPoint.cpp">
+      <Filter>01.Utility\03.Components\06.Navigation\NavigationPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
