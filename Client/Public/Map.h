@@ -6,16 +6,17 @@
 BEGIN(Engine)
 class CShader;
 class CModel;
+class CNavigation;
 END
 
 BEGIN(Client)
 
-class CForkLift abstract : public CGameObject
+class CMap abstract : public CGameObject
 {
 protected:
-	CForkLift(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-	CForkLift(const CForkLift& rhs);
-	virtual ~CForkLift() = default;
+	CMap(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	CMap(const CMap& rhs);
+	virtual ~CMap() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -31,8 +32,8 @@ public:
 protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };
+	CNavigation* m_pNavigationCom = { nullptr };
 
-	
 protected:
 	virtual HRESULT Ready_Components() PURE;
 	HRESULT Ready_Components_Origin(LEVEL eLEVEL);
@@ -41,7 +42,7 @@ protected:
 
 public:
 	///* 원형객체를 생성한다. */
-	//static CForkLift* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	//static CMap* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 
 	///* 사본객체를 생성한다. */
 	//virtual CGameObject* Clone(void* pArg) override;

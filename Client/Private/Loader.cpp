@@ -47,6 +47,8 @@
 #include "Model_Tool.h"
 #include "Model_GamePlay.h"
 
+#include "Map_GamePlay.h"
+#include "Map_Tool.h"
 #include <process.h>
 
 
@@ -361,11 +363,14 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	}
 	
 	{
-		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_ForkLift");
+		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Map");
 
 		if (LEVEL_TOOL == eLEVEL)
 		{
-
+			PivotMatrix = XMMatrixScaling(0.02f, 0.02f, 0.02f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, strPrototypeTag,
+				CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/Stage1/Stage1", PivotMatrix))))
+				return E_FAIL;
 		}
 		else
 		{
@@ -698,17 +703,20 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 
 	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_ForkLift");
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Map");
 
 		if (LEVEL_TOOL == eLEVEL)
 		{
-
+			/* For.Prototype_GameObject_ForkLift */
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CMap_Tool::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
 		}
 		else
 		{
 			/* For.Prototype_GameObject_ForkLift */
 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CForkLift_GamePlay::Create(m_pDevice, m_pContext))))
+				CMap_GamePlay::Create(m_pDevice, m_pContext))))
 				return E_FAIL;
 		}
 	}

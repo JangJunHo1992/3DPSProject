@@ -12,7 +12,7 @@ CForkLift_GamePlay::CForkLift_GamePlay(const CForkLift_GamePlay& rhs)
 
 HRESULT CForkLift_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin()))
+	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
 		return E_FAIL;
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift"),

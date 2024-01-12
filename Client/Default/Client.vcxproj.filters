@@ -529,6 +529,15 @@
     <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start\StartDemo">
       <UniqueIdentifier>{620a0787-ea46-4a46-9dc1-0956571d5c0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Map">
+      <UniqueIdentifier>{451bd218-9913-4c9d-be8b-d419dfc525da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map\Map_Tool">
+      <UniqueIdentifier>{cb0233d3-c958-48eb-981e-2426202d01db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map\Map_GamePlay">
+      <UniqueIdentifier>{de3e97c2-5098-45fe-b07e-0f3848841ea4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1065,6 +1074,15 @@
     <ClInclude Include="..\Public\Varg_RaidAttack2.h">
       <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\2</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Map.h">
+      <Filter>02.GameObjects\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map_Tool.h">
+      <Filter>02.GameObjects\Map\Map_Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map_GamePlay.h">
+      <Filter>02.GameObjects\Map\Map_GamePlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1553,6 +1571,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Varg_RaidAttack2.cpp">
       <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\6.RaidAttack\2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map.cpp">
+      <Filter>02.GameObjects\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map_Tool.cpp">
+      <Filter>02.GameObjects\Map\Map_Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map_GamePlay.cpp">
+      <Filter>02.GameObjects\Map\Map_GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
