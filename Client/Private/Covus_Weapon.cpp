@@ -1,5 +1,5 @@
 #include "Covus_Weapon.h"
-
+#include "Bone.h"
 #include "Character.h"
 #include "GameInstance.h"
 
@@ -80,10 +80,23 @@ HRESULT CCovus_Weapon::Ready_Components_Origin(LEVEL eLevel)
 		CBounding_Sphere::BOUNDING_SPHERE_DESC BoundingDesc = {};
 
 		_float fPosZ = 1.2f / m_iColliderSize * (i + 1);
+// 		_float fRadiusX = 180.f;
+// 		_float fRadiusY = 90.f;
+// 		_float fRadiusZ = 180.f;
 
+		_matrix SocketMatrix
+			= m_pSocketBone->Get_CombinedTransformationMatrix();
+// 			* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ))
+// 			* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+// 			* XMMatrixRotationY(XMConvertToRadians(fRadiusY));
+
+		_vector vPos = XMVector3TransformCoord(
+			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
+			, SocketMatrix
+		);
 		BoundingDesc.fRadius = 1.2f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
-
+		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 		const wstring strName = TEXT("Com_Collider_") + i;
 
 		if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),

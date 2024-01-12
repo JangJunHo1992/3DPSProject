@@ -73,6 +73,7 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::WalkandDisappear(CMagician_Ga
 	switch (iRandom)
 	{
 	case 0:
+		pActor->Set_bLookAt(true);
 		return new CMagician_Walk_Front();
 // 	case 1:
 // 		return new CMagician_DisappearF();
@@ -86,10 +87,13 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::Attack(CMagician_GamePlay* pA
 	switch (iRandom)
 	{
 	case 0:
+		pActor->Set_bLookAt(true);
 		return new CMagician_Attack1();
 	case 1:
+		pActor->Set_bLookAt(true);
 		return new CMagician_Attack4();
 	case 2:
+		pActor->Set_bLookAt(true);
 		return new CMagician_Attack5();
 	}
 
@@ -102,10 +106,13 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::Shoot(CMagician_GamePlay* pAc
 	switch (iRandom)
 	{
 	case 0:
+		pActor->Set_bLookAt(true);
 		return new CMagician_Shoot1();
 	case 1:
+		pActor->Set_bLookAt(true);
 		return new CMagician_Shoot2();
 	case 2:
+		pActor->Set_bLookAt(true);
 		return new CMagician_Shoot3();
 	}
 }

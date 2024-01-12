@@ -36,6 +36,7 @@ HRESULT CVarg::Initialize(void* pArg)
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(-60.f, 0.f, 0.f, 1.f));
 
 	return S_OK;
 }
@@ -89,7 +90,7 @@ HRESULT CVarg::Ready_Components_Origin(LEVEL eLevel)
 	/* For.Com_Collider */
 	CBounding_OBB::BOUNDING_OBB_DESC		BoundingDesc = {};
 
-	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
+	BoundingDesc.vExtents = _float3(0.8f, 1.5f, 0.8f);
 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
 

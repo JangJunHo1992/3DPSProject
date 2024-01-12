@@ -19,7 +19,8 @@ public:
 	CState<CVarg_GamePlay>* Ground_Normal(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
 	CState<CVarg_GamePlay>* Run(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
-	CState<CVarg_GamePlay>* Dash(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+	CState<CVarg_GamePlay>* Attack(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+	CState<CVarg_GamePlay>* RaidAttack(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CVarg_GamePlay>* Hitted(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
 

@@ -29,20 +29,27 @@ HRESULT CVarg_GamePlay::Initialize(void* pArg)
 	m_pActor = new CActor<CVarg_GamePlay>(this);
 	m_pActor->Set_State(new CVarg_Idle);
 
+	Search_Target();
+
+
 	return S_OK;
 }
 
 void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 {
 	__super::Priority_Tick(fTimeDelta);
+	if (nullptr == m_pTargetPlayer)
+		Search_Target();
+	if (m_bLookAt == true)
+	{
+		Look_At_Target();
+		m_bLookAt = false;
+	}
 }
 
 void CVarg_GamePlay::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	if (nullptr == m_pTargetPlayer)
-		Search_Target();
-
 	m_pActor->Update_State(fTimeDelta);
 }
 

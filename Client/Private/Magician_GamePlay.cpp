@@ -39,7 +39,11 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 	__super::Priority_Tick(fTimeDelta);
 	if(nullptr == m_pTargetPlayer)
 		Search_Target();
-	Look_At_Target();
+	if (m_bLookAt == true)
+	{
+		Look_At_Target();
+		m_bLookAt = false;
+	}
 
 }
 
