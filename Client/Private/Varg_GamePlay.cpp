@@ -1,6 +1,6 @@
 #include "Varg_GamePlay.h"
 
-//#include "Varg_Idle.h"
+#include "Varg_Idle.h"
 
 CVarg_GamePlay::CVarg_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CVarg(pDevice, pContext)
@@ -27,7 +27,10 @@ HRESULT CVarg_GamePlay::Initialize(void* pArg)
 		return E_FAIL;
 
 	m_pActor = new CActor<CVarg_GamePlay>(this);
-//	m_pActor->Set_State(new CVarg_Idle);
+	m_pActor->Set_State(new CVarg_Idle);
+
+	Search_Target();
+
 
 	return S_OK;
 }
@@ -35,6 +38,13 @@ HRESULT CVarg_GamePlay::Initialize(void* pArg)
 void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 {
 	__super::Priority_Tick(fTimeDelta);
+	if (nullptr == m_pTargetPlayer)
+		Search_Target();
+	if (m_bLookAt == true)
+	{
+		Look_At_Target();
+		m_bLookAt = false;
+	}
 }
 
 void CVarg_GamePlay::Tick(_float fTimeDelta)

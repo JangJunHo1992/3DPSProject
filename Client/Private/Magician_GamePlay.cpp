@@ -1,5 +1,5 @@
 #include "Magician_GamePlay.h"
-
+#include "Transform.h"
 #include "Magician_Idle.h"
 
 CMagician_GamePlay::CMagician_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -27,7 +27,9 @@ HRESULT CMagician_GamePlay::Initialize(void* pArg)
 		return E_FAIL;
 
 	m_pActor = new CActor<CMagician_GamePlay>(this);
-	m_pActor->Set_State(new CMagician_Idle);
+	m_pActor->Set_State(new CMagician_Idle());
+	
+	Search_Target();
 
 	return S_OK;
 }
@@ -35,11 +37,20 @@ HRESULT CMagician_GamePlay::Initialize(void* pArg)
 void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 {
 	__super::Priority_Tick(fTimeDelta);
+	if(nullptr == m_pTargetPlayer)
+		Search_Target();
+	if (m_bLookAt == true)
+	{
+		Look_At_Target();
+		m_bLookAt = false;
+	}
+
 }
 
 void CMagician_GamePlay::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
+
 	m_pActor->Update_State(fTimeDelta);
 }
 

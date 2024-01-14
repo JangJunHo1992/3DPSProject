@@ -36,6 +36,7 @@ HRESULT CVarg::Initialize(void* pArg)
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(-60.f, 0.f, 0.f, 1.f));
 
 	return S_OK;
 }
@@ -89,7 +90,7 @@ HRESULT CVarg::Ready_Components_Origin(LEVEL eLevel)
 	/* For.Com_Collider */
 	CBounding_OBB::BOUNDING_OBB_DESC		BoundingDesc = {};
 
-	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
+	BoundingDesc.vExtents = _float3(0.8f, 1.5f, 0.8f);
 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
 
@@ -108,25 +109,25 @@ HRESULT CVarg::Ready_PartObjects()
 		return E_FAIL;
 
 
-	{
-		CVarg_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
-			return E_FAIL;
-	}
+// 	{
+//  		CVarg_Weapon::WEAPON_DESC	WeaponDesc = {};
+//  		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
+//  			return E_FAIL;
+// 	}
 
 	{
 		CVarg_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "ik_hand_r", WeaponDesc, TEXT("Weapon_R"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Varg_Weapon"), "weapon_r", WeaponDesc, TEXT("Weapon_R"))))
 			return E_FAIL;
 	}
 
-	CWeapon* m_pWeapon_L = Get_Weapon(TEXT("Weapon_L"));
+	//CWeapon* m_pWeapon_L = Get_Weapon(TEXT("Weapon_L"));
 
 	CWeapon* m_pWeapon_R = Get_Weapon(TEXT("Weapon_R"));
 	m_pWeapon_R->Get_TransformComp()->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(180.0f));
 
-	m_pWeapon_L->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
-	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(-0.1f, 0.f, 0.f, 1.f));
+	//m_pWeapon_L->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
+	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.f, 0.f, 0.f, 1.f));
 
 
 

@@ -75,15 +75,22 @@ public:
 
 	void Knockback(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 
+public:
+	void	Search_Target();
+	_float	Calc_Distance(CCharacter* pTarget);
+	_float	Calc_Distance();
+	void Look_At_Target();
 
-
-
+	_float4 Get_Pos4();
 protected:
 	CNavigation* m_pNavigationCom = { nullptr };
 	CCollider* m_pColliderCom = { nullptr };
 
 	CBody* m_pBody = { nullptr };
 	vector<CWeapon*> m_Weapons;
+
+	CCharacter* m_pTargetPlayer = { nullptr };
+	CCharacter* m_pTargetMonster = { nullptr };
 
 
 protected:

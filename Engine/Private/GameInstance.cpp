@@ -433,25 +433,47 @@ RAY CGameInstance::Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX
 
 _bool CGameInstance::Picking_Mesh(RAY ray, _float3* out, vector<class CMesh*>* Meshes)
 {
-	_vector		vPickedPos;
+	//_vector		vPickedPos;
 	_vector		vVec0, vVec1, vVec2;
 
 	_vector		vRayPos = XMLoadFloat4(&ray.vPosition);
 	_vector		vRayDir = XMLoadFloat3(&ray.vDirection);
-	_float		fDist = 0.f;
+	_float		fMinDist = 100000.f;
 
-	for (CMesh* mesh : *Meshes) 
+	_bool bIsPicked = false;
+	_float3 vPickedPos = { 0.f, 0.f, 0.f };
+
+	for (CMesh* mesh : *Meshes)
 	{
 		CMesh_Tool* pMesh_Tool = dynamic_cast<CMesh_Tool*>(mesh);
 		if (nullptr == pMesh_Tool)
 			return false;
 
 		if (pMesh_Tool->Picking(ray, out))
-			return true;
+		{
+			bIsPicked = true;
+
+			_vector vPos = XMLoadFloat3(out);
+			_float3 vDist;
+			XMStoreFloat3(&vDist, vRayPos - vPos);
+
+			_float fDist = sqrt(vDist.x * vDist.x + vDist.y * vDist.y + vDist.z * vDist.z);
+			if (fMinDist > fDist)
+			{
+				fMinDist = fDist;
+				vPickedPos = *out;
+			}
+		}
 	}
 
+	//if (bIsPicked)
+	//{
+	//	*out = vPickedPos;
+	//}
 
-	return false;
+	*out = vPickedPos;
+
+	return bIsPicked;
 }
 
 _bool CGameInstance::Picking_Vertex(RAY ray, _float3* out, _uint triNum, VTXMESH* pVertices, _uint* pIndices)

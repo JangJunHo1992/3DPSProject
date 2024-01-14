@@ -19,8 +19,11 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
-
-
+public:
+	_bool Get_bLookAt() { return m_bLookAt; }
+	void  Set_bLookAt(_bool _bLookAt) { m_bLookAt = _bLookAt; }
+private:
+	_bool	m_bLookAt = false;
 
 private:
 	virtual HRESULT Ready_Components() override;

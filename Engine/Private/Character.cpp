@@ -1,7 +1,6 @@
 #include "Character.h"
 #include "Model.h"
 #include "GameInstance.h"
-
 //#include "Body.h"
 //#include "Weapon.h"
 
@@ -124,7 +123,7 @@ HRESULT CCharacter::Add_Body(const wstring& strPrototypeTag, CBody::BODY_DESC pA
 	if (nullptr == m_pBody)
 		return E_FAIL;
 
-	Safe_AddRef(m_pBody);
+	//Safe_AddRef(m_pBody);
 
 	return S_OK;
 }
@@ -146,7 +145,7 @@ HRESULT CCharacter::Add_Weapon(const wstring& strPrototypeTag, string strBoneNam
 		return E_FAIL;
 
 	m_Weapons.push_back(pWeapon);
-	Safe_AddRef(pWeapon);
+	//Safe_AddRef(pWeapon);
 
 	return S_OK;
 }
@@ -236,6 +235,65 @@ void CCharacter::Go_Right(_float fTimeDelta, CNavigation* pNavigation)
 void CCharacter::Knockback(_float fTimeDelta, CNavigation* pNavigation)
 {
 	m_pTransformCom->Knockback(fTimeDelta, pNavigation);
+}
+
+void CCharacter::Search_Target()
+{
+	if (nullptr == m_pTargetPlayer)
+	{
+		CCharacter* pTarget;
+		list<CGameObject*>* _ObjectList = m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
+
+		if (nullptr == _ObjectList)
+			return;
+
+		for (CGameObject* pObject : *_ObjectList)
+		{
+			pTarget = dynamic_cast<CCharacter*>(pObject);
+			if (nullptr == pTarget)
+				continue;
+
+			m_pTargetPlayer = pTarget;
+			Safe_AddRef(m_pTargetPlayer);
+			break;
+		}
+
+	}
+
+}
+
+_float CCharacter::Calc_Distance(CCharacter* pTarget)
+{
+	if (nullptr == pTarget)
+		return 1000000.f;
+
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	_float3 vTargetPos = pTarget->m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+	_float3 vDiff = vTargetPos - vPos;
+
+	return sqrt(vDiff.x * vDiff.x + vDiff.y * vDiff.y + vDiff.z * vDiff.z);
+
+}
+
+_float CCharacter::Calc_Distance()
+{
+	return Calc_Distance(m_pTargetPlayer);
+}
+
+void CCharacter::Look_At_Target()
+{
+	if (nullptr == m_pTargetPlayer)
+		return;
+
+	_fvector vTargetPos = m_pTargetPlayer->m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	m_pTransformCom->Look_At_OnLand(vTargetPos);
+}
+
+
+_float4 CCharacter::Get_Pos4()
+{
+	return m_pTransformCom->Get_Position();
 }
 
 
