@@ -538,6 +538,72 @@
     <Filter Include="02.GameObjects\Map\Map_GamePlay">
       <UniqueIdentifier>{de3e97c2-5098-45fe-b07e-0f3848841ea4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Entire">
+      <UniqueIdentifier>{c194f636-8841-4e41-a9f9-aab39ab96bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Parts">
+      <UniqueIdentifier>{8c7e8007-1e0e-43ff-9d88-bdf95c6b8435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Entire">
+      <UniqueIdentifier>{020da837-d4dd-4742-9f1d-8018eaead5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Parts">
+      <UniqueIdentifier>{1d738525-94f6-48d3-8c02-e29cba91ab6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay">
+      <UniqueIdentifier>{d45249de-988d-4117-aabf-f6e0d97e61ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Entire\Tool">
+      <UniqueIdentifier>{563d157b-84ea-4588-b1cb-74458f3be3be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Parts\Body">
+      <UniqueIdentifier>{c37a91dd-f660-4ae4-9afe-4380fa8d992a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon">
+      <UniqueIdentifier>{592354e5-7a9b-4447-877f-2607aaaeac06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State">
+      <UniqueIdentifier>{9a18ec85-2077-4230-9fd5-d227bdba3abf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Parts\Body\GamePlay">
+      <UniqueIdentifier>{cd854566-c18e-454e-87a4-994b656f9a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Parts\Body\Tool">
+      <UniqueIdentifier>{f9e76fff-4252-4ef4-b3e9-69555a319fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon\GamePlay">
+      <UniqueIdentifier>{ed475aea-7a0e-4521-92a0-46a4e84027f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon\Tool">
+      <UniqueIdentifier>{0b6207f7-e955-42a3-8e16-9be85315bc1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay">
+      <UniqueIdentifier>{926c4e76-a19e-4c61-9df9-16e8b0454097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Entire\Tool">
+      <UniqueIdentifier>{5c472c94-fc4f-4e6c-8b90-41b91872378d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State">
+      <UniqueIdentifier>{c2a0e5e0-09ea-4e71-9956-5b7847b95655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Parts\Body">
+      <UniqueIdentifier>{377f2a69-dd16-48e5-ab3d-6c2f99e493f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon">
+      <UniqueIdentifier>{0982491e-9fbe-41c2-8332-966c3ab68dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Parts\Body\GamePlay">
+      <UniqueIdentifier>{d4fff0d6-73b3-4813-8bc6-0539dbc0d8bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Parts\Body\Tool">
+      <UniqueIdentifier>{a7de63e8-2034-41da-9ad6-780400d48578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon\GamePlay">
+      <UniqueIdentifier>{111c8760-cefe-4799-9c3d-93422d95888d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon\Tool">
+      <UniqueIdentifier>{d47286ef-14d4-4081-8d1c-8a0a56fa99e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1083,6 +1149,60 @@
     <ClInclude Include="..\Public\Map_GamePlay.h">
       <Filter>02.GameObjects\Map\Map_GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\JobMob1.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Body.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Body.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Body_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Body\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Body_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Body\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Weapon.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Weapon_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Weapon_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Body_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Body\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Body_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Body\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Weapon.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Weapon_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Weapon_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1580,6 +1700,60 @@
     </ClCompile>
     <ClCompile Include="..\Private\Map_GamePlay.cpp">
       <Filter>02.GameObjects\Map\Map_GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Body.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Body.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Weapon.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Weapon_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Weapon_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Weapon\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Body_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Body\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Body_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Parts\Body\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Body_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Body\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Body_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Body\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Weapon.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Weapon_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Weapon_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
