@@ -1,6 +1,6 @@
 #include "JobMob1_GamePlay.h"
 
-//#include "JobMob1_Idle.h"
+#include "JobMob1_Idle.h"
 
 CJobMob1_GamePlay::CJobMob1_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CJobMob1(pDevice, pContext)
@@ -26,8 +26,8 @@ HRESULT CJobMob1_GamePlay::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
-	//m_pActor = new CActor<CJobMob1_GamePlay>(this);
-	//m_pActor->Set_State(new CJobMob1_Idle);
+	m_pActor = new CActor<CJobMob1_GamePlay>(this);
+	m_pActor->Set_State(new CJobMob1_Idle);
 
 	Search_Target();
 
@@ -50,7 +50,7 @@ void CJobMob1_GamePlay::Priority_Tick(_float fTimeDelta)
 void CJobMob1_GamePlay::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	//m_pActor->Update_State(fTimeDelta);
+	m_pActor->Update_State(fTimeDelta);
 }
 
 void CJobMob1_GamePlay::Late_Tick(_float fTimeDelta)

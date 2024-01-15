@@ -66,8 +66,8 @@ HRESULT CJobMob1::Render()
 
 void CJobMob1::Set_Hitted()
 {
-	//CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::HurtF;
-	//Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::HurtS_FL;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
 //void CJobMob1::Write_Json(json& Out_Json)
@@ -88,15 +88,18 @@ HRESULT CJobMob1::Ready_Components_Origin(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Collider */
-	CBounding_OBB::BOUNDING_OBB_DESC		BoundingDesc = {};
+	CBounding_Sphere::BOUNDING_SPHERE_DESC  BoundingDesc = {};
 
-	BoundingDesc.vExtents = _float3(0.8f, 1.5f, 0.8f);
-	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
-	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
+	// 	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
+	// 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
+	// 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
+	BoundingDesc.fRadius = _float(0.7f);
+	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius, 0.f);
 
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_OBB"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),
 		TEXT("Com_Collider"), reinterpret_cast<CComponent**>(&m_pColliderCom), &BoundingDesc)))
 		return E_FAIL;
+
 
 
 	return S_OK;
@@ -117,7 +120,7 @@ HRESULT CJobMob1::Ready_PartObjects()
 
 	{
 		CJobMob1_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_JobMob1_Weapon"), "iK_hand_gun", WeaponDesc, TEXT("Weapon_R"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_JobMob1_Weapon"), "weapon_r", WeaponDesc, TEXT("Weapon_R"))))
 			return E_FAIL;
 	}
 

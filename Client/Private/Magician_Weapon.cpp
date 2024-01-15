@@ -39,7 +39,7 @@ void CMagician_Weapon::Priority_Tick(_float fTimeDelta)
 void CMagician_Weapon::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	//Collision_Chcek();
+	Collision_Chcek();
 
 }
 

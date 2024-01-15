@@ -39,7 +39,7 @@ void CCovus_Weapon::Priority_Tick(_float fTimeDelta)
 void CCovus_Weapon::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	//Collision_Chcek();
+	Collision_Chcek();
 
 }
 
@@ -134,7 +134,7 @@ _bool CCovus_Weapon::Collision_Chcek()
 
 	CCharacter* pAlreadyHittedCharacter = nullptr;
 
-	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
 	for (CGameObject* pGameObject : _Targets)
 	{
 		if (false == m_bIsAttack)

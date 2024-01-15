@@ -634,6 +634,18 @@
     <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\4.Idle">
       <UniqueIdentifier>{b5de107f-f577-46d7-acc0-1f91d96f2b51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\5.Hurt">
+      <UniqueIdentifier>{604e7292-fe57-4833-9e87-21af51d409d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\5.Hurt">
+      <UniqueIdentifier>{45628137-8fe8-40f2-b7a1-1efcbd7543a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\6.SitIdle">
+      <UniqueIdentifier>{824c43c4-cc8e-4ad0-9065-4207f0c57ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\6.SitIdle">
+      <UniqueIdentifier>{24a1cce1-39c9-4fff-97bb-b8c91379a2cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1233,6 +1245,72 @@
     <ClInclude Include="..\Public\JobMob2_Tool.h">
       <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\Tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\JobMob2DefaultState.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\0.Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1DefaultState.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\0.Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Attack.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Attack1.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Attack2.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Attack3.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Dead.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\3.Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Idle.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\4.Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Walk.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\1.Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Walk_Front.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\1.Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob1_Hurt.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Attack3.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Attack4.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Attack5.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Attack.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Attack1.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Attack2.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Dead.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\3.Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Idle.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\4.Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Walk.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\1.Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Walk_Front.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\1.Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\JobMob2_Hurt.h">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1784,6 +1862,72 @@
     </ClCompile>
     <ClCompile Include="..\Private\JobMob2_Weapon_Tool.cpp">
       <Filter>02.GameObjects\1.MyAssets\JobMob2\Parts\Weapon\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2DefaultState.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\0.Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1DefaultState.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\0.Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Attack.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Attack1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Attack2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Attack3.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Dead.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\3.Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Hurt.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Idle.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\4.Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Walk.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\1.Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob1_Walk_Front.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\1.Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Attack.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Attack1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Attack2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Attack3.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Attack4.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Attack5.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\2.Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Dead.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\3.Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Hurt.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\5.Hurt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Idle.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\4.Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Walk_Front.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\1.Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\JobMob2_Walk.cpp">
+      <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\1.Walk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

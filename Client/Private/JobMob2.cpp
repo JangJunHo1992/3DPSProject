@@ -36,7 +36,7 @@ HRESULT CJobMob2::Initialize(void* pArg)
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(-20.f, 0.f, 0.f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(-20.f, 0.f, 10.f, 1.f));
 
 	return S_OK;
 }
@@ -88,15 +88,18 @@ HRESULT CJobMob2::Ready_Components_Origin(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Collider */
-	CBounding_OBB::BOUNDING_OBB_DESC		BoundingDesc = {};
+	CBounding_Sphere::BOUNDING_SPHERE_DESC  BoundingDesc = {};
 
-	BoundingDesc.vExtents = _float3(0.8f, 1.5f, 0.8f);
-	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
-	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
+	// 	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
+	// 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
+	// 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
+	BoundingDesc.fRadius = _float(0.7f);
+	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius, 0.f);
 
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_OBB"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),
 		TEXT("Com_Collider"), reinterpret_cast<CComponent**>(&m_pColliderCom), &BoundingDesc)))
 		return E_FAIL;
+
 
 
 	return S_OK;
