@@ -12,7 +12,7 @@ CMap_GamePlay::CMap_GamePlay(const CMap_GamePlay& rhs)
 
 HRESULT CMap_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin(LEVEL_TOOL)))
+	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
 		return E_FAIL;
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Map"),
