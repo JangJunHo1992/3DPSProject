@@ -646,6 +646,33 @@
     <Filter Include="02.GameObjects\1.MyAssets\JobMob1\Entire\GamePlay\State\6.SitIdle">
       <UniqueIdentifier>{24a1cce1-39c9-4fff-97bb-b8c91379a2cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Levels\03.Stage1">
+      <UniqueIdentifier>{f9ea6edb-66a1-457b-b562-1db66b5cb4fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\04.BossStage1">
+      <UniqueIdentifier>{2500748d-edae-4b02-a2e9-58003057f00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\05.BossStage2">
+      <UniqueIdentifier>{e76cfad2-2a03-4b12-8995-4bd43deaf99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map2">
+      <UniqueIdentifier>{36d9b20f-1728-4c37-81ac-e11c998633a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map3">
+      <UniqueIdentifier>{e7e5bf90-86f5-4ce1-a2b5-6a76c0ea0864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map2\Map_GamePlay">
+      <UniqueIdentifier>{27f68c2d-1519-445a-9a7b-4107c5677ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map2\Map_Tool">
+      <UniqueIdentifier>{03f7c36e-1c29-461b-943d-6d17ee4fa182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map3\GamePlay">
+      <UniqueIdentifier>{d673d921-4e7f-4b34-b497-a2a6501035ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Map3\Tool">
+      <UniqueIdentifier>{54d701f9-7d65-4d1e-a5c7-f3a8cc57bb85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1311,6 +1338,33 @@
     <ClInclude Include="..\Public\JobMob2_Hurt.h">
       <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\5.Hurt</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Level_Stage1.h">
+      <Filter>01.Levels\03.Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_BossStage1.h">
+      <Filter>01.Levels\04.BossStage1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_BossStage2.h">
+      <Filter>01.Levels\05.BossStage2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map2.h">
+      <Filter>02.GameObjects\Map2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map3.h">
+      <Filter>02.GameObjects\Map3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map2_GamePlay.h">
+      <Filter>02.GameObjects\Map2\Map_GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map2_Tool.h">
+      <Filter>02.GameObjects\Map2\Map_Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map3_GamePlay.h">
+      <Filter>02.GameObjects\Map3\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map3_Tool.h">
+      <Filter>02.GameObjects\Map3\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1928,6 +1982,33 @@
     </ClCompile>
     <ClCompile Include="..\Private\JobMob2_Walk.cpp">
       <Filter>02.GameObjects\1.MyAssets\JobMob2\Entire\GamePlay\State\1.Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_Stage1.cpp">
+      <Filter>01.Levels\03.Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_BossStage1.cpp">
+      <Filter>01.Levels\04.BossStage1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_BossStage2.cpp">
+      <Filter>01.Levels\05.BossStage2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map2.cpp">
+      <Filter>02.GameObjects\Map2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map3.cpp">
+      <Filter>02.GameObjects\Map3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map2_Tool.cpp">
+      <Filter>02.GameObjects\Map2\Map_Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map2_GamePlay.cpp">
+      <Filter>02.GameObjects\Map2\Map_GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map3_GamePlay.cpp">
+      <Filter>02.GameObjects\Map3\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map3_Tool.cpp">
+      <Filter>02.GameObjects\Map3\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

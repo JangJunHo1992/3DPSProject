@@ -1,5 +1,5 @@
 #include "Covus_GamePlay.h"
-
+#include "GameInstance.h"
 #include "Player_Idle.h"
 
 CCovus_GamePlay::CCovus_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -58,6 +58,7 @@ HRESULT CCovus_GamePlay::Render()
 
 HRESULT CCovus_GamePlay::Ready_Components()
 {
+	
 	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
 		return E_FAIL;
 

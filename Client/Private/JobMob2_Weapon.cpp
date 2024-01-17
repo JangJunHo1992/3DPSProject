@@ -71,7 +71,7 @@ HRESULT CJobMob2_Weapon::Ready_Components_Origin(LEVEL eLevel)
 
 
 	/* For.Com_Collider */
-	m_iColliderSize = 12;
+	m_iColliderSize = 6;
 	m_pColliders.resize(m_iColliderSize);
 	//m_pColliders = new CCollider*[m_iColliderSize];
 
@@ -79,9 +79,9 @@ HRESULT CJobMob2_Weapon::Ready_Components_Origin(LEVEL eLevel)
 	{
 		CBounding_Sphere::BOUNDING_SPHERE_DESC BoundingDesc = {};
 
-		_float fPosZ = 2.5f / m_iColliderSize * (i + 1);
+		_float fPosZ = 1.f / m_iColliderSize * (i + 1);
 
-		_float fRadiusX = 180.0f;
+		_float fRadiusX = 90.0f;
 		_float fRadiusY = 180.0f;
 		_float fRadiusZ = 90.0f;
 
@@ -96,7 +96,7 @@ HRESULT CJobMob2_Weapon::Ready_Components_Origin(LEVEL eLevel)
 			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
 			, SocketMatrix
 		);
-		BoundingDesc.fRadius = 2.5f / m_iColliderSize;
+		BoundingDesc.fRadius = 1.f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
 		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 		const wstring strName = TEXT("Com_Collider_") + i;

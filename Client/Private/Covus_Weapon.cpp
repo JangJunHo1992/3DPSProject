@@ -122,6 +122,10 @@ void CCovus_Weapon::Free()
 {
 
 	__super::Free();
+	for (_uint i = 0; i < m_iColliderSize; ++i)
+	{
+		Safe_Release(m_pColliders);
+	}
 
 }
 

@@ -25,7 +25,7 @@ HRESULT CAnimation::Initialize(CMyAIAnimation pAIAnimation, const CModel::BONES&
 	strcpy_s(m_szName, pAIAnimation.Get_Name().c_str());
 
 	m_fDuration = (_float)pAIAnimation.Get_Duration();
-	m_fTickPerSecond = (_float)pAIAnimation.Get_TickPerSecond()*1.7f;
+	m_fTickPerSecond = (_float)pAIAnimation.Get_TickPerSecond()*1.3f;
 
 	m_iNumChannels = pAIAnimation.Get_NumChannels();
 

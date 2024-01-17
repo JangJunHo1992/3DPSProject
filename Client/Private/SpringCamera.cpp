@@ -38,7 +38,7 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 
 		hDist = 1.f; //Z 축 카메라와 플레이어 거리
 		vDist = 1.f; //Y 축 카메라와 플레이어 거리
-		m_CameraOffsetY = 3.f;
+		m_CameraOffsetY = 2.f;
 		m_CameraOffsetZ = -5.f;
 		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
 		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
