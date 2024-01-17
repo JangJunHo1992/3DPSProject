@@ -94,10 +94,6 @@ CState<CJobMob2_GamePlay>* CJobMob2DefaultState::Attack(CJobMob2_GamePlay* pActo
 
 }
 
-CState<CJobMob2_GamePlay>* CJobMob2DefaultState::RaidAttack(CJobMob2_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
-{
-	
-}
 
 
 CState<CJobMob2_GamePlay>* CJobMob2DefaultState::Hitted(CJobMob2_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)

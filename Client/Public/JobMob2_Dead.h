@@ -12,7 +12,7 @@ public:
 	virtual void Release(CJobMob2_GamePlay* pActor) override;
 
 public:
-	static const _uint g_iAnimIndex = CJobMob2::JobMob2State::Dead;
+	static const _uint g_iAnimIndex = CJobMob2::JobMob2State::Die1;
 };
 
 END

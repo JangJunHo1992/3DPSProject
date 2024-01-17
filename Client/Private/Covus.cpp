@@ -68,6 +68,7 @@ HRESULT CCovus::Render()
 	return S_OK;
 }
 
+
 void CCovus::Set_Hitted()
 {
 	CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;

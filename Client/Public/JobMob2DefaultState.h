@@ -20,7 +20,6 @@ public:
 
 	CState<CJobMob2_GamePlay>* Run(CJobMob2_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CJobMob2_GamePlay>* Attack(CJobMob2_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
-	CState<CJobMob2_GamePlay>* RaidAttack(CJobMob2_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CJobMob2_GamePlay>* Hitted(CJobMob2_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
 

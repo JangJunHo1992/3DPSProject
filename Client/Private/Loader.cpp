@@ -411,7 +411,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	{
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_JobMob1");
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_JobMob2");
 			string strFilePath = "../Bin/Resources/Models/JobMob2/JobMob2";
 			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 

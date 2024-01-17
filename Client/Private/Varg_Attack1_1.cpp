@@ -9,6 +9,7 @@ void CVarg_Attack1_1::Initialize(CVarg_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	
 }
 
 CState<CVarg_GamePlay>* CVarg_Attack1_1::Update(CVarg_GamePlay* pActor, _float fTimeDelta)
