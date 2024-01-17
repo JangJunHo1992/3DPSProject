@@ -24,7 +24,8 @@ public:
 
 public:
 	HRESULT Open_Level(_uint iCurrentLevelIndex, class CLevel* pNewLevel);
-
+public:
+	_uint Get_CurrentLevel() { return m_iCurrentLevelIndex; }
 private:
 	_uint						m_iCurrentLevelIndex = { 0 };
 	class CLevel*				m_pCurrentLevel = { nullptr };
