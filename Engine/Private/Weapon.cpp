@@ -17,6 +17,7 @@ CWeapon::CWeapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 
 CWeapon::CWeapon(const CWeapon& rhs)
 	: CGameObject(rhs)
+	, m_iColliderSize(rhs.m_iColliderSize)
 {
 }
 

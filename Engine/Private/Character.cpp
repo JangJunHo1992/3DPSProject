@@ -73,6 +73,10 @@ void CCharacter::Late_Tick(_float fTimeDelta)
 
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
 		return;
+#ifdef _DEBUG
+	m_pNavigationCom->Render();
+	m_pColliderCom->Render();
+#endif
 }
 
 HRESULT CCharacter::Render()
@@ -80,10 +84,7 @@ HRESULT CCharacter::Render()
 	if (FAILED(__super::Render()))
 		return E_FAIL;
 
-#ifdef _DEBUG
-	m_pNavigationCom->Render();
-	m_pColliderCom->Render();
-#endif
+
 
 	return S_OK;
 }

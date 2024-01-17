@@ -10,6 +10,7 @@ CCovus_Weapon::CCovus_Weapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContex
 
 CCovus_Weapon::CCovus_Weapon(const CCovus_Weapon& rhs)
 	: CWeapon_Client(rhs)
+	
 {
 }
 
@@ -120,13 +121,7 @@ HRESULT CCovus_Weapon::Bind_ShaderResources()
 
 void CCovus_Weapon::Free()
 {
-
 	__super::Free();
-	for (_uint i = 0; i < m_iColliderSize; ++i)
-	{
-		Safe_Release(m_pColliders);
-	}
-
 }
 
 _bool CCovus_Weapon::Collision_Chcek()
