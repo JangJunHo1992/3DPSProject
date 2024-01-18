@@ -70,6 +70,8 @@ public:
 	HRESULT Initialize_Prototype(_float fSpeedPerSec, _float fRotationPerSec);
 
 public:
+	void Move_On_Navigation(_vector vMove, class CNavigation* pNavigation = nullptr);
+
 	void Go_Straight(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 	void Go_Straight_L45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 	void Go_Straight_R45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);

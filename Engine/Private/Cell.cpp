@@ -104,7 +104,7 @@ void CCell::Write_Cell(HANDLE& hFile, _ulong dwByte)
 
 _float CCell::Calc_Height(_fvector vPosition)
 {
-	_float3 vPos;  
+	_float3 vPos;
 	XMStoreFloat3(&vPos, vPosition);
 
 	_vector   vPlane = XMPlaneFromPoints(
@@ -117,6 +117,18 @@ _float CCell::Calc_Height(_fvector vPosition)
 	XMStoreFloat4(&Plane, vPlane);
 
 	return (-Plane.x * vPos.x - Plane.z * vPos.z - Plane.w) / Plane.y;
+}
+
+_bool CCell::Has_Point(_uint iPointIndex)
+{
+	for (_uint iIndex : m_ChildIndexes)
+	{
+		if (iIndex == iPointIndex)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 #ifdef _DEBUG

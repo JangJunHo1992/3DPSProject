@@ -168,6 +168,11 @@ CCollider* CCharacter::Get_Collider()
 	return m_pColliderCom;
 }
 
+CNavigation* CCharacter::Get_Navigation()
+{
+	return m_pNavigationCom;
+}
+
 
 void CCharacter::Set_Animation(
 	_uint _iNextAnimation
@@ -194,49 +199,87 @@ _bool CCharacter::Is_Inputable_Back(_uint _iIndexBack)
 	return m_pBody->Is_Inputable_Back(_iIndexBack);
 }
 
-void CCharacter::Go_Straight(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Straight(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Straight(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Straight(fTimeDelta, m_pNavigationCom);
 }
 
-void CCharacter::Go_Straight_L45(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Straight_L45(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Straight_L45(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Straight_L45(fTimeDelta, m_pNavigationCom);
 }
 
-void CCharacter::Go_Straight_R45(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Straight_R45(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Straight_R45(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Straight_R45(fTimeDelta, m_pNavigationCom);
 }
 
-void CCharacter::Go_Backward(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Backward(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Backward(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Backward(fTimeDelta, m_pNavigationCom);
 }
 
-void CCharacter::Go_Backward_L45(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Backward_L45(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Backward_L45(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Backward_L45(fTimeDelta, m_pNavigationCom);
 }
 
-void CCharacter::Go_Backward_R45(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Backward_R45(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Backward_R45(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Backward_R45(fTimeDelta, m_pNavigationCom);
 }
 
-void CCharacter::Go_Left(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Left(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Left(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Left(fTimeDelta, m_pNavigationCom);
 }
 
-void CCharacter::Go_Right(_float fTimeDelta, CNavigation* pNavigation)
+void CCharacter::Go_Right(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Right(fTimeDelta, pNavigation);
+	m_pTransformCom->Go_Right(fTimeDelta, m_pNavigationCom);
 }
 
 void CCharacter::Knockback(_float fTimeDelta, CNavigation* pNavigation)
 {
 	m_pTransformCom->Knockback(fTimeDelta, pNavigation);
+}
+
+void CCharacter::Update_RigidBody(_float fTimeDelta)
+{
+	if (abs(m_vNetPower.x) > 0.0001 || abs(m_vNetPower.y) > 0.0001 || abs(m_vNetPower.z) > 0.0001)
+		m_bIsPowered = true;
+
+
+	_float3 vMovePos = m_vNetPower * fTimeDelta * 20;
+	m_vNetPower -= vMovePos;
+
+	_vector vPos = m_pTransformCom->Get_State(CTransform::STATE::STATE_POSITION);
+	_float3 vPosFloat3 = m_pTransformCom->Get_State(CTransform::STATE::STATE_POSITION);
+	_float fCellHeight = m_pNavigationCom->Get_CurrentHeight(vPos);
+
+	//{
+	//	m_pTransformCom->Set_Position(vPosFloat3 + vMovePos);
+	//	return;
+	//}
+
+
+	_float3 vResult = m_vNetPower;
+
+	if (fCellHeight < (vPosFloat3 + m_vNetPower).y)
+	{
+		if (false == m_bIsJump)
+		{
+			m_vNetPower.y = 0;
+			vResult.y = fCellHeight - vPosFloat3.y;
+		}
+	}
+
+	else
+	{
+		vResult.y = fCellHeight - (vPosFloat3 + m_vNetPower).y;
+	}
+
+	m_pTransformCom->Move_On_Navigation(vResult, m_pNavigationCom);
 }
 
 void CCharacter::Search_Target()

@@ -43,6 +43,8 @@ public:
 
 	_float Calc_Height(_fvector vPosition);
 
+	_bool Has_Point(_uint iPointIndex);
+
 #ifdef _DEBUG
 public:
 	HRESULT Render(class CShader* pShader);
