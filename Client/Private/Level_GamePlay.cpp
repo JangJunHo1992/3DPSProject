@@ -36,7 +36,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 {
 	if (m_pGameInstance->Get_DIKeyState(DIK_F3) & 0x80)
 	{
-		if (FAILED(m_pGameInstance->Open_Level(LEVEL_GAMEPLAY, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS1))))
+		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS1))))
 			return;
 	}
 
@@ -74,6 +74,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player"))))
 	//	return E_FAIL;
 
+	
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
 	 	return E_FAIL;
 

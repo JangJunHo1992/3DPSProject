@@ -26,6 +26,7 @@ HRESULT CCovus_Weapon::Initialize_Prototype()
 
 HRESULT CCovus_Weapon::Initialize(void* pArg)
 {
+	m_iCurrentLevel = m_pGameInstance->Get_NextLevel();
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
@@ -40,7 +41,19 @@ void CCovus_Weapon::Priority_Tick(_float fTimeDelta)
 void CCovus_Weapon::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	Collision_Chcek();
+	
+	switch (m_iCurrentLevel)
+	{
+	case 2:
+		Collision_Chcek();	
+		break;
+	case 6:
+		Collision_Chcekb1();
+		break;
+	case 7:
+		Collision_Chcekb2();
+		break;
+	}
 
 }
 
@@ -124,7 +137,7 @@ void CCovus_Weapon::Free()
 	__super::Free();
 }
 
-_bool CCovus_Weapon::Collision_Chcek()
+_bool CCovus_Weapon::Collision_Chcek()//_uint eLevel
 {
 	if (false == m_bIsAttack)
 		return false;
@@ -132,8 +145,90 @@ _bool CCovus_Weapon::Collision_Chcek()
 	_bool bIsCollision = false;
 
 	CCharacter* pAlreadyHittedCharacter = nullptr;
-
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
 	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		if (false == m_bIsAttack)
+			break;
+
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider)
+				continue;
+
+			for (CCollider* pCollider : m_pColliders)
+			{
+				_bool isCollision = pCollider->Collision(pTargetCollider);
+				if (isCollision)
+				{
+					pTarget->Set_Hitted();
+					pAlreadyHittedCharacter = pTarget;
+					bIsCollision = true;
+					Set_IsAttack(false);
+					break;
+				}
+			}
+		}
+	}
+
+
+	return bIsCollision;
+}
+
+_bool CCovus_Weapon::Collision_Chcekb1()
+{
+	if (false == m_bIsAttack)
+		return false;
+
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		if (false == m_bIsAttack)
+			break;
+
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider)
+				continue;
+
+			for (CCollider* pCollider : m_pColliders)
+			{
+				_bool isCollision = pCollider->Collision(pTargetCollider);
+				if (isCollision)
+				{
+					pTarget->Set_Hitted();
+					pAlreadyHittedCharacter = pTarget;
+					bIsCollision = true;
+					Set_IsAttack(false);
+					break;
+				}
+			}
+		}
+	}
+
+
+	return bIsCollision;
+}
+
+_bool CCovus_Weapon::Collision_Chcekb2()
+{
+	if (false == m_bIsAttack)
+		return false;
+
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
 	for (CGameObject* pGameObject : _Targets)
 	{
 		if (false == m_bIsAttack)

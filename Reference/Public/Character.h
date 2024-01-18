@@ -92,9 +92,11 @@ protected:
 	CCharacter* m_pTargetPlayer = { nullptr };
 	CCharacter* m_pTargetMonster = { nullptr };
 
+	_uint		m_iCurrentLevelIn;
 
 protected:
 	map<const wstring, class CGameObject*>		m_PartObjects;
+	
 
 
 protected:

@@ -223,6 +223,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 	_matrix		PivotMatrix;
 
+
 	//Player
 	{
 

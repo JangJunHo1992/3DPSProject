@@ -16,6 +16,8 @@ HRESULT CCovus_Tool::Initialize_Prototype()
 	if (FAILED(__super::Initialize_Prototype()))
 		return E_FAIL;
 
+	
+
 	return S_OK;
 }
 

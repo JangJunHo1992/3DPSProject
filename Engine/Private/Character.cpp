@@ -25,6 +25,7 @@ HRESULT CCharacter::Initialize_Prototype()
 
 HRESULT CCharacter::Initialize(void* pArg)
 {
+
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
@@ -33,7 +34,7 @@ HRESULT CCharacter::Initialize(void* pArg)
 
 	if (FAILED(Ready_PartObjects()))
 		return E_FAIL;
-
+	m_iCurrentLevelIn = m_pGameInstance->Get_NextLevel();
 	return S_OK;
 }
 
@@ -57,8 +58,8 @@ void CCharacter::Tick(_float fTimeDelta)
 		if (nullptr != Pair.second)
 			Pair.second->Tick(fTimeDelta);
 	}
-
-	m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());
+	if(nullptr !=m_pColliderCom)
+		m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());
 }
 
 void CCharacter::Late_Tick(_float fTimeDelta)
@@ -243,7 +244,7 @@ void CCharacter::Search_Target()
 	if (nullptr == m_pTargetPlayer)
 	{
 		CCharacter* pTarget;
-		list<CGameObject*>* _ObjectList = m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
+		list<CGameObject*>* _ObjectList = m_pGameInstance->Get_GameObjects(m_iCurrentLevelIn, TEXT("Layer_Player"));
 
 		if (nullptr == _ObjectList)
 			return;

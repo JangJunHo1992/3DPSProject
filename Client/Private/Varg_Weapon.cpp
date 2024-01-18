@@ -136,7 +136,7 @@ _bool CVarg_Weapon::Collision_Chcek()
 
 	CCharacter* pAlreadyHittedCharacter = nullptr;
 
-	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Player"));
 	for (CGameObject* pGameObject : _Targets)
 	{
 		if (false == m_bIsAttack)

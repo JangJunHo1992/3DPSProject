@@ -162,6 +162,11 @@ _uint CGameInstance::Get_CurrentLevel()
 	return m_pLevel_Manager->Get_CurrentLevel();
 }
 
+_uint CGameInstance::Get_NextLevel()
+{
+	return m_pLevel_Manager->Get_NextLevel();
+}
+
 HRESULT CGameInstance::Add_Prototype_Object(const wstring & strPrototypeTag, CGameObject * pPrototype)
 {
 	if (nullptr == m_pObject_Manager)

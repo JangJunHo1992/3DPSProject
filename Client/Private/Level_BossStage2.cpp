@@ -44,7 +44,7 @@ void CLevel_BossStage2::Tick(_float fTimeDelta)
 
 HRESULT CLevel_BossStage2::Render()
 {
-	SetWindowText(g_hWnd, TEXT("게임플레이레벨입니다."));
+	SetWindowText(g_hWnd, TEXT("BossStage2."));
 
 	return S_OK;
 }
@@ -63,7 +63,7 @@ HRESULT CLevel_BossStage2::Ready_Layer_Camera(const wstring& strLayerTag)
 	Desc.fSpeedPerSec = 20.f;
 	Desc.fRotationPerSec = XMConvertToRadians(180.0f);
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Camera_Dynamic"), &Desc)))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, strLayerTag, TEXT("Prototype_GameObject_Camera_Dynamic"), &Desc)))
 		return E_FAIL;
 
 	return S_OK;
@@ -74,10 +74,10 @@ HRESULT CLevel_BossStage2::Ready_Layer_Player(const wstring& strLayerTag)
 	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player"))))
 	//	return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
 		return E_FAIL;
 
-	list<CGameObject*> m_pPlayerLayer = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, strLayerTag);
+	list<CGameObject*> m_pPlayerLayer = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, strLayerTag);
 
 	CGameObject* pPlayer = m_pPlayerLayer.back();
 
@@ -91,7 +91,7 @@ HRESULT CLevel_BossStage2::Ready_Layer_Monster(const wstring& strLayerTag)
 
 // 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Monster"))))
 // 		return E_FAIL;
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Magician"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, strLayerTag, TEXT("Prototype_GameObject_Magician"))))
 		return E_FAIL;
 // 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Varg"))))
 // 		return E_FAIL;
@@ -117,10 +117,10 @@ HRESULT CLevel_BossStage2::Ready_Layer_BackGround(const wstring& strLayerTag)
 	// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Terrain"))))
 	// 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Sky"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, strLayerTag, TEXT("Prototype_GameObject_Sky"))))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Map3"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, strLayerTag, TEXT("Prototype_GameObject_Map3"))))
 		return E_FAIL;
 
 	return S_OK;

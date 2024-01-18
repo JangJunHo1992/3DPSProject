@@ -22,7 +22,7 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevelID)
 {
 	/* 추후 로딩 레벨이 끝나면 원래 목적으로 뒀던 레벨로 넘어가기위해서. */
 	m_eNextLevelID = eNextLevelID;
-
+	m_iNextLevel = m_eNextLevelID;
 	/* 메인스레드로 대충 로드한다. */
 	/* 로딩용 자원을 로드한다. */
 	/* 로딩레벨에서 보여줘야할 객체들을 생성한다.(배경, 일러스트, 로딩바) */
@@ -45,6 +45,8 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 // 		if (GetKeyState(VK_RETURN) & 0x8000)
 // 		{
 			CLevel*		pNewLevel = { nullptr };
+
+			
 
 			switch (m_eNextLevelID)
 			{
@@ -70,8 +72,8 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 
 			}
 
-			if (nullptr == pNewLevel)
-				return;
+			//! 승용 주석if (nullptr == pNewLevel)
+			//! 승용 주석	return;
 
 			if (FAILED(m_pGameInstance->Open_Level(m_eNextLevelID, pNewLevel)))
 				return;

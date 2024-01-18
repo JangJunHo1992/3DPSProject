@@ -338,6 +338,7 @@ protected:
 	//HRESULT Bind_ShaderResources();
 protected:
 	_bool	m_bRotatePlayer = false;
+	
 
 public:
 	virtual void Free() override;
