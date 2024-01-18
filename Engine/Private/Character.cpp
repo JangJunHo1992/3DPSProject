@@ -58,8 +58,17 @@ void CCharacter::Tick(_float fTimeDelta)
 		if (nullptr != Pair.second)
 			Pair.second->Tick(fTimeDelta);
 	}
+	m_pTransformCom->Add_RootBone_Position(m_pBody->Get_MovePos(), m_pNavigationCom);
+
 	if(nullptr !=m_pColliderCom)
 		m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());
+
+	Update_RigidBody(fTimeDelta);
+
+// 	if (m_fInvincibleTime > 0.f)
+// 	{
+// 		m_fInvincibleTime -= fTimeDelta;
+// 	}
 }
 
 void CCharacter::Late_Tick(_float fTimeDelta)

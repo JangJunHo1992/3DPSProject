@@ -145,11 +145,14 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 		}
 
 
-
-		if (CGameInstance::GetInstance()->Mouse_Down(DIM_RB))
+		if (CGameInstance::GetInstance()->Key_Pressing(DIK_LSHIFT))
 		{
-			Select_Point_Mesh();
+			if (CGameInstance::GetInstance()->Mouse_Down(DIM_RB))
+			{
+				Select_Point_Mesh();
+			}
 		}
+		
 	}
 
 
@@ -157,8 +160,8 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 
 	if (m_pGameInstance->Key_Down(DIK_P))
 	{
-		//m_pMapNavigationCom->Save_All();
-		m_pGameInstance->Save_Objects_With_Json(LEVEL_TOOL, "Save_GameObjects.json");
+		m_pMapNavigationCom->Save_All();
+		//m_pGameInstance->Save_Objects_With_Json(LEVEL_TOOL, "Save_GameObjects.json");
 	}
 
 	//if (m_pGameInstance->Key_Down(DIK_J))

@@ -109,7 +109,8 @@ public:
 		m_WorldMatrix.m[STATE::STATE_POSITION][2] += vState.z;
 
 	}
-	void Add_RootBone_Position(const _float3& vPos);
+	void Add_RootBone_Position(const _float3& vPos, class CNavigation* pNavigation = nullptr);
+
 public:
 	_matrix		Get_RotationMatrix(FXMMATRIX Mat);
 	_float3		Extract_PitchYawRollFromRotationMatrix(FXMMATRIX Mat);

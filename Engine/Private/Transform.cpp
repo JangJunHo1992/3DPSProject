@@ -342,14 +342,25 @@ void CTransform::Look_At_Around(_fvector vTargetPos, _float fTimeDelta)
 	Set_State(CTransform::STATE_POSITION, vPosition);
 }
 
-void CTransform::Add_RootBone_Position(const _float3& vPos)
+void CTransform::Add_RootBone_Position(const _float3& vPos, CNavigation* pNavigation)
 {
-	_float3 vReslut;
-	XMStoreFloat3(&vReslut, XMVector3TransformNormal(XMLoadFloat3(&vPos), m_WorldMatrix));
+	_vector vRootMove = XMVector3TransformNormal(XMLoadFloat3(&vPos), m_WorldMatrix);
+	_vector vResult = vRootMove;
+	Move_On_Navigation(vResult, pNavigation);
 
-	m_WorldMatrix.m[STATE::STATE_POSITION][0] += vReslut.x;
-	m_WorldMatrix.m[STATE::STATE_POSITION][1] += vReslut.y;
-	m_WorldMatrix.m[STATE::STATE_POSITION][2] += vReslut.z;
+	/*_vector	vPosition = Get_State(STATE_POSITION);
+	_vector vRootMove = XMVector3TransformNormal(XMLoadFloat3(&vPos), m_WorldMatrix);
+
+	vPosition += vRootMove;
+
+
+	if (nullptr != pNavigation)
+	{
+		if (false == pNavigation->isMove(vPosition))
+			return;
+	}
+
+	Set_State(STATE_POSITION, vPosition);*/
 }
 
 _matrix CTransform::Get_RotationMatrix(FXMMATRIX Mat)
