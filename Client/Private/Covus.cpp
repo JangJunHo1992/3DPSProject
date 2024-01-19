@@ -40,7 +40,7 @@ HRESULT CCovus::Initialize(void* pArg)
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
-
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(90.f, -3.5f, 0.f, 1.f));
 	return S_OK;
 }
 
