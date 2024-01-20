@@ -5,6 +5,7 @@
 
 BEGIN(Engine)
 
+class CCollider;
 class CShader;
 class CBone;
 
@@ -23,7 +24,9 @@ protected:
 
 public:
 	class CBone* Get_BonePtr(const _char* pBoneName);
-
+	CCollider* Get_Collider() {
+		return m_pColliderCom;
+	}
 public:
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize(void* pArg) override;
@@ -50,6 +53,7 @@ public:
 protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };
+	CCollider* m_pColliderCom = { nullptr };
 
 protected:
 	class CTransform* m_pParentTransform = { nullptr };

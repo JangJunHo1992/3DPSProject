@@ -58,6 +58,7 @@ void CCharacter::Tick(_float fTimeDelta)
 		if (nullptr != Pair.second)
 			Pair.second->Tick(fTimeDelta);
 	}
+
 	m_pTransformCom->Add_RootBone_Position(m_pBody->Get_MovePos(), m_pNavigationCom);
 
 	if(nullptr !=m_pColliderCom)
