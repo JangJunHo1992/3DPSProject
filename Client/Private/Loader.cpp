@@ -474,20 +474,20 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 	}
 	{
-		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Fiona");
+// 		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Fiona");
 
-		if (LEVEL_TOOL == eLEVEL)
-		{
-
-		}
-		else
-		{
-			/* For.Prototype_Component_Model_Fiona */
-			PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
-			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, strPrototypeTag,
-				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Fiona/Fiona", PivotMatrix))))
-				return E_FAIL;
-		}
+// 		if (LEVEL_TOOL == eLEVEL)
+// 		{
+// 
+// 		}
+// 		else
+// 		{
+// 			/* For.Prototype_Component_Model_Fiona */
+// 			PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
+// 			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_GAMEPLAY, strPrototypeTag,
+// 				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Models/Fiona/Fiona", PivotMatrix))))
+// 				return E_FAIL;
+// 		}
 
 	}
 	//Map
@@ -919,21 +919,21 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 	}
 
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");
-
-		if (LEVEL_TOOL == eLEVEL)
-		{
-
-		}
-		else
-		{
-			/* For.Prototype_GameObject_Monster */
-			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-				CMonster_GamePlay::Create(m_pDevice, m_pContext))))
-				return E_FAIL;
-		}
-	}
+// 	{
+// 		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Monster");
+// 
+// 		if (LEVEL_TOOL == eLEVEL)
+// 		{
+// 
+// 		}
+// 		else
+// 		{
+// 			/* For.Prototype_GameObject_Monster */
+// 			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+// 				CMonster_GamePlay::Create(m_pDevice, m_pContext))))
+// 				return E_FAIL;
+// 		}
+// 	}
 
 	//Map
 	{
