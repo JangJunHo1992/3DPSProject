@@ -396,14 +396,14 @@ void CNavigation::Delete_Point(CNavigationPoint* pTargetPoint)
 	{
 		if (pPoint == pTargetPoint)
 		{
-			//for (CCell* pCell : m_Cells) 
-			//{
-			//	_uint iPointIndex = pPoint->Get_Index();
-			//	if (pCell->Has_Point(iPointIndex))
-			//	{
-			//		m_Cells.erase(remove(m_Cells.begin(), m_Cells.end(), pCell), m_Cells.end());
-			//	}
-			//}
+			for (CCell* pCell : m_Cells) 
+			{
+				_uint iPointIndex = pPoint->Get_Index();
+				if (pCell->Has_Point(iPointIndex))
+				{
+					m_Cells.erase(remove(m_Cells.begin(), m_Cells.end(), pCell), m_Cells.end());
+				}
+			}
 
 			m_Points.erase(remove(m_Points.begin(), m_Points.end(), pTargetPoint), m_Points.end());
 			Safe_Delete(pTargetPoint);

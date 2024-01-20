@@ -36,7 +36,7 @@ HRESULT CVarg::Initialize(void* pArg)
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(-60.f, 0.f, 0.f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.f, 0.f, 0.f, 1.f));
 
 	return S_OK;
 }

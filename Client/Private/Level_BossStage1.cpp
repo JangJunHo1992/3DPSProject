@@ -28,7 +28,27 @@ HRESULT CLevel_BossStage1::Initialize()
 
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 		return E_FAIL;
+	list<CGameObject*>* playerList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Player"));
+	CCharacter* pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
+	m_pGameInstance->Set_Player(pPlayer);
 
+	_vector vPos = pPlayer->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);
+	pPlayer->Get_Navigation()->Reset_CurrentIndex(vPos);
+
+	list<CGameObject*>* monsterList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
+
+	if (monsterList)
+	{
+		for (auto& pGameObject : *monsterList)
+		{
+			CCharacter* pMonster = dynamic_cast<CCharacter*>(pGameObject);
+			if (pMonster)
+			{
+				_vector vPos = pMonster->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);
+				pMonster->Get_Navigation()->Reset_CurrentIndex(vPos);
+			}
+		}
+	}
 	return S_OK;
 }
 
