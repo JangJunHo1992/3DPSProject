@@ -1,6 +1,7 @@
 #include "Magician_GamePlay.h"
 #include "Transform.h"
 #include "Magician_Idle.h"
+#include "GameInstance.h"
 
 CMagician_GamePlay::CMagician_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMagician(pDevice, pContext)
@@ -29,7 +30,7 @@ HRESULT CMagician_GamePlay::Initialize(void* pArg)
 	m_pActor = new CActor<CMagician_GamePlay>(this);
 	m_pActor->Set_State(new CMagician_Idle());
 	
-	Search_Target();
+	//Search_Target();
 
 	return S_OK;
 }
@@ -69,9 +70,25 @@ HRESULT CMagician_GamePlay::Render()
 
 HRESULT CMagician_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+// 	switch (m_pGameInstance->Get_NextLevel())
+// 	{
+// 	case 2:
+// 		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+// 			return E_FAIL;
+// 		break;
+// 	case 6:
+// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
+// 			return E_FAIL;
+// 		break;
+// 	case 7:
+// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
+// 			return E_FAIL;
+// 		break;
+// 	default:
+// 		break;
+// 	}
+	if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
 		return E_FAIL;
-
 	return S_OK;
 }
 

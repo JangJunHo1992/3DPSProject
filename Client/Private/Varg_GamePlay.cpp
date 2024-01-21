@@ -1,5 +1,5 @@
 #include "Varg_GamePlay.h"
-
+#include "GameInstance.h"
 #include "Varg_Idle.h"
 
 CVarg_GamePlay::CVarg_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -68,8 +68,25 @@ HRESULT CVarg_GamePlay::Render()
 
 HRESULT CVarg_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
-		return E_FAIL;
+	m_pGameInstance->Get_NextLevel();
+	switch (m_pGameInstance->Get_NextLevel())
+	{
+	case 2:
+		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+			return E_FAIL;
+		break;
+	case 6:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
+			return E_FAIL;
+		break;
+	case 7:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
+			return E_FAIL;
+		break;
+	default:
+		break;
+	}
+	
 
 	return S_OK;
 }

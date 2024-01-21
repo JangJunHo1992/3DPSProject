@@ -30,6 +30,8 @@ public:
 public:
 	void Terrain_Pick();
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
+	void Create_Object_On_Map(const wstring& strLayerTag, const wstring& strPrototypeTag);
+
 	void Create_Raider();
 	void Resize_Plane(_ushort x, _ushort z);
 
@@ -38,13 +40,19 @@ public:
 	CNavigationPoint* Select_Point();
 	CNavigationPoint* Select_Point_Mesh();
 
-
 	class CGameObject* Select_Object(const wstring& strLayerTag);
 	void Delete_Object(class CGameObject* pGameObject);
 
 public:
+	HRESULT Load_Objects_With_Json(string filePath);
+
+public:
+	void Delete_Point();
+
+
 
 private:
+	HRESULT Ready_LightDesc();
 	HRESULT Ready_Layer_Camera(const wstring& strLayerTag);
 	HRESULT Ready_Layer_Monster(const wstring& strLayerTag);
 	HRESULT Ready_Layer_BackGround(const wstring& strLayerTag);
@@ -64,6 +72,8 @@ private:
 
 	class CMap_Tool* m_pMap = { nullptr };
 	class CNavigation* m_pMapNavigationCom = { nullptr };
+
+	_bool	m_bNaviMode = { false };
 
 public:
 	void	Set_BrushRange(_float _fBrushRange);

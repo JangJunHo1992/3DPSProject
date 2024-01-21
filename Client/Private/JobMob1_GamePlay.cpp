@@ -1,6 +1,6 @@
 #include "JobMob1_GamePlay.h"
-
-//#include "JobMob1_Idle.h"
+#include "GameInstance.h"
+#include "JobMob1_Idle.h"
 
 CJobMob1_GamePlay::CJobMob1_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CJobMob1(pDevice, pContext)
@@ -27,7 +27,7 @@ HRESULT CJobMob1_GamePlay::Initialize(void* pArg)
 		return E_FAIL;
 
 	m_pActor = new CActor<CJobMob1_GamePlay>(this);
-	//m_pActor->Set_State(new CJobMob1_Idle);
+	m_pActor->Set_State(new CJobMob1_Idle);
 
 	Search_Target();
 
@@ -68,8 +68,24 @@ HRESULT CJobMob1_GamePlay::Render()
 
 HRESULT CJobMob1_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
-		return E_FAIL;
+	m_pGameInstance->Get_NextLevel();
+	switch (m_pGameInstance->Get_NextLevel())
+	{
+	case 2:
+		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+			return E_FAIL;
+		break;
+	case 6:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
+			return E_FAIL;
+		break;
+	case 7:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
+			return E_FAIL;
+		break;
+	default:
+		break;
+	}
 
 	return S_OK;
 }

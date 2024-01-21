@@ -189,6 +189,7 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Public\AlphaObject.h" />
     <ClInclude Include="..\Public\Animation.h" />
     <ClInclude Include="..\public\Base.h" />
     <ClInclude Include="..\Public\Body.h" />
@@ -215,6 +216,7 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClInclude Include="..\Public\Engine_Struct.h" />
     <ClInclude Include="..\Public\Engine_Typedef.h" />
     <ClInclude Include="..\Public\Font_Manager.h" />
+    <ClInclude Include="..\Public\Frustum.h" />
     <ClInclude Include="..\public\GameInstance.h" />
     <ClInclude Include="..\Public\GameObject.h" />
     <ClInclude Include="..\Public\Graphic_Device.h" />
@@ -224,6 +226,8 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClInclude Include="..\Public\Layer.h" />
     <ClInclude Include="..\public\Level.h" />
     <ClInclude Include="..\public\Level_Manager.h" />
+    <ClInclude Include="..\Public\Light.h" />
+    <ClInclude Include="..\Public\Light_Manager.h" />
     <ClInclude Include="..\Public\Mesh.h" />
     <ClInclude Include="..\Public\Mesh_GamePlay.h" />
     <ClInclude Include="..\Public\Mesh_Tool.h" />
@@ -248,7 +252,9 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClInclude Include="..\Public\PipeLine.h" />
     <ClInclude Include="..\Public\RapidJson.h" />
     <ClInclude Include="..\public\Renderer.h" />
+    <ClInclude Include="..\Public\RenderTarget.h" />
     <ClInclude Include="..\Public\Shader.h" />
+    <ClInclude Include="..\Public\Target_Manager.h" />
     <ClInclude Include="..\Public\Texture.h" />
     <ClInclude Include="..\Public\Timer.h" />
     <ClInclude Include="..\Public\Timer_Manager.h" />
@@ -268,6 +274,7 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClInclude Include="..\Public\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Private\AlphaObject.cpp" />
     <ClCompile Include="..\Private\Animation.cpp" />
     <ClCompile Include="..\private\Base.cpp" />
     <ClCompile Include="..\Private\Body.cpp" />
@@ -288,6 +295,7 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClCompile Include="..\Private\DebugDraw.cpp" />
     <ClCompile Include="..\Private\Engine_Struct.cpp" />
     <ClCompile Include="..\Private\Font_Manager.cpp" />
+    <ClCompile Include="..\Private\Frustum.cpp" />
     <ClCompile Include="..\private\GameInstance.cpp" />
     <ClCompile Include="..\Private\GameObject.cpp" />
     <ClCompile Include="..\Private\Graphic_Device.cpp" />
@@ -296,6 +304,8 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClCompile Include="..\Private\Layer.cpp" />
     <ClCompile Include="..\private\Level.cpp" />
     <ClCompile Include="..\private\Level_Manager.cpp" />
+    <ClCompile Include="..\Private\Light.cpp" />
+    <ClCompile Include="..\Private\Light_Manager.cpp" />
     <ClCompile Include="..\Private\Mesh.cpp" />
     <ClCompile Include="..\Private\Mesh_GamePlay.cpp" />
     <ClCompile Include="..\Private\Mesh_Tool.cpp" />
@@ -312,7 +322,9 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClCompile Include="..\Private\PipeLine.cpp" />
     <ClCompile Include="..\Private\RapidJson.cpp" />
     <ClCompile Include="..\private\Renderer.cpp" />
+    <ClCompile Include="..\Private\RenderTarget.cpp" />
     <ClCompile Include="..\Private\Shader.cpp" />
+    <ClCompile Include="..\Private\Target_Manager.cpp" />
     <ClCompile Include="..\Private\Texture.cpp" />
     <ClCompile Include="..\Private\Timer.cpp" />
     <ClCompile Include="..\Private\Timer_Manager.cpp" />
@@ -332,6 +344,7 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClCompile Include="..\Private\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Deferred.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl" />
   </ItemGroup>
   <ItemGroup>

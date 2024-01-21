@@ -5,6 +5,10 @@
 #include "Object_Manager.h"
 #include "Renderer.h"
 #include "Font_Manager.h"
+#include "Target_Manager.h"
+#include "Renderer.h"
+#include "Frustum.h"
+#include "Light_Manager.h"
 
 #include "RapidJson.h"
 #include "Mesh_Tool.h"
@@ -133,6 +137,22 @@ HRESULT CGameInstance::Present()
 	return m_pGraphic_Device->Present();
 }
 
+ID3D11RenderTargetView* CGameInstance::Get_BackBufferRTV() const
+{
+	if (nullptr == m_pGraphic_Device)
+		return nullptr;
+
+	return m_pGraphic_Device->Get_BackBufferRTV();
+}
+
+ID3D11DepthStencilView* CGameInstance::Get_DSV() const
+{
+	if (nullptr == m_pGraphic_Device)
+		return nullptr;
+
+	return m_pGraphic_Device->Get_DSV();
+}
+
 HRESULT CGameInstance::Add_Timer(const wstring & strTimeTag)
 {
 	if (nullptr == m_pTimer_Manager)
@@ -155,6 +175,16 @@ HRESULT CGameInstance::Open_Level(_uint iCurrentLevelIndex, CLevel * pNewLevel)
 		return E_FAIL;
 
 	return m_pLevel_Manager->Open_Level(iCurrentLevelIndex, pNewLevel);
+}
+
+_uint CGameInstance::Get_CurrentLevel()
+{
+	return m_pLevel_Manager->Get_CurrentLevel();
+}
+
+_uint CGameInstance::Get_NextLevel()
+{
+	return m_pLevel_Manager->Get_NextLevel();
 }
 
 HRESULT CGameInstance::Add_Prototype_Object(const wstring & strPrototypeTag, CGameObject * pPrototype)
@@ -255,6 +285,14 @@ HRESULT CGameInstance::Add_RenderGroup(CRenderer::RENDERGROUP eGroupID, CGameObj
 		return E_FAIL;
 
 	return m_pRenderer->Add_RenderGroup(eGroupID, pGameObject);
+}
+
+HRESULT CGameInstance::Add_DebugRender(CComponent* pDebugCom)
+{
+	if (nullptr == m_pRenderer)
+		return E_FAIL;
+
+	return m_pRenderer->Add_DebugRender(pDebugCom);
 }
 
 void CGameInstance::Set_Transform(CPipeLine::D3DTRANSFORMSTATE eState, _fmatrix TransformMatrix)
@@ -381,6 +419,57 @@ HRESULT CGameInstance::Add_Font(const wstring& strFontTag, const wstring& strFon
 HRESULT CGameInstance::Render_Font(const wstring& strFontTag, const wstring& strText, const _float2& vPosition, _fvector vColor, _float fScale, _float2 vOrigin, _float fRotation)
 {
 	return m_pFonts_Manager->Render(strFontTag, strText, vPosition, vColor, fScale, vOrigin, fRotation);
+}
+HRESULT CGameInstance::Add_RenderTarget(const wstring& strTargetTag, _uint iSizeX, _uint iSizeY, DXGI_FORMAT ePixelFormat, const _float4& vClearColor)
+{
+	return m_pTarget_Manager->Add_RenderTarget(strTargetTag, iSizeX, iSizeY, ePixelFormat, vClearColor);
+}
+
+HRESULT CGameInstance::Add_MRT(const wstring& strMRTTag, const wstring& strTargetTag)
+{
+	return m_pTarget_Manager->Add_MRT(strMRTTag, strTargetTag);
+}
+
+HRESULT CGameInstance::Begin_MRT(const wstring& strMRTTag)
+{
+	return m_pTarget_Manager->Begin_MRT(strMRTTag);
+}
+
+HRESULT CGameInstance::End_MRT()
+{
+	return m_pTarget_Manager->End_MRT();
+}
+
+HRESULT CGameInstance::Bind_RenderTarget_ShaderResource(const wstring& strTargetTag, CShader* pShader, const _char* pConstantName)
+{
+	return m_pTarget_Manager->Bind_ShaderResource(strTargetTag, pShader, pConstantName);
+}
+
+#ifdef _DEBUG
+HRESULT CGameInstance::Ready_RenderTarget_Debug(const wstring& strTargetTag, _float fX, _float fY, _float fSizeX, _float fSizeY)
+{
+	return m_pTarget_Manager->Ready_Debug(strTargetTag, fX, fY, fSizeX, fSizeY);
+}
+HRESULT CGameInstance::Render_Debug_RTVs(const wstring& strMRTTag, CShader* pShader, CVIBuffer_Rect* pVIBuffer)
+{
+	return m_pTarget_Manager->Render_Debug(strMRTTag, pShader, pVIBuffer);
+}
+
+#endif
+
+HRESULT CGameInstance::Add_Light(const LIGHT_DESC& LightDesc)
+{
+	return m_pLight_Manager->Add_Light(LightDesc);
+}
+
+HRESULT CGameInstance::Render_Lights(CShader* pShader, CVIBuffer_Rect* pVIBuffer)
+{
+	return m_pLight_Manager->Render(pShader, pVIBuffer);
+}
+
+_bool CGameInstance::isIn_WorldPlanes(_fvector vPoint, _float fRadius)
+{
+	return m_pFrustum->isIn_WorldPlanes(vPoint, fRadius);
 }
 
 RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY)

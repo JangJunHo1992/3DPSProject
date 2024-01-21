@@ -49,11 +49,11 @@ void CBody::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
 
-	_float3 vPos = { 0.f, 0.f, 0.f };
+	m_vMovePos = { 0.f, 0.f, 0.f };
 
-	m_pModelCom->Play_Animation(fTimeDelta, vPos);
+	m_pModelCom->Play_Animation(fTimeDelta, m_vMovePos);
 
-	m_pParentTransform->Add_RootBone_Position(vPos);
+	//m_pColliderCom->Update(m_WorldMatrix);
 }
 
 void CBody::Late_Tick(_float fTimeDelta)
@@ -132,7 +132,7 @@ HRESULT CBody::Bind_ShaderResources()
 void CBody::Free()
 {
 	__super::Free();
-
+	//Safe_Release(m_pColliderCom);
 	Safe_Release(m_pParentTransform);
 	Safe_Release(m_pModelCom);
 	Safe_Release(m_pShaderCom);

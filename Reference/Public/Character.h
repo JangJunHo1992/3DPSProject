@@ -34,6 +34,7 @@ public:
 	CBody* Get_Body();
 	CWeapon* Get_Weapon(const wstring & strWeaponTag = TEXT("Part_Weapon"));
 	CCollider* Get_Collider();
+	CNavigation* Get_Navigation();
 
 	virtual void Set_Hitted() PURE;
 	void Set_IsAttack(_bool _bIsAttack) 
@@ -63,18 +64,24 @@ public:
 	_bool	Is_Inputable_Front(_uint _iIndexFront);
 	_bool	Is_Inputable_Back(_uint _iIndexBack);
 
-	void Go_Straight(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-	void Go_Straight_L45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-	void Go_Straight_R45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-	void Go_Backward(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-	void Go_Backward_L45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-	void Go_Backward_R45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-	void Go_Left(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-	void Go_Right(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
+	void Go_Straight(_float fTimeDelta		);
+	void Go_Straight_L45(_float fTimeDelta );
+	void Go_Straight_R45(_float fTimeDelta );
+	void Go_Backward(_float fTimeDelta		);
+	void Go_Backward_L45(_float fTimeDelta );
+	void Go_Backward_R45(_float fTimeDelta );
+	void Go_Left(_float fTimeDelta			);
+	void Go_Right(_float fTimeDelta		);
 
 
 	void Knockback(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
-
+	//RigidBody
+public:
+	void	Set_Force(_float3 _vForce) { m_vNetPower = _vForce; }
+	void	Add_Force(_float3 _vForce) { m_vNetPower += _vForce; }
+	_float3* Get_Force() { return &m_vNetPower; };
+	_float	Calc_Force_Sum() { return abs(m_vNetPower.x) + abs(m_vNetPower.y) + abs(m_vNetPower.z); };
+	void	Update_RigidBody(_float fTimeDelta);
 public:
 	void	Search_Target();
 	_float	Calc_Distance(CCharacter* pTarget);
@@ -92,9 +99,14 @@ protected:
 	CCharacter* m_pTargetPlayer = { nullptr };
 	CCharacter* m_pTargetMonster = { nullptr };
 
-
+	_uint		m_iCurrentLevelIn;
+	//RigidBody
+	_bool m_bIsPowered = { false };
+	_float3	m_vNetPower = { 0.f, 0.f, 0.f };
+	_bool	m_bIsJump = { false };
 protected:
 	map<const wstring, class CGameObject*>		m_PartObjects;
+	
 
 
 protected:

@@ -52,6 +52,10 @@ HRESULT CObject_Manager::Add_CloneObject(_uint iLevelIndex, const wstring & strL
 	if (nullptr == pPrototype)
 		return E_FAIL;
 
+// 	CGameObject::GAMEOBJECT_DESC Desc = *(CGameObject::GAMEOBJECT_DESC*)pArg;
+// 
+// 	Desc.iLevelIndex = iLevelIndex;
+
 	/* 원형을 복제하여 실제 게임내에 사용할 사본 객체를 생성해낸다.  */
 	CGameObject*		pGameObject = pPrototype->Clone(pArg);
 	if (nullptr == pGameObject)

@@ -36,7 +36,7 @@ HRESULT CVarg::Initialize(void* pArg)
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(-60.f, 0.f, 0.f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.f, 0.f, 0.f, 1.f));
 
 	return S_OK;
 }
@@ -70,12 +70,12 @@ void CVarg::Set_Hitted()
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
-//void CVarg::Write_Json(json& Out_Json)
-//{
-//	Out_Json["Name"] = m_sName;
-//	Out_Json["LayerTag"] = m_sLayerTag;
-//	__super::Write_Json(Out_Json);
-//}
+void CVarg::Write_Json(json& Out_Json)
+{
+	Out_Json["Name"] = m_sName;
+	Out_Json["LayerTag"] = m_sLayerTag;
+	__super::Write_Json(Out_Json);
+}
 
 HRESULT CVarg::Ready_Components_Origin(LEVEL eLevel)
 {
@@ -88,15 +88,18 @@ HRESULT CVarg::Ready_Components_Origin(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Collider */
-	CBounding_OBB::BOUNDING_OBB_DESC		BoundingDesc = {};
+	CBounding_Sphere::BOUNDING_SPHERE_DESC  BoundingDesc = {};
 
-	BoundingDesc.vExtents = _float3(0.8f, 1.5f, 0.8f);
-	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
-	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
+	// 	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
+	// 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
+	// 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
+	BoundingDesc.fRadius = _float(1.5f);
+	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius, 0.f);
 
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_OBB"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),
 		TEXT("Com_Collider"), reinterpret_cast<CComponent**>(&m_pColliderCom), &BoundingDesc)))
 		return E_FAIL;
+
 
 
 	return S_OK;

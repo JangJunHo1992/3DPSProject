@@ -2,7 +2,6 @@
 #include "Cell.h"
 #include "NavigationPoint.h"
 #include "GameInstance.h"
-#include "Transform.h"
 
 _float4x4 CNavigation::m_WorldMatrix = { };
 
@@ -35,7 +34,7 @@ CCell* CNavigation::Get_CurrentCell()
 	if (m_iCurrentIndex == -1)
 		return nullptr;
 
-	for (CCell* pCell : m_Cells) 
+	for (CCell* pCell : m_Cells)
 	{
 		if (pCell->Get_Index() == m_iCurrentIndex)
 			return pCell;
@@ -52,6 +51,20 @@ _float CNavigation::Get_CurrentHeight(_fvector vPosition)
 		return 100.0f;
 
 	return pCell->Calc_Height(vPosition);
+}
+
+void CNavigation::Reset_CurrentIndex(_fvector vPosition)
+{
+	_int		iNeighborIndex = { -1 };
+
+	for (CCell* pCell : m_Cells)
+	{
+		if (pCell->isIn(vPosition, XMLoadFloat4x4(&m_WorldMatrix), &iNeighborIndex))
+		{
+			m_iCurrentIndex = pCell->Get_Index();
+			break;
+		}
+	}
 }
 
 HRESULT CNavigation::Initialize_Prototype(const wstring& strNavigationFilePath)
@@ -162,6 +175,7 @@ HRESULT CNavigation::Initialize(void* pArg)
 }
 
 
+#ifdef _DEBUG
 
 HRESULT CNavigation::Render()
 {
@@ -210,6 +224,8 @@ Exit:
 	return S_OK;
 
 }
+
+#endif
 
 HRESULT CNavigation::Make_Cell_By_Points(CNavigationPoint* pPoint0, CNavigationPoint* pPoint1, CNavigationPoint* pPoint2)
 {
@@ -343,9 +359,9 @@ CNavigationPoint* CNavigation::Make_Point(_float3 vPos)
 
 CNavigationPoint* CNavigation::Select_Point(RAY ray)
 {
-	for (CNavigationPoint* pPoint : m_Points) 
+	for (CNavigationPoint* pPoint : m_Points)
 	{
-		if (pPoint->IsSelected(ray)) 
+		if (pPoint->IsSelected(ray))
 		{
 			return pPoint;
 		}
@@ -364,7 +380,7 @@ HRESULT CNavigation::Save_All()
 
 	_ulong		dwByte = { 0 };
 
-	for (CCell* pCell : m_Cells) 
+	for (CCell* pCell : m_Cells)
 	{
 		pCell->Write_Cell(hFile, dwByte);
 	}
@@ -372,6 +388,27 @@ HRESULT CNavigation::Save_All()
 	CloseHandle(hFile);
 
 	return S_OK;
+}
+
+void CNavigation::Delete_Point(CNavigationPoint* pTargetPoint)
+{
+	for (CNavigationPoint* pPoint : m_Points)
+	{
+		if (pPoint == pTargetPoint)
+		{
+			for (CCell* pCell : m_Cells) 
+			{
+				_uint iPointIndex = pPoint->Get_Index();
+				if (pCell->Has_Point(iPointIndex))
+				{
+					m_Cells.erase(remove(m_Cells.begin(), m_Cells.end(), pCell), m_Cells.end());
+				}
+			}
+
+			m_Points.erase(remove(m_Points.begin(), m_Points.end(), pTargetPoint), m_Points.end());
+			Safe_Delete(pTargetPoint);
+		}
+	}
 }
 
 

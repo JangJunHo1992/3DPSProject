@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Terrain_GamePlay.h"
+#include "GameInstance.h"
 
 CTerrain_GamePlay::CTerrain_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CTerrain(pDevice, pContext)
@@ -14,7 +15,23 @@ CTerrain_GamePlay::CTerrain_GamePlay(const CTerrain_GamePlay& rhs)
 
 HRESULT CTerrain_GamePlay::Ready_Components()
 {
-	return Ready_Components_Origin(LEVEL::LEVEL_GAMEPLAY);
+	switch (m_pGameInstance->Get_NextLevel())
+	{
+	case 2:
+		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+			return E_FAIL;
+		break;
+	case 6:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
+			return E_FAIL;
+		break;
+	case 7:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
+			return E_FAIL;
+		break;
+	default:
+		break;
+	}
 }
 
 HRESULT CTerrain_GamePlay::Bind_ShaderResources()

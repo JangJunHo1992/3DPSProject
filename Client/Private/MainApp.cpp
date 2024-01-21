@@ -53,10 +53,17 @@ HRESULT CMainApp::Render()
 
 	/* 그려야할 모델들을 그리낟.*/
 	m_pGameInstance->Render_Engine();
+	++m_iNumRender;
 
+	if (1.f <= m_fTimeAcc)
+	{
+		wsprintf(m_szFPS, TEXT("FPS:%d"), m_iNumRender);
+		m_iNumRender = 0;
+		m_fTimeAcc = 0.f;
+	}
 	// MakeSpriteFont "넥슨lv1고딕 Bold" /FontSize:30 /FastPack /CharacterRegion:0x0020-0x00FF /CharacterRegion:0x3131-0x3163 /CharacterRegion:0xAC00-0xD800 /DefaultCharacter:0xAC00 138ex.spritefont
-	m_pGameInstance->Render_Font(TEXT("Font_Default"), TEXT("그러다 0원히 취업 못 한다!!"), _float2(0.f, 0.f));
-
+	//m_pGameInstance->Render_Font(TEXT("Font_Default"), TEXT("그러다 0원히 취업 못 한다!!"), _float2(0.f, 0.f));
+	m_pGameInstance->Render_Font(TEXT("Font_Default"), m_szFPS, _float2(0.f, 0.f), XMVectorSet(1.f, 0.f, 0.f, 1.f));
 	m_pGameInstance->Present();
 
 	return S_OK;

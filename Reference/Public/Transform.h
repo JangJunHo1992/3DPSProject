@@ -70,6 +70,8 @@ public:
 	HRESULT Initialize_Prototype(_float fSpeedPerSec, _float fRotationPerSec);
 
 public:
+	void Move_On_Navigation(_vector vMove, class CNavigation* pNavigation = nullptr);
+
 	void Go_Straight(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 	void Go_Straight_L45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 	void Go_Straight_R45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
@@ -107,7 +109,8 @@ public:
 		m_WorldMatrix.m[STATE::STATE_POSITION][2] += vState.z;
 
 	}
-	void Add_RootBone_Position(const _float3& vPos);
+	void Add_RootBone_Position(const _float3& vPos, class CNavigation* pNavigation = nullptr);
+
 public:
 	_matrix		Get_RotationMatrix(FXMMATRIX Mat);
 	_float3		Extract_PitchYawRollFromRotationMatrix(FXMMATRIX Mat);

@@ -1,5 +1,5 @@
 #include "Magician_Weapon_GamePlay.h"
-
+#include "GameInstance.h"
 
 CMagician_Weapon_GamePlay::CMagician_Weapon_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMagician_Weapon(pDevice, pContext)
@@ -13,9 +13,26 @@ CMagician_Weapon_GamePlay::CMagician_Weapon_GamePlay(const CMagician_Weapon_Game
 
 HRESULT CMagician_Weapon_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin(LEVEL::LEVEL_GAMEPLAY)))
+// 	m_pGameInstance->Get_NextLevel();
+// 	switch (m_pGameInstance->Get_NextLevel())
+// 	{
+// 	case 2:
+// 		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+// 			return E_FAIL;
+// 		break;
+// 	case 6:
+// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
+// 			return E_FAIL;
+// 		break;
+// 	case 7:
+// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
+// 			return E_FAIL;
+// 		break;
+// 	default:
+// 		break;
+// 	}
+	if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
 		return E_FAIL;
-
 	return S_OK;
 }
 
