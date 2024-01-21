@@ -21,8 +21,8 @@ public:
 public:
 	virtual void Set_Hitted() override;
 
-	//public:
-	//	virtual void Write_Json(json& Out_Json) override;
+public:
+	virtual void Write_Json(json& Out_Json) override;
 
 protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;

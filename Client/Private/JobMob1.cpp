@@ -70,12 +70,12 @@ void CJobMob1::Set_Hitted()
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
-//void CJobMob1::Write_Json(json& Out_Json)
-//{
-//	Out_Json["Name"] = m_sName;
-//	Out_Json["LayerTag"] = m_sLayerTag;
-//	__super::Write_Json(Out_Json);
-//}
+void CJobMob1::Write_Json(json& Out_Json)
+{
+	Out_Json["Name"] = m_sName;
+	Out_Json["LayerTag"] = m_sLayerTag;
+	__super::Write_Json(Out_Json);
+}
 
 HRESULT CJobMob1::Ready_Components_Origin(LEVEL eLevel)
 {

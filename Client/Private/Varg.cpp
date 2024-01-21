@@ -70,12 +70,12 @@ void CVarg::Set_Hitted()
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
-//void CVarg::Write_Json(json& Out_Json)
-//{
-//	Out_Json["Name"] = m_sName;
-//	Out_Json["LayerTag"] = m_sLayerTag;
-//	__super::Write_Json(Out_Json);
-//}
+void CVarg::Write_Json(json& Out_Json)
+{
+	Out_Json["Name"] = m_sName;
+	Out_Json["LayerTag"] = m_sLayerTag;
+	__super::Write_Json(Out_Json);
+}
 
 HRESULT CVarg::Ready_Components_Origin(LEVEL eLevel)
 {

@@ -66,16 +66,16 @@ HRESULT CJobMob2::Render()
 
 void CJobMob2::Set_Hitted()
 {
-	//CJobMob2::JobMob2State eHitted = CJobMob2::JobMob2State::HurtF;
-	//Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	CJobMob2::JobMob2State eHitted = CJobMob2::JobMob2State::HrutS_FL;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
-//void CJobMob2::Write_Json(json& Out_Json)
-//{
-//	Out_Json["Name"] = m_sName;
-//	Out_Json["LayerTag"] = m_sLayerTag;
-//	__super::Write_Json(Out_Json);
-//}
+void CJobMob2::Write_Json(json& Out_Json)
+{
+	Out_Json["Name"] = m_sName;
+	Out_Json["LayerTag"] = m_sLayerTag;
+	__super::Write_Json(Out_Json);
+}
 
 HRESULT CJobMob2::Ready_Components_Origin(LEVEL eLevel)
 {
