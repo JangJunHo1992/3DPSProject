@@ -17,6 +17,14 @@ class CCollider;
 class ENGINE_DLL CCharacter abstract : public CGameObject
 {
 protected:
+	typedef struct CCharacterStatus
+	{
+		_int m_iHP;
+		_int m_iAttack;
+
+	}CharStat;
+
+protected:
 	CCharacter(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
 	CCharacter(const CCharacter& rhs);
 	virtual ~CCharacter() = default;
@@ -37,6 +45,7 @@ public:
 	CNavigation* Get_Navigation();
 
 	virtual void Set_Hitted() PURE;
+	virtual void Set_Dead() PURE;
 	void Set_IsAttack(_bool _bIsAttack) 
 	{
 		for (CWeapon* pWeapon : m_Weapons)
@@ -105,7 +114,7 @@ protected:
 	_float3	m_vNetPower = { 0.f, 0.f, 0.f };
 	_bool	m_bIsJump = { false };
 protected:
-	map<const wstring, class CGameObject*>		m_PartObjects;
+	map<const wstring, CGameObject*>		m_PartObjects;
 	
 
 

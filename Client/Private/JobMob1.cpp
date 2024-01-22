@@ -29,6 +29,10 @@ HRESULT CJobMob1::Initialize(void* pArg)
 	m_sName = "JobMob1";
 	m_sLayerTag = "Layer_Monster";
 
+	
+	JobMob1Status.m_iAttack = 10;
+	JobMob1Status.m_iHP = 50;
+
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 10.f;
@@ -68,6 +72,7 @@ void CJobMob1::Set_Hitted()
 {
 	CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::HurtS_FL;
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	JobMob1Status.m_iHP -= 10;
 }
 
 void CJobMob1::Write_Json(json& Out_Json)
@@ -93,7 +98,7 @@ HRESULT CJobMob1::Ready_Components_Origin(LEVEL eLevel)
 	// 	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
 	// 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
 	// 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
-	BoundingDesc.fRadius = _float(0.7f);
+	BoundingDesc.fRadius = _float(1.f);
 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius, 0.f);
 
 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),
