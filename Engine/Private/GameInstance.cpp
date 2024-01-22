@@ -48,6 +48,10 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 	if (nullptr == m_pComponent_Manager)
 		return E_FAIL;
 
+	m_pTarget_Manager = CTarget_Manager::Create(*ppDevice, *ppContext);
+	if (nullptr == m_pTarget_Manager)
+		return E_FAIL;
+
 	m_pRenderer = CRenderer::Create(*ppDevice, *ppContext);
 	if (nullptr == m_pRenderer)
 		return E_FAIL;
@@ -59,6 +63,15 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 	m_pFonts_Manager = CFont_Manager::Create(*ppDevice, *ppContext);
 	if (nullptr == m_pFonts_Manager)
 		return E_FAIL;
+
+	m_pLight_Manager = CLight_Manager::Create();
+	if (nullptr == m_pLight_Manager)
+		return E_FAIL;
+
+	m_pFrustum = CFrustum::Create();
+	if (nullptr == m_pFrustum)
+		return E_FAIL;
+
 	return S_OK;
 }
 
@@ -67,7 +80,8 @@ void CGameInstance::Tick_Engine(_float fTimeDelta)
 	if (nullptr == m_pLevel_Manager ||
 		nullptr == m_pObject_Manager ||
 		nullptr == m_pPipeLine ||
-		nullptr == m_pInput_Device)
+		nullptr == m_pInput_Device||
+		nullptr == m_pFrustum)
 		return;
 
 	m_pInput_Device->Tick();
@@ -77,6 +91,8 @@ void CGameInstance::Tick_Engine(_float fTimeDelta)
 	m_pObject_Manager->Tick(fTimeDelta);
 
 	m_pPipeLine->Tick();
+
+	m_pFrustum->Tick();
 
 	m_pObject_Manager->Late_Tick(fTimeDelta);
 
@@ -663,6 +679,9 @@ void CGameInstance::WString_To_String(wstring _wstring, string& _string)
 
 void CGameInstance::Release_Manager()
 {
+	Safe_Release(m_pFrustum);
+	Safe_Release(m_pLight_Manager);
+	Safe_Release(m_pTarget_Manager);
 	Safe_Release(m_pFonts_Manager);
 	Safe_Release(m_pPipeLine);
 	Safe_Release(m_pObject_Manager);

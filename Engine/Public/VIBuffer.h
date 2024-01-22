@@ -43,6 +43,8 @@ protected:
 	DXGI_FORMAT					m_eIndexFormat = {};
 	D3D11_PRIMITIVE_TOPOLOGY	m_eTopology = {};
 
+	_float3* m_pVerticesPos = { nullptr };
+
 public:
 	virtual CComponent* Clone(void* pArg) = 0;
 	virtual void Free() override;

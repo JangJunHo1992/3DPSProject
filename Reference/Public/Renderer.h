@@ -6,6 +6,8 @@
 /* 모아놓은 순서대로 객체들의 렌더함수를 호출한다.(렌더콜) */
 
 BEGIN(Engine)
+class CGameObject;
+class CComponent;
 
 class CRenderer final : public CBase
 {
@@ -26,10 +28,10 @@ private:
 	ID3D11Device* m_pDevice = { nullptr };
 	ID3D11DeviceContext* m_pContext = { nullptr };
 	class CGameInstance* m_pGameInstance = { nullptr };
-	list<class CGameObject*>				m_RenderObjects[RENDER_END];
+	list<CGameObject*>				m_RenderObjects[RENDER_END];
 
 #ifdef _DEBUG
-	list<class CComponent*>					m_DebugComponent;
+	list<CComponent*>					m_DebugComponent;
 #endif
 
 private:

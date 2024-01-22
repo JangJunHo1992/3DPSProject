@@ -11,6 +11,9 @@
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
 texture2D		g_Texture[2];
 
+texture2D		g_DiffuseTexture;
+texture2D		g_DepthTexture;
+
 
 
 /* 정점의 변환(월드변환, 뷰변환, 투영변환.)을 수행한다. */
@@ -83,6 +86,57 @@ PS_OUT PS_MAIN(PS_IN In)
 }
 
 
+struct VS_OUT_EFFECT
+{
+	float4		vPosition : SV_POSITION;
+	float2		vTexcoord : TEXCOORD0;
+	float4		vProjPos : TEXCOORD1;
+};
+
+
+VS_OUT_EFFECT VS_MAIN_EFFECT(VS_IN In)
+{
+	VS_OUT_EFFECT		Out = (VS_OUT_EFFECT)0;
+
+	/* In.vPosition * 월드 * 뷰 * 투영 */
+	matrix		matWV, matWVP;
+
+	matWV = mul(g_WorldMatrix, g_ViewMatrix);
+	matWVP = mul(matWV, g_ProjMatrix);
+
+	Out.vPosition = mul(float4(In.vPosition, 1.f), matWVP);
+	Out.vTexcoord = In.vTexcoord;
+	Out.vProjPos = Out.vPosition;
+
+	return Out;
+}
+
+struct PS_IN_EFFECT
+{
+	float4		vPosition : SV_POSITION;
+	float2		vTexcoord : TEXCOORD0;
+	float4		vProjPos : TEXCOORD1;
+};
+
+/* 픽셀셰이더 : 픽셀의 색!!!! 을 결정한다. */
+PS_OUT PS_MAIN_EFFECT(PS_IN_EFFECT In)
+{
+	PS_OUT			Out = (PS_OUT)0;
+
+	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
+
+	float2	vDepthTexcoord;
+	vDepthTexcoord.x = (In.vProjPos.x / In.vProjPos.w) * 0.5f + 0.5f;
+	vDepthTexcoord.y = (In.vProjPos.y / In.vProjPos.w) * -0.5f + 0.5f;
+
+	float4	vDepthDesc = g_DepthTexture.Sample(PointSampler, vDepthTexcoord);
+	
+	Out.vColor.a = Out.vColor.a * (vDepthDesc.y * 1000.f - In.vProjPos.w) * 2.f;
+
+	return Out;
+}
+
+
 technique11 DefaultTechnique
 {
 	/* 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
@@ -100,12 +154,16 @@ technique11 DefaultTechnique
 	}
 
 	/* 위와 다른 형태에 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
-	pass Particle
+	pass Effect
 	{
 		SetRasterizerState(RS_Default);
 		SetDepthStencilState(DSS_Default, 0);
-		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
-		VertexShader = compile vs_5_0 VS_MAIN();
-		PixelShader = compile ps_5_0 PS_MAIN();
+		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
+		VertexShader = compile vs_5_0 VS_MAIN_EFFECT();
+		GeometryShader = NULL;
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_EFFECT();
 	}	
 }

@@ -18,6 +18,7 @@ CVIBuffer::CVIBuffer(const CVIBuffer& rhs)
 	, m_iIndexStride(rhs.m_iIndexStride)
 	, m_eIndexFormat(rhs.m_eIndexFormat)
 	, m_eTopology(rhs.m_eTopology)
+	, m_pVerticesPos(rhs.m_pVerticesPos)
 {
 
 
@@ -94,6 +95,9 @@ HRESULT CVIBuffer::Create_Buffer(_Inout_ ID3D11Buffer** ppBuffer)
 void CVIBuffer::Free()
 {
 	__super::Free();
+
+	if (false == m_isCloned)
+		Safe_Delete_Array(m_pVerticesPos);
 
 	Safe_Release(m_pVB);
 	Safe_Release(m_pIB);
