@@ -73,6 +73,7 @@ void CVarg::Set_Hitted()
 {
 	CVarg::VargState eHitted = CVarg::VargState::HurtF;
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	VargStatus.m_iHP -= 10;
 }
 
 void CVarg::Set_Dead()

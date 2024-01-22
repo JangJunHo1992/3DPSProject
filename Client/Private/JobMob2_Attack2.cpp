@@ -9,6 +9,8 @@ void CJobMob2_Attack2::Initialize(CJobMob2_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	pActor->Set_IsAttack(true);
+
 }
 
 CState<CJobMob2_GamePlay>* CJobMob2_Attack2::Update(CJobMob2_GamePlay* pActor, _float fTimeDelta)
@@ -27,5 +29,7 @@ CState<CJobMob2_GamePlay>* CJobMob2_Attack2::Update(CJobMob2_GamePlay* pActor, _
 void CJobMob2_Attack2::Release(CJobMob2_GamePlay* pActor)
 {
 	__super::Release(pActor);
+	pActor->Set_IsAttack(false);
+
 }
 

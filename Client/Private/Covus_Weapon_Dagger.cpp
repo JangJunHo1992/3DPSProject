@@ -24,7 +24,7 @@ HRESULT CCovus_Weapon_Dagger::Ready_Components_Origin(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Collider */
-	m_iColliderSize = 12;
+	m_iColliderSize = 7;
 	m_pColliders.resize(m_iColliderSize);
 
 	for (_uint i = 0; i < m_iColliderSize; ++i)

@@ -52,8 +52,7 @@ void CJobMob1::Priority_Tick(_float fTimeDelta)
 
 void CJobMob1::Tick(_float fTimeDelta)
 {
-	if (JobMob1Status.m_iHP < 0)
-		Set_Dead();
+	
 	__super::Tick(fTimeDelta);
 }
 
@@ -81,6 +80,8 @@ void CJobMob1::Set_Dead()
 {
 	CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::Dead;
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTransformCom->Get_State(CTransform::STATE_POSITION) - 3*m_pTransformCom->Get_State(CTransform::STATE_UP));
+
 }
 
 void CJobMob1::Write_Json(json& Out_Json)
