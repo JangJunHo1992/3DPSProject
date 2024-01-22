@@ -43,6 +43,9 @@ public:
 	CGameObject* Get_Player();
 	void	Set_Player(CGameObject* _pPlayer);
 public:
+	//void Set_CheckAnimDead(_bool _bcheckAnimDead) { m_bcheckAnimDead = _bcheckAnimDead; }
+	//_bool Get_CheckAnimDead() { return m_bcheckAnimDead; }
+public:
 	CGameObject*	m_pPlayer = { nullptr };
 private:
 	_uint			m_iNumLevels = { 0 };

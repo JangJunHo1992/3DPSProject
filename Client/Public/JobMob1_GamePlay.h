@@ -28,7 +28,6 @@ protected:
 	virtual void Set_Dead() override;
 private:
 	virtual HRESULT Ready_Components() override;
-
 private:
 	CActor<CJobMob1_GamePlay>* m_pActor = { nullptr };
 

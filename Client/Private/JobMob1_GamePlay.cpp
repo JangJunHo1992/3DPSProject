@@ -3,6 +3,8 @@
 #include "JobMob1_Idle.h"
 #include "JobMob1_Dead.h"
 
+
+
 CJobMob1_GamePlay::CJobMob1_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CJobMob1(pDevice, pContext)
 {
@@ -51,7 +53,9 @@ void CJobMob1_GamePlay::Priority_Tick(_float fTimeDelta)
 void CJobMob1_GamePlay::Tick(_float fTimeDelta)
 {
 	if (JobMob1Status.m_iHP < 0)
+	{
 		Set_Dead();
+	}
 	__super::Tick(fTimeDelta);
 	m_pActor->Update_State(fTimeDelta);
 }
@@ -71,13 +75,12 @@ HRESULT CJobMob1_GamePlay::Render()
 
 void CJobMob1_GamePlay::Set_Dead()
 {
-	Set_CheckAnimDead(true);
 	m_pActor->Set_State(new CJobMob1_Dead());
 }
 
 HRESULT CJobMob1_GamePlay::Ready_Components()
 {
-	m_pGameInstance->Get_NextLevel();
+	//m_pGameInstance->Get_NextLevel();
 	switch (m_pGameInstance->Get_NextLevel())
 	{
 	case 2:

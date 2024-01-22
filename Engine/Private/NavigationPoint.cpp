@@ -90,7 +90,7 @@ HRESULT CNavigationPoint::Render()
 	if (nullptr == m_pColliderCom)
 		return E_FAIL;
 
-	m_pColliderCom->Render();
+	//m_pColliderCom->Render();
 #endif
 
 	return S_OK;
