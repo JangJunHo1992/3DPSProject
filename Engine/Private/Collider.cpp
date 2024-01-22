@@ -94,6 +94,8 @@ HRESULT CCollider::Render()
 	if (nullptr == m_pBounding)
 		return E_FAIL;
 
+	m_pContext->GSSetShader(nullptr, nullptr, 0);
+
 	m_pBatch->Begin();
 
 	m_pEffect->SetWorld(XMMatrixIdentity());

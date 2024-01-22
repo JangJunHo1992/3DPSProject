@@ -1,32 +1,25 @@
 #include "MagicianDefaultState.h"
 #include "GameInstance.h"
 
-// #include "Magician_Idle.h"
-// #include "Magician_Run_Front.h"
-// #include "Magician_Run_Front_L45.h"
-// #include "Magician_Run_Front_R45.h"
-// #include "Magician_Run_Back.h"
-// #include "Magician_Run_Back_L45.h"
-// #include "Magician_Run_Back_R45.h"
-// #include "Magician_Run_Left.h"
-// #include "Magician_Run_Right.h"
-// 
-// #include "Magician_Walk_Front.h"
-// #include "Magician_Walk_Front_L45.h"
-// #include "Magician_Walk_Front_R45.h"
-// #include "Magician_Walk_Back.h"
-// #include "Magician_Walk_Back_L45.h"
-// #include "Magician_Walk_Back_R45.h"
-// #include "Magician_Walk_Left.h"
-// #include "Magician_Walk_Right.h"
-// 
-// #include "Magician_Dash_Back.h"
-// #include "Magician_Dash_Front.h"
-// #include "Magician_Dash_Left.h"
-// #include "Magician_Dash_Right.h"
-// 
-// #include "Magician_Attack1.h"
+#include "Magician_Idle.h"
 
+#include "Magician_Walk_Front.h"
+#include "Magician_Walk_Back.h"
+#include "Magician_Walk_Left.h"
+#include "Magician_Walk_Right.h"
+ 
+#include "Magician_DisappearB.h"
+#include "Magician_DisappearF.h"
+#include "Magician_DisappearL.h"
+#include "Magician_DisappearR.h"
+
+#include "Magician_Attack1.h"
+#include "Magician_Attack4.h"
+#include "Magician_Attack5.h"
+
+#include "Magician_Shoot1.h"
+#include "Magician_Shoot2.h"
+#include "Magician_Shoot3.h"
 // #include "Covus_Hit_01.h"
 // #include "Covus_Dead_01.h"
 // #include "Covus_Defense_Start.h"
@@ -36,6 +29,7 @@ void CMagicianDefaultState::Initialize(CMagician_GamePlay* pActor)
 {
 	m_pGameInstance = CGameInstance::GetInstance();
 	Safe_AddRef(m_pGameInstance);
+	
 }
 
 void CMagicianDefaultState::Release(CMagician_GamePlay* pActor)
@@ -47,168 +41,80 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::Ground_Normal(CMagician_GameP
 {
 	CState<CMagician_GamePlay>* pState = nullptr;
 
-
-	// 	if (m_pGameInstance->Key_Down(DIK_X))
-	// 	{
-	// 		return new CGreatDualBlade_Defense_Start();
-	// 	}
-
-// 
-// 	if (m_pGameInstance->Mouse_Down(DIM_LB))
-// 	{
-// 		return new CCovus_Attack1;
-// 	}
-
-	pState = Run(pActor, fTimeDelta, _iAnimIndex);
-	if (pState)	return pState;
-
-
-	pState = Dash(pActor, fTimeDelta, _iAnimIndex);
-	if (pState)	return pState;
-
-	return nullptr;
-}
-
-CState<CMagician_GamePlay>* CMagicianDefaultState::Run(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
-{
-// 	if (m_pGameInstance->Key_Pressing(DIK_LSHIFT))
-// 	{
-// 		if (m_pGameInstance->Key_Pressing(DIK_W))
-// 		{
-// 			if (m_pGameInstance->Key_Pressing(DIK_A))
-// 			{
-// 				if (CCovus_Run_Front_L45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Run_Front_L45();
-// 			}
-// 			else if (m_pGameInstance->Key_Pressing(DIK_D))
-// 			{
-// 				if (CCovus_Run_Front_R45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Run_Front_R45();
-// 			}
-// 			else
-// 			{
-// 				if (CCovus_Run_Front::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Run_Front();
-// 			}
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_S))
-// 		{
-// 			if (m_pGameInstance->Key_Pressing(DIK_A))
-// 			{
-// 				if (CCovus_Run_Back_L45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Run_Back_L45();
-// 			}
-// 			else if (m_pGameInstance->Key_Pressing(DIK_D))
-// 			{
-// 				if (CCovus_Run_Back_R45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Run_Back_R45();
-// 			}
-// 			else
-// 			{
-// 				if (CCovus_Run_Back::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Run_Back();
-// 			}
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_A))
-// 		{
-// 			if (CCovus_Run_Left::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Run_Left();
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_D))
-// 		{
-// 			if (CCovus_Run_Right::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Run_Right();
-// 		}
-// 		else
-// 		{
-// 			if (CCovus_Idle::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Idle();
-// 		}
-// 	}
 	
-// 		if (m_pGameInstance->Key_Pressing(DIK_W))
-// 		{
-// 			if (m_pGameInstance->Key_Pressing(DIK_A))
-// 			{
-// 				if (CCovus_Walk_Front_L45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Walk_Front_L45();
-// 			}
-// 			else if (m_pGameInstance->Key_Pressing(DIK_D))
-// 			{
-// 				if (CCovus_Walk_Front_R45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Walk_Front_R45();
-// 			}
-// 			else
-// 			{
-// 				if (CCovus_Walk_Front::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Walk_Front();
-// 			}
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_S))
-// 		{
-// 			if (m_pGameInstance->Key_Pressing(DIK_A))
-// 			{
-// 				if (CCovus_Walk_Back_L45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Walk_Back_L45();
-// 			}
-// 			else if (m_pGameInstance->Key_Pressing(DIK_D))
-// 			{
-// 				if (CCovus_Walk_Back_R45::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Walk_Back_R45();
-// 			}
-// 			else
-// 			{
-// 				if (CCovus_Walk_Back::g_iAnimIndex != _iAnimIndex)
-// 					return new CCovus_Walk_Back();
-// 			}
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_A))
-// 		{
-// 			if (CCovus_Walk_Left::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Walk_Left();
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_D))
-// 		{
-// 			if (CCovus_Walk_Right::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Walk_Right();
-// 		}
-// 		else
-// 		{
-// 			if (CCovus_Idle::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Idle();
-// 		}
 
+
+	if (30.f > pActor->Calc_Distance()&& 15.f <pActor->Calc_Distance())
+	{
+		pState = WalkandDisappear(pActor, fTimeDelta, _iAnimIndex);
+		if (pState)	return pState;
+	}
+		
+
+	if (15.f > pActor->Calc_Distance() && 5.f < pActor->Calc_Distance())
+	{
+		pState = Shoot(pActor, fTimeDelta, _iAnimIndex);
+		if (pState)	return pState;
+	}
+	if (5.f > pActor->Calc_Distance() && 0.5f < pActor->Calc_Distance())
+	{
+		pState = Attack(pActor, fTimeDelta, _iAnimIndex);
+		if (pState)	return pState;
+	}
+	
 
 	return nullptr;
 }
 
-CState<CMagician_GamePlay>* CMagicianDefaultState::Dash(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
+CState<CMagician_GamePlay>* CMagicianDefaultState::WalkandDisappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
 {
-// 	if (m_pGameInstance->Key_Pressing(DIK_SPACE))
-// 	{
-// 		if (m_pGameInstance->Key_Pressing(DIK_S))
-// 		{
-// 			if (CCovus_Dash_Back::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Dash_Back();
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_A))
-// 		{
-// 			if (CCovus_Dash_Left::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Dash_Left();
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_D))
-// 		{
-// 			if (CCovus_Dash_Right::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Dash_Right();
-// 		}
-// 		else if (m_pGameInstance->Key_Pressing(DIK_W))
-// 		{
-// 			if (CCovus_Dash_Front::g_iAnimIndex != _iAnimIndex)
-// 				return new CCovus_Dash_Front();
-// 		}
-// 	}
+	_uint iRandom = rand() % 1;
 
-	return nullptr;
+	switch (iRandom)
+	{
+	case 0:
+		pActor->Set_bLookAt(true);
+		return new CMagician_Walk_Front();
+// 	case 1:
+// 		return new CMagician_DisappearF();
+	}
+}
+
+CState<CMagician_GamePlay>* CMagicianDefaultState::Attack(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
+{
+	_uint iRandom = rand() % 3;
+
+	switch (iRandom)
+	{
+	case 0:
+		pActor->Set_bLookAt(true);
+		return new CMagician_Attack1();
+	case 1:
+		pActor->Set_bLookAt(true);
+		return new CMagician_Attack4();
+	case 2:
+		pActor->Set_bLookAt(true);
+		return new CMagician_Attack5();
+	}
+
+}
+
+CState<CMagician_GamePlay>* CMagicianDefaultState::Shoot(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
+{
+	_uint iRandom = rand() % 3;
+
+	switch (iRandom)
+	{
+	case 0:
+		pActor->Set_bLookAt(true);
+		return new CMagician_Shoot1();
+	case 1:
+		pActor->Set_bLookAt(true);
+		return new CMagician_Shoot2();
+	case 2:
+		pActor->Set_bLookAt(true);
+		return new CMagician_Shoot3();
+	}
 }
 
 

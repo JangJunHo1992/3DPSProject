@@ -327,14 +327,18 @@ public:
 public:
 	virtual void Set_Hitted() override;
 
-	//public:
-	//	virtual void Write_Json(json& Out_Json) override;
-
+public:
+	virtual void Write_Json(json& Out_Json) override;
+public:
+	_bool	Get_CheckRotatePlayer() { return m_bRotatePlayer; }
+	void	Set_CheckRotatePlayer(_bool _bRotatePlayer) { m_bRotatePlayer = _bRotatePlayer; }
 protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
 	virtual HRESULT Ready_PartObjects() override;
 	//HRESULT Bind_ShaderResources();
-
+protected:
+	_bool	m_bRotatePlayer = false;
+	
 
 public:
 	virtual void Free() override;

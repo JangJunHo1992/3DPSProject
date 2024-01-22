@@ -70,6 +70,8 @@ public:
 	HRESULT Initialize_Prototype(_float fSpeedPerSec, _float fRotationPerSec);
 
 public:
+	void Move_On_Navigation(_vector vMove, class CNavigation* pNavigation = nullptr);
+
 	void Go_Straight(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 	void Go_Straight_L45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
 	void Go_Straight_R45(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
@@ -86,7 +88,7 @@ public:
 	void Go_Target(_fvector vTargetPos, _float fTimeDelta, _float fSpare = 0.1f);
 	void Look_At(_fvector vTargetPos);
 	void Look_At_OnLand(_fvector vTargetPos);
-
+	void Look_At_Around(_fvector vTargetPos , _float fTimeDelta);
 
 public:
 	void Set_Position(const _float3& vState)
@@ -96,7 +98,7 @@ public:
 		XMStoreFloat4(&m_fPosition, vPosVec);
 		Set_State(STATE::STATE_POSITION, m_fPosition);
 	}
-
+	_float4 Get_Position() { return m_fPosition; }
 	void Add_Position(const _float3& vState)
 	{
 		_vector vPosVec = XMLoadFloat3(&vState);
@@ -107,8 +109,11 @@ public:
 		m_WorldMatrix.m[STATE::STATE_POSITION][2] += vState.z;
 
 	}
-public:
+	void Add_RootBone_Position(const _float3& vPos, class CNavigation* pNavigation = nullptr);
 
+public:
+	_matrix		Get_RotationMatrix(FXMMATRIX Mat);
+	_float3		Extract_PitchYawRollFromRotationMatrix(FXMMATRIX Mat);
 public:
 	HRESULT	Bind_ShaderResource(class CShader* pShader, const _char* pConstantName);
 
@@ -123,6 +128,7 @@ private:
 
 	_float4x4			m_WorldMatrix = {};
 	_float4				m_fPosition = {};
+
 public:
 	static CTransform* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, _float fSpeedPerSec, _float fRotationPerSec);
 	virtual CComponent* Clone(void* pArg) override;

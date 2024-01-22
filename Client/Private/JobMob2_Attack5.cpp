@@ -1,0 +1,31 @@
+#include "stdafx.h"
+#include "JobMob2_Attack5.h"
+#include "GameInstance.h"
+
+
+#include "JobMob2_Idle.h"
+
+void CJobMob2_Attack5::Initialize(CJobMob2_GamePlay* pActor)
+{
+	__super::Initialize(pActor);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+}
+
+CState<CJobMob2_GamePlay>* CJobMob2_Attack5::Update(CJobMob2_GamePlay* pActor, _float fTimeDelta)
+{
+	_uint iMinimumPlayTime = 15;
+
+
+	if (pActor->Is_Animation_End())
+	{
+		return new CJobMob2_Idle();
+	}
+
+	return nullptr;
+}
+
+void CJobMob2_Attack5::Release(CJobMob2_GamePlay* pActor)
+{
+	__super::Release(pActor);
+}
+

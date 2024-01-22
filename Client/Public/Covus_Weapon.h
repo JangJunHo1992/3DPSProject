@@ -21,12 +21,15 @@ public:
 
 public:
 	virtual _bool Collision_Chcek();
+	virtual _bool Collision_Chcekb1();
+	virtual _bool Collision_Chcekb2();
 
 protected:
 	virtual HRESULT Ready_Components() PURE;
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
 	virtual HRESULT Bind_ShaderResources() override;
-
+private:
+	_uint	m_iCurrentLevel;
 public:
 	virtual void Free() override;
 

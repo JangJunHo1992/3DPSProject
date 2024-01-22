@@ -1,5 +1,6 @@
 #include "..\Public\Navigation.h"
 #include "Cell.h"
+#include "NavigationPoint.h"
 #include "GameInstance.h"
 
 _float4x4 CNavigation::m_WorldMatrix = { };
@@ -13,16 +14,57 @@ CNavigation::CNavigation(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 CNavigation::CNavigation(const CNavigation& rhs)
 	: CComponent(rhs)
 	, m_Cells(rhs.m_Cells)
+	, m_Points(rhs.m_Points)
 #ifdef _DEBUG
 	, m_pShader(rhs.m_pShader)
 #endif
 {
 	for (auto& pCell : m_Cells)
 		Safe_AddRef(pCell);
+	for (auto& pPoint : m_Points)
+		Safe_AddRef(pPoint);
 #ifdef _DEBUG
 	Safe_AddRef(m_pShader);
 #endif
 
+}
+
+CCell* CNavigation::Get_CurrentCell()
+{
+	if (m_iCurrentIndex == -1)
+		return nullptr;
+
+	for (CCell* pCell : m_Cells)
+	{
+		if (pCell->Get_Index() == m_iCurrentIndex)
+			return pCell;
+	}
+
+	return nullptr;
+}
+
+_float CNavigation::Get_CurrentHeight(_fvector vPosition)
+{
+	CCell* pCell = Get_CurrentCell();
+
+	if (nullptr == pCell)
+		return 100.0f;
+
+	return pCell->Calc_Height(vPosition);
+}
+
+void CNavigation::Reset_CurrentIndex(_fvector vPosition)
+{
+	_int		iNeighborIndex = { -1 };
+
+	for (CCell* pCell : m_Cells)
+	{
+		if (pCell->isIn(vPosition, XMLoadFloat4x4(&m_WorldMatrix), &iNeighborIndex))
+		{
+			m_iCurrentIndex = pCell->Get_Index();
+			break;
+		}
+	}
 }
 
 HRESULT CNavigation::Initialize_Prototype(const wstring& strNavigationFilePath)
@@ -43,14 +85,74 @@ HRESULT CNavigation::Initialize_Prototype(const wstring& strNavigationFilePath)
 		if (0 == dwByte)
 			break;
 
-		CCell* pCell = CCell::Create(m_pDevice, m_pContext, vPoints, m_Cells.size());
-		if (nullptr == pCell)
+		//_uint iCellIndex = m_Cells.size();
+
+		//CCell* pCell = CCell::Create(m_pDevice, m_pContext, vPoints, iCellIndex);
+		//if (nullptr == pCell)
+		//	return E_FAIL;
+
+		//m_Cells.push_back(pCell);
+
+		vector<CNavigationPoint*> _pPointsOfCell;
+
+		for (_uint i = 0; i < 3; ++i)
+		{
+			CNavigationPoint::NAVIGATION_POINT_DESC desc = {};
+			desc.vPos = vPoints[i];
+
+			CNavigationPoint* pPoint = Make_Point(vPoints[i]);
+
+			if (nullptr == pPoint)
+				return E_FAIL;
+
+
+			//pPoint->Add_ParentIndex(m_iCellIndex++);
+			//pPoint->Set_Index(m_iPointIndex++);
+
+			//m_Points.push_back(pPoint);
+			_pPointsOfCell.push_back(pPoint);
+		}
+
+		if (FAILED(Make_Cell_By_Points(_pPointsOfCell[0], _pPointsOfCell[1], _pPointsOfCell[2])))
 			return E_FAIL;
 
-		m_Cells.push_back(pCell);
+
+
 	}
 
 	CloseHandle(hFile);
+
+	//{
+	//	//_uint iPointSize = m_Points.size();
+	//	CNavigationPoint* pPoint1 = m_Points[m_Points.size() - 2];
+	//	CNavigationPoint* pPoint2 = m_Points.back();
+	//	CNavigationPoint* pNewPoint = Make_Point(_float3(20.f, 0.0f, -10.f));
+	//	m_Points.push_back(pNewPoint);
+
+	//	//_float3 vPos1 = pPoint1->Get_TransformComp()->Get_Pos();
+	//	//_float3 vPos2 = pPoint2->Get_TransformComp()->Get_Pos();
+
+	//	if (FAILED(Make_Cell_By_Points(pPoint1, pPoint2, pNewPoint)))
+	//		return E_FAIL;
+	//}
+
+	//{
+	//	//_uint iPointSize = m_Points.size();
+	//	CNavigationPoint* pPoint2 = m_Points[m_Points.size() - 2];
+	//	CNavigationPoint* pPoint1 = m_Points.back();
+	//	CNavigationPoint* pNewPoint = Make_Point(_float3(10.f, 0.0f, -10.f));
+	//	m_Points.push_back(pNewPoint);
+
+	//	//_float3 vPos1 = pPoint1->Get_TransformComp()->Get_Pos();
+	//	//_float3 vPos2 = pPoint2->Get_TransformComp()->Get_Pos();
+
+	//	if (FAILED(Make_Cell_By_Points(pPoint1, pPoint2, pNewPoint)))
+	//		return E_FAIL;
+	//}
+
+
+
+	//_bool test = false;
 
 	if (FAILED(Make_Neighbors()))
 		return E_FAIL;
@@ -73,6 +175,7 @@ HRESULT CNavigation::Initialize(void* pArg)
 }
 
 
+#ifdef _DEBUG
 
 HRESULT CNavigation::Render()
 {
@@ -108,6 +211,13 @@ HRESULT CNavigation::Render()
 			pCell->Render(m_pShader);
 	}
 
+	for (auto& pPoint : m_Points)
+	{
+		if (nullptr != pPoint)
+			pPoint->Render();
+
+	}
+
 
 Exit:
 #endif
@@ -115,13 +225,66 @@ Exit:
 
 }
 
+#endif
+
+HRESULT CNavigation::Make_Cell_By_Points(CNavigationPoint* pPoint0, CNavigationPoint* pPoint1, CNavigationPoint* pPoint2)
+{
+
+	_float3		vPoints[3];
+
+	vPoints[0] = pPoint0->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+	vPoints[1] = pPoint1->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+	vPoints[2] = pPoint2->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+
+	_bool bIsCounterclockwise;
+	vector<_float3> ccw = Make_Points_Clockwise(vPoints, bIsCounterclockwise);
+	vPoints[0] = ccw[0];
+	vPoints[1] = ccw[1];
+	vPoints[2] = ccw[2];
+
+	_uint iParentIndex = m_iCellIndex++;
+
+	CCell* pCell = CCell::Create(m_pDevice, m_pContext, vPoints, iParentIndex);
+	if (nullptr == pCell)
+		return E_FAIL;
+
+	if (bIsCounterclockwise)
+	{
+		pCell->Add_ChildIndex(pPoint0->Get_Index());
+		pCell->Add_ChildIndex(pPoint2->Get_Index());
+		pCell->Add_ChildIndex(pPoint1->Get_Index());
+
+	}
+	else
+	{
+		pCell->Add_ChildIndex(pPoint0->Get_Index());
+		pCell->Add_ChildIndex(pPoint1->Get_Index());
+		pCell->Add_ChildIndex(pPoint2->Get_Index());
+	}
+
+	pPoint0->Add_ParentIndex(iParentIndex);
+	pPoint1->Add_ParentIndex(iParentIndex);
+	pPoint2->Add_ParentIndex(iParentIndex);
+
+	m_Cells.push_back(pCell);
+
+	return S_OK;
+}
 
 
 
 
-void CNavigation::Update(_fmatrix WorldMatrix)
+
+void CNavigation::Update(_fmatrix WorldMatrix, _float fTimeDelta)
 {
 	XMStoreFloat4x4(&m_WorldMatrix, WorldMatrix);
+
+	for (auto& pPoint : m_Points)
+	{
+		if (nullptr != pPoint)
+			pPoint->Tick(fTimeDelta);
+
+	}
 }
 
 _bool CNavigation::isMove(_fvector vPosition)
@@ -179,6 +342,99 @@ HRESULT CNavigation::Make_Neighbors()
 	return S_OK;
 }
 
+CNavigationPoint* CNavigation::Make_Point(_float3 vPos)
+{
+	CNavigationPoint::NAVIGATION_POINT_DESC desc = {};
+	desc.vPos = vPos;
+
+	CNavigationPoint* pPoint = CNavigationPoint::Create(m_pDevice, m_pContext, &desc);
+	if (nullptr == pPoint)
+		return nullptr;
+
+	pPoint->Set_Index(m_iPointIndex++);
+	m_Points.push_back(pPoint);
+
+	return pPoint;
+}
+
+CNavigationPoint* CNavigation::Select_Point(RAY ray)
+{
+	for (CNavigationPoint* pPoint : m_Points)
+	{
+		if (pPoint->IsSelected(ray))
+		{
+			return pPoint;
+		}
+	}
+
+	return nullptr;
+}
+
+
+
+HRESULT CNavigation::Save_All()
+{
+	HANDLE		hFile = CreateFile(TEXT("../Bin/DataFiles/Navigation.dat"), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+	if (0 == hFile)
+		return E_FAIL;
+
+	_ulong		dwByte = { 0 };
+
+	for (CCell* pCell : m_Cells)
+	{
+		pCell->Write_Cell(hFile, dwByte);
+	}
+
+	CloseHandle(hFile);
+
+	return S_OK;
+}
+
+void CNavigation::Delete_Point(CNavigationPoint* pTargetPoint)
+{
+	for (CNavigationPoint* pPoint : m_Points)
+	{
+		if (pPoint == pTargetPoint)
+		{
+			for (CCell* pCell : m_Cells) 
+			{
+				_uint iPointIndex = pPoint->Get_Index();
+				if (pCell->Has_Point(iPointIndex))
+				{
+					m_Cells.erase(remove(m_Cells.begin(), m_Cells.end(), pCell), m_Cells.end());
+				}
+			}
+
+			m_Points.erase(remove(m_Points.begin(), m_Points.end(), pTargetPoint), m_Points.end());
+			Safe_Delete(pTargetPoint);
+		}
+	}
+}
+
+
+vector<_float3> CNavigation::Make_Points_Clockwise(_float3 vPoints[3], _bool& bIsCounterclockwise)
+{
+	vector<_float3> result;
+
+	for (_uint i = 0; i < 3; ++i)
+	{
+		result.push_back(vPoints[i]);
+	}
+
+
+	_float ccw = (result[1].x - result[0].x) * (result[2].z - result[0].z) - (result[2].x - result[0].x) * (result[1].z - result[0].z);
+
+	bIsCounterclockwise = 0 < ccw;
+	if (bIsCounterclockwise)
+	{
+		result[0] = vPoints[0];
+		result[1] = vPoints[2];
+		result[2] = vPoints[1];
+	}
+
+	return result;
+}
+
 CNavigation* CNavigation::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext, const wstring& strNavigationFilePath)
 {
 	CNavigation* pInstance = new CNavigation(pDevice, pContext);
@@ -213,6 +469,11 @@ void CNavigation::Free()
 		Safe_Release(pCell);
 
 	m_Cells.clear();
+
+	for (auto& pPoint : m_Points)
+		Safe_Release(pPoint);
+
+	m_Points.clear();
 
 #ifdef _DEBUG
 	Safe_Release(m_pShader);

@@ -11,10 +11,9 @@
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
 texture2D		g_Texture[2];
 
-sampler DefaultSampler = sampler_state
-{	
-	Filter = MIN_MAG_MIP_LINEAR;
-};
+texture2D		g_DiffuseTexture;
+texture2D		g_DepthTexture;
+
 
 
 /* 정점의 변환(월드변환, 뷰변환, 투영변환.)을 수행한다. */
@@ -78,10 +77,61 @@ PS_OUT PS_MAIN(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	/* 첫번째 인자의 방식으로 두번째 인자의 위치에 있는 픽셀의 색을 얻어온다. */
-	vector		vSourColor = g_Texture[0].Sample(DefaultSampler, In.vTexcoord);	
-	vector		vDestColor = g_Texture[1].Sample(DefaultSampler, In.vTexcoord);
+	vector		vSourColor = g_Texture[0].Sample(LinearSampler, In.vTexcoord);	
+	vector		vDestColor = g_Texture[1].Sample(LinearSampler, In.vTexcoord);
 
 	Out.vColor = vSourColor + vDestColor;
+
+	return Out;
+}
+
+
+struct VS_OUT_EFFECT
+{
+	float4		vPosition : SV_POSITION;
+	float2		vTexcoord : TEXCOORD0;
+	float4		vProjPos : TEXCOORD1;
+};
+
+
+VS_OUT_EFFECT VS_MAIN_EFFECT(VS_IN In)
+{
+	VS_OUT_EFFECT		Out = (VS_OUT_EFFECT)0;
+
+	/* In.vPosition * 월드 * 뷰 * 투영 */
+	matrix		matWV, matWVP;
+
+	matWV = mul(g_WorldMatrix, g_ViewMatrix);
+	matWVP = mul(matWV, g_ProjMatrix);
+
+	Out.vPosition = mul(float4(In.vPosition, 1.f), matWVP);
+	Out.vTexcoord = In.vTexcoord;
+	Out.vProjPos = Out.vPosition;
+
+	return Out;
+}
+
+struct PS_IN_EFFECT
+{
+	float4		vPosition : SV_POSITION;
+	float2		vTexcoord : TEXCOORD0;
+	float4		vProjPos : TEXCOORD1;
+};
+
+/* 픽셀셰이더 : 픽셀의 색!!!! 을 결정한다. */
+PS_OUT PS_MAIN_EFFECT(PS_IN_EFFECT In)
+{
+	PS_OUT			Out = (PS_OUT)0;
+
+	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
+
+	float2	vDepthTexcoord;
+	vDepthTexcoord.x = (In.vProjPos.x / In.vProjPos.w) * 0.5f + 0.5f;
+	vDepthTexcoord.y = (In.vProjPos.y / In.vProjPos.w) * -0.5f + 0.5f;
+
+	float4	vDepthDesc = g_DepthTexture.Sample(PointSampler, vDepthTexcoord);
+	
+	Out.vColor.a = Out.vColor.a * (vDepthDesc.y * 1000.f - In.vProjPos.w) * 2.f;
 
 	return Out;
 }
@@ -95,7 +145,6 @@ technique11 DefaultTechnique
 		SetRasterizerState(RS_Default);
 		SetDepthStencilState(DSS_Default, 0);
 		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
-
 		/* 렌더스테이츠 */
 		VertexShader = compile vs_5_0 VS_MAIN();
 		GeometryShader = NULL;
@@ -105,13 +154,16 @@ technique11 DefaultTechnique
 	}
 
 	/* 위와 다른 형태에 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
-	pass Particle
+	pass Effect
 	{
 		SetRasterizerState(RS_Default);
 		SetDepthStencilState(DSS_Default, 0);
-		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
 
-		VertexShader = compile vs_5_0 VS_MAIN();
-		PixelShader = compile ps_5_0 PS_MAIN();
+		VertexShader = compile vs_5_0 VS_MAIN_EFFECT();
+		GeometryShader = NULL;
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_EFFECT();
 	}	
 }

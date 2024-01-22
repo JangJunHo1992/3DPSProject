@@ -4,7 +4,11 @@
 #include "Level_Manager.h"
 #include "Object_Manager.h"
 #include "Renderer.h"
-#include "Fonts_Manager.h"
+#include "Font_Manager.h"
+#include "Target_Manager.h"
+#include "Renderer.h"
+#include "Frustum.h"
+#include "Light_Manager.h"
 
 #include "RapidJson.h"
 #include "Mesh_Tool.h"
@@ -44,12 +48,28 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 	if (nullptr == m_pComponent_Manager)
 		return E_FAIL;
 
+	m_pTarget_Manager = CTarget_Manager::Create(*ppDevice, *ppContext);
+	if (nullptr == m_pTarget_Manager)
+		return E_FAIL;
+
 	m_pRenderer = CRenderer::Create(*ppDevice, *ppContext);
 	if (nullptr == m_pRenderer)
 		return E_FAIL;
 
 	m_pPipeLine = CPipeLine::Create();
 	if (nullptr == m_pPipeLine)
+		return E_FAIL;
+
+	m_pFonts_Manager = CFont_Manager::Create(*ppDevice, *ppContext);
+	if (nullptr == m_pFonts_Manager)
+		return E_FAIL;
+
+	m_pLight_Manager = CLight_Manager::Create();
+	if (nullptr == m_pLight_Manager)
+		return E_FAIL;
+
+	m_pFrustum = CFrustum::Create();
+	if (nullptr == m_pFrustum)
 		return E_FAIL;
 
 	return S_OK;
@@ -60,7 +80,8 @@ void CGameInstance::Tick_Engine(_float fTimeDelta)
 	if (nullptr == m_pLevel_Manager ||
 		nullptr == m_pObject_Manager ||
 		nullptr == m_pPipeLine ||
-		nullptr == m_pInput_Device)
+		nullptr == m_pInput_Device||
+		nullptr == m_pFrustum)
 		return;
 
 	m_pInput_Device->Tick();
@@ -70,6 +91,8 @@ void CGameInstance::Tick_Engine(_float fTimeDelta)
 	m_pObject_Manager->Tick(fTimeDelta);
 
 	m_pPipeLine->Tick();
+
+	m_pFrustum->Tick();
 
 	m_pObject_Manager->Late_Tick(fTimeDelta);
 
@@ -130,6 +153,22 @@ HRESULT CGameInstance::Present()
 	return m_pGraphic_Device->Present();
 }
 
+ID3D11RenderTargetView* CGameInstance::Get_BackBufferRTV() const
+{
+	if (nullptr == m_pGraphic_Device)
+		return nullptr;
+
+	return m_pGraphic_Device->Get_BackBufferRTV();
+}
+
+ID3D11DepthStencilView* CGameInstance::Get_DSV() const
+{
+	if (nullptr == m_pGraphic_Device)
+		return nullptr;
+
+	return m_pGraphic_Device->Get_DSV();
+}
+
 HRESULT CGameInstance::Add_Timer(const wstring & strTimeTag)
 {
 	if (nullptr == m_pTimer_Manager)
@@ -152,6 +191,16 @@ HRESULT CGameInstance::Open_Level(_uint iCurrentLevelIndex, CLevel * pNewLevel)
 		return E_FAIL;
 
 	return m_pLevel_Manager->Open_Level(iCurrentLevelIndex, pNewLevel);
+}
+
+_uint CGameInstance::Get_CurrentLevel()
+{
+	return m_pLevel_Manager->Get_CurrentLevel();
+}
+
+_uint CGameInstance::Get_NextLevel()
+{
+	return m_pLevel_Manager->Get_NextLevel();
 }
 
 HRESULT CGameInstance::Add_Prototype_Object(const wstring & strPrototypeTag, CGameObject * pPrototype)
@@ -252,6 +301,14 @@ HRESULT CGameInstance::Add_RenderGroup(CRenderer::RENDERGROUP eGroupID, CGameObj
 		return E_FAIL;
 
 	return m_pRenderer->Add_RenderGroup(eGroupID, pGameObject);
+}
+
+HRESULT CGameInstance::Add_DebugRender(CComponent* pDebugCom)
+{
+	if (nullptr == m_pRenderer)
+		return E_FAIL;
+
+	return m_pRenderer->Add_DebugRender(pDebugCom);
 }
 
 void CGameInstance::Set_Transform(CPipeLine::D3DTRANSFORMSTATE eState, _fmatrix TransformMatrix)
@@ -379,6 +436,57 @@ HRESULT CGameInstance::Render_Font(const wstring& strFontTag, const wstring& str
 {
 	return m_pFonts_Manager->Render(strFontTag, strText, vPosition, vColor, fScale, vOrigin, fRotation);
 }
+HRESULT CGameInstance::Add_RenderTarget(const wstring& strTargetTag, _uint iSizeX, _uint iSizeY, DXGI_FORMAT ePixelFormat, const _float4& vClearColor)
+{
+	return m_pTarget_Manager->Add_RenderTarget(strTargetTag, iSizeX, iSizeY, ePixelFormat, vClearColor);
+}
+
+HRESULT CGameInstance::Add_MRT(const wstring& strMRTTag, const wstring& strTargetTag)
+{
+	return m_pTarget_Manager->Add_MRT(strMRTTag, strTargetTag);
+}
+
+HRESULT CGameInstance::Begin_MRT(const wstring& strMRTTag)
+{
+	return m_pTarget_Manager->Begin_MRT(strMRTTag);
+}
+
+HRESULT CGameInstance::End_MRT()
+{
+	return m_pTarget_Manager->End_MRT();
+}
+
+HRESULT CGameInstance::Bind_RenderTarget_ShaderResource(const wstring& strTargetTag, CShader* pShader, const _char* pConstantName)
+{
+	return m_pTarget_Manager->Bind_ShaderResource(strTargetTag, pShader, pConstantName);
+}
+
+#ifdef _DEBUG
+HRESULT CGameInstance::Ready_RenderTarget_Debug(const wstring& strTargetTag, _float fX, _float fY, _float fSizeX, _float fSizeY)
+{
+	return m_pTarget_Manager->Ready_Debug(strTargetTag, fX, fY, fSizeX, fSizeY);
+}
+HRESULT CGameInstance::Render_Debug_RTVs(const wstring& strMRTTag, CShader* pShader, CVIBuffer_Rect* pVIBuffer)
+{
+	return m_pTarget_Manager->Render_Debug(strMRTTag, pShader, pVIBuffer);
+}
+
+#endif
+
+HRESULT CGameInstance::Add_Light(const LIGHT_DESC& LightDesc)
+{
+	return m_pLight_Manager->Add_Light(LightDesc);
+}
+
+HRESULT CGameInstance::Render_Lights(CShader* pShader, CVIBuffer_Rect* pVIBuffer)
+{
+	return m_pLight_Manager->Render(pShader, pVIBuffer);
+}
+
+_bool CGameInstance::isIn_WorldPlanes(_fvector vPoint, _float fRadius)
+{
+	return m_pFrustum->isIn_WorldPlanes(vPoint, fRadius);
+}
 
 RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY)
 {
@@ -430,25 +538,47 @@ RAY CGameInstance::Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX
 
 _bool CGameInstance::Picking_Mesh(RAY ray, _float3* out, vector<class CMesh*>* Meshes)
 {
-	_vector		vPickedPos;
+	//_vector		vPickedPos;
 	_vector		vVec0, vVec1, vVec2;
 
 	_vector		vRayPos = XMLoadFloat4(&ray.vPosition);
 	_vector		vRayDir = XMLoadFloat3(&ray.vDirection);
-	_float		fDist = 0.f;
+	_float		fMinDist = 100000.f;
 
-	for (CMesh* mesh : *Meshes) 
+	_bool bIsPicked = false;
+	_float3 vPickedPos = { 0.f, 0.f, 0.f };
+
+	for (CMesh* mesh : *Meshes)
 	{
 		CMesh_Tool* pMesh_Tool = dynamic_cast<CMesh_Tool*>(mesh);
 		if (nullptr == pMesh_Tool)
 			return false;
 
 		if (pMesh_Tool->Picking(ray, out))
-			return true;
+		{
+			bIsPicked = true;
+
+			_vector vPos = XMLoadFloat3(out);
+			_float3 vDist;
+			XMStoreFloat3(&vDist, vRayPos - vPos);
+
+			_float fDist = sqrt(vDist.x * vDist.x + vDist.y * vDist.y + vDist.z * vDist.z);
+			if (fMinDist > fDist)
+			{
+				fMinDist = fDist;
+				vPickedPos = *out;
+			}
+		}
 	}
 
+	//if (bIsPicked)
+	//{
+	//	*out = vPickedPos;
+	//}
 
-	return false;
+	*out = vPickedPos;
+
+	return bIsPicked;
 }
 
 _bool CGameInstance::Picking_Vertex(RAY ray, _float3* out, _uint triNum, VTXMESH* pVertices, _uint* pIndices)
@@ -549,6 +679,9 @@ void CGameInstance::WString_To_String(wstring _wstring, string& _string)
 
 void CGameInstance::Release_Manager()
 {
+	Safe_Release(m_pFrustum);
+	Safe_Release(m_pLight_Manager);
+	Safe_Release(m_pTarget_Manager);
 	Safe_Release(m_pFonts_Manager);
 	Safe_Release(m_pPipeLine);
 	Safe_Release(m_pObject_Manager);

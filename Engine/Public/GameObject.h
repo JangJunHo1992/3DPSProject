@@ -17,6 +17,7 @@ public:
 
 		_float	fSpeedPerSec = 0.f;
 		_float	fRotationPerSec = 0.f;
+		_uint   iLevelIndex = -1;
 
 	}GAMEOBJECT_DESC;
 protected:
@@ -68,8 +69,8 @@ protected:
 protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";
+	_uint						m_iCurrentLevelIndex = -1;
 
-	
 protected:
 	HRESULT	Add_Component(_uint iLevelIndex, const wstring& strPrototypeTag,
 							const wstring& strComTag, _Inout_ CComponent** ppOut, void* pArg = nullptr);

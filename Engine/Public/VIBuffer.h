@@ -21,7 +21,7 @@ public:
 
 public:
 
-	HRESULT Bind_VIBuffers();
+	virtual HRESULT Bind_VIBuffers();
 	/* 정점, 인덱스, 인스턴스 버퍼들을 생성한다. */
 	HRESULT Create_Buffer(_Inout_ ID3D11Buffer**	ppBuffer);
 
@@ -43,8 +43,10 @@ protected:
 	DXGI_FORMAT					m_eIndexFormat = {};
 	D3D11_PRIMITIVE_TOPOLOGY	m_eTopology = {};
 
+	_float3* m_pVerticesPos = { nullptr };
+
 public:
-	//virtual CComponent* Clone(void* pArg) = 0;
+	virtual CComponent* Clone(void* pArg) = 0;
 	virtual void Free() override;
 };
 

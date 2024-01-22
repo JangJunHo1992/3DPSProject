@@ -17,6 +17,7 @@ CWeapon::CWeapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 
 CWeapon::CWeapon(const CWeapon& rhs)
 	: CGameObject(rhs)
+	, m_iColliderSize(rhs.m_iColliderSize)
 {
 }
 
@@ -80,22 +81,23 @@ void CWeapon::Late_Tick(_float fTimeDelta)
 
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
 		return;
-}
-
-HRESULT CWeapon::Render()
-{
-	__super::Render();
-
 #ifdef _DEBUG
 	//m_pNavigationCom->Render();
 
-	if (m_bIsAttack) 
+	if (m_bIsAttack)
 	{
 		for (_uint i = 0; i < m_iColliderSize; ++i)
 			m_pColliders[i]->Render();
 	}
 
 #endif
+}
+
+HRESULT CWeapon::Render()
+{
+	__super::Render();
+
+
 
 	if (FAILED(Bind_ShaderResources()))
 		return E_FAIL;
@@ -131,8 +133,8 @@ HRESULT CWeapon::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
 		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-		return E_FAIL;
+// 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
+// 		return E_FAIL;
 
 	return S_OK;
 }

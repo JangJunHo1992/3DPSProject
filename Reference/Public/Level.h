@@ -14,7 +14,8 @@ public:
 	virtual HRESULT Initialize() ;
 	virtual void Tick(_float fTimeDelta);
 	virtual HRESULT Render();
-
+public:
+	_uint					m_iNextLevel = -1;
 protected:
 	ID3D11Device*			m_pDevice = { nullptr };
 	ID3D11DeviceContext*	m_pContext = { nullptr };

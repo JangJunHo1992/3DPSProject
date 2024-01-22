@@ -34,7 +34,11 @@ HRESULT CGameObject::Initialize(void* pArg)
 	GAMEOBJECT_DESC		Desc = {  };
 
 	if (nullptr != pArg)
+	{
 		Desc = *(GAMEOBJECT_DESC*)pArg;
+		m_iCurrentLevelIndex = Desc.iLevelIndex;
+	}
+
 
 	m_pTransformCom = CTransform::Create(m_pDevice, m_pContext,Desc.fSpeedPerSec,Desc.fRotationPerSec);
 	if (nullptr == m_pTransformCom)

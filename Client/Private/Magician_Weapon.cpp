@@ -1,5 +1,5 @@
 #include "Magician_Weapon.h"
-
+#include "Bone.h"
 #include "Character.h"
 #include "GameInstance.h"
 
@@ -39,7 +39,7 @@ void CMagician_Weapon::Priority_Tick(_float fTimeDelta)
 void CMagician_Weapon::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	//Collision_Chcek();
+	Collision_Chcek();
 
 }
 
@@ -71,7 +71,7 @@ HRESULT CMagician_Weapon::Ready_Components_Origin(LEVEL eLevel)
 
 
 	/* For.Com_Collider */
-	m_iColliderSize = 10;
+	m_iColliderSize = 6;
 	m_pColliders.resize(m_iColliderSize);
 	//m_pColliders = new CCollider*[m_iColliderSize];
 
@@ -81,8 +81,23 @@ HRESULT CMagician_Weapon::Ready_Components_Origin(LEVEL eLevel)
 
 		_float fPosZ = 1.2f / m_iColliderSize * (i + 1);
 
-		BoundingDesc.fRadius = 1.2f / m_iColliderSize;
+		_float fRadiusX = 180.f;
+		_float fRadiusY = 90.f;
+		_float fRadiusZ = 180.f;
+
+		_matrix SocketMatrix
+			= m_pSocketBone->Get_CombinedTransformationMatrix()
+			* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ))
+			* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+			* XMMatrixRotationY(XMConvertToRadians(fRadiusY));
+
+		_vector vPos = XMVector3TransformCoord(
+			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
+			, SocketMatrix
+		);
+		BoundingDesc.fRadius = 0.8f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
+		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 
 		const wstring strName = TEXT("Com_Collider_") + i;
 
@@ -121,7 +136,7 @@ _bool CMagician_Weapon::Collision_Chcek()
 
 	CCharacter* pAlreadyHittedCharacter = nullptr;
 
-	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
 	for (CGameObject* pGameObject : _Targets)
 	{
 		if (false == m_bIsAttack)

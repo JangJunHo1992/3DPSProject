@@ -232,6 +232,39 @@
     <Filter Include="01.Utility\05.Fonts\Manager">
       <UniqueIdentifier>{d3f6710f-7c77-4055-91c9-07fd23e221de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle">
+      <UniqueIdentifier>{bb0d6aff-cf77-4906-9851-2900d938f773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle\Instancing">
+      <UniqueIdentifier>{3c053b18-2fe6-4ce9-87b0-c20f75c0e071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Point">
+      <UniqueIdentifier>{61347b4d-e1aa-4ccb-97c6-c2b6592d04d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect">
+      <UniqueIdentifier>{3c5f4562-77ce-43ed-8775-c48ba64a27fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.Components\06.Navigation\NavigationPoint">
+      <UniqueIdentifier>{82c94314-2ba9-4a4a-8784-622a0b1f127d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.GameObjects\Alpha">
+      <UniqueIdentifier>{b8a5543f-74e7-465c-9792-566307337862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\06.RenderTargets">
+      <UniqueIdentifier>{415430f5-5097-4b00-8a3c-1c7579f6e519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\07.Lights">
+      <UniqueIdentifier>{edca6867-2a9b-4ddd-9cf8-45c9135de2be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\08.Frustum">
+      <UniqueIdentifier>{e822aef8-4643-47a7-9d0d-9917327bdfd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\06.RenderTargets\Manager">
+      <UniqueIdentifier>{b1c0d5bf-2ae3-45b8-a226-bc02ff3cfe62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\07.Lights\Manager">
+      <UniqueIdentifier>{6025671d-1098-494f-bf67-914c7bf45e4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -254,9 +287,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\Graphic_Device.h">
       <Filter>00.System\00.Device\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Engine_Struct.h">
-      <Filter>99.Defines</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Timer.h">
       <Filter>00.System\01.Timers</Filter>
@@ -447,11 +477,44 @@
     <ClInclude Include="..\Public\Character.h">
       <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Fonts.h">
+    <ClInclude Include="..\Public\VIBuffer_Instancing.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Particle_Point.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Particle_Rect.h">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Struct.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CustomFont.h">
       <Filter>01.Utility\05.Fonts</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Fonts_Manager.h">
+    <ClInclude Include="..\Public\Font_Manager.h">
       <Filter>01.Utility\05.Fonts\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\NavigationPoint.h">
+      <Filter>01.Utility\03.Components\06.Navigation\NavigationPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\AlphaObject.h">
+      <Filter>01.Utility\02.GameObjects\Alpha</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RenderTarget.h">
+      <Filter>01.Utility\06.RenderTargets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Target_Manager.h">
+      <Filter>01.Utility\06.RenderTargets\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Frustum.h">
+      <Filter>01.Utility\08.Frustum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Light.h">
+      <Filter>01.Utility\07.Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Light_Manager.h">
+      <Filter>01.Utility\07.Lights\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -632,15 +695,48 @@
     <ClCompile Include="..\Private\Character.cpp">
       <Filter>01.Utility\02.GameObjects\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Fonts.cpp">
+    <ClCompile Include="..\Private\VIBuffer_Instancing.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Particle_Point.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Particle_Rect.cpp">
+      <Filter>01.Utility\03.Components\01.VIBuffer\Particle\Instancing\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CustomFont.cpp">
       <Filter>01.Utility\05.Fonts</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Fonts_Manager.cpp">
+    <ClCompile Include="..\Private\Font_Manager.cpp">
       <Filter>01.Utility\05.Fonts\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\NavigationPoint.cpp">
+      <Filter>01.Utility\03.Components\06.Navigation\NavigationPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\AlphaObject.cpp">
+      <Filter>01.Utility\02.GameObjects\Alpha</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RenderTarget.cpp">
+      <Filter>01.Utility\06.RenderTargets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Target_Manager.cpp">
+      <Filter>01.Utility\06.RenderTargets\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Frustum.cpp">
+      <Filter>01.Utility\08.Frustum</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Light.cpp">
+      <Filter>01.Utility\07.Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Light_Manager.cpp">
+      <Filter>01.Utility\07.Lights\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Navigation.hlsl">
+      <Filter>91.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Deferred.hlsl">
       <Filter>91.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

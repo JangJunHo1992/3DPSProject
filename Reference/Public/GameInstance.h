@@ -38,13 +38,16 @@ public: /* For.Graphic_Device */
 	HRESULT Clear_BackBuffer_View(_float4 vClearColor);
 	HRESULT Clear_DepthStencil_View();	
 	HRESULT Present();
-
+	ID3D11RenderTargetView* Get_BackBufferRTV() const;
+	ID3D11DepthStencilView* Get_DSV() const;
 public: /* For.Timer_Manager */
 	HRESULT	Add_Timer(const wstring& strTimeTag);
 	_float Compute_TimeDelta(const wstring& strTimeTag);
 
 public: /* For.Level_Manager */
 	HRESULT Open_Level(_uint iCurrentLevelIndex, class CLevel* pNewLevel);
+	_uint Get_CurrentLevel();
+	_uint Get_NextLevel();
 
 public: /* For.Object_Manager */
 	HRESULT Add_Prototype_Object(const wstring& strPrototypeTag, class CGameObject* pPrototype);
@@ -69,6 +72,7 @@ public: /* For.Component_Manager */
 
 public: /* For.Renderer */
 	HRESULT Add_RenderGroup(CRenderer::RENDERGROUP eGroupID, class CGameObject* pGameObject);
+	HRESULT Add_DebugRender(class CComponent* pDebugCom);
 public: /* For.PipeLine */
 	void Set_Transform(CPipeLine::D3DTRANSFORMSTATE eState, _fmatrix TransformMatrix);
 	void Set_Transform(CPipeLine::D3DTRANSFORMSTATE eState, _float4x4 TransformMatrix);
@@ -97,6 +101,23 @@ public: /* For.Font_Manager */
 	HRESULT Add_Font(const wstring & strFontTag, const wstring & strFontFilePath);
 	HRESULT Render_Font(const wstring & strFontTag, const wstring & strText, const _float2 & vPosition, _fvector vColor = XMVectorSet(1.f, 1.f, 1.f, 1.f), _float fScale = 1.f, _float2 vOrigin = _float2(0.f, 0.f), _float fRotation = 0.f);
 
+public: /* For.Target_Manager */
+	HRESULT Add_RenderTarget(const wstring & strTargetTag, _uint iSizeX, _uint iSizeY, DXGI_FORMAT ePixelFormat, const _float4 & vClearColor);
+	HRESULT Add_MRT(const wstring & strMRTTag, const wstring & strTargetTag);
+	HRESULT Begin_MRT(const wstring & strMRTTag);
+	HRESULT End_MRT();
+	HRESULT Bind_RenderTarget_ShaderResource(const wstring & strTargetTag, class CShader* pShader, const _char * pConstantName);
+#ifdef _DEBUG
+	HRESULT Ready_RenderTarget_Debug(const wstring & strTargetTag, _float fX, _float fY, _float fSizeX, _float fSizeY);
+	HRESULT Render_Debug_RTVs(const wstring & strMRTTag, class CShader* pShader, class CVIBuffer_Rect* pVIBuffer);
+#endif
+
+public: /* For.Light_Manager */
+	HRESULT Add_Light(const LIGHT_DESC & LightDesc);
+	HRESULT Render_Lights(class CShader* pShader, class CVIBuffer_Rect* pVIBuffer);
+
+public: /* For.Frustum */
+	_bool isIn_WorldPlanes(_fvector vPoint, _float fRadius = 0.f);
 
 public:
 	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
@@ -122,7 +143,10 @@ private:
 	class CRenderer*				m_pRenderer = { nullptr };
 	class CPipeLine*				m_pPipeLine = { nullptr };
 	class CInput_Device*			m_pInput_Device = { nullptr };
-	class CFonts_Manager*			m_pFonts_Manager = { nullptr };
+	class CFont_Manager*			m_pFonts_Manager = { nullptr };
+	class CTarget_Manager* m_pTarget_Manager = { nullptr };
+	class CLight_Manager* m_pLight_Manager = { nullptr };
+	class CFrustum* m_pFrustum = { nullptr };
 public:
 	void Release_Manager();
 	static void Release_Engine();

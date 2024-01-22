@@ -53,7 +53,7 @@ HRESULT CTerrain::Initialize(void* pArg)
 
 void CTerrain::Priority_Tick(_float fTimeDelta)
 {
-	m_pNavigationCom->Update(m_pTransformCom->Get_WorldMatrix());
+	m_pNavigationCom->Update(m_pTransformCom->Get_WorldMatrix(), fTimeDelta);
 }
 
 void CTerrain::Tick(_float fTimeDelta)

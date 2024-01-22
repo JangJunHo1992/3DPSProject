@@ -1,5 +1,5 @@
 #include "Covus_GamePlay.h"
-
+#include "GameInstance.h"
 #include "Player_Idle.h"
 
 CCovus_GamePlay::CCovus_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -17,6 +17,8 @@ HRESULT CCovus_GamePlay::Initialize_Prototype()
 {
 	if (FAILED(__super::Initialize_Prototype()))
 		return E_FAIL;
+
+	
 
 	return S_OK;
 }
@@ -58,8 +60,38 @@ HRESULT CCovus_GamePlay::Render()
 
 HRESULT CCovus_GamePlay::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
-		return E_FAIL;
+	m_pGameInstance->Get_NextLevel();
+	switch (m_pGameInstance->Get_NextLevel())
+	{
+	case 2 :
+		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+			return E_FAIL;
+		break;
+	case 6:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
+			return E_FAIL;
+		break;
+	case 7:
+		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
+			return E_FAIL;
+		break;
+	default:
+		break;
+	}
+
+//  	if (m_pGameInstance->Get_CurrentLevel() == 2)
+//  	{
+// 		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
+// 			return E_FAIL;
+//  	}
+//  	else if (m_pGameInstance->Get_CurrentLevel() == 6)
+//  	{
+//  		
+//  	}
+//  	else if (m_pGameInstance->Get_CurrentLevel() == 7)
+//  	{
+//  		
+//  	}
 
 	return S_OK;
 }

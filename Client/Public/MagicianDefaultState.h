@@ -18,8 +18,9 @@ public:
 public:
 	CState<CMagician_GamePlay>* Ground_Normal(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
-	CState<CMagician_GamePlay>* Run(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
-	CState<CMagician_GamePlay>* Dash(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+	CState<CMagician_GamePlay>* Attack(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+	CState<CMagician_GamePlay>* Shoot(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+	CState<CMagician_GamePlay>* WalkandDisappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CMagician_GamePlay>* Hitted(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
 

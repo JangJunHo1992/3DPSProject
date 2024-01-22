@@ -24,7 +24,7 @@ HRESULT CForkLift_Tool::Initialize(void* pArg)
 
 HRESULT CForkLift_Tool::Ready_Components()
 {
-	if (FAILED(Ready_Components_Origin()))
+	if (FAILED(Ready_Components_Origin(LEVEL_TOOL)))
 		return E_FAIL;
 
 	if (FAILED(__super::Add_Component(LEVEL_TOOL, TEXT("Prototype_Component_Model_ForkLift"),

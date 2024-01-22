@@ -24,7 +24,7 @@ CState<CCovus_GamePlay>* CCovus_Attack1::Update(CCovus_GamePlay* pActor, _float 
 		pActor->Set_IsAttack(false);
 	}
 
-	if (pActor->Is_Animation_End())
+	if (pActor->Is_Inputable_Back(40))
 	{
 		return new CCovus_Idle();
 	}

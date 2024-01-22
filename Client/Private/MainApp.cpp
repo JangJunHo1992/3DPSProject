@@ -53,7 +53,17 @@ HRESULT CMainApp::Render()
 
 	/* ±×·Á¾ßÇÒ ¸ðµ¨µéÀ» ±×¸®³®.*/
 	m_pGameInstance->Render_Engine();
+	++m_iNumRender;
 
+	if (1.f <= m_fTimeAcc)
+	{
+		wsprintf(m_szFPS, TEXT("FPS:%d"), m_iNumRender);
+		m_iNumRender = 0;
+		m_fTimeAcc = 0.f;
+	}
+	// MakeSpriteFont "³Ø½¼lv1°íµñ Bold" /FontSize:30 /FastPack /CharacterRegion:0x0020-0x00FF /CharacterRegion:0x3131-0x3163 /CharacterRegion:0xAC00-0xD800 /DefaultCharacter:0xAC00 138ex.spritefont
+	//m_pGameInstance->Render_Font(TEXT("Font_Default"), TEXT("±×·¯´Ù 0¿øÈ÷ Ãë¾÷ ¸ø ÇÑ´Ù!!"), _float2(0.f, 0.f));
+	m_pGameInstance->Render_Font(TEXT("Font_Default"), m_szFPS, _float2(0.f, 0.f), XMVectorSet(1.f, 0.f, 0.f, 1.f));
 	m_pGameInstance->Present();
 
 	return S_OK;
@@ -89,6 +99,8 @@ HRESULT CMainApp::Ready_Prototype_Component_ForStaticLevel()
 
 HRESULT CMainApp::Ready_Gara()
 {
+	if (FAILED(m_pGameInstance->Add_Font(TEXT("Font_Default"), TEXT("../Bin/Resources/Fonts/139ex.spritefont"))))
+		return E_FAIL;
 	//D3D11_BLEND_DESC			BlendDesc;
 	//D3D11_DEPTH_STENCIL_DESC	DepthStencilDesc;
 	//D3D11_RASTERIZER_DESC		RasterizerDesc;
@@ -178,35 +190,35 @@ HRESULT CMainApp::Ready_Gara()
 	Safe_Delete_Array(pPixels);
 	Safe_Release(pTexture2D);
 
-	HANDLE		hFile = CreateFile(TEXT("../Bin/DataFiles/Navigation.dat"), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
-	if (0 == hFile)
-		return E_FAIL;
-
-	_ulong		dwByte = { 0 };
-
-	_float3		vPoints[3];
-
-	vPoints[0] = _float3(0.f, 0.0f, 10.f);
-	vPoints[1] = _float3(10.f, 0.0f, 0.0f);
-	vPoints[2] = _float3(0.0f, 0.0f, 0.0f);
-	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
-
-	vPoints[0] = _float3(0.f, 0.0f, 10.f);
-	vPoints[1] = _float3(10.f, 0.0f, 10.f);
-	vPoints[2] = _float3(10.f, 0.0f, 0.0f);
-	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
-
-	vPoints[0] = _float3(0.f, 0.0f, 20.f);
-	vPoints[1] = _float3(10.f, 0.0f, 10.f);
-	vPoints[2] = _float3(0.0f, 0.0f, 10.f);
-	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
-
-	vPoints[0] = _float3(10.f, 0.0f, 10.f);
-	vPoints[1] = _float3(20.f, 0.0f, 0.f);
-	vPoints[2] = _float3(10.f, 0.0f, 0.0f);
-	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
-
-	CloseHandle(hFile);
+// 	HANDLE		hFile = CreateFile(TEXT("../Bin/DataFiles/Navigation.dat"), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+// 	if (0 == hFile)
+// 		return E_FAIL;
+// 
+// 	_ulong		dwByte = { 0 };
+// 
+// 	_float3		vPoints[3];
+// 
+// 	vPoints[0] = _float3(0.f, 0.0f, 10.f);
+// 	vPoints[1] = _float3(10.f, 0.0f, 0.0f);
+// 	vPoints[2] = _float3(0.0f, 0.0f, 0.0f);
+// 	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
+// 
+// 	vPoints[0] = _float3(0.f, 0.0f, 10.f);
+// 	vPoints[1] = _float3(10.f, 0.0f, 10.f);
+// 	vPoints[2] = _float3(10.f, 0.0f, 0.0f);
+// 	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
+// 
+// 	vPoints[0] = _float3(0.f, 0.0f, 20.f);
+// 	vPoints[1] = _float3(10.f, 0.0f, 10.f);
+// 	vPoints[2] = _float3(0.0f, 0.0f, 10.f);
+// 	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
+// 
+// 	vPoints[0] = _float3(10.f, 0.0f, 10.f);
+// 	vPoints[1] = _float3(20.f, 0.0f, 0.f);
+// 	vPoints[2] = _float3(10.f, 0.0f, 0.0f);
+// 	WriteFile(hFile, vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
+// 
+// 	CloseHandle(hFile);
 
 	return S_OK;
 }

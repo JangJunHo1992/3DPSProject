@@ -5,7 +5,7 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
-
+#include <random>
 #include "Effects11\d3dx11effect.h"
 
 #include "assimp\scene.h"

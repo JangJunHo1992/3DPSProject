@@ -293,14 +293,14 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 			//_splitpath_s(strPath.data, nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
 			_splitpath_s(strPath.c_str(), nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
 
-			_char		szTmp[MAX_PATH] = "";
+			_char      szTmp[MAX_PATH] = "";
 			strcpy_s(szTmp, szDrive);
 			strcat_s(szTmp, szDirectory);
 			strcat_s(szTmp, szFileName);
-			strcat_s(szTmp, szEXT);
+			//strcat_s(szTmp, szEXT);
 
-			//_char szTest[MAX_PATH] = ".dds";
-			//strcat_s(szTmp, szTest);
+			_char szTest[MAX_PATH] = ".dds";
+			strcat_s(szTmp, szTest);
 
 			_tchar		szFullPath[MAX_PATH] = TEXT("");
 
