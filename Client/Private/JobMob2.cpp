@@ -70,6 +70,10 @@ void CJobMob2::Set_Hitted()
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
+void CJobMob2::Set_Dead()
+{
+}
+
 void CJobMob2::Write_Json(json& Out_Json)
 {
 	Out_Json["Name"] = m_sName;

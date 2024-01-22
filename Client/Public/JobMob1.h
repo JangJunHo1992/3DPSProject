@@ -20,6 +20,7 @@ public:
 
 public:
 	virtual void Set_Hitted() override;
+	virtual void Set_Dead() override;
 
 public:
 	virtual void Write_Json(json& Out_Json) override;

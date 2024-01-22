@@ -45,6 +45,7 @@ public:
 	CNavigation* Get_Navigation();
 
 	virtual void Set_Hitted() PURE;
+	virtual void Set_Dead() PURE;
 	void Set_IsAttack(_bool _bIsAttack) 
 	{
 		for (CWeapon* pWeapon : m_Weapons)

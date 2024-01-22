@@ -87,7 +87,8 @@ void CWeapon::Late_Tick(_float fTimeDelta)
 	if (m_bIsAttack)
 	{
 		for (_uint i = 0; i < m_iColliderSize; ++i)
-			m_pColliders[i]->Render();
+			m_pGameInstance->Add_DebugRender(m_pColliders[i]);
+			//m_pColliders[i]->Render();
 	}
 
 #endif

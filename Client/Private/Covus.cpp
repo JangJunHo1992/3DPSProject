@@ -85,6 +85,10 @@ void CCovus::Set_Hitted()
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
+void CCovus::Set_Dead()
+{
+}
+
 void CCovus::Write_Json(json& Out_Json)
 {
 	Out_Json["Name"] = m_sName;
@@ -128,13 +132,13 @@ HRESULT CCovus::Ready_PartObjects()
 
 	{
 		CCovus_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon_Dagger"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
 			return E_FAIL;
 	}
-
+	
 	{
 		CCovus_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon"), "ik_hand_r", WeaponDesc, TEXT("Weapon_R"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon_Saber"), "ik_hand_r", WeaponDesc, TEXT("Weapon_R"))))
 			return E_FAIL;
 	}
 

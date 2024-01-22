@@ -27,8 +27,10 @@
 #include "Covus_GamePlay.h"
 #include "Covus_Body_GamePlay.h"
 #include "Covus_Body_Tool.h"
-#include "Covus_Weapon_GamePlay.h"
-#include "Covus_Weapon_Tool.h"
+#include "Covus_Weapon_Saber_GamePlay.h"
+#include "Covus_Weapon_Saber_Tool.h"
+#include "Covus_Weapon_Dagger_GamePlay.h"
+#include "Covus_Weapon_Dagger_Tool.h"
 
 #include "Magician_Tool.h"
 #include "Magician_GamePlay.h"
@@ -248,16 +250,43 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Saber");
+			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Saber";
+
+ 			//_float fRadiusY = 270.0f;
+ 			//_float fRadiusZ = 90.0f;
+			_float fRadiusX = 270.f;
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationX(XMConvertToRadians(fRadiusX));
+ 				//* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+ 				//* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Dagger");
 			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Weapon";
 
-// 			_float fRadiusY = 270.0f;
-// 			_float fRadiusZ = 90.0f;
+			// 			_float fRadiusY = 270.0f;
+			// 			_float fRadiusZ = 90.0f;
 
 			PivotMatrix =
 				XMMatrixScaling(0.01f, 0.01f, 0.01f);
-// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+			// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+			// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
 			if (LEVEL_TOOL == eLEVEL)
 			{
@@ -663,22 +692,37 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Weapon_Dagger");
 
 			if (LEVEL_TOOL == eLEVEL)
 			{
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CCovus_Weapon_Tool::Create(m_pDevice, m_pContext))))
+					CCovus_Weapon_Dagger_Tool::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
 			}
 			else
 			{
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CCovus_Weapon_GamePlay::Create(m_pDevice, m_pContext))))
+					CCovus_Weapon_Dagger_GamePlay::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
 			}
 		}
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Weapon_Saber");
 
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_Weapon_Saber_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CCovus_Weapon_Saber_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
 		{
 			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus");
 

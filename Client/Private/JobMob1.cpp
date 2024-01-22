@@ -75,6 +75,10 @@ void CJobMob1::Set_Hitted()
 	JobMob1Status.m_iHP -= 10;
 }
 
+void CJobMob1::Set_Dead()
+{
+}
+
 void CJobMob1::Write_Json(json& Out_Json)
 {
 	Out_Json["Name"] = m_sName;

@@ -69,6 +69,10 @@ void CMagician::Set_Hitted()
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
+void CMagician::Set_Dead()
+{
+}
+
 void CMagician::Write_Json(json& Out_Json)
 {
 	Out_Json["Name"] = m_sName;

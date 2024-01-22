@@ -70,6 +70,10 @@ void CVarg::Set_Hitted()
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
+void CVarg::Set_Dead()
+{
+}
+
 void CVarg::Write_Json(json& Out_Json)
 {
 	Out_Json["Name"] = m_sName;
