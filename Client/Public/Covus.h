@@ -338,7 +338,7 @@ protected:
 	//HRESULT Bind_ShaderResources();
 protected:
 	_bool	m_bRotatePlayer = false;
-	
+	CCharacter::CharStat PlayerStatus = {};
 
 public:
 	virtual void Free() override;

@@ -83,13 +83,15 @@ void CWeapon::Late_Tick(_float fTimeDelta)
 		return;
 #ifdef _DEBUG
 	//m_pNavigationCom->Render();
-
-	if (m_bIsAttack)
-	{
-		for (_uint i = 0; i < m_iColliderSize; ++i)
-			m_pGameInstance->Add_DebugRender(m_pColliders[i]);
-			//m_pColliders[i]->Render();
-	}
+	for (_uint i = 0; i < m_iColliderSize; ++i)
+		m_pGameInstance->Add_DebugRender(m_pColliders[i]);
+	
+// 	if (m_bIsAttack)
+// 	{
+// 		for (_uint i = 0; i < m_iColliderSize; ++i)
+// 			m_pGameInstance->Add_DebugRender(m_pColliders[i]);
+// 			
+// 	}
 
 #endif
 }

@@ -29,6 +29,9 @@ HRESULT CVarg::Initialize(void* pArg)
 	m_sName = "Varg";
 	m_sLayerTag = "Layer_Monster";
 
+	VargStatus.m_iAttack = 20;
+	VargStatus.m_iHP = 200;
+
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 10.f;
@@ -48,6 +51,8 @@ void CVarg::Priority_Tick(_float fTimeDelta)
 
 void CVarg::Tick(_float fTimeDelta)
 {
+	if (VargStatus.m_iHP < 0)
+		Set_Dead();
 	__super::Tick(fTimeDelta);
 }
 
@@ -72,6 +77,8 @@ void CVarg::Set_Hitted()
 
 void CVarg::Set_Dead()
 {
+	CVarg::VargState eHitted = CVarg::VargState::TakeExecution_Dead;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
 void CVarg::Write_Json(json& Out_Json)

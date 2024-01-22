@@ -29,6 +29,9 @@ HRESULT CJobMob2::Initialize(void* pArg)
 	m_sName = "JobMob2";
 	m_sLayerTag = "Layer_Monster";
 
+	JobMob2Status.m_iAttack = 10;
+	JobMob2Status.m_iHP = 40;
+
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 10.f;
@@ -48,6 +51,8 @@ void CJobMob2::Priority_Tick(_float fTimeDelta)
 
 void CJobMob2::Tick(_float fTimeDelta)
 {
+	if (JobMob2Status.m_iHP < 0)
+		Set_Dead();
 	__super::Tick(fTimeDelta);
 }
 
@@ -72,6 +77,17 @@ void CJobMob2::Set_Hitted()
 
 void CJobMob2::Set_Dead()
 {
+	_uint Random = rand() % 2;
+	if (Random == 0)
+	{
+		CJobMob2::JobMob2State eHitted = CJobMob2::JobMob2State::Die1;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	}
+	else
+	{
+		CJobMob2::JobMob2State eHitted = CJobMob2::JobMob2State::Die2;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	}
 }
 
 void CJobMob2::Write_Json(json& Out_Json)

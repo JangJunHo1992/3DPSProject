@@ -29,6 +29,8 @@ protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
 	virtual HRESULT Ready_PartObjects() override;
 	//HRESULT Bind_ShaderResources();
+protected:
+	CCharacter::CharStat MagicianStatus = {};
 
 
 public:

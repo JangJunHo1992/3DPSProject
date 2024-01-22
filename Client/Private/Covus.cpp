@@ -33,7 +33,7 @@ HRESULT CCovus::Initialize(void* pArg)
 	m_sName = "Covus";
 	m_sLayerTag = "Layer_Player";
 
-	CCharacter::CharStat PlayerStatus = {};
+	
 	PlayerStatus.m_iHP = 150;
 	PlayerStatus.m_iAttack = 10;
 

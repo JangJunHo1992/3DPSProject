@@ -29,7 +29,8 @@ protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
 	virtual HRESULT Ready_PartObjects() override;
 	//HRESULT Bind_ShaderResources();
-
+protected:
+	CCharacter::CharStat JobMob2Status = {};
 
 public:
 	virtual void Free() override;
