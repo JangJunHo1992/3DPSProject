@@ -56,6 +56,7 @@ void CObject_Window::Start()
 
 void CObject_Window::Tick(_float fTimeDelta)
 {
+	
 }
 
 HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
@@ -73,7 +74,7 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 			if (ImGui::TreeNode("ObjectList"))
 			{
 				
-				string items[] = { "Layer_Monster","Layer_Environment","Layer_Object","Layer_Something"};
+				string items[] = { "Layer_Player", "Layer_Monster","Layer_Environment","Layer_Object","Layer_Something"};
 
 				static int Object_idx = 0; // Here we store our selection data as an index.
 				static int Layer_idx = 0; // Here we store our selection data as an index.
@@ -97,7 +98,7 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 				ImGui::Spacing();
 				if (ImGui::BeginListBox("LayerList"))
 				{
-					for (int n = 0; n <4; n++)
+					for (int n = 0; n <5; n++)
 					{
 						const bool is_selected = (Layer_idx == n);
 						if (ImGui::Selectable(items[n].c_str(), is_selected))
@@ -110,8 +111,8 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 							if (m_bCreateCheck)
 								if (m_pGameInstance->Mouse_Down(DIM_LB))
 								{
-									Create_Object(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
-
+									//Create_Object(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
+									Create_Object_On_Map(ConvertCtoWC(items[Layer_idx].c_str()), ConvertCtoWC(m_vObjectTag[Object_idx].c_str()));
 									m_bCloneCount = true;
 									m_bListCheck = true;
 								}
@@ -190,6 +191,7 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 
 	return S_OK;
 }
+
 void CObject_Window::Compress_Guizmo_Mode()
 {
 	if (nullptr == m_PickingObject)
@@ -362,6 +364,14 @@ void CObject_Window::Create_Object(const wstring& strLayerTag, const wstring& st
 	const _float3& temp = m_pTerrain->Get_PickedPosFloat3();
 	pGameObject->Set_Position(temp);
 
+}
+
+void CObject_Window::Create_Object_On_Map(const wstring& strLayerTag, const wstring& strPrototypeTag)
+{
+	if (nullptr == m_pLevel_MapTool)
+		return;
+
+	m_pLevel_MapTool->Create_Object_On_Map(strLayerTag, strPrototypeTag);
 }
 
 _bool CObject_Window::Check_ImGui_Rect()

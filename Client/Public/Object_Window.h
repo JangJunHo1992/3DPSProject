@@ -31,6 +31,7 @@ public:
 	wchar_t* ConvertCtoWC(const char* str);
 public:
 	void Create_Object(const wstring& strLayerTag, const wstring& strPrototypeTag);
+	void Create_Object_On_Map(const wstring& strLayerTag, const wstring& strPrototypeTag);
 	_bool Check_ImGui_Rect();
 public://guizmo
 	void ImGuizmo_Initialize();
@@ -51,6 +52,7 @@ public:
 	vector<string>	Get_ObjectTag() { return m_vObjectTag; }
 public:
 	CTerrain_Tool*			m_pTerrain = nullptr;
+	class CMap_Tool*		m_pMap = { nullptr };
 	CGameInstance*			m_pGameInstance = { nullptr };
 	CLevel_MapTool*			m_pLevel_MapTool = { nullptr };
 	CGameObject*			m_PickingObject = { nullptr };

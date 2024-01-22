@@ -21,7 +21,9 @@ private:
 public:
 	HRESULT Initialize();
 	HRESULT Add_RenderGroup(RENDERGROUP eGroupID, class CGameObject* pGameObject);
+#ifdef _DEBUG
 	HRESULT Add_DebugRender(class CComponent* pDebugCom);
+#endif
 	HRESULT Draw_RenderGroup();
 
 private:

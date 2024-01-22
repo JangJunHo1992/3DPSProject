@@ -99,6 +99,7 @@ HRESULT CRenderer::Add_RenderGroup(RENDERGROUP eGroupID, CGameObject* pGameObjec
 
 	return S_OK;
 }
+#ifdef _DEBUG
 
 HRESULT CRenderer::Add_DebugRender(CComponent* pDebugCom)
 {
@@ -108,7 +109,7 @@ HRESULT CRenderer::Add_DebugRender(CComponent* pDebugCom)
 
 	return S_OK;
 }
-
+#endif
 HRESULT CRenderer::Draw_RenderGroup()
 {
 	if (FAILED(Render_Priority()))
@@ -125,10 +126,11 @@ HRESULT CRenderer::Draw_RenderGroup()
 		return E_FAIL;
 	if (FAILED(Render_UI()))
 		return E_FAIL;
+#ifdef _DEBUG
 
 	if (FAILED(Render_Debug()))
 		return E_FAIL;
-
+#endif
 	return S_OK;
 }
 
@@ -325,11 +327,12 @@ void CRenderer::Free()
 			Safe_Release(pGameObject);
 		ObjectList.clear();
 	}
+#ifdef _DEBUG
 
 	for (auto pDebugCom : m_DebugComponent)
 		Safe_Release(pDebugCom);
 	m_DebugComponent.clear();
-
+#endif
 
 
 	Safe_Release(m_pShader);

@@ -90,10 +90,8 @@ void CImgui_Manager::Render()
 	ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
 	if (dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
 		window_flags |= ImGuiWindowFlags_NoBackground;
-
 	ImGui::SetNextWindowSize(ImVec2(g_iWinSizeX, g_iWinSizeY), ImGuiCond_Always);
 	ImGui::Begin("Dock", nullptr, window_flags);
-	Check_ImGui_Rect();
 	ImGui::PopStyleVar(2);
 	ImGuiID dockspaceID = ImGui::GetID("DockSpace");
 	ImGui::DockSpace(dockspaceID, ImVec2(0, 0), dockspaceFlags);
@@ -101,6 +99,7 @@ void CImgui_Manager::Render()
 
 	if (ImGui::BeginMainMenuBar())
 	{
+		
 		if (m_bMapTool)	ShowMapTool();
 		if (m_bEffectTool) ShowEffectTool();
 		if (m_bObjectTool) ShowObjectTool();
@@ -495,4 +494,5 @@ _bool CImgui_Manager::Check_ImGui_Rect()
 		return false; //ImGui ¿µ¿ª ³»
 	}
 	return true; //ImGui ¿µ¿ªÀÌ¶û ¾È °ãÄ§!
+	
 }
