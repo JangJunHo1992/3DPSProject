@@ -70,6 +70,7 @@ HRESULT CCollider::Initialize(void* pArg)
 void CCollider::Update(_fmatrix TransformMatrix)
 {
 	m_pBounding->Update(TransformMatrix);
+	
 }
 
 _bool CCollider::Collision(CCollider* pTargetCollider)

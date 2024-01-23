@@ -40,6 +40,13 @@ public:
 	void Update(_fmatrix TransformMatrix);
 	_bool Collision(CCollider* pTargetCollider);
 
+	_vector& GetCenterPos() { return m_vCenterPos; }
+	_vector* GetAxisDir() { return m_vAxisDir; }
+	float* GetAxisLen() { return m_fAxisLen; }
+public:
+	_vector		m_vCenterPos; //상자 중앙 좌표
+	_vector		m_vAxisDir[3]; // 상자에 평행한 세축의 단위 벡터
+	_float		m_fAxisLen[3]; // 상자의 평행한 세 축의 길이 fAxisLen[n]은 vAxisDir[n]에 각각 대응한다.
 
 //public:
 //	void Set_Owner(CGameObject* pOwner);

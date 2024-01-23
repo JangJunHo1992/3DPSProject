@@ -51,8 +51,6 @@ void CJobMob2::Priority_Tick(_float fTimeDelta)
 
 void CJobMob2::Tick(_float fTimeDelta)
 {
-// 	if (JobMob2Status.m_iHP < 0)
-// 		Set_Dead();
 	__super::Tick(fTimeDelta);
 }
 

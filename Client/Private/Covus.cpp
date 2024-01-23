@@ -61,7 +61,7 @@ void CCovus::Priority_Tick(_float fTimeDelta)
 
 void CCovus::Tick(_float fTimeDelta)
 {
-
+	Collision_Chcek();
 	__super::Tick(fTimeDelta);
 }
 
@@ -76,6 +76,72 @@ HRESULT CCovus::Render()
 		return E_FAIL;
 
 	return S_OK;
+}
+
+
+_bool CCovus::Collision_Chcek()//_uint eLevel
+{
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+				_float3 position = m_pTransformCom->Get_Position();
+				_float3 otherposition = pTarget->Get_TransformComp()->Get_Position();
+// 				_vector overlap = XMLoadFloat3(&position) - XMLoadFloat3(&otherposition);
+// 				_vector minOverlap = XMVectorMin(overlap, XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f));
+//  				_float3 minOverlapValues;
+// 				XMStoreFloat3(&minOverlapValues, minOverlap);
+				XMVECTOR overlap = XMLoadFloat3(&position) - XMLoadFloat3(&otherposition);
+
+				// 각 성분별 최솟값 계산
+				XMVECTOR minOverlap = XMVectorMin(overlap, XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f));
+
+				XMFLOAT3 minOverlapValues;
+				XMStoreFloat3(&minOverlapValues, minOverlap);
+
+				// 수동으로 변수 정의
+				float minX = minOverlapValues.x;
+				float minY = minOverlapValues.y;
+				float minZ = minOverlapValues.z;
+
+				float minOverlapValue = min(min( minX, minY), minZ );
+
+				if (minOverlapValue > 0) {
+					// 겹친 부분이 있는 경우
+					if (minOverlapValue == minX) {
+						position.x += minOverlapValue / 2.0f;
+						otherposition.x -= minOverlapValue / 2.0f;
+					}
+					else if (minOverlapValue == minY) {
+						position.y += minOverlapValue / 2.0f;
+						otherposition.y -= minOverlapValue / 2.0f;
+					}
+					else {
+						position.z += minOverlapValue / 2.0f;
+						otherposition.z -= minOverlapValue / 2.0f;
+					}
+				}
+				break;
+			}
+			
+		}
+	}
+
+
+	return bIsCollision;
 }
 
 

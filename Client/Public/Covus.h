@@ -323,7 +323,8 @@ public:
 		virtual void Tick(_float fTimeDelta) override;
 		virtual void Late_Tick(_float fTimeDelta) override;
 		virtual HRESULT Render() override;
-
+protected:
+	_bool Collision_Chcek();
 public:
 	virtual void Set_Hitted() override;
 	virtual void Set_Dead() override;
