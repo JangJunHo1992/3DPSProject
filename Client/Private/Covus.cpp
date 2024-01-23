@@ -92,49 +92,54 @@ _bool CCovus::Collision_Chcek()//_uint eLevel
 		if (pTarget)
 		{
 			CCollider* pTargetCollider = pTarget->Get_Collider();
-			if (nullptr == pTargetCollider)
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
 				continue;
 
 			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
 			if (isCollision)
 			{
-				_float3 position = m_pTransformCom->Get_Position();
-				_float3 otherposition = pTarget->Get_TransformComp()->Get_Position();
-// 				_vector overlap = XMLoadFloat3(&position) - XMLoadFloat3(&otherposition);
+// 				_vector position = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+// 				_vector otherposition = pTarget->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+// // 				_vector overlap = XMLoadFloat3(&position) - XMLoadFloat3(&otherposition);
+// // 				_vector minOverlap = XMVectorMin(overlap, XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f));
+// //  				_float3 minOverlapValues;
+// // 				XMStoreFloat3(&minOverlapValues, minOverlap);
+// 				_vector overlap = position - otherposition;
+// 				_float3 position1;
+// 				_float3 otherposition1;
+// 				// 각 성분별 최솟값 계산
 // 				_vector minOverlap = XMVectorMin(overlap, XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f));
-//  				_float3 minOverlapValues;
+// 
+// 				_float3 minOverlapValues;
 // 				XMStoreFloat3(&minOverlapValues, minOverlap);
-				XMVECTOR overlap = XMLoadFloat3(&position) - XMLoadFloat3(&otherposition);
-
-				// 각 성분별 최솟값 계산
-				XMVECTOR minOverlap = XMVectorMin(overlap, XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f));
-
-				XMFLOAT3 minOverlapValues;
-				XMStoreFloat3(&minOverlapValues, minOverlap);
-
-				// 수동으로 변수 정의
-				float minX = minOverlapValues.x;
-				float minY = minOverlapValues.y;
-				float minZ = minOverlapValues.z;
-
-				float minOverlapValue = min(min( minX, minY), minZ );
-
-				if (minOverlapValue > 0) {
-					// 겹친 부분이 있는 경우
-					if (minOverlapValue == minX) {
-						position.x += minOverlapValue / 2.0f;
-						otherposition.x -= minOverlapValue / 2.0f;
-					}
-					else if (minOverlapValue == minY) {
-						position.y += minOverlapValue / 2.0f;
-						otherposition.y -= minOverlapValue / 2.0f;
-					}
-					else {
-						position.z += minOverlapValue / 2.0f;
-						otherposition.z -= minOverlapValue / 2.0f;
-					}
-				}
-				break;
+// 				XMStoreFloat3(&position1, position);
+// 				XMStoreFloat3(&otherposition1, otherposition);
+// 				// 수동으로 변수 정의
+// 				float minX = minOverlapValues.x;
+// 				float minY = minOverlapValues.y;
+// 				float minZ = minOverlapValues.z;
+// 
+// 				float minOverlapValue = min(min( minX, minY), minZ );
+// 
+// 				if (minOverlapValue > 0) {
+// 					// 겹친 부분이 있는 경우
+// 					if (minOverlapValue == minX) {
+// 						position1.x += minOverlapValue / 2.0f;
+// 						otherposition1.x -= minOverlapValue / 2.0f;
+// 					}
+// 					else if (minOverlapValue == minY) {
+// 						position1.y += minOverlapValue / 2.0f;
+// 						otherposition1.y -= minOverlapValue / 2.0f;
+// 					}
+// 					else {
+// 						position1.z += minOverlapValue / 2.0f;
+// 						otherposition1.z -= minOverlapValue / 2.0f;
+// 					}
+// 				}
+// 				break;
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
 			}
 			
 		}

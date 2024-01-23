@@ -63,7 +63,12 @@ public:
 		XMStoreFloat4x4(&InverseMatrix, XMMatrixInverse(nullptr, XMLoadFloat4x4(&m_WorldMatrix)));
 		return InverseMatrix;
 	}
-
+	_float3 Get_Pos() {
+		_vector vPos = Get_State(STATE::STATE_POSITION);
+		_float3 vResult;
+		XMStoreFloat3(&vResult, vPos);
+		return vResult;
+	}
 	void	Set_WorldMatrix(_float4x4 matrix) { m_WorldMatrix = matrix; }
 
 public:

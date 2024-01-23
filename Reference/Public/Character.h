@@ -83,6 +83,7 @@ public:
 
 
 	void Knockback(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
+	void Pushed(_float3 vPos);
 	//RigidBody
 public:
 	void	Set_Force(_float3 _vForce) { m_vNetPower = _vForce; }
@@ -95,7 +96,7 @@ public:
 	_float	Calc_Distance(CCharacter* pTarget);
 	_float	Calc_Distance();
 	void Look_At_Target();
-
+	_float3 Get_Pos();
 	_float4 Get_Pos4();
 protected:
 	CNavigation* m_pNavigationCom = { nullptr };
