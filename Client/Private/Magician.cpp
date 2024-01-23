@@ -50,8 +50,7 @@ void CMagician::Priority_Tick(_float fTimeDelta)
 
 void CMagician::Tick(_float fTimeDelta)
 {
-	if (MagicianStatus.m_iHP < 0)
-		Set_Dead();
+	
 	__super::Tick(fTimeDelta);
 }
 

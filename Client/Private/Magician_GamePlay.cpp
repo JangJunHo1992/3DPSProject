@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Magician_Idle.h"
 #include "GameInstance.h"
+#include "Magician_Dead.h"
 
 CMagician_GamePlay::CMagician_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMagician(pDevice, pContext)
@@ -50,6 +51,8 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CMagician_GamePlay::Tick(_float fTimeDelta)
 {
+	if (MagicianStatus.m_iHP < 0)
+		Set_Dead();
 	__super::Tick(fTimeDelta);
 
 	m_pActor->Update_State(fTimeDelta);
@@ -66,6 +69,11 @@ HRESULT CMagician_GamePlay::Render()
 		return E_FAIL;
 
 	return S_OK;
+}
+
+void CMagician_GamePlay::Set_Dead()
+{
+	m_pActor->Set_State(new CMagician_Dead());
 }
 
 HRESULT CMagician_GamePlay::Ready_Components()

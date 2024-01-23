@@ -27,6 +27,8 @@ private:
 
 private:
 	virtual HRESULT Ready_Components() override;
+protected:
+	virtual void Set_Dead() override;
 
 private:
 	CActor<CVarg_GamePlay>* m_pActor = { nullptr };

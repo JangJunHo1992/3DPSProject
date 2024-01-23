@@ -61,7 +61,13 @@ void CCovus::Priority_Tick(_float fTimeDelta)
 
 void CCovus::Tick(_float fTimeDelta)
 {
-	Collision_Chcek();
+	if (m_iCurrentLevelIn == 2)
+		Collision_Chcek();
+	else if (m_iCurrentLevelIn == 6)
+		Collision_Chcek2();
+	else if (m_iCurrentLevelIn == 7)
+		Collision_Chcek3();
+	
 	__super::Tick(fTimeDelta);
 }
 
@@ -98,50 +104,76 @@ _bool CCovus::Collision_Chcek()//_uint eLevel
 			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
 			if (isCollision)
 			{
-// 				_vector position = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-// 				_vector otherposition = pTarget->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
-// // 				_vector overlap = XMLoadFloat3(&position) - XMLoadFloat3(&otherposition);
-// // 				_vector minOverlap = XMVectorMin(overlap, XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f));
-// //  				_float3 minOverlapValues;
-// // 				XMStoreFloat3(&minOverlapValues, minOverlap);
-// 				_vector overlap = position - otherposition;
-// 				_float3 position1;
-// 				_float3 otherposition1;
-// 				// 각 성분별 최솟값 계산
-// 				_vector minOverlap = XMVectorMin(overlap, XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f));
-// 
-// 				_float3 minOverlapValues;
-// 				XMStoreFloat3(&minOverlapValues, minOverlap);
-// 				XMStoreFloat3(&position1, position);
-// 				XMStoreFloat3(&otherposition1, otherposition);
-// 				// 수동으로 변수 정의
-// 				float minX = minOverlapValues.x;
-// 				float minY = minOverlapValues.y;
-// 				float minZ = minOverlapValues.z;
-// 
-// 				float minOverlapValue = min(min( minX, minY), minZ );
-// 
-// 				if (minOverlapValue > 0) {
-// 					// 겹친 부분이 있는 경우
-// 					if (minOverlapValue == minX) {
-// 						position1.x += minOverlapValue / 2.0f;
-// 						otherposition1.x -= minOverlapValue / 2.0f;
-// 					}
-// 					else if (minOverlapValue == minY) {
-// 						position1.y += minOverlapValue / 2.0f;
-// 						otherposition1.y -= minOverlapValue / 2.0f;
-// 					}
-// 					else {
-// 						position1.z += minOverlapValue / 2.0f;
-// 						otherposition1.z -= minOverlapValue / 2.0f;
-// 					}
-// 				}
-// 				break;
+
 				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 				pTarget->Pushed(vPos);
 				bIsCollision = true;
 			}
 			
+		}
+	}
+
+
+	return bIsCollision;
+}
+
+_bool CCovus::Collision_Chcek2()
+{
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+			
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
+			}
+
+		}
+	}
+
+
+	return bIsCollision;
+}
+
+_bool CCovus::Collision_Chcek3()
+{
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+			
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
+			}
+
 		}
 	}
 

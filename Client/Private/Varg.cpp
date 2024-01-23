@@ -51,8 +51,7 @@ void CVarg::Priority_Tick(_float fTimeDelta)
 
 void CVarg::Tick(_float fTimeDelta)
 {
-	if (VargStatus.m_iHP < 0)
-		Set_Dead();
+	
 	__super::Tick(fTimeDelta);
 }
 

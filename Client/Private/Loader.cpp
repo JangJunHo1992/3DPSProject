@@ -1168,7 +1168,27 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Saber");
+			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Saber";
+
+			//_float fRadiusY = 270.0f;
+			//_float fRadiusZ = 90.0f;
+			_float fRadiusX = 270.f;
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationX(XMConvertToRadians(fRadiusX));
+			//* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+			//* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			
+				if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Dagger");
 			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Weapon";
 
 			// 			_float fRadiusY = 270.0f;
@@ -1180,9 +1200,9 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 			// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
 		
-			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, strPrototypeTag,
-				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-				return E_FAIL;
+				if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
 			
 		}
 	}
@@ -1461,7 +1481,27 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Saber");
+			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Saber";
+
+			//_float fRadiusY = 270.0f;
+			//_float fRadiusZ = 90.0f;
+			_float fRadiusX = 270.f;
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationX(XMConvertToRadians(fRadiusX));
+			//* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+			//* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			
+				if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Dagger");
 			string strFilePath = "../Bin/Resources/Models/Player/Weapon/Weapon";
 
 			// 			_float fRadiusY = 270.0f;
@@ -1472,6 +1512,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 			// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
 			// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
+			
 				if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
 					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
 					return E_FAIL;

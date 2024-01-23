@@ -325,6 +325,10 @@ public:
 		virtual HRESULT Render() override;
 protected:
 	_bool Collision_Chcek();
+	_bool Collision_Chcek2();
+	_bool Collision_Chcek3();
+
+
 public:
 	virtual void Set_Hitted() override;
 	virtual void Set_Dead() override;
