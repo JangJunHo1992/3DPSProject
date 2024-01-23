@@ -133,7 +133,7 @@ CRenderTarget* CTarget_Manager::Find_RenderTarget(const wstring& strTargetTag)
 	return iter->second;
 }
 
-list<class CRenderTarget*>* CTarget_Manager::Find_MRT(const wstring& strMRTTag)
+list< CRenderTarget*>* CTarget_Manager::Find_MRT(const wstring& strMRTTag)
 {
 	auto	iter = m_MRTs.find(strMRTTag);
 
