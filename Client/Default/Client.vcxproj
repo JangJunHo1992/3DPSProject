@@ -226,7 +226,13 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Covus_RecoverR.h" />
     <ClInclude Include="..\Public\Covus_Tool.h" />
     <ClInclude Include="..\Public\Covus_Weapon.h" />
+    <ClInclude Include="..\Public\Covus_Weapon_Dagger.h" />
+    <ClInclude Include="..\Public\Covus_Weapon_Dagger_GamePlay.h" />
+    <ClInclude Include="..\Public\Covus_Weapon_Dagger_Tool.h" />
     <ClInclude Include="..\Public\Covus_Weapon_GamePlay.h" />
+    <ClInclude Include="..\Public\Covus_Weapon_Saber.h" />
+    <ClInclude Include="..\Public\Covus_Weapon_Saber_GamePlay.h" />
+    <ClInclude Include="..\Public\Covus_Weapon_Saber_Tool.h" />
     <ClInclude Include="..\Public\Covus_Weapon_Tool.h" />
     <ClInclude Include="..\Public\DefaultState.h" />
     <ClInclude Include="..\Public\Character_Client.h" />
@@ -450,7 +456,13 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Covus_RecoverR.cpp" />
     <ClCompile Include="..\Private\Covus_Tool.cpp" />
     <ClCompile Include="..\Private\Covus_Weapon.cpp" />
+    <ClCompile Include="..\Private\Covus_Weapon_Dagger.cpp" />
+    <ClCompile Include="..\Private\Covus_Weapon_Dagger_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Covus_Weapon_Dagger_Tool.cpp" />
     <ClCompile Include="..\Private\Covus_Weapon_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Covus_Weapon_Saber.cpp" />
+    <ClCompile Include="..\Private\Covus_Weapon_Saber_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Covus_Weapon_Saber_Tool.cpp" />
     <ClCompile Include="..\Private\Covus_Weapon_Tool.cpp" />
     <ClCompile Include="..\Private\DefaultState.cpp" />
     <ClCompile Include="..\Private\Effect_Explosion.cpp" />

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "GameObject.h"
 #include "Model.h"
 
@@ -16,6 +15,14 @@ class CCollider;
 
 class ENGINE_DLL CCharacter abstract : public CGameObject
 {
+protected:
+	typedef struct CCharacterStatus
+	{
+		_int m_iHP;
+		_int m_iAttack;
+
+	}CharStat;
+
 protected:
 	CCharacter(ID3D11Device * pDevice, ID3D11DeviceContext * pContext);
 	CCharacter(const CCharacter& rhs);
@@ -37,6 +44,7 @@ public:
 	CNavigation* Get_Navigation();
 
 	virtual void Set_Hitted() PURE;
+	virtual void Set_Dead() PURE;
 	void Set_IsAttack(_bool _bIsAttack) 
 	{
 		for (CWeapon* pWeapon : m_Weapons)
@@ -75,6 +83,7 @@ public:
 
 
 	void Knockback(_float fTimeDelta, class CNavigation* pNavigation = nullptr);
+	void Pushed(_float3 vPos);
 	//RigidBody
 public:
 	void	Set_Force(_float3 _vForce) { m_vNetPower = _vForce; }
@@ -87,7 +96,7 @@ public:
 	_float	Calc_Distance(CCharacter* pTarget);
 	_float	Calc_Distance();
 	void Look_At_Target();
-
+	_float3 Get_Pos();
 	_float4 Get_Pos4();
 protected:
 	CNavigation* m_pNavigationCom = { nullptr };
@@ -105,7 +114,7 @@ protected:
 	_float3	m_vNetPower = { 0.f, 0.f, 0.f };
 	_bool	m_bIsJump = { false };
 protected:
-	map<const wstring, class CGameObject*>		m_PartObjects;
+	map<const wstring, CGameObject*>		m_PartObjects;
 	
 
 

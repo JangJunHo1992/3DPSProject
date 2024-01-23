@@ -272,12 +272,12 @@ HRESULT CGameInstance::Save_Objects_With_Json(_uint iLevelIndex, string filePath
 	return S_OK;
 }
 
-//HRESULT CGameInstance::Load_Objects_With_Json(_uint iLevelIndex, string filePath)
-//{
-//	m_pObject_Manager->Load_Objects_With_Json(iLevelIndex, filePath);
-//
-//	return S_OK;
-//}
+// HRESULT CGameInstance::Load_Objects_With_Json(_uint iLevelIndex, string filePath)
+// {
+// 	m_pObject_Manager->Load_Objects_With_Json(iLevelIndex, filePath);
+// 
+// 	return S_OK;
+// }
 
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const wstring& strPrototypeTag, CComponent* pPrototype)
 {
@@ -302,7 +302,7 @@ HRESULT CGameInstance::Add_RenderGroup(CRenderer::RENDERGROUP eGroupID, CGameObj
 
 	return m_pRenderer->Add_RenderGroup(eGroupID, pGameObject);
 }
-
+#ifdef _DEBUG
 HRESULT CGameInstance::Add_DebugRender(CComponent* pDebugCom)
 {
 	if (nullptr == m_pRenderer)
@@ -310,7 +310,7 @@ HRESULT CGameInstance::Add_DebugRender(CComponent* pDebugCom)
 
 	return m_pRenderer->Add_DebugRender(pDebugCom);
 }
-
+#endif
 void CGameInstance::Set_Transform(CPipeLine::D3DTRANSFORMSTATE eState, _fmatrix TransformMatrix)
 {
 	if (nullptr == m_pPipeLine)

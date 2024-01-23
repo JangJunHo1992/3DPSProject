@@ -33,6 +33,11 @@ HRESULT CCovus::Initialize(void* pArg)
 	m_sName = "Covus";
 	m_sLayerTag = "Layer_Player";
 
+	
+	PlayerStatus.m_iHP = 150;
+	PlayerStatus.m_iAttack = 10;
+
+
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 8.f;
@@ -56,7 +61,13 @@ void CCovus::Priority_Tick(_float fTimeDelta)
 
 void CCovus::Tick(_float fTimeDelta)
 {
-
+	if (m_iCurrentLevelIn == 2)
+		Collision_Chcek();
+	else if (m_iCurrentLevelIn == 6)
+		Collision_Chcek2();
+	else if (m_iCurrentLevelIn == 7)
+		Collision_Chcek3();
+	
 	__super::Tick(fTimeDelta);
 }
 
@@ -74,10 +85,111 @@ HRESULT CCovus::Render()
 }
 
 
+_bool CCovus::Collision_Chcek()//_uint eLevel
+{
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
+			}
+			
+		}
+	}
+
+
+	return bIsCollision;
+}
+
+_bool CCovus::Collision_Chcek2()
+{
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+			
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
+			}
+
+		}
+	}
+
+
+	return bIsCollision;
+}
+
+_bool CCovus::Collision_Chcek3()
+{
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	_uint eLevel = m_pGameInstance->Get_NextLevel();
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+			
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
+			}
+
+		}
+	}
+
+
+	return bIsCollision;
+}
+
+
 void CCovus::Set_Hitted()
 {
 	CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+}
+
+void CCovus::Set_Dead()
+{
 }
 
 void CCovus::Write_Json(json& Out_Json)
@@ -123,13 +235,13 @@ HRESULT CCovus::Ready_PartObjects()
 
 	{
 		CCovus_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon_Dagger"), "ik_hand_l", WeaponDesc, TEXT("Weapon_L"))))
 			return E_FAIL;
 	}
-
+	
 	{
 		CCovus_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon"), "ik_hand_r", WeaponDesc, TEXT("Weapon_R"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Covus_Weapon_Saber"), "ik_hand_r", WeaponDesc, TEXT("Weapon_R"))))
 			return E_FAIL;
 	}
 

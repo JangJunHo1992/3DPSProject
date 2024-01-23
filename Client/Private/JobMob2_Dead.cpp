@@ -10,11 +10,11 @@ void CJobMob2_Dead::Initialize(CJobMob2_GamePlay* pActor)
 
 CState<CJobMob2_GamePlay>* CJobMob2_Dead::Update(CJobMob2_GamePlay* pActor, _float fTimeDelta)
 {
-// 	if (pActor->Is_Animation_End() && m_pGameInstance->Get_DIKeyState(DIK_SPACE))
-// 	{
-// 		return new CJobMob2_Idle();
-// 	}
-
+	if (pActor->Is_Animation_End())
+	{
+		pActor->Set_isdead(true);
+	}
+	
 	return nullptr;
 }
 

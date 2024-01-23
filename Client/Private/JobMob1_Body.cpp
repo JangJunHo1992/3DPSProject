@@ -1,4 +1,7 @@
 #include "JobMob1_Body.h"
+#include "Transform.h"
+#include "JobMob1_GamePlay.h"
+#include "GameInstance.h"
 
 CJobMob1_Body::CJobMob1_Body(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CBody_Client(pDevice, pContext)
@@ -34,10 +37,17 @@ void CJobMob1_Body::Priority_Tick(_float fTimeDelta)
 void CJobMob1_Body::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
+// 	if (m_pGameInstance->Get_Player()->Get_CheckAnimDead() == true)
+// 	{
+// 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTransformCom->Get_State(CTransform::STATE_POSITION) - _float3(0.f,1.f,0.f));
+// 		m_pGameInstance->Get_Player()->Set_CheckAnimDead(false);
+// 	}
+
 }
 
 void CJobMob1_Body::Late_Tick(_float fTimeDelta)
 {
+	
 	__super::Late_Tick(fTimeDelta);
 }
 

@@ -70,6 +70,7 @@ HRESULT CCollider::Initialize(void* pArg)
 void CCollider::Update(_fmatrix TransformMatrix)
 {
 	m_pBounding->Update(TransformMatrix);
+	
 }
 
 _bool CCollider::Collision(CCollider* pTargetCollider)
@@ -107,7 +108,7 @@ HRESULT CCollider::Render()
 	m_pEffect->Apply(m_pContext);
 
 	m_pBounding->Render(m_pBatch, m_isCollision == true ? XMVectorSet(1.f, 0.f, 0.f, 1.f) : XMVectorSet(0.f, 1.f, 0.f, 1.f));
-
+	
 	m_pBatch->End();
 
 	return S_OK;

@@ -98,6 +98,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			fTimeAcc = 0.f;
 		}
+		//프레임 제한 해제
+// 		if (1)
+// 		{
+// 			pMainApp->Tick(pGameInstance->Compute_TimeDelta(TEXT("Timer_60")));
+// 			pMainApp->Render();
+// 
+// 			fTimeAcc = 0.f;
+// 		}
 	}
 
 	Safe_Release(pGameInstance);

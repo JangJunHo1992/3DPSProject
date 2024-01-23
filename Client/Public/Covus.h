@@ -323,10 +323,15 @@ public:
 		virtual void Tick(_float fTimeDelta) override;
 		virtual void Late_Tick(_float fTimeDelta) override;
 		virtual HRESULT Render() override;
+protected:
+	_bool Collision_Chcek();
+	_bool Collision_Chcek2();
+	_bool Collision_Chcek3();
+
 
 public:
 	virtual void Set_Hitted() override;
-
+	virtual void Set_Dead() override;
 public:
 	virtual void Write_Json(json& Out_Json) override;
 public:
@@ -338,7 +343,7 @@ protected:
 	//HRESULT Bind_ShaderResources();
 protected:
 	_bool	m_bRotatePlayer = false;
-	
+	CCharacter::CharStat PlayerStatus = {};
 
 public:
 	virtual void Free() override;

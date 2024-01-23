@@ -85,7 +85,7 @@ void CCharacter::Late_Tick(_float fTimeDelta)
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
 		return;
 #ifdef _DEBUG
-	m_pNavigationCom->Render();
+	//m_pNavigationCom->Render();
 	m_pGameInstance->Add_DebugRender(m_pColliderCom);
 	/*m_pColliderCom->Render();*/
 #endif
@@ -255,6 +255,12 @@ void CCharacter::Knockback(_float fTimeDelta, CNavigation* pNavigation)
 	m_pTransformCom->Knockback(fTimeDelta, pNavigation);
 }
 
+void CCharacter::Pushed(_float3 vPos)
+{
+	_float3 vLook = XMVector3Normalize(Get_Pos() - vPos) / 10.f;
+	Add_Force(vLook);
+}
+
 void CCharacter::Update_RigidBody(_float fTimeDelta)
 {
 	if (abs(m_vNetPower.x) > 0.0001 || abs(m_vNetPower.y) > 0.0001 || abs(m_vNetPower.z) > 0.0001)
@@ -344,6 +350,11 @@ void CCharacter::Look_At_Target()
 
 	_fvector vTargetPos = m_pTargetPlayer->m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	m_pTransformCom->Look_At_OnLand(vTargetPos);
+}
+
+_float3 CCharacter::Get_Pos()
+{
+	return m_pTransformCom->Get_Pos();
 }
 
 

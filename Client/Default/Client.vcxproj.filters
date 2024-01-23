@@ -676,6 +676,24 @@
     <Filter Include="02.GameObjects\Effect\Explosion">
       <UniqueIdentifier>{b1e4a206-43dc-4e11-847c-a25fc2bac753}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber">
+      <UniqueIdentifier>{b624957a-ca7c-4db2-940e-ae7d9d8e16e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber\GamePlay">
+      <UniqueIdentifier>{555fe96b-b933-47ba-a3cc-6c6d9b67b215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber\Tool">
+      <UniqueIdentifier>{9d5afc46-4f89-4e4a-b7de-1a22f2aba9da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger">
+      <UniqueIdentifier>{17615bd6-d081-436b-9683-6734f18741e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\GamePlay">
+      <UniqueIdentifier>{a0180c34-d052-4063-a0c4-425d0f1e7fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool">
+      <UniqueIdentifier>{2141e291-f914-43c9-8927-7186bddee8b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1371,6 +1389,24 @@
     <ClInclude Include="..\Public\Effect_Explosion.h">
       <Filter>02.GameObjects\Effect\Explosion</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Saber.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Saber_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Saber_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Dagger.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Dagger_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Dagger_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2018,6 +2054,24 @@
     </ClCompile>
     <ClCompile Include="..\Private\Effect_Explosion.cpp">
       <Filter>02.GameObjects\Effect\Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Saber.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Saber_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Saber_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Saber\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Dagger.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Dagger_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Dagger_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

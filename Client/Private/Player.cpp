@@ -100,6 +100,10 @@ void CPlayer::Set_Hitted()
 	return;
 }
 
+void CPlayer::Set_Dead()
+{
+}
+
 //HRESULT CPlayer::Ready_Components()
 //{
 //	if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))

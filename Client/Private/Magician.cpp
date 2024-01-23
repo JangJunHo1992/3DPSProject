@@ -29,6 +29,9 @@ HRESULT CMagician::Initialize(void* pArg)
 	m_sName = "Magician";
 	m_sLayerTag = "Layer_Monster";
 
+	MagicianStatus.m_iAttack = 20;
+	MagicianStatus.m_iHP = 150;
+
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 10.f;
@@ -47,6 +50,7 @@ void CMagician::Priority_Tick(_float fTimeDelta)
 
 void CMagician::Tick(_float fTimeDelta)
 {
+	
 	__super::Tick(fTimeDelta);
 }
 
@@ -66,6 +70,13 @@ HRESULT CMagician::Render()
 void CMagician::Set_Hitted()
 {
 	CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
+	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	MagicianStatus.m_iHP -= 10;
+}
+
+void CMagician::Set_Dead()
+{
+	CMagician::MagicianState eHitted = CMagician::MagicianState::VSCorvus_TakeExecutionDisappear;
 	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 

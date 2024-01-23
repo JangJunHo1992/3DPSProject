@@ -1,6 +1,7 @@
 #include "JobMob2_GamePlay.h"
 #include "GameInstance.h"
 #include "JobMob2_Idle.h"
+#include "JobMob2_Dead.h"
 
 CJobMob2_GamePlay::CJobMob2_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CJobMob2(pDevice, pContext)
@@ -49,12 +50,16 @@ void CJobMob2_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CJobMob2_GamePlay::Tick(_float fTimeDelta)
 {
+	if (JobMob2Status.m_iHP < 0)
+		Set_Dead();
 	__super::Tick(fTimeDelta);
 	m_pActor->Update_State(fTimeDelta);
 }
 
 void CJobMob2_GamePlay::Late_Tick(_float fTimeDelta)
 {
+		
+		
 	__super::Late_Tick(fTimeDelta);
 }
 
@@ -64,6 +69,13 @@ HRESULT CJobMob2_GamePlay::Render()
 		return E_FAIL;
 
 	return S_OK;
+}
+
+void CJobMob2_GamePlay::Set_Dead()
+{
+	Set_CheckAnimDead(true);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTransformCom->Get_State(CTransform::STATE_POSITION) -2.5* m_pTransformCom->Get_State(CTransform::STATE_UP));
+	m_pActor->Set_State(new CJobMob2_Dead());
 }
 
 HRESULT CJobMob2_GamePlay::Ready_Components()

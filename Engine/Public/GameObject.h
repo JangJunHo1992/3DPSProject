@@ -50,6 +50,8 @@ public:
 public:
 	void Set_isdead(_bool _bisdead) { m_bisdead = _bisdead; }
 	_bool Get_isdead() { return m_bisdead; }
+	void Set_CheckAnimDead(_bool _bcheckAnimDead) { m_bcheckAnimDead = _bcheckAnimDead; }
+	_bool Get_CheckAnimDead() { return m_bcheckAnimDead; }
 public:
 	virtual void Write_Json(json& Out_Json) override;
 	virtual void Load_FromJson(const json& In_Json) override;
@@ -62,10 +64,11 @@ protected:
 	CGameInstance*		m_pGameInstance = { nullptr };
 	CTransform*			m_pTransformCom = { nullptr };
 protected:
-	map<const wstring, class CComponent*>	m_Components;
+	map<const wstring, CComponent*>	m_Components;
 protected:
 	_bool						m_isCloned = { false };
 	_bool						m_bisdead = false;
+	_bool						m_bcheckAnimDead = false;
 protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";

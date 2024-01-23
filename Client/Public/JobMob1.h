@@ -20,6 +20,7 @@ public:
 
 public:
 	virtual void Set_Hitted() override;
+	virtual void Set_Dead() override;
 
 public:
 	virtual void Write_Json(json& Out_Json) override;
@@ -28,7 +29,8 @@ protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
 	virtual HRESULT Ready_PartObjects() override;
 	//HRESULT Bind_ShaderResources();
-
+protected:
+	CCharacter::CharStat JobMob1Status;
 
 public:
 	virtual void Free() override;

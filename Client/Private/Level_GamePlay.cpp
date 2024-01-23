@@ -14,6 +14,8 @@ CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * p
 
 HRESULT CLevel_GamePlay::Initialize()
 {
+	Load_Objects_With_Json("Save_GameObjects.json");
+
 	if (FAILED(Ready_LightDesc()))
 		return E_FAIL;
 
@@ -69,6 +71,53 @@ HRESULT CLevel_GamePlay::Render()
 {
 	SetWindowText(g_hWnd, TEXT("게임플레이레벨입니다."));
 	
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Load_Objects_With_Json(string filePath)
+{
+	json json_in;
+	m_pGameInstance->Load_Json(filePath, json_in);
+
+	for (auto& item : json_in.items())
+	{
+		json object = item.value();
+
+		string tagObject = "Prototype_GameObject_";
+
+		string targetName = object["Name"];
+		tagObject += targetName;
+
+		string tagLayer = object["LayerTag"];
+
+		//tagLayer += object["LayerTag"];
+
+		wstring wStringLayerTag;
+		wStringLayerTag.assign(tagLayer.begin(), tagLayer.end());
+
+		wstring wStringObjTag;
+		wStringObjTag.assign(tagObject.begin(), tagObject.end());
+
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, wStringLayerTag, wStringObjTag)))
+			return E_FAIL;
+
+		list<CGameObject*>* pGameObjects = m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, wStringLayerTag);
+		if (nullptr == pGameObjects)
+			continue;
+
+		CGameObject* pGameObject = pGameObjects->back();
+		if (nullptr == pGameObject)
+			continue;
+
+		_float4x4 WorldMatrix;
+		ZeroMemory(&WorldMatrix, sizeof(_float4x4));
+		CJson_Utility::Load_JsonFloat4x4(object["Component"]["Transform"], WorldMatrix);
+
+		pGameObject->Set_WorldMatrix(WorldMatrix);
+
+	}
+
 	return S_OK;
 }
 
@@ -149,8 +198,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Player(const wstring& strLayerTag)
 	//	return E_FAIL;
 
 	
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
-	 	return E_FAIL;
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
+	//	return E_FAIL;
 
 	list<CGameObject*> m_pPlayerLayer = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, strLayerTag);
 
@@ -170,10 +219,10 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const wstring& strLayerTag)
 // 		return E_FAIL;
 // 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Varg"))))
 // 		return E_FAIL;
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_JobMob1"))))
-		return E_FAIL;
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_JobMob2"))))
-		return E_FAIL;
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_JobMob1"))))
+	//	return E_FAIL;
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_JobMob2"))))
+	//	return E_FAIL;
 
 	return S_OK;
 }

@@ -1,4 +1,5 @@
 #include "JobMob2_Body.h"
+#include "Transform.h"
 
 CJobMob2_Body::CJobMob2_Body(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CBody_Client(pDevice, pContext)
@@ -33,6 +34,11 @@ void CJobMob2_Body::Priority_Tick(_float fTimeDelta)
 
 void CJobMob2_Body::Tick(_float fTimeDelta)
 {
+	if (true == Get_CheckAnimDead())
+	{
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTransformCom->Get_State(CTransform::STATE_POSITION) - 2.5 * m_pTransformCom->Get_State(CTransform::STATE_UP));
+		Set_CheckAnimDead(false);
+	}
 	__super::Tick(fTimeDelta);
 }
 

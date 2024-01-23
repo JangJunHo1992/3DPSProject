@@ -9,6 +9,8 @@ void CVarg_RaidAttack2::Initialize(CVarg_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	pActor->Set_IsAttack(true);
+
 }
 
 CState<CVarg_GamePlay>* CVarg_RaidAttack2::Update(CVarg_GamePlay* pActor, _float fTimeDelta)
@@ -27,5 +29,7 @@ CState<CVarg_GamePlay>* CVarg_RaidAttack2::Update(CVarg_GamePlay* pActor, _float
 void CVarg_RaidAttack2::Release(CVarg_GamePlay* pActor)
 {
 	__super::Release(pActor);
+	pActor->Set_IsAttack(false);
+
 }
 

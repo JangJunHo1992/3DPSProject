@@ -36,11 +36,14 @@ HRESULT CLevel_MapTool::Initialize()
 	if (FAILED(Ready_LightDesc()))
 		return E_FAIL;
 
+	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
+		return E_FAIL;
+
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
 		return E_FAIL;
 
-	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
+		return E_FAIL;
 
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 		return E_FAIL;
@@ -160,8 +163,8 @@ void CLevel_MapTool::Tick(_float fTimeDelta)
 
 	if (m_pGameInstance->Key_Down(DIK_P))
 	{
-		m_pMapNavigationCom->Save_All();
-		//m_pGameInstance->Save_Objects_With_Json(LEVEL_TOOL, "Save_GameObjects.json");
+		//m_pMapNavigationCom->Save_All();
+		m_pGameInstance->Save_Objects_With_Json(LEVEL_TOOL, "Save_GameObjects.json");
 	}
 
 	//if (m_pGameInstance->Key_Down(DIK_J))
@@ -229,7 +232,7 @@ void CLevel_MapTool::Create_Object_On_Map(const wstring& strLayerTag, const wstr
 
 void CLevel_MapTool::Create_Raider()
 {
-	Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Raider"));
+	//Create_Object(TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Raider"));
 }
 
 void CLevel_MapTool::Resize_Plane(_ushort x, _ushort z)
@@ -438,6 +441,14 @@ HRESULT CLevel_MapTool::Ready_LightDesc()
  	return S_OK;
 }
 
+HRESULT CLevel_MapTool::Ready_Layer_Player(const wstring& strLayerTag)
+{
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
+	//	return E_FAIL;
+
+	return S_OK;
+}
+
 HRESULT CLevel_MapTool::Ready_Layer_Camera(const wstring& strLayerTag)
 {
 	CCamera_Dynamic_Tool::DYNAMIC_CAMERA_DESC		Desc = {};
@@ -460,7 +471,16 @@ HRESULT CLevel_MapTool::Ready_Layer_Camera(const wstring& strLayerTag)
 
 HRESULT CLevel_MapTool::Ready_Layer_Monster(const wstring& strLayerTag)
 {
-	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Raider_Tool"))))
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_JobMob1"))))
+	//	return E_FAIL;
+
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Magician"))))
+	//	return E_FAIL;
+
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_Varg"))))
+	//	return E_FAIL;
+
+	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_TOOL, strLayerTag, TEXT("Prototype_GameObject_JobMob2"))))
 	//	return E_FAIL;
 
 	return S_OK;

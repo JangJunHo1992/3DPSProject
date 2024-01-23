@@ -10,10 +10,11 @@ void CMagician_Dead::Initialize(CMagician_GamePlay* pActor)
 
 CState<CMagician_GamePlay>* CMagician_Dead::Update(CMagician_GamePlay* pActor, _float fTimeDelta)
 {
-	if (pActor->Is_Animation_End() && m_pGameInstance->Get_DIKeyState(DIK_SPACE))
+	if (pActor->Is_Animation_End())
 	{
-		return new CMagician_Idle();
+		pActor->Set_isdead(true);
 	}
+
 
 	return nullptr;
 }
