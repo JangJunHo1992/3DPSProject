@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Covus_Parry_L.h"
 #include "GameInstance.h"
-
+#include "Covus_Attack1.h"
 #include "Covus_Parry_R.h"
 #include "Player_Idle.h"
 
@@ -23,7 +23,14 @@ CState<CCovus_GamePlay>* CCovus_Parry_L::Update(CCovus_GamePlay* pActor, _float 
 		}
 		pActor->Set_IsAttack(false);
 	}
-
+	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
+	{
+		if (CGameInstance::GetInstance()->Get_DIMouseState(DIM_LB))
+		{
+			return new CCovus_Attack1();
+		}
+		pActor->Set_IsAttack(false);
+	}
 	if (pActor->Is_Inputable_Back(40))
 	{
 		return new CCovus_Idle();

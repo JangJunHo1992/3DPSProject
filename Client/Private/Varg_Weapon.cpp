@@ -154,7 +154,10 @@ _bool CVarg_Weapon::Collision_Chcek()
 				_bool isCollision = pCollider->Collision(pTargetCollider);
 				if (isCollision)
 				{
-					pTarget->Set_Hitted();
+					if (pTarget->Get_Parry() == false)
+					{
+						pTarget->Set_Hitted();
+					}
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
 					Set_IsAttack(false);

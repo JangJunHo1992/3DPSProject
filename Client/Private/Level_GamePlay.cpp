@@ -15,7 +15,7 @@ CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * p
 
 HRESULT CLevel_GamePlay::Initialize()
 {
-	Load_Objects_With_Json("Save_GameObjects.json");
+	Load_Objects_With_Json("Save_GameObjects1.json");
 
 	
 
