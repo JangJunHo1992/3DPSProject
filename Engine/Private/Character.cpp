@@ -257,7 +257,7 @@ void CCharacter::Knockback(_float fTimeDelta, CNavigation* pNavigation)
 
 void CCharacter::Pushed(_float3 vPos)
 {
-	_float3 vLook = XMVector3Normalize(Get_Pos() - vPos) / 10.f;
+	_float3 vLook = XMVector3Normalize(Get_Pos() - vPos) / 100.f;
 	Add_Force(vLook);
 }
 
