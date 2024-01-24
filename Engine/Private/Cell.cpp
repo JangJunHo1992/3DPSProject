@@ -94,8 +94,45 @@ void CCell::Update(_fmatrix WorldMatrix)
 
 }
 
+void CCell::Write_Cell(HANDLE& hFile, _ulong dwByte)
+{
+	if (0 == hFile)
+		return;
+
+	WriteFile(hFile, m_vPoints, sizeof(_float3) * 3, &dwByte, nullptr);
+}
+
+_float CCell::Calc_Height(_fvector vPosition)
+{
+	_float3 vPos;
+	XMStoreFloat3(&vPos, vPosition);
+
+	_vector   vPlane = XMPlaneFromPoints(
+		m_vPoints[0]
+		, m_vPoints[1]
+		, m_vPoints[2]
+	);
+
+	_float4 Plane;
+	XMStoreFloat4(&Plane, vPlane);
+
+	return (-Plane.x * vPos.x - Plane.z * vPos.z - Plane.w) / Plane.y;
+}
+
+_bool CCell::Has_Point(_uint iPointIndex)
+{
+	for (_uint iIndex : m_ChildIndexes)
+	{
+		if (iIndex == iPointIndex)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 #ifdef _DEBUG
+
 HRESULT CCell::Render(class CShader* pShader)
 {
 

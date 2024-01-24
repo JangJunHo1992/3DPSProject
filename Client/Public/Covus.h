@@ -323,18 +323,23 @@ public:
 		virtual void Tick(_float fTimeDelta) override;
 		virtual void Late_Tick(_float fTimeDelta) override;
 		virtual HRESULT Render() override;
-
+protected:
+	_bool Collision_Chcek();
 public:
 	virtual void Set_Hitted() override;
-
-	//public:
-	//	virtual void Write_Json(json& Out_Json) override;
-
+	virtual void Set_Dead() override;
+public:
+	virtual void Write_Json(json& Out_Json) override;
+public:
+	_bool	Get_CheckRotatePlayer() { return m_bRotatePlayer; }
+	void	Set_CheckRotatePlayer(_bool _bRotatePlayer) { m_bRotatePlayer = _bRotatePlayer; }
 protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
 	virtual HRESULT Ready_PartObjects() override;
 	//HRESULT Bind_ShaderResources();
-
+protected:
+	_bool	m_bRotatePlayer = false;
+	CCharacter::CharStat PlayerStatus = {};
 
 public:
 	virtual void Free() override;

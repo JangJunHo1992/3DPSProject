@@ -11,7 +11,7 @@ void CCovus_Walk_Left::Initialize(CCovus_GamePlay* pActor)
 
 CState<CCovus_GamePlay>* CCovus_Walk_Left::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
-	pActor->Go_Left(fTimeDelta);
+	pActor->Go_Left(fTimeDelta * 0.5);
 
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }

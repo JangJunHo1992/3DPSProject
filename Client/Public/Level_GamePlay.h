@@ -15,11 +15,14 @@ public:
 	virtual HRESULT Initialize() override;
 	virtual void Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
-
+public:
+	HRESULT Load_Objects_With_Json(string filePath);
 private:
+	HRESULT Ready_LightDesc();
 	HRESULT Ready_Layer_Camera(const wstring& strLayerTag);
 	HRESULT Ready_Layer_Player(const wstring& strLayerTag);
 	HRESULT Ready_Layer_Monster(const wstring& strLayerTag);
+	HRESULT Ready_Layer_Effect(const wstring& strLayerTag);
 	HRESULT Ready_Layer_BackGround(const wstring& strLayerTag);
 
 

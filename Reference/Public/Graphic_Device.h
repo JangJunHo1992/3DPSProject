@@ -23,6 +23,13 @@ private:
 
 public:
 	GRAPHIC_DESC		Get_GraphicDesc() const { return m_GraphicDesc; }
+public:
+	ID3D11RenderTargetView* Get_BackBufferRTV() const {
+		return m_pBackBufferRTV;
+	}
+	ID3D11DepthStencilView* Get_DSV() const {
+		return m_pDepthStencilView;
+	}
 
 public:
 	/* 그래픽 디바이스의 초기화. */

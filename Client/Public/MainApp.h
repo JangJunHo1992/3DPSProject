@@ -26,6 +26,13 @@ private:
 	ID3D11DeviceContext*	m_pContext = { nullptr };
 	CGameInstance*			m_pGameInstance = { nullptr };
 	//class CImgui_Manager*	m_pImguiManager = { nullptr };
+/*#ifdef _DEBUG*/
+private:
+	_tchar					m_szFPS[MAX_PATH] = TEXT("");
+	_float					m_fTimeAcc = { 0.f };
+	_uint					m_iNumRender = { 0 };
+
+/*#endif*/
 private:
 	HRESULT Open_Level(LEVEL eStartLevelID);
 	HRESULT Ready_Prototype_Component_ForStaticLevel();

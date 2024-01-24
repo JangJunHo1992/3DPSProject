@@ -19,11 +19,10 @@ private:
 	virtual ~CLoader() = default;
 
 public:
-
 	_bool isFinished() const {
 		return m_isFinished;
 	}
-		
+	void Set_isFinished(_bool _isFinished) { m_isFinished = _isFinished; }
 public:	
 	HRESULT Initialize(LEVEL eNextLevelID);
 
@@ -35,6 +34,9 @@ public:
 
 	HRESULT	Loading_For_Level(LEVEL eLEVEL);
 	HRESULT Loading_For_GamePlay_Level();
+	HRESULT Loading_For_GamePlay_BossStage1();
+	HRESULT Loading_For_GamePlay_BossStage2();
+
 	HRESULT Loading_For_Tool_Level();
 
 

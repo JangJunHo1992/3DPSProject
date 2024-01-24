@@ -21,7 +21,7 @@ public:
 
 public:
 	virtual void Set_Hitted() override;
-
+	virtual void Set_Dead() override;
 
 protected:
 	virtual HRESULT Ready_Components() PURE;

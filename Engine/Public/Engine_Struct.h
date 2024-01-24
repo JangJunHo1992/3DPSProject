@@ -19,6 +19,20 @@ namespace Engine
 		class CTexture* pMtrlTextures[AI_TEXTURE_TYPE_MAX];
 	}MATERIAL_DESC;
 
+	typedef struct
+	{
+		enum TYPE { TYPE_DIRECTIONAL, TYPE_POINT, TYPE_END };
+		TYPE			eType;
+		XMFLOAT4		vDirection;
+		XMFLOAT4		vPosition;
+
+		float			fRange;
+
+		XMFLOAT4		vDiffuse;
+		XMFLOAT4		vAmbient;
+		XMFLOAT4		vSpecular;
+	}LIGHT_DESC;
+
 	typedef struct ENGINE_DLL tagVertex_Position
 	{
 		XMFLOAT3		vPosition;
@@ -26,6 +40,15 @@ namespace Engine
 		static const unsigned int					iNumElements = 1;
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXPOS;
+
+	typedef struct ENGINE_DLL tagVertex_Point
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT2		vPSize;
+
+		static const unsigned int					iNumElements = 2;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTXPOINT;
 
 	typedef struct ENGINE_DLL tagVertex_Position_Texcoord
 	{
@@ -99,5 +122,23 @@ namespace Engine
 		XMFLOAT4		vRotation;
 		float			fTrackPosition;
 	}KEYFRAME;
+
+	typedef struct tagVectexInstance
+	{
+		XMFLOAT4		vRight, vUp, vLook, vPosition;
+		XMFLOAT4		vColor;
+	}VTXINSTANCE;
+
+	typedef struct ENGINE_DLL tagParticleRect
+	{
+		static const unsigned int					iNumElements = 7;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTX_PARTICLE_RECT;
+
+	typedef struct ENGINE_DLL tagParticlePoint
+	{
+		static const unsigned int					iNumElements = 7;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTX_PARTICLE_POINT;
 
 }

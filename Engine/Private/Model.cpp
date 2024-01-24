@@ -4,12 +4,9 @@
 #include "Bone.h"
 #include "Animation.h"
 #include "Channel.h"
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> JJH
 
 CModel::CModel(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CComponent(pDevice,pContext)
@@ -44,8 +41,6 @@ CModel::CModel(const CModel& rhs)
 	}
 }
 
-<<<<<<< HEAD
-=======
 CBone* CModel::Get_BonePtr(const _char* pBoneName) const
 {
 	auto	iter = find_if(m_Bones.begin(), m_Bones.end(), [&](CBone* pBone)
@@ -60,7 +55,6 @@ CBone* CModel::Get_BonePtr(const _char* pBoneName) const
 
 	return *iter;
 }
->>>>>>> JJH
 
 HRESULT CModel::Initialize_Prototype(TYPE eType, const string& strModelFilePath, _fmatrix PivotMatrix)
 {
@@ -128,27 +122,12 @@ HRESULT CModel::Bind_ShaderResource(CShader* pShader, const _char* pConstantName
 	return m_Materials[iMaterialIndex].pMtrlTextures[eTextureType]->Bind_ShaderResource(pShader, pConstantName);
 }
 
-<<<<<<< HEAD
-void CModel::Play_Animation(_float fTimeDelta)
-=======
 void CModel::Play_Animation(_float fTimeDelta, _float3& _Pos)
->>>>>>> JJH
 {
 	if (m_iCurrentAnimIndex >= m_iNumAnimations)
 		return;
 
 	m_bIsAnimEnd = m_Animations[m_iCurrentAnimIndex]->Invalidate_TransformationMatrix(m_eAnimState, fTimeDelta, m_Bones);
-<<<<<<< HEAD
-		
-	for (auto& pBone : m_Bones)
-	{
-		pBone->Invalidate_CombinedTransformationMatrix(m_Bones, XMLoadFloat4x4(&m_PivotMatrix));
-	}
-
-}
-
-void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration)
-=======
 	
 
 	_float3 NowPos;
@@ -201,7 +180,6 @@ void CModel::Play_Animation(_float fTimeDelta, _float3& _Pos, _float& fMinY)
 }
 
 void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState, _bool _bIsTransition, _float _fTransitionDuration, _uint iTargetKeyFrameIndex)
->>>>>>> JJH
 {
 	m_eAnimState = _eAnimState;
 
@@ -211,64 +189,13 @@ void CModel::Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimStat
 		
 		if (_bIsTransition)
 		{
-<<<<<<< HEAD
-			Set_Animation_Transition(_iAnimationIndex, _fTransitionDuration);
-=======
    			Set_Animation_Transition(_iAnimationIndex, _fTransitionDuration, iTargetKeyFrameIndex);
->>>>>>> JJH
 		}
 		else 
 		{
 			m_iCurrentAnimIndex = _iAnimationIndex;
 		}
 	}
-<<<<<<< HEAD
-}
-
-void CModel::Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration)
-{
-	CAnimation* currentAnimation = m_Animations[m_iCurrentAnimIndex];
-	CAnimation* targetAnimation = m_Animations[_iAnimationIndex];
-
-	_float fCurrentTrackPosition = m_Animations[m_iCurrentAnimIndex]->Get_TrackPosition();
-	_float fTransitionDuration = _fTransitionDuration > 0.f ? _fTransitionDuration : 0.2f;
-
-	_float fTransitionDuration_Start = 0.0f;
-	_float fTransitionDuration_End = 0.0f;
-	
-
-
-	vector<CChannel*> currentChannels = *currentAnimation->Get_Channels();
-
-	for (CChannel* currnetChannel : currentChannels)
-	{
-		_uint	targetBoneIndex = currnetChannel->Get_BoneIndex();
-		
-		CChannel* targetChannel = targetAnimation->Get_Channel_By_BoneIndex(targetBoneIndex);
-		if (nullptr == targetChannel)
-		{
-			_uint test = targetBoneIndex;
-		}
-		else
-		{
-			KEYFRAME startFrame = currnetChannel->Make_NowFrame(fCurrentTrackPosition);
-			KEYFRAME endFrame = targetChannel->Get_First_KeyFrame();
-			targetChannel->Set_Transition(startFrame, endFrame, &fTransitionDuration);
-			fTransitionDuration_End = endFrame.fTrackPosition;
-		}
-	}
-	fTransitionDuration_Start = fTransitionDuration_End - fTransitionDuration;
-
-	m_iCurrentAnimIndex = _iAnimationIndex;
-
-	m_Animations[m_iCurrentAnimIndex]->Set_IsTransition_True();
-	//m_Animations[m_iCurrentAnimIndex]->Set_TransitionDuration(0.0f);
-	m_Animations[m_iCurrentAnimIndex]->Set_TransitionDuration(&fTransitionDuration_End);
-	//m_Animations[m_iCurrentAnimIndex]->Set_TrackPosition(-0.2f);
-	m_Animations[m_iCurrentAnimIndex]->Set_TrackPosition(&fTransitionDuration_Start);
-	_bool test = false;
-
-=======
 
 }
 
@@ -284,7 +211,6 @@ void CModel::Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitio
 	targetAnimation->Set_Transition(currentAnimation, _fTransitionDuration, iTargetKeyFrameIndex);
 
 	m_iCurrentAnimIndex = _iAnimationIndex;
->>>>>>> JJH
 }
 
 void CModel::Reset_Animation(_int iAnimIndex)
@@ -295,8 +221,6 @@ void CModel::Reset_Animation(_int iAnimIndex)
 		m_Animations[iAnimIndex]->Reset_Animation(m_Bones);
 }
 
-<<<<<<< HEAD
-=======
 _float CModel::Get_TickPerSecond()
 {
 	return m_Animations[m_iCurrentAnimIndex]->Get_TickPerSecond();
@@ -317,7 +241,6 @@ _bool CModel::Is_Inputable_Back(_uint _iIndexBack)
 	return m_Animations[m_iCurrentAnimIndex]->Is_Inputable_Back(_iIndexBack);
 }
 
->>>>>>> JJH
 
 template<class T>
 HRESULT CModel::Ready_Meshes_Origin(_fmatrix PivotMatrix)
@@ -370,14 +293,14 @@ HRESULT CModel::Ready_Materials(const string& strModelFilePath)
 			//_splitpath_s(strPath.data, nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
 			_splitpath_s(strPath.c_str(), nullptr, 0, nullptr, 0, szFileName, MAX_PATH, szEXT, MAX_PATH);
 
-			_char		szTmp[MAX_PATH] = "";
+			_char      szTmp[MAX_PATH] = "";
 			strcpy_s(szTmp, szDrive);
 			strcat_s(szTmp, szDirectory);
 			strcat_s(szTmp, szFileName);
-			strcat_s(szTmp, szEXT);
+			//strcat_s(szTmp, szEXT);
 
-			//_char szTest[MAX_PATH] = ".dds";
-			//strcat_s(szTmp, szTest);
+			_char szTest[MAX_PATH] = ".dds";
+			strcat_s(szTmp, szTest);
 
 			_tchar		szFullPath[MAX_PATH] = TEXT("");
 
@@ -456,10 +379,6 @@ void CModel::Free()
 	m_Meshes.clear();
 
 	if (false == m_isCloned)
-<<<<<<< HEAD
-		m_Importer.FreeScene();
-=======
 		m_MyAssimp.FreeScene();
->>>>>>> JJH
 
 }

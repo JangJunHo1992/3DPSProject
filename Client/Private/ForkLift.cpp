@@ -80,10 +80,10 @@ void CForkLift::Write_Json(json& Out_Json)
 	__super::Write_Json(Out_Json);
 }
 
-HRESULT CForkLift::Ready_Components_Origin()
+HRESULT CForkLift::Ready_Components_Origin(LEVEL eLEVEL)
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Model"),
+	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Shader_Model"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
 
@@ -103,8 +103,8 @@ HRESULT CForkLift::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
 		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-		return E_FAIL;
+// 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
+// 		return E_FAIL;
 
 	//if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
 	//	return E_FAIL;

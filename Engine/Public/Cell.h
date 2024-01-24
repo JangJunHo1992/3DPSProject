@@ -27,6 +27,24 @@ public:
 		m_iNeighbors[eLine] = pNeighborCell->m_iIndex;
 	}
 
+	void Add_ChildIndex(_uint _iChildIndex) {
+		m_ChildIndexes.push_back(_iChildIndex);
+	}
+
+	_uint Get_Index() {
+		return m_iIndex;
+	}
+
+	void Set_Index(_uint _iIndex) {
+		m_iIndex = _iIndex;
+	}
+
+	void Write_Cell(HANDLE& hFile, _ulong dwByte);
+
+	_float Calc_Height(_fvector vPosition);
+
+	_bool Has_Point(_uint iPointIndex);
+
 #ifdef _DEBUG
 public:
 	HRESULT Render(class CShader* pShader);
@@ -40,6 +58,8 @@ private:
 	_int					m_iNeighbors[LINE_END] = { -1, -1, -1 };
 	_float3					m_vNormals[LINE_END] = {};
 	_uint					m_iIndex = { 0 };
+
+	vector<_uint>			m_ChildIndexes;
 
 #ifdef _DEBUG
 private:

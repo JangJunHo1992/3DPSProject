@@ -116,6 +116,7 @@ HRESULT CMesh::Ready_Vertices_NonAnim_Origin(CMyAIMesh pAIMesh, _fmatrix PivotMa
 
 		memcpy(&m_pVertices[i].vTexcoord, &pAIMesh.Get_TextureCoord(i), sizeof(_float3));
 		memcpy(&m_pVertices[i].vTangent, &pAIMesh.Get_Tangent(i), sizeof(_float3));
+		XMStoreFloat3(&m_pVertices[i].vTangent, XMVector3TransformNormal(XMLoadFloat3(&m_pVertices[i].vTangent), PivotMatrix));
 	}
 
 

@@ -11,7 +11,7 @@ void CCovus_Walk_Front::Initialize(CCovus_GamePlay* pActor)
 
 CState<CCovus_GamePlay>* CCovus_Walk_Front::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
-	pActor->Go_Straight(fTimeDelta);
+	pActor->Go_Straight(fTimeDelta * 0.5);
 
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }

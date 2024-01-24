@@ -34,10 +34,7 @@ public:
 protected:
 	CShader*		m_pShaderCom = { nullptr };
 	//CModel*			m_pModelCom = { nullptr };
-<<<<<<< HEAD
-=======
 	CCollider*		m_pColliderCom = { nullptr };
->>>>>>> JJH
 
 	
 

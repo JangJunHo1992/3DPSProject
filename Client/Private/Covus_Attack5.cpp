@@ -8,6 +8,8 @@ void CCovus_Attack5::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true, true, 3);
+	pActor->Set_IsAttack(true);
+
 }
 
 CState<CCovus_GamePlay>* CCovus_Attack5::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
@@ -16,10 +18,12 @@ CState<CCovus_GamePlay>* CCovus_Attack5::Update(CCovus_GamePlay* pActor, _float 
 
 	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
 	{
-		pActor->Set_IsAttack(false);
+		return new CCovus_Idle();
+
+		//pActor->Set_IsAttack(false);
 	}
 
-	if (pActor->Is_Animation_End())
+	if (pActor->Is_Inputable_Back(40))
 	{
 		return new CCovus_Idle();
 	}
@@ -30,5 +34,7 @@ CState<CCovus_GamePlay>* CCovus_Attack5::Update(CCovus_GamePlay* pActor, _float 
 void CCovus_Attack5::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
+	pActor->Set_IsAttack(false);
+
 }
 

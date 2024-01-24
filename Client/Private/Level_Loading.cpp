@@ -7,6 +7,10 @@
 #include "Level_GamePlay.h"
 #include "Level_MapTool.h"
 
+#include "Level_Stage1.h"
+#include "Level_BossStage1.h"
+#include "Level_BossStage2.h"
+
 #include "Imgui_Manager.h"
 CLevel_Loading::CLevel_Loading(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
 	: CLevel(pDevice, pContext)
@@ -18,7 +22,7 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevelID)
 {
 	/* 추후 로딩 레벨이 끝나면 원래 목적으로 뒀던 레벨로 넘어가기위해서. */
 	m_eNextLevelID = eNextLevelID;
-
+	m_iNextLevel = m_eNextLevelID;
 	/* 메인스레드로 대충 로드한다. */
 	/* 로딩용 자원을 로드한다. */
 	/* 로딩레벨에서 보여줘야할 객체들을 생성한다.(배경, 일러스트, 로딩바) */
@@ -38,9 +42,11 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 
 	if (true == m_pLoader->isFinished())
 	{
-		if (GetKeyState(VK_RETURN) & 0x8000)
-		{
+// 		if (GetKeyState(VK_RETURN) & 0x8000)
+// 		{
 			CLevel*		pNewLevel = { nullptr };
+
+			
 
 			switch (m_eNextLevelID)
 			{
@@ -50,6 +56,15 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 			case LEVEL_GAMEPLAY:
 				pNewLevel = CLevel_GamePlay::Create(m_pDevice, m_pContext);
 				break;
+			case LEVEL_STAGE1:
+				pNewLevel = CLevel_Stage1::Create(m_pDevice, m_pContext);
+				break;
+			case LEVEL_BOSS1:
+				pNewLevel = CLevel_BossStage1::Create(m_pDevice, m_pContext);
+				break;
+			case LEVEL_BOSS2:
+				pNewLevel = CLevel_BossStage2::Create(m_pDevice, m_pContext);
+				break;
 			case LEVEL_TOOL:
 				pNewLevel = CLevel_MapTool::Create(m_pDevice, m_pContext);
 
@@ -57,12 +72,12 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 
 			}
 
-			if (nullptr == pNewLevel)
-				return;
+			//! 승용 주석if (nullptr == pNewLevel)
+			//! 승용 주석	return;
 
 			if (FAILED(m_pGameInstance->Open_Level(m_eNextLevelID, pNewLevel)))
 				return;
-		}
+		//}
 	}
 }
 

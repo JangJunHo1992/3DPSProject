@@ -20,7 +20,6 @@ public:
 
 	CState<CCovus_GamePlay>* Run(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CCovus_GamePlay>* Dash(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
-	CState<CCovus_GamePlay>* Walk(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CCovus_GamePlay>* Hitted(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
 

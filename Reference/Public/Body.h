@@ -5,6 +5,7 @@
 
 BEGIN(Engine)
 
+class CCollider;
 class CShader;
 class CBone;
 
@@ -23,7 +24,9 @@ protected:
 
 public:
 	class CBone* Get_BonePtr(const _char* pBoneName);
-
+	CCollider* Get_Collider() {
+		return m_pColliderCom;
+	}
 public:
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize(void* pArg) override;
@@ -44,15 +47,18 @@ public:
 	_bool	Is_Animation_End();
 	_bool	Is_Inputable_Front(_uint _iIndexFront);
 	_bool	Is_Inputable_Back(_uint _iIndexBack);
-
+	_float3 Get_MovePos() {
+		return m_vMovePos;
+	}
 protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };
+	CCollider* m_pColliderCom = { nullptr };
 
 protected:
 	class CTransform* m_pParentTransform = { nullptr };
 	_float4x4			m_WorldMatrix = {};
-
+	_float3		m_vMovePos = { 0.f, 0.f, 0.f };
 protected:
 	_bool		m_bNoUseRootY = { false };
 

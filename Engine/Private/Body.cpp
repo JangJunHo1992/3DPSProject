@@ -49,23 +49,11 @@ void CBody::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
 
-	_float3 vPos = { 0.f, 0.f, 0.f };
+	m_vMovePos = { 0.f, 0.f, 0.f };
 
-	if (m_bNoUseRootY) 
-	{
-		_float fMinY = 10000;
-		m_pModelCom->Play_Animation(fTimeDelta, vPos, fMinY);
-		//vPos.y -= fMinY;
-	}
-	else 
-	{
-		m_pModelCom->Play_Animation(fTimeDelta, vPos);
-	}
+	m_pModelCom->Play_Animation(fTimeDelta, m_vMovePos);
 
-	//m_pModelCom->Play_Animation(fTimeDelta, vPos);
-	//m_pTransformCom->Add_Position(vPos);
-	m_pParentTransform->Add_Position(vPos);
-
+	//m_pColliderCom->Update(m_WorldMatrix);
 }
 
 void CBody::Late_Tick(_float fTimeDelta)
@@ -134,8 +122,8 @@ HRESULT CBody::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
 		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-		return E_FAIL;
+// 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
+// 		return E_FAIL;
 
 	return S_OK;
 }
@@ -144,7 +132,7 @@ HRESULT CBody::Bind_ShaderResources()
 void CBody::Free()
 {
 	__super::Free();
-
+	//Safe_Release(m_pColliderCom);
 	Safe_Release(m_pParentTransform);
 	Safe_Release(m_pModelCom);
 	Safe_Release(m_pShaderCom);

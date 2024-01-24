@@ -1,4 +1,18 @@
 
+sampler LinearSampler = sampler_state
+{
+	filter = min_mag_mip_linear;
+	AddressU = wrap;
+	AddressV = wrap;
+};
+
+sampler PointSampler = sampler_state
+{
+	filter = min_mag_mip_Point;
+	AddressU = wrap;
+	AddressV = wrap;
+};
+
 RasterizerState RS_Default
 {
 	FillMode = Solid;	
@@ -13,8 +27,6 @@ RasterizerState RS_Fill_Wireframe
 	FrontCounterClockwise = false;
 };
 
-<<<<<<< HEAD
-=======
 RasterizerState RS_Cull_None
 {
 	FillMode = Solid;
@@ -22,7 +34,6 @@ RasterizerState RS_Cull_None
 	FrontCounterClockwise = false;
 };
 
->>>>>>> JJH
 DepthStencilState DSS_Default
 {
 	DepthEnable = true;
@@ -48,5 +59,15 @@ BlendState BS_AlphaBlend_Add
 
 	SrcBlend = SRC_ALPHA;
 	DestBlend = Inv_Src_Alpha;
+	BlendOp = add;
+};
+
+BlendState BS_Blend_Add
+{
+	BlendEnable[0] = true;
+	BlendEnable[1] = true;
+
+	SrcBlend = one;
+	DestBlend = one;
 	BlendOp = add;
 };

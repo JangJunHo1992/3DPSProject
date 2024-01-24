@@ -21,6 +21,7 @@ HRESULT CCamera::Initialize(void* pArg)
 	if (nullptr == pArg)
 		return E_FAIL;
 
+
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
@@ -51,6 +52,8 @@ void CCamera::Tick(_float fTimeDelta)
 
 void CCamera::Late_Tick(_float fTimeDelta)
 {
+	m_pGameInstance->Set_Transform(CPipeLine::D3DTS_VIEW, m_pTransformCom->Get_WorldMatrixInverse());
+	m_pGameInstance->Set_Transform(CPipeLine::D3DTS_PROJ, XMMatrixPerspectiveFovLH(m_fFovy, m_fAspect, m_fNear, m_fFar));
 }
 
 void CCamera::Free()

@@ -25,7 +25,7 @@ HRESULT CAnimation::Initialize(CMyAIAnimation pAIAnimation, const CModel::BONES&
 	strcpy_s(m_szName, pAIAnimation.Get_Name().c_str());
 
 	m_fDuration = (_float)pAIAnimation.Get_Duration();
-	m_fTickPerSecond = (_float)pAIAnimation.Get_TickPerSecond();
+	m_fTickPerSecond = (_float)pAIAnimation.Get_TickPerSecond()*1.6f;
 
 	m_iNumChannels = pAIAnimation.Get_NumChannels();
 
@@ -46,17 +46,6 @@ HRESULT CAnimation::Initialize(CMyAIAnimation pAIAnimation, const CModel::BONES&
 
 _bool CAnimation::Invalidate_TransformationMatrix(CModel::ANIM_STATE _eAnimState, _float fTimeDelta, const CModel::BONES& Bones)
 {
-<<<<<<< HEAD
-	m_fTrackPosition += m_fTickPerSecond * fTimeDelta;
-
-	if (m_bIsTransition)
-	{
-		if (m_fTransitionDuration <= m_fTrackPosition) 
-		{
-			//m_isFinished = true;
-			m_bIsTransition = false;
-			m_fTrackPosition = m_fTransitionDuration;
-=======
 	_bool _bPrevTransition = m_bIsTransition;
 	if (m_bIsTransition)
 	{
@@ -152,65 +141,20 @@ CChannel* CAnimation::Get_Channel_By_BoneIndex(_uint _iBoneIndex, _uint& _iChann
 			CChannel* pChannel = m_Channels[i];
 			_iChannelIndex = i;
 			return pChannel;
->>>>>>> JJH
 		}
 	}
-	else 
-	{
-		switch (_eAnimState)
-		{
-		case Engine::CModel::ANIM_STATE_NORMAL:
-			if (m_fTrackPosition >= m_fDuration)
-			{
-				m_isFinished = true;
-				m_fTrackPosition = m_fDuration;
-			}
 
-			break;
-		case Engine::CModel::ANIM_STATE_LOOP:
-			if (m_fTrackPosition >= m_fDuration)
-			{
-				m_fTrackPosition = 0.0f;
-			}
-			break;
-		case Engine::CModel::ANIM_STATE_REVERSE:
-			break;
-		case Engine::CModel::ANIM_STATE_STOP:
-			break;
-		default:
-			break;
-		}
-	}
-		
-
-
-<<<<<<< HEAD
-	/* 내 애니메이션이 이용하는 전체 뼈의 상태를 m_fTrackPosition 시간에 맞는 상태로 갱신하다.*/
-	for (size_t i = 0; i < m_iNumChannels; i++)
-	{
-		m_Channels[i]->Invalidate_TransformationMatrix(m_fTrackPosition, Bones, &m_CurrentKeyFrames[i]);
-	}
-
-	return m_isFinished;
-=======
 	return nullptr;
->>>>>>> JJH
 }
 
 void CAnimation::Reset_Animation(const CModel::BONES& Bones)
 {
-<<<<<<< HEAD
-	m_fTransitionDuration = 0.0f;
-	m_fTrackPosition = 0.0f; 
-	m_isFinished = false;
-=======
 	m_isFinished = false;
 	m_bIsTransition = false;
 	m_fTrackPosition = 0.0f;
 	m_PrevPos = { 0.f, 0.f, 0.f };
 
 	Reset_TransitionKeyFrame();
->>>>>>> JJH
 
 	for (size_t i = 0; i < m_iNumChannels; i++)
 	{
@@ -219,22 +163,6 @@ void CAnimation::Reset_Animation(const CModel::BONES& Bones)
 
 }
 
-<<<<<<< HEAD
-CChannel* CAnimation::Get_Channel_By_BoneIndex(_uint _iBoneIndex)
-{
-	for (CChannel* pChannel : m_Channels) 
-	{
-		if (_iBoneIndex == pChannel->Get_BoneIndex()) 
-		{
-			return pChannel;
-		}
-	}
-	return nullptr;
-}
-
-
-CAnimation* CAnimation::Create(const aiAnimation* pAIAnimation, const CModel::BONES& Bones)
-=======
 void CAnimation::Set_Transition(CAnimation* prevAnimation, _float _fTransitionDuration, _uint iTargetKeyFrameIndex)
 {
 	m_PrevPos = { 0.f, 0.f, 0.f };
@@ -352,7 +280,6 @@ _bool CAnimation::Is_Inputable_Back(_uint _iIndexBack)
 
 
 CAnimation* CAnimation::Create(CMyAIAnimation pAIAnimation, const CModel::BONES& Bones)
->>>>>>> JJH
 {
 	CAnimation* pInstance = new CAnimation();
 

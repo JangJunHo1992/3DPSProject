@@ -15,30 +15,6 @@ private:
 	virtual ~CChannel() = default;
 
 public:
-<<<<<<< HEAD
-	HRESULT Initialize(const aiNodeAnim* pChannel, const CModel::BONES& Bones);
-	void	Invalidate_TransformationMatrix(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
-	void	Invalidate_TransformationMatrix_Normal(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
-	void	Invalidate_TransformationMatrix_Transition(_float fCurrentTrackPosition, const CModel::BONES& Bones);
-
-public:
-	//void		Set_AnimationTransition(_float _fCurrentTrackPosition, KEYFRAME _EndFrame);
-	_uint		Get_BoneIndex() { return m_iBoneIndex; };
-	KEYFRAME	Get_First_KeyFrame() { return m_KeyFrames[0]; };
-	void		Reset_Channel(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
-
-public:
-	_bool	Update_KeyFrame(_float fCurrentTrackPosition, _uint* pCurrentKeyFrameIndex);
-	_float	Calc_Ratio(_float fCurrentTrackPosition);
-	void	Calc_Now_Transform(_vector& vScale, _vector& vRotation, _vector& vPosition, _float fRatio);
-	_matrix	Make_TransformationMatrix(_float fRatio);
-	_matrix Make_EndFrame_TransformationMatrix();
-
-	KEYFRAME Make_NowFrame(_float fCurrentTrackPosition);
-	void	Set_Transition(KEYFRAME _StartFrame, KEYFRAME _EndFrame, _float* _fTransitionDuration);
-
-	
-=======
 	HRESULT Initialize(CMyAINodeAnimation pChannel, const CModel::BONES& Bones);
 	void	Invalidate_TransformationMatrix(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
 	void	Invalidate_TransformationMatrix_Normal(_float fCurrentTrackPosition, const CModel::BONES& Bones, _uint* pCurrentKeyFrameIndex);
@@ -72,26 +48,13 @@ public:
 	_matrix Make_EndFrame_TransformationMatrix();
 	KEYFRAME Make_NowFrame(_float fCurrentTrackPosition, _uint* pCurrentKeyFrameIndex);
 
->>>>>>> JJH
 
 private:
 	_char				m_szName[MAX_PATH] = "";
 	_uint				m_iNumKeyFrames = { 0 };
 	vector<KEYFRAME>	m_KeyFrames;
-<<<<<<< HEAD
-	//_uint				m_iCurrentKeyFrameIndex = { 0 };
 	_uint				m_iBoneIndex = { 0 };
 
-	_bool				m_bTransition = false;
-	KEYFRAME			m_StartFrame;
-	KEYFRAME			m_EndFrame;
-
-	//_float				m_fCurrentTrackPosition = { 0.0f };
-
-=======
-	_uint				m_iBoneIndex = { 0 };
-
->>>>>>> JJH
 	
 
 public:

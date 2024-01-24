@@ -19,6 +19,13 @@ namespace Engine
 		class CTexture* pMtrlTextures[AI_TEXTURE_TYPE_MAX];
 	}MATERIAL_DESC;
 
+	typedef struct ENGINE_DLL tagVertex_Position
+	{
+		XMFLOAT3		vPosition;
+
+		static const unsigned int					iNumElements = 1;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTXPOS;
 
 	typedef struct ENGINE_DLL tagVertex_Position_Texcoord
 	{
@@ -28,6 +35,15 @@ namespace Engine
 		static const unsigned int					iNumElements = 2;
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTXPOSTEX;
+
+	typedef struct ENGINE_DLL	tagVertex_Cube
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT3		vTexcoord;
+
+		static const unsigned int					iNumElements = 2;
+		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
+	}VTXCUBE;
 
 	typedef struct ENGINE_DLL tagVertex_Position_Normal_Texcoord
 	{

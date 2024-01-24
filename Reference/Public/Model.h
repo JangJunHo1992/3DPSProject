@@ -31,11 +31,8 @@ public:
 		return &m_Meshes;
 	}
 
-<<<<<<< HEAD
-=======
 	class CBone* Get_BonePtr(const _char* pBoneName) const;
 
->>>>>>> JJH
 	_uint Get_NumAnimations()
 	{
 		return m_iNumAnimations;
@@ -54,13 +51,7 @@ public:
 		m_iCurrentAnimIndex = iAnimIndex;
 	}
 
-<<<<<<< HEAD
-
-	
-
-=======
 	_bool Is_AnimEnd() { return m_bIsAnimEnd; };
->>>>>>> JJH
 
 	//void Rotate_PivotMatrix(_float )
 
@@ -75,19 +66,6 @@ public:
 	HRESULT Bind_ShaderResource(class CShader* pShader, const _char* pConstantName, _uint iMeshIndex, aiTextureType eTextureType);
 
 public:
-<<<<<<< HEAD
-	void	Play_Animation(_float fTimeDelta);
-	void	Set_Animation(_uint _iAnimationIndex, CModel::ANIM_STATE _eAnimState = CModel::ANIM_STATE::ANIM_STATE_END, _bool _bIsTransition = true, _float _fTransitionDuration = 0.2f);
-	void	Set_Animation_Transition(_uint _iAnimationIndex, _float _fTransitionDuration = 0.2f);
-	void	Reset_Animation(_int iAnimIndex = -1);
-	
-	//_bool	Animation_Transition(_float _fAdditionalTransitionDuration = 0.2f);
-
-
-protected:
-	const aiScene*			m_pAIScene = { nullptr };
-	Assimp::Importer		m_Importer;
-=======
 	void	Play_Animation(_float fTimeDelta, _float3& _Pos);
 	void	Play_Animation(_float fTimeDelta, _float3& _Pos, _float& fMinY);
 
@@ -103,7 +81,6 @@ protected:
 	_bool	Is_Inputable_Front(_uint _iIndexFront);
 	_bool	Is_Inputable_Back(_uint _iIndexBack);
 
->>>>>>> JJH
 
 protected:
 	CMyAssimp					m_MyAssimp;
@@ -117,23 +94,15 @@ protected:
 	_uint							m_iNumMeshes = { 0 };
 	vector<class CMesh*>			m_Meshes;
 
-<<<<<<< HEAD
-=======
 	_uint							m_iNumMaterials = { 0 };
 	vector<MATERIAL_DESC>			m_Materials;
 
->>>>>>> JJH
 	_uint							m_iNumAnimations = { 0 };
 	_uint							m_iCurrentAnimIndex = { 0 };
 	vector<class CAnimation*>		m_Animations;
 
 	_bool							m_bIsAnimEnd = { false };
 
-<<<<<<< HEAD
-
-	ANIM_STATE						m_eAnimState = { CModel::ANIM_STATE::ANIM_STATE_END };
-
-=======
 	ANIM_STATE						m_eAnimState = { CModel::ANIM_STATE::ANIM_STATE_END };
 
 	_bool							m_bUseAnimationPos = false;
@@ -142,7 +111,6 @@ protected:
 
 	//_char m_szRootNode[MAX_PATH] = "root";
 
->>>>>>> JJH
 	/* 내 모델의 전체 뼈들을 부모관계를 포함하여 저장한다. */
 	vector<class CBone*>	m_Bones;
 	

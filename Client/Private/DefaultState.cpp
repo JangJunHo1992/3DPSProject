@@ -26,17 +26,14 @@
 #include "Player_Dash_Right.h"
 
 #include "Covus_Attack1.h"
-// #include "Covus_Combo_01_01.h"
-// #include "Covus_Combo_02_01.h"
-// #include "Covus_Combo_03_01.h"
-// #include "Covus_Combo_04_01.h"
-// #include "Covus_Combo_05_01.h"
-// 
-// #include "Covus_Hit_01.h"
-// #include "Covus_Dead_01.h"
-// #include "Covus_Defense_Start.h"
 
+#include "Covus_HurtMFL.h"
+#include "Covus_HurtMFR.h"
+#include "Covus_HurtSL.h"
+#include "Covus_HurtSR.h"
 
+#include "Covus_Dead.h"
+#include "Covus_Parry_L.h"
 
 
 void CDefaultState::Initialize(CCovus_GamePlay* pActor)
@@ -55,26 +52,24 @@ CState<CCovus_GamePlay>* CDefaultState::Ground_Normal(CCovus_GamePlay* pActor, _
 	CState<CCovus_GamePlay>* pState = nullptr;
 
 
-// 	if (m_pGameInstance->Key_Down(DIK_X))
-// 	{
-// 		return new CGreatDualBlade_Defense_Start();
-// 	}
-// 
-// 	if (m_pGameInstance->Key_Down(DIK_Z))
-// 	{
-// 		return new CGreatDualBlade_Combo_01_01();
-// 	}
+	if (m_pGameInstance->Key_Down(DIK_F))
+	{
+		return new CCovus_Parry_L();
+	}
+
+
 	if (m_pGameInstance->Mouse_Down(DIM_LB))
 	{
 		return new CCovus_Attack1;
 	}
-	pState = Walk(pActor, fTimeDelta, _iAnimIndex);
-	if (pState)	return pState;
-
+	
 	pState = Run(pActor, fTimeDelta, _iAnimIndex);
 	if (pState)	return pState;
 
 	pState = Dash(pActor, fTimeDelta, _iAnimIndex);
+	if (pState)	return pState;
+
+	pState = Hitted(pActor, fTimeDelta, _iAnimIndex);
 	if (pState)	return pState;
 
 	return nullptr;
@@ -98,8 +93,11 @@ CState<CCovus_GamePlay>* CDefaultState::Run(CCovus_GamePlay* pActor, _float fTim
 			}
 			else
 			{
+				pActor->Set_CheckRotatePlayer(true);
+
 				if (CCovus_Run_Front::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Run_Front();
+				
 			}
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_S))
@@ -116,19 +114,82 @@ CState<CCovus_GamePlay>* CDefaultState::Run(CCovus_GamePlay* pActor, _float fTim
 			}
 			else
 			{
+				pActor->Set_CheckRotatePlayer(true);
 				if (CCovus_Run_Back::g_iAnimIndex != _iAnimIndex)
 					return new CCovus_Run_Back();
 			}
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_A))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Run_Left::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Run_Left();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_D))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Run_Right::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Run_Right();
+		}
+		else
+		{
+			if (CCovus_Idle::g_iAnimIndex != _iAnimIndex)
+				return new CCovus_Idle();
+		}
+	}
+	else
+	{
+		if (m_pGameInstance->Key_Pressing(DIK_W))
+		{
+			if (m_pGameInstance->Key_Pressing(DIK_A))
+			{
+				pActor->Set_CheckRotatePlayer(true);
+				if (CCovus_Walk_Front_L45::g_iAnimIndex != _iAnimIndex)
+					return new CCovus_Walk_Front_L45();
+			}
+			else if (m_pGameInstance->Key_Pressing(DIK_D))
+			{
+				pActor->Set_CheckRotatePlayer(true);
+				if (CCovus_Walk_Front_R45::g_iAnimIndex != _iAnimIndex)
+					return new CCovus_Walk_Front_R45();
+			}
+			else
+			{
+				pActor->Set_CheckRotatePlayer(true);
+				if (CCovus_Walk_Front::g_iAnimIndex != _iAnimIndex)
+					return new CCovus_Walk_Front();
+			}
+		}
+		else if (m_pGameInstance->Key_Pressing(DIK_S))
+		{
+			if (m_pGameInstance->Key_Pressing(DIK_A))
+			{
+				if (CCovus_Walk_Back_L45::g_iAnimIndex != _iAnimIndex)
+					return new CCovus_Walk_Back_L45();
+			}
+			else if (m_pGameInstance->Key_Pressing(DIK_D))
+			{
+				if (CCovus_Walk_Back_R45::g_iAnimIndex != _iAnimIndex)
+					return new CCovus_Walk_Back_R45();
+			}
+			else
+			{
+				pActor->Set_CheckRotatePlayer(true);
+				if (CCovus_Walk_Back::g_iAnimIndex != _iAnimIndex)
+					return new CCovus_Walk_Back();
+			}
+		}
+		else if (m_pGameInstance->Key_Pressing(DIK_A))
+		{
+			pActor->Set_CheckRotatePlayer(true);
+			if (CCovus_Walk_Left::g_iAnimIndex != _iAnimIndex)
+				return new CCovus_Walk_Left();
+		}
+		else if (m_pGameInstance->Key_Pressing(DIK_D))
+		{
+			pActor->Set_CheckRotatePlayer(true);
+			if (CCovus_Walk_Right::g_iAnimIndex != _iAnimIndex)
+				return new CCovus_Walk_Right();
 		}
 		else
 		{
@@ -146,85 +207,38 @@ CState<CCovus_GamePlay>* CDefaultState::Dash(CCovus_GamePlay* pActor, _float fTi
 	{
 		if (m_pGameInstance->Key_Pressing(DIK_S))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Back::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Back();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_A))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Left::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Left();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_D))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Right::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Right();
 		}
 		else if (m_pGameInstance->Key_Pressing(DIK_W))
 		{
+			pActor->Set_CheckRotatePlayer(true);
 			if (CCovus_Dash_Front::g_iAnimIndex != _iAnimIndex)
 				return new CCovus_Dash_Front();
 		}
+		else
+		{
+			if (CCovus_Idle::g_iAnimIndex != _iAnimIndex)
+				return new CCovus_Idle();
+		}
 	}
 
 	return nullptr;
 }
 
-CState<CCovus_GamePlay>* CDefaultState::Walk(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
-{
-	if (m_pGameInstance->Key_Pressing(DIK_W))
-	{
-		if (m_pGameInstance->Key_Pressing(DIK_A))
-		{
-			if (CCovus_Walk_Front_L45::g_iAnimIndex != _iAnimIndex)
-				return new CCovus_Walk_Front_L45();
-		}
-		else if (m_pGameInstance->Key_Pressing(DIK_D))
-		{
-			if (CCovus_Walk_Front_R45::g_iAnimIndex != _iAnimIndex)
-				return new CCovus_Walk_Front_R45();
-		}
-		else
-		{
-			if (CCovus_Walk_Front::g_iAnimIndex != _iAnimIndex)
-				return new CCovus_Walk_Front();
-		}
-	}
-	else if (m_pGameInstance->Key_Pressing(DIK_S))
-	{
-		if (m_pGameInstance->Key_Pressing(DIK_A))
-		{
-			if (CCovus_Walk_Back_L45::g_iAnimIndex != _iAnimIndex)
-				return new CCovus_Walk_Back_L45();
-		}
-		else if (m_pGameInstance->Key_Pressing(DIK_D))
-		{
-			if (CCovus_Walk_Back_R45::g_iAnimIndex != _iAnimIndex)
-				return new CCovus_Walk_Back_R45();
-		}
-		else
-		{
-			if (CCovus_Walk_Back::g_iAnimIndex != _iAnimIndex)
-				return new CCovus_Walk_Back();
-		}
-	}
-	else if (m_pGameInstance->Key_Pressing(DIK_A))
-	{
-		if (CCovus_Walk_Left::g_iAnimIndex != _iAnimIndex)
-			return new CCovus_Walk_Left();
-	}
-	else if (m_pGameInstance->Key_Pressing(DIK_D))
-	{
-		if (CCovus_Walk_Right::g_iAnimIndex != _iAnimIndex)
-			return new CCovus_Walk_Right();
-	}
-	else
-	{
-		if (CCovus_Idle::g_iAnimIndex != _iAnimIndex)
-			return new CCovus_Idle();
-	}
-
-	return nullptr;
-}
 
 CState<CCovus_GamePlay>* CDefaultState::Hitted(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
 {

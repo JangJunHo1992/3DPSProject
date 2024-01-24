@@ -18,27 +18,11 @@ private:
 	virtual ~CAnimation() = default;
 
 public:
-<<<<<<< HEAD
-	HRESULT Initialize(const aiAnimation* pAIAnimation, const CModel::BONES& Bones);
-=======
 	HRESULT Initialize(CMyAIAnimation pAIAnimation, const CModel::BONES& Bones);
->>>>>>> JJH
 	_bool Invalidate_TransformationMatrix(CModel::ANIM_STATE _eAnimState, _float fTimeDelta, const CModel::BONES& Bones);
 
 public:
 	vector<class CChannel*>* Get_Channels() { return &m_Channels; };
-<<<<<<< HEAD
-	CChannel* Get_Channel_By_BoneIndex(_uint _iBoneIndex);
-	_float	Get_TrackPosition() { return m_fTrackPosition; };
-	void	Set_TrackPosition(_float* _fTrackPosition) { m_fTrackPosition = *_fTrackPosition; };
-
-	void	Set_Duration(_float _fDuration) { m_fDuration = _fDuration; };
-
-	void	Set_TransitionDuration(_float* _fTransitionDuration) { m_fTransitionDuration = *_fTransitionDuration; };
-	void	Set_IsTransition_True() { m_bIsTransition = true; };
-
-	void	Reset_Animation(const CModel::BONES& Bones);
-=======
 	CChannel* Get_Channel_By_BoneIndex(_uint _iBoneIndex, _uint& _iChannelIndex);
 	void	Reset_Animation(const CModel::BONES& Bones);
 
@@ -83,7 +67,6 @@ public:
 	_bool	Is_Inputable_Front(_uint _iIndexFront);
 	_bool	Is_Inputable_Back(_uint _iIndexBack);
 
->>>>>>> JJH
 
 private:
 	_char					m_szName[MAX_PATH] = "";
@@ -98,9 +81,6 @@ private:
 	_bool					m_isFinished = { false };
 	
 	_bool					m_bIsTransition = { false };
-<<<<<<< HEAD
-	_float					m_fTransitionDuration = { 0.f };
-=======
 	_bool					m_bIsTransitionEnd_Now = { false };
 
 	_float					m_fTransitionEnd = { 0.f };
@@ -110,7 +90,6 @@ private:
 
 	_float3					m_PrevPos = { 0.f, 0.f, 0.f };
 
->>>>>>> JJH
 
 public:
 	static CAnimation* Create(CMyAIAnimation pAIAnimation, const CModel::BONES& Bones);
@@ -119,15 +98,3 @@ public:
 };
 
 END
-<<<<<<< HEAD
-
-
-//void	Set_Channel_Animation_Transition(_ushort iChannelIndex, KEYFRAME keyFrame);
-
-//_bool	Get_IsFinished()	{ return m_isFinished; }
-
-//_bool	Get_IsTransitionDuration_End() { return m_fTrackPosition >= m_fTransitionDuration; };
-
-//_float	Get_TransitionDuration() { return m_fTransitionDuration; };
-=======
->>>>>>> JJH
