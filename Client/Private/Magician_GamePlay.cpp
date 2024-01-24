@@ -73,28 +73,13 @@ HRESULT CMagician_GamePlay::Render()
 
 void CMagician_GamePlay::Set_Dead()
 {
+	m_bCheckDead = true;
 	m_pActor->Set_State(new CMagician_Dead());
 }
 
 HRESULT CMagician_GamePlay::Ready_Components()
 {
-// 	switch (m_pGameInstance->Get_NextLevel())
-// 	{
-// 	case 2:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
-// 			return E_FAIL;
-// 		break;
-// 	case 6:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
-// 			return E_FAIL;
-// 		break;
-// 	case 7:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
-// 			return E_FAIL;
-// 		break;
-// 	default:
-// 		break;
-// 	}
+
 	if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
 		return E_FAIL;
 	return S_OK;

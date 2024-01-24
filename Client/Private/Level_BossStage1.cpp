@@ -32,7 +32,7 @@ HRESULT CLevel_BossStage1::Initialize()
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 		return E_FAIL;
 	list<CGameObject*>* playerList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Player"));
-	CCharacter* pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
+	pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
 	m_pGameInstance->Set_Player(pPlayer);
 
 	_vector vPos = pPlayer->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);

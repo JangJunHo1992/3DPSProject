@@ -107,9 +107,13 @@ _bool CJobMob2::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 void CJobMob2::Set_Hitted()
 {
-	CJobMob2::JobMob2State eHitted = CJobMob2::JobMob2State::HrutS_FL;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	JobMob2Status.m_iHP -= 10;
+	if (m_bCheckDead == false)
+	{
+		CJobMob2::JobMob2State eHitted = CJobMob2::JobMob2State::HrutS_FL;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		JobMob2Status.m_iHP -= 10;
+	}
+	
 }
 
 void CJobMob2::Set_Dead()

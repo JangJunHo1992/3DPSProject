@@ -103,6 +103,7 @@ public:
 	_bool Get_Parry() { return m_bParry; }
 protected:
 	_bool m_bParry = false;
+	_bool m_bCheckDead = false;
 protected:
 	CNavigation* m_pNavigationCom = { nullptr };
 	CCollider* m_pColliderCom = { nullptr };

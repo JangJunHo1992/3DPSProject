@@ -105,15 +105,19 @@ _bool CVarg::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 }
 void CVarg::Set_Hitted()
 {
-	CVarg::VargState eHitted = CVarg::VargState::HurtF;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	VargStatus.m_iHP -= 10;
+	if (m_bCheckDead == false)
+	{
+		CVarg::VargState eHitted = CVarg::VargState::HurtF;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		VargStatus.m_iHP -= 10;
+	}
+	
 }
 
 void CVarg::Set_Dead()
 {
-	CVarg::VargState eHitted = CVarg::VargState::TakeExecution_Dead;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	//CVarg::VargState eHitted = CVarg::VargState::TakeExecution_Dead;
+	//Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
 void CVarg::Write_Json(json& Out_Json)

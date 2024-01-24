@@ -104,9 +104,13 @@ _bool CMagician::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 }
 void CMagician::Set_Hitted()
 {
-	CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	MagicianStatus.m_iHP -= 10;
+	if (m_bCheckDead == false)
+	{
+		CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		MagicianStatus.m_iHP -= 10;
+	}
+	
 }
 
 void CMagician::Set_Dead()

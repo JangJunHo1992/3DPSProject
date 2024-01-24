@@ -40,7 +40,7 @@ protected:
 protected:
 	_bool	m_bRotatePlayer = false;
 	CCharacter::CharStat PlayerStatus = {};
-
+	LIGHT_DESC			m_LightDesc = {};
 public:
 	virtual void Free() override;
 public:

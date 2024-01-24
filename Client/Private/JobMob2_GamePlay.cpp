@@ -73,7 +73,8 @@ HRESULT CJobMob2_GamePlay::Render()
 
 void CJobMob2_GamePlay::Set_Dead()
 {
-	Set_CheckAnimDead(true);
+	//Set_CheckAnimDead(true);
+	m_bCheckDead = true;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTransformCom->Get_State(CTransform::STATE_POSITION) -2.5* m_pTransformCom->Get_State(CTransform::STATE_UP));
 	m_pActor->Set_State(new CJobMob2_Dead());
 }

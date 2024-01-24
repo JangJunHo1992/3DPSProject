@@ -43,19 +43,30 @@ HRESULT CCovus::Initialize(void* pArg)
 	GameObjectDesc.fSpeedPerSec = 8.f;
 	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
 
+	
+
+// 	ZeroMemory(&m_LightDesc, sizeof m_LightDesc);
+// 
+// 	m_LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+// 	m_LightDesc.vPosition = m_pTransformCom->Get_Position();
+// 	m_LightDesc.fRange = 10.f;
+// 	m_LightDesc.vDiffuse = _float4(0.9f, 0.9f, 0.9f, 1.f);
+// 	m_LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
+// 	//m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
+// 
+// 	if (FAILED(m_pGameInstance->Add_Light(m_LightDesc)))
+// 		return E_FAIL;
+
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
-	//if(m_iCurrentLevelIn==2)
-	//	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(90.f, -3.5f, 0.f, 1.f));
-	//else if (m_iCurrentLevelIn == 6)
-	//	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(10.f, 0.f, 0.f, 1.f));
-	//else if (m_iCurrentLevelIn == 7)
-	//	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.f, 0.f, 0.f, 1.f));
+	
+
 	return S_OK;
 }
 
 void CCovus::Priority_Tick(_float fTimeDelta)
 {
+	m_LightDesc.vPosition = m_pTransformCom->Get_Position();
 	__super::Priority_Tick(fTimeDelta);
 }
 
@@ -119,9 +130,13 @@ _bool CCovus::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 void CCovus::Set_Hitted()
 {
-	CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	PlayerStatus.m_iHP -= 10;
+	if (m_bCheckDead == false &&m_bParry ==false)
+	{
+		CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		PlayerStatus.m_iHP -= 10;
+	}
+	
 }
 
 void CCovus::Set_Dead()
