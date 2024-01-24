@@ -11,7 +11,7 @@ CLight::CLight()
 HRESULT CLight::Initialize(const LIGHT_DESC& LightDesc)
 {
 	m_LightDesc = LightDesc;
-
+	m_vPos = m_LightDesc.vPosition;
 	return S_OK;
 }
 
@@ -28,6 +28,8 @@ HRESULT CLight::Render(CShader* pShader, CVIBuffer_Rect* pVIBuffer)
 	else
 	{
 		pShader->Bind_RawValue("g_vLightPos", &m_LightDesc.vPosition, sizeof(_float4));
+		pShader->Bind_RawValue("g_vLightPos", &m_vPos, sizeof(_float4));
+
 		pShader->Bind_RawValue("g_fLightRange", &m_LightDesc.fRange, sizeof(_float));
 
 		iPassIndex = 2;

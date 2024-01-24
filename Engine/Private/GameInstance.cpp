@@ -483,6 +483,11 @@ HRESULT CGameInstance::Render_Lights(CShader* pShader, CVIBuffer_Rect* pVIBuffer
 	return m_pLight_Manager->Render(pShader, pVIBuffer);
 }
 
+CLight* CGameInstance::Get_Light_Back()
+{
+	return m_pLight_Manager->Get_Light_Back();
+}
+
 _bool CGameInstance::isIn_WorldPlanes(_fvector vPoint, _float fRadius)
 {
 	return m_pFrustum->isIn_WorldPlanes(vPoint, fRadius);

@@ -43,19 +43,7 @@ HRESULT CCovus::Initialize(void* pArg)
 	GameObjectDesc.fSpeedPerSec = 8.f;
 	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
 
-	
 
-// 	ZeroMemory(&m_LightDesc, sizeof m_LightDesc);
-// 
-// 	m_LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-// 	m_LightDesc.vPosition = m_pTransformCom->Get_Position();
-// 	m_LightDesc.fRange = 10.f;
-// 	m_LightDesc.vDiffuse = _float4(0.9f, 0.9f, 0.9f, 1.f);
-// 	m_LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-// 	//m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
-// 
-// 	if (FAILED(m_pGameInstance->Add_Light(m_LightDesc)))
-// 		return E_FAIL;
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;

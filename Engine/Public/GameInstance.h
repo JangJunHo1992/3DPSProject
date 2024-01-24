@@ -117,6 +117,7 @@ public: /* For.Target_Manager */
 public: /* For.Light_Manager */
 	HRESULT Add_Light(const LIGHT_DESC & LightDesc);
 	HRESULT Render_Lights(class CShader* pShader, class CVIBuffer_Rect* pVIBuffer);
+	class CLight* Get_Light_Back();
 
 public: /* For.Frustum */
 	_bool isIn_WorldPlanes(_fvector vPoint, _float fRadius = 0.f);

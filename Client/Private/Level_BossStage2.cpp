@@ -5,6 +5,7 @@
 #include "Level_Loading.h"
 #include "Monster.h"
 #include "Player.h"
+#include "Light.h"
 
 
 CLevel_BossStage2::CLevel_BossStage2(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -14,8 +15,7 @@ CLevel_BossStage2::CLevel_BossStage2(ID3D11Device* pDevice, ID3D11DeviceContext*
 
 HRESULT CLevel_BossStage2::Initialize()
 {
-	if (FAILED(Ready_LightDesc()))
-		return E_FAIL;
+	
 
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
@@ -52,6 +52,8 @@ HRESULT CLevel_BossStage2::Initialize()
 			}
 		}
 	}
+	if (FAILED(Ready_LightDesc()))
+		return E_FAIL;
 	return S_OK;
 }
 
@@ -62,7 +64,9 @@ void CLevel_BossStage2::Tick(_float fTimeDelta)
 	//	if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_TOOL))))
 	//		return;
 	//}
+	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(5.f, 3.f, -5.f, 1.f));
 
+	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
 }
 
 HRESULT CLevel_BossStage2::Render()
@@ -119,7 +123,18 @@ HRESULT CLevel_BossStage2::Ready_LightDesc()
 
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
+	ZeroMemory(&PlayerLightDesc, sizeof PlayerLightDesc);
 
+	PlayerLightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(0.f, 1.f, 0.f, 1.f));
+	PlayerLightDesc.fRange = 20.f;
+	PlayerLightDesc.vDiffuse = _float4(1.f, 1.0f, 1.f, 1.f);
+	PlayerLightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
+	PlayerLightDesc.vSpecular = PlayerLightDesc.vDiffuse;
+
+	if (FAILED(m_pGameInstance->Add_Light(PlayerLightDesc)))
+		return E_FAIL;
+	m_pLight = m_pGameInstance->Get_Light_Back();
 	return S_OK;
 }
 

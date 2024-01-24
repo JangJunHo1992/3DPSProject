@@ -5,6 +5,7 @@
 #include "Level_Loading.h"
 #include "Monster.h"
 #include "Player.h"
+#include "Light.h"
 
 
 CLevel_GamePlay::CLevel_GamePlay(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
@@ -68,13 +69,14 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS1))))
 			return;
 	}
+	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(5.f, 3.f, -5.f, 1.f));
+	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
 }
 
 HRESULT CLevel_GamePlay::Render()
 {
 	SetWindowText(g_hWnd, TEXT("게임플레이레벨입니다."));
-	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION));
-
+	
 	return S_OK;
 }
 
@@ -121,7 +123,7 @@ HRESULT CLevel_GamePlay::Load_Objects_With_Json(string filePath)
 		pGameObject->Set_WorldMatrix(WorldMatrix);
 
 	}
-
+	
 	return S_OK;
 }
 
@@ -150,17 +152,7 @@ HRESULT CLevel_GamePlay::Ready_LightDesc()
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
 
-	ZeroMemory(&PlayerLightDesc, sizeof PlayerLightDesc);
-
-	PlayerLightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	XMStoreFloat4(&PlayerLightDesc.vPosition,pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION));
-	PlayerLightDesc.fRange = 20.f;
-	PlayerLightDesc.vDiffuse = _float4(1.f, 1.0f, 1.f, 1.f);
-	PlayerLightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	PlayerLightDesc.vSpecular = PlayerLightDesc.vDiffuse;
-
-	if (FAILED(m_pGameInstance->Add_Light(PlayerLightDesc)))
-		return E_FAIL;
+	
 
 // 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 // 		return E_FAIL;
@@ -175,6 +167,18 @@ HRESULT CLevel_GamePlay::Ready_LightDesc()
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
 
+	ZeroMemory(&PlayerLightDesc, sizeof PlayerLightDesc);
+
+	PlayerLightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)+ _float4(0.f, 1.f, 0.f, 1.f));
+	PlayerLightDesc.fRange = 20.f;
+	PlayerLightDesc.vDiffuse = _float4(0.5f, 0.5f, 0.5f, 1.f);
+	PlayerLightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
+	PlayerLightDesc.vSpecular = PlayerLightDesc.vDiffuse;
+
+	if (FAILED(m_pGameInstance->Add_Light(PlayerLightDesc)))
+		return E_FAIL;
+	m_pLight = m_pGameInstance->Get_Light_Back();
 	return S_OK;
 }
 

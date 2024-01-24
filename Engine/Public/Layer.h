@@ -20,10 +20,10 @@ public:
 	void Late_Tick(_float fTimeDelta);
 
 public:
-	list<class CGameObject*>*	Get_GameObjects() { return &m_GameObjects; };
+	list<CGameObject*>*	Get_GameObjects() { return &m_GameObjects; };
 
 private:
-	list<class CGameObject*>			m_GameObjects;
+	list<CGameObject*>			m_GameObjects;
 
 public:
 	static CLayer* Create();
