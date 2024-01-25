@@ -3,6 +3,7 @@
 #include "Magician_Idle.h"
 #include "GameInstance.h"
 #include "Magician_Dead.h"
+#include "Magician_Card_GamePlay.h"
 
 CMagician_GamePlay::CMagician_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMagician(pDevice, pContext)
@@ -85,9 +86,15 @@ HRESULT CMagician_GamePlay::Ready_Components()
 	return S_OK;
 }
 
-void CMagician_GamePlay::Create_Card()
+void CMagician_GamePlay::Create_Card(_float3 vStartPos, _float3 vEndPos)
 {
-	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Magician_Card"));
+	CMagician_Card::Magician_Card_DESC Desc;
+	Desc.vStartPos = vStartPos;
+	Desc.vEndPos = vEndPos;
+
+	Desc.vStartPos.y += 1.f;
+	Desc.vEndPos.y += 1.f;
+	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Magician_Card"), &Desc);
 }
 
 

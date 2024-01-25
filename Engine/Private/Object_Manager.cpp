@@ -217,6 +217,7 @@ void CObject_Manager::Save_Objects_With_Json(_uint iLevelIndex, string filePath)
 
 CGameObject* CObject_Manager::Get_Player()
 {
+
 	return m_pPlayer;
 }
 

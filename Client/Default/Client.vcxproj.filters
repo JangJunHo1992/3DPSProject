@@ -695,13 +695,10 @@
       <UniqueIdentifier>{2141e291-f914-43c9-8927-7186bddee8b0}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card">
-      <UniqueIdentifier>{86d8bc8c-2cb4-4aa7-8db5-73d151d3d3e9}</UniqueIdentifier>
+      <UniqueIdentifier>{f067930b-3363-4656-8719-de66b83cf95e}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\GamePlay">
-      <UniqueIdentifier>{3405518c-0fe6-4f8b-8409-ebe590a9bbd0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Tool">
-      <UniqueIdentifier>{2164b176-a54d-4fe0-aacb-3371f10de446}</UniqueIdentifier>
+      <UniqueIdentifier>{a3d3ea02-3c27-4944-93d8-bc7a49f7f059}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1416,14 +1413,8 @@
     <ClInclude Include="..\Public\Covus_Weapon_Dagger_Tool.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Magician_Card.h">
-      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Magician_Card_GamePlay.h">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Magician_Card_Tool.h">
-      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2091,14 +2082,8 @@
     <ClCompile Include="..\Private\Covus_Weapon_Dagger_Tool.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Magician_Card.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Magician_Card_GamePlay.cpp">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\GamePlay</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Magician_Card_Tool.cpp">
-      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

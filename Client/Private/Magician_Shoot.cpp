@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "Magician_Shoot.h"
-
+#include "Transform.h"
 
 void CMagician_Shoot::Initialize(CMagician_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
-	pActor->Create_Card();
+	pActor->Create_Card(pActor->Get_TransformComp()->Get_Pos(), pActor->Get_TransformComp()->Get_Pos());
 	pActor->Set_IsAttack(true);
 }
 

@@ -39,7 +39,6 @@
 #include "Magician_Weapon_GamePlay.h"
 #include "Magician_Weapon_Tool.h"
 #include "Magician_Card_GamePlay.h"
-#include "Magician_Card_Tool.h"
 
 #include "Varg_Tool.h"
 #include "Varg_GamePlay.h"
@@ -220,7 +219,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
 	/*For. Texture_Card*/
-	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Magician_Card"),
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Card"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
 		return E_FAIL;
 
@@ -812,18 +811,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		{
 			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Card");
 
-			if (LEVEL_TOOL == eLEVEL)
-			{
-				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CMagician_Card_Tool::Create(m_pDevice, m_pContext))))
-					return E_FAIL;
-			}
-			else
-			{
+
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
 					CMagician_Card_GamePlay::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
-			}
+			
 		}
 
 		{
@@ -1506,9 +1498,11 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Model_Magician_Card"),
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Card"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
 		return E_FAIL;
+
+	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1605,23 +1599,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 			
 		}
 
-		{
-			_float fRadiusX = 180.0f;
-			_float fRadiusY = 180.0f;
-			_float fRadiusZ = 180.0f;
-			PivotMatrix =
-				XMMatrixScaling(0.01f, 0.01f, 0.01f)
-				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
-				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
-
-			
-			{
-				
-
-			}
-
-		}
+	
 	}
 	
 	//Map3
@@ -1655,6 +1633,13 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		CVIBuffer_Particle_Rect::Create(m_pDevice, m_pContext, 100))))
 		return E_FAIL;
 
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Card"),
+		CVIBuffer_Rect::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+// 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Plane_Tool"),
+// 		CVIBuffer_Dynamic_Plane::Create(m_pDevice, m_pContext, 50, 50))))
+// 		return E_FAIL;
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
 // 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
 // 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
