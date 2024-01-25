@@ -154,7 +154,7 @@ HRESULT CCovus::Ready_Components_Origin(LEVEL eLevel)
 // 	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
 // 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
 // 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
-	BoundingDesc.fRadius = _float(0.7f);
+	BoundingDesc.fRadius = _float(1.f);
 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius, 0.f);
 
 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),

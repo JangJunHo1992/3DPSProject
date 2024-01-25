@@ -694,6 +694,9 @@
     <Filter Include="02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool">
       <UniqueIdentifier>{2141e291-f914-43c9-8927-7186bddee8b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Card">
+      <UniqueIdentifier>{86d8bc8c-2cb4-4aa7-8db5-73d151d3d3e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1407,6 +1410,9 @@
     <ClInclude Include="..\Public\Covus_Weapon_Dagger_Tool.h">
       <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Magician_Card.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Card</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2072,6 +2078,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Covus_Weapon_Dagger_Tool.cpp">
       <Filter>02.GameObjects\1.MyAssets\Covus\Parts\Weapon\Dagger\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Card.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Card</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
