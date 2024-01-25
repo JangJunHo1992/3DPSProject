@@ -1,5 +1,5 @@
 #include "Magician_Card.h"
-
+#include "Bone.h"
 #include "GameInstance.h"
 
 CMagician_Card::CMagician_Card(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -14,6 +14,8 @@ CMagician_Card::CMagician_Card(const CMagician_Card& rhs)
 
 HRESULT CMagician_Card::Initialize_Prototype()
 {
+
+
 	if (FAILED(__super::Initialize_Prototype()))
 		return E_FAIL;
 
@@ -28,6 +30,15 @@ HRESULT CMagician_Card::Initialize(void* pArg)
 	m_vEndPos = desc->vEndPos;
 	m_fSpeed = desc->fSpeed;
 
+	m_pParentTransform = (reinterpret_cast<Card_DESC*>(pArg))->m_pParentTransform;
+	if (nullptr == m_pParentTransform)
+		return E_FAIL;
+	Safe_AddRef(m_pParentTransform);
+
+	m_pSocketBone = (reinterpret_cast<Card_DESC*>(pArg))->m_pSocketBone;
+	if (nullptr == m_pSocketBone)
+		return E_FAIL;
+	Safe_AddRef(m_pSocketBone);
 
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
@@ -64,7 +75,16 @@ void CMagician_Card::Late_Tick(_float fTimeDelta)
 {
 	__super::Late_Tick(fTimeDelta);
 
-	XMStoreFloat4x4(&m_WorldMatrix, m_pTransformCom->Get_WorldMatrix());
+	_matrix		SocketMatrix = m_pSocketBone->Get_CombinedTransformationMatrix();
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		SocketMatrix.r[i] = XMVector3Normalize(SocketMatrix.r[i]);
+	}
+
+	XMStoreFloat4x4(&m_WorldMatrix, m_pTransformCom->Get_WorldMatrix() * SocketMatrix * m_pParentTransform->Get_WorldMatrix());
+
+
 
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
 		return;

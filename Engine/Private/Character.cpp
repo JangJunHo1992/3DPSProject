@@ -163,7 +163,6 @@ HRESULT CCharacter::Add_Weapon(const wstring& strPrototypeTag, string strBoneNam
 	return S_OK;
 }
 
-
 CBody* CCharacter::Get_Body()
 {
 	return dynamic_cast<CBody*>(Find_PartObject(TEXT("Part_Body")));

@@ -18,6 +18,11 @@ public:
 
 	}Magician_Card_DESC;
 
+	typedef struct
+	{
+		class CBone* m_pSocketBone = { nullptr };
+		class CTransform* m_pParentTransform = { nullptr };
+	}Card_DESC;
 protected:
 	CMagician_Card(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CMagician_Card(const CMagician_Card& rhs);
@@ -42,6 +47,8 @@ protected:
 	CCollider* m_pColliderCom = { nullptr };
 	CShader* m_pShaderCom = { nullptr };
 	CTexture* m_pTextureCom = { nullptr };
+	CTransform* m_pParentTransform = { nullptr };
+	CBone* m_pSocketBone = { nullptr };
 	_float3		m_vStartPos = { 0.f, 0.f, 0.f };
 	_float3		m_vEndPos = { 0.f, 0.f, 0.f };
 	_float		m_fSpeed = { 0.f };
