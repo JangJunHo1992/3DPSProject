@@ -72,7 +72,7 @@ void CLevel_BossStage1::Tick(_float fTimeDelta)
 HRESULT CLevel_BossStage1::Render()
 {
 	SetWindowText(g_hWnd, TEXT("게임플레이레벨입니다."));
-
+	
 	return S_OK;
 }
 

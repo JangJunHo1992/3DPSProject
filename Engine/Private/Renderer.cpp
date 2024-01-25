@@ -296,7 +296,7 @@ HRESULT CRenderer::Render_Debug()
 	{
 		pDebugCom->Render();
 		/* 나 얼믕ㅁ 물었어. 말못해. */
-		Safe_Release(pDebugCom);
+		//Safe_Release(pDebugCom);
 	}
 	m_DebugComponent.clear();
 

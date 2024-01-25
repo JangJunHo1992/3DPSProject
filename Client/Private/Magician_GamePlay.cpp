@@ -85,6 +85,11 @@ HRESULT CMagician_GamePlay::Ready_Components()
 	return S_OK;
 }
 
+void CMagician_GamePlay::Create_Card()
+{
+	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Magician_Card"));
+}
+
 
 CMagician_GamePlay* CMagician_GamePlay::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {

@@ -29,7 +29,8 @@ protected:
 	virtual void Set_Dead() override;
 private:
 	virtual HRESULT Ready_Components() override;
-
+public:
+	void Create_Card();
 private:
 	CActor<CMagician_GamePlay>* m_pActor = { nullptr };
 
