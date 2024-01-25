@@ -1,6 +1,7 @@
 #include "Varg_GamePlay.h"
 #include "GameInstance.h"
 #include "Varg_Idle.h"
+#include "Varg_Dead.h"
 
 CVarg_GamePlay::CVarg_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CVarg(pDevice, pContext)
@@ -49,6 +50,8 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CVarg_GamePlay::Tick(_float fTimeDelta)
 {
+	if (VargStatus.m_iHP < 0)
+		Set_Dead();
 	__super::Tick(fTimeDelta);
 	m_pActor->Update_State(fTimeDelta);
 }
@@ -90,7 +93,11 @@ HRESULT CVarg_GamePlay::Ready_Components()
 
 	return S_OK;
 }
-
+void CVarg_GamePlay::Set_Dead()
+{
+	m_bCheckDead = true;
+	m_pActor->Set_State(new CVarg_Dead());
+}
 
 CVarg_GamePlay* CVarg_GamePlay::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {

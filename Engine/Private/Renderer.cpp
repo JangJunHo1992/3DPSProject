@@ -248,7 +248,7 @@ HRESULT CRenderer::Render_LightAcc()
 		return E_FAIL;
 	if (FAILED(m_pGameInstance->Bind_RenderTarget_ShaderResource(TEXT("Target_Depth"), m_pShader, "g_DepthTexture")))
 		return E_FAIL;
-
+	
 	m_pGameInstance->Render_Lights(m_pShader, m_pVIBuffer);
 
 	/* 0번째에 백버퍼렌더타겟이 올라갔다. */

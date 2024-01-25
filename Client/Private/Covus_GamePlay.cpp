@@ -41,6 +41,7 @@ void CCovus_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CCovus_GamePlay::Tick(_float fTimeDelta)
 {
+	
 	__super::Tick(fTimeDelta);
 	m_pActor->Update_State(fTimeDelta);
 }

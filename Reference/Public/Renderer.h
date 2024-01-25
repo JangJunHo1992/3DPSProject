@@ -35,7 +35,7 @@ private:
 #ifdef _DEBUG
 	list<CComponent*>					m_DebugComponent;
 #endif
-
+	LIGHT_DESC LightDesc = {};
 private:
 	class CShader* m_pShader = { nullptr };
 	class CVIBuffer_Rect* m_pVIBuffer = { nullptr };

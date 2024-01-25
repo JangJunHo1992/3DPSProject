@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Magician_Idle.h"
 #include "GameInstance.h"
+#include "Magician_Dead.h"
 
 CMagician_GamePlay::CMagician_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMagician(pDevice, pContext)
@@ -50,6 +51,8 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CMagician_GamePlay::Tick(_float fTimeDelta)
 {
+	if (MagicianStatus.m_iHP < 0)
+		Set_Dead();
 	__super::Tick(fTimeDelta);
 
 	m_pActor->Update_State(fTimeDelta);
@@ -68,25 +71,15 @@ HRESULT CMagician_GamePlay::Render()
 	return S_OK;
 }
 
+void CMagician_GamePlay::Set_Dead()
+{
+	m_bCheckDead = true;
+	m_pActor->Set_State(new CMagician_Dead());
+}
+
 HRESULT CMagician_GamePlay::Ready_Components()
 {
-// 	switch (m_pGameInstance->Get_NextLevel())
-// 	{
-// 	case 2:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
-// 			return E_FAIL;
-// 		break;
-// 	case 6:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
-// 			return E_FAIL;
-// 		break;
-// 	case 7:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
-// 			return E_FAIL;
-// 		break;
-// 	default:
-// 		break;
-// 	}
+
 	if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
 		return E_FAIL;
 	return S_OK;

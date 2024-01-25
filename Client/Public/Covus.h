@@ -6,6 +6,43 @@ BEGIN(Client)
 
 class CCovus abstract : public CCharacter_Client
 {
+
+
+protected:
+	CCovus(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	CCovus(const CCovus& rhs);
+	virtual ~CCovus() = default;
+
+public:
+		virtual HRESULT Initialize_Prototype() override;
+		virtual HRESULT Initialize(void* pArg) override;
+		virtual void Priority_Tick(_float fTimeDelta) override;
+		virtual void Tick(_float fTimeDelta) override;
+		virtual void Late_Tick(_float fTimeDelta) override;
+		virtual HRESULT Render() override;
+protected:
+	_bool Collision_Chcek(LEVEL eLevel);
+
+
+
+public:
+	virtual void Set_Hitted() override;
+	virtual void Set_Dead() override;
+public:
+	virtual void Write_Json(json& Out_Json) override;
+public:
+	_bool	Get_CheckRotatePlayer() { return m_bRotatePlayer; }
+	void	Set_CheckRotatePlayer(_bool _bRotatePlayer) { m_bRotatePlayer = _bRotatePlayer; }
+protected:
+	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
+	virtual HRESULT Ready_PartObjects() override;
+	//HRESULT Bind_ShaderResources();
+protected:
+	_bool	m_bRotatePlayer = false;
+	CCharacter::CharStat PlayerStatus = {};
+	LIGHT_DESC			m_LightDesc = {};
+public:
+	virtual void Free() override;
 public:
 	enum PlayerState
 	{
@@ -310,40 +347,6 @@ public:
 		O_Corvus_SD1_SprintF,
 		O_Corvus_SD1_SprintF1
 	};
-
-protected:
-	CCovus(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-	CCovus(const CCovus& rhs);
-	virtual ~CCovus() = default;
-
-public:
-		virtual HRESULT Initialize_Prototype() override;
-		virtual HRESULT Initialize(void* pArg) override;
-		virtual void Priority_Tick(_float fTimeDelta) override;
-		virtual void Tick(_float fTimeDelta) override;
-		virtual void Late_Tick(_float fTimeDelta) override;
-		virtual HRESULT Render() override;
-protected:
-	_bool Collision_Chcek();
-public:
-	virtual void Set_Hitted() override;
-	virtual void Set_Dead() override;
-public:
-	virtual void Write_Json(json& Out_Json) override;
-public:
-	_bool	Get_CheckRotatePlayer() { return m_bRotatePlayer; }
-	void	Set_CheckRotatePlayer(_bool _bRotatePlayer) { m_bRotatePlayer = _bRotatePlayer; }
-protected:
-	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
-	virtual HRESULT Ready_PartObjects() override;
-	//HRESULT Bind_ShaderResources();
-protected:
-	_bool	m_bRotatePlayer = false;
-	CCharacter::CharStat PlayerStatus = {};
-
-public:
-	virtual void Free() override;
-
 };
 
 END

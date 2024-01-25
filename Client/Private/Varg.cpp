@@ -51,8 +51,12 @@ void CVarg::Priority_Tick(_float fTimeDelta)
 
 void CVarg::Tick(_float fTimeDelta)
 {
-	if (VargStatus.m_iHP < 0)
-		Set_Dead();
+	if (m_iCurrentLevelIn == 2)
+		Collision_Chcek(LEVEL_GAMEPLAY);
+	else if (m_iCurrentLevelIn == 6)
+		Collision_Chcek(LEVEL_BOSS1);
+	else if (m_iCurrentLevelIn == 7)
+		Collision_Chcek(LEVEL_BOSS2);
 	__super::Tick(fTimeDelta);
 }
 
@@ -68,18 +72,52 @@ HRESULT CVarg::Render()
 
 	return S_OK;
 }
+_bool CVarg::Collision_Chcek(LEVEL eLevel)//_uint eLevel
+{
+	_bool bIsCollision = false;
 
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(eLevel, TEXT("Layer_Player"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
+			}
+
+		}
+	}
+
+
+	return bIsCollision;
+}
 void CVarg::Set_Hitted()
 {
-	CVarg::VargState eHitted = CVarg::VargState::HurtF;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	VargStatus.m_iHP -= 10;
+	if (m_bCheckDead == false)
+	{
+		CVarg::VargState eHitted = CVarg::VargState::HurtF;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		VargStatus.m_iHP -= 10;
+	}
+	
 }
 
 void CVarg::Set_Dead()
 {
-	CVarg::VargState eHitted = CVarg::VargState::TakeExecution_Dead;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	//CVarg::VargState eHitted = CVarg::VargState::TakeExecution_Dead;
+	//Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 }
 
 void CVarg::Write_Json(json& Out_Json)
