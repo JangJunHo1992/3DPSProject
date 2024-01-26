@@ -218,10 +218,10 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
-	/*For. Texture_Card*/
-	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Card"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
-		return E_FAIL;
+// 	/*For. Texture_Card*/
+// 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Card"),
+// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
+// 		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -808,15 +808,15 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			}
 		}
 
-		{
-			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Card");
-
-
-				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CMagician_Card_GamePlay::Create(m_pDevice, m_pContext))))
-					return E_FAIL;
-			
-		}
+// 		{
+// 			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Card");
+// 
+// 
+// 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+// 					CMagician_Card_GamePlay::Create(m_pDevice, m_pContext))))
+// 					return E_FAIL;
+// 			
+// 		}
 
 		{
 			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician");
@@ -1498,9 +1498,9 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Card"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Card"),
+// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
+// 		return E_FAIL;
 
 	
 

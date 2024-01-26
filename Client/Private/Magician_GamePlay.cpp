@@ -88,13 +88,13 @@ HRESULT CMagician_GamePlay::Ready_Components()
 
 void CMagician_GamePlay::Create_Card(_float3 vStartPos, _float3 vEndPos)
 {
-	CMagician_Card::Magician_Card_DESC Desc;
-	Desc.vStartPos = vStartPos;
-	Desc.vEndPos = vEndPos;
-
-	Desc.vStartPos.y += 1.f;
-	Desc.vEndPos.y += 1.f;
-	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Magician_Card"), &Desc);
+// 	CMagician_Card::Magician_Card_DESC Desc;
+// 	Desc.vStartPos = vStartPos;
+// 	Desc.vEndPos = vEndPos;
+// 
+// 	Desc.vStartPos.y += 1.f;
+// 	Desc.vEndPos.y += 1.f;
+// 	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Magician_Card"), &Desc);
 }
 
 

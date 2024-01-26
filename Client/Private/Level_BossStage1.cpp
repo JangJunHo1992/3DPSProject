@@ -64,9 +64,9 @@ void CLevel_BossStage1::Tick(_float fTimeDelta)
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS2))))
 			return;
 	}
-	//XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(5.f, 3.f, -5.f, 1.f));
-	//
-	//m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
+	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(5.f, 3.f, -5.f, 1.f));
+
+	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
 }
 
 HRESULT CLevel_BossStage1::Render()

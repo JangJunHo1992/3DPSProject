@@ -5,7 +5,7 @@
 void CMagician_Shoot::Initialize(CMagician_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
-	pActor->Create_Card(pActor->Get_TransformComp()->Get_Pos(), pActor->Get_TransformComp()->Get_Pos());
+	//pActor->Create_Card(pActor->Get_TransformComp()->Get_Pos(), pActor->Get_TransformComp()->Get_Pos());
 	pActor->Set_IsAttack(true);
 }
 
