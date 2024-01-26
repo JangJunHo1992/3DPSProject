@@ -168,19 +168,19 @@ HRESULT CMagician::Ready_PartObjects()
 			return E_FAIL;
 	}
 
-// 	{
-// 		CMagician_Card::WEAPON_DESC	CardDesc = {};
-// 		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Card"), "ik_hand_l", CardDesc, TEXT("Weapon_L"))))
-// 			return E_FAIL;
-// 	}
+	{
+		CMagician_Card::WEAPON_DESC	CardDesc = {};
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Card"), "ik_hand_l", CardDesc, TEXT("Weapon_L"))))
+			return E_FAIL;
+	}
 
  	CWeapon* m_pWeapon_R = Get_Weapon(TEXT("Weapon_R"));
  	m_pWeapon_R->Get_TransformComp()->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(180.0f));
  	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
 
-// 	CWeapon* m_pWeapon_L = Get_Weapon(TEXT("Weapon_L"));
-// 	m_pWeapon_R->Get_TransformComp()->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(180.0f));
-// 	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
+	CWeapon* m_pWeapon_L = Get_Weapon(TEXT("Weapon_L"));
+	m_pWeapon_R->Get_TransformComp()->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(180.0f));
+	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
 
 
 	return S_OK;

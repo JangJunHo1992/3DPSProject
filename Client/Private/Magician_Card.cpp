@@ -3,12 +3,12 @@
 #include "GameInstance.h"
 #include "Covus.h"
 CMagician_Card::CMagician_Card(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
-	: CGameObject(pDevice, pContext)
+	: CMagician_Weapon(pDevice, pContext)
 {
 }
 
 CMagician_Card::CMagician_Card(const CMagician_Card& rhs)
-	: CGameObject(rhs)
+	: CMagician_Weapon(rhs)
 {
 }
 
@@ -39,8 +39,6 @@ HRESULT CMagician_Card::Initialize(void* pArg)
 
 void CMagician_Card::Priority_Tick(_float fTimeDelta)
 {
-	
-
 	__super::Priority_Tick(fTimeDelta);
 }
 
@@ -80,23 +78,45 @@ HRESULT CMagician_Card::Ready_Components_Origin(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Model */
-// 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Model_Magician_Card"),
-// 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
-// 		return E_FAIL;
-
 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Model_Magician_Card"),
-		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
+		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
+
+
 
 	/* For.Com_Collider */
-	CBounding_Sphere::BOUNDING_SPHERE_DESC		BoundingDesc = {};
+	m_iColliderSize = 1;
+	m_pColliders.resize(m_iColliderSize);
+	for (_uint i = 0; i < m_iColliderSize; ++i)
+	{
+		CBounding_Sphere::BOUNDING_SPHERE_DESC BoundingDesc = {};
 
-	BoundingDesc.fRadius = { 0.7f };
-	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, 0.f);
+		_float fPosZ = 1.2f / m_iColliderSize * (i + 1);
 
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),
-		TEXT("Com_Collider"), reinterpret_cast<CComponent**>(&m_pColliderCom), &BoundingDesc)))
-		return E_FAIL;
+		_float fRadiusX = 180.f;
+		_float fRadiusY = 90.f;
+		_float fRadiusZ = 180.f;
+
+		_matrix SocketMatrix
+			= m_pSocketBone->Get_CombinedTransformationMatrix()
+			* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ))
+			* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+			* XMMatrixRotationY(XMConvertToRadians(fRadiusY));
+
+		_vector vPos = XMVector3TransformCoord(
+			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
+			, SocketMatrix
+		);
+		BoundingDesc.fRadius = 0.8f / m_iColliderSize;
+		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
+		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
+
+		const wstring strName = TEXT("Com_Collider_") + i;
+
+		if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),
+			strName, reinterpret_cast<CComponent**>(&m_pColliders[i]), &BoundingDesc)))
+			return E_FAIL;
+	}
 	
 
 
