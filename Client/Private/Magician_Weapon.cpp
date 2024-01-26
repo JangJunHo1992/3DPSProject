@@ -16,9 +16,9 @@ CMagician_Weapon::CMagician_Weapon(const CMagician_Weapon& rhs)
 
 HRESULT CMagician_Weapon::Initialize_Prototype()
 {
-	if (FAILED(__super::Initialize_Prototype())) {
+	if (FAILED(__super::Initialize_Prototype()))
 		return E_FAIL;
-	}
+	
 
 	return S_OK;
 }

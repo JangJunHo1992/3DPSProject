@@ -88,7 +88,7 @@ HRESULT CMagician_GamePlay::Ready_Components()
 
 void CMagician_GamePlay::Create_Card()
 {
-	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Monster"), TEXT("Prototype_GameObject_Magician_Card"));
+	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_BossCard"), TEXT("Prototype_GameObject_Magician_Card"));
 }
 
 

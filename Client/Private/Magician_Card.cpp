@@ -1,7 +1,7 @@
 #include "Magician_Card.h"
 #include "GameInstance.h"
 #include "Bone.h"
-
+#include "Character.h"
 CMagician_Card::CMagician_Card(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CMagician_Weapon(pDevice, pContext)
 {
@@ -11,6 +11,65 @@ CMagician_Card::CMagician_Card(const CMagician_Card& rhs)
 	: CMagician_Weapon(rhs)
 {
 }
+
+HRESULT CMagician_Card::Initialize_Prototype()
+{
+	if (FAILED(__super::Initialize_Prototype()))
+		return E_FAIL;
+
+
+	return S_OK;
+}
+
+HRESULT CMagician_Card::Initialize(void* pArg)
+{
+	if (FAILED(__super::Initialize(pArg)))
+		return E_FAIL;
+
+	list<CGameObject*>* _pTargets = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
+
+	if (nullptr == _pTargets)
+		return E_FAIL;
+
+	for (CGameObject* pGameObject : *_pTargets)
+	{
+		CCharacter* m_pPlayer = dynamic_cast<CCharacter*>(pGameObject);
+		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+	}
+
+
+	m_pTransformCom->Look_At(m_vPlayerPos);
+
+
+	return S_OK;
+}
+
+void CMagician_Card::Priority_Tick(_float fTimeDelta)
+{
+	__super::Priority_Tick(fTimeDelta);
+}
+
+void CMagician_Card::Tick(_float fTimeDelta)
+{
+	m_pTransformCom->Go_Straight(fTimeDelta*0.25);
+	__super::Tick(fTimeDelta);
+}
+
+void CMagician_Card::Late_Tick(_float fTimeDelta)
+{
+	__super::Late_Tick(fTimeDelta);
+}
+
+HRESULT CMagician_Card::Render()
+{
+	if (FAILED(__super::Render())) {
+		return E_FAIL;
+	}
+
+	return S_OK;
+}
+
+
 
 HRESULT CMagician_Card::Ready_Components_Origin(LEVEL eLevel)
 {
