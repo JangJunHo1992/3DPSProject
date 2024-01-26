@@ -77,9 +77,7 @@ HRESULT CMagician_Card::Render()
 
 HRESULT CMagician_Card::Ready_Components_Origin(LEVEL eLevel)
 {
-	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Shader_Model"),
-		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
+	if (FAILED(__super::Ready_Components_Origin(eLevel)))
 		return E_FAIL;
 
 	/* For.Com_Model */
