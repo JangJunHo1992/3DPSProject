@@ -28,14 +28,12 @@ protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel);
 	virtual HRESULT Bind_ShaderResources();
 protected:
-	CShader*			m_pShaderCom = { nullptr };
-	CTexture*			m_pTextureCom = { nullptr };
-	class CCharacter*	m_pPlayer = { nullptr };
-	class CCollider*	m_pColliderCom = { nullptr };
+	CCharacter* m_pPlayer = { nullptr };
+
 	_vector				m_vAttackDirection; // 원거리 공격 방향
 	_float				m_fAttackSpeed = 0;       // 원거리 공격 속도
 	_int				CardCheckTime = 200;
-	_uint				m_iColliderSize = { 0 };
+
 	_vector				vPos = {};
 	_bool				m_bfirstcheck = true;
 public:

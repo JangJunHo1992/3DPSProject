@@ -40,6 +40,8 @@
 #include "Magician_Weapon_Tool.h"
 #include "Magician_Card_GamePlay.h"
 #include "Magician_Card_Tool.h"
+#include "Magician_Cane_GamePlay.h"
+#include "Magician_Cane_Tool.h"
 
 #include "Varg_Tool.h"
 #include "Varg_GamePlay.h"
@@ -330,34 +332,37 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			}
 		}
 
-		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Weapon");
-			string strFilePath = "../Bin/Resources/Models/MagicianTest/Cane/MagicianWeapon";
-
-			_float fRadiusX = 180.0f;
-			_float fRadiusY = 180.0f;
-			_float fRadiusZ = 180.0f;
-			PivotMatrix =
-				XMMatrixScaling(0.01f, 0.01f, 0.01f)
-							* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
-			 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-			 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
-
-			if (LEVEL_TOOL == eLEVEL)
-			{
-				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-					return E_FAIL;
-			}
-			else
-			{
-				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-					return E_FAIL;
-			}
-		}
+// 		{
+// 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Cane");
+// 			string strFilePath = "../Bin/Resources/Models/MagicianTest/Cane/MagicianWeapon";
+// 
+// 			_float fRadiusX = 180.0f;
+// 			_float fRadiusY = 180.0f;
+// 			_float fRadiusZ = 180.0f;
+// 			PivotMatrix =
+// 				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+// 							* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+// 			 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+// 			 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+// 
+// 			if (LEVEL_TOOL == eLEVEL)
+// 			{
+// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+// 					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+// 					return E_FAIL;
+// 			}
+// 			else
+// 			{
+// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+// 					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+// 					return E_FAIL;
+// 			}
+// 		}
 
 // 		{
+// 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Card");
+// 			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
+// 
 // 			_float fRadiusX = 180.0f;
 // 			_float fRadiusY = 180.0f;
 // 			_float fRadiusZ = 180.0f;
@@ -366,22 +371,21 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 // 				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
 // 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
 // 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
-
+// 
 // 			if (LEVEL_TOOL == eLEVEL)
 // 			{
-// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Magician_Card"),
-// 					CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.dds"), 1))))
+// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+// 					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
 // 					return E_FAIL;
 // 			}
 // 			else
 // 			{
-// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Magician_Card"),
-// 					CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.dds"), 1))))
+// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+// 					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
 // 					return E_FAIL;
-// 				
 // 			}
-			
-/*		}*/
+// 		}
+	
 	}
 	//Varg
 	{
@@ -793,18 +797,18 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Cane");
 
 			if (LEVEL_TOOL == eLEVEL)
 			{
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CMagician_Weapon_Tool::Create(m_pDevice, m_pContext))))
+					CMagician_Cane_Tool::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
 			}
 			else
 			{
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CMagician_Weapon_GamePlay::Create(m_pDevice, m_pContext))))
+					CMagician_Cane_GamePlay::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
 			}
 		}
@@ -1579,15 +1583,15 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 			PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 
 
-				if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
-					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
-					return E_FAIL;
-			
+			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
+				return E_FAIL;
+
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Weapon");
-			string strFilePath = "../Bin/Resources/Models/MagicianTest/Cane/MagicianWeapon";
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Card");
+			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
 
 			_float fRadiusX = 180.0f;
 			_float fRadiusY = 180.0f;
@@ -1599,16 +1603,16 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
 
-				if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
-					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-					return E_FAIL;
-			
+			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+				return E_FAIL;
+
 		}
 
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Weapon");
-			string strFilePath = "../Bin/Resources/Models/MagicianTest/Card/Card";
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Cane");
+			string strFilePath = "../Bin/Resources/Models/MagicianTest/Cane/MagicianWeapon";
 
 			_float fRadiusX = 180.0f;
 			_float fRadiusY = 180.0f;
@@ -1626,105 +1630,106 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 
 		}
 	}
-	
-	//Map3
-	{
-		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Map3");
 
-	
+			//Map3
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Map3");
+
+
 			/* For.Prototype_Component_Model_Map3 */
 			PivotMatrix = XMMatrixScaling(0.02f, 0.02f, 0.02f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_BOSS2, strPrototypeTag,
 				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/BossStage2/BossStage2", PivotMatrix))))
 				return E_FAIL;
-		
-	}
+
+		}
 
 
 		/* For.Prototype_Component_VIBuffer_Terrain */
 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Terrain_GamePlay"),
 			CVIBuffer_Static_Terrain::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Height2.bmp")))))
 			return E_FAIL;
-	
 
-	
+
+
 		/* For.Prototype_Component_VIBuffer_Cube */
 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Cube"),
 			CVIBuffer_Cube::Create(m_pDevice, m_pContext))))
 			return E_FAIL;
+
+		/* For.Prototype_Component_VIBuffer_Particle_Rect */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Particle_Rect"),
+			CVIBuffer_Particle_Rect::Create(m_pDevice, m_pContext, 100))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_VIBuffer_Particle_Point */
+	// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+	// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+	// 		return E_FAIL;
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+		lstrcpy(m_szLoadingText, TEXT("셰이더를(을) 로드하는 중입니다."));
+		/* For.Prototype_Component_Shader_VtxNorTex */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_VtxNorTex"),
+			CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_VtxNorTex.hlsl"), VTXNORTEX::Elements, VTXNORTEX::iNumElements))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_Shader_Model */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Model"),
+			CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Model.hlsl"), VTXMESH::Elements, VTXMESH::iNumElements))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_Shader_AnimModel */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_AnimModel"),
+			CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_AnimModel.hlsl"), VTXANIMMESH::Elements, VTXANIMMESH::iNumElements))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_Shader_VtxCube */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_VtxCube"),
+			CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_VtxCube.hlsl"), VTXCUBE::Elements, VTXCUBE::iNumElements))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_Shader_Particle_Rect */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Particle_Rect"),
+			CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_Shader_Particle_Point */
+	// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Point"),
+	// 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
+	// 		return E_FAIL;
+
+		lstrcpy(m_szLoadingText, TEXT("네비게이션를(을) 로드하는 중입니다."));
+		/* For.Prototype_Component_Navigation */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Navigation"),
+			CNavigation::Create(m_pDevice, m_pContext, TEXT("../Bin/DataFiles/Stage3.dat")))))
+			return E_FAIL;
+
+		lstrcpy(m_szLoadingText, TEXT("콜리이더를(을) 로드하는 중입니다."));
+		/* For.Prototype_Component_Collider_AABB */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_AABB"),
+			CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_AABB))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_Collider_OBB */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_OBB"),
+			CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_OBB))))
+			return E_FAIL;
+
+		/* For.Prototype_Component_Collider_Sphere */
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_Sphere"),
+			CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_SPHERE))))
+			return E_FAIL;
+
+		lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
+
+		m_isFinished = true;
+
+		return S_OK;
 	
-	/* For.Prototype_Component_VIBuffer_Particle_Rect */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Particle_Rect"),
-		CVIBuffer_Particle_Rect::Create(m_pDevice, m_pContext, 100))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_VIBuffer_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-// 		return E_FAIL;
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-	lstrcpy(m_szLoadingText, TEXT("셰이더를(을) 로드하는 중입니다."));
-	/* For.Prototype_Component_Shader_VtxNorTex */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_VtxNorTex"),
-		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_VtxNorTex.hlsl"), VTXNORTEX::Elements, VTXNORTEX::iNumElements))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Shader_Model */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Model"),
-		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Model.hlsl"), VTXMESH::Elements, VTXMESH::iNumElements))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Shader_AnimModel */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_AnimModel"),
-		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_AnimModel.hlsl"), VTXANIMMESH::Elements, VTXANIMMESH::iNumElements))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Shader_VtxCube */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_VtxCube"),
-		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_VtxCube.hlsl"), VTXCUBE::Elements, VTXCUBE::iNumElements))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Shader_Particle_Rect */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Particle_Rect"),
-		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Shader_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Point"),
-// 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
-// 		return E_FAIL;
-
-	lstrcpy(m_szLoadingText, TEXT("네비게이션를(을) 로드하는 중입니다."));
-	/* For.Prototype_Component_Navigation */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Navigation"),
-		CNavigation::Create(m_pDevice, m_pContext, TEXT("../Bin/DataFiles/Stage3.dat")))))
-		return E_FAIL;
-
-	lstrcpy(m_szLoadingText, TEXT("콜리이더를(을) 로드하는 중입니다."));
-	/* For.Prototype_Component_Collider_AABB */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_AABB"),
-		CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_AABB))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Collider_OBB */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_OBB"),
-		CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_OBB))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Collider_Sphere */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_Sphere"),
-		CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_SPHERE))))
-		return E_FAIL;
-
-	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
-
-	m_isFinished = true;
-
-	return S_OK;
 }
 
 HRESULT CLoader::Loading_For_Tool_Level()

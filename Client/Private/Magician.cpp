@@ -5,6 +5,7 @@
 #include "Magician_Body.h"
 #include "Magician_Weapon.h"
 #include "Magician_Card.h"
+#include "Magician_Cane.h"
 
 CMagician::CMagician(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CCharacter_Client(pDevice, pContext)
@@ -163,14 +164,14 @@ HRESULT CMagician::Ready_PartObjects()
 
 
 	{
-		CMagician_Weapon::WEAPON_DESC	WeaponDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Weapon"), "ik_hand_r", WeaponDesc, TEXT("Weapon_R"))))
+		CMagician_Cane::WEAPON_DESC	CaneDesc = {};
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Cane"), "ik_hand_r", CaneDesc, TEXT("Weapon_R"))))
 			return E_FAIL;
 	}
 
 	{
 		CMagician_Card::WEAPON_DESC	CardDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Card"), "ik_hand_l", CardDesc, TEXT("Weapon_L"))))
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Card"), "weapon_i_hat", CardDesc, TEXT("Weapon_L"))))
 			return E_FAIL;
 	}
 
@@ -179,8 +180,8 @@ HRESULT CMagician::Ready_PartObjects()
  	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
 
 	CWeapon* m_pWeapon_L = Get_Weapon(TEXT("Weapon_L"));
-	m_pWeapon_R->Get_TransformComp()->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(180.0f));
-	m_pWeapon_R->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
+	m_pWeapon_L->Get_TransformComp()->Rotation(XMVectorSet(0.f, 1.f, 0.f, 0.f), XMConvertToRadians(180.0f));
+	m_pWeapon_L->Get_TransformComp()->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.1f, 0.f, 0.f, 1.f));
 
 
 	return S_OK;

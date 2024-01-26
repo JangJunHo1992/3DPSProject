@@ -302,6 +302,9 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Magician_Body.h" />
     <ClInclude Include="..\Public\Magician_Body_GamePlay.h" />
     <ClInclude Include="..\Public\Magician_Body_Tool.h" />
+    <ClInclude Include="..\Public\Magician_Cane.h" />
+    <ClInclude Include="..\Public\Magician_Cane_GamePlay.h" />
+    <ClInclude Include="..\Public\Magician_Cane_Tool.h" />
     <ClInclude Include="..\Public\Magician_Card.h" />
     <ClInclude Include="..\Public\Magician_Card_GamePlay.h" />
     <ClInclude Include="..\Public\Magician_Card_Tool.h" />
@@ -532,6 +535,9 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Magician_Body.cpp" />
     <ClCompile Include="..\Private\Magician_Body_GamePlay.cpp" />
     <ClCompile Include="..\Private\Magician_Body_Tool.cpp" />
+    <ClCompile Include="..\Private\Magician_Cane.cpp" />
+    <ClCompile Include="..\Private\Magician_Cane_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Magician_Cane_Tool.cpp" />
     <ClCompile Include="..\Private\Magician_Card.cpp" />
     <ClCompile Include="..\Private\Magician_Card_GamePlay.cpp" />
     <ClCompile Include="..\Private\Magician_Card_Tool.cpp" />

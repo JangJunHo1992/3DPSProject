@@ -28,11 +28,16 @@ HRESULT CMagician_Card::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 	
-	list<CGameObject*>* playerList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
-	m_pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
-	m_pGameInstance->Set_Player(m_pPlayer);
+	list<CGameObject*>* _pTargets = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
 
-	vPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);
+	if (nullptr == _pTargets)
+		return false;
+
+	for (CGameObject* pGameObject : *_pTargets)
+	{
+		m_pPlayer = dynamic_cast<CCharacter*>(pGameObject);
+		vPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+	}
 	
 	return S_OK;
 }
@@ -126,17 +131,9 @@ HRESULT CMagician_Card::Ready_Components_Origin(LEVEL eLevel)
 
 HRESULT CMagician_Card::Bind_ShaderResources()
 {
-// 	if (FAILED(__super::Bind_ShaderResources()))
-// 		return E_FAIL;
-	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
+	if (FAILED(__super::Bind_ShaderResources()))
 		return E_FAIL;
-
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_ViewMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_VIEW))))
-		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
-		return E_FAIL;
-	if (FAILED(m_pTextureCom->Bind_ShaderResources(m_pShaderCom, "g_Texture")))
-		return E_FAIL;
+	
 
 	return S_OK;
 }
@@ -151,6 +148,8 @@ void CMagician_Card::Free()
 
 _bool CMagician_Card::Collision_Chcek()
 {
+	if (false == m_bIsAttack)
+		return false;
 
 	_bool bIsCollision = false;
 
@@ -159,7 +158,8 @@ _bool CMagician_Card::Collision_Chcek()
 	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
 	for (CGameObject* pGameObject : _Targets)
 	{
-
+		if (false == m_bIsAttack)
+			break;
 		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
 		
 		if (pTarget)
@@ -168,21 +168,24 @@ _bool CMagician_Card::Collision_Chcek()
 			if (nullptr == pTargetCollider)
 				continue;
 
-		
-			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
-			if (isCollision)
+			for (CCollider* pCollider : m_pColliders)
 			{
-				if (pTarget->Get_Parry() == false)
+				_bool isCollision = pCollider->Collision(pTargetCollider);
+				if (isCollision)
 				{
-					pTarget->Set_Hitted();
-					Set_isdead(true);
+					if (pTarget->Get_Parry() == false)
+					{
+						pTarget->Set_Hitted();
+						Set_isdead(true);
+						Set_IsAttack(false);
 
+					}
+					pAlreadyHittedCharacter = pTarget;
+					bIsCollision = true;
+					break;
 				}
-				pAlreadyHittedCharacter = pTarget;
-				bIsCollision = true;
-				break;
 			}
-			
+
 		}
 	}
 
@@ -203,11 +206,11 @@ void CMagician_Card::Update_Ranged_Attack(_float fTimeDelta)
 	// 원거리 공격 중일 때만 업데이트
 	
 	// 이동할 거리 계산
-	_float fMoveDistance = m_fAttackSpeed * fTimeDelta;
-	
+	_float fMoveDistance = m_fAttackSpeed * fTimeDelta * 0.01f;
+	_float3 vCardPos = _float3(0.f, 0.f, 0.f);
 	Start_Ranged_Attack(vPos);
-	// 이동할 거리만큼 현재 위치 업데이트
-	Set_Position(m_pTransformCom->Get_State(CTransform::STATE_POSITION) + m_vAttackDirection * fMoveDistance);
+	vCardPos += m_vAttackDirection * fMoveDistance;
+	m_pTransformCom->Set_Position(m_pTransformCom->Get_Pos()+vCardPos);
 
 		
 	
