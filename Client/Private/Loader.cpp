@@ -36,9 +36,10 @@
 #include "Magician_GamePlay.h"
 #include "Magician_Body_GamePlay.h"
 #include "Magician_Body_Tool.h"
-#include "Magician_Weapon_GamePlay.h"
-#include "Magician_Weapon_Tool.h"
+#include "Magician_Cane_GamePlay.h"
+#include "Magician_Cane_Tool.h"
 #include "Magician_Card_GamePlay.h"
+#include "Magician_Card_Tool.h"
 
 #include "Varg_Tool.h"
 #include "Varg_GamePlay.h"
@@ -218,10 +219,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
-// 	/*For. Texture_Card*/
-// 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Card"),
-// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
-// 		return E_FAIL;
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -330,7 +328,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Cane");
 			string strFilePath = "../Bin/Resources/Models/MagicianTest/Cane/MagicianWeapon";
 
 			_float fRadiusX = 180.0f;
@@ -356,31 +354,33 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 			}
 		}
 
-// 		{
-// 			_float fRadiusX = 180.0f;
-// 			_float fRadiusY = 180.0f;
-// 			_float fRadiusZ = 180.0f;
-// 			PivotMatrix =
-// 				XMMatrixScaling(0.01f, 0.01f, 0.01f)
-// 				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
-// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Card");
+			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
 
-// 			if (LEVEL_TOOL == eLEVEL)
-// 			{
-// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Magician_Card"),
-// 					CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.dds"), 1))))
-// 					return E_FAIL;
-// 			}
-// 			else
-// 			{
-// 				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Model_Magician_Card"),
-// 					CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.dds"), 1))))
-// 					return E_FAIL;
-// 				
-// 			}
-			
-/*		}*/
+			_float fRadiusX = 180.0f;
+			_float fRadiusY = 180.0f;
+			_float fRadiusZ = 180.0f;
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
+					CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+					return E_FAIL;
+			}
+		}
+
 	}
 	//Varg
 	{
@@ -792,31 +792,38 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Cane");
 
 			if (LEVEL_TOOL == eLEVEL)
 			{
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CMagician_Weapon_Tool::Create(m_pDevice, m_pContext))))
+					CMagician_Cane_Tool::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
 			}
 			else
 			{
 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-					CMagician_Weapon_GamePlay::Create(m_pDevice, m_pContext))))
+					CMagician_Cane_GamePlay::Create(m_pDevice, m_pContext))))
 					return E_FAIL;
 			}
 		}
 
-// 		{
-// 			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Card");
-// 
-// 
-// 				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-// 					CMagician_Card_GamePlay::Create(m_pDevice, m_pContext))))
-// 					return E_FAIL;
-// 			
-// 		}
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Card");
+
+			if (LEVEL_TOOL == eLEVEL)
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_Card_Tool::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+			else
+			{
+				if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+					CMagician_Card_GamePlay::Create(m_pDevice, m_pContext))))
+					return E_FAIL;
+			}
+		}
 
 		{
 			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician");
@@ -1281,106 +1288,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 			
 		}
 	}
-// 	JobMob1
-// 		{
-// 	
-// 			{
-// 				const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_JobMob1");
-// 				string strFilePath = "../Bin/Resources/Models/JobMob1/JobMob1";
-// 				PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-// 	
-// 				if (LEVEL_TOOL == eLEVEL)
-// 				{
-// 	
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 				else
-// 				{
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 			}
-// 	
-// 			{
-// 				const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_JobMob1_Weapon");
-// 				string strFilePath = "../Bin/Resources/Models/JobMob1/Weapon/Weapon";
-// 				_float fRadiusX = 135.0f;
-// 				_float fRadiusY = 180.0f;
-// 				_float fRadiusZ = 180.0f;
-// 	
-// 				PivotMatrix =
-// 					XMMatrixScaling(0.01f, 0.01f, 0.01f)
-// 					* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
-// 					* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-// 					* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
-// 	
-// 				if (LEVEL_TOOL == eLEVEL)
-// 				{
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 				else
-// 				{
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 			}
-// 		}
-// 		//JobMob2
-// 		{
-// 	
-// 			{
-// 				const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_JobMob2");
-// 				string strFilePath = "../Bin/Resources/Models/JobMob2/JobMob2";
-// 				PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-// 	
-// 				if (LEVEL_TOOL == eLEVEL)
-// 				{
-// 	
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 				else
-// 				{
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 			}
-// 	
-// 			{
-// 				const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_JobMob2_Weapon");
-// 				string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
-// 				_float fRadiusX = 180.0f;
-// 				_float fRadiusY = 270.0f;
-// 				_float fRadiusZ = 180.0f;
-// 	
-// 				PivotMatrix =
-// 					XMMatrixScaling(0.01f, 0.01f, 0.01f)
-// 					* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
-// 					* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-// 					* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
-// 	
-// 				if (LEVEL_TOOL == eLEVEL)
-// 				{
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 				else
-// 				{
-// 					if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, strPrototypeTag,
-// 						CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-// 						return E_FAIL;
-// 				}
-// 			}
-// 		}
+
 
 	//Map
 	
@@ -1498,9 +1406,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
 
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Card"),
-// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Card/Card.png"), 1))))
-// 		return E_FAIL;
+
 
 	
 
@@ -1580,7 +1486,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		}
 
 		{
-			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Weapon");
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Cane");
 			string strFilePath = "../Bin/Resources/Models/MagicianTest/Cane/MagicianWeapon";
 
 			_float fRadiusX = 180.0f;
@@ -1599,6 +1505,25 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 			
 		}
 
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Card");
+			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
+
+			_float fRadiusX = 180.0f;
+			_float fRadiusY = 180.0f;
+			_float fRadiusZ = 180.0f;
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+
+			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+				return E_FAIL;
+
+		}
 	
 	}
 	
@@ -1633,9 +1558,6 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		CVIBuffer_Particle_Rect::Create(m_pDevice, m_pContext, 100))))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Card"),
-		CVIBuffer_Rect::Create(m_pDevice, m_pContext))))
-		return E_FAIL;
 
 // 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_VIBuffer_Plane_Tool"),
 // 		CVIBuffer_Dynamic_Plane::Create(m_pDevice, m_pContext, 50, 50))))

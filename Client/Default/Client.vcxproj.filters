@@ -700,6 +700,18 @@
     <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\GamePlay">
       <UniqueIdentifier>{a3d3ea02-3c27-4944-93d8-bc7a49f7f059}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane">
+      <UniqueIdentifier>{ad1b4964-14e1-4479-a503-e28db764b7e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane\GamePlay">
+      <UniqueIdentifier>{c3c16689-5af9-4200-9b1a-30e5135da89c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane\Tool">
+      <UniqueIdentifier>{c3f329aa-b346-4c10-a7a5-5a0a284c37f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Tool">
+      <UniqueIdentifier>{34d58141-39f0-420b-8486-798135819db0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1416,6 +1428,21 @@
     <ClInclude Include="..\Public\Magician_Card_GamePlay.h">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Magician_Cane.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Cane_GamePlay.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Cane_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Card_Tool.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Card.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2084,6 +2111,21 @@
     </ClCompile>
     <ClCompile Include="..\Private\Magician_Card_GamePlay.cpp">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Cane.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Cane_GamePlay.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Cane_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Cane\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Card_Tool.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Card.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -265,9 +265,6 @@
     <Filter Include="01.Utility\07.Lights\Manager">
       <UniqueIdentifier>{6025671d-1098-494f-bf67-914c7bf45e4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\02.GameObjects\Card">
-      <UniqueIdentifier>{55b1e000-2e69-4553-b1ff-f8325b3ac8c4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Base.h">
@@ -519,9 +516,6 @@
     <ClInclude Include="..\Public\Light_Manager.h">
       <Filter>01.Utility\07.Lights\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Magician_Card.h">
-      <Filter>01.Utility\02.GameObjects\Card</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Base.cpp">
@@ -736,9 +730,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\Light_Manager.cpp">
       <Filter>01.Utility\07.Lights\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Magician_Card.cpp">
-      <Filter>01.Utility\02.GameObjects\Card</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

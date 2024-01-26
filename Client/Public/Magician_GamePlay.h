@@ -30,7 +30,7 @@ protected:
 private:
 	virtual HRESULT Ready_Components() override;
 public:
-	void Create_Card(_float3 vStartPos, _float3 vEndPos);
+	void Create_Card();
 private:
 	CActor<CMagician_GamePlay>* m_pActor = { nullptr };
 

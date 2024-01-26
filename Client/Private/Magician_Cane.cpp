@@ -1,31 +1,31 @@
-#include "Magician_Card.h"
+#include "Magician_Cane.h"
 #include "GameInstance.h"
 #include "Bone.h"
 
-CMagician_Card::CMagician_Card(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
+CMagician_Cane::CMagician_Cane(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CMagician_Weapon(pDevice, pContext)
 {
 }
 
-CMagician_Card::CMagician_Card(const CMagician_Card& rhs)
+CMagician_Cane::CMagician_Cane(const CMagician_Cane& rhs)
 	: CMagician_Weapon(rhs)
 {
 }
 
-HRESULT CMagician_Card::Ready_Components_Origin(LEVEL eLevel)
+HRESULT CMagician_Cane::Ready_Components_Origin(LEVEL eLevel)
 {
 	if (FAILED(__super::Ready_Components_Origin(eLevel)))
 		return E_FAIL;
 
 	/* For.Com_Model */
-
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Model_Magician_Card"),
+	
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Model_Magician_Cane"),
 		TEXT("Com_Model"), reinterpret_cast<CComponent**>(&m_pModelCom))))
 		return E_FAIL;
 
-
-	/* For.Com_Collider */
-	m_iColliderSize = 1;
+	
+		/* For.Com_Collider */
+	m_iColliderSize = 6;
 	m_pColliders.resize(m_iColliderSize);
 	//m_pColliders = new CCollider*[m_iColliderSize];
 
