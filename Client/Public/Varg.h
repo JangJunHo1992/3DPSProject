@@ -17,7 +17,8 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void Late_Tick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
-
+public:
+	_bool Collision_Chcek(LEVEL eLevel);
 public:
 	virtual void Set_Hitted() override;
 	virtual void Set_Dead() override;

@@ -43,30 +43,29 @@ HRESULT CCovus::Initialize(void* pArg)
 	GameObjectDesc.fSpeedPerSec = 8.f;
 	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
 
+
+
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
-	if(m_iCurrentLevelIn==2)
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(90.f, -3.5f, 0.f, 1.f));
-	else if (m_iCurrentLevelIn == 6)
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(10.f, 0.f, 0.f, 1.f));
-	else if (m_iCurrentLevelIn == 7)
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.f, 0.f, 0.f, 1.f));
+	
+
 	return S_OK;
 }
 
 void CCovus::Priority_Tick(_float fTimeDelta)
 {
+	m_LightDesc.vPosition = m_pTransformCom->Get_Position();
 	__super::Priority_Tick(fTimeDelta);
 }
 
 void CCovus::Tick(_float fTimeDelta)
 {
 	if (m_iCurrentLevelIn == 2)
-		Collision_Chcek();
+		Collision_Chcek(LEVEL_GAMEPLAY);
 	else if (m_iCurrentLevelIn == 6)
-		Collision_Chcek2();
+		Collision_Chcek(LEVEL_BOSS1);
 	else if (m_iCurrentLevelIn == 7)
-		Collision_Chcek3();
+		Collision_Chcek(LEVEL_BOSS2);
 	
 	__super::Tick(fTimeDelta);
 }
@@ -85,13 +84,12 @@ HRESULT CCovus::Render()
 }
 
 
-_bool CCovus::Collision_Chcek()//_uint eLevel
+_bool CCovus::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 {
 	_bool bIsCollision = false;
 
 	CCharacter* pAlreadyHittedCharacter = nullptr;
-	_uint eLevel = m_pGameInstance->Get_NextLevel();
-	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Monster"));
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(eLevel, TEXT("Layer_Monster"));
 	for (CGameObject* pGameObject : _Targets)
 	{
 		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
@@ -110,70 +108,6 @@ _bool CCovus::Collision_Chcek()//_uint eLevel
 				bIsCollision = true;
 			}
 			
-		}
-	}
-
-
-	return bIsCollision;
-}
-
-_bool CCovus::Collision_Chcek2()
-{
-	_bool bIsCollision = false;
-
-	CCharacter* pAlreadyHittedCharacter = nullptr;
-	_uint eLevel = m_pGameInstance->Get_NextLevel();
-	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
-	for (CGameObject* pGameObject : _Targets)
-	{
-		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
-		if (pTarget)
-		{
-			CCollider* pTargetCollider = pTarget->Get_Collider();
-			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
-				continue;
-
-			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
-			if (isCollision)
-			{
-			
-				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-				pTarget->Pushed(vPos);
-				bIsCollision = true;
-			}
-
-		}
-	}
-
-
-	return bIsCollision;
-}
-
-_bool CCovus::Collision_Chcek3()
-{
-	_bool bIsCollision = false;
-
-	CCharacter* pAlreadyHittedCharacter = nullptr;
-	_uint eLevel = m_pGameInstance->Get_NextLevel();
-	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
-	for (CGameObject* pGameObject : _Targets)
-	{
-		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
-		if (pTarget)
-		{
-			CCollider* pTargetCollider = pTarget->Get_Collider();
-			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
-				continue;
-
-			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
-			if (isCollision)
-			{
-			
-				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-				pTarget->Pushed(vPos);
-				bIsCollision = true;
-			}
-
 		}
 	}
 
@@ -184,8 +118,13 @@ _bool CCovus::Collision_Chcek3()
 
 void CCovus::Set_Hitted()
 {
-	CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	if (m_bCheckDead == false &&m_bParry ==false)
+	{
+		CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		PlayerStatus.m_iHP -= 10;
+	}
+	
 }
 
 void CCovus::Set_Dead()
@@ -215,7 +154,7 @@ HRESULT CCovus::Ready_Components_Origin(LEVEL eLevel)
 // 	BoundingDesc.vExtents = _float3(0.5f, 0.7f, 0.5f);
 // 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.vExtents.y, 0.f);
 // 	BoundingDesc.vRotation = _float3(0.f, XMConvertToRadians(45.0f), 0.f);
-	BoundingDesc.fRadius = _float(0.7f);
+	BoundingDesc.fRadius = _float(1.f);
 	BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius, 0.f);
 
 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),

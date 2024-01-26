@@ -21,7 +21,6 @@ public:
 	virtual HRESULT Render() override;
 
 
-
 private:
 	virtual HRESULT Ready_Components() override;
 

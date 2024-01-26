@@ -98,6 +98,12 @@ public:
 	void Look_At_Target();
 	_float3 Get_Pos();
 	_float4 Get_Pos4();
+public:
+	void Set_Parry(_bool _bParry) { m_bParry = _bParry; }
+	_bool Get_Parry() { return m_bParry; }
+protected:
+	_bool m_bParry = false;
+	_bool m_bCheckDead = false;
 protected:
 	CNavigation* m_pNavigationCom = { nullptr };
 	CCollider* m_pColliderCom = { nullptr };

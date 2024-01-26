@@ -86,7 +86,7 @@ void CCharacter::Late_Tick(_float fTimeDelta)
 		return;
 #ifdef _DEBUG
 	//m_pNavigationCom->Render();
-	m_pGameInstance->Add_DebugRender(m_pColliderCom);
+	//m_pGameInstance->Add_DebugRender(m_pColliderCom);
 	/*m_pColliderCom->Render();*/
 #endif
 }
@@ -162,7 +162,6 @@ HRESULT CCharacter::Add_Weapon(const wstring& strPrototypeTag, string strBoneNam
 
 	return S_OK;
 }
-
 
 CBody* CCharacter::Get_Body()
 {
@@ -257,7 +256,7 @@ void CCharacter::Knockback(_float fTimeDelta, CNavigation* pNavigation)
 
 void CCharacter::Pushed(_float3 vPos)
 {
-	_float3 vLook = XMVector3Normalize(Get_Pos() - vPos) / 10.f;
+	_float3 vLook = XMVector3Normalize(Get_Pos() - vPos) / 100.f;
 	Add_Force(vLook);
 }
 

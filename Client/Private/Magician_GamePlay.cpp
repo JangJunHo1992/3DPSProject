@@ -3,6 +3,7 @@
 #include "Magician_Idle.h"
 #include "GameInstance.h"
 #include "Magician_Dead.h"
+#include "Magician_Card_GamePlay.h"
 
 CMagician_GamePlay::CMagician_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMagician(pDevice, pContext)
@@ -73,31 +74,21 @@ HRESULT CMagician_GamePlay::Render()
 
 void CMagician_GamePlay::Set_Dead()
 {
+	m_bCheckDead = true;
 	m_pActor->Set_State(new CMagician_Dead());
 }
 
 HRESULT CMagician_GamePlay::Ready_Components()
 {
-// 	switch (m_pGameInstance->Get_NextLevel())
-// 	{
-// 	case 2:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_GAMEPLAY)))
-// 			return E_FAIL;
-// 		break;
-// 	case 6:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS1)))
-// 			return E_FAIL;
-// 		break;
-// 	case 7:
-// 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
-// 			return E_FAIL;
-// 		break;
-// 	default:
-// 		break;
-// 	}
+
 	if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
 		return E_FAIL;
 	return S_OK;
+}
+
+void CMagician_GamePlay::Create_Card()
+{
+	m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_BossCard"), TEXT("Prototype_GameObject_Magician_Card"));
 }
 
 

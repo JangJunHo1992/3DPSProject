@@ -95,6 +95,7 @@ HRESULT CVarg_GamePlay::Ready_Components()
 }
 void CVarg_GamePlay::Set_Dead()
 {
+	m_bCheckDead = true;
 	m_pActor->Set_State(new CVarg_Dead());
 }
 

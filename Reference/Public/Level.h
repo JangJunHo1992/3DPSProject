@@ -22,7 +22,9 @@ protected:
 
 protected:
 	class CGameInstance*	m_pGameInstance = { nullptr };
-
+	LIGHT_DESC				PlayerLightDesc{};
+	class CCharacter*		pPlayer = { nullptr };
+	class CLight*			m_pLight = { nullptr };
 public:
 	virtual void Free() override;
 };

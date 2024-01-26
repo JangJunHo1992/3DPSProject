@@ -11,7 +11,7 @@ void CMagician_DisappearL::Initialize(CMagician_GamePlay* pActor)
 
 CState<CMagician_GamePlay>* CMagician_DisappearL::Update(CMagician_GamePlay* pActor, _float fTimeDelta)
 {
-	pActor->Go_Backward(fTimeDelta * 0.25);
+	pActor->Go_Backward(fTimeDelta);
 	if (pActor->Is_Inputable_Back(10))
 	{
 		return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);

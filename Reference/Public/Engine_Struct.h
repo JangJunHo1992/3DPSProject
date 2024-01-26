@@ -31,6 +31,10 @@ namespace Engine
 		XMFLOAT4		vDiffuse;
 		XMFLOAT4		vAmbient;
 		XMFLOAT4		vSpecular;
+
+		void Set_LightPos(XMFLOAT4	_Position) { vPosition = _Position; }
+		XMFLOAT4 Get_LightPos() { return vPosition; }
+
 	}LIGHT_DESC;
 
 	typedef struct ENGINE_DLL tagVertex_Position

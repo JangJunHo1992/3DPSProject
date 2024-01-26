@@ -46,7 +46,7 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::Ground_Normal(CMagician_GameP
 
 	if (30.f > pActor->Calc_Distance()&& 15.f <pActor->Calc_Distance())
 	{
-		pState = WalkandDisappear(pActor, fTimeDelta, _iAnimIndex);
+		pState = Walk(pActor, fTimeDelta, _iAnimIndex);
 		if (pState)	return pState;
 	}
 		
@@ -56,17 +56,34 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::Ground_Normal(CMagician_GameP
 		pState = Shoot(pActor, fTimeDelta, _iAnimIndex);
 		if (pState)	return pState;
 	}
-	if (5.f > pActor->Calc_Distance() && 0.5f < pActor->Calc_Distance())
+	_uint Random = rand() % 2;
+	switch (Random)
 	{
-		pState = Attack(pActor, fTimeDelta, _iAnimIndex);
-		if (pState)	return pState;
+	case 0:
+		if (5.f > pActor->Calc_Distance() && 0.5f < pActor->Calc_Distance())
+		{
+			pState = Attack(pActor, fTimeDelta, _iAnimIndex);
+			if (pState)	return pState;
+		}
+		break;
+	case 1:
+		if (5.f > pActor->Calc_Distance() && 0.5f < pActor->Calc_Distance())
+		{
+			pState = Disappear(pActor, fTimeDelta, _iAnimIndex);
+			if (pState)	return pState;
+		}
+		break;
+	default:
+		break;
 	}
+	
+	
 	
 
 	return nullptr;
 }
 
-CState<CMagician_GamePlay>* CMagicianDefaultState::WalkandDisappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
+CState<CMagician_GamePlay>* CMagicianDefaultState::Walk(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
 {
 	_uint iRandom = rand() % 1;
 
@@ -79,7 +96,28 @@ CState<CMagician_GamePlay>* CMagicianDefaultState::WalkandDisappear(CMagician_Ga
 // 		return new CMagician_DisappearF();
 	}
 }
+CState<CMagician_GamePlay>* CMagicianDefaultState::Disappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
+{
+	_uint iRandom = rand() % 3;
 
+	switch (iRandom)
+	{
+	case 0:
+		pActor->Set_bLookAt(true);
+		return new CMagician_DisappearB();
+		break;
+	case 1:
+		pActor->Set_bLookAt(true);
+		return new CMagician_DisappearL();
+		break;
+	case 2:
+		pActor->Set_bLookAt(true);
+		return new CMagician_DisappearR();
+		break;
+		// 	case 1:
+		// 		return new CMagician_DisappearF();
+	}
+}
 CState<CMagician_GamePlay>* CMagicianDefaultState::Attack(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)
 {
 	_uint iRandom = rand() % 3;

@@ -18,7 +18,7 @@ CState<CJobMob2_GamePlay>* CJobMob2_Attack1::Update(CJobMob2_GamePlay* pActor, _
 	_uint iMinimumPlayTime = 15;
 
 
-	if (pActor->Is_Animation_End())
+	if (pActor->Is_Inputable_Front(iMinimumPlayTime)&&pActor->Is_Animation_End())
 	{
 		return new CJobMob2_Idle();
 	}

@@ -3,6 +3,7 @@
 #include "Base.h"
 
 BEGIN(Engine)
+class CLight;
 
 class CLight_Manager final : public CBase
 {
@@ -15,9 +16,11 @@ public:
 	HRESULT Add_Light(const LIGHT_DESC& LightDesc);
 
 	HRESULT Render(class CShader* pShader, class CVIBuffer_Rect* pVIBuffer);
+public:
+	CLight* Get_Light_Back() { return m_Lights.back();}
 
 private:
-	list<class CLight*>			m_Lights;
+	list<CLight*>			m_Lights;
 
 public:
 	static CLight_Manager* Create();

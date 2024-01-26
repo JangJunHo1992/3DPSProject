@@ -54,6 +54,7 @@ void CJobMob1_GamePlay::Tick(_float fTimeDelta)
 {
 	if (JobMob1Status.m_iHP < 0)
 	{
+		
 		Set_Dead();
 	}
 	__super::Tick(fTimeDelta);
@@ -75,6 +76,7 @@ HRESULT CJobMob1_GamePlay::Render()
 
 void CJobMob1_GamePlay::Set_Dead()
 {
+	m_bCheckDead = true;
 	m_pActor->Set_State(new CJobMob1_Dead());
 }
 

@@ -52,7 +52,12 @@ void CJobMob1::Priority_Tick(_float fTimeDelta)
 
 void CJobMob1::Tick(_float fTimeDelta)
 {
-	
+	if (m_iCurrentLevelIn == 2)
+		Collision_Chcek(LEVEL_GAMEPLAY);
+	else if (m_iCurrentLevelIn == 6)
+		Collision_Chcek(LEVEL_BOSS1);
+	else if (m_iCurrentLevelIn == 7)
+		Collision_Chcek(LEVEL_BOSS2);
 	__super::Tick(fTimeDelta);
 }
 
@@ -69,18 +74,53 @@ HRESULT CJobMob1::Render()
 	return S_OK;
 }
 
+_bool CJobMob1::Collision_Chcek(LEVEL eLevel)//_uint eLevel
+{
+	_bool bIsCollision = false;
+
+	CCharacter* pAlreadyHittedCharacter = nullptr;
+	list<CGameObject*> _Targets = *m_pGameInstance->Get_GameObjects(eLevel, TEXT("Layer_Player"));
+	for (CGameObject* pGameObject : _Targets)
+	{
+		CCharacter* pTarget = dynamic_cast<CCharacter*>(pGameObject);
+		if (pTarget)
+		{
+			CCollider* pTargetCollider = pTarget->Get_Collider();
+			if (nullptr == pTargetCollider && pTargetCollider != m_pColliderCom)
+				continue;
+
+			_bool isCollision = m_pColliderCom->Collision(pTargetCollider);
+			if (isCollision)
+			{
+
+				_vector vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+				pTarget->Pushed(vPos);
+				bIsCollision = true;
+			}
+
+		}
+	}
+
+
+	return bIsCollision;
+}
+
 void CJobMob1::Set_Hitted()
 {
-	CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::HurtS_FL;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	JobMob1Status.m_iHP -= 10;
+	if (m_bCheckDead == false)
+	{
+		CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::HurtS_FL;
+		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		JobMob1Status.m_iHP -= 10;
+	}
+	
 }
 
 void CJobMob1::Set_Dead()
 {
-	CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::Dead;
-	Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTransformCom->Get_State(CTransform::STATE_POSITION) - 3*m_pTransformCom->Get_State(CTransform::STATE_UP));
+	//CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::Dead;
+	//Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+	//m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTransformCom->Get_State(CTransform::STATE_POSITION) - 3*m_pTransformCom->Get_State(CTransform::STATE_UP));
 
 }
 

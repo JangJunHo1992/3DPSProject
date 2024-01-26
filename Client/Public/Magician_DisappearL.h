@@ -12,7 +12,7 @@ public:
 	virtual void Release(CMagician_GamePlay* pActor) override;
 
 public:
-	static const _uint g_iAnimIndex = CMagician::MagicianState::WalkLDisappear;
+	static const _uint g_iAnimIndex = CMagician::MagicianState::DisappearMove_L;
 };
 
 END

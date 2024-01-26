@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Covus_Parry_R.h"
 #include "GameInstance.h"
-
+#include "Covus_Attack1.h"
 #include "Covus_Parry_L.h"
 #include "Player_Idle.h"
 
@@ -23,8 +23,13 @@ CState<CCovus_GamePlay>* CCovus_Parry_R::Update(CCovus_GamePlay* pActor, _float 
 		}
 		pActor->Set_IsAttack(false);
 	}
-
-	if (pActor->Is_Animation_End())
+	
+	if (CGameInstance::GetInstance()->Get_DIMouseState(DIM_LB))
+	{
+		return new CCovus_Attack1();
+	}
+	
+	if (pActor->Is_Inputable_Back(40))
 	{
 		return new CCovus_Idle();
 	}
@@ -35,5 +40,7 @@ CState<CCovus_GamePlay>* CCovus_Parry_R::Update(CCovus_GamePlay* pActor, _float 
 void CCovus_Parry_R::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
+	pActor->Set_IsAttack(false);
+
 }
 

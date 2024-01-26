@@ -13,21 +13,19 @@ void CMagician_Attack5::Initialize(CMagician_GamePlay* pActor)
 
 CState<CMagician_GamePlay>* CMagician_Attack5::Update(CMagician_GamePlay* pActor, _float fTimeDelta)
 {
-	_uint iMinimumPlayTime = 15;
+	_uint iMinimumPlayTime = 10;
 	// 
-	// 	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
-	// 	{
-	// 		if (CGameInstance::GetInstance()->Mouse_Down(DIM_LB))
-	// 		{
-	// 			return new CMagician_Attack2();
-	// 		}
-	 		pActor->Set_IsAttack(false);
-	// 	}
+	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
+	{
+		pActor->Set_IsAttack(true);
+	}
 
 	if (pActor->Is_Animation_End())
 	{
+		pActor->Set_IsAttack(false);
 		return new CMagician_Idle();
 	}
+
 
 	return nullptr;
 }

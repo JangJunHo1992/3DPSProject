@@ -20,8 +20,10 @@ public:
 
 	CState<CMagician_GamePlay>* Attack(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CMagician_GamePlay>* Shoot(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
-	CState<CMagician_GamePlay>* WalkandDisappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+	CState<CMagician_GamePlay>* Walk(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CMagician_GamePlay>* Hitted(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+	CState<CMagician_GamePlay>* Disappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
+
 
 
 public:
