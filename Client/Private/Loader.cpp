@@ -40,6 +40,7 @@
 #include "Magician_Cane_Tool.h"
 #include "Magician_Card_GamePlay.h"
 #include "Magician_Card_Tool.h"
+#include "Magician_Card_Bullet_GamePlay.h"
 
 #include "Varg_Tool.h"
 #include "Varg_GamePlay.h"
@@ -826,6 +827,17 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		}
 
 		{
+			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician_Card_Bullet");
+
+		
+			
+			if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+				CMagician_Card_Bullet_GamePlay::Create(m_pDevice, m_pContext))))
+				return E_FAIL;
+			
+		}
+
+		{
 			const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Magician");
 
 			if (LEVEL_TOOL == eLEVEL)
@@ -1507,6 +1519,26 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 
 		{
 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Card");
+			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
+
+			_float fRadiusX = 180.0f;
+			_float fRadiusY = 180.0f;
+			_float fRadiusZ = 180.0f;
+			PivotMatrix =
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+
+			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,
+				CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+				return E_FAIL;
+
+		}
+
+		{
+			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Card_Bullet");
 			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
 
 			_float fRadiusX = 180.0f;

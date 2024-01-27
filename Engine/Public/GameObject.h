@@ -69,6 +69,7 @@ protected:
 	_bool						m_isCloned = { false };
 	_bool						m_bisdead = false;
 	_bool						m_bcheckAnimDead = false;
+	_bool						m_bCheckCard = false;
 protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";
