@@ -6,6 +6,13 @@ BEGIN(Client)
 
 class CMagician_Card abstract : public CMagician_Weapon
 {
+public:
+	typedef struct Magician_CardDesc
+	{
+
+		class CTransform* m_pParentTransform;
+	}CARD_DESC;
+
 protected:
 	CMagician_Card(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CMagician_Card(const CMagician_Card& rhs);
