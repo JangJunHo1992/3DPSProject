@@ -53,11 +53,11 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 	{
 		Set_CutSceneDead(true);
 	}
-	if (40.f < Calc_Distance() && m_bCheckStart)
+	if (40.f < Calc_Distance() && m_bCheckStart)//나중에 오브젝트 넣어서 그거 파괴하면 보스랑 싸우게 할거면 이거로 해도됨! 
 	{
 		m_pActor->Set_State(new CVarg_StartDemo());
 		m_bCheckStart = false;
-		m_bStartScene = true;
+		m_bStartScene = true; // 이거 카메라 
 
 	}
 }
