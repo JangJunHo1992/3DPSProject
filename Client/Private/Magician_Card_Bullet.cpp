@@ -40,13 +40,12 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 
 	if (nullptr == _pMTargets)
 		return E_FAIL;
-	_vector Yheight;
-	Yheight.m128_f32[1] = 2.f;
+	
 	for (CGameObject* pGameObject : *_pMTargets)
 	{
 		
 		CCharacter* m_pMonster = dynamic_cast<CCharacter*>(pGameObject);
-		m_vMonsterPos = m_pMonster->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)+ Yheight;
+		m_vMonsterPos = m_pMonster->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)+ 2*m_pMonster->Get_TransformComp()->Get_State(CTransform::STATE_UP);
 		m_pTransformCom->Set_WorldMatrix(m_pMonster->Get_TransformComp()->Get_WorldMatrix());
 	}
 
@@ -60,7 +59,7 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 	for (CGameObject* pGameObject : *_pTargets)
 	{
 		CCharacter* m_pPlayer = dynamic_cast<CCharacter*>(pGameObject);
-		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)+ 2 * m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_UP);
 	}
 
 	m_pTransformCom->Look_At(m_vPlayerPos);

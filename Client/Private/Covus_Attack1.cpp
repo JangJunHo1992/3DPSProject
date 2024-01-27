@@ -22,7 +22,7 @@ CState<CCovus_GamePlay>* CCovus_Attack1::Update(CCovus_GamePlay* pActor, _float 
 		{
 			return new CCovus_Attack2();
 		}
-		//pActor->Set_IsAttack(false);
+		
 	}
 	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
 	{
@@ -30,7 +30,7 @@ CState<CCovus_GamePlay>* CCovus_Attack1::Update(CCovus_GamePlay* pActor, _float 
 		{
 			return new CCovus_Parry_L();
 		}
-		pActor->Set_IsAttack(false);
+		
 	}
 	if (pActor->Is_Inputable_Back(40))
 	{
