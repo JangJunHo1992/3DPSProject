@@ -34,7 +34,7 @@ protected:
 	CModel*			m_pModelCom = { nullptr };
 	CCollider*		m_pColliderCom = { nullptr };
 
-	_float4x4		m_WorldMatrix = {};
+	/*_float4x4		m_WorldMatrix = {};*/
 
 	_float3				m_vPlayerPos = {};
 	_float3				m_vMonsterPos = {};

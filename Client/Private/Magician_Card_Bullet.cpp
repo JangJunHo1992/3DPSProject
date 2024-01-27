@@ -70,11 +70,13 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 
 void CMagician_Card_Bullet::Priority_Tick(_float fTimeDelta)
 {
-
+	__super::Priority_Tick(fTimeDelta);
 }
 
 void CMagician_Card_Bullet::Tick(_float fTimeDelta)
 {
+	__super::Tick(fTimeDelta);
+
 	if (m_iCardDeadTime < 0)
 	{
 		m_bisdead = true;
@@ -84,7 +86,7 @@ void CMagician_Card_Bullet::Tick(_float fTimeDelta)
 		--m_iCardDeadTime;
 	}
 
-	m_pTransformCom->Go_Straight(fTimeDelta * 0.3);
+	m_pTransformCom->Go_Straight(fTimeDelta);
 
 	m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());
 	
@@ -94,6 +96,8 @@ void CMagician_Card_Bullet::Tick(_float fTimeDelta)
 
 void CMagician_Card_Bullet::Late_Tick(_float fTimeDelta)
 {
+	__super::Late_Tick(fTimeDelta);
+
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONBLEND, this)))
 		return;
 #ifdef _DEBUG
@@ -105,6 +109,8 @@ void CMagician_Card_Bullet::Late_Tick(_float fTimeDelta)
 
 HRESULT CMagician_Card_Bullet::Render()
 {
+	__super::Render();
+
 	if (FAILED(Bind_ShaderResources()))
 		return E_FAIL;
 
@@ -171,7 +177,7 @@ HRESULT CMagician_Card_Bullet::Ready_Components_Origin(LEVEL eLEVEL)
 	CBounding_Sphere::BOUNDING_SPHERE_DESC BoundingDesc = {};
 
 
-	BoundingDesc.fRadius = 0.8f;
+	BoundingDesc.fRadius = 0.2f;
 	BoundingDesc.vCenter = m_pTransformCom->Get_State(CTransform::STATE_POSITION)+_float3(0.f,1.f,0.f);
 
 
@@ -184,24 +190,15 @@ HRESULT CMagician_Card_Bullet::Ready_Components_Origin(LEVEL eLEVEL)
 
 HRESULT CMagician_Card_Bullet::Bind_ShaderResources()
 {
-// 	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
-// 		return E_FAIL;
-// 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ViewMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_VIEW))))
-// 		return E_FAIL;
-// 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
-// 		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_Matrix("g_WorldMatrix", &m_WorldMatrix)))
+
+	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ViewMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_VIEW))))
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
 		return E_FAIL;
 
-// 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-// 		return E_FAIL;
 
-	//if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
-	//	return E_FAIL;
 	return S_OK;
 }
 
