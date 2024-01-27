@@ -23,11 +23,44 @@ HRESULT CMagician_Card_Bullet::Initialize_Prototype()
 
 HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 {
-	if (FAILED(__super::Initialize(pArg)))
+	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
+
+	GameObjectDesc.fSpeedPerSec = 10.f;
+	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
+
+	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
 
 	if (FAILED(Ready_Components()))
 		return E_FAIL;
+
+	
+
+	list<CGameObject*>* _pMTargets = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
+
+	if (nullptr == _pMTargets)
+		return E_FAIL;
+
+	for (CGameObject* pGameObject : *_pMTargets)
+	{
+		CCharacter* m_pMonster = dynamic_cast<CCharacter*>(pGameObject);
+		m_vMonsterPos = m_pMonster->Get_TransformComp()->Get_Pos()+_float3(0.f,1.f,0.f);
+	}
+
+	m_pTransformCom->Set_Position(m_vMonsterPos);
+
+	list<CGameObject*>* _pTargets = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
+
+	if (nullptr == _pTargets)
+		return E_FAIL;
+
+	for (CGameObject* pGameObject : *_pTargets)
+	{
+		CCharacter* m_pPlayer = dynamic_cast<CCharacter*>(pGameObject);
+		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_Pos();
+	}
+
+	m_pTransformCom->Look_At(m_vPlayerPos);
 
 
 	
@@ -42,9 +75,21 @@ void CMagician_Card_Bullet::Priority_Tick(_float fTimeDelta)
 
 void CMagician_Card_Bullet::Tick(_float fTimeDelta)
 {
-	m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());
+	if (m_iCardDeadTime < 0)
+	{
+		m_bisdead = true;
+	}
+	else
+	{
+		--m_iCardDeadTime;
+	}
 
+	m_pTransformCom->Go_Straight(fTimeDelta * 0.3);
+
+	m_pColliderCom->Update(m_pTransformCom->Get_WorldMatrix());
+	
 	Collision_Chcek();
+
 }
 
 void CMagician_Card_Bullet::Late_Tick(_float fTimeDelta)
@@ -119,7 +164,7 @@ _bool CMagician_Card_Bullet::Collision_Chcek()
 HRESULT CMagician_Card_Bullet::Ready_Components_Origin(LEVEL eLEVEL)
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(eLEVEL, TEXT("Prototype_Component_Shader_Model"),
+	if (FAILED(__super::Add_Component(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Model"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
 
@@ -127,7 +172,7 @@ HRESULT CMagician_Card_Bullet::Ready_Components_Origin(LEVEL eLEVEL)
 
 
 	BoundingDesc.fRadius = 0.8f;
-	BoundingDesc.vCenter = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	BoundingDesc.vCenter = m_pTransformCom->Get_State(CTransform::STATE_POSITION)+_float3(0.f,1.f,0.f);
 
 
 	if (FAILED(__super::Add_Component(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_Sphere"),
@@ -166,5 +211,6 @@ void CMagician_Card_Bullet::Free()
 
 	Safe_Release(m_pModelCom);
 	Safe_Release(m_pShaderCom);
+	Safe_Release(m_pColliderCom);
 }
 

@@ -1545,7 +1545,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 			_float fRadiusY = 180.0f;
 			_float fRadiusZ = 180.0f;
 			PivotMatrix =
-				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				XMMatrixScaling(1.f, 1.f, 1.f)
 				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));

@@ -62,9 +62,9 @@ void CMagician_Card::Late_Tick(_float fTimeDelta)
 
 HRESULT CMagician_Card::Render()
 {
-	if (FAILED(__super::Render())) {
-		return E_FAIL;
-	}
+	//if (FAILED(__super::Render())) {
+	//	return E_FAIL;
+	//}
 
 	return S_OK;
 }
