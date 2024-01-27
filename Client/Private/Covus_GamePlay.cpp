@@ -1,6 +1,8 @@
 #include "Covus_GamePlay.h"
 #include "GameInstance.h"
 #include "Player_Idle.h"
+#include "Covus_CutScene1.h"
+#include "Covus_CutScene2.h"
 
 CCovus_GamePlay::CCovus_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CCovus(pDevice, pContext)
@@ -41,7 +43,18 @@ void CCovus_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CCovus_GamePlay::Tick(_float fTimeDelta)
 {
-	
+	if (Get_CutSceneDead() == true)
+	{
+		m_pActor->Set_State(new CCovus_CutScene1);
+		Set_CutSceneDead(false);
+	}
+
+	if (Get_CutSceneDead2() == true)
+	{
+		m_pActor->Set_State(new CCovus_CutScene2);
+		Set_CutSceneDead2(false);
+
+	}
 	__super::Tick(fTimeDelta);
 	m_pActor->Update_State(fTimeDelta);
 }

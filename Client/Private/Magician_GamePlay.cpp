@@ -4,6 +4,8 @@
 #include "GameInstance.h"
 #include "Magician_Dead.h"
 #include "Magician_Card_GamePlay.h"
+#include "Magician_Stun.h"
+#include "Magician_Start.h"
 
 CMagician_GamePlay::CMagician_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CMagician(pDevice, pContext)
@@ -32,6 +34,7 @@ HRESULT CMagician_GamePlay::Initialize(void* pArg)
 	m_pActor = new CActor<CMagician_GamePlay>(this);
 	m_pActor->Set_State(new CMagician_Idle());
 	
+	m_bStartScene = true;
 	//Search_Target();
 
 	return S_OK;
@@ -39,6 +42,7 @@ HRESULT CMagician_GamePlay::Initialize(void* pArg)
 
 void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 {
+	
 	__super::Priority_Tick(fTimeDelta);
 	if(nullptr == m_pTargetPlayer)
 		Search_Target();
@@ -47,13 +51,34 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 		Look_At_Target();
 		m_bLookAt = false;
 	}
-
+	if (m_pGameInstance->Get_DIKeyState(DIK_1))
+	{
+		Set_CutSceneDead(true);
+	}
+	if (40.f < Calc_Distance() && m_bCheckStart)
+	{
+		m_pActor->Set_State(new CMagician_Start());
+		m_bCheckStart = false;
+		m_bStartScene2 = true;
+	}
 }
 
 void CMagician_GamePlay::Tick(_float fTimeDelta)
 {
-	if (MagicianStatus.m_iHP < 0)
+	if (m_bStartScene2 == true)
+	{
+		//초반에 카메라 세팅 여기서 할거 true 일때만 몬스터한테 붙고 true가 아니라면 다시 플레이어 한테 갈수 있도록  
+	}
+// 	else if (m_bStartScene == false)
+// 	{
+// 		//컷신이 끝나고 나서 여기서 다시 바꾸기
+// 	}
+
+	if (MagicianStatus.m_iHP < 0 && m_bCutSceneDead == true )
 		Set_Dead();
+	else if(MagicianStatus.m_iHP < 0)
+		m_pActor->Set_State(new CMagician_Stun());
+
 	__super::Tick(fTimeDelta);
 
 	m_pActor->Update_State(fTimeDelta);

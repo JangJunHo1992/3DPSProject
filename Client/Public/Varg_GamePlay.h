@@ -24,7 +24,7 @@ public:
 	void  Set_bLookAt(_bool _bLookAt) { m_bLookAt = _bLookAt; }
 private:
 	_bool	m_bLookAt = false;
-
+	_bool   m_bCheckStart = true;
 private:
 	virtual HRESULT Ready_Components() override;
 protected:

@@ -1,0 +1,27 @@
+#include "stdafx.h"
+#include "Magician_Start.h"
+#include "GameInstance.h"
+#include "Magician_Idle.h"
+
+
+
+void CMagician_Start::Initialize(CMagician_GamePlay* pActor)
+{
+	__super::Initialize(pActor);
+
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true);
+}
+
+CState<CMagician_GamePlay>* CMagician_Start::Update(CMagician_GamePlay* pActor, _float fTimeDelta)
+{
+	if (pActor->Is_Animation_End())
+	{
+		return new CMagician_Idle();
+		pActor->Set_StartScene(false);
+	}
+}
+
+void CMagician_Start::Release(CMagician_GamePlay* pActor)
+{
+	__super::Release(pActor);
+}

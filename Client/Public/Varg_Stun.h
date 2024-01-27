@@ -4,7 +4,7 @@
 
 BEGIN(Client)
 
-class CVarg_Dead : public CVarg_Hurt
+class CVarg_Stun : public CVarg_Hurt
 {
 public:
 	virtual void Initialize(CVarg_GamePlay* pActor) override;
@@ -12,7 +12,8 @@ public:
 	virtual void Release(CVarg_GamePlay* pActor) override;
 
 public:
-	static const _uint g_iAnimIndex = CVarg::VargState::TakeExecution_Start_FIX;
+	static const _uint g_iAnimIndex = CVarg::VargState::TakeExecution_NoDeadEnd;
 };
 
 END
+

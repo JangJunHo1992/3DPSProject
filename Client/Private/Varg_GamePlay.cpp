@@ -1,7 +1,10 @@
 #include "Varg_GamePlay.h"
 #include "GameInstance.h"
 #include "Varg_Idle.h"
+#include "Varg_StartIdle.h"
+#include "Varg_StartDemo.h"
 #include "Varg_Dead.h"
+#include "Varg_Stun.h"
 
 CVarg_GamePlay::CVarg_GamePlay(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CVarg(pDevice, pContext)
@@ -28,9 +31,9 @@ HRESULT CVarg_GamePlay::Initialize(void* pArg)
 		return E_FAIL;
 
 	m_pActor = new CActor<CVarg_GamePlay>(this);
-	m_pActor->Set_State(new CVarg_Idle);
+	m_pActor->Set_State(new CVarg_StartIdle);
 
-	Search_Target();
+	
 
 
 	return S_OK;
@@ -46,12 +49,26 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 		Look_At_Target();
 		m_bLookAt = false;
 	}
+	if (m_pGameInstance->Get_DIKeyState(DIK_1))
+	{
+		Set_CutSceneDead(true);
+	}
+	if (40.f < Calc_Distance() && m_bCheckStart)
+	{
+		m_pActor->Set_State(new CVarg_StartDemo());
+		m_bCheckStart = false;
+		m_bStartScene = true;
+
+	}
 }
 
 void CVarg_GamePlay::Tick(_float fTimeDelta)
 {
-	if (VargStatus.m_iHP < 0)
+	if (VargStatus.m_iHP < 0 && Get_CutSceneDead()==true)
 		Set_Dead();
+	else if (VargStatus.m_iHP < 0)
+		m_pActor->Set_State(new CVarg_Stun());
+
 	__super::Tick(fTimeDelta);
 	m_pActor->Update_State(fTimeDelta);
 }

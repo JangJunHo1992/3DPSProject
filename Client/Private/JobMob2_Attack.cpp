@@ -6,13 +6,13 @@
 void CJobMob2_Attack::Initialize(CJobMob2_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
-	pActor->Set_IsAttack(true);
+	//pActor->Set_IsAttack(true);
 }
 
 void CJobMob2_Attack::Release(CJobMob2_GamePlay* pActor)
 {
 	__super::Release(pActor);
-	pActor->Set_IsAttack(false);
+	//pActor->Set_IsAttack(false);
 }
 
 CState<CJobMob2_GamePlay>* CJobMob2_Attack::Update_State(CJobMob2_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex)

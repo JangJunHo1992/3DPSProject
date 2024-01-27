@@ -5,7 +5,7 @@
 BEGIN(Engine)
 class CGameInstance;
 class CTransform;
-
+class CComponent;
 class ENGINE_DLL CGameObject abstract : public CBase
 {
 public:
@@ -52,6 +52,16 @@ public:
 	_bool Get_isdead() { return m_bisdead; }
 	void Set_CheckAnimDead(_bool _bcheckAnimDead) { m_bcheckAnimDead = _bcheckAnimDead; }
 	_bool Get_CheckAnimDead() { return m_bcheckAnimDead; }
+	//start
+	void Set_StartScene(_bool _bStartScene) { m_bStartScene = _bStartScene; }
+	_bool Get_StartScene() { return m_bStartScene; }
+	void Set_StartScene2(_bool _bStartScene2) { m_bStartScene2 = _bStartScene2; }
+	_bool Get_StartScene2() { return m_bStartScene2; }
+	//end
+	void Set_CutSceneDead(_bool _bCutSceneDead) { m_bCutSceneDead = _bCutSceneDead; }
+	_bool Get_CutSceneDead() { return m_bCutSceneDead; }
+	void Set_CutSceneDead2(_bool _bCutSceneDead2) { m_bCutSceneDead2 = _bCutSceneDead2; }
+	_bool Get_CutSceneDead2() { return m_bCutSceneDead2; }
 public:
 	virtual void Write_Json(json& Out_Json) override;
 	virtual void Load_FromJson(const json& In_Json) override;
@@ -70,6 +80,12 @@ protected:
 	_bool						m_bisdead = false;
 	_bool						m_bcheckAnimDead = false;
 	_bool						m_bCheckCard = false;
+	//Start
+	_bool						m_bStartScene = false;
+	_bool						m_bStartScene2 = false;
+	//End
+	_bool						m_bCutSceneDead = false;
+	_bool						m_bCutSceneDead2 = false;
 protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";

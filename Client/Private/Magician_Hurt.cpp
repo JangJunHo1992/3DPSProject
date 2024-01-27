@@ -6,7 +6,7 @@
 void CMagician_Hurt::Initialize(CMagician_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
-	pActor->Set_IsAttack(true);
+	//pActor->Set_IsAttack(true);
 }
 
 void CMagician_Hurt::Release(CMagician_GamePlay* pActor)

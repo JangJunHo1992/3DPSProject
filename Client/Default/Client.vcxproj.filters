@@ -718,6 +718,12 @@
     <Filter Include="02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Bullet\GamePlay">
       <UniqueIdentifier>{e64add6e-abea-452c-afd9-a5011bd1543e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\11.CutSceneDead">
+      <UniqueIdentifier>{48818baf-3249-4560-8014-5f063cc2bff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\8.Stun">
+      <UniqueIdentifier>{dde8e559-b3a6-4986-934f-3f730c393f69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1455,6 +1461,30 @@
     <ClInclude Include="..\Public\Magician_Card_Bullet_GamePlay.h">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Bullet\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Magician_Start.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\4.Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Magician_Stun.h">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\2.Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_CutScene2.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\11.CutSceneDead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_CutScene1.h">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\11.CutSceneDead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Dead2.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\3.Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_StartDemo.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start\StartDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_StartIdle.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start\StartIdle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Varg_Stun.h">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\8.Stun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2144,6 +2174,30 @@
     </ClCompile>
     <ClCompile Include="..\Private\Magician_Card_Bullet.cpp">
       <Filter>02.GameObjects\1.MyAssets\Magician\Parts\Weapon\Card\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Start.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\4.Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Magician_Stun.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\2.Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_CutScene1.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\11.CutSceneDead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_CutScene2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Covus\Entire\GamePlay\State\11.CutSceneDead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Dead2.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\3.Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_StartDemo.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start\StartDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_StartIdle.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\7.Start\StartIdle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Varg_Stun.cpp">
+      <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\8.Stun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
