@@ -1541,14 +1541,14 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 			const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Magician_Card_Bullet");
 			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
 
-// 			_float fRadiusX = 180.0f;
-// 			_float fRadiusY = 180.0f;
-// 			_float fRadiusZ = 180.0f;
+			_float fRadiusX = 180.0f;
+			_float fRadiusY = 180.0f;
+			_float fRadiusZ = 180.0f;
 			PivotMatrix =
-				XMMatrixScaling(0.01f, 0.01f, 0.01f);
-// 				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
-// 				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-// 				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+				XMMatrixScaling(0.01f, 0.01f, 0.01f)
+				* XMMatrixRotationX(XMConvertToRadians(fRadiusX))
+				* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+				* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
 
 
 			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, strPrototypeTag,

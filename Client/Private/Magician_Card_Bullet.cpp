@@ -40,14 +40,17 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 
 	if (nullptr == _pMTargets)
 		return E_FAIL;
-
+	_vector Yheight;
+	Yheight.m128_f32[1] = 2.f;
 	for (CGameObject* pGameObject : *_pMTargets)
 	{
+		
 		CCharacter* m_pMonster = dynamic_cast<CCharacter*>(pGameObject);
-		m_vMonsterPos = m_pMonster->Get_TransformComp()->Get_Pos()+_float3(0.f,1.f,0.f);
+		m_vMonsterPos = m_pMonster->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)+ Yheight;
+		m_pTransformCom->Set_WorldMatrix(m_pMonster->Get_TransformComp()->Get_WorldMatrix());
 	}
 
-	m_pTransformCom->Set_Position(m_vMonsterPos);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_vMonsterPos);
 
 	list<CGameObject*>* _pTargets = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
 
@@ -57,7 +60,7 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 	for (CGameObject* pGameObject : *_pTargets)
 	{
 		CCharacter* m_pPlayer = dynamic_cast<CCharacter*>(pGameObject);
-		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_Pos();
+		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
 	}
 
 	m_pTransformCom->Look_At(m_vPlayerPos);
@@ -76,6 +79,8 @@ void CMagician_Card_Bullet::Priority_Tick(_float fTimeDelta)
 void CMagician_Card_Bullet::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
+
+	m_WorldMatrix = m_pTransformCom->Get_WorldMatrix();
 
 	if (m_iCardDeadTime < 0)
 	{
@@ -191,7 +196,9 @@ HRESULT CMagician_Card_Bullet::Ready_Components_Origin(LEVEL eLEVEL)
 HRESULT CMagician_Card_Bullet::Bind_ShaderResources()
 {
 
-	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
+// 	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
+// 		return E_FAIL;
+	if (FAILED(m_pShaderCom->Bind_Matrix("g_WorldMatrix", &m_WorldMatrix)))
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ViewMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_VIEW))))
 		return E_FAIL;
