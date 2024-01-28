@@ -43,8 +43,8 @@ HRESULT CCovus::Initialize(void* pArg)
 	GameObjectDesc.fSpeedPerSec = 8.f;
 	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
 
-
-
+	
+	
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
 	

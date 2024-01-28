@@ -208,6 +208,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Covus_Body.h" />
     <ClInclude Include="..\Public\Covus_Body_GamePlay.h" />
     <ClInclude Include="..\Public\Covus_Body_Tool.h" />
+    <ClInclude Include="..\Public\Covus_CutScene1.h" />
+    <ClInclude Include="..\Public\Covus_CutScene2.h" />
     <ClInclude Include="..\Public\Covus_Dead.h" />
     <ClInclude Include="..\Public\Covus_GamePlay.h" />
     <ClInclude Include="..\Public\Covus_Healing.h" />
@@ -306,6 +308,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Magician_Cane_GamePlay.h" />
     <ClInclude Include="..\Public\Magician_Cane_Tool.h" />
     <ClInclude Include="..\Public\Magician_Card.h" />
+    <ClInclude Include="..\Public\Magician_Card_Bullet.h" />
+    <ClInclude Include="..\Public\Magician_Card_Bullet_GamePlay.h" />
     <ClInclude Include="..\Public\Magician_Card_GamePlay.h" />
     <ClInclude Include="..\Public\Magician_Card_Tool.h" />
     <ClInclude Include="..\Public\Magician_Dead.h" />
@@ -323,6 +327,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Magician_Shoot1.h" />
     <ClInclude Include="..\Public\Magician_Shoot2.h" />
     <ClInclude Include="..\Public\Magician_Shoot3.h" />
+    <ClInclude Include="..\Public\Magician_Start.h" />
+    <ClInclude Include="..\Public\Magician_Stun.h" />
     <ClInclude Include="..\Public\Magician_Tool.h" />
     <ClInclude Include="..\Public\Magician_Walk.h" />
     <ClInclude Include="..\Public\Magician_Walk_Back.h" />
@@ -398,11 +404,15 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Varg_Body_GamePlay.h" />
     <ClInclude Include="..\Public\Varg_Body_Tool.h" />
     <ClInclude Include="..\Public\Varg_Dead.h" />
+    <ClInclude Include="..\Public\Varg_Dead2.h" />
     <ClInclude Include="..\Public\Varg_GamePlay.h" />
     <ClInclude Include="..\Public\Varg_Hurt.h" />
     <ClInclude Include="..\Public\Varg_Idle.h" />
     <ClInclude Include="..\Public\Varg_RaidAttack1.h" />
     <ClInclude Include="..\Public\Varg_RaidAttack2.h" />
+    <ClInclude Include="..\Public\Varg_StartDemo.h" />
+    <ClInclude Include="..\Public\Varg_StartIdle.h" />
+    <ClInclude Include="..\Public\Varg_Stun.h" />
     <ClInclude Include="..\Public\Varg_Tool.h" />
     <ClInclude Include="..\Public\Varg_Walk.h" />
     <ClInclude Include="..\Public\Varg_Walk_Back.h" />
@@ -444,6 +454,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Covus_Body.cpp" />
     <ClCompile Include="..\Private\Covus_Body_GamePlay.cpp" />
     <ClCompile Include="..\Private\Covus_Body_Tool.cpp" />
+    <ClCompile Include="..\Private\Covus_CutScene1.cpp" />
+    <ClCompile Include="..\Private\Covus_CutScene2.cpp" />
     <ClCompile Include="..\Private\Covus_Dead.cpp" />
     <ClCompile Include="..\Private\Covus_GamePlay.cpp" />
     <ClCompile Include="..\Private\Covus_Healing.cpp" />
@@ -539,6 +551,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Magician_Cane_GamePlay.cpp" />
     <ClCompile Include="..\Private\Magician_Cane_Tool.cpp" />
     <ClCompile Include="..\Private\Magician_Card.cpp" />
+    <ClCompile Include="..\Private\Magician_Card_Bullet.cpp" />
+    <ClCompile Include="..\Private\Magician_Card_Bullet_GamePlay.cpp" />
     <ClCompile Include="..\Private\Magician_Card_GamePlay.cpp" />
     <ClCompile Include="..\Private\Magician_Card_Tool.cpp" />
     <ClCompile Include="..\Private\Magician_Dead.cpp" />
@@ -556,6 +570,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Magician_Shoot1.cpp" />
     <ClCompile Include="..\Private\Magician_Shoot2.cpp" />
     <ClCompile Include="..\Private\Magician_Shoot3.cpp" />
+    <ClCompile Include="..\Private\Magician_Start.cpp" />
+    <ClCompile Include="..\Private\Magician_Stun.cpp" />
     <ClCompile Include="..\Private\Magician_Tool.cpp" />
     <ClCompile Include="..\Private\Magician_Walk.cpp" />
     <ClCompile Include="..\Private\Magician_Walk_Back.cpp" />
@@ -630,11 +646,15 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Varg_Body_GamePlay.cpp" />
     <ClCompile Include="..\Private\Varg_Body_Tool.cpp" />
     <ClCompile Include="..\Private\Varg_Dead.cpp" />
+    <ClCompile Include="..\Private\Varg_Dead2.cpp" />
     <ClCompile Include="..\Private\Varg_GamePlay.cpp" />
     <ClCompile Include="..\Private\Varg_Hurt.cpp" />
     <ClCompile Include="..\Private\Varg_Idle.cpp" />
     <ClCompile Include="..\Private\Varg_RaidAttack1.cpp" />
     <ClCompile Include="..\Private\Varg_RaidAttack2.cpp" />
+    <ClCompile Include="..\Private\Varg_StartDemo.cpp" />
+    <ClCompile Include="..\Private\Varg_StartIdle.cpp" />
+    <ClCompile Include="..\Private\Varg_Stun.cpp" />
     <ClCompile Include="..\Private\Varg_Tool.cpp" />
     <ClCompile Include="..\Private\Varg_Walk.cpp" />
     <ClCompile Include="..\Private\Varg_Walk_Back.cpp" />

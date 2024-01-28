@@ -21,4 +21,6 @@ CState<CMagician_GamePlay>* CMagician_Dead::Update(CMagician_GamePlay* pActor, _
 
 void CMagician_Dead::Release(CMagician_GamePlay* pActor)
 {
+	__super::Release(pActor);
+
 }

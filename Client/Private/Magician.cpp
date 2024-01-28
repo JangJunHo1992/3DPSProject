@@ -169,8 +169,8 @@ HRESULT CMagician::Ready_PartObjects()
 	}
 
 	{
-		CMagician_Card::WEAPON_DESC	CardDesc = {};
-		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Card"), "ik_hand_l", CardDesc, TEXT("Weapon_L"))))
+		CMagician_Weapon::WEAPON_DESC	CardDesc = {};
+		if (FAILED(Add_Weapon(TEXT("Prototype_GameObject_Magician_Card"), "ik_hand_l", CardDesc, TEXT("Card_L"))))
 			return E_FAIL;
 	}
 

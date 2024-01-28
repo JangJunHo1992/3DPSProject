@@ -23,8 +23,16 @@ public:
 public:
 	_bool Get_bLookAt() { return m_bLookAt; }
 	void  Set_bLookAt(_bool _bLookAt) { m_bLookAt = _bLookAt; }
+
+	_bool Get_bCheckStart() { return m_bCheckStart; }
+	void  Set_bCheckStart(_bool _bCheckStart) { m_bCheckStart = _bCheckStart; }
+
+	_bool Get_bCheckShoot() { return m_bCheckShoot; }
+	void  Set_bCheckShoot(_bool _bCheckShoot) { m_bCheckShoot = _bCheckShoot; }
 private:
 	_bool	m_bLookAt = false;
+	_bool   m_bCheckStart = true;
+	_bool   m_bCheckShoot = false;
 protected:
 	virtual void Set_Dead() override;
 private:

@@ -9,20 +9,26 @@ void CJobMob1_Attack1::Initialize(CJobMob1_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
-	pActor->Set_IsAttack(true);
+	
 
 }
 
 CState<CJobMob1_GamePlay>* CJobMob1_Attack1::Update(CJobMob1_GamePlay* pActor, _float fTimeDelta)
 {
 	_uint iMinimumPlayTime = 15;
-
+	if (pActor->Is_Inputable_Front(5))
+	{
+		pActor->Set_IsAttack(true);
+	}
 
 	if (pActor->Is_Animation_End())
 	{
 		return new CJobMob1_Idle();
 	}
-
+	if (pActor->Is_Inputable_Front(20))
+	{
+		pActor->Set_IsAttack(false);
+	}
 	return nullptr;
 }
 

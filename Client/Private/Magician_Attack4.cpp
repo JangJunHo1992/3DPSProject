@@ -19,12 +19,12 @@ CState<CMagician_GamePlay>* CMagician_Attack4::Update(CMagician_GamePlay* pActor
 	{
 		pActor->Set_IsAttack(true);
 	}
-
-	if (pActor->Is_Animation_End())
+	if (pActor->Is_Inputable_Front(25))
 	{
 		pActor->Set_IsAttack(false);
 		return new CMagician_Idle();
 	}
+	
 
 	return nullptr;
 }

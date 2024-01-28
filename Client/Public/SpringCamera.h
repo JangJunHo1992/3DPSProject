@@ -5,6 +5,8 @@
 
 BEGIN(Client)
 class CCovus;
+class CVarg;
+class CMagician;
 
 class CSpringCamera final : public CCamera
 {
@@ -30,6 +32,9 @@ public:
 	virtual void Write_Json(json & Out_Json) override;
 public:
 	void CameraRotation(_float fTimeDelta);
+	
+
+
 public:
 	void RotatePlayer();
 	void Mouse_Fix();
@@ -44,7 +49,13 @@ public:
 	_float3 PreActualPosition = {};//카메라 보간을 위해 이전 프레임 포지션가져옴
 	_float3 CameraTickPos = {};// tick 에서 값이 자꾸 이상하게 초기화되서 이걸로 다시 값을 맞춰줘야함 
 	CTransform* m_ptarget = { nullptr };//카메라가 따라다닐 타깃 오브젝트 //타깃 오브젝트는 위치, 방향벡터 , 타깃의 위쪽을 가리키는 벡터를 지닌다.
+	//CTransform* m_pgtarget = { nullptr };//카메라가 따라다닐 타깃 오브젝트 //타깃 오브젝트는 위치, 방향벡터 , 타깃의 위쪽을 가리키는 벡터를 지닌다.
+	//CTransform* m_ptarget = { nullptr };//카메라가 따라다닐 타깃 오브젝트 //타깃 오브젝트는 위치, 방향벡터 , 타깃의 위쪽을 가리키는 벡터를 지닌다.
+
 	CCovus* m_pPlayer = { nullptr };
+	CVarg* m_pVarg = { nullptr };
+	CMagician* m_pMagician = { nullptr };
+
 	_float	m_fAngle = 0.f;
 	_float  m_fPitch = 0.f;
 	_matrix cameraMatrix;//최종 카메라 행렬

@@ -22,9 +22,12 @@ public:
 public:
 	_bool Get_bLookAt() { return m_bLookAt; }
 	void  Set_bLookAt(_bool _bLookAt) { m_bLookAt = _bLookAt; }
+
+	_bool Get_bCheckStart() { return m_bCheckStart; }
+	void  Set_bCheckStart(_bool _bCheckStart) { m_bCheckStart = _bCheckStart; }
 private:
 	_bool	m_bLookAt = false;
-
+	_bool   m_bCheckStart = true;
 private:
 	virtual HRESULT Ready_Components() override;
 protected:

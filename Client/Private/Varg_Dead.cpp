@@ -2,6 +2,7 @@
 #include "Varg_Dead.h"
 #include "GameInstance.h"
 #include "Varg_Idle.h"
+#include "Varg_Dead2.h"
 
 void CVarg_Dead::Initialize(CVarg_GamePlay* pActor)
 {
@@ -13,7 +14,7 @@ CState<CVarg_GamePlay>* CVarg_Dead::Update(CVarg_GamePlay* pActor, _float fTimeD
 {
 	if (pActor->Is_Animation_End())
 	{
-		pActor->Set_isdead(true);
+		return new CVarg_Dead2();
 	}
 
 

@@ -23,7 +23,8 @@ private:
 	HRESULT Ready_Layer_Monster(const wstring& strLayerTag);
 	HRESULT Ready_Layer_Effect(const wstring& strLayerTag);
 	HRESULT Ready_Layer_BackGround(const wstring& strLayerTag);
-
+public:
+	HRESULT Load_Objects_With_Json(string filePath);
 
 public:
 	static CLevel_BossStage1* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);

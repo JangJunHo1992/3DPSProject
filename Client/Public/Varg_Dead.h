@@ -12,7 +12,7 @@ public:
 	virtual void Release(CVarg_GamePlay* pActor) override;
 
 public:
-	static const _uint g_iAnimIndex = CVarg::VargState::Dead;
+	static const _uint g_iAnimIndex = CVarg::VargState::TakeExecution_Start_FIX;
 };
 
 END

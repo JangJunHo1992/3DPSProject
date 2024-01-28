@@ -3,6 +3,8 @@
 #include "GameInstance.h"
 #include "GameObject.h"
 #include "Covus.h"
+#include "Varg.h"
+#include "Magician.h"
 
 CSpringCamera::CSpringCamera(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	:CCamera(pDevice,pContext)
@@ -41,7 +43,9 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 		m_CameraOffsetY = 2.f;
 		m_CameraOffsetZ = -5.f;
 		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
-		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
+ 		m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Player());
+ 		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Player());
+		m_ptarget = dynamic_cast<CTransform*>(m_pPlayer->Get_TransformComp());
 		ActualPosition = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		
 	}
@@ -56,6 +60,19 @@ void CSpringCamera::Priority_Tick(_float fTimeDelta)
 
 void CSpringCamera::Tick(_float fTimeDelta)
 {
+// 	if (m_bStartScene == true&& m_bStartScene2==false)
+// 	{
+// 		m_ptarget = dynamic_cast<CTransform*>(m_pVarg->Get_TransformComp());
+// 	}
+// 	else if (m_bStartScene == false && m_bStartScene2 == true)
+// 	{
+// 		m_ptarget = dynamic_cast<CTransform*>(m_pMagician->Get_TransformComp());
+// 		
+// 	}
+// 	else
+// 	{
+// 		m_ptarget = dynamic_cast<CTransform*>(m_pPlayer->Get_TransformComp());
+// 	}
 	CameraRotation(fTimeDelta);
 	//Player가 앞키를 누르면 카메라 회전했던 방향쪽에서 회전값을 받아서 카메라가 바라보고 있는 방향으로 플레이어도 쳐다 보게 만듬 
 	if (true == m_pPlayer->Get_CheckRotatePlayer())
@@ -153,6 +170,8 @@ void CSpringCamera::CameraRotation(_float fTimeDelta)
 	m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(ActualPosition));
 	m_pTransformCom->Set_Position(currentCameraPosition + cameraOffset * hDist);
 }
+
+
 
 void CSpringCamera::RotatePlayer()
 {
