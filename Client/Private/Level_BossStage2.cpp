@@ -59,8 +59,34 @@ HRESULT CLevel_BossStage2::Initialize()
 
 void CLevel_BossStage2::Tick(_float fTimeDelta)
 {
+	if (pPlayer->Get_StartScene2() == true)
+	{
+		list<CGameObject*>* monsterList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
 
-	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(5.f, 3.f, -5.f, 1.f));
+		if (monsterList)
+		{
+			for (auto& pGameObject : *monsterList)
+			{
+				CCharacter* pMonster = dynamic_cast<CCharacter*>(pGameObject);
+				if (pMonster)
+				{
+					_vector vPos = pMonster->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);
+					m_pGameInstance->Set_Player(pMonster);
+				}
+			}
+		}
+	}
+	else
+	{
+		list<CGameObject*>* playerList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
+		pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
+		m_pGameInstance->Set_Player(pPlayer);
+	}
+
+
+	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)
+		- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK)
+		+ 3 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_UP));
 
 	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
 }

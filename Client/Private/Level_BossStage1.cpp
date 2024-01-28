@@ -59,14 +59,39 @@ HRESULT CLevel_BossStage1::Initialize()
 
 void CLevel_BossStage1::Tick(_float fTimeDelta)
 {
+	if (pPlayer->Get_StartScene() == true)
+	{
+		list<CGameObject*>* monsterList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
+
+		if (monsterList)
+		{
+			for (auto& pGameObject : *monsterList)
+			{
+				CCharacter* pMonster = dynamic_cast<CCharacter*>(pGameObject);
+				if (pMonster)
+				{
+					_vector vPos = pMonster->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);
+					m_pGameInstance->Set_Player(pMonster);
+				}
+			}
+		}
+	}
+	else
+	{
+		list<CGameObject*>* playerList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Player"));
+		pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
+		m_pGameInstance->Set_Player(pPlayer);
+	}
 	if (m_pGameInstance->Get_DIKeyState(DIK_F3) & 0x80)
 	{
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS2))))
 			return;
 	}
-	//XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(5.f, 3.f, -5.f, 1.f));
-	//
-	//m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
+	//조명 위치 
+	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)
+		- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK)
+		+ 3 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_UP));
+	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
 }
 
 HRESULT CLevel_BossStage1::Render()
