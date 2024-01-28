@@ -107,8 +107,13 @@ void CVarg::Set_Hitted()
 {
 	if (m_bCheckDead == false)
 	{
-		CVarg::VargState eHitted = CVarg::VargState::HurtF;
-		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		_uint Random = rand() % 5;
+		if (Random == 2 /*|| Random == 7 || Random == 5*/)
+		{
+			CVarg::VargState eHitted = CVarg::VargState::HurtF;
+			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		}
+		
 		VargStatus.m_iHP -= 10;
 	}
 	

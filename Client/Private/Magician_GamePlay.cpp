@@ -76,7 +76,7 @@ void CMagician_GamePlay::Tick(_float fTimeDelta)
 // 	}
 
 	
-	if(MagicianStatus.m_iHP < 0)
+	if(MagicianStatus.m_iHP < 0 && Get_CutSceneDead2() == false)
 		m_pActor->Set_State(new CMagician_Stun());
 
 	__super::Tick(fTimeDelta);

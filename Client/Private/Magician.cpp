@@ -107,8 +107,13 @@ void CMagician::Set_Hitted()
 {
 	if (m_bCheckDead == false)
 	{
-		CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
-		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		_uint Random = rand() % 3;
+		if (Random == 1)
+		{
+			CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
+			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		}
+		
 		MagicianStatus.m_iHP -= 10;
 	}
 	

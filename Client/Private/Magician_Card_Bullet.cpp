@@ -25,8 +25,8 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 {
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
-	GameObjectDesc.fSpeedPerSec = 10.f;
-	GameObjectDesc.fRotationPerSec = XMConvertToRadians(180.0f);
+	GameObjectDesc.fSpeedPerSec = 13.f;
+	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;

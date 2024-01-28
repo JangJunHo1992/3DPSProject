@@ -66,8 +66,7 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 void CVarg_GamePlay::Tick(_float fTimeDelta)
 {
 	
-		Set_Dead();
-	if (VargStatus.m_iHP < 0)
+	if (VargStatus.m_iHP < 0 && Get_CutSceneDead() == false)
 		m_pActor->Set_State(new CVarg_Stun());
 
 	__super::Tick(fTimeDelta);
