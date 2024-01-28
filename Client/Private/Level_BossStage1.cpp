@@ -65,11 +65,7 @@ void CLevel_BossStage1::Tick(_float fTimeDelta)
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS2))))
 			return;
 	}
-	//조명 위치 
-	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)
-		- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_RIGHT)
-		+ 3 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_UP));
-	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
+
 }
 
 HRESULT CLevel_BossStage1::Render()
@@ -126,18 +122,7 @@ HRESULT CLevel_BossStage1::Ready_LightDesc()
 
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
-	ZeroMemory(&PlayerLightDesc, sizeof PlayerLightDesc);
 
-	PlayerLightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION) + _float4(0.f, 1.f, 0.f, 1.f));
-	PlayerLightDesc.fRange = 20.f;
-	PlayerLightDesc.vDiffuse = _float4(1.f, 1.0f, 1.f, 1.f);
-	PlayerLightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	PlayerLightDesc.vSpecular = PlayerLightDesc.vDiffuse;
-
-	if (FAILED(m_pGameInstance->Add_Light(PlayerLightDesc)))
-		return E_FAIL;
-	m_pLight = m_pGameInstance->Get_Light_Back();
 	return S_OK;
 }
 
