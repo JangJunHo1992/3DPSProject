@@ -30,7 +30,7 @@ HRESULT CJobMob2::Initialize(void* pArg)
 	m_sLayerTag = "Layer_Monster";
 
 	JobMob2Status.m_iAttack = 10;
-	JobMob2Status.m_iHP = 40;
+	JobMob2Status.m_iHP = 100;
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 

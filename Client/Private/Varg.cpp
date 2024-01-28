@@ -30,7 +30,7 @@ HRESULT CVarg::Initialize(void* pArg)
 	m_sLayerTag = "Layer_Monster";
 
 	VargStatus.m_iAttack = 20;
-	VargStatus.m_iHP = 200;
+	VargStatus.m_iHP = 500;
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 

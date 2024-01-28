@@ -53,8 +53,8 @@ HRESULT CCovus::Initialize(void* pArg)
 	m_LightDesc.eType = LIGHT_DESC::TYPE_POINT;
 	XMStoreFloat4(&m_LightDesc.vPosition, m_pTransformCom->Get_State(CTransform::STATE_POSITION) + _float4(0.f, 1.f, 0.f, 1.f));
 	m_LightDesc.fRange = 20.f;
-	m_LightDesc.vDiffuse = _float4(0.5f, 0.5f, 0.5f, 1.f);
-	m_LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
+	m_LightDesc.vDiffuse = _float4(0.6f, 0.8f, 1.0f, 1.0f);
+	m_LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
 	m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
 
 	if (FAILED(m_pGameInstance->Add_Light(m_LightDesc)))

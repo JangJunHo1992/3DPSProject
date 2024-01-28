@@ -31,7 +31,7 @@ HRESULT CMagician::Initialize(void* pArg)
 	m_sLayerTag = "Layer_Monster";
 
 	MagicianStatus.m_iAttack = 20;
-	MagicianStatus.m_iHP = 150;
+	MagicianStatus.m_iHP = 400;
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
