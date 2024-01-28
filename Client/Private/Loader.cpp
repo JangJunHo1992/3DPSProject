@@ -1582,7 +1582,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 			string strFilePath = "../Bin/Resources/Models/JobMob2/Weapon/Weapon";
 
 			_float fRadiusX = 180.0f;
-			_float fRadiusY = 90.0f;
+			_float fRadiusY = 270.0f;
 			_float fRadiusZ = 180.0f;
 			PivotMatrix =
 				XMMatrixScaling(0.01f, 0.01f, 0.01f)
