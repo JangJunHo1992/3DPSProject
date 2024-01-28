@@ -26,19 +26,19 @@ HRESULT CMagician_Card::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
-	list<CGameObject*>* _pTargets = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
-
-	if (nullptr == _pTargets)
-		return E_FAIL;
-
-	for (CGameObject* pGameObject : *_pTargets)
-	{
-		CCharacter* m_pPlayer = dynamic_cast<CCharacter*>(pGameObject);
-		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
-	}
-
-
-	m_pTransformCom->Look_At(m_vPlayerPos);
+// 	list<CGameObject*>* _pTargets = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Player"));
+// 
+// 	if (nullptr == _pTargets)
+// 		return E_FAIL;
+// 
+// 	for (CGameObject* pGameObject : *_pTargets)
+// 	{
+// 		CCharacter* m_pPlayer = dynamic_cast<CCharacter*>(pGameObject);
+// 		m_vPlayerPos = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION);
+// 	}
+// 
+// 
+// 	m_pTransformCom->Look_At(m_vPlayerPos);
 
 
 	return S_OK;
@@ -62,9 +62,9 @@ void CMagician_Card::Late_Tick(_float fTimeDelta)
 
 HRESULT CMagician_Card::Render()
 {
-	//if (FAILED(__super::Render())) {
-	//	return E_FAIL;
-	//}
+	if (FAILED(__super::Render())) {
+		return E_FAIL;
+	}
 
 	return S_OK;
 }

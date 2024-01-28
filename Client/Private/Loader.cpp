@@ -558,7 +558,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		{
 			PivotMatrix = XMMatrixScaling(0.02f, 0.02f, 0.02f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
 			if (FAILED(m_pGameInstance->Add_Prototype(LEVEL::LEVEL_TOOL, strPrototypeTag,
-				CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/Stage1/Stage1", PivotMatrix))))
+				CModel_Tool::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Models/BossStage2/BossStage2", PivotMatrix))))
 				return E_FAIL;
 		}
 		else
@@ -650,7 +650,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	lstrcpy(m_szLoadingText, TEXT("네비게이션를(을) 로드하는 중입니다."));
 	/* For.Prototype_Component_Navigation */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Navigation"),
-		CNavigation::Create(m_pDevice, m_pContext, TEXT("../Bin/DataFiles/Navigation.dat")))))
+		CNavigation::Create(m_pDevice, m_pContext, TEXT("../Bin/DataFiles/Stage1.dat")))))
 		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("콜리이더를(을) 로드하는 중입니다."));

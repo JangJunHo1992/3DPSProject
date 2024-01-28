@@ -9,7 +9,7 @@ void CMagician_Start::Initialize(CMagician_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 
-	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_LOOP, true);
+	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
 }
 
 CState<CMagician_GamePlay>* CMagician_Start::Update(CMagician_GamePlay* pActor, _float fTimeDelta)

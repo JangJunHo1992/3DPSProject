@@ -80,12 +80,13 @@ protected:
 	_bool						m_bisdead = false;
 	_bool						m_bcheckAnimDead = false;
 	_bool						m_bCheckCard = false;
+public:
 	//Start
-	_bool						m_bStartScene = false;
-	_bool						m_bStartScene2 = false;
+	static _bool						m_bStartScene ;
+	static _bool						m_bStartScene2;
 	//End
-	_bool						m_bCutSceneDead = false;
-	_bool						m_bCutSceneDead2 = false;
+	static _bool						m_bCutSceneDead;
+	static _bool						m_bCutSceneDead2;
 protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";

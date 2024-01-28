@@ -26,7 +26,7 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 10.f;
-	GameObjectDesc.fRotationPerSec = XMConvertToRadians(90.0f);
+	GameObjectDesc.fRotationPerSec = XMConvertToRadians(180.0f);
 
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
@@ -182,7 +182,7 @@ HRESULT CMagician_Card_Bullet::Ready_Components_Origin(LEVEL eLEVEL)
 
 
 	BoundingDesc.fRadius = 0.2f;
-	BoundingDesc.vCenter = m_pTransformCom->Get_State(CTransform::STATE_POSITION)+_float3(0.f,1.f,0.f);
+	BoundingDesc.vCenter = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
 
 	if (FAILED(__super::Add_Component(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_Sphere"),

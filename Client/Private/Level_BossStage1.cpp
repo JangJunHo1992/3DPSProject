@@ -15,7 +15,7 @@ CLevel_BossStage1::CLevel_BossStage1(ID3D11Device* pDevice, ID3D11DeviceContext*
 
 HRESULT CLevel_BossStage1::Initialize()
 {
-	
+	Load_Objects_With_Json("Save_GameObjects2.json");
 
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
@@ -59,29 +59,7 @@ HRESULT CLevel_BossStage1::Initialize()
 
 void CLevel_BossStage1::Tick(_float fTimeDelta)
 {
-	if (pPlayer->Get_StartScene() == true)
-	{
-		list<CGameObject*>* monsterList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
-
-		if (monsterList)
-		{
-			for (auto& pGameObject : *monsterList)
-			{
-				CCharacter* pMonster = dynamic_cast<CCharacter*>(pGameObject);
-				if (pMonster)
-				{
-					_vector vPos = pMonster->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);
-					m_pGameInstance->Set_Player(pMonster);
-				}
-			}
-		}
-	}
-	else
-	{
-		list<CGameObject*>* playerList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Player"));
-		pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
-		m_pGameInstance->Set_Player(pPlayer);
-	}
+	
 	if (m_pGameInstance->Get_DIKeyState(DIK_F3) & 0x80)
 	{
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS2))))
@@ -89,7 +67,7 @@ void CLevel_BossStage1::Tick(_float fTimeDelta)
 	}
 	//조명 위치 
 	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)
-		- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK)
+		/*- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK)*/
 		+ 3 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_UP));
 	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
 }
@@ -188,14 +166,14 @@ HRESULT CLevel_BossStage1::Ready_Layer_Player(const wstring& strLayerTag)
 	//if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Player"))))
 	//	return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, strLayerTag, TEXT("Prototype_GameObject_Covus"))))
+// 		return E_FAIL;
 
-	list<CGameObject*> m_pPlayerLayer = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, strLayerTag);
-
-	CGameObject* pPlayer = m_pPlayerLayer.back();
-
-	m_pGameInstance->Set_Player(pPlayer);
+// 	list<CGameObject*> m_pPlayerLayer = *m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, strLayerTag);
+// 
+// 	CGameObject* pPlayer = m_pPlayerLayer.back();
+// 
+// 	m_pGameInstance->Set_Player(pPlayer);
 
 	return S_OK;
 }
@@ -207,8 +185,8 @@ HRESULT CLevel_BossStage1::Ready_Layer_Monster(const wstring& strLayerTag)
 // 		return E_FAIL;
 // 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Magician"))))
 // 		return E_FAIL;
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, strLayerTag, TEXT("Prototype_GameObject_Varg"))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, strLayerTag, TEXT("Prototype_GameObject_Varg"))))
+// 		return E_FAIL;
 // 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_JobMob1"))))
 // 		return E_FAIL;
 // 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_JobMob2"))))
@@ -240,7 +218,52 @@ HRESULT CLevel_BossStage1::Ready_Layer_BackGround(const wstring& strLayerTag)
 	return S_OK;
 
 }
+HRESULT CLevel_BossStage1::Load_Objects_With_Json(string filePath)
+{
+	json json_in;
+	m_pGameInstance->Load_Json(filePath, json_in);
 
+	for (auto& item : json_in.items())
+	{
+		json object = item.value();
+
+		string tagObject = "Prototype_GameObject_";
+
+		string targetName = object["Name"];
+		tagObject += targetName;
+
+		string tagLayer = object["LayerTag"];
+
+		//tagLayer += object["LayerTag"];
+
+		wstring wStringLayerTag;
+		wStringLayerTag.assign(tagLayer.begin(), tagLayer.end());
+
+		wstring wStringObjTag;
+		wStringObjTag.assign(tagObject.begin(), tagObject.end());
+
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, wStringLayerTag, wStringObjTag)))
+			return E_FAIL;
+
+		list<CGameObject*>* pGameObjects = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, wStringLayerTag);
+		if (nullptr == pGameObjects)
+			continue;
+
+		CGameObject* pGameObject = pGameObjects->back();
+		if (nullptr == pGameObject)
+			continue;
+
+		_float4x4 WorldMatrix;
+		ZeroMemory(&WorldMatrix, sizeof(_float4x4));
+		CJson_Utility::Load_JsonFloat4x4(object["Component"]["Transform"], WorldMatrix);
+
+		pGameObject->Set_WorldMatrix(WorldMatrix);
+
+	}
+
+	return S_OK;
+}
 CLevel_BossStage1* CLevel_BossStage1::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
 	CLevel_BossStage1* pInstance = new CLevel_BossStage1(pDevice, pContext);
