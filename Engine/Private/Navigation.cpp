@@ -179,7 +179,7 @@ HRESULT CNavigation::Initialize(void* pArg)
 
 HRESULT CNavigation::Render()
 {
-#ifdef _DEBUG
+
 	/* 셀들의 위치가 월드상에 존재한다. */
 	_float4		vColor = { 0.0f, 0.f, 0.f, 1.f };
 
@@ -220,7 +220,7 @@ HRESULT CNavigation::Render()
 
 
 Exit:
-#endif
+
 	return S_OK;
 
 }

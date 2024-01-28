@@ -67,7 +67,7 @@ void CLevel_BossStage1::Tick(_float fTimeDelta)
 	}
 	//조명 위치 
 	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)
-		/*- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK)*/
+		- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_RIGHT)
 		+ 3 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_UP));
 	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
 }
