@@ -52,6 +52,7 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 	if (m_pGameInstance->Get_DIKeyState(DIK_1))
 	{
 		Set_CutSceneDead(true);
+		Set_Dead();
 	}
 	if (40.f < Calc_Distance() && m_bCheckStart)//나중에 오브젝트 넣어서 그거 파괴하면 보스랑 싸우게 할거면 이거로 해도됨! 
 	{
@@ -64,9 +65,9 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CVarg_GamePlay::Tick(_float fTimeDelta)
 {
-	if (VargStatus.m_iHP < 0 && Get_CutSceneDead()==true)
+	
 		Set_Dead();
-	else if (VargStatus.m_iHP < 0)
+	if (VargStatus.m_iHP < 0)
 		m_pActor->Set_State(new CVarg_Stun());
 
 	__super::Tick(fTimeDelta);

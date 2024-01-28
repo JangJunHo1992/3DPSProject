@@ -79,7 +79,8 @@ void CCovus::Tick(_float fTimeDelta)
 	else if (m_iCurrentLevelIn == 7)
 		Collision_Chcek(LEVEL_BOSS2);
 
-	XMStoreFloat4(&m_LightDesc.vPosition, m_pTransformCom->Get_State(CTransform::STATE_POSITION) + _float4(0.f, 1.f, 0.f, 1.f));
+	XMStoreFloat4(&m_LightDesc.vPosition, m_pTransformCom->Get_State(CTransform::STATE_POSITION) + _float4(8.f, 2.f, -5.f, 1.f));
+	//_float4 fTemp = m_pTransformCom->Get_Position() + _float4(-5.f, 1.f, -5.f, 1.f);
 	m_pLight->Set_Lightpos(m_LightDesc.vPosition);
 
 	__super::Tick(fTimeDelta);

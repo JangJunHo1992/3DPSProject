@@ -19,7 +19,7 @@ CState<CCovus_GamePlay>* CCovus_Attack5::Update(CCovus_GamePlay* pActor, _float 
 	{
 		pActor->Set_IsAttack(true);
 	}
-	if (pActor->Is_Inputable_Front(20))
+	if (pActor->Is_Inputable_Front(40))
 	{
 		return new CCovus_Idle();
 	}

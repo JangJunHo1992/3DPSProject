@@ -19,7 +19,7 @@ CState<CCovus_GamePlay>* CCovus_Attack1::Update(CCovus_GamePlay* pActor, _float 
 	{
 		pActor->Set_IsAttack(true);
 	}
-	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
+	if (pActor->Is_Inputable_Front(25))
 	{
 		if (CGameInstance::GetInstance()->Mouse_Down(DIM_LB))
 		{

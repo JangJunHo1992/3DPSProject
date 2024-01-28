@@ -53,7 +53,8 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 	}
 	if (m_pGameInstance->Get_DIKeyState(DIK_1))
 	{
-		Set_CutSceneDead(true);
+		Set_CutSceneDead2(true);
+		Set_Dead();
 	}
 	if (40.f < Calc_Distance() && m_bCheckStart)
 	{
@@ -65,18 +66,17 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CMagician_GamePlay::Tick(_float fTimeDelta)
 {
-	if (m_bStartScene2 == true)
-	{
-		//초반에 카메라 세팅 여기서 할거 true 일때만 몬스터한테 붙고 true가 아니라면 다시 플레이어 한테 갈수 있도록  
-	}
+// 	if (m_bStartScene2 == true)
+// 	{
+// 		//초반에 카메라 세팅 여기서 할거 true 일때만 몬스터한테 붙고 true가 아니라면 다시 플레이어 한테 갈수 있도록  
+// 	}
 // 	else if (m_bStartScene == false)
 // 	{
 // 		//컷신이 끝나고 나서 여기서 다시 바꾸기
 // 	}
 
-	if (MagicianStatus.m_iHP < 0 && m_bCutSceneDead == true )
-		Set_Dead();
-	else if(MagicianStatus.m_iHP < 0)
+	
+	if(MagicianStatus.m_iHP < 0)
 		m_pActor->Set_State(new CMagician_Stun());
 
 	__super::Tick(fTimeDelta);
