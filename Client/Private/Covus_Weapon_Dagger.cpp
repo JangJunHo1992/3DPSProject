@@ -24,14 +24,14 @@ HRESULT CCovus_Weapon_Dagger::Ready_Components_Origin(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Collider */
-	m_iColliderSize = 7;
+	m_iColliderSize = 1;
 	m_pColliders.resize(m_iColliderSize);
 
 	for (_uint i = 0; i < m_iColliderSize; ++i)
 	{
 		CBounding_Sphere::BOUNDING_SPHERE_DESC BoundingDesc = {};
 
-		_float fPosZ = 1.2f / m_iColliderSize * (i + 1);
+		_float fPosZ = 0.2f / m_iColliderSize * (i + 1);
 
 		_float fRadiusX = 90.0f;
 		_float fRadiusY = 0.0f;
@@ -47,7 +47,7 @@ HRESULT CCovus_Weapon_Dagger::Ready_Components_Origin(LEVEL eLevel)
 			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
 			, SocketMatrix);
 
-		BoundingDesc.fRadius = 1.2f / m_iColliderSize;
+		BoundingDesc.fRadius = 0.2f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
 		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 

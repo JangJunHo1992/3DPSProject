@@ -207,13 +207,13 @@ _bool CCovus_Weapon::Collision_Chcekb1()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision)
+				if (isCollision && Get_isAttack() == true)
 				{
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
 					Set_IsAttack(false);
-					break;
+					return bIsCollision;
 				}
 			}
 		}
@@ -248,13 +248,13 @@ _bool CCovus_Weapon::Collision_Chcekb2()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision)
+				if (isCollision && Get_isAttack() == true)
 				{
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
 					Set_IsAttack(false);
-					break;
+					return bIsCollision;
 				}
 			}
 		}
