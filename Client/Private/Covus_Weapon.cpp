@@ -172,7 +172,7 @@ _bool CCovus_Weapon::Collision_Chcek()//_uint eLevel
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
 					Set_IsAttack(false);
-					break;
+					return bIsCollision;
 				}
 			}
 		}
