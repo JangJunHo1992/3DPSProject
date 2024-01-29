@@ -28,8 +28,8 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void Late_Tick(_float fTimeDelta) override;
 
-public:
-	virtual void Write_Json(json & Out_Json) override;
+// public:
+// 	virtual void Write_Json(json & Out_Json) override;
 public:
 	void CameraRotation(_float fTimeDelta);
 	
@@ -55,7 +55,7 @@ public:
 	CCovus* m_pPlayer = { nullptr };
 	CVarg* m_pVarg = { nullptr };
 	CMagician* m_pMagician = { nullptr };
-
+	
 	_float	m_fAngle = 0.f;
 	_float  m_fPitch = 0.f;
 	_matrix cameraMatrix;//최종 카메라 행렬

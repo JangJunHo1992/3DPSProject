@@ -26,6 +26,14 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 	m_sName = "Camera";
 	m_sLayerTag = "Layer_Camera";
 
+	m_CameraOffsetY = 2.f;
+	m_CameraOffsetZ = -5.f;
+	m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
+	m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Player());
+	m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Player());
+	m_ptarget = dynamic_cast<CTransform*>(m_pPlayer->Get_TransformComp());
+
+	_vector cameraOffset = XMVectorSet(m_CameraOffsetX, m_CameraOffsetY, m_CameraOffsetZ, 0.0f);
 	
 
 	if (nullptr == pArg)
@@ -34,7 +42,7 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 	SPRING_CAMERA_DESC* pDesc = (SPRING_CAMERA_DESC*)pArg;
 
 	m_fMouseSensor = pDesc->fMouseSensor;
-	//pDesc->vAt = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK);
+	pDesc->vEye = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)+cameraOffset;
 
 	if (FAILED(__super::Initialize(pDesc)))
 		return E_FAIL;
@@ -44,26 +52,34 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 
 		hDist = 1.f; //Z 축 카메라와 플레이어 거리
 		vDist = 1.f; //Y 축 카메라와 플레이어 거리
-		m_CameraOffsetY = 2.f;
-		m_CameraOffsetZ = -5.f;
-		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
-		m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Player());
-		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Player());
-		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
-		ActualPosition = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		//m_CameraOffsetX = 5.f;
 		
+		
+
+		_vector vTargetPos = m_ptarget->Get_State(CTransform::STATE_POSITION);
+		_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(0.f, 0.0f, 0.0f);
+		 // 카메라의 초기 위치
+ 		cameraOffset = XMVector3TransformCoord(cameraOffset, rotationMatrix);
+		ActualPosition = vTargetPos + cameraOffset;//m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		m_pTransformCom->Set_WorldMatrix(m_pPlayer->Get_TransformComp()->Get_WorldMatrix());
 		if (m_pPlayer->Get_CurrentLevel() == 2)
 		{
-			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(m_fPitch, m_fAngle, 0.0f);
-			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
+//  			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(0.f, XM_PI, 0.0f);
+// 	
+//  			XMVECTOR cameraOffset = XMVectorSet(m_CameraOffsetX, m_CameraOffsetY, m_CameraOffsetZ, 0.0f);  // 카메라의 초기 위치
+//  			cameraOffset = XMVector3TransformCoord(cameraOffset, rotationMatrix);
+// 
+// 			//최악의 경우수
+// 			_vector Temp = XMVectorSet(141.805038f, -3.57046294f, -11.9469032f, 0.0f);
+// 			m_pTransformCom->Set_Position(m_ptarget->Get_State(CTransform::STATE_POSITION) + cameraOffset * hDist);
 
 			m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
 			m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
 		}
 		else if (m_pPlayer->Get_CurrentLevel() == 6)
 		{
-			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(m_fPitch, m_fAngle, 0.0f);
-			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
+// 			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(0.f, XM_PI, 0.0f);
+// 			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
 
 			m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
 			m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
@@ -83,8 +99,8 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 		}
 		else if (m_pPlayer->Get_CurrentLevel() == 7)
 		{
-			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(m_fPitch, m_fAngle, 0.0f);
-			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
+// 			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(0.f, XM_PI, 0.0f);
+// 			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
 			m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
 			m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
 			list<CGameObject*>* monsterList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
@@ -108,13 +124,7 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 
 void CSpringCamera::Priority_Tick(_float fTimeDelta)
 {
-	if (m_bfirst)
-	{
-		
 
-		m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK));
-		m_bfirst = false;
-	}
 
 	
 	if (Get_StartScene() == true)
@@ -131,9 +141,9 @@ void CSpringCamera::Priority_Tick(_float fTimeDelta)
 	{
 		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
 
-		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
+		m_ptarget = dynamic_cast<CTransform*>(m_pPlayer->Get_TransformComp());
 	}
-
+	
 // 	m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
 // 
 // 	m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
@@ -141,6 +151,19 @@ void CSpringCamera::Priority_Tick(_float fTimeDelta)
 
 void CSpringCamera::Tick(_float fTimeDelta)
 {
+//  	if (m_bfirst)
+// 	{
+// 		_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(0.f, XM_PI, 0.0f);
+// 
+// 		XMVECTOR cameraOffset = XMVectorSet(m_CameraOffsetX, m_CameraOffsetY, m_CameraOffsetZ, 0.0f);  // 카메라의 초기 위치
+// 		cameraOffset = XMVector3TransformCoord(cameraOffset, rotationMatrix);
+// 
+// 		//최악의 경우수
+// 		_float3 Temp = _float3(143.48080444335938f, -1.57047700881958f, -6.841729164123535f);
+// 		//ActualPosition = Temp;
+// 		m_pTransformCom->Set_Position(Temp);
+// 		m_bfirst = false;
+// 	}
 
 	CameraRotation(fTimeDelta);
 	//Player가 앞키를 누르면 카메라 회전했던 방향쪽에서 회전값을 받아서 카메라가 바라보고 있는 방향으로 플레이어도 쳐다 보게 만듬 
@@ -198,16 +221,17 @@ void CSpringCamera::Late_Tick(_float fTimeDelta)
 
 }
 
-void CSpringCamera::Write_Json(json& Out_Json)
-{
-	Out_Json["Name"] = m_sName;
-	__super::Write_Json(Out_Json);
-}
+// void CSpringCamera::Write_Json(json& Out_Json)
+// {
+// 	Out_Json["Name"] = m_sName;
+// 	__super::Write_Json(Out_Json);
+// }
 
 
 void CSpringCamera::CameraRotation(_float fTimeDelta)
 {
 	//카메라 움직임은 Late_Tick에 있다!
+
 	_float3 currentCameraPosition = ActualPosition;
 	_float3 idealPosition = m_ptarget->Get_State(CTransform::STATE_POSITION);
 	_float3 displacement = ActualPosition - idealPosition;
@@ -232,12 +256,12 @@ void CSpringCamera::CameraRotation(_float fTimeDelta)
 	currentCameraPosition.z = XMVectorGetZ(XMVectorLerp(XMLoadFloat3(&currentCameraPosition), XMLoadFloat3(&idealPosition), 1.0f - expf(-CameraMoveSpeed * fTimeDelta)));
 
 	// 캐릭터 주위를 중심으로 하는 카메라 위치 계산
-	XMVECTOR cameraOffset = XMVectorSet(m_CameraOffsetX, m_CameraOffsetY, m_CameraOffsetZ, 0.0f);  // 카메라의 초기 위치
+ 	XMVECTOR cameraOffset = XMVectorSet(m_CameraOffsetX, m_CameraOffsetY, m_CameraOffsetZ, 0.0f);  // 카메라의 초기 위치
 	cameraOffset = XMVector3TransformCoord(cameraOffset, rotationMatrix);
 
 	// 캐릭터의 위치 및 회전 적용
 	m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(ActualPosition));
-	m_pTransformCom->Set_Position(currentCameraPosition + cameraOffset * hDist);
+	m_pTransformCom->Set_Position(ActualPosition + cameraOffset);
 }
 
 
