@@ -17,7 +17,9 @@ CState<CVarg_GamePlay>* CVarg_StartDemo::Update(CVarg_GamePlay* pActor, _float f
 
 	if (pActor->Is_Animation_End())
 	{
+		pActor->Set_StartScene(false);
 		return new CVarg_Idle();
+
 	}
 
 

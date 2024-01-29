@@ -42,11 +42,20 @@ public:
 public:
 	CGameObject* Get_Player();
 	void	Set_Player(CGameObject* _pPlayer);
+
+	CGameObject* Get_Varg();
+	void	Set_Varg(CGameObject* _pVarg);
+
+	CGameObject* Get_Magician();
+	void	Set_Magician(CGameObject* _pMagician);
 public:
 	//void Set_CheckAnimDead(_bool _bcheckAnimDead) { m_bcheckAnimDead = _bcheckAnimDead; }
 	//_bool Get_CheckAnimDead() { return m_bcheckAnimDead; }
 public:
 	CGameObject*	m_pPlayer = { nullptr };
+	CGameObject*	m_pVarg = { nullptr };
+	CGameObject*	m_pMagician = { nullptr };
+
 private:
 	_uint			m_iNumLevels = { 0 };
 

@@ -16,8 +16,8 @@ CState<CMagician_GamePlay>* CMagician_Start::Update(CMagician_GamePlay* pActor, 
 {
 	if (pActor->Is_Animation_End())
 	{
+		pActor->Set_StartScene2(false);
 		return new CMagician_Idle();
-		pActor->Set_StartScene(false);
 	}
 }
 

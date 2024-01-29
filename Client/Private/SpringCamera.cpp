@@ -26,15 +26,19 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 	m_sName = "Camera";
 	m_sLayerTag = "Layer_Camera";
 
+	
+
 	if (nullptr == pArg)
 		return E_FAIL;
 
 	SPRING_CAMERA_DESC* pDesc = (SPRING_CAMERA_DESC*)pArg;
 
 	m_fMouseSensor = pDesc->fMouseSensor;
+	//pDesc->vAt = m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK);
 
 	if (FAILED(__super::Initialize(pDesc)))
 		return E_FAIL;
+
 	{
 		DampConstant = 2.f * sqrt(SpringConstant);
 
@@ -43,11 +47,60 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 		m_CameraOffsetY = 2.f;
 		m_CameraOffsetZ = -5.f;
 		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
- 		m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Player());
- 		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Player());
+		m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Player());
+		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Player());
 		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
 		ActualPosition = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		
+		if (m_pPlayer->Get_CurrentLevel() == 2)
+		{
+			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(m_fPitch, m_fAngle, 0.0f);
+			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
+
+			m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
+			m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
+		}
+		else if (m_pPlayer->Get_CurrentLevel() == 6)
+		{
+			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(m_fPitch, m_fAngle, 0.0f);
+			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
+
+			m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
+			m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
+			list<CGameObject*>* monsterList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Monster"));
+
+			if (monsterList)
+			{
+				for (auto& pGameObject : *monsterList)
+				{
+					m_pVarg = dynamic_cast<CVarg*>(pGameObject);
+					if (m_pVarg)
+					{
+						m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Varg());
+					}
+				}
+			}
+		}
+		else if (m_pPlayer->Get_CurrentLevel() == 7)
+		{
+			_matrix rotationMatrix = XMMatrixRotationRollPitchYaw(m_fPitch, m_fAngle, 0.0f);
+			m_pTransformCom->Set_WorldMatrix(rotationMatrix * XMMatrixTranslationFromVector(m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)));
+			m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
+			m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
+			list<CGameObject*>* monsterList = m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Monster"));
+
+			if (monsterList)
+			{
+				for (auto& pGameObject : *monsterList)
+				{
+					m_pMagician = dynamic_cast<CMagician*>(pGameObject);
+					if (m_pVarg)
+					{
+						m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Magician());
+					}
+				}
+			}
+		}
 	}
 	ShowCursor(FALSE);
 	return S_OK;
@@ -55,26 +108,40 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 
 void CSpringCamera::Priority_Tick(_float fTimeDelta)
 {
-	m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
+	if (m_bfirst)
+	{
+		
 
-	m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
+		m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_LOOK));
+		m_bfirst = false;
+	}
+
+	
+	if (Get_StartScene() == true)
+	{
+		m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Varg());
+		m_ptarget = dynamic_cast<CTransform*>(m_pVarg->Get_TransformComp());
+	}
+	else if (Get_StartScene2() == true)
+	{
+		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Magician());
+		m_ptarget = dynamic_cast<CTransform*>(m_pMagician->Get_TransformComp());
+	}
+	else
+	{
+		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
+
+		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
+	}
+
+// 	m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
+// 
+// 	m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
 }
 
 void CSpringCamera::Tick(_float fTimeDelta)
 {
-// 	if (m_bStartScene == true&& m_bStartScene2==false)
-// 	{
-// 		m_ptarget = dynamic_cast<CTransform*>(m_pVarg->Get_TransformComp());
-// 	}
-// 	else if (m_bStartScene == false && m_bStartScene2 == true)
-// 	{
-// 		m_ptarget = dynamic_cast<CTransform*>(m_pMagician->Get_TransformComp());
-// 		
-// 	}
-// 	else
-// 	{
-// 		m_ptarget = dynamic_cast<CTransform*>(m_pPlayer->Get_TransformComp());
-// 	}
+
 	CameraRotation(fTimeDelta);
 	//Player가 앞키를 누르면 카메라 회전했던 방향쪽에서 회전값을 받아서 카메라가 바라보고 있는 방향으로 플레이어도 쳐다 보게 만듬 
 	if (true == m_pPlayer->Get_CheckRotatePlayer())

@@ -61,6 +61,8 @@ public:
 	_matrix cameraMatrix;//최종 카메라 행렬
 	_bool m_bCheck = false;//마우스 가운데 모으기 
 	_bool m_bFix = true;//마우스 가운데 모으기 
+
+	_bool m_bfirst = true;
 public:
 	//카메라 X,Y,Z
 	_float m_CameraOffsetX = 0.f;

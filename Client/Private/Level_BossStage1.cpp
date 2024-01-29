@@ -49,6 +49,7 @@ HRESULT CLevel_BossStage1::Initialize()
 			{
 				_vector vPos = pMonster->Get_TransformComp()->Get_State(CTransform::STATE::STATE_POSITION);
 				pMonster->Get_Navigation()->Reset_CurrentIndex(vPos);
+				m_pGameInstance->Set_Varg(pMonster);
 			}
 		}
 	}

@@ -110,6 +110,7 @@ void CVarg::Set_Hitted()
 		_uint Random = rand() % 5;
 		if (Random == 2 /*|| Random == 7 || Random == 5*/)
 		{
+			Set_IsAttack(false);
 			CVarg::VargState eHitted = CVarg::VargState::HurtF;
 			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		}

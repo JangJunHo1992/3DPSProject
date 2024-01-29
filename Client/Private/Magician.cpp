@@ -103,6 +103,7 @@ _bool CMagician::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 	return bIsCollision;
 }
+
 void CMagician::Set_Hitted()
 {
 	if (m_bCheckDead == false)
@@ -110,6 +111,8 @@ void CMagician::Set_Hitted()
 		_uint Random = rand() % 3;
 		if (Random == 1)
 		{
+			Set_IsAttack(false);
+
 			CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
 			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		}
