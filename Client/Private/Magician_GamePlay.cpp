@@ -54,6 +54,7 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 	if (m_pGameInstance->Get_DIKeyState(DIK_1))
 	{
 		Set_CutSceneDead2(true);
+		//CGameObject::m_bCutSceneDead2 = true;
 		m_pActor->Set_State(new CMagician_Dead());
 	}
 	if (40.f > Calc_Distance() && m_bCheckStart)

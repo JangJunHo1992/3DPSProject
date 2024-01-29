@@ -26,7 +26,8 @@ private:
 
 private:
 	CActor<CCovus_GamePlay>* m_pActor = { nullptr };
-
+	_bool					m_bCutSceneDeadCheck = true;
+	_bool					m_bCutSceneDeadCheck2 = true;
 public:
 	/* 원형객체를 생성한다. */
 	static CCovus_GamePlay* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);

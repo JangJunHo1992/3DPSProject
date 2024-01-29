@@ -52,6 +52,7 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 	if (m_pGameInstance->Get_DIKeyState(DIK_1))
 	{
 		Set_CutSceneDead(true);
+		//CGameObject::m_bCutSceneDead = true;
 		m_pActor->Set_State(new CVarg_Dead());
 	}
 	if (40.f > Calc_Distance() && m_bCheckStart)//나중에 오브젝트 넣어서 그거 파괴하면 보스랑 싸우게 할거면 이거로 해도됨! 
