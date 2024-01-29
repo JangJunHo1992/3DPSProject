@@ -142,7 +142,7 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 void CSpringCamera::Priority_Tick(_float fTimeDelta)
 {
 
-	if (Get_StartScene() == true)
+	if (Get_StartScene() == true )
 	{
 		m_CameraOffsetY = 1.8f;
 		m_CameraOffsetZ = -3.f;
@@ -150,10 +150,26 @@ void CSpringCamera::Priority_Tick(_float fTimeDelta)
 		m_ptarget = dynamic_cast<CTransform*>(m_pVarg->Get_TransformComp());
 		m_bPlayerCheck = false;
 	}
-	else if (Get_StartScene2() == true)
+	else if (Get_CutSceneDead() == true)
+	{
+		m_CameraOffsetY = 1.8f;
+		m_CameraOffsetZ = -4.f;
+		m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Varg());
+		m_ptarget = dynamic_cast<CTransform*>(m_pVarg->Get_TransformComp());
+		m_bPlayerCheck = false;
+	}
+	else if (Get_StartScene2() == true )
 	{
 		m_CameraOffsetY = 1.8f;
 		m_CameraOffsetZ = -3.f;
+		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Magician());
+		m_ptarget = dynamic_cast<CTransform*>(m_pMagician->Get_TransformComp());
+		m_bPlayerCheck = false;
+	}
+	else if (Get_CutSceneDead2() == true)
+	{
+		m_CameraOffsetY = 1.8f;
+		m_CameraOffsetZ = -4.f;
 		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Magician());
 		m_ptarget = dynamic_cast<CTransform*>(m_pMagician->Get_TransformComp());
 		m_bPlayerCheck = false;
@@ -163,7 +179,6 @@ void CSpringCamera::Priority_Tick(_float fTimeDelta)
 		m_CameraOffsetY = 2.f;
 		m_CameraOffsetZ = -5.f;
 		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
-
 		m_ptarget = dynamic_cast<CTransform*>(m_pPlayer->Get_TransformComp());
 		m_bPlayerCheck = true;
 

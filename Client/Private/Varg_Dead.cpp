@@ -14,6 +14,7 @@ CState<CVarg_GamePlay>* CVarg_Dead::Update(CVarg_GamePlay* pActor, _float fTimeD
 {
 	if (pActor->Is_Animation_End())
 	{
+
 		return new CVarg_Dead2();
 	}
 

@@ -12,6 +12,7 @@ CState<CMagician_GamePlay>* CMagician_Dead::Update(CMagician_GamePlay* pActor, _
 {
 	if (pActor->Is_Animation_End())
 	{
+		pActor->Set_CutSceneDead2(false);
 		pActor->Set_isdead(true);
 	}
 
