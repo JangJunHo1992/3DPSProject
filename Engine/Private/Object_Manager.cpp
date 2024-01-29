@@ -226,6 +226,26 @@ void CObject_Manager::Set_Player(CGameObject* _pPlayer)
 	m_pPlayer = _pPlayer;
 }
 
+CGameObject* CObject_Manager::Get_Varg()
+{
+	return m_pVarg;
+}
+
+void CObject_Manager::Set_Varg(CGameObject* _pVarg)
+{
+	m_pVarg = _pVarg;
+}
+
+CGameObject* CObject_Manager::Get_Magician()
+{
+	return m_pMagician;
+}
+
+void CObject_Manager::Set_Magician(CGameObject* _pMagician)
+{
+	m_pMagician = _pMagician;
+}
+
 void CObject_Manager::Fill_PrototypeTags(vector<string>* _vector)
 {
 	for (auto& item : m_Prototypes) 

@@ -9,7 +9,7 @@
 #include "Renderer.h"
 #include "Frustum.h"
 #include "Light_Manager.h"
-
+#include "GameObject.h"
 #include "RapidJson.h"
 #include "Mesh_Tool.h"
 //#include "Json_Utility.h"
@@ -242,7 +242,7 @@ void CGameInstance::Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>
 	m_pObject_Manager->Get_CloneGameObjects(iLevelIndex, clonevector);
 }
 
-list<class CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag)
+list<CGameObject*>* CGameInstance::Get_GameObjects(_uint iLevelIndex, const wstring& strLayerTag)
 {
 	return m_pObject_Manager->Get_GameObjects(iLevelIndex, strLayerTag);
 }
@@ -263,6 +263,26 @@ CGameObject* CGameInstance::Get_Player()
 void CGameInstance::Set_Player(CGameObject* _pPlayer)
 {
 	m_pObject_Manager->Set_Player(_pPlayer);
+}
+
+CGameObject* CGameInstance::Get_Varg()
+{
+	return m_pObject_Manager->Get_Varg();
+}
+
+void CGameInstance::Set_Varg(CGameObject* _pVarg)
+{
+	m_pObject_Manager->Set_Varg(_pVarg);
+}
+
+CGameObject* CGameInstance::Get_Magician()
+{
+	return m_pObject_Manager->Get_Magician();
+}
+
+void CGameInstance::Set_Magician(CGameObject* _pMagician)
+{
+	m_pObject_Manager->Set_Magician(_pMagician);
 }
 
 HRESULT CGameInstance::Save_Objects_With_Json(_uint iLevelIndex, string filePath)

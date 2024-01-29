@@ -34,7 +34,7 @@ HRESULT CMagician_GamePlay::Initialize(void* pArg)
 	m_pActor = new CActor<CMagician_GamePlay>(this);
 	m_pActor->Set_State(new CMagician_Idle());
 	
-	m_bStartScene = true;
+	
 	//Search_Target();
 
 	return S_OK;
@@ -54,9 +54,10 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 	if (m_pGameInstance->Get_DIKeyState(DIK_1))
 	{
 		Set_CutSceneDead2(true);
-		Set_Dead();
+		//CGameObject::m_bCutSceneDead2 = true;
+		m_pActor->Set_State(new CMagician_Dead());
 	}
-	if (40.f < Calc_Distance() && m_bCheckStart)
+	if (40.f > Calc_Distance() && m_bCheckStart)
 	{
 		m_pActor->Set_State(new CMagician_Start());
 		m_bCheckStart = false;

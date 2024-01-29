@@ -109,6 +109,7 @@ void CJobMob1::Set_Hitted()
 {
 	if (m_bCheckDead == false)
 	{
+		Set_IsAttack(false);
 		CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::HurtS_FL;
 		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		JobMob1Status.m_iHP -= 10;

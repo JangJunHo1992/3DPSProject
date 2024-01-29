@@ -101,6 +101,9 @@ public:
 public:
 	void Set_Parry(_bool _bParry) { m_bParry = _bParry; }
 	_bool Get_Parry() { return m_bParry; }
+
+	void Set_CurrentLevel(_uint _iCurrentLevelIn) { m_iCurrentLevelIn = _iCurrentLevelIn; }
+	_uint Get_CurrentLevel() { return m_iCurrentLevelIn; }
 protected:
 	_bool m_bParry = false;
 	_bool m_bCheckDead = false;

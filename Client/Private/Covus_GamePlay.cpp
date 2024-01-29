@@ -43,19 +43,21 @@ void CCovus_GamePlay::Priority_Tick(_float fTimeDelta)
 
 void CCovus_GamePlay::Tick(_float fTimeDelta)
 {
-	if (Get_CutSceneDead() == true)
+	if (Get_CutSceneDead() == true && m_bCutSceneDeadCheck)
 	{
 		m_pActor->Set_State(new CCovus_CutScene1);
-		Set_CutSceneDead(false);
+		//Set_CutSceneDead(false);
+		m_bCutSceneDeadCheck = false;
 	}
 
-	if (Get_CutSceneDead2() == true)
+	if (Get_CutSceneDead2() == true && m_bCutSceneDeadCheck2)
 	{
 		m_pActor->Set_State(new CCovus_CutScene2);
-		Set_CutSceneDead2(false);
-
+		//Set_CutSceneDead2(false);
+		m_bCutSceneDeadCheck2 = false;
 	}
 	__super::Tick(fTimeDelta);
+	//if(Get_StartScene()== false && Get_StartScene2() == false)
 	m_pActor->Update_State(fTimeDelta);
 }
 

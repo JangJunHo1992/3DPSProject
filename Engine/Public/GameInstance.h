@@ -19,6 +19,7 @@
 BEGIN(Engine)
 class CGameObject;
 class CLayer;
+class CMesh;
 
 class ENGINE_DLL CGameInstance final : public CBase
 {
@@ -58,8 +59,15 @@ public: /* For.Object_Manager */
 	void Get_CloneGameObjects(_uint iLevelIndex, vector<CGameObject*>* clonevector);
 	list<CGameObject*>* Get_GameObjects(_uint iLevelIndex, const wstring & strLayerTag);
 	class CComponent* Get_Component(_uint iLevelIndex, const wstring & strLayerTag, const wstring & strComponentTag, _uint iIndex = 0);
+	//get set
 	CGameObject* Get_Player();
 	void	Set_Player(CGameObject * _pPlayer);
+
+	CGameObject* Get_Varg();
+	void	Set_Varg(CGameObject * _pVarg);
+
+	CGameObject* Get_Magician();
+	void	Set_Magician(CGameObject * _pMagician);
 
 
 	HRESULT Save_Objects_With_Json(_uint iLevelIndex, string filePath);
@@ -126,7 +134,7 @@ public:
 	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
 	RAY	Get_MouseRayLocal(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY, _matrix matWorld);
 
-	_bool		Picking_Mesh(RAY ray, _float3 * out, vector<class CMesh*>* Meshes);
+	_bool		Picking_Mesh(RAY ray, _float3 * out, vector<CMesh*>* Meshes);
 	_bool		Picking_Vertex(RAY ray, _float3 * out, _uint triNum, VTXMESH * pVertices, _uint * pIndices);
 
 

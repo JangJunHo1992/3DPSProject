@@ -12,7 +12,7 @@ CState<CVarg_GamePlay>* CVarg_Stun::Update(CVarg_GamePlay* pActor, _float fTimeD
 {
 	if (pActor->Is_Animation_End())
 	{
-		return nullptr;
+		//return nullptr;
 	}
 
 

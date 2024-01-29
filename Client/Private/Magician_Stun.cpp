@@ -12,7 +12,7 @@ CState<CMagician_GamePlay>* CMagician_Stun::Update(CMagician_GamePlay* pActor, _
 {
 	if (pActor->Is_Animation_End())
 	{
-		return nullptr;
+		//return nullptr;
 	}
 
 
