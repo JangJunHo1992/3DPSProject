@@ -57,6 +57,7 @@ void CCovus_GamePlay::Tick(_float fTimeDelta)
 		m_bCutSceneDeadCheck2 = false;
 	}
 	__super::Tick(fTimeDelta);
+	//if(Get_StartScene()== false && Get_StartScene2() == false)
 	m_pActor->Update_State(fTimeDelta);
 }
 
