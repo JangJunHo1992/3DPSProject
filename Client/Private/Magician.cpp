@@ -31,7 +31,7 @@ HRESULT CMagician::Initialize(void* pArg)
 	m_sLayerTag = "Layer_Monster";
 
 	MagicianStatus.m_iAttack = 20;
-	MagicianStatus.m_iHP = 150;
+	MagicianStatus.m_iHP = 400;
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
@@ -107,8 +107,13 @@ void CMagician::Set_Hitted()
 {
 	if (m_bCheckDead == false)
 	{
-		CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
-		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		_uint Random = rand() % 3;
+		if (Random == 1)
+		{
+			CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
+			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+		}
+		
 		MagicianStatus.m_iHP -= 10;
 	}
 	

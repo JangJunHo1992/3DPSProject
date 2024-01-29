@@ -5,7 +5,7 @@
 
 #include "Covus_Body.h"
 #include "Covus_Weapon.h"
-
+#include "Light.h"
 
 
 CCovus::CCovus(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -48,13 +48,25 @@ HRESULT CCovus::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
 	
+	ZeroMemory(&m_LightDesc, sizeof m_LightDesc);
+
+	m_LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	XMStoreFloat4(&m_LightDesc.vPosition, m_pTransformCom->Get_State(CTransform::STATE_POSITION) + _float4(0.f, 1.f, 0.f, 1.f));
+	m_LightDesc.fRange = 20.f;
+	m_LightDesc.vDiffuse = _float4(0.6f, 0.8f, 1.0f, 1.0f);
+	m_LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
+	m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
+
+	if (FAILED(m_pGameInstance->Add_Light(m_LightDesc)))
+		return E_FAIL;
+	m_pLight = m_pGameInstance->Get_Light_Back();
 
 	return S_OK;
 }
 
 void CCovus::Priority_Tick(_float fTimeDelta)
 {
-	m_LightDesc.vPosition = m_pTransformCom->Get_Position();
+	
 	__super::Priority_Tick(fTimeDelta);
 }
 
@@ -66,7 +78,11 @@ void CCovus::Tick(_float fTimeDelta)
 		Collision_Chcek(LEVEL_BOSS1);
 	else if (m_iCurrentLevelIn == 7)
 		Collision_Chcek(LEVEL_BOSS2);
-	
+
+	XMStoreFloat4(&m_LightDesc.vPosition, m_pTransformCom->Get_State(CTransform::STATE_POSITION) + _float4(8.f, 2.f, -5.f, 1.f));
+	//_float4 fTemp = m_pTransformCom->Get_Position() + _float4(-5.f, 1.f, -5.f, 1.f);
+	m_pLight->Set_Lightpos(m_LightDesc.vPosition);
+
 	__super::Tick(fTimeDelta);
 }
 

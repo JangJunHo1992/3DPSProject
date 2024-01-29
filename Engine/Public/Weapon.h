@@ -26,6 +26,7 @@ protected:
 	virtual ~CWeapon() = default;
 
 public:
+	_bool Get_isAttack() { return m_bIsAttack; }
 	void Set_IsAttack(_bool _bIsAttack) { m_bIsAttack = _bIsAttack; };
 
 public:

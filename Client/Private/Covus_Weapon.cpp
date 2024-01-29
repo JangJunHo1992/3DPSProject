@@ -166,7 +166,7 @@ _bool CCovus_Weapon::Collision_Chcek()//_uint eLevel
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision)
+				if (isCollision&& Get_isAttack() == true)
 				{
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;

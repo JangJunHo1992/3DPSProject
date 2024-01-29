@@ -31,7 +31,7 @@ HRESULT CJobMob1::Initialize(void* pArg)
 
 	
 	JobMob1Status.m_iAttack = 10;
-	JobMob1Status.m_iHP = 50;
+	JobMob1Status.m_iHP = 100;
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 

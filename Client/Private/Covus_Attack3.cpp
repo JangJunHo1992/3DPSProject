@@ -20,7 +20,7 @@ CState<CCovus_GamePlay>* CCovus_Attack3::Update(CCovus_GamePlay* pActor, _float 
 	{
 		pActor->Set_IsAttack(true);
 	}
-	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
+	if (pActor->Is_Inputable_Front(25))
 	{
 		if (CGameInstance::GetInstance()->Mouse_Down(DIM_LB))
 		{
@@ -36,7 +36,7 @@ CState<CCovus_GamePlay>* CCovus_Attack3::Update(CCovus_GamePlay* pActor, _float 
 		}
 		pActor->Set_IsAttack(false);
 	}
-	if (pActor->Is_Inputable_Front(20))
+	if (pActor->Is_Inputable_Front(30))
 	{
 		return new CCovus_Idle();
 	}

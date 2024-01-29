@@ -45,7 +45,7 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 		m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
  		m_pVarg = dynamic_cast<CVarg*>(m_pGameInstance->Get_Player());
  		m_pMagician = dynamic_cast<CMagician*>(m_pGameInstance->Get_Player());
-		m_ptarget = dynamic_cast<CTransform*>(m_pPlayer->Get_TransformComp());
+		m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
 		ActualPosition = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		
 	}
@@ -55,7 +55,9 @@ HRESULT CSpringCamera::Initialize(void* pArg)
 
 void CSpringCamera::Priority_Tick(_float fTimeDelta)
 {
+	m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
 
+	m_ptarget = dynamic_cast<CTransform*>(m_pGameInstance->Get_Player()->Get_TransformComp());
 }
 
 void CSpringCamera::Tick(_float fTimeDelta)

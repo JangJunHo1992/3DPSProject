@@ -41,6 +41,7 @@ protected:
 	_bool	m_bRotatePlayer = false;
 	CCharacter::CharStat PlayerStatus = {};
 	LIGHT_DESC			m_LightDesc = {};
+	class CLight* m_pLight = { nullptr };
 public:
 	virtual void Free() override;
 public:

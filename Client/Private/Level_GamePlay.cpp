@@ -69,10 +69,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 		if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pDevice, m_pContext, LEVEL_BOSS1))))
 			return;
 	}
-	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)
-		- 10 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_RIGHT)
-		+ 3 * pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_UP));
-	m_pLight->Set_Lightpos(PlayerLightDesc.vPosition);
+
 }
 
 HRESULT CLevel_GamePlay::Render()
@@ -154,10 +151,7 @@ HRESULT CLevel_GamePlay::Ready_LightDesc()
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
 
-	
-
-// 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-// 		return E_FAIL;
+	ZeroMemory(&LightDesc, sizeof LightDesc);
 
 	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
 	LightDesc.vPosition = _float4(70.f, 10.f, 30.f, 1.f);
@@ -169,18 +163,18 @@ HRESULT CLevel_GamePlay::Ready_LightDesc()
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
 
-	ZeroMemory(&PlayerLightDesc, sizeof PlayerLightDesc);
+	ZeroMemory(&LightDesc, sizeof LightDesc);
 
-	PlayerLightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	XMStoreFloat4(&PlayerLightDesc.vPosition, pPlayer->Get_TransformComp()->Get_State(CTransform::STATE_POSITION)+ _float4(0.f, 1.f, 0.f, 1.f));
-	PlayerLightDesc.fRange = 20.f;
-	PlayerLightDesc.vDiffuse = _float4(0.5f, 0.5f, 0.5f, 1.f);
-	PlayerLightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	PlayerLightDesc.vSpecular = PlayerLightDesc.vDiffuse;
+	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	LightDesc.vPosition = _float4(70.f, 10.f, 30.f, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.f, 0.0f, 1.f, 1.f);
+	LightDesc.vAmbient = _float4(0.4f, 0.1f, 0.4f, 1.f);
+	LightDesc.vSpecular = LightDesc.vDiffuse;
 
-	if (FAILED(m_pGameInstance->Add_Light(PlayerLightDesc)))
+	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
-	m_pLight = m_pGameInstance->Get_Light_Back();
+
 	return S_OK;
 }
 
