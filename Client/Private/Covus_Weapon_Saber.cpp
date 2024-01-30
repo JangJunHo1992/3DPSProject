@@ -31,7 +31,7 @@ HRESULT CCovus_Weapon_Saber::Ready_Components_Origin(LEVEL eLevel)
 	{
 		CBounding_Sphere::BOUNDING_SPHERE_DESC BoundingDesc = {};
 
-		_float fPosZ = 0.6f / m_iColliderSize * (i + 1);
+		_float fPosZ = 1.2f / m_iColliderSize * (i + 1);
 
 		_float fRadiusX =90.0f;
 		_float fRadiusY =0.0f;

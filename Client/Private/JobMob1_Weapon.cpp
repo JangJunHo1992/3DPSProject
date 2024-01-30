@@ -96,7 +96,7 @@ HRESULT CJobMob1_Weapon::Ready_Components_Origin(LEVEL eLevel)
 			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
 			, SocketMatrix
 		);
-		BoundingDesc.fRadius = 1.f / m_iColliderSize;
+		BoundingDesc.fRadius = 0.5f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
 		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 		const wstring strName = TEXT("Com_Collider_") + i;
@@ -148,7 +148,7 @@ _bool CJobMob1_Weapon::Collision_Chcek()
 			CCollider* pTargetCollider = pTarget->Get_Collider();
 			if (nullptr == pTargetCollider)
 				continue;
-
+			 
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
