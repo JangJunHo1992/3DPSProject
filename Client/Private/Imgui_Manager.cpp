@@ -55,10 +55,10 @@ HRESULT CImgui_Manager::SetUp_Imgui(ID3D11Device* pDevice, ID3D11DeviceContext* 
 	ImGui_ImplWin32_Init(g_hWnd);
 	ImGui_ImplDX11_Init(pDevice, pContext);
 	io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\malgun.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesKorean());
-	
+
 	Init_Window();
-	
-	
+
+
 	return S_OK;
 }
 
@@ -90,8 +90,10 @@ void CImgui_Manager::Render()
 	ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
 	if (dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
 		window_flags |= ImGuiWindowFlags_NoBackground;
+
 	ImGui::SetNextWindowSize(ImVec2(g_iWinSizeX, g_iWinSizeY), ImGuiCond_Always);
 	ImGui::Begin("Dock", nullptr, window_flags);
+	Check_ImGui_Rect();
 	ImGui::PopStyleVar(2);
 	ImGuiID dockspaceID = ImGui::GetID("DockSpace");
 	ImGui::DockSpace(dockspaceID, ImVec2(0, 0), dockspaceFlags);
@@ -99,7 +101,6 @@ void CImgui_Manager::Render()
 
 	if (ImGui::BeginMainMenuBar())
 	{
-		
 		if (m_bMapTool)	ShowMapTool();
 		if (m_bEffectTool) ShowEffectTool();
 		if (m_bObjectTool) ShowObjectTool();
@@ -115,9 +116,9 @@ void CImgui_Manager::Render()
 			{
 				//Load_Objects_With_Json(LEVEL::LEVEL_TOOL, "Test1");
 				m_bdialogCheck = true;
-				
+
 			}
-	
+
 			ImGui::EndMenu();
 		}
 
@@ -125,7 +126,7 @@ void CImgui_Manager::Render()
 		{
 			if (ImGui::MenuItem("PhysX_Collider", "PgUp"))
 			{
-				
+
 
 
 			}
@@ -140,16 +141,16 @@ void CImgui_Manager::Render()
 
 			ImGui::EndMenu();
 		}
-		
+
 		if (ImGui::BeginMenu("Editer"))
 		{
 			ImGui::RadioButton("NO_PICKING", &m_ePickMode, 0); ImGui::SameLine();
 			ImGui::RadioButton("TERRAIN_PICKING", &m_ePickMode, 1); ImGui::SameLine();
 			ImGui::RadioButton("MESH_PICKING", &m_ePickMode, 2);
 
-			if (ImGui::MenuItem(u8"맵툴","",&m_bMapTool))
+			if (ImGui::MenuItem(u8"맵툴", "", &m_bMapTool))
 			{
-				
+
 			}
 			if (ImGui::MenuItem(u8"이펙트툴", "", &m_bEffectTool))
 			{
@@ -159,19 +160,19 @@ void CImgui_Manager::Render()
 			{
 
 			}
-			if (ImGui::MenuItem(u8"카메라툴","", &m_bCameraTool))
+			if (ImGui::MenuItem(u8"카메라툴", "", &m_bCameraTool))
 			{
 			}
 
 			ImGui::EndMenu();
-			
+
 
 		}
 
 		ImGui::EndMainMenuBar();
 	}
 	static bool canValidateDialog = false;
-	
+
 	if (m_bdialogCheck)
 	{
 		if (ImGui::Button("Open File Dialog"))
@@ -199,7 +200,7 @@ void CImgui_Manager::Render()
 			m_bdialogCheck = false;
 		}
 	}
-	
+
 
 	ImGui::Render();
 
@@ -229,7 +230,7 @@ void CImgui_Manager::Init_ModelEditer()
 
 void CImgui_Manager::Write_Json(const string& In_szPath)
 {
-	
+
 }
 
 void CImgui_Manager::Load_FromJson(const string& In_szPath)
@@ -329,7 +330,7 @@ _int CImgui_Manager::CheckPicking(_int ePickMode)
 	switch (m_ePickMode)
 	{
 	case NO_PICKING:
-		
+
 		break;
 	case TERRAIN_PICKING:
 
@@ -337,8 +338,8 @@ _int CImgui_Manager::CheckPicking(_int ePickMode)
 	case MESH_PICKING:
 
 		break;
-	
-	
+
+
 	}
 	return ePickMode;
 }
@@ -394,27 +395,7 @@ void CImgui_Manager::ShowMapTool()
 
 void CImgui_Manager::ShowEffectTool()
 {
-	ImGui::Begin(u8"이펙트툴");
-	if (ImGui::BeginTabBar("##EffectTabBar"))
-	{
-		//TODO 이펙트 탭 시작
-		if (ImGui::BeginTabItem(u8"이펙트"))
-		{
-			ImGui::Text(u8"이펙트");
-			ImGui::EndTabItem();
-		}
-		//TODO 이펙트 탭 종료
-
-		//! 파티클 탭 시작
-		if (ImGui::BeginTabItem(u8"파티클"))
-		{
-			ImGui::Text(u8"파티클");
-			ImGui::EndTabItem();
-		}
-		//! 파티클 탭 종료
-		ImGui::EndTabBar();
-	}
-	ImGui::End();
+	m_pEffectWindow->Render(m_pContext);
 }
 
 void CImgui_Manager::ShowObjectTool()
@@ -454,6 +435,8 @@ void CImgui_Manager::Init_Window()
 	m_pMapWindow->Initialize();
 	m_pObjWindow = CObject_Window::GetInstance();
 	m_pObjWindow->Initialize();
+	m_pEffectWindow = CEffect_Window::GetInstance();
+	m_pEffectWindow->Initialize();
 }
 
 
@@ -483,8 +466,8 @@ _bool CImgui_Manager::Check_ImGui_Rect()
 {
 	POINT tMouse = {};
 	GetCursorPos(&tMouse);
-	ScreenToClient (m_pGameInstance->Get_GraphicDesc().hWnd, &tMouse);
-	
+	ScreenToClient(m_pGameInstance->Get_GraphicDesc().hWnd, &tMouse);
+
 	ImVec2 windowPos = ImGui::GetWindowPos(); //왼쪽상단모서리점
 	ImVec2 windowSize = ImGui::GetWindowSize();
 
@@ -494,5 +477,4 @@ _bool CImgui_Manager::Check_ImGui_Rect()
 		return false; //ImGui 영역 내
 	}
 	return true; //ImGui 영역이랑 안 겹침!
-	
 }

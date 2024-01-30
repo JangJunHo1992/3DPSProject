@@ -30,7 +30,7 @@ HRESULT CLevel_EffectTool::Initialize()
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_EFFECT_TOOL, TEXT("Layer_Weapon"), TEXT("Prototype_GameObject_Raider_Weapon_DoubleSword"))))
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_EFFECT_TOOL, TEXT("Layer_Weapon"), TEXT("Prototype_GameObject_Covus_Weapon_Saber"))))
 		return E_FAIL;
 
 	m_pWaepon = m_pGameInstance->Get_GameObjects(LEVEL_EFFECT_TOOL, TEXT("Layer_Weapon"))->back();

@@ -36,7 +36,7 @@ public:
 	HRESULT Loading_For_GamePlay_Level();
 	HRESULT Loading_For_GamePlay_BossStage1();
 	HRESULT Loading_For_GamePlay_BossStage2();
-
+	HRESULT Loading_For_Effect_Tool_Level();
 	HRESULT Loading_For_Tool_Level();
 
 

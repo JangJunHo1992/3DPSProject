@@ -17,9 +17,9 @@ class CCamera_Window;
 class CEffect_Window;
 class CTerrain;
 
-class CImgui_Manager  : public CBase
+class CImgui_Manager : public CBase
 {
-	
+
 public:
 	enum class IMGUI_WINDOW_TYPE
 	{
@@ -40,7 +40,7 @@ public:
 	};
 
 public:
-	enum PickMode { NO_PICKING= 0, TERRAIN_PICKING, MESH_PICKING, PICKING_END };
+	enum PickMode { NO_PICKING = 0, TERRAIN_PICKING, MESH_PICKING, PICKING_END };
 	DECLARE_SINGLETON(CImgui_Manager)
 private:
 	CImgui_Manager() = default;
@@ -75,7 +75,7 @@ public:
 	virtual void Free() override;
 
 private:
-	char*	ConvertWCtoC(const wchar_t* str);
+	char* ConvertWCtoC(const wchar_t* str);
 	wchar_t* ConvertCtoWC(const char* str);
 
 private:
@@ -105,8 +105,8 @@ private:
 	CTerrain_Tool* m_pTerrainTool = { nullptr };
 
 
-	ID3D11Device*			m_pDevice = nullptr;
-	ID3D11DeviceContext*	m_pContext = nullptr;
+	ID3D11Device* m_pDevice = nullptr;
+	ID3D11DeviceContext* m_pContext = nullptr;
 
 public:
 	CImGui_Window* pWindows[EDITER_TYPE::TYPE_END];

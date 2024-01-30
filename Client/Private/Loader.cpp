@@ -22,6 +22,9 @@
 
 // #include "Particle_Blue.h"
 // #include "Particle_Red.h"
+#include "Particle_Custom.h"
+#include "Particle_Custom_EffectTool.h"
+
 
 #include "Covus_Tool.h"
 #include "Covus_GamePlay.h"
@@ -150,6 +153,10 @@ HRESULT CLoader::Loading()
 		break;
 	case LEVEL_TOOL:
 		hr = Loading_For_Tool_Level();
+		break;
+	case LEVEL_EFFECT_TOOL:
+		hr = Loading_For_Effect_Tool_Level();
+		break;
 	}
 
 	if (FAILED(hr))
@@ -1200,6 +1207,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 // 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Red"),
 // 		CParticle_Red::Create(m_pDevice, m_pContext))))
 // 		return E_FAIL;
+// 
+// 	   	/* For.Prototype_GameObject_Particle_Custom*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Custom"),
+		CParticle_Custom::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1695,6 +1707,118 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Collider_Sphere"),
 		CCollider::Create(m_pDevice, m_pContext, CCollider::TYPE_SPHERE))))
 		return E_FAIL;
+
+	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
+
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_For_Effect_Tool_Level()
+{
+	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_Texture_Snow"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Snow.png"), 1))))
+		return E_FAIL;
+
+	///* For.Prototype_Component_Texture_Sky */
+	//if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_Texture_Night"),
+	//	CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Night.dds"), 1))))
+	//	return E_FAIL;
+
+
+	lstrcpy(m_szLoadingText, TEXT("모델를(을) 로드하는 중입니다."));
+	/* For.Prototype_Component_VIBuffer_Particle_Rect */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_VIBuffer_Particle_Rect"),
+		CVIBuffer_Particle_Rect::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_VIBuffer_Particle_Point */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
+	//대상이 되는 무기 
+// 	{
+// 		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Raider_Weapon_DoubleSword");
+// 		string strFilePath = "../Bin/Resources/Models/Weapon/Raider/Sword_01/Sword_01";
+// 
+// 		_float fRadiusY = 270.0f;
+// 		_float fRadiusZ = 90.0f;
+// 
+// 		_matrix PivotMatrix =
+// 			XMMatrixScaling(0.01f, 0.01f, 0.01f)
+// 			* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+// 			* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+// 
+// 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, strPrototypeTag,
+// 			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+// 			return E_FAIL;
+// 	}
+
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Saber");
+		string strFilePath = "../Bin/Resources/Models/Player/Weapon/Saber";
+
+		//_float fRadiusY = 270.0f;
+		//_float fRadiusZ = 90.0f;
+		_float fRadiusX = 270.f;
+		_matrix PivotMatrix =
+			XMMatrixScaling(0.01f, 0.01f, 0.01f)
+			* XMMatrixRotationX(XMConvertToRadians(fRadiusX));
+		//* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
+		//* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
+
+		
+		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, strPrototypeTag,
+			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
+			return E_FAIL;
+		
+	}
+
+	lstrcpy(m_szLoadingText, TEXT("셰이더를(을) 로드하는 중입니다."));
+
+	/* For.Prototype_Component_Shader_Particle_Point */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
+		return E_FAIL;
+
+
+	/* For.Prototype_Component_Shader_Model */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_Shader_Model"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Model.hlsl"), VTXMESH::Elements, VTXMESH::iNumElements))))
+		return E_FAIL;
+
+	lstrcpy(m_szLoadingText, TEXT("원형객체를(을) 로드하는 중입니다."));
+
+
+	/* For.Prototype_GameObject_Particle_Custom*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Custom"),
+		CParticle_Custom_EffectTool::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+
+	const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Camera_Dynamic");
+	/* For.Prototype_GameObject_Camera_Dynamic */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+		CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+// 
+	//원형 객체
+	{
+		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Weapon_Saber");
+
+		if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
+			CCovus_Weapon_Saber_GamePlay::Create(m_pDevice, m_pContext))))
+			return E_FAIL;
+
+	}
+
+	//if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Sky"),
+	//	CSky::Create(m_pDevice, m_pContext))))
+	//	return E_FAIL;
+
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 
