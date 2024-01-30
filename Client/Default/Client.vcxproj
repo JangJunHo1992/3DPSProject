@@ -289,6 +289,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\JobMob2_Weapon_Tool.h" />
     <ClInclude Include="..\Public\Level_BossStage1.h" />
     <ClInclude Include="..\Public\Level_BossStage2.h" />
+    <ClInclude Include="..\Public\Level_EffectTool.h" />
     <ClInclude Include="..\Public\Level_GamePlay.h" />
     <ClInclude Include="..\Public\Level_Loading.h" />
     <ClInclude Include="..\public\Level_Logo.h" />
@@ -356,8 +357,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Monster_GamePlay.h" />
     <ClInclude Include="..\Public\Monster_Tool.h" />
     <ClInclude Include="..\Public\Object_Window.h" />
-    <ClInclude Include="..\Public\Particle_Blue.h" />
-    <ClInclude Include="..\Public\Particle_Red.h" />
+    <ClInclude Include="..\Public\Particle_Custom.h" />
+    <ClInclude Include="..\Public\Particle_Custom_EffectTool.h" />
     <ClInclude Include="..\Public\Player.h" />
     <ClInclude Include="..\Public\Player_Dash.h" />
     <ClInclude Include="..\Public\Player_Dash_Back.h" />
@@ -532,6 +533,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\JobMob2_Weapon_Tool.cpp" />
     <ClCompile Include="..\Private\Level_BossStage1.cpp" />
     <ClCompile Include="..\Private\Level_BossStage2.cpp" />
+    <ClCompile Include="..\Private\Level_EffectTool.cpp" />
     <ClCompile Include="..\Private\Level_GamePlay.cpp" />
     <ClCompile Include="..\Private\Level_Loading.cpp" />
     <ClCompile Include="..\private\Level_Logo.cpp" />
@@ -599,8 +601,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Monster_GamePlay.cpp" />
     <ClCompile Include="..\Private\Monster_Tool.cpp" />
     <ClCompile Include="..\Private\Object_Window.cpp" />
-    <ClCompile Include="..\Private\Particle_Blue.cpp" />
-    <ClCompile Include="..\Private\Particle_Red.cpp" />
+    <ClCompile Include="..\Private\Particle_Custom.cpp" />
+    <ClCompile Include="..\Private\Particle_Custom_EffectTool.cpp" />
     <ClCompile Include="..\Private\Player.cpp" />
     <ClCompile Include="..\Private\Player_Dash.cpp" />
     <ClCompile Include="..\Private\Player_Dash_Back.cpp" />

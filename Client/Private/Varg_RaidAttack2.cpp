@@ -28,7 +28,7 @@ CState<CVarg_GamePlay>* CVarg_RaidAttack2::Update(CVarg_GamePlay* pActor, _float
 	}
 
 
-	if (pActor->Is_Inputable_Back(10))
+	if (pActor->Is_Inputable_Back(20))
 	{
 		pActor->Set_IsAttack(false);
 	}

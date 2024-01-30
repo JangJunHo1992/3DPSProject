@@ -403,12 +403,6 @@
     <Filter Include="02.GameObjects\Effect\Particles">
       <UniqueIdentifier>{a6a83eda-f7da-48d8-b550-80bad228d160}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObjects\Effect\Particles\Blue">
-      <UniqueIdentifier>{6be9b4e2-8d46-4e8a-98c5-6abed9328b9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObjects\Effect\Particles\Red">
-      <UniqueIdentifier>{e3ca59a6-1861-4dfb-b0e1-6fd2ee3b5107}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObjects\1.MyAssets\JobMob1">
       <UniqueIdentifier>{4b9ea446-c22d-4add-9ad3-50fcb947aba6}</UniqueIdentifier>
     </Filter>
@@ -723,6 +717,15 @@
     </Filter>
     <Filter Include="02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\8.Stun">
       <UniqueIdentifier>{dde8e559-b3a6-4986-934f-3f730c393f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Levels\02.Tool\Effect_Tool">
+      <UniqueIdentifier>{4a5e26ab-7978-4ba7-adba-5c83ed397bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\Custom">
+      <UniqueIdentifier>{4e3c74e6-a3e9-473d-8663-2c37f0fc6f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\Custom\EffectTool">
+      <UniqueIdentifier>{02dd690a-2e52-469f-9033-6d496587d6fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1149,12 +1152,6 @@
     <ClInclude Include="..\Public\Varg_Weapon_Tool.h">
       <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Particle_Blue.h">
-      <Filter>02.GameObjects\Effect\Particles\Blue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Particle_Red.h">
-      <Filter>02.GameObjects\Effect\Particles\Red</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Magician_Dead.h">
       <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\2.Dead</Filter>
     </ClInclude>
@@ -1484,6 +1481,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\Varg_Stun.h">
       <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\8.Stun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_EffectTool.h">
+      <Filter>01.Levels\02.Tool\Effect_Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Custom.h">
+      <Filter>02.GameObjects\Effect\Particles\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Custom_EffectTool.h">
+      <Filter>02.GameObjects\Effect\Particles\Custom\EffectTool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1863,12 +1869,6 @@
     <ClCompile Include="..\Private\Varg_Weapon_Tool.cpp">
       <Filter>02.GameObjects\1.MyAssets\Varg\Parts\Weapon\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Particle_Blue.cpp">
-      <Filter>02.GameObjects\Effect\Particles\Blue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Particle_Red.cpp">
-      <Filter>02.GameObjects\Effect\Particles\Red</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Magician_Dead.cpp">
       <Filter>02.GameObjects\1.MyAssets\Magician\Entire\GamePlay\State\2.Dead</Filter>
     </ClCompile>
@@ -2198,6 +2198,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Varg_Stun.cpp">
       <Filter>02.GameObjects\1.MyAssets\Varg\Entire\GamePlay\State\8.Stun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_EffectTool.cpp">
+      <Filter>01.Levels\02.Tool\Effect_Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Custom.cpp">
+      <Filter>02.GameObjects\Effect\Particles\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Custom_EffectTool.cpp">
+      <Filter>02.GameObjects\Effect\Particles\Custom\EffectTool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,8 +20,8 @@
 #include "Weapon_Player.h"
 #include "Body_Player.h"
 
-#include "Particle_Blue.h"
-#include "Particle_Red.h"
+// #include "Particle_Blue.h"
+// #include "Particle_Red.h"
 
 #include "Covus_Tool.h"
 #include "Covus_GamePlay.h"
@@ -1192,9 +1192,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 
 	/* For.Prototype_GameObject_Particle_Blue */
-	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Blue"),
-		CParticle_Blue::Create(m_pDevice, m_pContext))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Blue"),
+// 		CParticle_Blue::Create(m_pDevice, m_pContext))))
+// 		return E_FAIL;
 
 	/* For.Prototype_GameObject_Particle_Red */
 // 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Red"),
