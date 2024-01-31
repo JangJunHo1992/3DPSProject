@@ -48,7 +48,7 @@ HRESULT CParticle_Custom::Initialize(void* pArg)
 	m_pTransformCom->Rotation(Desc->parentMatrix);
 
 	m_ParticleDesc = ParticleDesc;
-
+	
 	if (FAILED(Ready_Components()))
 		return E_FAIL;
 
@@ -58,20 +58,24 @@ HRESULT CParticle_Custom::Initialize(void* pArg)
 
 void CParticle_Custom::Priority_Tick(_float fTimeDelta)
 {
-
-
-
+	
 }
 
 void CParticle_Custom::Tick(_float fTimeDelta)
 {
 	m_pVIBufferCom->Update(fTimeDelta);
+ 	m_fTimeAcc += fTimeDelta;
+
+	if (m_fTimeAcc >= m_ParticleDesc.vLifeTime.y)
+		m_bisdead = true;
+
 }
 
 void CParticle_Custom::Late_Tick(_float fTimeDelta)
 {
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_BLEND, this)))
 		return;
+
 }
 
 HRESULT CParticle_Custom::Render()

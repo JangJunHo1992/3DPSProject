@@ -143,25 +143,39 @@ void CObject_Manager::Tick(_float fTimeDelta)
 
 void CObject_Manager::Late_Tick(_float fTimeDelta)
 {
-	for (size_t i = 0; i < m_iNumLevels; i++)
+	for (auto iter = m_GameObjects.begin(); iter != m_GameObjects.end();)
 	{
-		for (auto& Pair : m_pLayers[i])
+		(*iter)->Late_Tick(fTimeDelta);
+
+		if ((*iter)->Get_isdead() == true)
 		{
-			Pair.second->Late_Tick(fTimeDelta);
-
-			//list<CGameObject*> pGameObjects = *Pair.second->Get_GameObjects();
-
-// 			for (auto& pGameObject : pGameObjects)
-// 			{
-// 				if (true == pGameObject->Get_isdead())
-// 				{
-// 					Safe_Release(pGameObject);
-// 					pGameObjects.erase(pGameObject);
-// 				}
-// 			}
+			Safe_Release((*iter));
+			iter = m_GameObjects.erase(iter);
 
 		}
-	}
+		else
+		{
+			++iter;
+		}
+// 	for (size_t i = 0; i < m_iNumLevels; i++)
+// 	{
+// 		for (auto& Pair : m_pLayers[i])
+// 		{
+// 			Pair.second->Late_Tick(fTimeDelta);
+// 
+// 			//list<CGameObject*> pGameObjects = *Pair.second->Get_GameObjects();
+// 
+// // 			for (auto& pGameObject : pGameObjects)
+// // 			{
+// // 				if (true == pGameObject->Get_isdead())
+// // 				{
+// // 					Safe_Release(pGameObject);
+// // 					pGameObjects.erase(pGameObject);
+// // 				}
+// // 			}
+// 
+// 		}
+// 	}
 }
 
 

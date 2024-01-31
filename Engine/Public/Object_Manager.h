@@ -55,7 +55,8 @@ public:
 	CGameObject*	m_pPlayer = { nullptr };
 	CGameObject*	m_pVarg = { nullptr };
 	CGameObject*	m_pMagician = { nullptr };
-
+private:
+	list<CGameObject*>         m_GameObjects;
 private:
 	_uint			m_iNumLevels = { 0 };
 

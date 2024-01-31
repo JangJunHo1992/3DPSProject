@@ -39,7 +39,7 @@ protected:
 	CTexture* m_pTextureCom = { nullptr };
 	CVIBuffer_Particle_Point* m_pVIBufferCom = { nullptr };
 	CVIBuffer_Particle_Point::PARTICLE_POINT_DESC		m_ParticleDesc = {};
-
+	_float			m_fTimeAcc = { 0.0f };
 protected:
 	virtual HRESULT Ready_Components();
 	HRESULT Bind_ShaderResources();
