@@ -727,6 +727,12 @@
     <Filter Include="02.GameObjects\Effect\Particles\Custom\EffectTool">
       <UniqueIdentifier>{02dd690a-2e52-469f-9033-6d496587d6fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Effectweapon">
+      <UniqueIdentifier>{168e35f4-9505-46ea-baed-5c5cb9d5210e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effectweapon\Test">
+      <UniqueIdentifier>{c11bef3b-f5a5-4c4f-8c50-167e4d462042}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1491,6 +1497,9 @@
     <ClInclude Include="..\Public\Particle_Custom_EffectTool.h">
       <Filter>02.GameObjects\Effect\Particles\Custom\EffectTool</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Saber_EffectTool.h">
+      <Filter>02.GameObjects\Effectweapon\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2207,6 +2216,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Particle_Custom_EffectTool.cpp">
       <Filter>02.GameObjects\Effect\Particles\Custom\EffectTool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Saber_EffectTool.cpp">
+      <Filter>02.GameObjects\Effectweapon\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

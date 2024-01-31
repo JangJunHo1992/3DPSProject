@@ -32,6 +32,7 @@
 #include "Covus_Body_Tool.h"
 #include "Covus_Weapon_Saber_GamePlay.h"
 #include "Covus_Weapon_Saber_Tool.h"
+#include "Covus_Weapon_Saber_EffectTool.h"
 #include "Covus_Weapon_Dagger_GamePlay.h"
 #include "Covus_Weapon_Dagger_Tool.h"
 
@@ -1802,7 +1803,7 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 	const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Camera_Dynamic");
 	/* For.Prototype_GameObject_Camera_Dynamic */
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-		CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+		CCamera_Dynamic_Tool::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 // 
 	//¿øÇü °´Ã¼
@@ -1810,7 +1811,7 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Weapon_Saber");
 
 		if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-			CCovus_Weapon_Saber_GamePlay::Create(m_pDevice, m_pContext))))
+			CCovus_Weapon_Saber_EffectTool::Create(m_pDevice, m_pContext))))
 			return E_FAIL;
 
 	}

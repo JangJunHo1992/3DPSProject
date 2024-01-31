@@ -28,6 +28,10 @@ HRESULT CCovus_Weapon_Saber_GamePlay::Ready_Components()
 		if (FAILED(Ready_Components_Origin(LEVEL_BOSS2)))
 			return E_FAIL;
 		break;
+	case 8:
+		if (FAILED(Ready_Components_Origin(LEVEL_EFFECT_TOOL)))
+			return E_FAIL;
+		break;
 	default:
 		break;
 	}
