@@ -1721,7 +1721,7 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
 	/* For.Prototype_Component_Texture_Snow */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_Texture_Snow"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Snow.png"), 1))))
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Varg.png"), 1))))
 		return E_FAIL;
 
 	///* For.Prototype_Component_Texture_Sky */

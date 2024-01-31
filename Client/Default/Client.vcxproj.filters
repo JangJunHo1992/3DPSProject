@@ -733,6 +733,9 @@
     <Filter Include="02.GameObjects\Effectweapon\Test">
       <UniqueIdentifier>{c11bef3b-f5a5-4c4f-8c50-167e4d462042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Effect\Trail">
+      <UniqueIdentifier>{7b9bbb45-34ef-4783-b1cb-081cabb2c70f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
