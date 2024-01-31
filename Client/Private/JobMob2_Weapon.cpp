@@ -71,7 +71,7 @@ HRESULT CJobMob2_Weapon::Ready_Components_Origin(LEVEL eLevel)
 
 
 	/* For.Com_Collider */
-	m_iColliderSize = 6;
+	m_iColliderSize = 1;
 	m_pColliders.resize(m_iColliderSize);
 	//m_pColliders = new CCollider*[m_iColliderSize];
 
@@ -96,7 +96,7 @@ HRESULT CJobMob2_Weapon::Ready_Components_Origin(LEVEL eLevel)
 			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
 			, SocketMatrix
 		);
-		BoundingDesc.fRadius = 1.f / m_iColliderSize;
+		BoundingDesc.fRadius = 0.3f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
 		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 		const wstring strName = TEXT("Com_Collider_") + i;
@@ -152,16 +152,18 @@ _bool CJobMob2_Weapon::Collision_Chcek()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision)
+				if (isCollision && Get_isAttack() == true)
 				{
 					if (pTarget->Get_Parry() == false)
 					{
 						pTarget->Set_Hitted();
 					}
+
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
 					Set_IsAttack(false);
-					break;
+					return bIsCollision;
+
 				}
 			}
 		}

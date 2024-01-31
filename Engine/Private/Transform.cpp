@@ -282,6 +282,22 @@ void CTransform::Rotation(_fvector vAxis, _float fRadian)
 	Set_State(CTransform::STATE_LOOK, XMVector3TransformNormal(vLook, RotationMatrix));
 }
 
+void CTransform::Rotation(_matrix WorldMatrix)
+{
+	_float3		vScale = Get_Scaled();
+
+	_vector		vRight = XMVectorSet(1.f, 0.f, 0.f, 0.f) * vScale.x;
+	_vector		vUp = XMVectorSet(0.f, 1.f, 0.f, 0.f) * vScale.y;
+	_vector		vLook = XMVectorSet(0.f, 0.f, 1.f, 0.f) * vScale.z;
+
+	_matrix		RotationMatrix = WorldMatrix;
+
+	Set_State(CTransform::STATE_RIGHT, XMVector3TransformNormal(vRight, RotationMatrix));
+	Set_State(CTransform::STATE_UP, XMVector3TransformNormal(vUp, RotationMatrix));
+	Set_State(CTransform::STATE_LOOK, XMVector3TransformNormal(vLook, RotationMatrix));
+
+}
+
 void CTransform::Go_Target(_fvector vTargetPos, _float fTimeDelta, _float fSpare)
 {
 	_vector		vPosition = Get_State(CTransform::STATE_POSITION);

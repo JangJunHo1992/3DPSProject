@@ -10,6 +10,7 @@
 #include "Level_Stage1.h"
 #include "Level_BossStage1.h"
 #include "Level_BossStage2.h"
+#include "Level_EffectTool.h"
 
 #include "Imgui_Manager.h"
 CLevel_Loading::CLevel_Loading(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
@@ -67,9 +68,10 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 				break;
 			case LEVEL_TOOL:
 				pNewLevel = CLevel_MapTool::Create(m_pDevice, m_pContext);
-
 				break;
-
+			case LEVEL_EFFECT_TOOL:
+				pNewLevel = CLevel_EffectTool::Create(m_pDevice, m_pContext);
+				break;
 			}
 
 			//! ½Â¿ë ÁÖ¼®if (nullptr == pNewLevel)

@@ -1,17 +1,20 @@
 #include "..\Public\VIBuffer_Instancing.h"
 
-CVIBuffer_Instancing::CVIBuffer_Instancing(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
+CVIBuffer_Instancing::CVIBuffer_Instancing(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CVIBuffer(pDevice, pContext)
 {
 }
 
-CVIBuffer_Instancing::CVIBuffer_Instancing(const CVIBuffer_Instancing & rhs)
+CVIBuffer_Instancing::CVIBuffer_Instancing(const CVIBuffer_Instancing& rhs)
 	: CVIBuffer(rhs)
 	, m_iNumInstance(rhs.m_iNumInstance)
 	, m_iInstanceStride(rhs.m_iInstanceStride)
 	, m_iIndexCountPerInstance(rhs.m_iIndexCountPerInstance)
 	, m_RandomNumber(rhs.m_RandomNumber)
+
 	, m_pSpeeds(rhs.m_pSpeeds)
+	//, m_pOrigianlSpeeds(rhs.m_pOrigianlSpeeds)
+	//, m_pAccelerations(rhs.m_pAccelerations)
 	, m_pLifeTimes(rhs.m_pLifeTimes)
 	, m_InstancingDesc(rhs.m_InstancingDesc)
 {
@@ -24,7 +27,7 @@ HRESULT CVIBuffer_Instancing::Initialize_Prototype()
 	return S_OK;
 }
 
-HRESULT CVIBuffer_Instancing::Initialize(void * pArg)
+HRESULT CVIBuffer_Instancing::Initialize(void* pArg)
 {
 	m_InstancingDesc = *(INSTANCING_DESC*)pArg;
 
@@ -39,33 +42,41 @@ HRESULT CVIBuffer_Instancing::Initialize(void * pArg)
 
 	ZeroMemory(&m_SubResourceData, sizeof m_SubResourceData);
 
-	VTXINSTANCE*		pVertices = new VTXINSTANCE[m_iNumInstance];
+	VTXINSTANCE* pVertices = new VTXINSTANCE[m_iNumInstance];
 
 	_vector				vDir = XMVectorSet(1.f, 0.f, 0.f, 0.f);
 	_float				fLength = { 0.0f };
 
-	uniform_real_distribution<float>	RandomRange(0.1f, m_InstancingDesc.fRange);
-	uniform_real_distribution<float>	RandomRotation(0.0f, XMConvertToRadians(360.0f));	
-	uniform_real_distribution<float>	RandomScale(m_InstancingDesc.vScale.x, m_InstancingDesc.vScale.y);
+	uniform_real_distribution<float>	RandomRange(m_InstancingDesc.vRange.x, m_InstancingDesc.vRange.y);
+	uniform_real_distribution<float>	RandomRotationX(XMConvertToRadians(m_InstancingDesc.vRotationX.x), XMConvertToRadians(m_InstancingDesc.vRotationX.y));
+	uniform_real_distribution<float>	RandomRotationY(XMConvertToRadians(m_InstancingDesc.vRotationY.x), XMConvertToRadians(m_InstancingDesc.vRotationY.y));
+	uniform_real_distribution<float>	RandomRotationZ(XMConvertToRadians(m_InstancingDesc.vRotationZ.x), XMConvertToRadians(m_InstancingDesc.vRotationZ.y));
+	uniform_real_distribution<float>	RandomScaleX(m_InstancingDesc.vScaleX.x, m_InstancingDesc.vScaleX.y);
+	uniform_real_distribution<float>	RandomScaleY(m_InstancingDesc.vScaleY.x, m_InstancingDesc.vScaleY.y);
 	uniform_real_distribution<float>	RandomSpeed(m_InstancingDesc.vSpeed.x, m_InstancingDesc.vSpeed.y);
 	uniform_real_distribution<float>	RandomLifeTime(m_InstancingDesc.vLifeTime.x, m_InstancingDesc.vLifeTime.y);
 
-
+	m_fAccelerations = m_InstancingDesc.fAcceleration;
 
 	for (size_t i = 0; i < m_iNumInstance; i++)
 	{
+		//m_pOrigianlSpeeds[i] = RandomSpeed(m_RandomNumber);
 		m_pSpeeds[i] = RandomSpeed(m_RandomNumber);
 		m_pLifeTimes[i] = RandomLifeTime(m_RandomNumber);
 
-		_float	fScale = RandomScale(m_RandomNumber);
+		_float	fScaleX = RandomScaleX(m_RandomNumber);
+		_float	fScaleY = RandomScaleY(m_RandomNumber);
 
-		pVertices[i].vRight = _float4(fScale, 0.f, 0.f, 0.f);
-		pVertices[i].vUp = _float4(0.f, fScale, 0.f, 0.f);
-		pVertices[i].vLook = _float4(0.f, 0.f, 1.0f, 0.f);
+		pVertices[i].vRight = _float4(fScaleX, 0.f, 0.f, 0.f);
+		pVertices[i].vUp = _float4(0.f, fScaleY, 0.f, 0.f);
+		pVertices[i].vLook = _float4(0.f, 0.f, 1.f, 0.f);
 
 		vDir = XMVector3Normalize(vDir) * RandomRange(m_RandomNumber);
 
-		_vector		vRotation = XMQuaternionRotationRollPitchYaw(RandomRotation(m_RandomNumber), RandomRotation(m_RandomNumber), RandomRotation(m_RandomNumber));
+		_vector		vRotation = XMQuaternionRotationRollPitchYaw(
+			RandomRotationX(m_RandomNumber),
+			RandomRotationY(m_RandomNumber),
+			RandomRotationZ(m_RandomNumber));
 
 		_matrix		RotationMatrix = XMMatrixRotationQuaternion(vRotation);
 
@@ -81,7 +92,7 @@ HRESULT CVIBuffer_Instancing::Initialize(void * pArg)
 
 	Safe_Delete_Array(pVertices);
 
-	
+
 	return S_OK;
 }
 
@@ -91,7 +102,7 @@ HRESULT CVIBuffer_Instancing::Bind_VIBuffers()
 		nullptr == m_pIB)
 		return E_FAIL;
 
-	ID3D11Buffer*		pVertexBuffers[] = {
+	ID3D11Buffer* pVertexBuffers[] = {
 		m_pVB,
 		m_pVBInstance,
 	};
@@ -104,7 +115,7 @@ HRESULT CVIBuffer_Instancing::Bind_VIBuffers()
 
 	_uint				iOffsets[] = {
 		0,
-		0, 
+		0,
 	};
 
 
@@ -122,13 +133,14 @@ HRESULT CVIBuffer_Instancing::Bind_VIBuffers()
 
 void CVIBuffer_Instancing::Update(_float fTimeDelta)
 {
+
 	m_fTimeAcc += fTimeDelta;
 
 	D3D11_MAPPED_SUBRESOURCE			SubResource = {};
 
 	m_pContext->Map(m_pVBInstance, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &SubResource);
 
-	VTXINSTANCE*		pVertices = ((VTXINSTANCE*)SubResource.pData);
+	VTXINSTANCE* pVertices = ((VTXINSTANCE*)SubResource.pData);
 
 	for (size_t i = 0; i < m_iNumInstance; i++)
 	{
@@ -136,10 +148,15 @@ void CVIBuffer_Instancing::Update(_float fTimeDelta)
 
 		pVertices[i].vColor.w = fAlpha;
 
-		_vector		vDir = XMVector3Normalize(XMLoadFloat4(&pVertices[i].vPosition) - XMLoadFloat3(&m_InstancingDesc.vCenter));
+		//_vector		vDir = XMVector3Normalize(XMLoadFloat3(&m_InstancingDesc.vDestination) - (XMLoadFloat4(&pVertices[i].vPosition) - XMLoadFloat3(&m_InstancingDesc.vCulling)));
+		_vector		vDir = XMVector3Normalize((XMLoadFloat4(&pVertices[i].vPosition) - XMLoadFloat3(&m_InstancingDesc.vCulling)));
+
 		vDir = XMVectorSetW(vDir, 0.f);
 
-		XMStoreFloat4(&pVertices[i].vPosition, XMLoadFloat4(&pVertices[i].vPosition) + vDir * m_pSpeeds[i] * fTimeDelta);
+		_float fAcceleration = m_fAccelerations * m_fTimeAcc;
+		_float fSpeed = m_pSpeeds[i] + fAcceleration > 0 ? m_pSpeeds[i] + fAcceleration : 0;
+
+		XMStoreFloat4(&pVertices[i].vPosition, XMLoadFloat4(&pVertices[i].vPosition) + vDir * fSpeed * fTimeDelta);
 	}
 
 	m_pContext->Unmap(m_pVBInstance, 0);
@@ -157,13 +174,14 @@ HRESULT CVIBuffer_Instancing::Render()
 void CVIBuffer_Instancing::Free()
 {
 	__super::Free();
-	
+
 	if (false == m_isCloned)
 	{
+		//Safe_Delete_Array(m_pOrigianlSpeeds);
 		Safe_Delete_Array(m_pSpeeds);
+		//Safe_Delete_Array(m_pAccelerations);
 		Safe_Delete_Array(m_pLifeTimes);
 	}
 
-	
 	Safe_Release(m_pVBInstance);
 }

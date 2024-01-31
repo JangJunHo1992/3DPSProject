@@ -92,7 +92,7 @@ HRESULT CMagician_Card::Ready_Components_Origin(LEVEL eLevel)
 	{
 		CBounding_Sphere::BOUNDING_SPHERE_DESC BoundingDesc = {};
 
-		_float fPosZ = 1.2f / m_iColliderSize * (i + 1);
+		_float fPosZ = 0.1f;
 
 		_float fRadiusX = 180.f;
 		_float fRadiusY = 90.f;
@@ -108,7 +108,7 @@ HRESULT CMagician_Card::Ready_Components_Origin(LEVEL eLevel)
 			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
 			, SocketMatrix
 		);
-		BoundingDesc.fRadius = 0.8f / m_iColliderSize;
+		BoundingDesc.fRadius = 0.1f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
 		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 

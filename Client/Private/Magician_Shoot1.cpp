@@ -16,7 +16,7 @@ CState<CMagician_GamePlay>* CMagician_Shoot1::Update(CMagician_GamePlay* pActor,
 {
 	_uint iMinimumPlayTime = 15;
 	
-	if (pActor->Is_Inputable_Front(20)&&pActor->Get_bCheckShoot()==true)
+	if (pActor->Is_Inputable_Front(30)&&pActor->Get_bCheckShoot()==true)
 	{
 		pActor->Create_Card();
 		pActor->Set_bCheckShoot(false);

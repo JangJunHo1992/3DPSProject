@@ -24,7 +24,7 @@ HRESULT CCovus_Weapon_Saber::Ready_Components_Origin(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Collider */
-	m_iColliderSize = 12;
+	m_iColliderSize = 6;
 	m_pColliders.resize(m_iColliderSize);
 
 	for (_uint i = 0; i < m_iColliderSize; ++i)
@@ -47,7 +47,7 @@ HRESULT CCovus_Weapon_Saber::Ready_Components_Origin(LEVEL eLevel)
 			XMLoadFloat3(&_float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ))
 			, SocketMatrix);
 
-		BoundingDesc.fRadius = 1.2f / m_iColliderSize;
+		BoundingDesc.fRadius = 0.6f / m_iColliderSize;
 		BoundingDesc.vCenter = _float3(0.f, BoundingDesc.fRadius / 2.f, fPosZ);
 		XMStoreFloat3(&BoundingDesc.vCenter, vPos);
 
