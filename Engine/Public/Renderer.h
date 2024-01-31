@@ -12,7 +12,7 @@ class CComponent;
 class CRenderer final : public CBase
 {
 public:
-	enum RENDERGROUP { RENDER_PRIORITY, RENDER_NONLIGHT, RENDER_NONBLEND, RENDER_BLEND, RENDER_UI, RENDER_END };
+	enum RENDERGROUP { RENDER_PRIORITY, RENDER_SHADOW, RENDER_NONLIGHT, RENDER_NONBLEND, RENDER_BLEND, RENDER_UI, RENDER_END };
 
 private:
 	CRenderer(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
@@ -42,9 +42,10 @@ private:
 
 	_float4x4								m_WorldMatrix;
 	_float4x4								m_ViewMatrix, m_ProjMatrix;
-
+	ID3D11DepthStencilView* m_pLightDepthDSV = { nullptr };
 private:
 	HRESULT Render_Priority();
+	HRESULT Render_Shadow();
 	HRESULT Render_NonLight();
 	HRESULT Render_NonBlend();
 	HRESULT Render_Blend();
