@@ -74,7 +74,7 @@ HRESULT CObject_Window::Render(ID3D11DeviceContext* pContext)
 			if (ImGui::TreeNode("ObjectList"))
 			{
 				
-				string items[] = { "Layer_Player", "Layer_Monster","Layer_Environment","Layer_Object","Layer_Something"};
+				string items[] = { "Layer_Player", "Layer_Monster","Layer_Environment","Layer_Object","Layer_Effect","Layer_Something"};
 
 				static int Object_idx = 0; // Here we store our selection data as an index.
 				static int Layer_idx = 0; // Here we store our selection data as an index.

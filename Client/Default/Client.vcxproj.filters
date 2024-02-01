@@ -748,6 +748,9 @@
     <Filter Include="02.GameObjects\0.Abstract\Parts\Weapon">
       <UniqueIdentifier>{0360368b-bdd3-4da7-b43e-cbd0c75670c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Effect\Fire">
+      <UniqueIdentifier>{fee6745a-09ec-4fe4-b3d8-3ad3a512cfd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1515,6 +1518,9 @@
     <ClInclude Include="..\Public\Weapon_Client.h">
       <Filter>02.GameObjects\0.Abstract\Parts\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Effect_Fire.h">
+      <Filter>02.GameObjects\Effect\Fire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2237,6 +2243,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Weapon_Client.cpp">
       <Filter>02.GameObjects\0.Abstract\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Effect_Fire.cpp">
+      <Filter>02.GameObjects\Effect\Fire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

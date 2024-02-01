@@ -241,6 +241,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Character_Client.h" />
     <ClInclude Include="..\Public\Client_Defines.h" />
     <ClInclude Include="..\Public\Effect_Explosion.h" />
+    <ClInclude Include="..\Public\Effect_Fire.h" />
     <ClInclude Include="..\Public\Effect_Window.h" />
     <ClInclude Include="..\Public\ForkLift.h" />
     <ClInclude Include="..\Public\ForkLift_GamePlay.h" />
@@ -487,6 +488,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Covus_Weapon_Tool.cpp" />
     <ClCompile Include="..\Private\DefaultState.cpp" />
     <ClCompile Include="..\Private\Effect_Explosion.cpp" />
+    <ClCompile Include="..\Private\Effect_Fire.cpp" />
     <ClCompile Include="..\Private\Effect_Window.cpp" />
     <ClCompile Include="..\Private\ForkLift.cpp" />
     <ClCompile Include="..\Private\ForkLift_GamePlay.cpp" />
