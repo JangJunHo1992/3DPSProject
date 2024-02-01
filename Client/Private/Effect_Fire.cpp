@@ -57,17 +57,9 @@ HRESULT CEffect_Fire::Initialize(void* pArg)
 // 			return E_FAIL;
 // 	}
 
-	LIGHT_DESC		m_LightDesc{};
+	
 
-	m_LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	XMStoreFloat4(&m_LightDesc.vPosition, m_pTransformCom->Get_State(CTransform::STATE_POSITION));
-	m_LightDesc.fRange = 20.f;
-	m_LightDesc.vDiffuse = _float4(0.6f, 0.8f, 1.0f, 1.0f);
-	m_LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
-	//m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
-
-	if (FAILED(m_pGameInstance->Add_Light(m_LightDesc)))
-		return E_FAIL;
+	
 
 	return S_OK;
 }
@@ -75,6 +67,7 @@ HRESULT CEffect_Fire::Initialize(void* pArg)
 void CEffect_Fire::Priority_Tick(_float fTimeDelta)
 {
 	__super::Priority_Tick(fTimeDelta);
+	
 }
 
 void CEffect_Fire::Tick(_float fTimeDelta)

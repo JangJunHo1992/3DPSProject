@@ -30,7 +30,7 @@ private:
 	CShader* m_pShaderCom = { nullptr };
 	CTexture* m_pTextureCom = { nullptr };
 	CVIBuffer_Rect* m_pVIBufferCom = { nullptr };
-
+	LIGHT_DESC		m_LightDesc{};
 private:
 	_float				m_fFrame = { 0.0f };
 
