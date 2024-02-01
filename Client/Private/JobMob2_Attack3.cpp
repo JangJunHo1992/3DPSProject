@@ -21,11 +21,11 @@ CState<CJobMob2_GamePlay>* CJobMob2_Attack3::Update(CJobMob2_GamePlay* pActor, _
 	{
 		return new CJobMob2_Idle();
 	}
-	if (pActor->Is_Inputable_Front(15))
+	if (pActor->Is_Inputable_Front(20))
 	{
 		pActor->Set_IsAttack(true);
 	}
-	if (pActor->Is_Inputable_Back(20))
+	if (pActor->Is_Inputable_Back(30))
 	{
 		pActor->Set_IsAttack(false);
 	}

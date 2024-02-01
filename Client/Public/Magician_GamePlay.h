@@ -29,10 +29,14 @@ public:
 
 	_bool Get_bCheckShoot() { return m_bCheckShoot; }
 	void  Set_bCheckShoot(_bool _bCheckShoot) { m_bCheckShoot = _bCheckShoot; }
+
+	_bool Get_bCheckRender() { return m_bCheckRender; }
+	void  Set_bCheckRender(_bool _bCheckRender) { m_bCheckRender = _bCheckRender; }
 private:
 	_bool	m_bLookAt = false;
 	_bool   m_bCheckStart = true;
 	_bool   m_bCheckShoot = false;
+	_bool   m_bCheckRender = true;
 protected:
 	virtual void Set_Dead() override;
 private:

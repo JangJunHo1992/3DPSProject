@@ -15,9 +15,13 @@ CState<CMagician_GamePlay>* CMagician_Attack5::Update(CMagician_GamePlay* pActor
 {
 	_uint iMinimumPlayTime = 10;
 	// 
-	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
+	if (pActor->Is_Inputable_Front(20))
 	{
 		pActor->Set_IsAttack(true);
+	}
+	if (pActor->Is_Inputable_Back(30))
+	{
+		pActor->Set_IsAttack(false);
 	}
 
 	if (pActor->Is_Animation_End())
@@ -25,10 +29,7 @@ CState<CMagician_GamePlay>* CMagician_Attack5::Update(CMagician_GamePlay* pActor
 		
 		return new CMagician_Idle();
 	}
-	if (pActor->Is_Inputable_Back(20))
-	{
-		pActor->Set_IsAttack(false);
-	}
+	
 
 	return nullptr;
 }

@@ -92,8 +92,12 @@ void CMagician_GamePlay::Late_Tick(_float fTimeDelta)
 
 HRESULT CMagician_GamePlay::Render()
 {
-	if (FAILED(__super::Render()))
-		return E_FAIL;
+	if (m_bCheckRender == true)
+	{
+		if (FAILED(__super::Render()))
+			return E_FAIL;
+	}
+	
 
 	return S_OK;
 }
