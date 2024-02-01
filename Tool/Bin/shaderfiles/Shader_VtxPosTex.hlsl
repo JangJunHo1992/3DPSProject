@@ -9,6 +9,8 @@
 
 /* 셰이더의 전역변수 == 상수테이블(Constant Table) */
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
+float4			g_vCamPosition;
+
 texture2D		g_Texture[2];
 
 texture2D		g_DiffuseTexture;
@@ -97,6 +99,17 @@ struct VS_OUT_EFFECT
 VS_OUT_EFFECT VS_MAIN_EFFECT(VS_IN In)
 {
 	VS_OUT_EFFECT		Out = (VS_OUT_EFFECT)0;
+
+	matrix WorldMatrix = g_WorldMatrix;
+
+	float3 vLook = normalize((g_vCamPosition * -1.f).xyz);
+	float3 vRight = normalize(cross(float3(0.f, 1.f, 0.f), vLook));
+	float3 vUp = normalize(cross(vLook, vRight));
+
+	WorldMatrix[0] = float4(vRight, 0.f) * length(WorldMatrix[0]);
+	WorldMatrix[1] = float4(vUp, 0.f) * length(WorldMatrix[1]);
+	WorldMatrix[2] = float4(vLook, 0.f) * length(WorldMatrix[2]);
+
 
 	/* In.vPosition * 월드 * 뷰 * 투영 */
 	matrix		matWV, matWVP;
