@@ -25,6 +25,7 @@
 #include "Particle_Custom.h"
 #include "Particle_Custom_EffectTool.h"
 
+#include "Effect_Fire.h"
 
 #include "Covus_Tool.h"
 #include "Covus_GamePlay.h"
@@ -231,7 +232,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 	/* For.Prototype_Component_Texture_Fire */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Fire"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Fire/96_%d.dds"), 36))))
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Fire/96_%d.png"), 36))))
 		return E_FAIL;
 
 
@@ -1221,6 +1222,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 // 	   	/* For.Prototype_GameObject_Particle_Custom*/
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Custom"),
 		CParticle_Custom::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+	/* For.Prototype_GameObject_Fire*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Fire"),
+		CEffect_Fire::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

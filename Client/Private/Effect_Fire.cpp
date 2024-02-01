@@ -37,14 +37,32 @@ HRESULT CEffect_Fire::Initialize(void* pArg)
 		return E_FAIL;
 
 	// void* pArg : 복제하여 객체를 생성할때 원형에서 채우지 못한 데이터를 추가적으로 더 초기화해주기위해서. 
-	if (FAILED(Ready_Components()))
-		return E_FAIL;
+	if (m_pGameInstance->Get_CurrentLevel() == 2)
+	{
+		if (FAILED(Ready_Components(LEVEL_GAMEPLAY)))
+			return E_FAIL;
+	}
+	else if (m_pGameInstance->Get_CurrentLevel() == 3)
+	{
+		if (FAILED(Ready_Components(LEVEL_TOOL)))
+			return E_FAIL;
+	}
+	else if (m_pGameInstance->Get_CurrentLevel() == 6)
+	{
+		if (FAILED(Ready_Components(LEVEL_BOSS1)))
+			return E_FAIL;
+	}
+	else if (m_pGameInstance->Get_CurrentLevel() == 7)
+	{
+		if (FAILED(Ready_Components(LEVEL_BOSS2)))
+			return E_FAIL;
+	}
 
 	LIGHT_DESC		m_LightDesc{};
 
 	m_LightDesc.eType = LIGHT_DESC::TYPE_POINT;
 	m_LightDesc.vPosition = m_pTransformCom->Get_Position();
-	m_LightDesc.fRange = 10.f;
+	m_LightDesc.fRange = 20.f;
 	m_LightDesc.vDiffuse = _float4(0.6f, 0.8f, 1.0f, 1.0f);
 	m_LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
 	m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
@@ -67,7 +85,7 @@ void CEffect_Fire::Tick(_float fTimeDelta)
 	if (m_fFrame >= 36.0f)
 		m_fFrame = 0.f;
 }
-
+	
 void CEffect_Fire::Late_Tick(_float fTimeDelta)
 {
 	Compute_CamDistance();
@@ -93,7 +111,7 @@ HRESULT CEffect_Fire::Render()
 	return S_OK;
 }
 
-HRESULT CEffect_Fire::Ready_Components()
+HRESULT CEffect_Fire::Ready_Components(LEVEL eLevel)
 {
 	/* For.Com_Shader */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Shader_VtxPosTex"),
@@ -106,7 +124,7 @@ HRESULT CEffect_Fire::Ready_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Fire"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Fire"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 

@@ -35,7 +35,7 @@ private:
 	_float				m_fFrame = { 0.0f };
 
 private:
-	HRESULT Ready_Components();
+	HRESULT Ready_Components(LEVEL eLevel);
 	HRESULT Bind_ShaderResources();
 
 	void Write_Json(json& Out_Json);

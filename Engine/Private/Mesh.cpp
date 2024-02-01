@@ -156,7 +156,7 @@ HRESULT CMesh::Ready_Vertices_Anim_Origin(CMyAIMesh pAIMesh, const vector<class 
 		memcpy(&m_pAnimVertices[i].vTexcoord, &pAIMesh.Get_TextureCoord(i), sizeof(_float3));
 		memcpy(&m_pAnimVertices[i].vTangent, &pAIMesh.Get_Tangent(i), sizeof(_float3));
 	}
-
+	
 	m_iNumBones = pAIMesh.Get_NumBones();
 
 	/* 이 메시에게 영향을 주는 뼈을 순회하면서 각각의 뼈가 어떤 정점들에게 영향을 주는지 파악한다.*/
@@ -261,9 +261,10 @@ HRESULT CMesh::Ready_Vertices_Anim_Origin(CMyAIMesh pAIMesh, const vector<class 
 
 void CMesh::Free()
 {
-	//Safe_Delete_Array(m_pIndices);
-	//Safe_Delete_Array(m_pVertices);
-	//Safe_Delete_Array(m_pAnimVertices);
+	Safe_Delete_Array(m_pIndices);
+	Safe_Delete_Array(m_pVertices);
+	Safe_Delete_Array(m_pAnimVertices);
+	
 
 	__super::Free();
 }

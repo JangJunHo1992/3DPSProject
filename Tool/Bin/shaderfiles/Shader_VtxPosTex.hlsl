@@ -125,6 +125,11 @@ PS_OUT PS_MAIN_EFFECT(PS_IN_EFFECT In)
 
 	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
 
+	if (Out.vColor.r < 0.3f &&
+		Out.vColor.g < 0.3f &&
+		Out.vColor.b < 0.3f )
+		discard;
+
 	float2	vDepthTexcoord;
 	vDepthTexcoord.x = (In.vProjPos.x / In.vProjPos.w) * 0.5f + 0.5f;
 	vDepthTexcoord.y = (In.vProjPos.y / In.vProjPos.w) * -0.5f + 0.5f;
@@ -156,7 +161,7 @@ technique11 DefaultTechnique
 	/* 위와 다른 형태에 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
 	pass Effect
 	{
-		SetRasterizerState(RS_Default);
+		SetRasterizerState(RS_Cull_None);
 		SetDepthStencilState(DSS_Default, 0);
 		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
 

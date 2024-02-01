@@ -17,7 +17,7 @@ HRESULT CLevel_GamePlay::Initialize()
 {
 	Load_Objects_With_Json("Save_GameObjects1.json");
 
-	
+	Load_Objects_With_Json("Save_GameObjects.json");
 
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
