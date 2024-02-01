@@ -49,9 +49,22 @@ HRESULT CParticle_Custom::Initialize(void* pArg)
 
 	m_ParticleDesc = ParticleDesc;
 	
-	if (FAILED(Ready_Components()))
-		return E_FAIL;
-
+	if (m_pGameInstance->Get_CurrentLevel() == 2)
+	{
+		if (FAILED(Ready_Components(LEVEL_GAMEPLAY)))
+			return E_FAIL;
+	}
+	else if (m_pGameInstance->Get_CurrentLevel() == 6)
+	{
+		if (FAILED(Ready_Components(LEVEL_BOSS1)))
+			return E_FAIL;
+	}
+	else if (m_pGameInstance->Get_CurrentLevel() == 7)
+	{
+		if (FAILED(Ready_Components(LEVEL_BOSS2)))
+			return E_FAIL;
+	}
+		
 
 	return S_OK;
 }
@@ -95,20 +108,20 @@ HRESULT CParticle_Custom::Render()
 	return S_OK;
 }
 
-HRESULT CParticle_Custom::Ready_Components()
+HRESULT CParticle_Custom::Ready_Components(LEVEL eLevel)
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Point"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Shader_Particle_Point"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
 
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
 		TEXT("Com_VIBuffer"), reinterpret_cast<CComponent**>(&m_pVIBufferCom), &m_ParticleDesc)))
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Snow"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Snow"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 

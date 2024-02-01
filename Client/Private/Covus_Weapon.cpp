@@ -168,6 +168,7 @@ _bool CCovus_Weapon::Collision_Chcek()//_uint eLevel
 				_bool isCollision = pCollider->Collision(pTargetCollider);
 				if (isCollision&& Get_isAttack() == true)
 				{
+					Create_Attack_Particle(LEVEL_GAMEPLAY, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
@@ -209,6 +210,7 @@ _bool CCovus_Weapon::Collision_Chcekb1()
 				_bool isCollision = pCollider->Collision(pTargetCollider);
 				if (isCollision && Get_isAttack() == true)
 				{
+					Create_Attack_Particle(LEVEL_BOSS1, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
@@ -250,6 +252,7 @@ _bool CCovus_Weapon::Collision_Chcekb2()
 				_bool isCollision = pCollider->Collision(pTargetCollider);
 				if (isCollision && Get_isAttack() == true)
 				{
+					Create_Attack_Particle(LEVEL_BOSS2, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
@@ -262,4 +265,32 @@ _bool CCovus_Weapon::Collision_Chcekb2()
 
 
 	return bIsCollision;
+}
+
+void CCovus_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
+{
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_HalfMoon_Desc();
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
+
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
+
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
 }

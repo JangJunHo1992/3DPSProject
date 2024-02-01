@@ -41,7 +41,7 @@ public:
 public:
 	virtual _bool Collision_Chcek() PURE;
 	void Attack(CCharacter* pCharacter);
-
+	virtual void Create_Attack_Particle(_float3 vLocalPos) {};
 protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };

@@ -656,9 +656,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-// 		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -688,6 +688,10 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	/* For.Prototype_Component_Shader_Particle_Rect */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_Particle_Rect"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Shader_Particle_Point */
@@ -1389,9 +1393,9 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 		return E_FAIL;
 
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-// 		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1421,6 +1425,10 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 	/* For.Prototype_Component_Shader_Particle_Rect */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Shader_Particle_Rect"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Shader_Particle_Point */
@@ -1648,9 +1656,9 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 // 		CVIBuffer_Dynamic_Plane::Create(m_pDevice, m_pContext, 50, 50))))
 // 		return E_FAIL;
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-// 		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1680,6 +1688,10 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 	/* For.Prototype_Component_Shader_Particle_Rect */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Particle_Rect"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Shader_Particle_Point */

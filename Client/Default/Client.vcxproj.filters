@@ -736,6 +736,18 @@
     <Filter Include="02.GameObjects\Effect\Trail">
       <UniqueIdentifier>{7b9bbb45-34ef-4783-b1cb-081cabb2c70f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Characther">
+      <UniqueIdentifier>{58b3aab8-a5b6-444d-b4eb-acaf6dc0ac0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Parts">
+      <UniqueIdentifier>{1ec8f964-8623-4025-b74d-6fe31b4574c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Parts\Body">
+      <UniqueIdentifier>{896b4dca-8510-4ae0-a5af-5634c4fed049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Parts\Weapon">
+      <UniqueIdentifier>{0360368b-bdd3-4da7-b43e-cbd0c75670c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -902,15 +914,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\Weapon_Player.h">
       <Filter>02.GameObjects\Player\Parts\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Body_Client.h">
-      <Filter>02.GameObjects\0.Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Weapon_Client.h">
-      <Filter>02.GameObjects\0.Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Character_Client.h">
-      <Filter>02.GameObjects\0.Abstract</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Player_GamePlay.h">
       <Filter>02.GameObjects\Player\Character\GamePlay</Filter>
@@ -1502,6 +1505,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\Covus_Weapon_Saber_EffectTool.h">
       <Filter>02.GameObjects\Effectweapon\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character_Client.h">
+      <Filter>02.GameObjects\0.Abstract\Characther</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Body_Client.h">
+      <Filter>02.GameObjects\0.Abstract\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Weapon_Client.h">
+      <Filter>02.GameObjects\0.Abstract\Parts\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2222,6 +2234,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Covus_Weapon_Saber_EffectTool.cpp">
       <Filter>02.GameObjects\Effectweapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Weapon_Client.cpp">
+      <Filter>02.GameObjects\0.Abstract\Parts\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
