@@ -37,35 +37,34 @@ HRESULT CEffect_Fire::Initialize(void* pArg)
 		return E_FAIL;
 
 	// void* pArg : 복제하여 객체를 생성할때 원형에서 채우지 못한 데이터를 추가적으로 더 초기화해주기위해서. 
-	if (m_pGameInstance->Get_CurrentLevel() == 2)
-	{
-		if (FAILED(Ready_Components(LEVEL_GAMEPLAY)))
-			return E_FAIL;
-	}
-	else if (m_pGameInstance->Get_CurrentLevel() == 3)
-	{
-		if (FAILED(Ready_Components(LEVEL_TOOL)))
-			return E_FAIL;
-	}
-	else if (m_pGameInstance->Get_CurrentLevel() == 6)
-	{
-		if (FAILED(Ready_Components(LEVEL_BOSS1)))
-			return E_FAIL;
-	}
-	else if (m_pGameInstance->Get_CurrentLevel() == 7)
-	{
-		if (FAILED(Ready_Components(LEVEL_BOSS2)))
-			return E_FAIL;
-	}
+	
+	if (FAILED(Ready_Components(LEVEL_GAMEPLAY)))
+		return E_FAIL;
+// 	}
+// 	else if (m_pGameInstance->Get_CurrentLevel() == 3)
+// 	{
+// 		if (FAILED(Ready_Components(LEVEL_TOOL)))
+// 			return E_FAIL;
+// 	}
+// 	else if (m_pGameInstance->Get_CurrentLevel() == 6)
+// 	{
+// 		if (FAILED(Ready_Components(LEVEL_BOSS1)))
+// 			return E_FAIL;
+// 	}
+// 	else if (m_pGameInstance->Get_CurrentLevel() == 7)
+// 	{
+// 		if (FAILED(Ready_Components(LEVEL_BOSS2)))
+// 			return E_FAIL;
+// 	}
 
 	LIGHT_DESC		m_LightDesc{};
 
 	m_LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	m_LightDesc.vPosition = m_pTransformCom->Get_Position();
+	XMStoreFloat4(&m_LightDesc.vPosition, m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_LightDesc.fRange = 20.f;
 	m_LightDesc.vDiffuse = _float4(0.6f, 0.8f, 1.0f, 1.0f);
 	m_LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
-	m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
+	//m_LightDesc.vSpecular = m_LightDesc.vDiffuse;
 
 	if (FAILED(m_pGameInstance->Add_Light(m_LightDesc)))
 		return E_FAIL;
@@ -75,11 +74,12 @@ HRESULT CEffect_Fire::Initialize(void* pArg)
 
 void CEffect_Fire::Priority_Tick(_float fTimeDelta)
 {
-	
+	__super::Priority_Tick(fTimeDelta);
 }
 
 void CEffect_Fire::Tick(_float fTimeDelta)
 {
+	__super::Tick(fTimeDelta);
 	m_fFrame += 36.f * fTimeDelta;
 
 	if (m_fFrame >= 36.0f)
@@ -88,6 +88,8 @@ void CEffect_Fire::Tick(_float fTimeDelta)
 	
 void CEffect_Fire::Late_Tick(_float fTimeDelta)
 {
+	__super::Late_Tick(fTimeDelta);
+
 	Compute_CamDistance();
 
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_BLEND, this)))

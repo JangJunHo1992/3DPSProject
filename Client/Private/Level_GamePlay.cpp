@@ -17,7 +17,6 @@ HRESULT CLevel_GamePlay::Initialize()
 {
 	Load_Objects_With_Json("Save_GameObjects1.json");
 
-	Load_Objects_With_Json("Save_GameObjects.json");
 
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
@@ -58,6 +57,8 @@ HRESULT CLevel_GamePlay::Initialize()
 	}
 	if (FAILED(Ready_LightDesc()))
 		return E_FAIL;
+
+	Load_Objects_With_Json("Save_GameObjects.json");
 
 	return S_OK;
 }
@@ -356,8 +357,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const wstring& strLayerTag)
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Sky"))))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Map"))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Map"))))
+// 		return E_FAIL;
 
 	return S_OK;
 
