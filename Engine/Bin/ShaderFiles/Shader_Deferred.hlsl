@@ -23,6 +23,8 @@ texture2D		g_NormalTexture;
 texture2D		g_DepthTexture;
 texture2D		g_SpecularTexture;
 texture2D		g_LightDepthTexture;
+texture2D		g_EffectTexture;
+texture2D		g_BlurTexture;
 
 struct VS_IN
 {
@@ -188,7 +190,7 @@ PS_OUT PS_MAIN_FINAL(PS_IN In)
 	vector		vShade = g_ShadeTexture.Sample(LinearSampler, In.vTexcoord);
 	vector		vSpecular = g_SpecularTexture.Sample(LinearSampler, In.vTexcoord);
 
-	Out.vColor = vDiffuse * vShade + vSpecular;
+	Out.vColor = vDiffuse * vShade + vSpecular + vEffect + vBlur;
 
 	vector		vDepthDesc = g_DepthTexture.Sample(PointSampler, In.vTexcoord);
 	float		fViewZ = vDepthDesc.y * 1000.f;
@@ -228,6 +230,57 @@ PS_OUT PS_MAIN_FINAL(PS_IN In)
 	return Out;
 }
 
+float4 Blur_X(float2 vTexCoord)
+{
+	float4		vOut = (float4)0;
+
+	float2		vUV = (float2)0;
+
+	for (int i = -6; i < 7; ++i)
+	{
+		vUV = vTexCoord + float2(1.f / g_fTexW * i, 0);
+		vOut += fWeight[6 + i] * g_EffectTexture.Sample(ClampSampler, vUV);
+	}
+
+	vOut /= fTotal;
+
+	return vOut;
+}
+
+float4 Blur_Y(float2 vTexCoord)
+{
+	float4		vOut = (float4)0;
+
+	float2		vUV = (float2)0;
+
+	for (int i = -6; i < 7; ++i)
+	{
+		vUV = vTexCoord + float2(0, 1.f / (g_fTexH / 2.f) * i);
+		vOut += fWeight[6 + i] * g_EffectTexture.Sample(ClampSampler, vUV);
+	}
+
+	vOut /= fTotal;
+
+	return vOut;
+}
+
+PS_OUT PS_MAIN_BLUR_X(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	Out.vColor = Blur_X(In.vTexcoord);
+
+	return Out;
+}
+
+PS_OUT PS_MAIN_BLUR_Y(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	Out.vColor = Blur_Y(In.vTexcoord);
+
+	return Out;
+}
 
 technique11 DefaultTechnique
 {
@@ -274,4 +327,26 @@ technique11 DefaultTechnique
 		GeometryShader = NULL;
 		PixelShader = compile ps_5_0 PS_MAIN_FINAL();
 	}
+
+	pass Blur_X
+	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_None, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_BLUR_X();
+	}
+	pass Blur_Y
+	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_None, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_BLUR_Y();
+	}
+
 }
