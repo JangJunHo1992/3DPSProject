@@ -48,30 +48,47 @@ HRESULT CParticle_Custom::Initialize(void* pArg)
 	m_pTransformCom->Rotation(Desc->parentMatrix);
 
 	m_ParticleDesc = ParticleDesc;
-
-	if (FAILED(Ready_Components()))
-		return E_FAIL;
-
+	
+	if (m_pGameInstance->Get_CurrentLevel() == 2)
+	{
+		if (FAILED(Ready_Components(LEVEL_GAMEPLAY)))
+			return E_FAIL;
+	}
+	else if (m_pGameInstance->Get_CurrentLevel() == 6)
+	{
+		if (FAILED(Ready_Components(LEVEL_BOSS1)))
+			return E_FAIL;
+	}
+	else if (m_pGameInstance->Get_CurrentLevel() == 7)
+	{
+		if (FAILED(Ready_Components(LEVEL_BOSS2)))
+			return E_FAIL;
+	}
+		
 
 	return S_OK;
 }
 
 void CParticle_Custom::Priority_Tick(_float fTimeDelta)
 {
-
-
-
+	
 }
 
 void CParticle_Custom::Tick(_float fTimeDelta)
 {
 	m_pVIBufferCom->Update(fTimeDelta);
+ 	m_fTimeAcc += fTimeDelta;
+
+	if (m_fTimeAcc >= m_ParticleDesc.vLifeTime.y)
+		m_bisdead = true;
+
 }
 
 void CParticle_Custom::Late_Tick(_float fTimeDelta)
 {
-	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_BLEND, this)))
+	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_NONLIGHT, this)))
 		return;
+
 }
 
 HRESULT CParticle_Custom::Render()
@@ -91,20 +108,20 @@ HRESULT CParticle_Custom::Render()
 	return S_OK;
 }
 
-HRESULT CParticle_Custom::Ready_Components()
+HRESULT CParticle_Custom::Ready_Components(LEVEL eLevel)
 {
 	/* For.Com_Shader */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_Particle_Point"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Shader_Particle_Point"),
 		TEXT("Com_Shader"), reinterpret_cast<CComponent**>(&m_pShaderCom))))
 		return E_FAIL;
 
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
 		TEXT("Com_VIBuffer"), reinterpret_cast<CComponent**>(&m_pVIBufferCom), &m_ParticleDesc)))
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Snow"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Snow"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 
@@ -121,7 +138,7 @@ HRESULT CParticle_Custom::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
 		return E_FAIL;
-	if (FAILED(m_pTextureCom->Bind_ShaderResources(m_pShaderCom, "g_Texture")))
+	if (FAILED(m_pTextureCom->Bind_ShaderResource(m_pShaderCom, "g_Texture",0)))
 		return E_FAIL;
 
 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))

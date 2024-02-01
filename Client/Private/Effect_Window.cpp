@@ -122,6 +122,40 @@ HRESULT CEffect_Window::Render(ID3D11DeviceContext* pContext)
 			}
 
 			{
+				float vScaleX[2];
+				vScaleX[0] = m_Desc->ParticleDesc.vScaleX.x;
+				vScaleX[1] = m_Desc->ParticleDesc.vScaleX.y;
+
+				ImGui::DragFloat2("ScaleX", vScaleX, 0.1f, 0.f);
+
+				if (0 > vScaleX[0])
+					vScaleX[0] = 0.f;
+
+				if (vScaleX[0] > vScaleX[1])
+					vScaleX[1] = vScaleX[0];
+
+				m_Desc->ParticleDesc.vScaleX.x = vScaleX[0];
+				m_Desc->ParticleDesc.vScaleX.y = vScaleX[1];
+			}
+
+			{
+				float vScaleY[2];
+				vScaleY[0] = m_Desc->ParticleDesc.vScaleY.x;
+				vScaleY[1] = m_Desc->ParticleDesc.vScaleY.y;
+
+				ImGui::DragFloat2("ScaleY", vScaleY, 0.1f, 0.f);
+
+				if (0 > vScaleY[0])
+					vScaleY[0] = 0.f;
+
+				if (vScaleY[0] > vScaleY[1])
+					vScaleY[1] = vScaleY[0];
+
+				m_Desc->ParticleDesc.vScaleY.x = vScaleY[0];
+				m_Desc->ParticleDesc.vScaleY.y = vScaleY[1];
+			}
+
+			{
 				float vSpeed[2];
 				vSpeed[0] = m_Desc->ParticleDesc.vSpeed.x;
 				vSpeed[1] = m_Desc->ParticleDesc.vSpeed.y;

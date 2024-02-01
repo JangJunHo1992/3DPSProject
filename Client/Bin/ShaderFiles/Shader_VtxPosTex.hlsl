@@ -9,6 +9,8 @@
 
 /* 셰이더의 전역변수 == 상수테이블(Constant Table) */
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
+float4			g_vCamPosition;
+
 texture2D		g_Texture[2];
 
 texture2D		g_DiffuseTexture;
@@ -98,6 +100,17 @@ VS_OUT_EFFECT VS_MAIN_EFFECT(VS_IN In)
 {
 	VS_OUT_EFFECT		Out = (VS_OUT_EFFECT)0;
 
+	matrix WorldMatrix = g_WorldMatrix;
+
+	float3 vLook = normalize((g_vCamPosition * -1.f).xyz);
+	float3 vRight = normalize(cross(float3(0.f, 1.f, 0.f), vLook));
+	float3 vUp = normalize(cross(vLook, vRight));
+
+	WorldMatrix[0] = float4(vRight, 0.f) * length(WorldMatrix[0]);
+	WorldMatrix[1] = float4(vUp, 0.f) * length(WorldMatrix[1]);
+	WorldMatrix[2] = float4(vLook, 0.f) * length(WorldMatrix[2]);
+
+
 	/* In.vPosition * 월드 * 뷰 * 투영 */
 	matrix		matWV, matWVP;
 
@@ -124,6 +137,11 @@ PS_OUT PS_MAIN_EFFECT(PS_IN_EFFECT In)
 	PS_OUT			Out = (PS_OUT)0;
 
 	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
+
+	if (Out.vColor.r < 0.3f &&
+		Out.vColor.g < 0.3f &&
+		Out.vColor.b < 0.3f )
+		discard;
 
 	float2	vDepthTexcoord;
 	vDepthTexcoord.x = (In.vProjPos.x / In.vProjPos.w) * 0.5f + 0.5f;
@@ -156,7 +174,7 @@ technique11 DefaultTechnique
 	/* 위와 다른 형태에 내가 원하는 특정 셰이더들을 그리는 모델에 적용한다. */
 	pass Effect
 	{
-		SetRasterizerState(RS_Default);
+		SetRasterizerState(RS_Cull_None);
 		SetDepthStencilState(DSS_Default, 0);
 		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
 

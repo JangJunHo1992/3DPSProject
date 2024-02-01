@@ -15,10 +15,11 @@ void CCovus_Attack2::Initialize(CCovus_GamePlay* pActor)
 CState<CCovus_GamePlay>* CCovus_Attack2::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
 	_uint iMinimumPlayTime = 15;
-	if (pActor->Is_Inputable_Front(10))
+	if (pActor->Is_Inputable_Front(20))
 	{
 		pActor->Set_IsAttack(true);
 	}
+	
 	if (pActor->Is_Inputable_Front(25))
 	{
 		if (CGameInstance::GetInstance()->Mouse_Down(DIM_LB))

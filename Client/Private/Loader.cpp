@@ -25,6 +25,7 @@
 #include "Particle_Custom.h"
 #include "Particle_Custom_EffectTool.h"
 
+#include "Effect_Fire.h"
 
 #include "Covus_Tool.h"
 #include "Covus_GamePlay.h"
@@ -32,6 +33,7 @@
 #include "Covus_Body_Tool.h"
 #include "Covus_Weapon_Saber_GamePlay.h"
 #include "Covus_Weapon_Saber_Tool.h"
+#include "Covus_Weapon_Saber_EffectTool.h"
 #include "Covus_Weapon_Dagger_GamePlay.h"
 #include "Covus_Weapon_Dagger_Tool.h"
 
@@ -220,12 +222,17 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 
 	/* For.Prototype_Component_Texture_Snow */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Snow"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Snow.png"), 1))))
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"), 1))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Sky */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Fire */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Fire"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Fire/96_%d.png"), 36))))
 		return E_FAIL;
 
 
@@ -655,9 +662,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-// 		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -687,6 +694,10 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	/* For.Prototype_Component_Shader_Particle_Rect */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_Particle_Rect"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Shader_Particle_Point */
@@ -1212,6 +1223,11 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Custom"),
 		CParticle_Custom::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
+
+	/* For.Prototype_GameObject_Fire*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Fire"),
+		CEffect_Fire::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1388,9 +1404,9 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 		return E_FAIL;
 
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-// 		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1420,6 +1436,10 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 	/* For.Prototype_Component_Shader_Particle_Rect */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Shader_Particle_Rect"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Shader_Particle_Point */
@@ -1647,9 +1667,9 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 // 		CVIBuffer_Dynamic_Plane::Create(m_pDevice, m_pContext, 50, 50))))
 // 		return E_FAIL;
 	/* For.Prototype_Component_VIBuffer_Particle_Point */
-// 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
-// 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
-// 		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Particle_Point"),
+		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1679,6 +1699,10 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 	/* For.Prototype_Component_Shader_Particle_Rect */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Particle_Rect"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Shader_Particle_Point"),
+		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Shader_Particle_Point */
@@ -1720,7 +1744,7 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
 	/* For.Prototype_Component_Texture_Snow */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_Texture_Snow"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Snow.png"), 1))))
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Varg.png"), 1))))
 		return E_FAIL;
 
 	///* For.Prototype_Component_Texture_Sky */
@@ -1802,7 +1826,7 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 	const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Camera_Dynamic");
 	/* For.Prototype_GameObject_Camera_Dynamic */
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-		CCamera_Dynamic::Create(m_pDevice, m_pContext))))
+		CCamera_Dynamic_Tool::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 // 
 	//원형 객체
@@ -1810,7 +1834,7 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 		const wstring& strPrototypeTag = TEXT("Prototype_GameObject_Covus_Weapon_Saber");
 
 		if (FAILED(m_pGameInstance->Add_Prototype_Object(strPrototypeTag,
-			CCovus_Weapon_Saber_GamePlay::Create(m_pDevice, m_pContext))))
+			CCovus_Weapon_Saber_EffectTool::Create(m_pDevice, m_pContext))))
 			return E_FAIL;
 
 	}

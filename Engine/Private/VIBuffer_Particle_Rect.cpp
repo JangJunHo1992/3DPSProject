@@ -113,6 +113,10 @@ HRESULT CVIBuffer_Particle_Rect::Initialize(void * pArg)
 	return S_OK;
 }
 
+void CVIBuffer_Particle_Rect::Update(_float fTimeDelta)
+{
+}
+
 //void CVIBuffer_Particle_Rect::Update(_float fTimeDelta)
 //{
 //

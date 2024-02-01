@@ -727,6 +727,30 @@
     <Filter Include="02.GameObjects\Effect\Particles\Custom\EffectTool">
       <UniqueIdentifier>{02dd690a-2e52-469f-9033-6d496587d6fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Effectweapon">
+      <UniqueIdentifier>{168e35f4-9505-46ea-baed-5c5cb9d5210e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effectweapon\Test">
+      <UniqueIdentifier>{c11bef3b-f5a5-4c4f-8c50-167e4d462042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Trail">
+      <UniqueIdentifier>{7b9bbb45-34ef-4783-b1cb-081cabb2c70f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Characther">
+      <UniqueIdentifier>{58b3aab8-a5b6-444d-b4eb-acaf6dc0ac0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Parts">
+      <UniqueIdentifier>{1ec8f964-8623-4025-b74d-6fe31b4574c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Parts\Body">
+      <UniqueIdentifier>{896b4dca-8510-4ae0-a5af-5634c4fed049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\0.Abstract\Parts\Weapon">
+      <UniqueIdentifier>{0360368b-bdd3-4da7-b43e-cbd0c75670c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Fire">
+      <UniqueIdentifier>{fee6745a-09ec-4fe4-b3d8-3ad3a512cfd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -893,15 +917,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\Weapon_Player.h">
       <Filter>02.GameObjects\Player\Parts\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Body_Client.h">
-      <Filter>02.GameObjects\0.Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Weapon_Client.h">
-      <Filter>02.GameObjects\0.Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Character_Client.h">
-      <Filter>02.GameObjects\0.Abstract</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Player_GamePlay.h">
       <Filter>02.GameObjects\Player\Character\GamePlay</Filter>
@@ -1490,6 +1505,21 @@
     </ClInclude>
     <ClInclude Include="..\Public\Particle_Custom_EffectTool.h">
       <Filter>02.GameObjects\Effect\Particles\Custom\EffectTool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Covus_Weapon_Saber_EffectTool.h">
+      <Filter>02.GameObjects\Effectweapon\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Character_Client.h">
+      <Filter>02.GameObjects\0.Abstract\Characther</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Body_Client.h">
+      <Filter>02.GameObjects\0.Abstract\Parts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Weapon_Client.h">
+      <Filter>02.GameObjects\0.Abstract\Parts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Effect_Fire.h">
+      <Filter>02.GameObjects\Effect\Fire</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2207,6 +2237,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Particle_Custom_EffectTool.cpp">
       <Filter>02.GameObjects\Effect\Particles\Custom\EffectTool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Covus_Weapon_Saber_EffectTool.cpp">
+      <Filter>02.GameObjects\Effectweapon\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Weapon_Client.cpp">
+      <Filter>02.GameObjects\0.Abstract\Parts\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Effect_Fire.cpp">
+      <Filter>02.GameObjects\Effect\Fire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

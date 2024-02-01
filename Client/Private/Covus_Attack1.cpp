@@ -54,7 +54,7 @@ CState<CCovus_GamePlay>* CCovus_Attack1::Update(CCovus_GamePlay* pActor, _float 
 void CCovus_Attack1::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
-	//pActor->Set_IsAttack(false);
+	pActor->Set_IsAttack(false);
 
 }
 

@@ -2,6 +2,7 @@
 
 #include "Weapon.h"
 #include "Client_Defines.h"
+#include "Particle_Custom.h"
 
 BEGIN(Client)
 
@@ -17,6 +18,11 @@ protected:
 	{
 	};
 	virtual ~CWeapon_Client() = default;
+
+public:
+	CParticle_Custom::PARTICLE_DESC Get_Particle_Blood_Desc();
+	CParticle_Custom::PARTICLE_DESC Get_Particle_HitEffect_Desc();
+	CParticle_Custom::PARTICLE_DESC Get_Particle_HalfMoon_Desc();
 
 protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) PURE;

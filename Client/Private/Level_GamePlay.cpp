@@ -17,7 +17,6 @@ HRESULT CLevel_GamePlay::Initialize()
 {
 	Load_Objects_With_Json("Save_GameObjects1.json");
 
-	
 
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
@@ -58,6 +57,8 @@ HRESULT CLevel_GamePlay::Initialize()
 	}
 	if (FAILED(Ready_LightDesc()))
 		return E_FAIL;
+
+	Load_Objects_With_Json("Save_GameObjects.json");
 
 	return S_OK;
 }
@@ -129,158 +130,131 @@ HRESULT CLevel_GamePlay::Load_Objects_With_Json(string filePath)
 HRESULT CLevel_GamePlay::Ready_LightDesc()
 {
 	LIGHT_DESC			LightDesc{};
-
+	_float darknessFactor = 0.7f;
 	LightDesc.eType = LIGHT_DESC::TYPE_DIRECTIONAL;
 	LightDesc.vDirection = _float4(0.f, -1.f, 0.f, 0.f);
-	LightDesc.vDiffuse = _float4(0.1f, 0.2f, 0.2f, 1.f);
+	LightDesc.vDiffuse = _float4(0.2f, 0.25f, 0.25f, 1.f);
 	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
 	//LightDesc.vSpecular = _float4(1.f, 1.f, 1.f, 1.f);
 	//_float4(0.4f, 0.5f, 0.6f, 1.f);
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
 
+	/// //////////////////////////////////////////////////
+
 	ZeroMemory(&LightDesc, sizeof LightDesc);
 
 	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(100.f,5.f, 0.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
-
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
-
-	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(70.f, 5.f, 0.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
-
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
-
-	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(40.f, 5.f, 0.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
-
-
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
-
-	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(10.f, 5.f, 0.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
-
-
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
+	LightDesc.vPosition = _float4(1.4724184274673462f, 11.77269458770752f, 0.6472334861755371f, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
 	
-	 /////////////////////////////////////////////////////////////
+	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
+		return E_FAIL;
+	/////////////////////////////////////////////////////////
 	ZeroMemory(&LightDesc, sizeof LightDesc);
 
 	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(100.f, 5.f, 20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
+	LightDesc.vPosition = _float4(1.700891375541687f, 11.783430099487305f, 5.648001194000244f, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
 
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
-
-	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(70.f, 5.f, 20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
-
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
-
-	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(40.f, 5.f, 20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
-
-
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
-
-	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(10.f, 5.f, 20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
-
-
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
-
-	/////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////
 	ZeroMemory(&LightDesc, sizeof LightDesc);
 
 	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(100.f, 5.f, -20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
+	LightDesc.vPosition = _float4(112.3560562133789f, 0.5234057903289795f, -10.380002975463867, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
 
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
+	/////////////////////////////////////////////////////////
+	ZeroMemory(&LightDesc, sizeof LightDesc);
+
+	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	LightDesc.vPosition = _float4(99.86543273925781f, 1.063599705696106f, -7.615180969238281f, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
+
+	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
+		return E_FAIL;
+	/////////////////////////////////////////////////////////
+	ZeroMemory(&LightDesc, sizeof LightDesc);
+
+	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	LightDesc.vPosition = _float4(82.26553344726563f, 1.5634887218475342f, -3.986800193786621, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
+
+	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
+		return E_FAIL;
+	/////////////////////////////////////////////////////////
+	ZeroMemory(&LightDesc, sizeof LightDesc);
+
+	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	LightDesc.vPosition = _float4(85.90026092529297f, 7.649482250213623f, -16.342212677001953, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
+
+	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
+		return E_FAIL;
+	/////////////////////////////////////////////////////////
+	ZeroMemory(&LightDesc, sizeof LightDesc);
+
+	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	LightDesc.vPosition = _float4(80.60698699951172f, 7.687834739685059f, -15.370453834533691, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
+
+	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
+		return E_FAIL;
+	/////////////////////////////////////////////////////////
+	ZeroMemory(&LightDesc, sizeof LightDesc);
+
+	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	LightDesc.vPosition = _float4(102.6769027709961f, 7.55126428604126f, -32.740867614746094, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
+
+	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
+		return E_FAIL;
+	/////////////////////////////////////////////////////////
 
 	ZeroMemory(&LightDesc, sizeof LightDesc);
+
 	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(70.f, 5.f, -20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
+	LightDesc.vPosition = _float4(124.58329010009766f, 7.928438186645508f, -24.89158058166504, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
 
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
-
+	/////////////////////////////////////////////////////////
 	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(40.f, 5.f, -20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
 
+	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
+	LightDesc.vPosition = _float4(115.4299087524414f, 7.551743984222412f, 8.650155067443848f, 1.f);
+	LightDesc.fRange = 20.f;
+	LightDesc.vDiffuse = _float4(1.0f, 0.5f, 0.0f, 1.0f) * darknessFactor;
+	LightDesc.vAmbient = _float4(0.2f, 0.2f, 0.2f, 1.f);
 
 	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
 		return E_FAIL;
-
-	ZeroMemory(&LightDesc, sizeof LightDesc);
-	LightDesc.eType = LIGHT_DESC::TYPE_POINT;
-	LightDesc.vPosition = _float4(10.f, 5.f, -20.f, 1.f);
-	LightDesc.fRange = 50.f;
-	LightDesc.vDiffuse = float4(0.1f, 0.1f, 0.1f, 1.0f);
-	LightDesc.vAmbient = _float4(0.1f, 0.1f, 0.1f, 1.f);
-	LightDesc.vSpecular = LightDesc.vDiffuse;
+	/////////////////////////////////////////////////////////
 
 
-	if (FAILED(m_pGameInstance->Add_Light(LightDesc)))
-		return E_FAIL;
 	return S_OK;
 }
 
@@ -356,8 +330,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const wstring& strLayerTag)
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Sky"))))
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Map"))))
-		return E_FAIL;
+// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, strLayerTag, TEXT("Prototype_GameObject_Map"))))
+// 		return E_FAIL;
 
 	return S_OK;
 

@@ -32,7 +32,7 @@ public:
 	virtual void Tick(_float fTimeDelta);
 	virtual void Late_Tick(_float fTimeDelta);
 	virtual HRESULT Render();
-
+	virtual HRESULT Render_Shadow() { return S_OK; }
 public:
 	class CComponent* Find_Component(const wstring& strComTag);
 

@@ -23,7 +23,7 @@ public:
 	virtual _bool Collision_Chcek();
 	virtual _bool Collision_Chcekb1();
 	virtual _bool Collision_Chcekb2();
-
+	virtual void Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos);
 protected:
 	virtual HRESULT Ready_Components() PURE;
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;

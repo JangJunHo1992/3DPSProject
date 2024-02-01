@@ -24,7 +24,7 @@ public:
 		_float2		vScaleX = _float2(0.1f, 0.3f);
 		_float2		vScaleY = _float2(0.1f, 0.3f);
 
-		_float2		vLifeTime = _float2(0.4f, 1.4f);
+		_float2		vLifeTime = _float2(0.0f, 1.4f);
 	}INSTANCING_DESC;
 
 protected:

@@ -22,13 +22,11 @@ CState<CVarg_GamePlay>* CVarg_RaidAttack2::Update(CVarg_GamePlay* pActor, _float
 	{
 		return new CVarg_Idle();
 	}
-	if (pActor->Is_Inputable_Front(15))
+	if (pActor->Is_Inputable_Front(20))
 	{
 		pActor->Set_IsAttack(true);
 	}
-
-
-	if (pActor->Is_Inputable_Back(20))
+	if (pActor->Is_Inputable_Back(30))
 	{
 		pActor->Set_IsAttack(false);
 	}

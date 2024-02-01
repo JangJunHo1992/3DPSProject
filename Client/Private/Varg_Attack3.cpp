@@ -23,13 +23,11 @@ CState<CVarg_GamePlay>* CVarg_Attack3::Update(CVarg_GamePlay* pActor, _float fTi
 		return new CVarg_Idle();
 	}
 
-	if (pActor->Is_Inputable_Front(10))
+	if (pActor->Is_Inputable_Front(20))
 	{
 		pActor->Set_IsAttack(true);
 	}
-
-
-	if (pActor->Is_Inputable_Back(10))
+	if (pActor->Is_Inputable_Back(30))
 	{
 		pActor->Set_IsAttack(false);
 	}
