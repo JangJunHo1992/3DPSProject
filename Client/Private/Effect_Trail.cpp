@@ -171,8 +171,11 @@ HRESULT CEffect_Trail::Bind_ShaderResources()
 	
 	if (FAILED(m_pTextureCom->Bind_ShaderResource(m_pShader, "g_DiffuseTexture")))
 		return E_FAIL;
-	m_iMaskIndex = 642;
+	m_iMaskIndex = 628;
 	if (FAILED(m_pMaskTextureCom->Bind_ShaderResource(m_pShader, "g_MaskTexture", m_iMaskIndex)))
+		return E_FAIL;
+	m_iNoiseIndex =36;
+	if (FAILED(m_pNoiseTextureCom->Bind_ShaderResource(m_pShader, "g_DistortionTexture", m_iNoiseIndex)))
 		return E_FAIL;
 	if (FAILED(m_pGameInstance->Bind_RenderTarget_ShaderResource(TEXT("Target_Depth"), m_pShader, "g_DepthTexture")))
 		return E_FAIL;
