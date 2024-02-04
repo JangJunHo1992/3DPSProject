@@ -361,8 +361,11 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Monster_GamePlay.h" />
     <ClInclude Include="..\Public\Monster_Tool.h" />
     <ClInclude Include="..\Public\Object_Window.h" />
+    <ClInclude Include="..\Public\Particle_Attack.h" />
     <ClInclude Include="..\Public\Particle_Custom.h" />
     <ClInclude Include="..\Public\Particle_Custom_EffectTool.h" />
+    <ClInclude Include="..\Public\Particle_Hit.h" />
+    <ClInclude Include="..\Public\Particle_Parry.h" />
     <ClInclude Include="..\Public\Player.h" />
     <ClInclude Include="..\Public\Player_Dash.h" />
     <ClInclude Include="..\Public\Player_Dash_Back.h" />
@@ -609,8 +612,11 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Monster_GamePlay.cpp" />
     <ClCompile Include="..\Private\Monster_Tool.cpp" />
     <ClCompile Include="..\Private\Object_Window.cpp" />
+    <ClCompile Include="..\Private\Particle_Attack.cpp" />
     <ClCompile Include="..\Private\Particle_Custom.cpp" />
     <ClCompile Include="..\Private\Particle_Custom_EffectTool.cpp" />
+    <ClCompile Include="..\Private\Particle_Hit.cpp" />
+    <ClCompile Include="..\Private\Particle_Parry.cpp" />
     <ClCompile Include="..\Private\Player.cpp" />
     <ClCompile Include="..\Private\Player_Dash.cpp" />
     <ClCompile Include="..\Private\Player_Dash_Back.cpp" />

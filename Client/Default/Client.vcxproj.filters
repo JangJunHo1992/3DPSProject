@@ -1542,6 +1542,15 @@
     <ClInclude Include="..\Public\Effect_Monster_Trail.h">
       <Filter>02.GameObjects\Effect\Trail\MonsterTrail</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Particle_Hit.h">
+      <Filter>02.GameObjects\Effect\Particles\HIt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Attack.h">
+      <Filter>02.GameObjects\Effect\Particles\Player\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Particle_Parry.h">
+      <Filter>02.GameObjects\Effect\Particles\Player\Parry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2273,6 +2282,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Effect_Monster_Trail.cpp">
       <Filter>02.GameObjects\Effect\Trail\MonsterTrail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Hit.cpp">
+      <Filter>02.GameObjects\Effect\Particles\HIt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Attack.cpp">
+      <Filter>02.GameObjects\Effect\Particles\Player\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Particle_Parry.cpp">
+      <Filter>02.GameObjects\Effect\Particles\Player\Parry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

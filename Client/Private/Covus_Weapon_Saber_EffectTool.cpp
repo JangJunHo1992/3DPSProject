@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "Covus_Weapon_Saber_EffectTool.h"
+#include "GameInstance.h"
 
 
 CCovus_Weapon_Saber_EffectTool::CCovus_Weapon_Saber_EffectTool(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
