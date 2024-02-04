@@ -145,4 +145,36 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC		Elements[iNumElements];
 	}VTX_PARTICLE_POINT;
 
+	typedef	struct ENGINE_DLL tagTrailIndex16
+	{
+		_ushort	_0, _1, _2, _3;
+
+	}TRAILINDEX16;
+
+	typedef struct tag_TrailBuffer
+	{
+		_float3		vPos_0;
+		_float3		vPos_1;
+		_uint		iMaxCnt;
+		_uint		iPass;
+	} TRAIL_DESC;
+
+	typedef struct tagVertex_Texture
+	{
+		XMFLOAT3		vPosition;
+		XMFLOAT2		vTexUV;
+	}VTXTEX;
+
+	typedef struct tagFaceIndices16
+	{
+		unsigned short _1, _2, _3;
+	}FACEINDICES16;
+
+
+
+	typedef struct ENGINE_DLL tagVertex_Texture_Declaration
+	{
+		static const unsigned int		iNumElements = 2;
+		static const D3D11_INPUT_ELEMENT_DESC	Element[iNumElements];
+	} VTXTEX_DECLARATION;
 }

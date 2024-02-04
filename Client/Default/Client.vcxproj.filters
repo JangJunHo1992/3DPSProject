@@ -1521,6 +1521,9 @@
     <ClInclude Include="..\Public\Effect_Fire.h">
       <Filter>02.GameObjects\Effect\Fire</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Effect_Trail.h">
+      <Filter>02.GameObjects\Effect\Trail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2246,6 +2249,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Effect_Fire.cpp">
       <Filter>02.GameObjects\Effect\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Effect_Trail.cpp">
+      <Filter>02.GameObjects\Effect\Trail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
