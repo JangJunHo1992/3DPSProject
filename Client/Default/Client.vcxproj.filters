@@ -754,6 +754,18 @@
     <Filter Include="02.GameObjects\Effect\Trail\MonsterTrail">
       <UniqueIdentifier>{5ec74067-103d-4794-94b6-64d90b770c91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\Player">
+      <UniqueIdentifier>{db667c01-917b-4b16-a51b-3218de5e98b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\Player\Parry">
+      <UniqueIdentifier>{58f72f19-3078-4b43-9a7e-6a0d8b39e59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\HIt">
+      <UniqueIdentifier>{9c0682df-580b-4ed7-99fe-f4b9d65adce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\Effect\Particles\Player\Attack">
+      <UniqueIdentifier>{c6299141-a359-4c77-9873-d35e1d80a54f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">

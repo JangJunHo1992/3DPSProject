@@ -49,17 +49,17 @@ HRESULT CParticle_Custom::Initialize(void* pArg)
 
 	m_ParticleDesc = ParticleDesc;
 	
-	if (m_pGameInstance->Get_CurrentLevel() == 2)
+	if (m_pGameInstance->Get_NextLevel() == 2)
 	{
 		if (FAILED(Ready_Components(LEVEL_GAMEPLAY)))
 			return E_FAIL;
 	}
-	else if (m_pGameInstance->Get_CurrentLevel() == 6)
+	else if (m_pGameInstance->Get_NextLevel() == 6)
 	{
 		if (FAILED(Ready_Components(LEVEL_BOSS1)))
 			return E_FAIL;
 	}
-	else if (m_pGameInstance->Get_CurrentLevel() == 7)
+	else if (m_pGameInstance->Get_NextLevel() == 7)
 	{
 		if (FAILED(Ready_Components(LEVEL_BOSS2)))
 			return E_FAIL;
