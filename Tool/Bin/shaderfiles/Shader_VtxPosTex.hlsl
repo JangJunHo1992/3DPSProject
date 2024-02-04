@@ -159,15 +159,15 @@ PS_OUT PS_MAIN_TRAIL(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 
-	//Out.vColor = float4(1.f, 0.2f, 0.1f, 1);
+	Out.vColor = float4(1.f, 0.2f, 0.1f, 1.f);
 
-	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
+	//Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
 
-	//float4	vMaskDesc = g_MaskTexture.Sample(LinearSampler, In.vTexcoord);
-	//Out.vColor.a = vMaskDesc.x;
+	float4	vMaskDesc = g_MaskTexture.Sample(LinearSampler, In.vTexcoord);
+	Out.vColor.a = vMaskDesc.x;
 
 	//Out.vColor.y = min(1 - vMaskDesc.x, 0.25f);
-	//Out.vColor.y = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
+	Out.vColor.y = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
 
 	return Out;
 }
@@ -176,15 +176,15 @@ PS_OUT PS_MAIN_TRAIL_GREEN(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 
-	//Out.vColor = float4(1.0f, 0.2f, 1.0f, 1);
+	Out.vColor = float4(51.f/255.f,185.f/255.f,129.f/255.f, 1.0f);
 
-	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
+	//Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
 
-	//float4	vMaskDesc = g_MaskTexture.Sample(LinearSampler, In.vTexcoord);
-	//Out.vColor.a = max(vMaskDesc.x, 0);
+	float4	vMaskDesc = g_MaskTexture.Sample(LinearSampler, In.vTexcoord);
+	Out.vColor.a = max(vMaskDesc.x, 0);
 
 	//Out.vColor.y = min(1 - vMaskDesc.x, 0.25f);
-	//Out.vColor.y = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
+	//Out.vColor.z = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
 	//Out.vColor.x = min(max(1 - vMaskDesc.x, 0.3f), 0.5f);
 
 	return Out;

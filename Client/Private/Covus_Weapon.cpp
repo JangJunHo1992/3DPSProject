@@ -49,6 +49,7 @@ HRESULT CCovus_Weapon::Initialize(void* pArg)
 			return E_FAIL;
 
 		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
 		m_pTrailDiffuse->Set_Use(true);
 	}
 	else if (m_pGameInstance->Get_NextLevel() == 6)
@@ -62,6 +63,7 @@ HRESULT CCovus_Weapon::Initialize(void* pArg)
 			return E_FAIL;
 
 		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
 		m_pTrailDiffuse->Set_Use(true);
 	}
 	else if (m_pGameInstance->Get_NextLevel() == 7)
@@ -75,6 +77,7 @@ HRESULT CCovus_Weapon::Initialize(void* pArg)
 			return E_FAIL;
 
 		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
 		m_pTrailDiffuse->Set_Use(true);
 	}
 	

@@ -89,7 +89,7 @@ HRESULT CEffect_Trail::Render()
 	if (FAILED(Bind_ShaderResources()))
 		return E_FAIL;
 
-	m_pShader->Begin(2);
+	m_pShader->Begin(3);
 
 	m_pVIBuffer->Bind_VIBuffers();
 			
@@ -126,13 +126,13 @@ HRESULT CEffect_Trail::Ready_Components(LEVEL eLevel)
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 
-// 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_UVMask"),
-// 		TEXT("Com_MaskTexture"), reinterpret_cast<CComponent**>(&m_pMaskTextureCom))))
-// 		return E_FAIL;
-// 
-// 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_UVNoise"),
-// 		TEXT("Com_NoiseTexture"), reinterpret_cast<CComponent**>(&m_pNoiseTextureCom))))
-// 		return E_FAIL;
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_UVMask"),
+		TEXT("Com_MaskTexture"), reinterpret_cast<CComponent**>(&m_pMaskTextureCom))))
+		return E_FAIL;
+
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_UVNoise"),
+		TEXT("Com_NoiseTexture"), reinterpret_cast<CComponent**>(&m_pNoiseTextureCom))))
+		return E_FAIL;
 
 
 	//if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Shader_EffectMesh"),
@@ -171,7 +171,9 @@ HRESULT CEffect_Trail::Bind_ShaderResources()
 	
 	if (FAILED(m_pTextureCom->Bind_ShaderResource(m_pShader, "g_DiffuseTexture")))
 		return E_FAIL;
-
+	m_iMaskIndex = 642;
+	if (FAILED(m_pMaskTextureCom->Bind_ShaderResource(m_pShader, "g_MaskTexture", m_iMaskIndex)))
+		return E_FAIL;
 	if (FAILED(m_pGameInstance->Bind_RenderTarget_ShaderResource(TEXT("Target_Depth"), m_pShader, "g_DepthTexture")))
 		return E_FAIL;
 
