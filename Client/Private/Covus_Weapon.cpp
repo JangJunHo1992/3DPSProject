@@ -2,6 +2,7 @@
 #include "Bone.h"
 #include "Character.h"
 #include "GameInstance.h"
+#include "Effect_Trail.h"
 
 CCovus_Weapon::CCovus_Weapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CWeapon_Client(pDevice, pContext)
@@ -30,6 +31,53 @@ HRESULT CCovus_Weapon::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
+	TRAIL_DESC TrailDesc;
+	ZeroMemory(&TrailDesc, sizeof(TRAIL_DESC));
+
+	TrailDesc.iMaxCnt = 16;
+	TrailDesc.vPos_0 = _float3(0.f, 0.f, 0.f);
+	TrailDesc.vPos_1 = _float3(0.f, 0.f, 1.3f);
+
+	if (m_pGameInstance->Get_NextLevel() == 2)
+	{
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Trail"), &TrailDesc)))
+			return E_FAIL;
+
+		m_pTrailDiffuse = dynamic_cast<CEffect_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Effect"))->back());
+
+		if (nullptr == m_pTrailDiffuse)
+			return E_FAIL;
+
+		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_Use(true);
+	}
+	else if (m_pGameInstance->Get_NextLevel() == 6)
+	{
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Trail"), &TrailDesc)))
+			return E_FAIL;
+
+		m_pTrailDiffuse = dynamic_cast<CEffect_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Effect"))->back());
+
+		if (nullptr == m_pTrailDiffuse)
+			return E_FAIL;
+
+		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_Use(true);
+	}
+	else if (m_pGameInstance->Get_NextLevel() == 7)
+	{
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Trail"), &TrailDesc)))
+			return E_FAIL;
+
+		m_pTrailDiffuse = dynamic_cast<CEffect_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Effect"))->back());
+
+		if (nullptr == m_pTrailDiffuse)
+			return E_FAIL;
+
+		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_Use(true);
+	}
+	
 	return S_OK;
 }
 
@@ -41,7 +89,7 @@ void CCovus_Weapon::Priority_Tick(_float fTimeDelta)
 void CCovus_Weapon::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	
+	//m_pTrailDiffuse->Set_Use(true);
 	switch (m_iCurrentLevel)
 	{
 	case 2:

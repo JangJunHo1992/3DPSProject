@@ -96,6 +96,7 @@ void CWeapon::Late_Tick(_float fTimeDelta)
 	}
 
 #endif
+
 }
 
 HRESULT CWeapon::Render()

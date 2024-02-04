@@ -1,4 +1,6 @@
 #pragma once
+
+#include "Client_Defines.h"
 #include "AlphaObject.h"
 
 BEGIN(Engine)
@@ -12,7 +14,7 @@ BEGIN(Client)
 
 class CEffect_Trail : public CAlphaObject
 {
-private:
+protected:
 	CEffect_Trail(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 	CEffect_Trail(const CEffect_Trail& rhs);
 	virtual ~CEffect_Trail() = default;
@@ -85,3 +87,4 @@ public:
 };
 
 END
+

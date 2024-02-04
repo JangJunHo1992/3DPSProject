@@ -16,6 +16,7 @@ texture2D		g_Texture[2];
 texture2D		g_DiffuseTexture;
 texture2D		g_DepthTexture;
 
+texture2D		g_MaskTexture;
 
 
 /* 정점의 변환(월드변환, 뷰변환, 투영변환.)을 수행한다. */
@@ -154,6 +155,40 @@ PS_OUT PS_MAIN_EFFECT(PS_IN_EFFECT In)
 	return Out;
 }
 
+PS_OUT PS_MAIN_TRAIL(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	//Out.vColor = float4(1.f, 0.2f, 0.1f, 1);
+
+	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
+
+	//float4	vMaskDesc = g_MaskTexture.Sample(LinearSampler, In.vTexcoord);
+	//Out.vColor.a = vMaskDesc.x;
+
+	//Out.vColor.y = min(1 - vMaskDesc.x, 0.25f);
+	//Out.vColor.y = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
+
+	return Out;
+}
+
+PS_OUT PS_MAIN_TRAIL_GREEN(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	//Out.vColor = float4(1.0f, 0.2f, 1.0f, 1);
+
+	Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
+
+	//float4	vMaskDesc = g_MaskTexture.Sample(LinearSampler, In.vTexcoord);
+	//Out.vColor.a = max(vMaskDesc.x, 0);
+
+	//Out.vColor.y = min(1 - vMaskDesc.x, 0.25f);
+	//Out.vColor.y = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
+	//Out.vColor.x = min(max(1 - vMaskDesc.x, 0.3f), 0.5f);
+
+	return Out;
+}
 
 technique11 DefaultTechnique
 {
@@ -184,4 +219,31 @@ technique11 DefaultTechnique
 		DomainShader = NULL;
 		PixelShader = compile ps_5_0 PS_MAIN_EFFECT();
 	}	
+
+	pass Trail
+	{
+		SetRasterizerState(RS_Cull_None);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = NULL;
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_TRAIL();
+	}
+
+	pass Trail_Blue
+	{
+		SetRasterizerState(RS_Cull_None);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = NULL;
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_TRAIL_GREEN();
+	}
+
 }

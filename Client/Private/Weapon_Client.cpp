@@ -1,4 +1,24 @@
 #include "Weapon_Client.h"
+#include "Effect_Trail.h"
+
+HRESULT CWeapon_Client::Initialize(void* pArg)
+{
+	if (FAILED(__super::Initialize(pArg)))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+void CWeapon_Client::Late_Tick(_float fTimeDelta)
+{
+	__super::Late_Tick(fTimeDelta);
+
+	if (nullptr != m_pTrailDiffuse)
+	{
+		m_pTrailDiffuse->Set_Use(m_bIsAttack);
+		m_pTrailDiffuse->Update(fTimeDelta, m_WorldMatrix);
+	}
+}
 
 CParticle_Custom::PARTICLE_DESC CWeapon_Client::Get_Particle_Blood_Desc()
 {
