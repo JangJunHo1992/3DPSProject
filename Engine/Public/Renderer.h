@@ -54,6 +54,8 @@ private:
 	HRESULT Render_LightAcc();
 	HRESULT Render_Deferred();
 
+	HRESULT Render_Bloom();
+
 #ifdef _DEBUG
 private:
 	HRESULT Render_Debug();

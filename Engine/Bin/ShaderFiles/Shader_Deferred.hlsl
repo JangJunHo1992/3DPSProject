@@ -4,6 +4,17 @@ matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
 matrix			g_ProjMatrixInv, g_ViewMatrixInv;
 matrix			g_LightViewMatrix, g_LightProjMatrix;
 
+float			g_fTexW = 1280.0f;
+float			g_fTexH = 720.0f;
+
+static const float fWeight[13] = {
+	0.0561, 0.1353, 0.278, 0.4868, 0.7261, 0.9231, 1,
+	0.9231, 0.7261, 0.4868, 0.278, 0.1353, 0.0561
+};
+
+static const float fTotal = 6.2108;
+
+
 vector			g_vLightDir;
 vector			g_vLightPos;
 float			g_fLightRange;
@@ -184,13 +195,17 @@ PS_OUT PS_MAIN_FINAL(PS_IN In)
 	PS_OUT		Out = (PS_OUT)0;
 
 	vector		vDiffuse = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
-	if (0.0f == vDiffuse.a)
-		discard;
+	
 
 	vector		vShade = g_ShadeTexture.Sample(LinearSampler, In.vTexcoord);
 	vector		vSpecular = g_SpecularTexture.Sample(LinearSampler, In.vTexcoord);
+	vector		vBlur = g_BlurTexture.Sample(LinearSampler, In.vTexcoord);
+	vector		vEffect = g_EffectTexture.Sample(LinearSampler, In.vTexcoord);
 
 	Out.vColor = vDiffuse * vShade + vSpecular + vEffect + vBlur;
+
+	if (0.0f == vDiffuse.a && 0.0f == vEffect.a && 0.0f == vBlur.a)
+		discard;
 
 	vector		vDepthDesc = g_DepthTexture.Sample(PointSampler, In.vTexcoord);
 	float		fViewZ = vDepthDesc.y * 1000.f;
