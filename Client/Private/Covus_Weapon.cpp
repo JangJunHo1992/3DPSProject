@@ -49,7 +49,7 @@ HRESULT CCovus_Weapon::Initialize(void* pArg)
 			return E_FAIL;
 
 		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
-		m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
+		//m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
 		m_pTrailDiffuse->Set_Use(true);
 	}
 	else if (m_pGameInstance->Get_NextLevel() == 6)
@@ -217,14 +217,15 @@ _bool CCovus_Weapon::Collision_Chcek()//_uint eLevel
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision&& Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit() == false)
 				{
 					Create_Attack_Particle(LEVEL_GAMEPLAY, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
-					return bIsCollision;
+					break;
 				}
 			}
 		}
@@ -259,14 +260,15 @@ _bool CCovus_Weapon::Collision_Chcekb1()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision && Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit() == false)
 				{
 					Create_Attack_Particle(LEVEL_BOSS1, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
-					return bIsCollision;
+					break;
 				}
 			}
 		}
@@ -301,14 +303,15 @@ _bool CCovus_Weapon::Collision_Chcekb2()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision && Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit() == false)
 				{
 					Create_Attack_Particle(LEVEL_BOSS2, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
-					return bIsCollision;
+					break;
 				}
 			}
 		}

@@ -2,6 +2,7 @@
 #include "Bone.h"
 #include "Character.h"
 #include "GameInstance.h"
+#include "Effect_Monster_Trail.h"
 
 CMagician_Weapon::CMagician_Weapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CWeapon_Client(pDevice, pContext)
@@ -19,6 +20,7 @@ HRESULT CMagician_Weapon::Initialize_Prototype()
 	if (FAILED(__super::Initialize_Prototype()))
 		return E_FAIL;
 	
+	
 
 	return S_OK;
 }
@@ -27,6 +29,28 @@ HRESULT CMagician_Weapon::Initialize(void* pArg)
 {
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
+
+	TRAIL_DESC TrailDesc;
+	ZeroMemory(&TrailDesc, sizeof(TRAIL_DESC));
+
+	TrailDesc.iMaxCnt = 16;
+	TrailDesc.vPos_0 = _float3(0.f, 0.f, 0.f);
+	TrailDesc.vPos_1 = _float3(0.f, 0.f, 1.3f);
+
+
+
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Monster_Trail"), &TrailDesc)))
+		return E_FAIL;
+
+	m_pMonsterTrailDiffuse = dynamic_cast<CEffect_Monster_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Effect"))->back());
+
+	if (nullptr == m_pMonsterTrailDiffuse)
+		return E_FAIL;
+
+	m_pMonsterTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+	//m_pMonsterTrailDiffuse->Set_TextureIndex(1, 693, 0);
+	m_pMonsterTrailDiffuse->Set_Use(true);
+
 
 	return S_OK;
 }
@@ -152,7 +176,7 @@ _bool CMagician_Weapon::Collision_Chcek()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision && Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit()==false)
 				{
 					if (pTarget->Get_Parry() == false)
 					{
@@ -161,6 +185,7 @@ _bool CMagician_Weapon::Collision_Chcek()
 				
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
 					return bIsCollision;
 					

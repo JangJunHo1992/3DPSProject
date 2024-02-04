@@ -10,7 +10,7 @@ void CCovus_Parry_R::Initialize(CCovus_GamePlay* pActor)
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
 
-	pActor->Set_IsAttack(false);
+	//pActor->Set_IsAttack(false);
 }
 
 CState<CCovus_GamePlay>* CCovus_Parry_R::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
@@ -18,7 +18,7 @@ CState<CCovus_GamePlay>* CCovus_Parry_R::Update(CCovus_GamePlay* pActor, _float 
 	_uint iMinimumPlayTime = 15;
 	if (pActor->Is_Inputable_Front(5))
 	{
-		pActor->Set_IsAttack(true);
+		//pActor->Set_IsAttack(true);
 	}
 	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
 	{
@@ -26,7 +26,7 @@ CState<CCovus_GamePlay>* CCovus_Parry_R::Update(CCovus_GamePlay* pActor, _float 
 		{
 			return new CCovus_Parry_L();
 		}
-		pActor->Set_IsAttack(false);
+		//pActor->Set_IsAttack(false);
 	}
 	
 	if (CGameInstance::GetInstance()->Get_DIMouseState(DIM_LB))
@@ -48,7 +48,7 @@ CState<CCovus_GamePlay>* CCovus_Parry_R::Update(CCovus_GamePlay* pActor, _float 
 void CCovus_Parry_R::Release(CCovus_GamePlay* pActor)
 {
 	__super::Release(pActor);
-	pActor->Set_IsAttack(false);
+	//pActor->Set_IsAttack(false);
 
 }
 

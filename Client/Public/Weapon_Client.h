@@ -6,6 +6,7 @@
 
 BEGIN(Client)
 class CEffect_Trail;
+class CEffect_Monster_Trail;
 
 class CWeapon_Client abstract : public CWeapon
 {
@@ -28,6 +29,7 @@ public:
 	CParticle_Custom::PARTICLE_DESC Get_Particle_HalfMoon_Desc();
 protected:
 	CEffect_Trail* m_pTrailDiffuse = { nullptr };
+	CEffect_Monster_Trail* m_pMonsterTrailDiffuse = { nullptr };
 protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) PURE;
 

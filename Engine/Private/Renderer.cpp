@@ -456,7 +456,7 @@ HRESULT CRenderer::Render_Bloom()
 
 	m_pVIBuffer->Bind_VIBuffers();
 
-	m_pShader->Begin(4);
+	m_pShader->Begin(6);
 
 	m_pVIBuffer->Render();
 
@@ -471,7 +471,7 @@ HRESULT CRenderer::Render_Bloom()
 
 	m_pVIBuffer->Bind_VIBuffers();
 
-	m_pShader->Begin(5);
+	m_pShader->Begin(6);
 
 	m_pVIBuffer->Render();
 

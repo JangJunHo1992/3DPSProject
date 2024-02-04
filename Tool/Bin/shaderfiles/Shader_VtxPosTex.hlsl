@@ -166,10 +166,11 @@ PS_OUT PS_MAIN_TRAIL(PS_IN In)
 	//Out.vColor = g_DiffuseTexture.Sample(LinearSampler, In.vTexcoord);
 
 	float4	vMaskDesc = g_MaskTexture.Sample(LinearSampler, In.vTexcoord);
-	Out.vColor.a = vMaskDesc.x;
+	Out.vColor.a = max(vMaskDesc.x, 0);
 
 	//Out.vColor.y = min(1 - vMaskDesc.x, 0.25f);
-	Out.vColor.y = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
+	//Out.vColor.z = min(max(1 - vMaskDesc.x, 0.3f), 0.7f);
+	//Out.vColor.x = min(max(1 - vMaskDesc.x, 0.3f), 0.5f);
 
 	return Out;
 }

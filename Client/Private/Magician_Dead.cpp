@@ -10,12 +10,15 @@ void CMagician_Dead::Initialize(CMagician_GamePlay* pActor)
 
 CState<CMagician_GamePlay>* CMagician_Dead::Update(CMagician_GamePlay* pActor, _float fTimeDelta)
 {
+	if (pActor->Is_Inputable_Back(50))
+	{
+		pActor->Activate_Dissolve();
+	}
 	if (pActor->Is_Animation_End())
 	{
 		pActor->Set_CutSceneDead2(false);
-		pActor->Activate_Dissolve();
+		pActor->Set_isdead(true);
 	}
-
 
 	return nullptr;
 }

@@ -1,5 +1,6 @@
 #include "Weapon_Client.h"
 #include "Effect_Trail.h"
+#include "Effect_Monster_Trail.h"
 
 HRESULT CWeapon_Client::Initialize(void* pArg)
 {
@@ -21,6 +22,11 @@ void CWeapon_Client::Late_Tick(_float fTimeDelta)
 	{
 		m_pTrailDiffuse->Set_Use(m_bIsAttack);
 		m_pTrailDiffuse->Update(fTimeDelta, m_WorldMatrix);
+	}
+	if (nullptr != m_pMonsterTrailDiffuse)
+	{
+		m_pMonsterTrailDiffuse->Set_Use(m_bIsAttack);
+		m_pMonsterTrailDiffuse->Update(fTimeDelta, m_WorldMatrix);
 	}
 }
 

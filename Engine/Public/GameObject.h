@@ -62,6 +62,9 @@ public:
 	_bool Get_CutSceneDead() { return m_bCutSceneDead; }
 	void Set_CutSceneDead2(_bool _bCutSceneDead2) { m_bCutSceneDead2 = _bCutSceneDead2; }
 	_bool Get_CutSceneDead2() { return m_bCutSceneDead2; }
+	
+	void	Set_HasBeenHit(_bool _bHasBeenHit) { m_bHasBeenHit = _bHasBeenHit; }
+	_bool	Get_HasBeenHit() { return m_bHasBeenHit; }
 public:
 	virtual void Write_Json(json& Out_Json) override;
 	virtual void Load_FromJson(const json& In_Json) override;
@@ -82,11 +85,13 @@ protected:
 	_bool						m_bCheckCard = false;
 public:
 	//Start
-	static _bool						m_bStartScene ;
-	static _bool						m_bStartScene2;
+	static _bool				m_bStartScene ;
+	static _bool				m_bStartScene2;
 	//End
-	static _bool						m_bCutSceneDead;
-	static _bool						m_bCutSceneDead2;
+	static _bool				m_bCutSceneDead;
+	static _bool				m_bCutSceneDead2;
+
+	_bool						m_bHasBeenHit = false;
 protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";

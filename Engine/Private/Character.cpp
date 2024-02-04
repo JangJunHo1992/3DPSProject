@@ -69,8 +69,8 @@ void CCharacter::Tick(_float fTimeDelta)
 	if (m_bIsDissolve)
 		m_fDissolveTime += fTimeDelta;
 
-	if (1.5f <= m_fDissolveTime)
-		m_bisdead = true;
+	//if (1.5f <= m_fDissolveTime)
+	//	m_bisdead = true;
 // 	if (m_fInvincibleTime > 0.f)
 // 	{
 // 		m_fInvincibleTime -= fTimeDelta;
