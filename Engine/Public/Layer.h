@@ -24,7 +24,7 @@ public:
 
 private:
 	list<CGameObject*>			m_GameObjects;
-	_uint						m_iCheckTime;
+	
 public:
 	static CLayer* Create();
 	virtual void Free() override;

@@ -89,6 +89,14 @@ void CCovus::Tick(_float fTimeDelta)
 void CCovus::Late_Tick(_float fTimeDelta)
 {
 	__super::Late_Tick(fTimeDelta);
+	if (Get_HasBeenHit() == true)
+		++m_iCheckHitTime;
+
+	if (Get_HasBeenHit() == true && m_iCheckHitTime > 5.f)
+	{
+		Set_HasBeenHit(false);
+		m_iCheckHitTime = 0;
+	}
 }
 
 HRESULT CCovus::Render()

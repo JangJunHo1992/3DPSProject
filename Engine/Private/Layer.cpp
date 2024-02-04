@@ -38,18 +38,13 @@ void CLayer::Priority_Tick(_float fTimeDelta)
 
 void CLayer::Tick(_float fTimeDelta)
 {
-	m_iCheckTime += fTimeDelta;
 	for (auto& pGameObject : m_GameObjects)
 	{
 		if (nullptr != pGameObject)
 		{
 			pGameObject->Tick(fTimeDelta);
-			if (m_iCheckTime > 1.f)
-			{
-				pGameObject->Set_HasBeenHit(false);
-				m_iCheckTime = 0.f;
-			}
 		}
+	
 	}
 }
 

@@ -96,7 +96,7 @@ protected:
 	string						m_sName = "";
 	string						m_sLayerTag = "";
 	_uint						m_iCurrentLevelIndex = -1;
-
+	_uint						m_iCheckHitTime = 0;
 protected:
 	HRESULT	Add_Component(_uint iLevelIndex, const wstring& strPrototypeTag,
 							const wstring& strComTag, _Inout_ CComponent** ppOut, void* pArg = nullptr);
