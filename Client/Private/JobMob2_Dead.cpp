@@ -12,7 +12,7 @@ CState<CJobMob2_GamePlay>* CJobMob2_Dead::Update(CJobMob2_GamePlay* pActor, _flo
 {
 	if (pActor->Is_Animation_End())
 	{
-		pActor->Set_isdead(true);
+		pActor->Activate_Dissolve();
 	}
 	
 	return nullptr;

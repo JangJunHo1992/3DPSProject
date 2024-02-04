@@ -62,6 +62,10 @@ void CWeapon::Tick(_float fTimeDelta)
 
 	for (_uint i = 0; i < m_iColliderSize; ++i)
 		m_pColliders[i]->Update(m_WorldMatrix);
+
+
+	if (m_bDissolve)
+		m_fDissolveWeight += fTimeDelta;
 }
 
 void CWeapon::Late_Tick(_float fTimeDelta)
@@ -110,11 +114,19 @@ HRESULT CWeapon::Render()
 
 	_uint		iNumMeshes = m_pModelCom->Get_NumMeshes();
 
+	_uint iPass = false == m_bDissolve ? 0 : 1;
+
+	if (FAILED(m_pDissolveTexture->Bind_ShaderResource(m_pShaderCom, "g_DissolveTexture", 0)))
+		return E_FAIL;
+
+	if (FAILED(m_pShaderCom->Bind_RawValue("g_fDissolveWeight", &m_fDissolveWeight, sizeof(_float))))
+		return E_FAIL;
+
 	for (size_t i = 0; i < iNumMeshes; i++)
 	{
 		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
 
-		m_pShaderCom->Begin(0);
+		m_pShaderCom->Begin(iPass);
 
 		m_pModelCom->Render(i);
 	}
@@ -139,12 +151,20 @@ HRESULT CWeapon::Render_Shadow()
 
 	_uint		iNumMeshes = m_pModelCom->Get_NumMeshes();
 
+	_uint iPass = false == m_bDissolve ? 1 : 2;
+
+	if (FAILED(m_pDissolveTexture->Bind_ShaderResource(m_pShaderCom, "g_DissolveTexture", 0)))
+		return E_FAIL;
+
+	if (FAILED(m_pShaderCom->Bind_RawValue("g_fDissolveWeight", &m_fDissolveWeight, sizeof(_float))))
+		return E_FAIL;
+
 	for (size_t i = 0; i < iNumMeshes; i++)
 	{
 
 		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
 
-		m_pShaderCom->Begin(2);
+		m_pShaderCom->Begin(iPass);
 
 		m_pModelCom->Render(i);
 	}

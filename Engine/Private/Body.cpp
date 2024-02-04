@@ -54,6 +54,9 @@ void CBody::Tick(_float fTimeDelta)
 	m_pModelCom->Play_Animation(fTimeDelta, m_vMovePos);
 
 	//m_pColliderCom->Update(m_WorldMatrix);
+
+	if (m_bDissolve)
+		m_fDissolveWeight += fTimeDelta;
 }
 
 void CBody::Late_Tick(_float fTimeDelta)
@@ -79,13 +82,21 @@ HRESULT CBody::Render()
 
 	_uint		iNumMeshes = m_pModelCom->Get_NumMeshes();
 
+	_uint iPass = false == m_bDissolve ? 0 : 3;
+
+	if (FAILED(m_pDissolveTexture->Bind_ShaderResource(m_pShaderCom, "g_DissolveTexture", 0)))
+		return E_FAIL;
+
+	if (FAILED(m_pShaderCom->Bind_RawValue("g_fDissolveWeight", &m_fDissolveWeight, sizeof(_float))))
+		return E_FAIL;
+
 	for (size_t i = 0; i < iNumMeshes; i++)
 	{
 		m_pModelCom->Bind_BoneMatrices(m_pShaderCom, "g_BoneMatrices", i);
 
 		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
 
-		m_pShaderCom->Begin(0);
+		m_pShaderCom->Begin(iPass);
 
 		m_pModelCom->Render(i);
 	}
@@ -110,13 +121,21 @@ HRESULT CBody::Render_Shadow()
 
 	_uint		iNumMeshes = m_pModelCom->Get_NumMeshes();
 
+	_uint iPass = false == m_bDissolve ? 2 : 3;
+
+	if (FAILED(m_pDissolveTexture->Bind_ShaderResource(m_pShaderCom, "g_DissolveTexture", 0)))
+		return E_FAIL;
+
+	if (FAILED(m_pShaderCom->Bind_RawValue("g_fDissolveWeight", &m_fDissolveWeight, sizeof(_float))))
+		return E_FAIL;
+
 	for (size_t i = 0; i < iNumMeshes; i++)
 	{
 		m_pModelCom->Bind_BoneMatrices(m_pShaderCom, "g_BoneMatrices", i);
 
 		m_pModelCom->Bind_ShaderResource(m_pShaderCom, "g_DiffuseTexture", i, aiTextureType_DIFFUSE);
 
-		m_pShaderCom->Begin(2);
+		m_pShaderCom->Begin(iPass);
 
 		m_pModelCom->Render(i);
 	}
@@ -156,6 +175,8 @@ HRESULT CBody::Bind_ShaderResources()
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ViewMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_VIEW))))
 		return E_FAIL;
 	if (FAILED(m_pShaderCom->Bind_Matrix("g_ProjMatrix", &m_pGameInstance->Get_TransformFloat4x4(CPipeLine::D3DTS_PROJ))))
+		return E_FAIL;
+	if (FAILED(m_pDissolveTexture->Bind_ShaderResource(m_pShaderCom, "g_DissolveTexture", 0)))
 		return E_FAIL;
 // 	if (FAILED(m_pShaderCom->Bind_RawValue("g_vCamPosition", &m_pGameInstance->Get_CamPosition(), sizeof(_float4))))
 // 		return E_FAIL;

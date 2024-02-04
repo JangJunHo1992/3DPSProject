@@ -14,9 +14,9 @@ CState<CVarg_GamePlay>* CVarg_Dead2::Update(CVarg_GamePlay* pActor, _float fTime
 {
 	if (pActor->Is_Animation_End())
 	{
+		pActor->Activate_Dissolve();
 		pActor->Set_CutSceneDead(false);
 
-		pActor->Set_isdead(true);
 	}
 
 

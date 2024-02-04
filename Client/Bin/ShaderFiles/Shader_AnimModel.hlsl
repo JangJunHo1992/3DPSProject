@@ -3,8 +3,11 @@
 
 matrix			g_WorldMatrix, g_ViewMatrix, g_ProjMatrix;
 texture2D		g_DiffuseTexture;
+texture2D		g_DissolveTexture;
 
 matrix			g_BoneMatrices[256];
+
+float			g_fDissolveWeight;
 
 struct VS_IN
 {
@@ -106,6 +109,45 @@ PS_OUT_SHADOW PS_MAIN_SHADOW(PS_IN In)
 	return Out;
 }
 
+
+PS_OUT PS_DISSOLVE_MAIN(PS_IN In)
+{
+	PS_OUT Out = (PS_OUT)0;
+
+	float4 vColor = g_DiffuseTexture.Sample(ClampSampler, In.vTexcoord);
+	float4 vDissolve = g_DissolveTexture.Sample(ClampSampler, In.vTexcoord);
+
+	float sinTime = sin(g_fDissolveWeight);
+
+	if (vColor.a == 0.f)
+		clip(-1);
+
+	if (vDissolve.r >= sinTime)
+		vColor.a = 1;
+	else
+		vColor.a = 0;
+
+	if (vDissolve.r >= sinTime - 0.05 && vDissolve.r <= sinTime + 0.05)
+		vColor = float4(1, 0, 0, 1); // »¡
+	else;
+
+	if (vDissolve.r >= sinTime - 0.03 && vDissolve.r <= sinTime + 0.03)
+		vColor = float4(1, 1, 0, 1); // ³ë
+	else;
+
+	if (vDissolve.r >= sinTime - 0.025 && vDissolve.r <= sinTime + 0.025)
+		vColor = float4(1, 1, 1, 1); // Èò
+	else;
+
+	Out.vDiffuse = vColor;
+
+	if (0 == Out.vDiffuse.a)
+		discard;
+
+	return Out;
+};
+
+
 technique11 DefaultTechnique
 {	
 	pass Model
@@ -148,4 +190,18 @@ technique11 DefaultTechnique
 		DomainShader = NULL;
 		PixelShader = compile ps_5_0 PS_MAIN_SHADOW();
 	}
+
+	pass Dissolve
+	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = NULL;
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_DISSOLVE_MAIN();
+	}
+
 }

@@ -99,6 +99,8 @@ public:
 	_float3 Get_Pos();
 	_float4 Get_Pos4();
 public:
+	void Activate_Dissolve();
+public:
 	void Set_Parry(_bool _bParry) { m_bParry = _bParry; }
 	_bool Get_Parry() { return m_bParry; }
 
@@ -122,6 +124,9 @@ protected:
 	_bool m_bIsPowered = { false };
 	_float3	m_vNetPower = { 0.f, 0.f, 0.f };
 	_bool	m_bIsJump = { false };
+
+	_bool m_bIsDissolve = { false };
+	_float m_fDissolveTime = { 0.f };
 protected:
 	map<const wstring, CGameObject*>		m_PartObjects;
 	
