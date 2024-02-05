@@ -92,7 +92,7 @@ void CCovus::Late_Tick(_float fTimeDelta)
 	if (Get_HasBeenHit() == true)
 		++m_iCheckHitTime;
 
-	if (Get_HasBeenHit() == true && m_iCheckHitTime > 5.f)
+	if (Get_HasBeenHit() == true && m_iCheckHitTime > 10.f)
 	{
 		Set_HasBeenHit(false);
 		m_iCheckHitTime = 0;
@@ -142,7 +142,7 @@ _bool CCovus::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 void CCovus::Set_Hitted()
 {
-	if (m_bCheckDead == false &&m_bParry ==false)
+	if (m_bCheckDead == false &&m_bParry ==false && Get_HasBeenHit() == false)
 	{
 		CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
 		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);

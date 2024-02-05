@@ -212,4 +212,18 @@ void CJobMob2_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 
 		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
 	}
+	_uint iRandom = rand() % 3;
+	if (iRandom == 1)
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
+
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
 }

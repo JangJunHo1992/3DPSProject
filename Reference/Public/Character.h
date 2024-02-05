@@ -118,7 +118,7 @@ protected:
 
 	CCharacter* m_pTargetPlayer = { nullptr };
 	CCharacter* m_pTargetMonster = { nullptr };
-
+	_float4x4	m_CharWorldMatrix = {};
 	_uint		m_iCurrentLevelIn;
 	//RigidBody
 	_bool m_bIsPowered = { false };

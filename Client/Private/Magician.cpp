@@ -66,7 +66,7 @@ void CMagician::Late_Tick(_float fTimeDelta)
 	if (Get_HasBeenHit() == true)
 		++m_iCheckHitTime;
 
-	if (Get_HasBeenHit() == true && m_iCheckHitTime > 5.f)
+	if (Get_HasBeenHit() == true && m_iCheckHitTime > 10.f)
 	{
 		Set_HasBeenHit(false);
 		m_iCheckHitTime = 0;
@@ -114,7 +114,7 @@ _bool CMagician::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 void CMagician::Set_Hitted()
 {
-	if (m_bCheckDead == false)
+	if (m_bCheckDead == false && Get_HasBeenHit() == false)
 	{
 		_uint Random = rand() % 3;
 		if (Random == 1)
