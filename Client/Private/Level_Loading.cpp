@@ -124,7 +124,6 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 			//! ½Â¿ë ÁÖ¼®	return;
 			if (FAILED(m_pGameInstance->Open_Level(m_eNextLevelID, pNewLevel)))
 				return;
-			//CGameObject::m_bLoadingComplete == false;
 		}
 	}
 }
