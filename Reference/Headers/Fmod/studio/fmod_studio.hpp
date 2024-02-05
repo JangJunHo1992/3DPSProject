@@ -11,9 +11,9 @@
 #ifndef FMOD_STUDIO_HPP
 #define FMOD_STUDIO_HPP
 
-#include "Fmod/studio/fmod_studio_common.h"
-#include "Fmod/studio/fmod_studio.h"
-#include "Fmod/core/fmod.hpp"
+#include "../Fmod/studio/fmod_studio_common.h"
+#include "../Fmod/studio/fmod_studio.h"
+#include "../Fmod/core/fmod.hpp"
 
 namespace FMOD
 {
