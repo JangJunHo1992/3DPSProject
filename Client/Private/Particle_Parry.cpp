@@ -97,7 +97,7 @@ HRESULT CParticle_Parry::Render()
 		return E_FAIL;
 
 	/* 이 셰ㅒ이더에 0번째 패스로 그릴꺼야. */
-	m_pShaderCom->Begin(1);
+	m_pShaderCom->Begin(2);
 
 	/* 내가 그릴려고하는 정점, 인덷ㄱ스버퍼를 장치에 바인딩해. */
 	m_pVIBufferCom->Bind_VIBuffers();
@@ -121,7 +121,7 @@ HRESULT CParticle_Parry::Ready_Components(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Snow"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Parry"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 

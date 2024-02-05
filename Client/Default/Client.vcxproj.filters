@@ -2292,6 +2292,9 @@
     <ClCompile Include="..\Private\Particle_Parry.cpp">
       <Filter>02.GameObjects\Effect\Particles\Player\Parry</Filter>
     </ClCompile>
+    <ClCompile Include="..\Public\Character_Client.cpp">
+      <Filter>02.GameObjects\0.Abstract\Characther</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">

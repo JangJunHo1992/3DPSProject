@@ -24,6 +24,9 @@
 // #include "Particle_Red.h"
 #include "Particle_Custom.h"
 #include "Particle_Custom_EffectTool.h"
+#include "Particle_Attack.h"
+#include "Particle_Hit.h"
+#include "Particle_Parry.h"
 
 #include "VIBuffer_Trail.h"
 #include "Effect_Fire.h"
@@ -226,10 +229,6 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 // 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Brush.png"), 1))))
 // 		return E_FAIL;
 
-	/* For.Prototype_Component_Texture_Snow */
-	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Snow"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"), 1))))
-		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Sky */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Sky"),
@@ -255,6 +254,26 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_UVMask"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Mask/%d.png"), 902))))
 		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Hit"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"),1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Parry */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Parry"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Particle/0.png"), 1))))
+		return E_FAIL;
+
+	//For.Prototype_Component_Texture_Snow
+		if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Snow"),
+			CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Particle/1.png"), 1))))
+			return E_FAIL;
+
+// 	/* For.Prototype_Component_Texture_Snow */
+// 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Hit"),
+// 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"), 1))))
+// 		return E_FAIL;
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1254,6 +1273,19 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CParticle_Custom::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 
+	/* For.Prototype_GameObject_Particle_Parry*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Parry"),
+		CParticle_Parry::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_Particle_Hit*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Hit"),
+		CParticle_Hit::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_Particle_Attack*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Particle_Attack"),
+		CParticle_Attack::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
 	/* For.Prototype_GameObject_Fire*/
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Fire"),
 		CEffect_Fire::Create(m_pDevice, m_pContext))))
@@ -1304,8 +1336,18 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 // 		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Snow */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Snow"),
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Hit"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Parry */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Parry"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Particle/0.png"), 1))))
+		return E_FAIL;
+
+	//For.Prototype_Component_Texture_Snow
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Snow"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Particle/1.png"), 1))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Sky */
@@ -1542,8 +1584,18 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
 
 	/* For.Prototype_Component_Texture_Snow */
-	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Snow"),
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Hit"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Parry */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Parry"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Particle/0.png"), 1))))
+		return E_FAIL;
+
+	//For.Prototype_Component_Texture_Snow
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Snow"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Particle/1.png"), 1))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Sky */

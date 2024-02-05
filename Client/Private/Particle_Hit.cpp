@@ -121,7 +121,7 @@ HRESULT CParticle_Hit::Ready_Components(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Snow"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Hit"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 

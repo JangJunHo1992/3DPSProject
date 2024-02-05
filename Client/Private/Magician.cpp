@@ -114,7 +114,7 @@ _bool CMagician::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 void CMagician::Set_Hitted()
 {
-	if (m_bCheckDead == false)
+	if (m_bCheckDead == false && Get_HasBeenHit() == false)
 	{
 		_uint Random = rand() % 3;
 		if (Random == 1)
@@ -126,6 +126,42 @@ void CMagician::Set_Hitted()
 		}
 		
 		MagicianStatus.m_iHP -= 10;
+		if (m_iCurrentLevelIn == 2)
+		{
+			CParticle_Hit::PARTICLE_DESC Desc = Get_Particle_Hitblood_Desc();
+
+			_float3 vPos;
+			XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&m_pTransformCom->Get_Pos()), m_pTransformCom->Get_WorldMatrix()));
+
+			Desc.parentMatrix = m_pTransformCom->Get_WorldMatrix();
+			Desc.vPos = vPos;
+
+			m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Hit"), &Desc);
+		}
+		else if (m_iCurrentLevelIn == 6)
+		{
+			CParticle_Hit::PARTICLE_DESC Desc = Get_Particle_Hitblood_Desc();
+
+			_float3 vPos;
+			XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&m_pTransformCom->Get_Pos()), m_pTransformCom->Get_WorldMatrix()));
+
+			Desc.parentMatrix = m_pTransformCom->Get_WorldMatrix();
+			Desc.vPos = vPos;
+
+			m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Hit"), &Desc);
+		}
+		else if (m_iCurrentLevelIn == 7)
+		{
+			CParticle_Hit::PARTICLE_DESC Desc = Get_Particle_Hitblood_Desc();
+
+			_float3 vPos;
+			XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&m_pTransformCom->Get_Pos()), m_pTransformCom->Get_WorldMatrix()));
+
+			Desc.parentMatrix = m_pTransformCom->Get_WorldMatrix();
+			Desc.vPos = vPos;
+
+			m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Hit"), &Desc);
+		}
 	}
 	
 }

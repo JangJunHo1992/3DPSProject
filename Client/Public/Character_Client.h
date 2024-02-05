@@ -2,6 +2,7 @@
 
 #include "Character.h"
 #include "Client_Defines.h"
+#include "Particle_Hit.h"
 
 BEGIN(Client)
 
@@ -20,6 +21,8 @@ protected:
 	virtual ~CCharacter_Client() = default;
 
 protected:
+	CParticle_Hit::PARTICLE_DESC Get_Particle_Hitblood_Desc();
+
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) PURE;
 
 };

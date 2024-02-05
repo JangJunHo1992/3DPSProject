@@ -197,3 +197,18 @@ _bool CMagician_Weapon::Collision_Chcek()
 
 	return bIsCollision;
 }
+
+void CMagician_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
+{
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_HalfMoon_Desc();
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
+}

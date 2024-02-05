@@ -3,6 +3,7 @@
 #include "Weapon.h"
 #include "Client_Defines.h"
 #include "Particle_Custom.h"
+#include "Particle_Parry.h"
 
 BEGIN(Client)
 class CEffect_Trail;
@@ -24,7 +25,7 @@ public:
 	virtual HRESULT Initialize(void* pArg) override;
 	virtual void Late_Tick(_float fTimeDelta) override;
 public:
-	CParticle_Custom::PARTICLE_DESC Get_Particle_Blood_Desc();
+	CParticle_Parry::PARTICLE_DESC Get_Particle_Parry_Desc();
 	CParticle_Custom::PARTICLE_DESC Get_Particle_HitEffect_Desc();
 	CParticle_Custom::PARTICLE_DESC Get_Particle_HalfMoon_Desc();
 protected:
