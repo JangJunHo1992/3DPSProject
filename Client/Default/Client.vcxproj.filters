@@ -775,6 +775,9 @@
     <Filter Include="02.GameObjects\UI\TexUI\Loading_ICON">
       <UniqueIdentifier>{449a2c2b-f3fb-4524-9591-a0ca7387b2bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\UI\TexUI\Loading_Complete">
+      <UniqueIdentifier>{05cd2f20-e8de-49de-89d2-3577ce580b01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1563,6 +1566,9 @@
     <ClInclude Include="..\Public\TexUI_Loading_ICON.h">
       <Filter>02.GameObjects\UI\TexUI\Loading_ICON</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\TexUI_Loading_Complete.h">
+      <Filter>02.GameObjects\UI\TexUI\Loading_Complete</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2306,6 +2312,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\TexUI_Loading_ICON.cpp">
       <Filter>02.GameObjects\UI\TexUI\Loading_ICON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TexUI_Loading_Complete.cpp">
+      <Filter>02.GameObjects\UI\TexUI\Loading_Complete</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

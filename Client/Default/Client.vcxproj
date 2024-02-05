@@ -399,6 +399,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Terrain.h" />
     <ClInclude Include="..\Public\Terrain_GamePlay.h" />
     <ClInclude Include="..\Public\Terrain_Tool.h" />
+    <ClInclude Include="..\Public\TexUI_Loading_Complete.h" />
     <ClInclude Include="..\Public\TexUI_Loading_ICON.h" />
     <ClInclude Include="..\Public\Varg.h" />
     <ClInclude Include="..\Public\VargDefaultState.h" />
@@ -650,6 +651,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Terrain.cpp" />
     <ClCompile Include="..\Private\Terrain_GamePlay.cpp" />
     <ClCompile Include="..\Private\Terrain_Tool.cpp" />
+    <ClCompile Include="..\Private\TexUI_Loading_Complete.cpp" />
     <ClCompile Include="..\Private\TexUI_Loading_ICON.cpp" />
     <ClCompile Include="..\Private\Varg.cpp" />
     <ClCompile Include="..\Private\VargDefaultState.cpp" />
