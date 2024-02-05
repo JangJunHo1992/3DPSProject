@@ -85,7 +85,7 @@ private:
 	FMOD_CHANNELGROUP* m_pMasterChanelGroup;
 
 private:
-	const char* commonPath = "C:/Users/hmbga/OneDrive/3D_Personal/Client/Bin/Resources/Sound/";
+	const char* commonPath = "C:/Users/jj/Desktop/3DPSProject/Client/Bin/Resources/Sound/";
 
 public:
 	static CSound_Manager* Create();
