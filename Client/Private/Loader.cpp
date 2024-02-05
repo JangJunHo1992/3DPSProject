@@ -20,6 +20,10 @@
 #include "Weapon_Player.h"
 #include "Body_Player.h"
 
+#include "Loading1.h"
+#include "Loading2.h"
+#include "Loading3.h"
+
 // #include "Particle_Blue.h"
 // #include "Particle_Red.h"
 #include "Particle_Custom.h"
@@ -197,8 +201,23 @@ HRESULT CLoader::Loading_For_Logo_Level()
 	/* For.Prototype_GameObject_BackGround */
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_BackGround"),
 		CBackGround::Create(m_pDevice, m_pContext))))
-		return E_FAIL;	
+		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Loading1"),
+		CLoading1::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 
+	/* For.Prototype_GameObject_Loading2 */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Loading2"),
+		CLoading2::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+	/* For.Prototype_GameObject_Loading3 */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Loading3"),
+		CLoading3::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+
+	
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 
 	m_isFinished = true;
@@ -211,6 +230,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	/* 게임플레이 레벨에 필요한 자원을 로드하자. */
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
 
+	
 	/* For.Prototype_Component_Texture_Terrain */
 // 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Terrain"),
 // 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Terrain/Tile%d.dds"), 2))))

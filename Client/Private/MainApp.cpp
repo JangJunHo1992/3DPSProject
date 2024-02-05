@@ -5,6 +5,10 @@
 #include "Level_Loading.h"
 #include "Imgui_Manager.h"
 
+#include "Loading1.h"
+#include "Loading2.h"
+#include "Loading3.h"
+
 
 CMainApp::CMainApp()	
 	: m_pGameInstance(CGameInstance::GetInstance())
@@ -94,6 +98,10 @@ HRESULT CMainApp::Ready_Prototype_Component_ForStaticLevel()
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Shader_VtxPosTex"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_VtxPosTex.hlsl"), VTXPOSTEX::Elements, VTXPOSTEX::iNumElements))))
 		return E_FAIL;
+
+
+
+	
 
 	return S_OK;
 }

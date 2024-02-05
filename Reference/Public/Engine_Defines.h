@@ -38,12 +38,12 @@ using namespace rapidjson;
 #include <fstream>
 #include <string>
 
-#include "Fmod/core/fmod.h"
-#include "Fmod/core/fmod.hpp"
-#include "Fmod/core/fmod_errors.h"
-#include "Fmod/studio/fmod_studio.h"
-#include "Fmod/studio/fmod_studio.hpp"
-#include "Fmod/core/fmod_common.h"
+#include "../Fmod/core/fmod.h"
+#include "../Fmod/core/fmod.hpp"
+#include "../Fmod/core/fmod_errors.h"
+#include "../Fmod/studio/fmod_studio.h"
+#include "../Fmod/studio/fmod_studio.hpp"
+#include "../Fmod/core/fmod_common.h"
 
 
 

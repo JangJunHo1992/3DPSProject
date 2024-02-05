@@ -11,7 +11,7 @@
 #ifndef FMOD_STUDIO_COMMON_H
 #define FMOD_STUDIO_COMMON_H
 
-#include "Fmod/core/fmod.h"
+#include "../Fmod/core/fmod.h"
 
 /*
     FMOD Studio types.
