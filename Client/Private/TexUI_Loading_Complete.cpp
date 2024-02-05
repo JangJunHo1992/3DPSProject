@@ -98,6 +98,7 @@ HRESULT CTexUI_Loading_Complete::Render()
 	m_pVIBufferCom->Bind_VIBuffers();
 
 	/* 바인딩된 정점, 인덱스를 그려. */
+	if (CGameObject::m_bLoadingComplete == true)
 		m_pVIBufferCom->Render();
 
 	return S_OK;

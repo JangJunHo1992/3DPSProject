@@ -1302,8 +1302,9 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
+	CGameObject::m_bLoadingComplete = true;
+
 	m_isFinished = true;
 	
 	return S_OK;
@@ -1562,6 +1563,8 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
+	CGameObject::m_bLoadingComplete = true;
+
 	m_isFinished = true;
 	return S_OK;
 }
@@ -1843,6 +1846,8 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
+	CGameObject::m_bLoadingComplete = true;
+
 	m_isFinished = true;
 
 	return S_OK;

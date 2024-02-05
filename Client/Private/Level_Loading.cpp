@@ -3,6 +3,8 @@
 #include "Loader.h"
 
 #include "GameInstance.h"
+#include "GameObject.h"
+
 #include "Level_Logo.h"
 #include "Level_GamePlay.h"
 #include "Level_MapTool.h"
@@ -63,16 +65,19 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevelID)
 	{
 		if (FAILED(Ready_Layer_BackGround1(TEXT("Layer_BackGround"))))
 			return E_FAIL;
+		//CGameObject::m_bLoadingComplete = false;
 	}
 	else if (m_eNextLevelID == LEVEL_BOSS1)
 	{
 		if (FAILED(Ready_Layer_BackGround2(TEXT("Layer_BackGround"))))
 			return E_FAIL;
+		//CGameObject::m_bLoadingComplete = false;
 	}
 	else if (m_eNextLevelID == LEVEL_BOSS2)
 	{
 		if (FAILED(Ready_Layer_BackGround3(TEXT("Layer_BackGround"))))
 			return E_FAIL;
+		//CGameObject::m_bLoadingComplete = false;
 	}
 	/* 추가적인 스레드를 생성하여 eNextLevelID에 필요한 자원들을 로드한다. */
 	m_pLoader = CLoader::Create(m_pDevice, m_pContext, eNextLevelID);
@@ -119,7 +124,7 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 				pNewLevel = CLevel_EffectTool::Create(m_pDevice, m_pContext);
 				break;
 			}
-
+			CGameObject::m_bLoadingComplete = false;
 			//! 승용 주석if (nullptr == pNewLevel)
 			//! 승용 주석	return;
 			if (FAILED(m_pGameInstance->Open_Level(m_eNextLevelID, pNewLevel)))

@@ -7,7 +7,8 @@ _bool		CGameObject::				m_bStartScene		=false;
 _bool		CGameObject::				m_bStartScene2		=false;
 _bool		CGameObject::				m_bCutSceneDead		=false;
 _bool		CGameObject::				m_bCutSceneDead2	=false;	
-//_bool		CGameObject::				m_bLoadingComplete	=false;
+_bool		CGameObject::				m_bLoadingComplete	=false;
+
 CGameObject::CGameObject(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
 	: m_pDevice(pDevice)
 	, m_pContext(pContext)
