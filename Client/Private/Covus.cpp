@@ -147,44 +147,36 @@ void CCovus::Set_Hitted()
 		CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
 		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		PlayerStatus.m_iHP -= 10;
-		if(m_iCurrentLevelIn == 2)
+		
+		if (m_iCurrentLevelIn == 2)
 		{
-			CParticle_Hit::PARTICLE_DESC Desc = Get_Particle_Hitblood_Desc();
-
-			_float3 vPos;
-			XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&m_pTransformCom->Get_Pos()),m_pTransformCom->Get_WorldMatrix()));
-
-			Desc.parentMatrix = m_pTransformCom->Get_WorldMatrix();
-			Desc.vPos = vPos;
-
-			m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Hit"), &Desc);
+			Create_Attack_Particle(LEVEL_GAMEPLAY, m_pColliderCom->GetCenterPos());
 		}
 		else if (m_iCurrentLevelIn == 6)
 		{
-			CParticle_Hit::PARTICLE_DESC Desc = Get_Particle_Hitblood_Desc();
-
-			_float3 vPos;
-			XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&m_pTransformCom->Get_Pos()), m_pTransformCom->Get_WorldMatrix()));
-
-			Desc.parentMatrix = m_pTransformCom->Get_WorldMatrix();
-			Desc.vPos = vPos;
-
-			m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Hit"), &Desc);
+			Create_Attack_Particle(LEVEL_BOSS1, m_pColliderCom->GetCenterPos());
 		}
 		else if (m_iCurrentLevelIn == 7)
 		{
-			CParticle_Hit::PARTICLE_DESC Desc = Get_Particle_Hitblood_Desc();
-
-			_float3 vPos;
-			XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&m_pTransformCom->Get_Pos()), m_pTransformCom->Get_WorldMatrix()));
-
-			Desc.parentMatrix = m_pTransformCom->Get_WorldMatrix();
-			Desc.vPos = vPos;
-
-			m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Hit"), &Desc);
+			Create_Attack_Particle(LEVEL_BOSS2, m_pColliderCom->GetCenterPos());
 		}
 	}
 	
+}
+
+void CCovus::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
+{
+	{
+		CParticle_Hit::PARTICLE_DESC Desc = Get_Particle_Hitblood_Desc();
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_pTransformCom->Get_WorldMatrix()));
+
+		Desc.parentMatrix = m_pTransformCom->Get_WorldMatrix();
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Hit"), &Desc);
+	}
 }
 
 void CCovus::Set_Dead()

@@ -27,6 +27,7 @@ protected:
 
 public:
 	virtual void Set_Hitted() override;
+	void Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos);
 	virtual void Set_Dead() override;
 public:
 	virtual void Write_Json(json& Out_Json) override;

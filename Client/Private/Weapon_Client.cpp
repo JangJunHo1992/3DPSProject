@@ -30,9 +30,9 @@ void CWeapon_Client::Late_Tick(_float fTimeDelta)
 	}
 }
 
-CParticle_Custom::PARTICLE_DESC CWeapon_Client::Get_Particle_Parry_Desc()
+CParticle_Parry::PARTICLE_DESC CWeapon_Client::Get_Particle_Parry_Desc()
 {
-	CParticle_Custom::PARTICLE_DESC Desc;
+	CParticle_Parry::PARTICLE_DESC Desc;
 
 	Desc.ParticleDesc.vRange = _float2(0.6f, 0.6f);
 	Desc.ParticleDesc.vSpeed = _float2(0.5f, 3.f);

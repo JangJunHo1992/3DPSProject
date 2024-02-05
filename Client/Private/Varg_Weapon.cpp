@@ -182,6 +182,7 @@ _bool CVarg_Weapon::Collision_Chcek()
 					{
 						pTarget->Set_Hitted();
 					}
+					Create_Attack_Particle(LEVEL_BOSS1, pCollider->GetCenterPos());
 
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;

@@ -21,6 +21,7 @@ public:
 	_bool Collision_Chcek(LEVEL eLevel);
 public:
 	virtual void Set_Hitted() override;
+	void Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos);
 	virtual void Set_Dead() override;
 
 public:

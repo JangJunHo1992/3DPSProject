@@ -182,7 +182,8 @@ _bool CMagician_Weapon::Collision_Chcek()
 					{
 						pTarget->Set_Hitted();
 					}
-				
+					Create_Attack_Particle(LEVEL_BOSS2, pCollider->GetCenterPos());
+
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
 					pTarget->Set_HasBeenHit(true);

@@ -184,6 +184,7 @@ _bool CJobMob2_Weapon::Collision_Chcek()
 					{
 						pTarget->Set_Hitted();
 					}
+					Create_Attack_Particle(LEVEL_GAMEPLAY, pCollider->GetCenterPos());
 
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
