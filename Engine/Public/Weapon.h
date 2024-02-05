@@ -42,9 +42,15 @@ public:
 	virtual _bool Collision_Chcek() PURE;
 	void Attack(CCharacter* pCharacter);
 	virtual void Create_Attack_Particle(_float3 vLocalPos) {};
+public:
+	void Activate_Dissolve() {
+		m_bDissolve = true;
+	}
+
 protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };
+	CTexture* m_pDissolveTexture = { nullptr };
 
 protected:
 	CTransform* m_pParentTransform = { nullptr };
@@ -55,6 +61,9 @@ protected:
 	vector<CCollider*> m_pColliders = { nullptr };
 	_uint	m_iColliderSize = {0};
 	_bool	m_bIsAttack = { false };
+
+	_bool		m_bDissolve = { false };
+	_float		m_fDissolveWeight = { 0.f };
 
 protected:
 	virtual HRESULT Ready_Components() PURE;

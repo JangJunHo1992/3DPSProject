@@ -63,6 +63,14 @@ void CVarg::Tick(_float fTimeDelta)
 void CVarg::Late_Tick(_float fTimeDelta)
 {
 	__super::Late_Tick(fTimeDelta);
+	if (Get_HasBeenHit() == true)
+		++m_iCheckHitTime;
+
+	if (Get_HasBeenHit() == true && m_iCheckHitTime > 10.f)
+	{
+		Set_HasBeenHit(false);
+		m_iCheckHitTime = 0;
+	}
 }
 
 HRESULT CVarg::Render()
@@ -105,7 +113,7 @@ _bool CVarg::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 }
 void CVarg::Set_Hitted()
 {
-	if (m_bCheckDead == false)
+	if (m_bCheckDead == false && Get_HasBeenHit() == false)
 	{
 		_uint Random = rand() % 5;
 		if (Random == 2 /*|| Random == 7 || Random == 5*/)

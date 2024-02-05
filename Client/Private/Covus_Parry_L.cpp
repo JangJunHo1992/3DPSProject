@@ -14,17 +14,17 @@ void CCovus_Parry_L::Initialize(CCovus_GamePlay* pActor)
 CState<CCovus_GamePlay>* CCovus_Parry_L::Update(CCovus_GamePlay* pActor, _float fTimeDelta)
 {
 	_uint iMinimumPlayTime = 15;
-	if (pActor->Is_Inputable_Front(5))
-	{
-		pActor->Set_IsAttack(true);
-	}
+// 	if (pActor->Is_Inputable_Front(5))
+// 	{
+// 		//pActor->Set_IsAttack(true);
+// 	}
 	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
 	{
 		if (CGameInstance::GetInstance()->Get_DIKeyState(DIK_F))
 		{
 			return new CCovus_Parry_R();
 		}
-		pActor->Set_IsAttack(false);
+		//pActor->Set_IsAttack(false);
 	}
 	if (pActor->Is_Inputable_Front(iMinimumPlayTime))
 	{
@@ -32,7 +32,7 @@ CState<CCovus_GamePlay>* CCovus_Parry_L::Update(CCovus_GamePlay* pActor, _float 
 		{
 			return new CCovus_Attack1();
 		}
-		pActor->Set_IsAttack(false);
+		//pActor->Set_IsAttack(false);
 	}
 	if (pActor->Is_Inputable_Front(20))
 	{

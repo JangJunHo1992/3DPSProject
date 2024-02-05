@@ -8,7 +8,7 @@ BEGIN(Engine)
 class CCollider;
 class CShader;
 class CBone;
-
+class CTexture;
 
 class ENGINE_DLL CBody abstract : public CGameObject
 {
@@ -50,17 +50,25 @@ public:
 	_float3 Get_MovePos() {
 		return m_vMovePos;
 	}
+public:
+	void Activate_Dissolve() {
+		m_bDissolve = true;
+	}
 protected:
 	CShader* m_pShaderCom = { nullptr };
 	CModel* m_pModelCom = { nullptr };
 	CCollider* m_pColliderCom = { nullptr };
-
+	CTexture* m_pDissolveTexture = { nullptr };
 protected:
 	class CTransform* m_pParentTransform = { nullptr };
 	_float4x4			m_WorldMatrix = {};
 	_float3		m_vMovePos = { 0.f, 0.f, 0.f };
+
+	_bool		m_bDissolve = { false };
+	_float		m_fDissolveWeight = { 0.f };
 protected:
 	_bool		m_bNoUseRootY = { false };
+
 
 protected:
 	virtual HRESULT Ready_Components() PURE;

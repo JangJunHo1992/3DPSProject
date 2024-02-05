@@ -2,6 +2,7 @@
 #include "Bone.h"
 #include "Character.h"
 #include "GameInstance.h"
+#include "Effect_Trail.h"
 
 CCovus_Weapon::CCovus_Weapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CWeapon_Client(pDevice, pContext)
@@ -30,6 +31,56 @@ HRESULT CCovus_Weapon::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
+	TRAIL_DESC TrailDesc;
+	ZeroMemory(&TrailDesc, sizeof(TRAIL_DESC));
+
+	TrailDesc.iMaxCnt = 16;
+	TrailDesc.vPos_0 = _float3(0.f, 0.f, 0.f);
+	TrailDesc.vPos_1 = _float3(0.f, 0.f, 1.3f);
+
+	if (m_pGameInstance->Get_NextLevel() == 2)
+	{
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_GAMEPLAY, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Trail"), &TrailDesc)))
+			return E_FAIL;
+
+		m_pTrailDiffuse = dynamic_cast<CEffect_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_GAMEPLAY, TEXT("Layer_Effect"))->back());
+
+		if (nullptr == m_pTrailDiffuse)
+			return E_FAIL;
+
+		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		//m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
+		m_pTrailDiffuse->Set_Use(true);
+	}
+	else if (m_pGameInstance->Get_NextLevel() == 6)
+	{
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Trail"), &TrailDesc)))
+			return E_FAIL;
+
+		m_pTrailDiffuse = dynamic_cast<CEffect_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Effect"))->back());
+
+		if (nullptr == m_pTrailDiffuse)
+			return E_FAIL;
+
+		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
+		m_pTrailDiffuse->Set_Use(true);
+	}
+	else if (m_pGameInstance->Get_NextLevel() == 7)
+	{
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Trail"), &TrailDesc)))
+			return E_FAIL;
+
+		m_pTrailDiffuse = dynamic_cast<CEffect_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Effect"))->back());
+
+		if (nullptr == m_pTrailDiffuse)
+			return E_FAIL;
+
+		m_pTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+		m_pTrailDiffuse->Set_TextureIndex(1, 693, 0);
+		m_pTrailDiffuse->Set_Use(true);
+	}
+	
 	return S_OK;
 }
 
@@ -41,7 +92,7 @@ void CCovus_Weapon::Priority_Tick(_float fTimeDelta)
 void CCovus_Weapon::Tick(_float fTimeDelta)
 {
 	__super::Tick(fTimeDelta);
-	
+	//m_pTrailDiffuse->Set_Use(true);
 	switch (m_iCurrentLevel)
 	{
 	case 2:
@@ -166,14 +217,15 @@ _bool CCovus_Weapon::Collision_Chcek()//_uint eLevel
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision&& Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit() == false)
 				{
 					Create_Attack_Particle(LEVEL_GAMEPLAY, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
-					return bIsCollision;
+					break;
 				}
 			}
 		}
@@ -208,14 +260,15 @@ _bool CCovus_Weapon::Collision_Chcekb1()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision && Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit() == false)
 				{
 					Create_Attack_Particle(LEVEL_BOSS1, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
-					return bIsCollision;
+					break;
 				}
 			}
 		}
@@ -250,14 +303,15 @@ _bool CCovus_Weapon::Collision_Chcekb2()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision && Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit() == false)
 				{
 					Create_Attack_Particle(LEVEL_BOSS2, pCollider->GetCenterPos());
 					pTarget->Set_Hitted();
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
-					return bIsCollision;
+					break;
 				}
 			}
 		}
@@ -280,7 +334,8 @@ void CCovus_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 
 		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
 	}
-
+	_uint iRandom = rand() % 3;
+	if(iRandom == 1)
 	{
 		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
 
@@ -294,3 +349,5 @@ void CCovus_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
 	}
 }
+
+ 	

@@ -63,6 +63,14 @@ void CJobMob2::Tick(_float fTimeDelta)
 void CJobMob2::Late_Tick(_float fTimeDelta)
 {
 	__super::Late_Tick(fTimeDelta);
+	if (Get_HasBeenHit() == true)
+		++m_iCheckHitTime;
+
+	if (Get_HasBeenHit() == true && m_iCheckHitTime > 10.f)
+	{
+		Set_HasBeenHit(false);
+		m_iCheckHitTime = 0;
+	}
 }
 
 HRESULT CJobMob2::Render()
@@ -107,7 +115,7 @@ _bool CJobMob2::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 void CJobMob2::Set_Hitted()
 {
-	if (m_bCheckDead == false)
+	if (m_bCheckDead == false && Get_HasBeenHit() == false)
 	{
 		Set_IsAttack(false);
 

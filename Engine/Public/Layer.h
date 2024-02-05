@@ -24,7 +24,7 @@ public:
 
 private:
 	list<CGameObject*>			m_GameObjects;
-
+	
 public:
 	static CLayer* Create();
 	virtual void Free() override;

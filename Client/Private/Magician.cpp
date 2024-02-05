@@ -31,7 +31,7 @@ HRESULT CMagician::Initialize(void* pArg)
 	m_sLayerTag = "Layer_Monster";
 
 	MagicianStatus.m_iAttack = 20;
-	MagicianStatus.m_iHP = 400;
+	MagicianStatus.m_iHP = 500;
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
@@ -63,6 +63,14 @@ void CMagician::Tick(_float fTimeDelta)
 void CMagician::Late_Tick(_float fTimeDelta)
 {
 	__super::Late_Tick(fTimeDelta);
+	if (Get_HasBeenHit() == true)
+		++m_iCheckHitTime;
+
+	if (Get_HasBeenHit() == true && m_iCheckHitTime > 10.f)
+	{
+		Set_HasBeenHit(false);
+		m_iCheckHitTime = 0;
+	}
 }
 
 HRESULT CMagician::Render()
@@ -106,7 +114,7 @@ _bool CMagician::Collision_Chcek(LEVEL eLevel)//_uint eLevel
 
 void CMagician::Set_Hitted()
 {
-	if (m_bCheckDead == false)
+	if (m_bCheckDead == false && Get_HasBeenHit() == false)
 	{
 		_uint Random = rand() % 3;
 		if (Random == 1)

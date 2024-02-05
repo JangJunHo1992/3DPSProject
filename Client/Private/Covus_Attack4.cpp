@@ -33,8 +33,8 @@ CState<CCovus_GamePlay>* CCovus_Attack4::Update(CCovus_GamePlay* pActor, _float 
 		if (CGameInstance::GetInstance()->Get_DIKeyState(DIK_F))
 		{
 			return new CCovus_Parry_L();
+			pActor->Set_IsAttack(false);
 		}
-		pActor->Set_IsAttack(false);
 	}
 	if (pActor->Is_Inputable_Front(40))
 	{
@@ -46,7 +46,7 @@ CState<CCovus_GamePlay>* CCovus_Attack4::Update(CCovus_GamePlay* pActor, _float 
 // 	}
 	if (pActor->Is_Inputable_Front(20))
 	{
-		pActor->Set_IsAttack(false);
+		//pActor->Set_IsAttack(false);
 	}
 	return nullptr;
 }

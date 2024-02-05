@@ -66,6 +66,11 @@ void CCharacter::Tick(_float fTimeDelta)
 
 	Update_RigidBody(fTimeDelta);
 
+	if (m_bIsDissolve)
+		m_fDissolveTime += fTimeDelta;
+
+	//if (1.5f <= m_fDissolveTime)
+	//	m_bisdead = true;
 // 	if (m_fInvincibleTime > 0.f)
 // 	{
 // 		m_fInvincibleTime -= fTimeDelta;
@@ -321,6 +326,16 @@ void CCharacter::Search_Target()
 
 	}
 
+}
+
+void CCharacter::Activate_Dissolve()
+{
+	m_pBody->Activate_Dissolve();
+	for (CWeapon* pWeapon : m_Weapons)
+	{
+		pWeapon->Activate_Dissolve();
+	}
+	m_bIsDissolve = true;
 }
 
 _float CCharacter::Calc_Distance(CCharacter* pTarget)

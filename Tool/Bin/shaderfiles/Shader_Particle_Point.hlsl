@@ -125,6 +125,39 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	return Out;
 }
+PS_OUT PS_MAIN_PLAYER(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	/* 첫번째 인자의 방식으로 두번째 인자의 위치에 있는 픽셀의 색을 얻어온다. */
+	Out.vColor = g_Texture.Sample(PointSampler, In.vTexcoord);
+
+	if (Out.vColor.a < 0.8f)
+		discard;
+
+	Out.vColor.rgb = float3(0.263f, 0.851f, 0.635f);
+
+	Out.vColor.a = In.vColor.a;
+
+	return Out;
+}
+
+PS_OUT PS_MAIN_PARRY(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	/* 첫번째 인자의 방식으로 두번째 인자의 위치에 있는 픽셀의 색을 얻어온다. */
+	Out.vColor = g_Texture.Sample(PointSampler, In.vTexcoord);
+
+	if (Out.vColor.a < 0.8f)
+		discard;
+
+	Out.vColor.rgb = float3(0.949f, 0.824f, 0.188f);
+
+	Out.vColor.a = In.vColor.a;
+
+	return Out;
+}
 
 
 technique11 DefaultTechnique
@@ -141,5 +174,29 @@ technique11 DefaultTechnique
 		HullShader = NULL;
 		DomainShader = NULL;
 		PixelShader = compile ps_5_0 PS_MAIN();
+	}
+	pass PlayerParticle
+	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+		/* 렌더스테이츠 */
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = compile gs_5_0 GS_MAIN();
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_PLAYER();
+	}
+	pass ParryParticle
+	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_AlphaBlend_Add, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+		/* 렌더스테이츠 */
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = compile gs_5_0 GS_MAIN();
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_PARRY();
 	}
 }

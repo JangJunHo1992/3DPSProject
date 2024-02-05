@@ -25,7 +25,10 @@
 #include "Particle_Custom.h"
 #include "Particle_Custom_EffectTool.h"
 
+#include "VIBuffer_Trail.h"
 #include "Effect_Fire.h"
+#include "Effect_Trail.h"
+#include "Effect_Monster_Trail.h"
 
 #include "Covus_Tool.h"
 #include "Covus_GamePlay.h"
@@ -179,6 +182,9 @@ HRESULT CLoader::Loading_For_Logo_Level()
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Loading.png"),1))))
 		return E_FAIL;
 
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Dissolve"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Dissolve/187.png"), 1))))
+		return E_FAIL;
 
 	lstrcpy(m_szLoadingText, TEXT("모델를(을) 로드하는 중입니다."));
 	
@@ -233,6 +239,21 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	/* For.Prototype_Component_Texture_Fire */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Fire"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Fire/96_%d.png"), 36))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Trail */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Trail"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Trail/Varg.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_UVNoise"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Noise/%d.png"), 680))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_UVMask"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Mask/%d.png"), 902))))
 		return E_FAIL;
 
 
@@ -666,6 +687,15 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
 		return E_FAIL;
 
+	/* For.Prototype_Component_VIBuffer_Terrain */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Trail"),
+		CVIBuffer_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Monster_Trail"),
+		CVIBuffer_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -695,7 +725,7 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_Particle_Rect"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Rect.hlsl"), VTX_PARTICLE_RECT::Elements, VTX_PARTICLE_RECT::iNumElements))))
 		return E_FAIL;
-
+	/* For.Prototype_Component_Shader_Particle_Point */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Shader_Particle_Point"),
 		CShader::Create(m_pDevice, m_pContext, TEXT("../Bin/ShaderFiles/Shader_Particle_Point.hlsl"), VTX_PARTICLE_POINT::Elements, VTX_PARTICLE_POINT::iNumElements))))
 		return E_FAIL;
@@ -1228,6 +1258,16 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Fire"),
 		CEffect_Fire::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
+
+	/* For.Prototype_GameObject_Trail*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Trail"),
+		CEffect_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+
+	/* For.Prototype_GameObject_Monster_Trail*/
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Monster_Trail"),
+		CEffect_Monster_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1265,7 +1305,7 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 
 	/* For.Prototype_Component_Texture_Snow */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Snow"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Snow.png"), 1))))
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"), 1))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Sky */
@@ -1273,6 +1313,20 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
 
+	/* For.Prototype_Component_Texture_Trail */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Trail"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Trail/Varg.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_UVNoise"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Noise/%d.png"), 680))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_UVMask"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Mask/%d.png"), 902))))
+		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1408,6 +1462,13 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
 		return E_FAIL;
 
+	/* For.Prototype_Component_VIBuffer_Terrain */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_VIBuffer_Trail"),
+		CVIBuffer_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_VIBuffer_Monster_Trail"),
+		CVIBuffer_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1482,16 +1543,28 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 
 	/* For.Prototype_Component_Texture_Snow */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Snow"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Snow.png"), 1))))
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Blood.png"), 1))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Sky */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 4))))
 		return E_FAIL;
+	//----------------------------------------------------------------------------------------------------
+	/* For.Prototype_Component_Texture_Trail */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Trail"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Trail/Varg.png"), 1))))
+		return E_FAIL;
 
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_UVNoise"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Noise/%d.png"), 680))))
+		return E_FAIL;
 
-
+	/* For.Prototype_Component_Texture_Snow */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_UVMask"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Mask/%d.png"), 902))))
+		return E_FAIL;
 	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1671,6 +1744,13 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
 		return E_FAIL;
 
+	/* For.Prototype_Component_VIBuffer_Terrain */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Trail"),
+		CVIBuffer_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_VIBuffer_Monster_Trail"),
+		CVIBuffer_Trail::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -114,7 +114,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;dinput8.lib;dxguid.lib;Effects11d.lib;DirectXTKd.lib;assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dinput8.lib;dxguid.lib;Effects11d.lib;DirectXTKd.lib;assimp-vc142-mtd.lib;fmodL_vc.lib;fmodstudioL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../ThirdPartyLib/</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -169,7 +169,7 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;dinput8.lib;dxguid.lib;Effects11.lib;DirectXTK.lib;assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dinput8.lib;dxguid.lib;Effects11.lib;DirectXTK.lib;assimp-vc142-mt.lib;fmodL_vc.lib;fmodstudioL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../ThirdPartyLib/</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -254,10 +254,12 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClInclude Include="..\public\Renderer.h" />
     <ClInclude Include="..\Public\RenderTarget.h" />
     <ClInclude Include="..\Public\Shader.h" />
+    <ClInclude Include="..\Public\Sound_Manager.h" />
     <ClInclude Include="..\Public\Target_Manager.h" />
     <ClInclude Include="..\Public\Texture.h" />
     <ClInclude Include="..\Public\Timer.h" />
     <ClInclude Include="..\Public\Timer_Manager.h" />
+    <ClInclude Include="..\Public\VIBuffer_Trail.h" />
     <ClInclude Include="..\Public\Transform.h" />
     <ClInclude Include="..\public\VIBuffer.h" />
     <ClInclude Include="..\Public\VIBuffer_Cell.h" />
@@ -324,10 +326,12 @@ xcopy "$(SolutionDir)Engine\Bin\ShaderFiles\*.*" "$(SolutionDir)Client\Bin\Shade
     <ClCompile Include="..\private\Renderer.cpp" />
     <ClCompile Include="..\Private\RenderTarget.cpp" />
     <ClCompile Include="..\Private\Shader.cpp" />
+    <ClCompile Include="..\Private\Sound_Manager.cpp" />
     <ClCompile Include="..\Private\Target_Manager.cpp" />
     <ClCompile Include="..\Private\Texture.cpp" />
     <ClCompile Include="..\Private\Timer.cpp" />
     <ClCompile Include="..\Private\Timer_Manager.cpp" />
+    <ClCompile Include="..\Private\VIBuffer_Trail.cpp" />
     <ClCompile Include="..\Private\Transform.cpp" />
     <ClCompile Include="..\private\VIBuffer.cpp" />
     <ClCompile Include="..\Private\VIBuffer_Cell.cpp" />

@@ -2,6 +2,7 @@
 #include "Bone.h"
 #include "Character.h"
 #include "GameInstance.h"
+#include "Effect_Monster_Trail.h"
 
 CVarg_Weapon::CVarg_Weapon(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CWeapon_Client(pDevice, pContext)
@@ -27,6 +28,29 @@ HRESULT CVarg_Weapon::Initialize(void* pArg)
 {
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
+
+	TRAIL_DESC TrailDesc;
+	ZeroMemory(&TrailDesc, sizeof(TRAIL_DESC));
+
+	TrailDesc.iMaxCnt = 16;
+	TrailDesc.vPos_0 = _float3(0.f, 0.f, 0.f);
+	TrailDesc.vPos_1 = _float3(0.f, 0.f, 2.5f);
+
+	
+	
+	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Monster_Trail"), &TrailDesc)))
+		return E_FAIL;
+
+	m_pMonsterTrailDiffuse = dynamic_cast<CEffect_Monster_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_BOSS1, TEXT("Layer_Effect"))->back());
+
+	if (nullptr == m_pMonsterTrailDiffuse)
+		return E_FAIL;
+
+	m_pMonsterTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+	//m_pMonsterTrailDiffuse->Set_TextureIndex(1, 693, 0);
+	m_pMonsterTrailDiffuse->Set_Use(true);
+	
+
 
 	return S_OK;
 }
@@ -152,15 +176,16 @@ _bool CVarg_Weapon::Collision_Chcek()
 			for (CCollider* pCollider : m_pColliders)
 			{
 				_bool isCollision = pCollider->Collision(pTargetCollider);
-				if (isCollision && Get_isAttack() == true)
+				if (isCollision && pTarget->Get_HasBeenHit() == false)
 				{
 					if (pTarget->Get_Parry() == false)
 					{
 						pTarget->Set_Hitted();
 					}
-
+					Create_Attack_Particle(LEVEL_BOSS1, pCollider->GetCenterPos());
 					pAlreadyHittedCharacter = pTarget;
 					bIsCollision = true;
+					pTarget->Set_HasBeenHit(true);
 					Set_IsAttack(false);
 					return bIsCollision;
 
@@ -171,4 +196,32 @@ _bool CVarg_Weapon::Collision_Chcek()
 
 
 	return bIsCollision;
+}
+void CVarg_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
+{
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_HalfMoon_Desc();
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
+	_uint iRandom = rand() % 3;
+	if (iRandom == 1)
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
+
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
 }
