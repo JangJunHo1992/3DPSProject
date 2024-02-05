@@ -1824,7 +1824,7 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로드하는 중입니다."));
 	/* For.Prototype_Component_Texture_Snow */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, TEXT("Prototype_Component_Texture_Snow"),
-		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Snow/Varg.png"), 1))))
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Particle/0.png"), 1))))
 		return E_FAIL;
 
 	///* For.Prototype_Component_Texture_Sky */
@@ -1844,22 +1844,6 @@ HRESULT CLoader::Loading_For_Effect_Tool_Level()
 		CVIBuffer_Particle_Point::Create(m_pDevice, m_pContext, 100))))
 		return E_FAIL;
 	//대상이 되는 무기 
-// 	{
-// 		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Raider_Weapon_DoubleSword");
-// 		string strFilePath = "../Bin/Resources/Models/Weapon/Raider/Sword_01/Sword_01";
-// 
-// 		_float fRadiusY = 270.0f;
-// 		_float fRadiusZ = 90.0f;
-// 
-// 		_matrix PivotMatrix =
-// 			XMMatrixScaling(0.01f, 0.01f, 0.01f)
-// 			* XMMatrixRotationY(XMConvertToRadians(fRadiusY))
-// 			* XMMatrixRotationZ(XMConvertToRadians(fRadiusZ));
-// 
-// 		if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_EFFECT_TOOL, strPrototypeTag,
-// 			CModel_GamePlay::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, strFilePath, PivotMatrix))))
-// 			return E_FAIL;
-// 	}
 
 	{
 		const wstring& strPrototypeTag = TEXT("Prototype_Component_Model_Covus_Weapon_Saber");

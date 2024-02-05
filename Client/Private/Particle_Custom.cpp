@@ -64,6 +64,11 @@ HRESULT CParticle_Custom::Initialize(void* pArg)
 		if (FAILED(Ready_Components(LEVEL_BOSS2)))
 			return E_FAIL;
 	}
+	else if (m_pGameInstance->Get_NextLevel() == 8)
+	{
+		if (FAILED(Ready_Components(LEVEL_EFFECT_TOOL)))
+			return E_FAIL;
+	}
 		
 
 	return S_OK;
