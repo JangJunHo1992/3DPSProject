@@ -334,6 +334,7 @@ void CCovus_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 
 		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
 	}
+}
 
 // 	{
 // 		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
@@ -347,4 +348,3 @@ void CCovus_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 // 
 // 		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
 // 	}
-}
