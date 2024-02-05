@@ -23,6 +23,7 @@
 #include "Loading1.h"
 #include "Loading2.h"
 #include "Loading3.h"
+#include "TexUI_Loading_ICON.h"
 
 // #include "Particle_Blue.h"
 // #include "Particle_Red.h"
@@ -202,6 +203,8 @@ HRESULT CLoader::Loading_For_Logo_Level()
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_BackGround"),
 		CBackGround::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
+
+	/* For.Prototype_GameObject_Loading1 */
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_Loading1"),
 		CLoading1::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
@@ -216,7 +219,10 @@ HRESULT CLoader::Loading_For_Logo_Level()
 		CLoading3::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 
-
+	/* For.Prototype_GameObject_TexUI_Loading_ICON */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Loading_ICON"),
+		CTexUI_Loading_ICON::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 

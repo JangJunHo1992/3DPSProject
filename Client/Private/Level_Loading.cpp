@@ -15,6 +15,7 @@
 #include "Loading1.h"
 #include "Loading2.h"
 #include "Loading3.h"
+#include "TexUI_Loading_ICON.h"
 
 #include "Imgui_Manager.h"
 CLevel_Loading::CLevel_Loading(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
@@ -44,7 +45,12 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevelID)
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_Loading3"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/TexUI_LoadingScreen_Circus_01.dds"), 1))))
 		return E_FAIL;
-		/* For.Prototype_GameObject_Loading1 */
+
+	/* For.Prototype_Component_Texture_TexUI_Loading_ICON */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Loading_ICON"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/TexUI_LoadingIcon.png"), 1))))
+		return E_FAIL;
+		
 	
 	/* 로딩레벨에서 보여줘야할 객체들을 생성한다.(배경, 일러스트, 로딩바) */
 	if (m_eNextLevelID == LEVEL_GAMEPLAY)
@@ -126,6 +132,7 @@ HRESULT CLevel_Loading::Render()
 
 HRESULT CLevel_Loading::Ready_Layer_BackGround1(const wstring& strLayerTag)
 {
+	{
 	CLoading1::Loading1_DESC		BackGroundDesc = {};
 
 	BackGroundDesc.fX = g_iWinSizeX >> 1;
@@ -134,15 +141,31 @@ HRESULT CLevel_Loading::Ready_Layer_BackGround1(const wstring& strLayerTag)
 	BackGroundDesc.fSizeY = g_iWinSizeY;
 	BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
 	BackGroundDesc.fSpeedPerSec = 10.f;
-
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_Loading1"), &BackGroundDesc)))
 		return E_FAIL;
+	}
 
+	{
+		CTexUI_Loading_ICON::TexUI_Loading_ICON_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 1170 ;
+		BackGroundDesc.fY = 600 ;
+		BackGroundDesc.fSizeX = g_iWinSizeX * 0.08f;
+		BackGroundDesc.fSizeY = g_iWinSizeY * 0.25f;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Loading_ICON"), &BackGroundDesc)))
+			return E_FAIL;
+	}
+	
+	
 	return S_OK;
 }
 
 HRESULT CLevel_Loading::Ready_Layer_BackGround2(const wstring& strLayerTag)
 {
+	{
 	CLoading2::Loading2_DESC		BackGroundDesc = {};
 
 	BackGroundDesc.fX = g_iWinSizeX >> 1;
@@ -154,12 +177,27 @@ HRESULT CLevel_Loading::Ready_Layer_BackGround2(const wstring& strLayerTag)
 
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_Loading2"), &BackGroundDesc)))
 		return E_FAIL;
+	}
 
+	{
+		CTexUI_Loading_ICON::TexUI_Loading_ICON_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = g_iWinSizeX >> 1;
+		BackGroundDesc.fY = g_iWinSizeY >> 1;
+		BackGroundDesc.fSizeX = g_iWinSizeX;
+		BackGroundDesc.fSizeY = g_iWinSizeY;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Loading_ICON"), &BackGroundDesc)))
+			return E_FAIL;
+	}
 	return S_OK;
 }
 
 HRESULT CLevel_Loading::Ready_Layer_BackGround3(const wstring& strLayerTag)
 {
+	{
 	CLoading3::Loading3_DESC		BackGroundDesc = {};
 
 	BackGroundDesc.fX = g_iWinSizeX >> 1;
@@ -171,6 +209,21 @@ HRESULT CLevel_Loading::Ready_Layer_BackGround3(const wstring& strLayerTag)
 
 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_Loading3"), &BackGroundDesc)))
 		return E_FAIL;
+	}
+
+	{
+		CTexUI_Loading_ICON::TexUI_Loading_ICON_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = g_iWinSizeX >> 1;
+		BackGroundDesc.fY = g_iWinSizeY >> 1;
+		BackGroundDesc.fSizeX = g_iWinSizeX;
+		BackGroundDesc.fSizeY = g_iWinSizeY;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Loading_ICON"), &BackGroundDesc)))
+			return E_FAIL;
+	}
 
 	return S_OK;
 }

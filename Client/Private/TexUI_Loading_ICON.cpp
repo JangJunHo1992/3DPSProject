@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "Loading1.h"
+#include "TexUI_Loading_ICON.h"
 #include "GameInstance.h"
 
 
-CLoading1::CLoading1(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
+CTexUI_Loading_ICON::CTexUI_Loading_ICON(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
 {
 
 }
 
-CLoading1::CLoading1(const CLoading1& rhs)
+CTexUI_Loading_ICON::CTexUI_Loading_ICON(const CTexUI_Loading_ICON& rhs)
 	: CGameObject(rhs)
 {
 }
 
-HRESULT CLoading1::Initialize_Prototype()
+HRESULT CTexUI_Loading_ICON::Initialize_Prototype()
 {
 	/* 원형객체의 초기화과정을 수행한다. */
 	/* 1.서버로부터 값을 받아와서 초기화한다 .*/
@@ -26,13 +26,13 @@ HRESULT CLoading1::Initialize_Prototype()
 	return S_OK;
 }
 
-HRESULT CLoading1::Initialize(void* pArg)
+HRESULT CTexUI_Loading_ICON::Initialize(void* pArg)
 {
 	/* 백그라운드 객체가 사용할 Trnasform컴포넌트를 생성하여 추가해놓는다. */
 	/*if (FAILED(__super::Initialize(&CGameObject::GAMEOBJECT_DESC(10.0f, 90.0f))))
 		return E_FAIL;*/
 
-	Loading1_DESC* pDesc = (Loading1_DESC*)pArg;
+	TexUI_Loading_ICON_DESC* pDesc = (TexUI_Loading_ICON_DESC*)pArg;
 
 	m_fX = pDesc->fX;
 	m_fY = pDesc->fY;
@@ -48,7 +48,7 @@ HRESULT CLoading1::Initialize(void* pArg)
 		return E_FAIL;
 
 	m_pTransformCom->Set_Scaling(m_fSizeX, m_fSizeY, 1.f);
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.02f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.01f, 1.f));
 
 	XMStoreFloat4x4(&m_ViewMatrix, XMMatrixIdentity());
 	XMStoreFloat4x4(&m_ProjMatrix, XMMatrixOrthographicLH(g_iWinSizeX, g_iWinSizeY, 0.f, 1.f));
@@ -57,14 +57,14 @@ HRESULT CLoading1::Initialize(void* pArg)
 	return S_OK;
 }
 
-void CLoading1::Priority_Tick(_float fTimeDelta)
+void CTexUI_Loading_ICON::Priority_Tick(_float fTimeDelta)
 {
 	int a = 10;
 
 
 }
 
-void CLoading1::Tick(_float fTimeDelta)
+void CTexUI_Loading_ICON::Tick(_float fTimeDelta)
 {
 
 
@@ -80,19 +80,19 @@ void CLoading1::Tick(_float fTimeDelta)
 
 }
 
-void CLoading1::Late_Tick(_float fTimeDelta)
+void CTexUI_Loading_ICON::Late_Tick(_float fTimeDelta)
 {
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_PRIORITY, this)))
 		return;
 }
 
-HRESULT CLoading1::Render()
+HRESULT CTexUI_Loading_ICON::Render()
 {
 	if (FAILED(Bind_ShaderResources()))
 		return E_FAIL;
 
 	/* 이 셰ㅒ이더에 0번째 패스로 그릴꺼야. */
-	m_pShaderCom->Begin(0);
+	m_pShaderCom->Begin(6);
 
 	/* 내가 그릴려고하는 정점, 인덷ㄱ스버퍼를 장치에 바인딩해. */
 	m_pVIBufferCom->Bind_VIBuffers();
@@ -103,7 +103,7 @@ HRESULT CLoading1::Render()
 	return S_OK;
 }
 
-HRESULT CLoading1::Ready_Components()
+HRESULT CTexUI_Loading_ICON::Ready_Components()
 {
 	//void** 형은 아무거나 들어가질수가 없음 따라서 형변환을 해줘야 함!
 	/* For.Com_Shader */
@@ -117,14 +117,14 @@ HRESULT CLoading1::Ready_Components()
 		return E_FAIL;
 
 	/* For. Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_LOADING, TEXT("Prototype_Component_Texture_Loading1"),
+	if (FAILED(__super::Add_Component(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Loading_ICON"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 
 	return S_OK;
 }
 
-HRESULT CLoading1::Bind_ShaderResources()
+HRESULT CTexUI_Loading_ICON::Bind_ShaderResources()
 {
 
 	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
@@ -139,33 +139,33 @@ HRESULT CLoading1::Bind_ShaderResources()
 	return S_OK;
 }
 
-CLoading1* CLoading1::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
+CTexUI_Loading_ICON* CTexUI_Loading_ICON::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
-	CLoading1* pInstance = new CLoading1(pDevice, pContext);
+	CTexUI_Loading_ICON* pInstance = new CTexUI_Loading_ICON(pDevice, pContext);
 
 	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX("Failed to Created : CLoading1");
+		MSG_BOX("Failed to Created : CTexUI_Loading_ICON");
 		Safe_Release(pInstance);
 	}
 	return pInstance;
 }
 
-CGameObject* CLoading1::Clone(void* pArg)
+CGameObject* CTexUI_Loading_ICON::Clone(void* pArg)
 {
-	CLoading1* pInstance = new CLoading1(*this);
+	CTexUI_Loading_ICON* pInstance = new CTexUI_Loading_ICON(*this);
 
 	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX("Failed to Cloned : CLoading1");
+		MSG_BOX("Failed to Cloned : CTexUI_Loading_ICON");
 		Safe_Release(pInstance);
 	}
 	return pInstance;
 }
 
-void CLoading1::Free()
+void CTexUI_Loading_ICON::Free()
 {
 	__super::Free();
 

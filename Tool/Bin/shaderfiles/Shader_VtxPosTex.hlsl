@@ -90,6 +90,20 @@ PS_OUT PS_MAIN(PS_IN In)
 	return Out;
 }
 
+PS_OUT PS_MAIN_ICON(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	/* 첫번째 인자의 방식으로 두번째 인자의 위치에 있는 픽셀의 색을 얻어온다. */
+	vector		vSourColor = g_Texture[0].Sample(LinearSampler, In.vTexcoord);
+	//vector		vDestColor = g_Texture[1].Sample(LinearSampler, In.vTexcoord);
+	if (vSourColor.a < 0.3f)
+		discard;
+
+	Out.vColor = vSourColor;
+
+	return Out;
+}
 
 struct VS_OUT_EFFECT
 {
@@ -335,4 +349,16 @@ technique11 DefaultTechnique
 		PixelShader = compile ps_5_0 PS_VARG();
 	}
 
+	pass UI_ICON
+	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+		/* 렌더스테이츠 */
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = NULL;
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_ICON();
+	}
 }
