@@ -19,6 +19,7 @@ CState<CMagician_GamePlay>* CMagician_Start::Update(CMagician_GamePlay* pActor, 
 	{
 		CBoss_HPBar::m_bCheckBossHPBar = true;
 		pActor->Set_StartScene2(false);
+		m_pGameInstance->Play_BGM(L"MAGICIAN",L"Sea_of_Trees_Level_-_Combat.ogg",1.f);
 		return new CMagician_Idle();
 	}
 }
@@ -26,4 +27,5 @@ CState<CMagician_GamePlay>* CMagician_Start::Update(CMagician_GamePlay* pActor, 
 void CMagician_Start::Release(CMagician_GamePlay* pActor)
 {
 	__super::Release(pActor);
+	
 }

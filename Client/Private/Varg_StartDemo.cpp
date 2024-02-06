@@ -19,7 +19,7 @@ CState<CVarg_GamePlay>* CVarg_StartDemo::Update(CVarg_GamePlay* pActor, _float f
 	{
 		pActor->Set_StartScene(false);
 		CBoss_HPBar::m_bCheckBossHPBar = true;
-	
+		m_pGameInstance->Play_BGM(L"VARG", L"Varg_Boss_Version_0806_Fix_Loudness.ogg", 1.f);
 		return new CVarg_Idle();
 
 	}
