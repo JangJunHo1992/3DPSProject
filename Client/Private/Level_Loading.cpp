@@ -19,6 +19,12 @@
 #include "Loading3.h"
 #include "TexUI_Loading_ICON.h"
 #include "TexUI_Loading_Complete.h"
+#include "TexUI_Stage1Loading_pont.h"
+#include "TexUI_Stage2Loading_pont.h"
+#include "TexUI_Stage3Loading_pont.h"
+#include "TexUI_Stage1Loading_Name.h"
+#include "TexUI_Stage2Loading_Name.h"
+#include "TexUI_Stage3Loading_Name.h"
 
 #include "Imgui_Manager.h"
 CLevel_Loading::CLevel_Loading(ID3D11Device * pDevice, ID3D11DeviceContext * pContext)
@@ -58,7 +64,36 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevelID)
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Loading_Complete"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/Loading_Complete.png"), 1))))
 		return E_FAIL;
-		
+	//=============================Font============================================
+	/* For.Prototype_Component_Texture_TexUI_Stage1Loading_pont */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Stage1Loading_pont"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/LoadingFont/Fortress_Desc.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_TexUI_Stage2Loading_pont */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Stage2Loading_pont"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/LoadingFont/SafeHouse_Desc.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_TexUI_Stage3Loading_pont */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Stage3Loading_pont"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/LoadingFont/SeaOfTrees_Desc.png"), 1))))
+		return E_FAIL;
+	//=============================FontName============================================
+/* For.Prototype_Component_Texture_TexUI_Stage1Loading_Name */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Stage1Loading_Name"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/LoadingFont/Fortress_Name.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_TexUI_Stage2Loading_Name */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Stage2Loading_Name"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/LoadingFont/SafeHouse_Name.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_TexUI_Stage3Loading_Name */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_LOADING, TEXT("Prototype_Component_Texture_TexUI_Stage3Loading_Name"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/LoadingScreen/LoadingFont/SeaOfTrees_Name.png"), 1))))
+		return E_FAIL;
 	
 	/* 로딩레벨에서 보여줘야할 객체들을 생성한다.(배경, 일러스트, 로딩바) */
 	if (m_eNextLevelID == LEVEL_GAMEPLAY)
@@ -183,6 +218,34 @@ HRESULT CLevel_Loading::Ready_Layer_BackGround1(const wstring& strLayerTag)
 		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Loading_Complete"), &BackGroundDesc)))
 			return E_FAIL;
 	}
+
+	{
+		CTexUI_Stage1Loading_pont::TexUI_Stage1Loading_pont_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 480;
+		BackGroundDesc.fY = 670;
+		BackGroundDesc.fSizeX = g_iWinSizeX * 0.7f;
+		BackGroundDesc.fSizeY = g_iWinSizeY * 0.06f;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Stage1Loading_pont"), &BackGroundDesc)))
+			return E_FAIL;
+	}
+
+	{
+		CTexUI_Stage1Loading_Name::TexUI_Stage1Loading_Name_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 90;
+		BackGroundDesc.fY = 620;
+		BackGroundDesc.fSizeX = g_iWinSizeX * 0.1f;
+		BackGroundDesc.fSizeY = g_iWinSizeY * 0.03f;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Stage1Loading_Name"), &BackGroundDesc)))
+			return E_FAIL;
+	}
 	
 	
 	return S_OK;
@@ -231,6 +294,35 @@ HRESULT CLevel_Loading::Ready_Layer_BackGround2(const wstring& strLayerTag)
 		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Loading_Complete"), &BackGroundDesc)))
 			return E_FAIL;
 	}
+
+	{
+		CTexUI_Stage2Loading_pont::TexUI_Stage2Loading_pont_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 480;
+		BackGroundDesc.fY = 670;
+		BackGroundDesc.fSizeX = g_iWinSizeX * 0.7f;
+		BackGroundDesc.fSizeY = g_iWinSizeY * 0.06f;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Stage2Loading_pont"), &BackGroundDesc)))
+			return E_FAIL;
+	}
+
+	{
+		CTexUI_Stage2Loading_Name::TexUI_Stage2Loading_Name_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 90;
+		BackGroundDesc.fY = 620;
+		BackGroundDesc.fSizeX = g_iWinSizeX * 0.1f;
+		BackGroundDesc.fSizeY = g_iWinSizeY * 0.03f;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Stage2Loading_Name"), &BackGroundDesc)))
+			return E_FAIL;
+	}
+
 	return S_OK;
 }
 
@@ -275,6 +367,34 @@ HRESULT CLevel_Loading::Ready_Layer_BackGround3(const wstring& strLayerTag)
 		BackGroundDesc.fSpeedPerSec = 10.f;
 
 		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Loading_Complete"), &BackGroundDesc)))
+			return E_FAIL;
+	}
+
+	{
+		CTexUI_Stage3Loading_pont::TexUI_Stage3Loading_pont_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 480;
+		BackGroundDesc.fY = 670;
+		BackGroundDesc.fSizeX = g_iWinSizeX * 0.7f;
+		BackGroundDesc.fSizeY = g_iWinSizeY * 0.06f;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Stage3Loading_pont"), &BackGroundDesc)))
+			return E_FAIL;
+	}
+
+	{
+		CTexUI_Stage3Loading_Name::TexUI_Stage3Loading_Name_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 90;
+		BackGroundDesc.fY = 620;
+		BackGroundDesc.fSizeX = g_iWinSizeX * 0.1f;
+		BackGroundDesc.fSizeY = g_iWinSizeY * 0.03f;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+
+		if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_LOADING, strLayerTag, TEXT("Prototype_GameObject_TexUI_Stage3Loading_Name"), &BackGroundDesc)))
 			return E_FAIL;
 	}
 

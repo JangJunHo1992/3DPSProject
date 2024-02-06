@@ -778,6 +778,24 @@
     <Filter Include="02.GameObjects\UI\TexUI\Loading_Complete">
       <UniqueIdentifier>{05cd2f20-e8de-49de-89d2-3577ce580b01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\UI\TexUI\Stage1Pont">
+      <UniqueIdentifier>{6955886d-cfb1-4079-8200-ffaacc9c5c08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\TexUI\Stage2Pont">
+      <UniqueIdentifier>{3347182a-7c42-47ee-97e1-ced3ce578dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\TexUI\Stage3Pont">
+      <UniqueIdentifier>{683cacc2-a4b6-49f6-99a4-5b79e0426589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\TexUI\Stage3Pont\Name">
+      <UniqueIdentifier>{fe9f0096-22c6-4ef3-8e94-73a3e4215a1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\TexUI\Stage2Pont\Name">
+      <UniqueIdentifier>{b88c1bea-7e37-4e0c-bfe4-9f8b586564af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\TexUI\Stage1Pont\Name">
+      <UniqueIdentifier>{e813927a-4a3b-4f38-8a37-170f58698086}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1569,6 +1587,24 @@
     <ClInclude Include="..\Public\TexUI_Loading_Complete.h">
       <Filter>02.GameObjects\UI\TexUI\Loading_Complete</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\TexUI_Stage1Loading_pont.h">
+      <Filter>02.GameObjects\UI\TexUI\Stage1Pont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TexUI_Stage2Loading_pont.h">
+      <Filter>02.GameObjects\UI\TexUI\Stage2Pont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TexUI_Stage3Loading_pont.h">
+      <Filter>02.GameObjects\UI\TexUI\Stage3Pont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TexUI_Stage1Loading_Name.h">
+      <Filter>02.GameObjects\UI\TexUI\Stage1Pont\Name</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TexUI_Stage2Loading_Name.h">
+      <Filter>02.GameObjects\UI\TexUI\Stage2Pont\Name</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TexUI_Stage3Loading_Name.h">
+      <Filter>02.GameObjects\UI\TexUI\Stage3Pont\Name</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2315,6 +2351,24 @@
     </ClCompile>
     <ClCompile Include="..\Private\TexUI_Loading_Complete.cpp">
       <Filter>02.GameObjects\UI\TexUI\Loading_Complete</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TexUI_Stage1Loading_pont.cpp">
+      <Filter>02.GameObjects\UI\TexUI\Stage1Pont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TexUI_Stage2Loading_pont.cpp">
+      <Filter>02.GameObjects\UI\TexUI\Stage2Pont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TexUI_Stage3Loading_pont.cpp">
+      <Filter>02.GameObjects\UI\TexUI\Stage3Pont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TexUI_Stage1Loading_Name.cpp">
+      <Filter>02.GameObjects\UI\TexUI\Stage1Pont\Name</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TexUI_Stage2Loading_Name.cpp">
+      <Filter>02.GameObjects\UI\TexUI\Stage2Pont\Name</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TexUI_Stage3Loading_Name.cpp">
+      <Filter>02.GameObjects\UI\TexUI\Stage3Pont\Name</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

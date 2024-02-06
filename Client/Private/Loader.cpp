@@ -25,6 +25,12 @@
 #include "Loading3.h"
 #include "TexUI_Loading_ICON.h"
 #include "TexUI_Loading_Complete.h"
+#include "TexUI_Stage1Loading_pont.h"
+#include "TexUI_Stage2Loading_pont.h"
+#include "TexUI_Stage3Loading_pont.h"
+#include "TexUI_Stage1Loading_Name.h"
+#include "TexUI_Stage2Loading_Name.h"
+#include "TexUI_Stage3Loading_Name.h"
 
 // #include "Particle_Blue.h"
 // #include "Particle_Red.h"
@@ -229,7 +235,32 @@ HRESULT CLoader::Loading_For_Logo_Level()
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Loading_Complete"),
 		CTexUI_Loading_Complete::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
-	
+	//------------------------------------------------------------------------------------------
+	/* For.Prototype_GameObject_TexUI_Stage1Loading_pont */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Stage1Loading_pont"),
+		CTexUI_Stage1Loading_pont::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_TexUI_Stage2Loading_pont */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Stage2Loading_pont"),
+		CTexUI_Stage2Loading_pont::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_TexUI_Stage3Loading_pont */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Stage3Loading_pont"),
+		CTexUI_Stage3Loading_pont::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	//------------------------------------------------------------------------------------------
+	/* For.Prototype_GameObject_TexUI_Stage1Loading_Name */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Stage1Loading_Name"),
+		CTexUI_Stage1Loading_Name::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_TexUI_Stage2Loading_Name */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Stage2Loading_Name"),
+		CTexUI_Stage2Loading_Name::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_TexUI_Stage3Loading_Name */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Stage3Loading_Name"),
+		CTexUI_Stage3Loading_Name::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 
