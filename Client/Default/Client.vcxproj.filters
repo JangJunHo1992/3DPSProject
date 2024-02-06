@@ -796,6 +796,18 @@
     <Filter Include="02.GameObjects\UI\TexUI\Stage1Pont\Name">
       <UniqueIdentifier>{e813927a-4a3b-4f38-8a37-170f58698086}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\UI\PlayerHP">
+      <UniqueIdentifier>{08bf6215-b4d1-4873-9439-60788a742774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\MonsterHP">
+      <UniqueIdentifier>{5aeb62e0-81d4-4ad6-bc57-4102126fa752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\BossHP">
+      <UniqueIdentifier>{772095fe-7fa0-4e97-b502-b5472527c24d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\PlayerHP\HPBarBase">
+      <UniqueIdentifier>{e53a514d-b0fa-44ec-93b0-0db138fe5510}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1605,6 +1617,18 @@
     <ClInclude Include="..\Public\TexUI_Stage3Loading_Name.h">
       <Filter>02.GameObjects\UI\TexUI\Stage3Pont\Name</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Monster_HPBar.h">
+      <Filter>02.GameObjects\UI\MonsterHP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_HPBar.h">
+      <Filter>02.GameObjects\UI\PlayerHP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Boss_HPBar.h">
+      <Filter>02.GameObjects\UI\BossHP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Player_HPBarBase.h">
+      <Filter>02.GameObjects\UI\PlayerHP\HPBarBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2369,6 +2393,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\TexUI_Stage3Loading_Name.cpp">
       <Filter>02.GameObjects\UI\TexUI\Stage3Pont\Name</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Monster_HPBar.cpp">
+      <Filter>02.GameObjects\UI\MonsterHP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_HPBar.cpp">
+      <Filter>02.GameObjects\UI\PlayerHP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Boss_HPBar.cpp">
+      <Filter>02.GameObjects\UI\BossHP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Player_HPBarBase.cpp">
+      <Filter>02.GameObjects\UI\PlayerHP\HPBarBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -195,6 +195,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\public\BackGround.h" />
     <ClInclude Include="..\Public\Body_Client.h" />
     <ClInclude Include="..\Public\Body_Player.h" />
+    <ClInclude Include="..\Public\Boss_HPBar.h" />
     <ClInclude Include="..\Public\Camera_Dynamic.h" />
     <ClInclude Include="..\Public\Camera_Dynamic_Tool.h" />
     <ClInclude Include="..\Public\Camera_Window.h" />
@@ -362,6 +363,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Map_Window.h" />
     <ClInclude Include="..\Public\Monster.h" />
     <ClInclude Include="..\Public\Monster_GamePlay.h" />
+    <ClInclude Include="..\Public\Monster_HPBar.h" />
     <ClInclude Include="..\Public\Monster_Tool.h" />
     <ClInclude Include="..\Public\Object_Window.h" />
     <ClInclude Include="..\Public\Particle_Custom.h" />
@@ -373,6 +375,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Player_Dash_Left.h" />
     <ClInclude Include="..\Public\Player_Dash_Right.h" />
     <ClInclude Include="..\Public\Player_GamePlay.h" />
+    <ClInclude Include="..\Public\Player_HPBar.h" />
+    <ClInclude Include="..\Public\Player_HPBarBase.h" />
     <ClInclude Include="..\Public\Player_Idle.h" />
     <ClInclude Include="..\Public\Player_Run.h" />
     <ClInclude Include="..\Public\Player_Run_Back.h" />
@@ -457,6 +461,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Actor.cpp" />
     <ClCompile Include="..\private\BackGround.cpp" />
     <ClCompile Include="..\Private\Body_Player.cpp" />
+    <ClCompile Include="..\Private\Boss_HPBar.cpp" />
     <ClCompile Include="..\Private\Camera_Dynamic.cpp" />
     <ClCompile Include="..\Private\Camera_Dynamic_Tool.cpp" />
     <ClCompile Include="..\Private\Camera_Window.cpp" />
@@ -621,6 +626,7 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Map_Window.cpp" />
     <ClCompile Include="..\Private\Monster.cpp" />
     <ClCompile Include="..\Private\Monster_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Monster_HPBar.cpp" />
     <ClCompile Include="..\Private\Monster_Tool.cpp" />
     <ClCompile Include="..\Private\Object_Window.cpp" />
     <ClCompile Include="..\Private\Particle_Custom.cpp" />
@@ -632,6 +638,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Player_Dash_Left.cpp" />
     <ClCompile Include="..\Private\Player_Dash_Right.cpp" />
     <ClCompile Include="..\Private\Player_GamePlay.cpp" />
+    <ClCompile Include="..\Private\Player_HPBar.cpp" />
+    <ClCompile Include="..\Private\Player_HPBarBase.cpp" />
     <ClCompile Include="..\Private\Player_Idle.cpp" />
     <ClCompile Include="..\Private\Player_Run.cpp" />
     <ClCompile Include="..\Private\Player_Run_Back.cpp" />

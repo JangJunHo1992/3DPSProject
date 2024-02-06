@@ -6,7 +6,7 @@
 #include "Covus_Body.h"
 #include "Covus_Weapon.h"
 #include "Light.h"
-
+#include "Player_HPBarBase.h"
 
 CCovus::CCovus(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CCharacter_Client(pDevice, pContext)
@@ -60,6 +60,19 @@ HRESULT CCovus::Initialize(void* pArg)
 	if (FAILED(m_pGameInstance->Add_Light(m_LightDesc)))
 		return E_FAIL;
 	m_pLight = m_pGameInstance->Get_Light_Back();
+
+	{
+		CPlayer_HPBarBase::Player_HPBarBase_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 180;
+		BackGroundDesc.fY = 650;
+		BackGroundDesc.fSizeX = 300;
+		BackGroundDesc.fSizeY = 20;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+		if (FAILED(m_pGameInstance->Add_CloneObject(m_pGameInstance->Get_NextLevel(), TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Player_HPBarBase"), &BackGroundDesc)))
+			return E_FAIL;
+	}
 
 	return S_OK;
 }
@@ -184,6 +197,8 @@ HRESULT CCovus::Ready_Components_Origin(LEVEL eLevel)
 	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Collider_Sphere"),
 		TEXT("Com_Collider"), reinterpret_cast<CComponent**>(&m_pColliderCom), &BoundingDesc)))
 		return E_FAIL;
+
+	
 
 
 	return S_OK;
