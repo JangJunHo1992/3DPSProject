@@ -300,6 +300,9 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Level_MapTool.h" />
     <ClInclude Include="..\Public\Level_Stage1.h" />
     <ClInclude Include="..\public\Loader.h" />
+    <ClInclude Include="..\Public\Loading1.h" />
+    <ClInclude Include="..\Public\Loading2.h" />
+    <ClInclude Include="..\Public\Loading3.h" />
     <ClInclude Include="..\Public\Magician.h" />
     <ClInclude Include="..\Public\MagicianDefaultState.h" />
     <ClInclude Include="..\Public\Magician_Attack.h" />
@@ -396,6 +399,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Terrain.h" />
     <ClInclude Include="..\Public\Terrain_GamePlay.h" />
     <ClInclude Include="..\Public\Terrain_Tool.h" />
+    <ClInclude Include="..\Public\TexUI_Loading_Complete.h" />
+    <ClInclude Include="..\Public\TexUI_Loading_ICON.h" />
     <ClInclude Include="..\Public\Varg.h" />
     <ClInclude Include="..\Public\VargDefaultState.h" />
     <ClInclude Include="..\Public\Varg_Attack.h" />
@@ -548,6 +553,9 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Level_MapTool.cpp" />
     <ClCompile Include="..\Private\Level_Stage1.cpp" />
     <ClCompile Include="..\private\Loader.cpp" />
+    <ClCompile Include="..\Private\Loading1.cpp" />
+    <ClCompile Include="..\Private\Loading2.cpp" />
+    <ClCompile Include="..\Private\Loading3.cpp" />
     <ClCompile Include="..\Private\Magician.cpp" />
     <ClCompile Include="..\Private\MagicianDefaultState.cpp" />
     <ClCompile Include="..\Private\Magician_Attack.cpp" />
@@ -643,6 +651,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\Private\Terrain.cpp" />
     <ClCompile Include="..\Private\Terrain_GamePlay.cpp" />
     <ClCompile Include="..\Private\Terrain_Tool.cpp" />
+    <ClCompile Include="..\Private\TexUI_Loading_Complete.cpp" />
+    <ClCompile Include="..\Private\TexUI_Loading_ICON.cpp" />
     <ClCompile Include="..\Private\Varg.cpp" />
     <ClCompile Include="..\Private\VargDefaultState.cpp" />
     <ClCompile Include="..\Private\Varg_Attack.cpp" />

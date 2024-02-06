@@ -91,6 +91,8 @@ public:
 	static _bool				m_bCutSceneDead;
 	static _bool				m_bCutSceneDead2;
 
+	static _bool				m_bLoadingComplete;
+
 	_bool						m_bHasBeenHit = false;
 protected:
 	string						m_sName = "";
