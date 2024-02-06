@@ -18,6 +18,8 @@ CState<CMagician_GamePlay>* CMagician_Shoot2::Update(CMagician_GamePlay* pActor,
 	if (pActor->Is_Inputable_Front(20) && pActor->Get_bCheckShoot() == true)
 	{
 		pActor->Create_Card();
+		m_pGameInstance->Play_Sound(L"MAGICIAN", L"CardShot_02.ogg", SOUND_EFFECT2, 1.f);
+
 		pActor->Set_bCheckShoot(false);
 	}
 
