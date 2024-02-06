@@ -3,6 +3,8 @@
 #include "GameInstance.h"
 #include "Varg.h"
 
+
+_bool		CBoss_HPBar::m_bCheckBossHPBar = false;
 CBoss_HPBar::CBoss_HPBar(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
 {
@@ -106,14 +108,14 @@ HRESULT CBoss_HPBar::Render()
 		return E_FAIL;
 
 	/* 이 셰ㅒ이더에 0번째 패스로 그릴꺼야. */
-	m_pShaderCom->Begin(7);
+	m_pShaderCom->Begin(8);
 
 	/* 내가 그릴려고하는 정점, 인덷ㄱ스버퍼를 장치에 바인딩해. */
 	m_pVIBufferCom->Bind_VIBuffers();
 
 	/* 바인딩된 정점, 인덱스를 그려. */
-
-	m_pVIBufferCom->Render();
+	if(CBoss_HPBar::m_bCheckBossHPBar == true)
+		m_pVIBufferCom->Render();
 
 	return S_OK;
 }

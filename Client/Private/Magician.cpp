@@ -5,7 +5,8 @@
 #include "Magician_Body.h"
 #include "Magician_Weapon.h"
 #include "Magician_Card.h"
-
+#include "Boss_HPBarBase.h"
+#include "Boss_HPBar2.h"
 
 _float	CMagician::m_pMagicianHP = 500.f;
 CMagician::CMagician(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -34,7 +35,7 @@ HRESULT CMagician::Initialize(void* pArg)
 
 	MagicianStatus.m_iAttack = 20;
 	MagicianStatus.m_iHP = 500;
-
+	m_pMagicianHP = MagicianStatus.m_iHP;
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 10.f;
@@ -42,6 +43,33 @@ HRESULT CMagician::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(-50.f, 0.f, 0.f, 1.f));
+
+	{
+		CBoss_HPBarBase::Boss_HPBarBase_DESC		BackGroundDesc = {};
+
+		BackGroundDesc.fX = 640;
+		BackGroundDesc.fY = 50;
+		BackGroundDesc.fSizeX = 600;
+		BackGroundDesc.fSizeY = 30;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+		m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Boss_HPBarBase"), &BackGroundDesc);
+
+	}
+
+	{
+		CBoss_HPBar2::Boss_HPBar2_DESC		BackGroundDesc = {};
+
+
+		BackGroundDesc.fX = 640;
+		BackGroundDesc.fY = 50;
+		BackGroundDesc.fSizeX = 440;
+		BackGroundDesc.fSizeY = 18;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+		m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Boss_HPBar2"), &BackGroundDesc);
+
+	}
 
 	return S_OK;
 }

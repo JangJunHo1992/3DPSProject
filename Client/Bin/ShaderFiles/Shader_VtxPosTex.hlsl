@@ -128,6 +128,28 @@ PS_OUT PS_MAIN_PLAYER_RATIO(PS_IN In)
 	return Out;
 }
 
+PS_OUT PS_MAIN_PLAYER_MRATIO(PS_IN In)
+{
+	PS_OUT		Out = (PS_OUT)0;
+
+	/* 첫번째 인자의 방식으로 두번째 인자의 위치에 있는 픽셀의 색을 얻어온다. */
+	float2 vTexRatio = In.vTexcoord.x * g_fRatio;
+	vector		vSourColor = g_Texture[0].Sample(LinearSampler, In.vTexcoord);
+
+	float fRatio = vTexRatio;
+
+	if (In.vTexcoord.x > g_fRatio)
+		discard;
+	//vector		vDestColor = g_Texture[1].Sample(LinearSampler, In.vTexcoord);
+
+	if (vSourColor.a < 0.3f)
+		discard;
+	vSourColor.rgb = float3(1.f, 0.f, 0.f);
+	Out.vColor = vSourColor;
+
+	return Out;
+}
+
 struct VS_OUT_EFFECT
 {
 	float4		vPosition : SV_POSITION;
@@ -396,5 +418,18 @@ technique11 DefaultTechnique
 		HullShader = NULL;
 		DomainShader = NULL;
 		PixelShader = compile ps_5_0 PS_MAIN_PLAYER_RATIO();
+	}
+
+	pass UI_MonsterRatio
+	{
+		SetRasterizerState(RS_Default);
+		SetDepthStencilState(DSS_Default, 0);
+		SetBlendState(BS_Default, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xffffffff);
+		/* 렌더스테이츠 */
+		VertexShader = compile vs_5_0 VS_MAIN();
+		GeometryShader = NULL;
+		HullShader = NULL;
+		DomainShader = NULL;
+		PixelShader = compile ps_5_0 PS_MAIN_PLAYER_MRATIO();
 	}
 }

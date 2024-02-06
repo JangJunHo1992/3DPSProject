@@ -4,7 +4,8 @@
 
 #include "Varg_Body.h"
 #include "Varg_Weapon.h"
-
+#include "Boss_HPBarBase.h"
+#include "Boss_HPBar.h"
 _float CVarg::m_pVargHP = 500.f;
 
 CVarg::CVarg(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
@@ -33,7 +34,7 @@ HRESULT CVarg::Initialize(void* pArg)
 
 	VargStatus.m_iAttack = 20;
 	VargStatus.m_iHP = 500;
-
+	m_pVargHP = VargStatus.m_iHP;
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
 	GameObjectDesc.fSpeedPerSec = 10.f;
@@ -42,6 +43,33 @@ HRESULT CVarg::Initialize(void* pArg)
 	if (FAILED(__super::Initialize(&GameObjectDesc)))
 		return E_FAIL;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(0.f, 0.f, 0.f, 1.f));
+
+	{
+		CBoss_HPBarBase::Boss_HPBarBase_DESC		BackGroundDesc = {};
+
+
+		BackGroundDesc.fX = 640;
+		BackGroundDesc.fY = 50;
+		BackGroundDesc.fSizeX = 600;
+		BackGroundDesc.fSizeY = 30;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+		m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Boss_HPBarBase"), &BackGroundDesc);
+
+	}
+	{
+		CBoss_HPBar::Boss_HPBar_DESC		BackGroundDesc = {};
+
+
+		BackGroundDesc.fX = 640;
+		BackGroundDesc.fY = 50;
+		BackGroundDesc.fSizeX = 440;
+		BackGroundDesc.fSizeY = 18;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+		m_pGameInstance->Add_CloneObject(LEVEL_BOSS1, TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Boss_HPBar"), &BackGroundDesc);
+
+	}
 
 	return S_OK;
 }

@@ -47,6 +47,8 @@ private:
 	_float		m_fMaxHP = 300.f;
 	_float      m_fRatio = 0.f;
 	//_float		m_fDissolveWeight = { 0.f };
+public:
+	static	_bool		m_bCheckBossHPBar;
 private:
 	HRESULT Ready_Components(LEVEL eLevel);
 	HRESULT Bind_ShaderResources();

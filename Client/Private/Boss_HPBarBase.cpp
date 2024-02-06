@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Boss_HPBarBase.h"
 #include "GameInstance.h"
-
+#include "Boss_HPBar.h"
 
 CBoss_HPBarBase::CBoss_HPBarBase(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
@@ -112,8 +112,8 @@ HRESULT CBoss_HPBarBase::Render()
 	m_pVIBufferCom->Bind_VIBuffers();
 
 	/* 바인딩된 정점, 인덱스를 그려. */
-
-	m_pVIBufferCom->Render();
+	if (CBoss_HPBar::m_bCheckBossHPBar == true)
+		m_pVIBufferCom->Render();
 
 	return S_OK;
 }

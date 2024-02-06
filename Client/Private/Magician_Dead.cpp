@@ -2,6 +2,7 @@
 #include "Magician_Dead.h"
 #include "GameInstance.h"
 #include "Magician_Idle.h"
+#include "Boss_HPBar.h"
 
 void CMagician_Dead::Initialize(CMagician_GamePlay* pActor)
 {
@@ -16,6 +17,7 @@ CState<CMagician_GamePlay>* CMagician_Dead::Update(CMagician_GamePlay* pActor, _
 	}
 	if (pActor->Is_Animation_End())
 	{
+		CBoss_HPBar::m_bCheckBossHPBar = false;
 		pActor->Set_CutSceneDead2(false);
 		pActor->Set_isdead(true);
 	}
