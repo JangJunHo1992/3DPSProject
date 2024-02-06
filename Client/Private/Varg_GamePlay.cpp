@@ -52,6 +52,8 @@ void CVarg_GamePlay::Priority_Tick(_float fTimeDelta)
 	if (m_pGameInstance->Get_DIKeyState(DIK_1))
 	{
 		Set_CutSceneDead(true);
+		m_pGameInstance->Play_Sound(L"VARG", L"CV_Varg_Dead_03.ogg", SOUND_SYSTEM_EFFECT, 1.f);
+
 		//CGameObject::m_bCutSceneDead = true;
 		m_pActor->Set_State(new CVarg_Dead());
 	}

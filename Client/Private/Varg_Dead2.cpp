@@ -8,7 +8,6 @@ void CVarg_Dead2::Initialize(CVarg_GamePlay* pActor)
 {
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
 	
-	m_pGameInstance->Play_Sound(L"VARG", L"CV_Varg_Dead_03.ogg", SOUND_SYSTEM_EFFECT, 1.f);
 		
 }
 
