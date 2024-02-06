@@ -12,6 +12,7 @@
 #include "GameObject.h"
 #include "RapidJson.h"
 #include "Mesh_Tool.h"
+#include "Sound_Manager.h"
 //#include "Json_Utility.h"
 
 IMPLEMENT_SINGLETON(CGameInstance)
@@ -70,6 +71,10 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInstance, 
 
 	m_pFrustum = CFrustum::Create();
 	if (nullptr == m_pFrustum)
+		return E_FAIL;
+
+	m_Sound_Manager = CSound_Manager::Create();
+	if (nullptr == m_Sound_Manager)
 		return E_FAIL;
 
 	return S_OK;
@@ -511,6 +516,31 @@ CLight* CGameInstance::Get_Light_Back()
 _bool CGameInstance::isIn_WorldPlanes(_fvector vPoint, _float fRadius)
 {
 	return m_pFrustum->isIn_WorldPlanes(vPoint, fRadius);
+}
+
+void CGameInstance::Play_Sound(const wstring& strGroupKey, const wstring& strSoundKey, CHANNELID eID, _float fVolume)
+{
+	m_Sound_Manager->Play_Sound(strGroupKey, strSoundKey, eID, fVolume);
+}
+
+void CGameInstance::Play_BGM(const wstring& strGroupKey, const wstring& strSoundKey, _float fVolume)
+{
+	m_Sound_Manager->Play_BGM(strGroupKey, strSoundKey, fVolume);
+}
+
+void CGameInstance::Stop_Sound(CHANNELID eID)
+{
+	m_Sound_Manager->Stop_Sound(eID);
+}
+
+void CGameInstance::Stop_All()
+{
+	m_Sound_Manager->Stop_All();
+}
+
+void CGameInstance::Set_ChannelVolume(CHANNELID eID, float fVolume)
+{
+	m_Sound_Manager->Set_ChannelVolume(eID, fVolume);
 }
 
 RAY CGameInstance::Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY)

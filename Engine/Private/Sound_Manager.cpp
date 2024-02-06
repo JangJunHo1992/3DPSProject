@@ -32,29 +32,31 @@ HRESULT CSound_Manager::Ready_Sound()
 	/* For. BGM */
 	Load_SoundFile_GroupAsync(L"BGM", "../Bin/Resources/Sound/BGM/"); 
 	//Wait_GroupAsync();
-
-	Load_SoundFile_GroupAsync(L"AMBIENCE", "../Bin/Resources/Sound/Ambience/");
-	//Wait_GroupAsync();
-
 	Load_SoundFile_GroupAsync(L"PLAYER_ATTACK", "../Bin/Resources/Sound/Attack/"); 
-	////Wait_GroupAsync();
 	Load_SoundFile_GroupAsync(L"PLAYER_HIT", "../Bin/Resources/Sound/Hit/");
+	Load_SoundFile_GroupAsync(L"PLAYER_FOOTSTEP", "../Bin/Resources/Sound/Footstep/");
+
+	Load_SoundFile_GroupAsync(L"ENEMY_ATTACK", "../Bin/Resources/Sound/Attack/"); 
+	Load_SoundFile_GroupAsync(L"ENEMY_HIT", "../Bin/Resources/Sound/Hit/"); 
+	Load_SoundFile_GroupAsync(L"ENEMY_FOOTSTEP", "../Bin/Resources/Sound/Footstep/");
+	Load_SoundFile_GroupAsync(L"MAGICIAN", "../Bin/Resources/Sound/BOSSMagician/");
+	Load_SoundFile_GroupAsync(L"VARG", "../Bin/Resources/Sound/BOSSVarg/");
+	//Load_SoundFile_GroupAsync(L"CRITICAL", "../Bin/Resources/Sound/Hit/");
+// 	Load_SoundFile_GroupAsync(L"AMBIENCE", "../Bin/Resources/Sound/Ambience/");
+// 	//Wait_GroupAsync();
+
+	////Wait_GroupAsync();
 	////Wait_GroupAsync();
 	Load_SoundFile_GroupAsync(L"PLAYER_HIT2", "../Bin/Resources/Sound/Hit/");
 	////Wait_GroupAsync();
-	Load_SoundFile_GroupAsync(L"PLAYER_FOOTSTEP", "../Bin/Resources/Sound/Footstep/");
 	////Wait_GroupAsync();
 
-	Load_SoundFile_GroupAsync(L"ENEMY_ATTACK", "../Bin/Resources/Sound/Attack/"); 
 	////Wait_GroupAsync();
-	Load_SoundFile_GroupAsync(L"ENEMY_HIT", "../Bin/Resources/Sound/Hit/"); 
 	////Wait_GroupAsync();
 	Load_SoundFile_GroupAsync(L"ENEMY_HIT2", "../Bin/Resources/Sound/Hit/");
 	////Wait_GroupAsync();
-	Load_SoundFile_GroupAsync(L"ENEMY_FOOTSTEP", "../Bin/Resources/Sound/Footstep/");
 	////Wait_GroupAsync();
 
-	Load_SoundFile_GroupAsync(L"CRITICAL", "../Bin/Resources/Sound/Hit/");
 
 
 	//Load_SoundFile_GroupAsync(L"Effect", "EFFECT"); //ok 

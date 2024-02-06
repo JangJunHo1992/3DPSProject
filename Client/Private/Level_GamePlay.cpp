@@ -60,6 +60,8 @@ HRESULT CLevel_GamePlay::Initialize()
 
 	Load_Objects_With_Json("Save_GameObjects.json");
 
+	m_pGameInstance->Play_BGM(L"BGM", L"BGM_STAGE_1.ogg", 1.f);
+
 	return S_OK;
 }
 

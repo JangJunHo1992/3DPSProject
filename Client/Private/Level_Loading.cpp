@@ -119,6 +119,8 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevelID)
 	if (nullptr == m_pLoader)
 		return E_FAIL;
 
+	m_pGameInstance->Play_BGM(L"BGM", L"MainLoading.ogg", 1.f);
+
 	return S_OK;
 }
 

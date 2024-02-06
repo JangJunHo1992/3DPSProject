@@ -58,7 +58,7 @@ public:
 	// 모든 사운드 정지
 	void Stop_All();
 	// 채널의 볼륨 설정
-	void Set_ChannelVolume(CHANNELID eID, float fVolume);
+	void Set_ChannelVolume(CHANNELID eID, _float fVolume);
 
 private:
 	// 내부적으로 로드할 사운드 파일 폴더를 지정해 로드하는 함수

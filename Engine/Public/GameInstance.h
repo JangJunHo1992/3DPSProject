@@ -129,6 +129,18 @@ public: /* For.Light_Manager */
 
 public: /* For.Frustum */
 	_bool isIn_WorldPlanes(_fvector vPoint, _float fRadius = 0.f);
+public://Sound_Manager
+	// 사운드 재생
+	void Play_Sound(const wstring& strGroupKey, const wstring& strSoundKey, CHANNELID eID, _float fVolume = 1.f);
+	// 브금 재생
+	void Play_BGM(const wstring& strGroupKey, const wstring& strSoundKey, _float fVolume = 1.f);
+	// 사운드 정지
+	void Stop_Sound(CHANNELID eID);
+	// 모든 사운드 정지
+	void Stop_All();
+	// 채널의 볼륨 설정
+	void Set_ChannelVolume(CHANNELID eID, float fVolume);
+
 
 public:
 	RAY	Get_MouseRayWorld(HWND g_hWnd, const unsigned int	g_iWinSizeX, const unsigned int	g_iWinSizeY);
@@ -158,6 +170,7 @@ private:
 	class CTarget_Manager* m_pTarget_Manager = { nullptr };
 	class CLight_Manager* m_pLight_Manager = { nullptr };
 	class CFrustum* m_pFrustum = { nullptr };
+	class CSound_Manager* m_Sound_Manager = { nullptr };
 public:
 	void Release_Manager();
 	static void Release_Engine();

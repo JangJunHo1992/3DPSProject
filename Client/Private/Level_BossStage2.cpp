@@ -56,6 +56,10 @@ HRESULT CLevel_BossStage2::Initialize()
 	}
 	if (FAILED(Ready_LightDesc()))
 		return E_FAIL;
+
+	m_pGameInstance->Play_BGM(L"MAGICIAN", L"Sea_of_Trees_Level_-_Exploration.ogg", 1.f);
+
+
 	return S_OK;
 }
 

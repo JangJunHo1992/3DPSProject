@@ -55,6 +55,10 @@ HRESULT CLevel_BossStage1::Initialize()
 	}
 	if (FAILED(Ready_LightDesc()))
 		return E_FAIL;
+
+	m_pGameInstance->Play_BGM(L"VARG", L"Varg_Boss_Version_0806_Fix_Loudness.ogg", 1.f);
+
+
 	return S_OK;
 }
 
