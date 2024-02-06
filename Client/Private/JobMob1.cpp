@@ -121,6 +121,7 @@ void CJobMob1::Set_Hitted()
 		CJobMob1::JobMob1State eHitted = CJobMob1::JobMob1State::HurtS_FL;
 		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		JobMob1Status.m_iHP -= 10;
+		//m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_01.ogg", SOUND_Monster, 1.f);
 	}
 	
 }

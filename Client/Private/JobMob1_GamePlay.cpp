@@ -54,7 +54,7 @@ void CJobMob1_GamePlay::Tick(_float fTimeDelta)
 {
 	if (JobMob1Status.m_iHP < 0)
 	{
-		
+		m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"DeadEffect_02.ogg", SOUND_EFFECT, 1.f);
 		Set_Dead();
 	}
 	__super::Tick(fTimeDelta);

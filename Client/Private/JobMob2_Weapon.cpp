@@ -201,9 +201,22 @@ _bool CJobMob2_Weapon::Collision_Chcek()
 }
 void CJobMob2_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 {
+	_uint iRandom = rand() % 3;
+
 	{
 		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_HalfMoon_Desc();
-
+		switch (iRandom)
+		{
+		case 0:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_01.ogg", SOUND_Monster, 1.f);
+			break;
+		case 1:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_02.ogg", SOUND_Monster, 1.f);
+			break;
+		case 2:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_03.ogg", SOUND_Monster, 1.f);
+			break;
+		}
 		_float3 vPos;
 		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
 
@@ -212,11 +225,21 @@ void CJobMob2_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 
 		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
 	}
-	_uint iRandom = rand() % 3;
 	if (iRandom == 1)
 	{
 		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
-
+		switch (iRandom)
+		{
+		case 0:
+			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_01.ogg", SOUND_PLAYER, 1.f);
+			break;
+		case 1:
+			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_02.ogg", SOUND_PLAYER, 1.f);
+			break;
+		case 2:
+			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_03.ogg", SOUND_PLAYER, 1.f);
+			break;
+		}
 
 		_float3 vPos;
 		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));

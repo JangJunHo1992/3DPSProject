@@ -37,7 +37,7 @@ CState<CJobMob1_GamePlay>* CJobMob1DefaultState::Ground_Normal(CJobMob1_GamePlay
 
 	if (10.f > pActor->Calc_Distance() && 5.f < pActor->Calc_Distance())
 	{
-
+		m_pGameInstance->Play_Sound(L"ENEMY_ATTACK", L"Gardener_Vocal_01.ogg", SOUND_Monster, 1.f);
 		pState = Run(pActor, fTimeDelta, _iAnimIndex);
 		if (pState)	return pState;
 	}

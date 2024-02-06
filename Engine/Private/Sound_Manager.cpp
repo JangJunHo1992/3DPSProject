@@ -47,7 +47,7 @@ HRESULT CSound_Manager::Ready_Sound()
 
 	////Wait_GroupAsync();
 	////Wait_GroupAsync();
-	Load_SoundFile_GroupAsync(L"PLAYER_HIT2", "../Bin/Resources/Sound/Hit/");
+	//Load_SoundFile_GroupAsync(L"PLAYER_HIT2", "../Bin/Resources/Sound/Hit/");
 	////Wait_GroupAsync();
 	////Wait_GroupAsync();
 

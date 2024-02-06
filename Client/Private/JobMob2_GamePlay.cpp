@@ -51,7 +51,10 @@ void CJobMob2_GamePlay::Priority_Tick(_float fTimeDelta)
 void CJobMob2_GamePlay::Tick(_float fTimeDelta)
 {
 	if (JobMob2Status.m_iHP < 0)
+	{
+		m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"DeadEffect_01.ogg", SOUND_EFFECT, 1.f);
 		Set_Dead();
+	}
 	__super::Tick(fTimeDelta);
 	m_pActor->Update_State(fTimeDelta);
 }

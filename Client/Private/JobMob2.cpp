@@ -122,6 +122,23 @@ void CJobMob2::Set_Hitted()
 		CJobMob2::JobMob2State eHitted = CJobMob2::JobMob2State::HrutS_FL;
 		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		JobMob2Status.m_iHP -= 10;
+		_uint iRandom = rand() % 4;
+		switch (iRandom)
+		{
+		case 0:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"VillagerF_Voice_Hurt_01.ogg", SOUND_Monster, 1.f);
+			break;
+		case 1:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"VillagerF_Voice_Hurt_02.ogg", SOUND_Monster, 1.f);
+			break;
+		case 2:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"VillagerF_Voice_Hurt_03.ogg", SOUND_Monster, 1.f);
+			break;
+		case 3:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"VillagerF_Voice_Hurt_04.ogg", SOUND_Monster, 1.f);
+			break;
+	
+		}
 	}
 	
 }

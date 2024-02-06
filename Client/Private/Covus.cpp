@@ -177,6 +177,8 @@ void CCovus::Set_Hitted()
 		CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
 		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		m_pPlayerHP -= 10;
+		m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"NM_V_Halberds_HurtXL.ogg", SOUND_PLAYER, 1.f);
+
 	}
 	
 }

@@ -7,6 +7,7 @@ void CJobMob2_Dead::Initialize(CJobMob2_GamePlay* pActor)
 {
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
 	pActor->Activate_Dissolve();
+
 }
 
 CState<CJobMob2_GamePlay>* CJobMob2_Dead::Update(CJobMob2_GamePlay* pActor, _float fTimeDelta)

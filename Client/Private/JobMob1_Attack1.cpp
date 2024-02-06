@@ -25,6 +25,7 @@ CState<CJobMob1_GamePlay>* CJobMob1_Attack1::Update(CJobMob1_GamePlay* pActor, _
 	if (pActor->Is_Inputable_Front(20))
 	{
 		pActor->Set_IsAttack(true);
+		m_pGameInstance->Play_Sound(L"ENEMY_ATTACK", L"Spear_AttackHeavy_01.ogg", SOUND_Monster, 1.f);
 	}
 	if (pActor->Is_Inputable_Back(30))
 	{

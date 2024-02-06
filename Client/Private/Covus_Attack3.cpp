@@ -9,7 +9,8 @@ void CCovus_Attack3::Initialize(CCovus_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
-	
+	m_pGameInstance->Play_Sound(L"PLAYER_ATTACK", L"EVM_Player_War_attack_1_03.wav", SOUND_EFFECT2, 1.f);
+
 
 }
 
@@ -18,6 +19,7 @@ CState<CCovus_GamePlay>* CCovus_Attack3::Update(CCovus_GamePlay* pActor, _float 
 	_uint iMinimumPlayTime = 15;
 	if (pActor->Is_Inputable_Front(10))
 	{
+
 		pActor->Set_IsAttack(true);
 	}
 	if (pActor->Is_Inputable_Front(25))

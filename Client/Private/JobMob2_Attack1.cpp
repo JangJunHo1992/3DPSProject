@@ -24,6 +24,7 @@ CState<CJobMob2_GamePlay>* CJobMob2_Attack1::Update(CJobMob2_GamePlay* pActor, _
 	}
 	if (pActor->Is_Inputable_Front(20))
 	{
+		m_pGameInstance->Play_Sound(L"ENEMY_ATTACK", L"VillagerF_Voice_Attack_01.ogg", SOUND_Monster, 1.f);
 		pActor->Set_IsAttack(true);
 	}
 	if (pActor->Is_Inputable_Back(30))

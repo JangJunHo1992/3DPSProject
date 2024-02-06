@@ -15,6 +15,8 @@ CState<CJobMob1_GamePlay>* CJobMob1_Dead::Update(CJobMob1_GamePlay* pActor, _flo
 	
 	if (pActor->Is_Animation_End())
 	{
+		
+
 		pActor->Set_isdead(true);
 	}
 
