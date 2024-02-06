@@ -6,6 +6,8 @@
 #include "Magician_Weapon.h"
 #include "Magician_Card.h"
 
+
+_float	CMagician::m_pMagicianHP = 500.f;
 CMagician::CMagician(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CCharacter_Client(pDevice, pContext)
 {

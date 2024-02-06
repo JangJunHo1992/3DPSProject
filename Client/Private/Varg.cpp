@@ -5,6 +5,8 @@
 #include "Varg_Body.h"
 #include "Varg_Weapon.h"
 
+_float CVarg::m_pVargHP = 500.f;
+
 CVarg::CVarg(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CCharacter_Client(pDevice, pContext)
 {

@@ -7,6 +7,10 @@
 #include "Covus_Weapon.h"
 #include "Light.h"
 #include "Player_HPBarBase.h"
+#include "Player_HPBar.h"
+
+
+_float		CCovus::m_pPlayerHP = 300;
 
 CCovus::CCovus(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CCharacter_Client(pDevice, pContext)
@@ -34,9 +38,9 @@ HRESULT CCovus::Initialize(void* pArg)
 	m_sLayerTag = "Layer_Player";
 
 	
-	PlayerStatus.m_iHP = 150;
+	PlayerStatus.m_iHP = 300;
 	PlayerStatus.m_iAttack = 10;
-
+	m_pPlayerHP = PlayerStatus.m_iHP;
 
 	CGameObject::GAMEOBJECT_DESC		GameObjectDesc = {};
 
@@ -74,6 +78,19 @@ HRESULT CCovus::Initialize(void* pArg)
 			return E_FAIL;
 	}
 
+	{
+		CPlayer_HPBar::Player_HPBar_DESC		BackGroundDesc = {};
+		BackGroundDesc.CurrentHP = m_pPlayerHP;
+		BackGroundDesc.fX = 180;
+		BackGroundDesc.fY = 650;
+		BackGroundDesc.fSizeX = 220;
+		BackGroundDesc.fSizeY = 12;
+		BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+		BackGroundDesc.fSpeedPerSec = 10.f;
+		if (FAILED(m_pGameInstance->Add_CloneObject(m_pGameInstance->Get_NextLevel(), TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Player_HPBar"), &BackGroundDesc)))
+			return E_FAIL;
+	}
+
 	return S_OK;
 }
 
@@ -105,7 +122,7 @@ void CCovus::Late_Tick(_float fTimeDelta)
 	if (Get_HasBeenHit() == true)
 		++m_iCheckHitTime;
 
-	if (Get_HasBeenHit() == true && m_iCheckHitTime > 10.f)
+	if (Get_HasBeenHit() == true && m_iCheckHitTime > 20.f)
 	{
 		Set_HasBeenHit(false);
 		m_iCheckHitTime = 0;
@@ -159,7 +176,7 @@ void CCovus::Set_Hitted()
 	{
 		CCovus::PlayerState eHitted = CCovus::PlayerState::HurtMFL;
 		Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
-		PlayerStatus.m_iHP -= 10;
+		m_pPlayerHP -= 10;
 	}
 	
 }

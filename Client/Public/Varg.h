@@ -33,7 +33,8 @@ protected:
 protected:
 	CCharacter::CharStat VargStatus = {};
 
-
+public:
+	static _float m_pVargHP;
 public:
 	virtual void Free() override;
 

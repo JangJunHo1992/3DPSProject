@@ -127,6 +127,7 @@ protected:
 
 	_bool m_bIsDissolve = { false };
 	_float m_fDissolveTime = { 0.f };
+
 protected:
 	map<const wstring, CGameObject*>		m_PartObjects;
 	

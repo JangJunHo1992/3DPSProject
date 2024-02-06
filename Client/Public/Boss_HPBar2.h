@@ -12,19 +12,19 @@ END
 
 BEGIN(Client)
 
-class CPlayer_HPBar final : public CGameObject
+class CBoss_HPBar2 final : public CGameObject
 {
 public:
-	typedef struct tagPlayer_HPBarDesc : public CGameObject::GAMEOBJECT_DESC
+	typedef struct tagBoss_HPBar2Desc : public CGameObject::GAMEOBJECT_DESC
 	{
 		_float			fX, fY, fSizeX, fSizeY;
 		_float			CurrentHP;
-	}Player_HPBar_DESC;
+	}Boss_HPBar2_DESC;
 
 private:
-	CPlayer_HPBar(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-	CPlayer_HPBar(const CPlayer_HPBar& rhs);
-	virtual ~CPlayer_HPBar() = default;
+	CBoss_HPBar2(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	CBoss_HPBar2(const CBoss_HPBar2& rhs);
+	virtual ~CBoss_HPBar2() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -41,7 +41,7 @@ private:
 	CShader* m_pShaderCom = { nullptr };
 	CTexture* m_pTextureCom = { nullptr };
 	CVIBuffer_Rect* m_pVIBufferCom = { nullptr };
-	CCovus* m_pPlayer = { nullptr };
+
 private:
 	_float		m_fCurrentHP = 0.f;
 	_float		m_fMaxHP = 300.f;
@@ -55,7 +55,7 @@ private:
 
 public:
 	/* 원형객체를 생성한다. */
-	static CPlayer_HPBar* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	static CBoss_HPBar2* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 
 	/* 사본객체를 생성한다. */
 	virtual CGameObject* Clone(void* pArg) override;

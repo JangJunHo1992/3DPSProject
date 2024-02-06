@@ -32,7 +32,8 @@ protected:
 	//HRESULT Bind_ShaderResources();
 protected:
 	CCharacter::CharStat MagicianStatus = {};
-
+public:
+	static _float m_pMagicianHP;
 
 public:
 	virtual void Free() override;

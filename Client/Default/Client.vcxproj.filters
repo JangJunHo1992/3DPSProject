@@ -808,6 +808,15 @@
     <Filter Include="02.GameObjects\UI\PlayerHP\HPBarBase">
       <UniqueIdentifier>{e53a514d-b0fa-44ec-93b0-0db138fe5510}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObjects\UI\BossHP\Boss1">
+      <UniqueIdentifier>{4fec81f7-71f2-4df9-a9b1-174dce913ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\BossHP\Boss2">
+      <UniqueIdentifier>{64fc7235-ff3e-493a-b345-76de1c96fc39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObjects\UI\BossHP\BossHPBarBase">
+      <UniqueIdentifier>{0cda464f-2f0e-4300-9d07-e7bd55c95a69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1623,11 +1632,17 @@
     <ClInclude Include="..\Public\Player_HPBar.h">
       <Filter>02.GameObjects\UI\PlayerHP</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Boss_HPBar.h">
-      <Filter>02.GameObjects\UI\BossHP</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Player_HPBarBase.h">
       <Filter>02.GameObjects\UI\PlayerHP\HPBarBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Boss_HPBar.h">
+      <Filter>02.GameObjects\UI\BossHP\Boss1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Boss_HPBar2.h">
+      <Filter>02.GameObjects\UI\BossHP\Boss2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Boss_HPBarBase.h">
+      <Filter>02.GameObjects\UI\BossHP\BossHPBarBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2400,11 +2415,17 @@
     <ClCompile Include="..\Private\Player_HPBar.cpp">
       <Filter>02.GameObjects\UI\PlayerHP</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Boss_HPBar.cpp">
-      <Filter>02.GameObjects\UI\BossHP</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Player_HPBarBase.cpp">
       <Filter>02.GameObjects\UI\PlayerHP\HPBarBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Boss_HPBar.cpp">
+      <Filter>02.GameObjects\UI\BossHP\Boss1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Boss_HPBar2.cpp">
+      <Filter>02.GameObjects\UI\BossHP\Boss2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Boss_HPBarBase.cpp">
+      <Filter>02.GameObjects\UI\BossHP\BossHPBarBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

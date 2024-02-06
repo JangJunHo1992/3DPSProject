@@ -7,24 +7,22 @@ BEGIN(Engine)
 class CShader;
 class CTexture;
 class CVIBuffer_Rect;
-
 END
 
 BEGIN(Client)
 
-class CPlayer_HPBar final : public CGameObject
+class CBoss_HPBarBase final : public CGameObject
 {
 public:
-	typedef struct tagPlayer_HPBarDesc : public CGameObject::GAMEOBJECT_DESC
+	typedef struct tagBoss_HPBarBaseDesc : public CGameObject::GAMEOBJECT_DESC
 	{
 		_float			fX, fY, fSizeX, fSizeY;
-		_float			CurrentHP;
-	}Player_HPBar_DESC;
+	}Boss_HPBarBase_DESC;
 
 private:
-	CPlayer_HPBar(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
-	CPlayer_HPBar(const CPlayer_HPBar& rhs);
-	virtual ~CPlayer_HPBar() = default;
+	CBoss_HPBarBase(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	CBoss_HPBarBase(const CBoss_HPBarBase& rhs);
+	virtual ~CBoss_HPBarBase() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -41,21 +39,14 @@ private:
 	CShader* m_pShaderCom = { nullptr };
 	CTexture* m_pTextureCom = { nullptr };
 	CVIBuffer_Rect* m_pVIBufferCom = { nullptr };
-	CCovus* m_pPlayer = { nullptr };
-private:
-	_float		m_fCurrentHP = 0.f;
-	_float		m_fMaxHP = 300.f;
-	_float      m_fRatio = 0.f;
-	//_float		m_fDissolveWeight = { 0.f };
+
 private:
 	HRESULT Ready_Components(LEVEL eLevel);
 	HRESULT Bind_ShaderResources();
 
-	void Decrease_Ratio(_float fRatio);
-
 public:
 	/* 원형객체를 생성한다. */
-	static CPlayer_HPBar* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
+	static CBoss_HPBarBase* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 
 	/* 사본객체를 생성한다. */
 	virtual CGameObject* Clone(void* pArg) override;

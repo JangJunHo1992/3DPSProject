@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "Boss_HPBar.h"
+#include "Player_HPBarBase.h"
 #include "GameInstance.h"
-#include "Varg.h"
 
-CBoss_HPBar::CBoss_HPBar(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
+
+CPlayer_HPBarBase::CPlayer_HPBarBase(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
 {
 
 }
 
-CBoss_HPBar::CBoss_HPBar(const CBoss_HPBar& rhs)
+CPlayer_HPBarBase::CPlayer_HPBarBase(const CPlayer_HPBarBase& rhs)
 	: CGameObject(rhs)
 {
 }
 
-HRESULT CBoss_HPBar::Initialize_Prototype()
+HRESULT CPlayer_HPBarBase::Initialize_Prototype()
 {
 	/* 원형객체의 초기화과정을 수행한다. */
 	/* 1.서버로부터 값을 받아와서 초기화한다 .*/
@@ -26,15 +26,14 @@ HRESULT CBoss_HPBar::Initialize_Prototype()
 	return S_OK;
 }
 
-HRESULT CBoss_HPBar::Initialize(void* pArg)
+HRESULT CPlayer_HPBarBase::Initialize(void* pArg)
 {
 	/* 백그라운드 객체가 사용할 Trnasform컴포넌트를 생성하여 추가해놓는다. */
 	/*if (FAILED(__super::Initialize(&CGameObject::GAMEOBJECT_DESC(10.0f, 90.0f))))
 		return E_FAIL;*/
 
-	Boss_HPBar_DESC* pDesc = (Boss_HPBar_DESC*)pArg;
+	Player_HPBarBase_DESC* pDesc = (Player_HPBarBase_DESC*)pArg;
 
-	m_fCurrentHP = pDesc->CurrentHP;
 	m_fX = pDesc->fX;
 	m_fY = pDesc->fY;
 	m_fSizeX = pDesc->fSizeX;
@@ -61,11 +60,9 @@ HRESULT CBoss_HPBar::Initialize(void* pArg)
 			return E_FAIL;
 	}
 
-	//m_pPlayer = dynamic_cast<CCovus*>(m_pGameInstance->Get_Player());
-
 
 	m_pTransformCom->Set_Scaling(m_fSizeX, m_fSizeY, 1.f);
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.02f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, XMVectorSet(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.01f, 1.f));
 
 	XMStoreFloat4x4(&m_ViewMatrix, XMMatrixIdentity());
 	XMStoreFloat4x4(&m_ProjMatrix, XMMatrixOrthographicLH(g_iWinSizeX, g_iWinSizeY, 0.f, 1.f));
@@ -74,39 +71,42 @@ HRESULT CBoss_HPBar::Initialize(void* pArg)
 	return S_OK;
 }
 
-void CBoss_HPBar::Priority_Tick(_float fTimeDelta)
+void CPlayer_HPBarBase::Priority_Tick(_float fTimeDelta)
 {
-	//list<CGameObject*>* playerList = m_pGameInstance->Get_GameObjects(m_pGameInstance->Get_NextLevel(), TEXT("Layer_Player"));
-	//m_pPlayer = dynamic_cast<CCharacter*>((*playerList).back());
-	//m_pGameInstance->Set_Player(m_pPlayer);
+	int a = 10;
 
 
 }
 
-void CBoss_HPBar::Tick(_float fTimeDelta)
+void CPlayer_HPBarBase::Tick(_float fTimeDelta)
 {
-	m_fCurrentHP = CVarg::m_pVargHP;
-	m_fRatio = m_fCurrentHP / m_fMaxHP;
-	//m_pTransformCom->Set_Scaling(m_fSizeX * m_fRatio, m_fSizeY, 1.f);
-	/*m_fRatio -= fRatio;*/
 
-	if (m_fRatio <= 0.f)
-		m_fRatio = 0.f;
+
+	//if (GetKeyState(VK_LEFT) & 0x8000)
+	//	m_pTransformCom->Turn(XMVectorSet(0.f, 1.f, 0.f, 0.f), fTimeDelta * -1.f);
+	//if (GetKeyState(VK_RIGHT) & 0x8000)
+	//	m_pTransformCom->Turn(XMVectorSet(0.f, 1.f, 0.f, 0.f), fTimeDelta);
+
+	//if (GetKeyState(VK_UP) & 0x8000)
+	//	m_pTransformCom->Go_Straight(fTimeDelta);
+	//if (GetKeyState(VK_DOWN) & 0x8000)
+	//	m_pTransformCom->Go_Backward(fTimeDelta);
+
 }
 
-void CBoss_HPBar::Late_Tick(_float fTimeDelta)
+void CPlayer_HPBarBase::Late_Tick(_float fTimeDelta)
 {
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_PRIORITY, this)))
 		return;
 }
 
-HRESULT CBoss_HPBar::Render()
+HRESULT CPlayer_HPBarBase::Render()
 {
 	if (FAILED(Bind_ShaderResources()))
 		return E_FAIL;
 
 	/* 이 셰ㅒ이더에 0번째 패스로 그릴꺼야. */
-	m_pShaderCom->Begin(7);
+	m_pShaderCom->Begin(6);
 
 	/* 내가 그릴려고하는 정점, 인덷ㄱ스버퍼를 장치에 바인딩해. */
 	m_pVIBufferCom->Bind_VIBuffers();
@@ -118,7 +118,7 @@ HRESULT CBoss_HPBar::Render()
 	return S_OK;
 }
 
-HRESULT CBoss_HPBar::Ready_Components(LEVEL eLevel)
+HRESULT CPlayer_HPBarBase::Ready_Components(LEVEL eLevel)
 {
 	//void** 형은 아무거나 들어가질수가 없음 따라서 형변환을 해줘야 함!
 	/* For.Com_Shader */
@@ -132,14 +132,14 @@ HRESULT CBoss_HPBar::Ready_Components(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For. Com_Texture */
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Boss_HPBar"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Player_HPBarBase"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 
 	return S_OK;
 }
 
-HRESULT CBoss_HPBar::Bind_ShaderResources()
+HRESULT CPlayer_HPBarBase::Bind_ShaderResources()
 {
 
 	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
@@ -150,45 +150,37 @@ HRESULT CBoss_HPBar::Bind_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pTextureCom->Bind_ShaderResources(m_pShaderCom, "g_Texture")))
 		return E_FAIL;
-	if (FAILED(m_pShaderCom->Bind_RawValue("g_fRatio", &m_fRatio, sizeof(_float))))
-		return E_FAIL;
 
 	return S_OK;
 }
-void CBoss_HPBar::Decrease_Ratio(_float fRatio)
-{
-	m_fRatio -= fRatio;
 
-	if (m_fRatio <= 0.f)
-		m_fRatio = 0.f;
-}
-CBoss_HPBar* CBoss_HPBar::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
+CPlayer_HPBarBase* CPlayer_HPBarBase::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
-	CBoss_HPBar* pInstance = new CBoss_HPBar(pDevice, pContext);
+	CPlayer_HPBarBase* pInstance = new CPlayer_HPBarBase(pDevice, pContext);
 
 	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX("Failed to Created : CBoss_HPBar");
+		MSG_BOX("Failed to Created : CPlayer_HPBarBase");
 		Safe_Release(pInstance);
 	}
 	return pInstance;
 }
 
-CGameObject* CBoss_HPBar::Clone(void* pArg)
+CGameObject* CPlayer_HPBarBase::Clone(void* pArg)
 {
-	CBoss_HPBar* pInstance = new CBoss_HPBar(*this);
+	CPlayer_HPBarBase* pInstance = new CPlayer_HPBarBase(*this);
 
 	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX("Failed to Cloned : CBoss_HPBar");
+		MSG_BOX("Failed to Cloned : CPlayer_HPBarBase");
 		Safe_Release(pInstance);
 	}
 	return pInstance;
 }
 
-void CBoss_HPBar::Free()
+void CPlayer_HPBarBase::Free()
 {
 	__super::Free();
 

@@ -99,6 +99,8 @@ protected:
 	string						m_sLayerTag = "";
 	_uint						m_iCurrentLevelIndex = -1;
 	_uint						m_iCheckHitTime = 0;
+public:
+	static _float				m_pPlayerHP ;
 protected:
 	HRESULT	Add_Component(_uint iLevelIndex, const wstring& strPrototypeTag,
 							const wstring& strComTag, _Inout_ CComponent** ppOut, void* pArg = nullptr);

@@ -32,6 +32,7 @@
 #include "TexUI_Stage2Loading_Name.h"
 #include "TexUI_Stage3Loading_Name.h"
 #include "Player_HPBarBase.h"
+#include "Player_HPBar.h"
 
 // #include "Particle_Blue.h"
 // #include "Particle_Red.h"
@@ -263,9 +264,13 @@ HRESULT CLoader::Loading_For_Logo_Level()
 		CTexUI_Stage3Loading_Name::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 	//------------------------------------------------------------------------------------------
-	/* For.Prototype_GameObject_TexUI_Stage1Loading_Name */
+	/* For.Prototype_GameObject_TexUI_Player_HPBarBase */
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Player_HPBarBase"),
 		CPlayer_HPBarBase::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_TexUI_Player_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Player_HPBar"),
+		CPlayer_HPBar::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 
@@ -325,8 +330,18 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Mask/%d.png"), 902))))
 		return E_FAIL;
 
-	/* For.Prototype_Component_Texture_Snow */
+	/* For.Prototype_Component_Texture_Player_HPBarBase */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Player_HPBarBase"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Player_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Player_HPBar"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_Plague_HealthBar.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Player_HPBarBase */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Boss_HPBarBase"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
 		return E_FAIL;
 
@@ -1402,8 +1417,19 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/Mask/%d.png"), 902))))
 		return E_FAIL;
 
-	/* For.Prototype_Component_Texture_Snow */
+	/* For.Prototype_Component_Texture_Player_HPBarBase */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Player_HPBarBase"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
+		return E_FAIL;
+
+
+	/* For.Prototype_Component_Texture_Player_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Player_HPBar"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_Plague_HealthBar.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Boss_HPBarBase */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Boss_HPBarBase"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
 		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1647,6 +1673,16 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 	
 	/* For.Prototype_Component_Texture_Player_HPBarBase */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Player_HPBarBase"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Player_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Player_HPBar"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_Plague_HealthBar.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Boss_HPBarBase */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Boss_HPBarBase"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
 		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

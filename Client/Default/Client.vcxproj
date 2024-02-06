@@ -196,6 +196,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClInclude Include="..\Public\Body_Client.h" />
     <ClInclude Include="..\Public\Body_Player.h" />
     <ClInclude Include="..\Public\Boss_HPBar.h" />
+    <ClInclude Include="..\Public\Boss_HPBar2.h" />
+    <ClInclude Include="..\Public\Boss_HPBarBase.h" />
     <ClInclude Include="..\Public\Camera_Dynamic.h" />
     <ClInclude Include="..\Public\Camera_Dynamic_Tool.h" />
     <ClInclude Include="..\Public\Camera_Window.h" />
@@ -462,6 +464,8 @@ attrib +r "$(SolutionDir)Tool\Bin\shaderfiles\*.*" /s </Command>
     <ClCompile Include="..\private\BackGround.cpp" />
     <ClCompile Include="..\Private\Body_Player.cpp" />
     <ClCompile Include="..\Private\Boss_HPBar.cpp" />
+    <ClCompile Include="..\Private\Boss_HPBar2.cpp" />
+    <ClCompile Include="..\Private\Boss_HPBarBase.cpp" />
     <ClCompile Include="..\Private\Camera_Dynamic.cpp" />
     <ClCompile Include="..\Private\Camera_Dynamic_Tool.cpp" />
     <ClCompile Include="..\Private\Camera_Window.cpp" />

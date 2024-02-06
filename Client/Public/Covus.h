@@ -37,11 +37,13 @@ protected:
 	virtual HRESULT Ready_Components_Origin(LEVEL eLevel) override;
 	virtual HRESULT Ready_PartObjects() override;
 	//HRESULT Bind_ShaderResources();
-protected:
+public:
 	_bool	m_bRotatePlayer = false;
 	CCharacter::CharStat PlayerStatus = {};
 	LIGHT_DESC			m_LightDesc = {};
 	class CLight* m_pLight = { nullptr };
+public:
+	static _float				m_pPlayerHP;
 public:
 	virtual void Free() override;
 public:
