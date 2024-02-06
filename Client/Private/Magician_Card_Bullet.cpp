@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "GameInstance.h"
 #include "Particle_Custom.h"
+#include "Effect_Monster_Trail.h"
 
 CMagician_Card_Bullet::CMagician_Card_Bullet(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
@@ -106,7 +107,26 @@ HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
 
 	m_pTransformCom->Look_At(m_vPlayerPos);
 
-
+// 	TRAIL_DESC TrailDesc;
+// 	ZeroMemory(&TrailDesc, sizeof(TRAIL_DESC));
+// 
+// 	TrailDesc.iMaxCnt = 16;
+// 	TrailDesc.vPos_0 = _float3(0.f, 0.f, 0.f);
+// 	TrailDesc.vPos_1 = _float3(0.f, 0.f, 1.3f);
+// 
+// 
+// 
+// 	if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Monster_Trail"), &TrailDesc)))
+// 		return E_FAIL;
+// 
+// 	m_pMonsterTrailDiffuse = dynamic_cast<CEffect_Monster_Trail*>(m_pGameInstance->Get_GameObjects(LEVEL_BOSS2, TEXT("Layer_Effect"))->back());
+// 
+// 	if (nullptr == m_pMonsterTrailDiffuse)
+// 		return E_FAIL;
+// 
+// 	m_pMonsterTrailDiffuse->Set_OwnerDesc(m_WorldMatrix);
+// 	//m_pMonsterTrailDiffuse->Set_TextureIndex(1, 693, 0);
+// 	m_pMonsterTrailDiffuse->Set_Use(true);
 	
 
 	return S_OK;
@@ -218,32 +238,33 @@ void CMagician_Card_Bullet::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalP
 {
 	_uint iRandom = rand() % 3;
 
-	{
-		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_HalfMoon_Desc();
-		switch (iRandom)
-		{
-		case 0:
-			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_01.ogg", SOUND_Monster, 1.f);
-			break;
-		case 1:
-			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_02.ogg", SOUND_Monster, 1.f);
-			break;
-		case 2:
-			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_03.ogg", SOUND_Monster, 1.f);
-			break;
-		}
-		_float3 vPos;
-		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
-
-		Desc.parentMatrix = m_WorldMatrix;
-		Desc.vPos = vPos;
-
-		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
-	}
+// 	{
+// 		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_HalfMoon_Desc();
+// 		switch (iRandom)
+// 		{
+// 		case 0:
+// 			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_01.ogg", SOUND_Monster, 1.f);
+// 			break;
+// 		case 1:
+// 			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_02.ogg", SOUND_Monster, 1.f);
+// 			break;
+// 		case 2:
+// 			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_03.ogg", SOUND_Monster, 1.f);
+// 			break;
+// 		}
+// 		_float3 vPos;
+// 		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+// 
+// 		Desc.parentMatrix = m_WorldMatrix;
+// 		Desc.vPos = vPos;
+// 
+// 		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+// 	}
 	if (iRandom == 2)
 	{
 		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
-		switch (iRandom)
+		_uint Random = rand() % 3;
+		switch (Random)
 		{
 		case 0:
 			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_01.ogg", SOUND_PLAYER, 1.f);

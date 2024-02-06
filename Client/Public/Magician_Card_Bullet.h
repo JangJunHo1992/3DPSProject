@@ -7,6 +7,7 @@ BEGIN(Engine)
 class CShader;
 class CModel;
 class CCollider;
+class CEffect_Monster_Trail;
 END
 
 BEGIN(Client)
@@ -35,7 +36,7 @@ protected:
 	CShader*		m_pShaderCom = { nullptr };
 	CModel*			m_pModelCom = { nullptr };
 	CCollider*		m_pColliderCom = { nullptr };
-
+	CEffect_Monster_Trail* m_pMonsterTrailDiffuse = { nullptr };
 	_float4x4		m_WorldMatrix = {};
 
 	_vector				m_vPlayerPos = {};

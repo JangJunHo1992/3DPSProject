@@ -59,7 +59,7 @@ HRESULT CMainApp::Render()
 	/* ±×·Á¾ßÇÒ ¸ðµ¨µéÀ» ±×¸®³®.*/
 	m_pGameInstance->Render_Engine();
 	++m_iNumRender;
-
+#ifdef _DEBUG
 	if (1.f <= m_fTimeAcc)
 	{
 		wsprintf(m_szFPS, TEXT("FPS:%d"), m_iNumRender);
@@ -69,6 +69,8 @@ HRESULT CMainApp::Render()
 	// MakeSpriteFont "³Ø½¼lv1°íµñ Bold" /FontSize:30 /FastPack /CharacterRegion:0x0020-0x00FF /CharacterRegion:0x3131-0x3163 /CharacterRegion:0xAC00-0xD800 /DefaultCharacter:0xAC00 138ex.spritefont
 	//m_pGameInstance->Render_Font(TEXT("Font_Default"), TEXT("±×·¯´Ù 0¿øÈ÷ Ãë¾÷ ¸ø ÇÑ´Ù!!"), _float2(0.f, 0.f));
 	m_pGameInstance->Render_Font(TEXT("Font_Default"), m_szFPS, _float2(0.f, 0.f), XMVectorSet(1.f, 0.f, 0.f, 1.f));
+#endif
+
 	m_pGameInstance->Present();
 
 	return S_OK;
