@@ -29,6 +29,8 @@ private:
 	_bool					m_bCutSceneDeadCheck = true;
 	_bool					m_bCutSceneDeadCheck2 = true;
 public:
+	_int					m_iFootstepTimeCheck = 100;
+public:
 	/* 원형객체를 생성한다. */
 	static CCovus_GamePlay* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 

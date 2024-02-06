@@ -22,7 +22,8 @@ public:
 	CState<CVarg_GamePlay>* Attack(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CVarg_GamePlay>* RaidAttack(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CVarg_GamePlay>* Hitted(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
-
+public:
+	_int	m_iFootStepCheck = 25;
 
 public:
 	virtual CState<CVarg_GamePlay>* Update_State(CVarg_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex) PURE;

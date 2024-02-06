@@ -22,7 +22,8 @@ public:
 	CState<CCovus_GamePlay>* Dash(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CCovus_GamePlay>* Hitted(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
-
+public:
+	_int	m_iFootStepCheck = 25;
 public:
 	virtual CState<CCovus_GamePlay>* Update_State(CCovus_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex) PURE;
 

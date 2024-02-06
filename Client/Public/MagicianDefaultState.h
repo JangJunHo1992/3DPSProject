@@ -24,7 +24,8 @@ public:
 	CState<CMagician_GamePlay>* Hitted(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CMagician_GamePlay>* Disappear(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 
-
+public:
+	_int	m_iFootStepCheck = 25;
 
 public:
 	virtual CState<CMagician_GamePlay>* Update_State(CMagician_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex) PURE;

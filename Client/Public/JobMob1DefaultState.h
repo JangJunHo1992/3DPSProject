@@ -21,7 +21,8 @@ public:
 	CState<CJobMob1_GamePlay>* Run(CJobMob1_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CJobMob1_GamePlay>* Attack(CJobMob1_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
 	CState<CJobMob1_GamePlay>* Hitted(CJobMob1_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex);
-
+public:
+	_int	m_iFootStepCheck = 25;
 
 public:
 	virtual CState<CJobMob1_GamePlay>* Update_State(CJobMob1_GamePlay* pActor, _float fTimeDelta, _uint _iAnimIndex) PURE;

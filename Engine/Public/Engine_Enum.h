@@ -9,8 +9,8 @@ namespace Engine
 
 enum CHANNELID {
 	SOUND_BGM, SOUND_ENVIRONMENT,
-	SOUND_PLAYER,
-	SOUND_Monster,
+	SOUND_PLAYER, SOUND_PLAYERFootStep,
+	SOUND_Monster, SOUND_MonsterFootStep,
 	SOUND_EFFECT, SOUND_EFFECT2,
 	SOUND_UI,
 	SOUND_SYSTEM_EFFECT, /* Bierce Announce */

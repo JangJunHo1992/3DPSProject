@@ -39,6 +39,7 @@ HRESULT CCovus_GamePlay::Initialize(void* pArg)
 void CCovus_GamePlay::Priority_Tick(_float fTimeDelta)
 {
 	__super::Priority_Tick(fTimeDelta);
+	--m_iFootstepTimeCheck;
 }
 
 void CCovus_GamePlay::Tick(_float fTimeDelta)
@@ -64,6 +65,8 @@ void CCovus_GamePlay::Tick(_float fTimeDelta)
 void CCovus_GamePlay::Late_Tick(_float fTimeDelta)
 {
 	__super::Late_Tick(fTimeDelta);
+	if (m_iFootstepTimeCheck < 0)
+		m_iFootstepTimeCheck = 100;
 }
 
 HRESULT CCovus_GamePlay::Render()

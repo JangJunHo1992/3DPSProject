@@ -14,6 +14,8 @@ CState<CCovus_GamePlay>* CCovus_Walk_Back::Update(CCovus_GamePlay* pActor, _floa
 {
 	pActor->Go_Backward(fTimeDelta*0.5);
 
+	
+
 	return __super::Update_State(pActor, fTimeDelta, g_iAnimIndex);
 }
 
