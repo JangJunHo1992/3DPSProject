@@ -44,7 +44,7 @@ private:
 	
 private:
 	_float		m_fCurrentHP = 0.f;
-	_float		m_fMaxHP = 300.f;
+	_float		m_fMaxHP = 500.f;
 	_float      m_fRatio = 0.f;
 	//_float		m_fDissolveWeight = { 0.f };
 public:
