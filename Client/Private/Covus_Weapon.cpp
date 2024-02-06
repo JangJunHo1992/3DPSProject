@@ -350,7 +350,8 @@ void CCovus_Weapon::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
 	if(iRandom == 1)
 	{
 		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
-		switch (iRandom)
+		_uint Random = rand() % 3;
+		switch (Random)
 		{
 		case 0:
 			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_01.ogg", SOUND_PLAYER, 1.f);

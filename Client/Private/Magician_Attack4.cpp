@@ -9,6 +9,8 @@ void CMagician_Attack4::Initialize(CMagician_GamePlay* pActor)
 {
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
+	m_pGameInstance->Play_Sound(L"MAGICIAN", L"CV_MagicianLV2_AtkAction05_02.ogg", SOUND_EFFECT, 1.f);
+
 }
 
 CState<CMagician_GamePlay>* CMagician_Attack4::Update(CMagician_GamePlay* pActor, _float fTimeDelta)

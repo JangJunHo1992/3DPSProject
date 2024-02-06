@@ -55,6 +55,8 @@ void CMagician_GamePlay::Priority_Tick(_float fTimeDelta)
 	{
 		Set_CutSceneDead2(true);
 		//CGameObject::m_bCutSceneDead2 = true;
+		m_pGameInstance->Play_Sound(L"MAGICIAN", L"CV_MagicianLV1_Dead_05___.ogg", SOUND_SYSTEM_EFFECT2, 1.f);
+
 		m_pActor->Set_State(new CMagician_Dead());
 	}
 	if (40.f > Calc_Distance() && m_bCheckStart)

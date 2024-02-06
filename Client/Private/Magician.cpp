@@ -153,6 +153,20 @@ void CMagician::Set_Hitted()
 
 			CMagician::MagicianState eHitted = CMagician::MagicianState::HurtFL;
 			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+			m_pGameInstance->Play_Sound(L"VARG", L"CV_Varg_AtkAction01.ogg", SOUND_Monster, 1.f);
+			_uint iRandom = rand() % 3;
+			switch (iRandom)
+			{
+			case 0:
+				m_pGameInstance->Play_Sound(L"MAGICIAN", L"CV_MagicianLV1_Hurt01___.ogg", SOUND_Monster, 1.f);
+				break;
+			case 1:
+				m_pGameInstance->Play_Sound(L"MAGICIAN", L"CV_MagicianLV1_Hurt02___.ogg", SOUND_Monster, 1.f);
+				break;
+			case 2:
+				m_pGameInstance->Play_Sound(L"MAGICIAN", L"CV_MagicianLV1_Hurt03___.ogg", SOUND_Monster, 1.f);
+				break;
+			}
 		}
 		
 		m_pMagicianHP -= 10;

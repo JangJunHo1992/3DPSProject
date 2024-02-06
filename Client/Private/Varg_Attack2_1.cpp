@@ -10,7 +10,8 @@ void CVarg_Attack2_1::Initialize(CVarg_GamePlay* pActor)
 	__super::Initialize(pActor);
 	pActor->Set_Animation(g_iAnimIndex, CModel::ANIM_STATE_NORMAL, true);
 	//pActor->Set_IsAttack(true);
-
+	m_pGameInstance->Play_Sound(L"VARG", L"CV_Varg_AtkAction04.ogg", SOUND_EFFECT, 1.f);
+	m_pGameInstance->Play_Sound(L"VARG", L"Urd_Attack06.ogg", SOUND_EFFECT2, 1.f);
 }
 
 CState<CVarg_GamePlay>* CVarg_Attack2_1::Update(CVarg_GamePlay* pActor, _float fTimeDelta)

@@ -151,6 +151,19 @@ void CVarg::Set_Hitted()
 			Set_IsAttack(false);
 			CVarg::VargState eHitted = CVarg::VargState::HurtF;
 			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
+			_uint iRandom = rand() % 3;
+			switch (iRandom)
+			{
+			case 0:
+				m_pGameInstance->Play_Sound(L"VARG", L"CV_Varg_Hurt01.ogg", SOUND_Monster, 1.f);
+				break;
+			case 1:
+				m_pGameInstance->Play_Sound(L"VARG", L"CV_Varg_Hurt02.ogg", SOUND_Monster, 1.f);
+				break;
+			case 2:
+				m_pGameInstance->Play_Sound(L"VARG", L"CV_Varg_Hurt03.ogg", SOUND_Monster, 1.f);
+				break;
+			}
 		}
 		
 		m_pVargHP -= 10;
