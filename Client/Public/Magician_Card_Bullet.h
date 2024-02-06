@@ -20,6 +20,8 @@ protected:
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
+	CParticle_Custom::PARTICLE_DESC Get_Particle_Blood_Desc();
+	CParticle_Custom::PARTICLE_DESC Get_Particle_HalfMoon_Desc();
 	virtual HRESULT Initialize(void* pArg) override;
 	virtual void Priority_Tick(_float fTimeDelta) override;
 	virtual void Tick(_float fTimeDelta) override;
@@ -41,6 +43,8 @@ protected:
 	_int				m_iCardDeadTime = 1000;
 public:
 	virtual _bool Collision_Chcek();
+
+	void Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos);
 
 	
 protected:

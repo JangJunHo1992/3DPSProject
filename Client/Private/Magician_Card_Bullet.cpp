@@ -3,7 +3,7 @@
 
 #include "Character.h"
 #include "GameInstance.h"
-
+#include "Particle_Custom.h"
 
 CMagician_Card_Bullet::CMagician_Card_Bullet(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
@@ -19,6 +19,48 @@ CMagician_Card_Bullet::CMagician_Card_Bullet(const CMagician_Card_Bullet& rhs)
 HRESULT CMagician_Card_Bullet::Initialize_Prototype()
 {
 	return S_OK;
+}
+
+CParticle_Custom::PARTICLE_DESC CMagician_Card_Bullet::Get_Particle_Blood_Desc()
+{
+	CParticle_Custom::PARTICLE_DESC Desc;
+
+	Desc.ParticleDesc.vRange = _float2(0.5f, 1.0f);
+	Desc.ParticleDesc.vSpeed = _float2(0.9f, 3.f);
+	Desc.ParticleDesc.vCenter.x = _float(1.f);
+	Desc.ParticleDesc.vCenter.y = _float(0.f);
+	Desc.ParticleDesc.vCenter.z = _float(1.f);
+	Desc.ParticleDesc.fAcceleration = -3.f;
+	Desc.ParticleDesc.vRotationX = _float2(0.f, 360.f);
+	Desc.ParticleDesc.vRotationY = _float2(0.f, 360.f);
+	Desc.ParticleDesc.vRotationZ = _float2(0.f, 360.f);
+	Desc.ParticleDesc.vLifeTime = _float2(0.1f, 1.5f);
+	Desc.ParticleDesc.vScaleX = _float2(0.10000000149011612f, 0.30000001192092896f);
+	Desc.ParticleDesc.vScaleY = _float2(0.10000000149011612f, 0.30000001192092896f);
+
+	return Desc;
+}
+
+
+
+CParticle_Custom::PARTICLE_DESC CMagician_Card_Bullet::Get_Particle_HalfMoon_Desc()
+{
+	CParticle_Custom::PARTICLE_DESC Desc;
+
+	Desc.ParticleDesc.vRange = _float2(0.6f, 0.6f);
+	Desc.ParticleDesc.vSpeed = _float2(5.f, 5.f);
+	Desc.ParticleDesc.vCenter.x = _float(0.4f);
+	Desc.ParticleDesc.vCenter.y = _float(0.f);
+	Desc.ParticleDesc.vCenter.z = _float(0.f);
+	Desc.ParticleDesc.fAcceleration = -29.f;
+	Desc.ParticleDesc.vRotationX = _float2(270.f, 270.f);
+	Desc.ParticleDesc.vRotationY = _float2(180.f, 360.f);
+	Desc.ParticleDesc.vRotationZ = _float2(360.f, 360.f);
+	Desc.ParticleDesc.vLifeTime = _float2(0.9f, 0.9f);
+	Desc.ParticleDesc.vScaleX = _float2(0.2f, 0.2f);
+	Desc.ParticleDesc.vScaleY = _float2(0.2f, 0.2f);
+
+	return Desc;
 }
 
 HRESULT CMagician_Card_Bullet::Initialize(void* pArg)
@@ -158,6 +200,7 @@ _bool CMagician_Card_Bullet::Collision_Chcek()
 				{
 					pTarget->Set_Hitted();
 				}
+				Create_Attack_Particle(LEVEL_BOSS2, m_pColliderCom->GetCenterPos());
 				pAlreadyHittedCharacter = pTarget;
 				bIsCollision = true;
 				Set_isdead(true);
@@ -169,6 +212,58 @@ _bool CMagician_Card_Bullet::Collision_Chcek()
 
 
 	return bIsCollision;
+}
+
+void CMagician_Card_Bullet::Create_Attack_Particle(LEVEL eLevel, _float3 vLocalPos)
+{
+	_uint iRandom = rand() % 3;
+
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_HalfMoon_Desc();
+		switch (iRandom)
+		{
+		case 0:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_01.ogg", SOUND_Monster, 1.f);
+			break;
+		case 1:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_02.ogg", SOUND_Monster, 1.f);
+			break;
+		case 2:
+			m_pGameInstance->Play_Sound(L"ENEMY_HIT", L"BodyHit_03.ogg", SOUND_Monster, 1.f);
+			break;
+		}
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
+	if (iRandom == 2)
+	{
+		CParticle_Custom::PARTICLE_DESC Desc = Get_Particle_Blood_Desc();
+		switch (iRandom)
+		{
+		case 0:
+			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_01.ogg", SOUND_PLAYER, 1.f);
+			break;
+		case 1:
+			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_02.ogg", SOUND_PLAYER, 1.f);
+			break;
+		case 2:
+			m_pGameInstance->Play_Sound(L"PLAYER_HIT", L"CriticalHit_03.ogg", SOUND_PLAYER, 1.f);
+			break;
+		}
+
+		_float3 vPos;
+		XMStoreFloat3(&vPos, XMVector3Transform(XMLoadFloat3(&vLocalPos), m_WorldMatrix));
+
+		Desc.parentMatrix = m_WorldMatrix;
+		Desc.vPos = vPos;
+
+		m_pGameInstance->Add_CloneObject(eLevel, TEXT("Layer_Effect"), TEXT("Prototype_GameObject_Particle_Custom"), &Desc);
+	}
 }
 
 HRESULT CMagician_Card_Bullet::Ready_Components_Origin(LEVEL eLEVEL)

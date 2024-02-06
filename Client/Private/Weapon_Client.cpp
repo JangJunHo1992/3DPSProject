@@ -50,25 +50,7 @@ CParticle_Custom::PARTICLE_DESC CWeapon_Client::Get_Particle_Blood_Desc()
 	return Desc;
 }
 
-CParticle_Custom::PARTICLE_DESC CWeapon_Client::Get_Particle_HitEffect_Desc()
-{
-	CParticle_Custom::PARTICLE_DESC Desc;
 
-	Desc.ParticleDesc.vRange = _float2(0.0f,1.8f);
-	Desc.ParticleDesc.vSpeed = _float2(1.4f, 2.4f);
-	Desc.ParticleDesc.vCenter.x = _float(2.f);
-	Desc.ParticleDesc.vCenter.y = _float(0.f);
-	Desc.ParticleDesc.vCenter.z = _float(0.f);
-	Desc.ParticleDesc.fAcceleration = -3.f;
-	Desc.ParticleDesc.vRotationX = _float2(90.f, 180.f);
-	Desc.ParticleDesc.vRotationY = _float2(90.f, 180.f);
-	Desc.ParticleDesc.vRotationZ = _float2(270.f, 360.f);
-	Desc.ParticleDesc.vLifeTime = _float2(0.1f, 1.5f);
-	Desc.ParticleDesc.vScaleX = _float2(0.2f, 0.2f);
-	Desc.ParticleDesc.vScaleY = _float2(0.2f, 0.2f);
-
-	return Desc;
-}
 
 CParticle_Custom::PARTICLE_DESC CWeapon_Client::Get_Particle_HalfMoon_Desc()
 {
@@ -84,6 +66,26 @@ CParticle_Custom::PARTICLE_DESC CWeapon_Client::Get_Particle_HalfMoon_Desc()
 	Desc.ParticleDesc.vRotationY = _float2(180.f, 360.f);
 	Desc.ParticleDesc.vRotationZ = _float2(360.f, 360.f);
 	Desc.ParticleDesc.vLifeTime = _float2(0.9f, 0.9f);
+	Desc.ParticleDesc.vScaleX = _float2(0.2f, 0.2f);
+	Desc.ParticleDesc.vScaleY = _float2(0.2f, 0.2f);
+
+	return Desc;
+}
+
+CParticle_Custom::PARTICLE_DESC CWeapon_Client::Get_Particle_HitEffect_Desc()
+{
+	CParticle_Custom::PARTICLE_DESC Desc;
+
+	Desc.ParticleDesc.vRange = _float2(0.0f, 1.8f);
+	Desc.ParticleDesc.vSpeed = _float2(1.4f, 2.4f);
+	Desc.ParticleDesc.vCenter.x = _float(2.f);
+	Desc.ParticleDesc.vCenter.y = _float(0.f);
+	Desc.ParticleDesc.vCenter.z = _float(0.f);
+	Desc.ParticleDesc.fAcceleration = -3.f;
+	Desc.ParticleDesc.vRotationX = _float2(90.f, 180.f);
+	Desc.ParticleDesc.vRotationY = _float2(90.f, 180.f);
+	Desc.ParticleDesc.vRotationZ = _float2(270.f, 360.f);
+	Desc.ParticleDesc.vLifeTime = _float2(0.1f, 1.5f);
 	Desc.ParticleDesc.vScaleX = _float2(0.2f, 0.2f);
 	Desc.ParticleDesc.vScaleY = _float2(0.2f, 0.2f);
 
