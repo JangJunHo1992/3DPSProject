@@ -3,7 +3,7 @@
 #include "GameInstance.h"
 #include "Magician_Idle.h"
 #include "Boss_HPBarBase.h"
-
+#include "Boss_HPBar2.h"
 
 void CMagician_Start::Initialize(CMagician_GamePlay* pActor)
 {
@@ -25,8 +25,22 @@ CState<CMagician_GamePlay>* CMagician_Start::Update(CMagician_GamePlay* pActor, 
 			BackGroundDesc.fSizeY = 30;
 			BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
 			BackGroundDesc.fSpeedPerSec = 10.f;
-			if (FAILED(m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Boss_HPBarBase"), &BackGroundDesc)))
-				return;
+			m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Boss_HPBarBase"), &BackGroundDesc);
+		
+		}
+
+		{
+			CBoss_HPBar2::Boss_HPBar2_DESC		BackGroundDesc = {};
+
+
+			BackGroundDesc.fX = 640;
+			BackGroundDesc.fY = 50;
+			BackGroundDesc.fSizeX = 293;
+			BackGroundDesc.fSizeY = 18;
+			BackGroundDesc.fRotationPerSec = XMConvertToRadians(90.f);
+			BackGroundDesc.fSpeedPerSec = 10.f;
+			m_pGameInstance->Add_CloneObject(LEVEL_BOSS2, TEXT("Layer_UI"), TEXT("Prototype_GameObject_TexUI_Boss_HPBar2"), &BackGroundDesc);
+			
 		}
 		pActor->Set_StartScene2(false);
 		return new CMagician_Idle();

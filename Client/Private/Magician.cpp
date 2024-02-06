@@ -127,7 +127,7 @@ void CMagician::Set_Hitted()
 			Set_Animation(eHitted, CModel::ANIM_STATE::ANIM_STATE_NORMAL, true);
 		}
 		
-		MagicianStatus.m_iHP -= 10;
+		m_pMagicianHP -= 10;
 	}
 	
 }

@@ -33,6 +33,9 @@
 #include "TexUI_Stage3Loading_Name.h"
 #include "Player_HPBarBase.h"
 #include "Player_HPBar.h"
+#include "Boss_HPBarBase.h"
+#include "Boss_HPBar.h"
+#include "Boss_HPBar2.h"
 
 // #include "Particle_Blue.h"
 // #include "Particle_Red.h"
@@ -272,6 +275,17 @@ HRESULT CLoader::Loading_For_Logo_Level()
 	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Player_HPBar"),
 		CPlayer_HPBar::Create(m_pDevice, m_pContext))))
 		return E_FAIL;
+	/* For.Prototype_GameObject_TexUI_Player_HPBarBase */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Boss_HPBarBase"),
+		CBoss_HPBarBase::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_TexUI_Player_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Boss_HPBar"),
+		CBoss_HPBar::Create(m_pDevice, m_pContext))))
+		return E_FAIL;/* For.Prototype_GameObject_TexUI_Player_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype_Object(TEXT("Prototype_GameObject_TexUI_Boss_HPBar2"),
+		CBoss_HPBar2::Create(m_pDevice, m_pContext))))
+		return E_FAIL;
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니다."));
 
 	m_isFinished = true;
@@ -343,6 +357,16 @@ HRESULT CLoader::Loading_For_Level(LEVEL eLEVEL)
 	/* For.Prototype_Component_Texture_Player_HPBarBase */
 	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Boss_HPBarBase"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Boss_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Boss_HPBar"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_Plague_HealthBar.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Boss_HPBar2 */
+	if (FAILED(m_pGameInstance->Add_Prototype(eLEVEL, TEXT("Prototype_Component_Texture_Boss_HPBar2"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_Plague_HealthBar.png"), 1))))
 		return E_FAIL;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1432,6 +1456,11 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage1()
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Boss_HPBarBase"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
 		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Boss_HPBar */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS1, TEXT("Prototype_Component_Texture_Boss_HPBar"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_Plague_HealthBar.png"), 1))))
+		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	lstrcpy(m_szLoadingText, TEXT("모델를(을) 로드하는 중입니다."));
@@ -1684,6 +1713,11 @@ HRESULT CLoader::Loading_For_GamePlay_BossStage2()
 	/* For.Prototype_Component_Texture_Boss_HPBarBase */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Boss_HPBarBase"),
 		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_HPBar_4BarBorderElite_TYPE2_.png"), 1))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Boss_HPBar2 */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_BOSS2, TEXT("Prototype_Component_Texture_Boss_HPBar2"),
+		CTexture::Create(m_pDevice, m_pContext, TEXT("../Bin/Resources/Textures/UI/TexUI_Plague_HealthBar.png"), 1))))
 		return E_FAIL;
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

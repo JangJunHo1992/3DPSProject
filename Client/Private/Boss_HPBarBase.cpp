@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "Player_HPBarBase.h"
+#include "Boss_HPBarBase.h"
 #include "GameInstance.h"
 
 
-CPlayer_HPBarBase::CPlayer_HPBarBase(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
+CBoss_HPBarBase::CBoss_HPBarBase(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: CGameObject(pDevice, pContext)
 {
 
 }
 
-CPlayer_HPBarBase::CPlayer_HPBarBase(const CPlayer_HPBarBase& rhs)
+CBoss_HPBarBase::CBoss_HPBarBase(const CBoss_HPBarBase& rhs)
 	: CGameObject(rhs)
 {
 }
 
-HRESULT CPlayer_HPBarBase::Initialize_Prototype()
+HRESULT CBoss_HPBarBase::Initialize_Prototype()
 {
 	/* 원형객체의 초기화과정을 수행한다. */
 	/* 1.서버로부터 값을 받아와서 초기화한다 .*/
@@ -26,13 +26,13 @@ HRESULT CPlayer_HPBarBase::Initialize_Prototype()
 	return S_OK;
 }
 
-HRESULT CPlayer_HPBarBase::Initialize(void* pArg)
+HRESULT CBoss_HPBarBase::Initialize(void* pArg)
 {
 	/* 백그라운드 객체가 사용할 Trnasform컴포넌트를 생성하여 추가해놓는다. */
 	/*if (FAILED(__super::Initialize(&CGameObject::GAMEOBJECT_DESC(10.0f, 90.0f))))
 		return E_FAIL;*/
 
-	Player_HPBarBase_DESC* pDesc = (Player_HPBarBase_DESC*)pArg;
+	Boss_HPBarBase_DESC* pDesc = (Boss_HPBarBase_DESC*)pArg;
 
 	m_fX = pDesc->fX;
 	m_fY = pDesc->fY;
@@ -71,14 +71,14 @@ HRESULT CPlayer_HPBarBase::Initialize(void* pArg)
 	return S_OK;
 }
 
-void CPlayer_HPBarBase::Priority_Tick(_float fTimeDelta)
+void CBoss_HPBarBase::Priority_Tick(_float fTimeDelta)
 {
 	int a = 10;
 
 
 }
 
-void CPlayer_HPBarBase::Tick(_float fTimeDelta)
+void CBoss_HPBarBase::Tick(_float fTimeDelta)
 {
 
 
@@ -94,13 +94,13 @@ void CPlayer_HPBarBase::Tick(_float fTimeDelta)
 
 }
 
-void CPlayer_HPBarBase::Late_Tick(_float fTimeDelta)
+void CBoss_HPBarBase::Late_Tick(_float fTimeDelta)
 {
 	if (FAILED(m_pGameInstance->Add_RenderGroup(CRenderer::RENDER_PRIORITY, this)))
 		return;
 }
 
-HRESULT CPlayer_HPBarBase::Render()
+HRESULT CBoss_HPBarBase::Render()
 {
 	if (FAILED(Bind_ShaderResources()))
 		return E_FAIL;
@@ -118,7 +118,7 @@ HRESULT CPlayer_HPBarBase::Render()
 	return S_OK;
 }
 
-HRESULT CPlayer_HPBarBase::Ready_Components(LEVEL eLevel)
+HRESULT CBoss_HPBarBase::Ready_Components(LEVEL eLevel)
 {
 	//void** 형은 아무거나 들어가질수가 없음 따라서 형변환을 해줘야 함!
 	/* For.Com_Shader */
@@ -132,14 +132,14 @@ HRESULT CPlayer_HPBarBase::Ready_Components(LEVEL eLevel)
 		return E_FAIL;
 
 	/* For. Com_Texture */
-	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Player_HPBarBase"),
+	if (FAILED(__super::Add_Component(eLevel, TEXT("Prototype_Component_Texture_Boss_HPBarBase"),
 		TEXT("Com_Texture"), reinterpret_cast<CComponent**>(&m_pTextureCom))))
 		return E_FAIL;
 
 	return S_OK;
 }
 
-HRESULT CPlayer_HPBarBase::Bind_ShaderResources()
+HRESULT CBoss_HPBarBase::Bind_ShaderResources()
 {
 
 	if (FAILED(m_pTransformCom->Bind_ShaderResource(m_pShaderCom, "g_WorldMatrix")))
@@ -154,33 +154,33 @@ HRESULT CPlayer_HPBarBase::Bind_ShaderResources()
 	return S_OK;
 }
 
-CPlayer_HPBarBase* CPlayer_HPBarBase::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
+CBoss_HPBarBase* CBoss_HPBarBase::Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 {
-	CPlayer_HPBarBase* pInstance = new CPlayer_HPBarBase(pDevice, pContext);
+	CBoss_HPBarBase* pInstance = new CBoss_HPBarBase(pDevice, pContext);
 
 	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX("Failed to Created : CPlayer_HPBarBase");
+		MSG_BOX("Failed to Created : CBoss_HPBarBase");
 		Safe_Release(pInstance);
 	}
 	return pInstance;
 }
 
-CGameObject* CPlayer_HPBarBase::Clone(void* pArg)
+CGameObject* CBoss_HPBarBase::Clone(void* pArg)
 {
-	CPlayer_HPBarBase* pInstance = new CPlayer_HPBarBase(*this);
+	CBoss_HPBarBase* pInstance = new CBoss_HPBarBase(*this);
 
 	/* 원형객체를 초기화한다.  */
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX("Failed to Cloned : CPlayer_HPBarBase");
+		MSG_BOX("Failed to Cloned : CBoss_HPBarBase");
 		Safe_Release(pInstance);
 	}
 	return pInstance;
 }
 
-void CPlayer_HPBarBase::Free()
+void CBoss_HPBarBase::Free()
 {
 	__super::Free();
 
